@@ -1,0 +1,19 @@
+# Big Rivers App
+
+# gitignore file
+
+# --------------------
+#  Untracked Files
+# --------------------
+
+# main un-zipped database
+*.accdb
+
+# pdfs, txt, xls files
+*.pdf
+*.txt
+*.xls
+
+# old modules, images
+*.bas
+*.PNG
