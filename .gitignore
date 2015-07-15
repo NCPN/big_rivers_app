@@ -15,5 +15,5 @@
 *.xls
 
 # old modules, images
-*.bas
-*.PNG
+#*.bas
+#*.PNG
