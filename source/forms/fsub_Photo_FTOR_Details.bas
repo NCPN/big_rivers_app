@@ -10,13 +10,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =6912
+    Width =6780
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =3144
-    Top =864
-    Right =11832
-    Bottom =8592
+    Left =4980
+    Top =3510
+    Right =11490
+    Bottom =10080
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc1f3db6ed487e440
@@ -167,7 +167,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =6780
+            Height =6720
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -178,14 +178,14 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =93
                     Top =2424
-                    Width =6912
+                    Width =6780
                     Height =360
                     BackColor =15858167
                     BorderColor =15858167
                     Name ="rctSubjectHdr"
                     GridlineColor =10921638
                     LayoutCachedTop =2424
-                    LayoutCachedWidth =6912
+                    LayoutCachedWidth =6780
                     LayoutCachedHeight =2784
                     BackThemeColorIndex =-1
                     BorderThemeColorIndex =-1
@@ -196,20 +196,20 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Width =6912
+                    Width =6780
                     Height =360
                     BackColor =15266810
                     BorderColor =10921638
                     Name ="rctPhotogHdr"
                     GridlineColor =10921638
-                    LayoutCachedWidth =6912
+                    LayoutCachedWidth =6780
                     LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5040
-                    Top =6300
+                    Left =4920
+                    Top =6240
                     Width =1620
                     Height =372
                     ForeColor =16711680
@@ -218,10 +218,10 @@ Begin Form
                     StatusBarText ="Next to add photo and move to next one"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5040
-                    LayoutCachedTop =6300
-                    LayoutCachedWidth =6660
-                    LayoutCachedHeight =6672
+                    LayoutCachedLeft =4920
+                    LayoutCachedTop =6240
+                    LayoutCachedWidth =6540
+                    LayoutCachedHeight =6612
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                     Gradient =0
@@ -243,10 +243,10 @@ Begin Form
                     PressedForeColor =6750156
                     PressedForeThemeColorIndex =-1
                     PressedForeTint =100.0
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                     Overlaps =1
                 End
                 Begin OptionGroup
@@ -726,7 +726,7 @@ Begin Form
                     Left =780
                     Top =4800
                     Width =4080
-                    Height =1560
+                    Height =1380
                     ColumnOrder =8
                     TabIndex =9
                     BorderColor =10921638
@@ -737,7 +737,7 @@ Begin Form
                     LayoutCachedLeft =780
                     LayoutCachedTop =4800
                     LayoutCachedWidth =4860
-                    LayoutCachedHeight =6360
+                    LayoutCachedHeight =6180
                     Begin
                         Begin Label
                             OverlapFlags =85
@@ -763,7 +763,7 @@ Begin Form
                     OverlapFlags =85
                     Left =4500
                     Top =1872
-                    Width =2280
+                    Width =1860
                     Height =300
                     FontSize =8
                     FontWeight =500
@@ -774,7 +774,7 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =4500
                     LayoutCachedTop =1872
-                    LayoutCachedWidth =6780
+                    LayoutCachedWidth =6360
                     LayoutCachedHeight =2172
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -784,7 +784,7 @@ Begin Form
                     OverlapFlags =85
                     Left =4500
                     Top =2940
-                    Width =2280
+                    Width =1860
                     Height =300
                     FontSize =8
                     FontWeight =500
@@ -795,7 +795,7 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =4500
                     LayoutCachedTop =2940
-                    LayoutCachedWidth =6780
+                    LayoutCachedWidth =6360
                     LayoutCachedHeight =3240
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -804,9 +804,9 @@ Begin Form
                     FontItalic = NotDefault
                     OverlapFlags =85
                     Left =4500
-                    Top =3840
-                    Width =2280
-                    Height =840
+                    Top =3960
+                    Width =1860
+                    Height =300
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -815,9 +815,9 @@ Begin Form
                     Caption ="Photo # hint"
                     GridlineColor =10921638
                     LayoutCachedLeft =4500
-                    LayoutCachedTop =3840
-                    LayoutCachedWidth =6780
-                    LayoutCachedHeight =4680
+                    LayoutCachedTop =3960
+                    LayoutCachedWidth =6360
+                    LayoutCachedHeight =4260
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -846,9 +846,9 @@ Begin Form
                     FontItalic = NotDefault
                     OverlapFlags =85
                     Left =5340
-                    Top =420
+                    Top =540
                     Width =1440
-                    Height =420
+                    Height =300
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -857,7 +857,7 @@ Begin Form
                     Caption ="Closeup hint"
                     GridlineColor =10921638
                     LayoutCachedLeft =5340
-                    LayoutCachedTop =420
+                    LayoutCachedTop =540
                     LayoutCachedWidth =6780
                     LayoutCachedHeight =840
                     ForeThemeColorIndex =-1
@@ -869,7 +869,7 @@ Begin Form
                     Left =5340
                     Top =900
                     Width =1440
-                    Height =480
+                    Height =300
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -880,7 +880,7 @@ Begin Form
                     LayoutCachedLeft =5340
                     LayoutCachedTop =900
                     LayoutCachedWidth =6780
-                    LayoutCachedHeight =1380
+                    LayoutCachedHeight =1200
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -889,14 +889,14 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =93
                     Top =3420
-                    Width =6912
+                    Width =6780
                     Height =360
                     BackColor =16381933
                     BorderColor =16381933
                     Name ="rctPhotoDetailHdr"
                     GridlineColor =10921638
                     LayoutCachedTop =3420
-                    LayoutCachedWidth =6912
+                    LayoutCachedWidth =6780
                     LayoutCachedHeight =3780
                     BackThemeColorIndex =-1
                     BorderThemeColorIndex =-1

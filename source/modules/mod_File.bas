@@ -273,7 +273,7 @@ End Function
 
 ' =================================
 ' FUNCTION:     ParseFileName
-' Description:  Parses an input path string to return only the file extension, if present
+' Description:  Parses an input path string to return only the file name, if present
 ' Parameters:   strFullPath - string for the full file path
 ' Returns:      string including only the file name
 ' Throws:       none
