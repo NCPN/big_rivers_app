@@ -338,41 +338,43 @@ Err_Handler:
 End Sub
 
 ' ================================ Big Rivers ===========================
-Public Sub SetHints(frm As Form)
+Public Sub SetHints(frm As Form, strForm As String)
 
 'Forms!Mainform!Subform1.Form!
-
-    Select Case frm.name
     
-        With Forms!frm!fsub.Form
-        
+    With frm!fsub.Form
+    
+        Select Case strForm
+            
             Case "fsub_Photo_FTOR_Details"
-                lblCloseupHint.Caption = ""
-                lblReplacementHint.Caption = ""
-                !lblPhotoNumHint.Caption = "P + Month(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + camera seq # (4-digit) (PA010300)"
-                lblCommentHint.Caption = ""
+
+                !lblCloseupHint.Caption = "Is the photo a closeup?"
+                !lblReplacementHint.Caption = "Does photo replace another?"
+                !lblCommentHint.Caption = ""
                 
-                Select Case TempVar("phototype")
+                Select Case TempVars("phototype")
                     Case "R" 'reference
-                        lblPhotogLocHint.Caption = "from river, 10m upstream, etc."
-                        lblSubjectLocHint.Caption = "CP1, RM2, etc."
+                        !lblPhotogLocHint.Caption = "from river, 10m upstream, etc."
+                        !lblSubjectLocHint.Caption = "CP1, RM2, etc."
                     Case "O" 'overview
-                        lblPhotogLocHint.Caption = ""
-                        lblSubjectLocHint.Caption = "O1, O2, etc."
+                        !lblPhotogLocHint.Caption = ""
+                        !lblSubjectLocHint.Caption = "O1, O2, etc."
                     Case "T" 'transect
-                        lblPhotogLocHint.Caption = "T + transect# - order# (T2-1)"
-                        lblSubjectLocHint.Caption = ""
+                        !lblPhotogLocHint.Caption = "T + transect# - order# (T2-1)"
+                        !lblSubjectLocHint.Caption = ""
                     Case "F" 'feature
-                        lblPhotogLocHint.Caption = "F + transect# - order# (F3/4-2)"
-                        lblSubjectLocHint.Caption = ""
+                        !lblPhotogLocHint.Caption = "F + transect# - order# (F3/4-2)"
+                        !lblSubjectLocHint.Caption = ""
                 End Select
             
             Case "fsub_Photo_Other_Details"
-                
+                !lblDescriptionHint.Caption = ""
             Case Else
                 
         End Select
 
+        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# (PA010300)"
+                
     End With
     
 End Sub

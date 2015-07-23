@@ -77,3 +77,9 @@ Public Const TEXT_ENABLED As Long = lngBlue
 Public Const TEXT_DISABLED As Long = lngGray
 
 Public Const PROGRESS_BAR As Long = lngLime
+
+'-----------------------------------------------------------------------
+' Photo Types
+'-----------------------------------------------------------------------
+Public Const PHOTO_TYPES_MAIN As String = "Reference,Overview,Feature,Transect,Other"      'String -> basic photo types
+Public Const PHOTO_TYPES_OTHER As String = "Animal,Plant,Cultural,Disturbance,Field Work,Scenic,Weather,Other"      'String -> other photo types
