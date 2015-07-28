@@ -13,10 +13,10 @@ Begin Form
     Width =6420
     DatasheetFontHeight =11
     ItemSuffix =54
-    Left =1980
-    Top =1524
-    Right =9216
-    Bottom =7272
+    Left =4572
+    Top =3696
+    Right =11340
+    Bottom =10524
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc1f3db6ed487e440
@@ -189,6 +189,7 @@ Begin Form
                     BackThemeColorIndex =-1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =4260
                     Top =3816
@@ -329,7 +330,7 @@ Begin Form
                     OverlapFlags =85
                     IMESentenceMode =3
                     Left =600
-                    Top =2280
+                    Top =2340
                     Width =3888
                     Height =1380
                     ColumnOrder =2
@@ -340,14 +341,14 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =600
-                    LayoutCachedTop =2280
+                    LayoutCachedTop =2340
                     LayoutCachedWidth =4488
-                    LayoutCachedHeight =3660
+                    LayoutCachedHeight =3720
                     Begin
                         Begin Label
                             OverlapFlags =85
                             Left =360
-                            Top =1860
+                            Top =1920
                             Width =1080
                             Height =315
                             FontWeight =500
@@ -357,9 +358,9 @@ Begin Form
                             Caption ="Description"
                             GridlineColor =10921638
                             LayoutCachedLeft =360
-                            LayoutCachedTop =1860
+                            LayoutCachedTop =1920
                             LayoutCachedWidth =1440
-                            LayoutCachedHeight =2175
+                            LayoutCachedHeight =2235
                         End
                     End
                 End
@@ -367,20 +368,21 @@ Begin Form
                     FontItalic = NotDefault
                     OverlapFlags =85
                     Left =4560
-                    Top =1440
+                    Top =1380
                     Width =1860
-                    Height =300
+                    Height =960
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16737792
                     Name ="lblPhotoNumHint"
-                    Caption ="Photo # hint"
+                    Caption ="P + Month\015\012(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + \015\0124-digit camera"
+                        " seq# \015\012(PA010300 = Jan 1, #300)"
                     GridlineColor =10921638
                     LayoutCachedLeft =4560
-                    LayoutCachedTop =1440
+                    LayoutCachedTop =1380
                     LayoutCachedWidth =6420
-                    LayoutCachedHeight =1740
+                    LayoutCachedHeight =2340
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -388,7 +390,7 @@ Begin Form
                     FontItalic = NotDefault
                     OverlapFlags =85
                     Left =4620
-                    Top =2280
+                    Top =2460
                     Width =1800
                     Height =660
                     FontSize =8
@@ -396,12 +398,11 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16737792
                     Name ="lblDescriptionHint"
-                    Caption ="Description hint"
                     GridlineColor =10921638
                     LayoutCachedLeft =4620
-                    LayoutCachedTop =2280
+                    LayoutCachedTop =2460
                     LayoutCachedWidth =6420
-                    LayoutCachedHeight =2940
+                    LayoutCachedHeight =3120
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
