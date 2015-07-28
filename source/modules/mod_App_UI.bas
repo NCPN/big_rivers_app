@@ -13,6 +13,7 @@ Option Explicit
 '               BLC, 6/1/2015  - 1.02 - changed View to Search tab
 '               BLC, 6/12/2015 - 1.03 - added EnableTargetTool button
 '               BLC, 6/30/2015 - 1.04 - added ClearFields()
+'               BLC, 7/27/2015 - 1.05 - added SetHints()
 ' =================================
 
 ' =================================
@@ -338,7 +339,23 @@ Err_Handler:
 End Sub
 
 ' ================================ Big Rivers ===========================
+
+' ---------------------------------
+' SUB:          SetHints
+' Description:  set field hints for form
+' Assumptions:  -
+' Parameters:   frm - form where fields reside(form object)
+'               strForm - name of subform (string)
+' Returns:      N/A
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/27/2015  - initial version
+' ---------------------------------
 Public Sub SetHints(frm As Form, strForm As String)
+On Error GoTo Err_Handler
 
 'Forms!Mainform!Subform1.Form!
     
@@ -363,7 +380,7 @@ Public Sub SetHints(frm As Form, strForm As String)
                         !lblPhotogLocHint.Caption = "T + transect# - order# (T2-1)"
                         !lblSubjectLocHint.Caption = ""
                     Case "F" 'feature
-                        !lblPhotogLocHint.Caption = "F + transect# - order# (F3/4-2)"
+                        !lblPhotogLocHint.Caption = "F + transect# - order# " & vbCrLf & "(F3/4-2)"
                         !lblSubjectLocHint.Caption = ""
                 End Select
             
@@ -373,8 +390,18 @@ Public Sub SetHints(frm As Form, strForm As String)
                 
         End Select
 
-        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# (PA010300)"
+        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# " & vbCrLf & "(PA010300 = Jan 1, #300)"
                 
     End With
     
+Exit_Sub:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetHints[form_Forms])"
+    End Select
+    Resume Exit_Sub
 End Sub

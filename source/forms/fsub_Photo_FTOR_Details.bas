@@ -13,10 +13,10 @@ Begin Form
     Width =6780
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =4980
-    Top =3510
-    Right =11490
-    Bottom =10080
+    Left =2595
+    Top =3060
+    Right =11550
+    Bottom =9765
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc1f3db6ed487e440
@@ -764,7 +764,7 @@ Begin Form
                     Left =4500
                     Top =1872
                     Width =1860
-                    Height =300
+                    Height =405
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -775,7 +775,7 @@ Begin Form
                     LayoutCachedLeft =4500
                     LayoutCachedTop =1872
                     LayoutCachedWidth =6360
-                    LayoutCachedHeight =2172
+                    LayoutCachedHeight =2277
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -785,7 +785,7 @@ Begin Form
                     Left =4500
                     Top =2940
                     Width =1860
-                    Height =300
+                    Height =360
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -796,7 +796,7 @@ Begin Form
                     LayoutCachedLeft =4500
                     LayoutCachedTop =2940
                     LayoutCachedWidth =6360
-                    LayoutCachedHeight =3240
+                    LayoutCachedHeight =3300
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -806,7 +806,7 @@ Begin Form
                     Left =4500
                     Top =3960
                     Width =1860
-                    Height =300
+                    Height =420
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -817,7 +817,7 @@ Begin Form
                     LayoutCachedLeft =4500
                     LayoutCachedTop =3960
                     LayoutCachedWidth =6360
-                    LayoutCachedHeight =4260
+                    LayoutCachedHeight =4380
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -846,9 +846,9 @@ Begin Form
                     FontItalic = NotDefault
                     OverlapFlags =85
                     Left =5340
-                    Top =540
+                    Top =480
                     Width =1440
-                    Height =300
+                    Height =360
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -857,7 +857,7 @@ Begin Form
                     Caption ="Closeup hint"
                     GridlineColor =10921638
                     LayoutCachedLeft =5340
-                    LayoutCachedTop =540
+                    LayoutCachedTop =480
                     LayoutCachedWidth =6780
                     LayoutCachedHeight =840
                     ForeThemeColorIndex =-1
@@ -869,7 +869,7 @@ Begin Form
                     Left =5340
                     Top =900
                     Width =1440
-                    Height =300
+                    Height =360
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -880,7 +880,7 @@ Begin Form
                     LayoutCachedLeft =5340
                     LayoutCachedTop =900
                     LayoutCachedWidth =6780
-                    LayoutCachedHeight =1200
+                    LayoutCachedHeight =1260
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End

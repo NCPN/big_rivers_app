@@ -423,3 +423,55 @@ Err_Handler:
     End Select
     Resume Exit_Function
 End Function
+
+' ---------------------------------
+' SUB:     PopulateTree
+' Description:  Populate the treeview control
+' Parameters:   TreeType - treeview type (string)
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, June 3, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 6/3/2015  - initial version
+' ---------------------------------
+Public Sub PopulateTree(TreeType As String)
+
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    
+    Select Case TreeType
+        Case "ParkSiteFeatureTransectPlot"
+            strSQL = "SELECT * FROM qry_Park_Site_Feature_Transect_Plot"
+        Case "Photo"
+    End Select
+                   
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+    
+    'assume only 1 record returned
+    If rs.RecordCount > 0 Then
+        
+        
+        
+        
+    Else
+        GoTo Exit_Sub
+    End If
+       
+Exit_Sub:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateTree[mod_App_Data])"
+    End Select
+    Resume Exit_Sub
+End Sub

@@ -10,7 +10,8 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, 2/12/2015
 ' Revisions:    BLC - 5/27/2015 - 1.00 - initial version
-'               BLC - 7/7/2016  - 1.01 - added GetErrorTrappingOption()
+'               BLC - 7/7/2015  - 1.01 - added GetErrorTrappingOption()
+'               BLC - 7/24/2015 - 1.02 - added RemoveVCSModules()
 ' =================================
 
 ' ===================================================================================
@@ -248,7 +249,6 @@ On Error GoTo Err_Handler
 
     SetDebugDbPaths strDbPath
 
-
     'progress bar test
     DoCmd.OpenForm "frm_ProgressBar", acNormal
     
@@ -313,3 +313,134 @@ Err_Handler:
     End Select
     Resume Exit_Function
 End Function
+
+' ---------------------------------
+' SUB:          DeleteModule
+' Description:  Remove a module from the current database.
+' Assumptions:  -
+' Parameters:   strModule - module name (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  OurManInBananas, November 16, 2014
+'               http://stackoverflow.com/questions/26948789/ms-access-use-vba-to-delete-a-module-from-access-file
+' Adapted:      Bonnie Campbell, July 24, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/24/2015 - initial version
+' ---------------------------------
+Sub DeleteModule(strModule As String)
+On Error GoTo Err_Handler
+
+    Dim vbCom As Object
+
+    Set vbCom = Application.VBE.ActiveVBProject.VBComponents
+
+    vbCom.Remove VBComponent:=vbCom.item(strModule)
+
+Exit_Sub:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DeleteModule[mod_Dev_Debug])"
+    End Select
+    Resume Exit_Sub
+End Sub
+
+' ---------------------------------
+' SUB:          RemoveModules
+' Description:  Remove VCS modules from the current database.
+' Assumptions:  Use the following strType for removing VCS or dev modules:
+'                   VCS => "VCS_", Dev => "mod_Dev_"
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 24, 2015 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/24/2015 - initial version
+' ---------------------------------
+Sub RemoveModules(strType As String)
+On Error GoTo Err_Handler
+   
+    Dim i As Integer
+    Dim modOpenModules As Modules
+    
+    Set modOpenModules = Application.Modules
+    
+    For i = 0 To modOpenModules.count - 1
+    
+        Debug.Print modOpenModules(i).name
+                
+        If Left(modOpenModules(i).name, Len(strType)) = strType Then
+            DeleteModule (modOpenModules(i).name)
+        End If
+        
+    Next
+
+Exit_Sub:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RemoveVCSModules[mod_Dev_Debug])"
+    End Select
+    Resume Exit_Sub
+End Sub
+
+' ---------------------------------
+' SUB:          AddModules
+' Description:  Add VCS or Debug modules to the current database.
+' Assumptions:  Only modules to be added are found within the directory path passed into the function
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 24, 2015 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/24/2015 - initial version
+' ---------------------------------
+Sub AddModules(strPath As String)
+On Error GoTo Err_Handler
+
+    Dim ModuleFilePath As String, ModuleFile As String
+   
+    ModuleFile = Dir(strPath, vbNormal)
+    
+    While ModuleFile <> ""
+    
+        ModuleFilePath = strPath & ModuleFile
+        
+        If Right(ModuleFilePath, 4) = ".bas" Then
+            'add the module (file)
+            Application.VBE.ActiveVBProject.VBComponents.Import ModuleFilePath
+        End If
+        
+        ModuleFile = Dir("")  'get the next file
+    Wend
+
+Exit_Sub:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - AddModules[mod_Dev_Debug])"
+    End Select
+    Resume Exit_Sub
+End Sub
+
+
+Public Sub moduletest()
+
+    'AddModules ("C:\__git-projects\dev_modules - Copy\")
+    RemoveModules "VCS_"
+    
+End Sub

@@ -149,7 +149,7 @@ On Error GoTo Err_Handler
 '    Else
 '        lngHeight = 4044
 '    End If
-    frm.Move frm.WindowLeft, height:=lngHeight, Width:=lngWidth
+    frm.Move frm.WindowLeft, Height:=lngHeight, Width:=lngWidth
     
 Exit_Procedure:
     Exit Sub
