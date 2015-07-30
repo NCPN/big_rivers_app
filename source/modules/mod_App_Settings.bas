@@ -9,6 +9,7 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - initial version
+'               BLC, 7/10/2015 - adapted for Big Rivers
 ' =================================
 
 ' ---------------------------------
@@ -83,3 +84,4 @@ Public Const PROGRESS_BAR As Long = lngLime
 '-----------------------------------------------------------------------
 Public Const PHOTO_TYPES_MAIN As String = "Reference,Overview,Feature,Transect,Other"      'String -> basic photo types
 Public Const PHOTO_TYPES_OTHER As String = "Animal,Plant,Cultural,Disturbance,Field Work,Scenic,Weather,Other"      'String -> other photo types
+Public Const PHOTO_EXT_ALLOWED As String = "jpg,jpeg,png"
