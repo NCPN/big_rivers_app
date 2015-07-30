@@ -108,7 +108,7 @@ On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim rows As Integer, cols As Integer, i As Integer, j As Integer, matches As Integer, iZeroes As Integer
-    Dim stritem As String, strColHeads As String, aryColWidths() As String
+    Dim strItem As String, strColHeads As String, aryColWidths() As String
 
     Set frm = ctrlSource.Parent
     
@@ -172,24 +172,24 @@ On Error GoTo Err_Handler
             Do Until rs.EOF
             
                 'initialize item
-                stritem = ""
+                strItem = ""
                     
                 'generate item
                 For j = 0 To cols - 1
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        stritem = stritem & rs.Fields(j).Value & ";"
+                        strItem = strItem & rs.Fields(j).Value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
-                        matches = (Len(stritem) - Len(Replace$(stritem, ";", ""))) / Len(";")
+                        matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
                         
                         'add item if not already in list --> # of ; should equal cols - 1
                         'but # in list should only be # of non-zero columns --> cols - iZeroes
                         If matches = cols - iZeroes Then
-                            ctrlSource.AddItem stritem
+                            ctrlSource.AddItem strItem
                             'reset the string
-                            stritem = ""
+                            strItem = ""
                         End If
                     
                     End If

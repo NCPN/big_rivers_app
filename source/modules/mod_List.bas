@@ -100,7 +100,7 @@ On Error GoTo Err_Handler
 
     Dim rows As Integer, cols As Integer, i As Integer, j As Integer, matches As Integer
     Dim frm As Form
-    Dim stritem As String, strColHeads As String, aryColWidths() As String
+    Dim strItem As String, strColHeads As String, aryColWidths() As String
 
     'exit if subform control (hdrs are static & present on sfrm)
     If ctrl.ControlType = 112 Then
@@ -806,7 +806,7 @@ Public Sub MoveSingleItem(frm As Form, strSourceControl As String, strTargetCont
     
 On Error GoTo Err_Handler
     
-    Dim stritem As String
+    Dim strItem As String
     Dim intColumnCount As Integer
     
     'if source = target, just remove the item
@@ -835,18 +835,18 @@ On Error GoTo Err_Handler
     End If
     
     For intColumnCount = 0 To frm.Controls(strSourceControl).ColumnCount - 1
-        stritem = stritem & frm.Controls(strSourceControl).Column(intColumnCount) & ";"
+        strItem = strItem & frm.Controls(strSourceControl).Column(intColumnCount) & ";"
     Next
     
     'remove extra semi-colon (;)
-    stritem = Left(stritem, Len(stritem) - 1)
+    strItem = Left(strItem, Len(strItem) - 1)
 
     'Check the length to make sure something is selected
     ' -------------------------------------------------------------------------
     '  NOTE: ListIndex is zero based, so add 1 to remove proper item
     ' -------------------------------------------------------------------------
-    If Len(stritem) > 0 Then
-        frm.Controls(strTargetControl).AddItem stritem
+    If Len(strItem) > 0 Then
+        frm.Controls(strTargetControl).AddItem strItem
         frm.Controls(strSourceControl).RemoveItem frm.Controls(strSourceControl).ListIndex + 1
     Else
         MsgBox "Please select an item to move."
@@ -887,7 +887,7 @@ Public Sub MoveAllItems(frm As Form, strSourceControl As String, strTargetContro
     
 On Error GoTo Err_Handler
     
-    Dim stritem As String
+    Dim strItem As String
     Dim intColumnCount As Integer, startRow As Integer
     Dim lngRowCount As Long
     
@@ -911,11 +911,11 @@ On Error GoTo Err_Handler
     
     For lngRowCount = startRow To frm.Controls(strSourceControl).ListCount - 1
         For intColumnCount = 0 To frm.Controls(strSourceControl).ColumnCount - 1
-            stritem = stritem & frm.Controls(strSourceControl).Column(intColumnCount, lngRowCount) & ";"
+            strItem = strItem & frm.Controls(strSourceControl).Column(intColumnCount, lngRowCount) & ";"
         Next
-        stritem = Left(stritem, Len(stritem) - 1)
-        frm.Controls(strTargetControl).AddItem stritem
-        stritem = ""
+        strItem = Left(strItem, Len(strItem) - 1)
+        frm.Controls(strTargetControl).AddItem strItem
+        strItem = ""
     Next
         
     'clear the list
@@ -969,7 +969,7 @@ On Error GoTo Err_Handler
     Dim iRow As Integer, startRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
-    Dim stritem As String
+    Dim strItem As String
     
     'if source = target, just remove the items
     If strSourceControl = strTargetControl Then
@@ -991,8 +991,8 @@ On Error GoTo Err_Handler
     
     'add back the header if it doesn't exist
     If frm.Controls(strTargetControl).ColumnHeads = True And frm.Controls(strTargetControl).ListCount = 0 Then
-       stritem = TempVars("lbxHdr") & stritem
-       frm.Controls(strTargetControl).AddItem stritem
+       strItem = TempVars("lbxHdr") & strItem
+       frm.Controls(strTargetControl).AddItem strItem
     End If
     
     'generate array of selected items
@@ -1035,15 +1035,15 @@ On Error GoTo Err_Handler
         iRow = arySelectedItems(x) - iRemovedItems
             
         'clear string
-        stritem = ""
+        strItem = ""
         
         'add all columns
         For i = 0 To frm.Controls(strSourceControl).ColumnCount
-            stritem = stritem & frm.Controls(strSourceControl).Column(i, iRow) & ";"
+            strItem = strItem & frm.Controls(strSourceControl).Column(i, iRow) & ";"
         Next i
         
         'add to target
-        frm.Controls(strTargetControl).AddItem stritem
+        frm.Controls(strTargetControl).AddItem strItem
         
         'remove from source
         frm.Controls(strSourceControl).RemoveItem iRow

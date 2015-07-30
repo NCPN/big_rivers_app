@@ -427,13 +427,13 @@ End Function
 ' Revisions:    BLC, 9/1/2014 - initial version
 '               BLC, 4/30/2015 - moved from mod_Utilities to mod_Db
 ' ---------------------------------
-Public Function GetTempVarIndex(stritem) As String
+Public Function GetTempVarIndex(strItem) As String
 On Error GoTo Err_Handler
 
 Dim i As Integer
 
     For i = 0 To [TempVars].count - 1
-        If [TempVars].item(i).name = stritem Then
+        If [TempVars].item(i).name = strItem Then
             'fetch the index and exit
             GetTempVarIndex = i
             Exit Function

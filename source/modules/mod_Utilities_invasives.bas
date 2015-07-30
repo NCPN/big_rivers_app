@@ -304,7 +304,7 @@ End Function
 
 Public Function ReplaceListItem(strList As String, strFind As String, strReplace As String, strDelimiter As String, booCaseSensitive As Boolean, booTrim As Boolean) As String
 
-Dim stritem As String
+Dim strItem As String
 Dim intCompare As Integer
 Dim strResult As String
 Dim strChar As String
@@ -320,19 +320,19 @@ If booTrim Then strFind = Trim(strFind)
 Do Until InStr(strList, strDelimiter) = 0
     'Get each item in the list
     If booTrim Then
-        stritem = Trim(Left(strList, InStr(strList, strDelimiter) - 1))
+        strItem = Trim(Left(strList, InStr(strList, strDelimiter) - 1))
     Else
-        stritem = Left(strList, InStr(strList, strDelimiter) - 1)
+        strItem = Left(strList, InStr(strList, strDelimiter) - 1)
     End If
         
     strList = Mid(strList, InStr(strList, strDelimiter) + 1)
 
     'Compare the item to the string we wish to replace
-    If StrComp(stritem, strFind, intCompare) = 0 Then
+    If StrComp(strItem, strFind, intCompare) = 0 Then
         'If they're the same, then replace the item
         strResult = strResult & strReplace & strDelimiter
     Else
-        strResult = strResult & stritem & strDelimiter
+        strResult = strResult & strItem & strDelimiter
     End If
 Loop
 
@@ -500,7 +500,7 @@ End Function
 
 Public Function ListCompareRemove(strListMain As String, ByVal strListToKeep As String, strDelimiter As String) As String
 
-Dim stritem As String
+Dim strItem As String
 Dim intI As Integer
 Dim strNewList As String
 
@@ -517,11 +517,11 @@ If Not Right(strListMain, 1) = strDelimiter Then
 End If
 
 Do Until InStr(strListMain, strDelimiter) = 0
-    stritem = strDelimiter & Trim(Left(strListMain, InStr(strListMain, strDelimiter)))
+    strItem = strDelimiter & Trim(Left(strListMain, InStr(strListMain, strDelimiter)))
     strListMain = Mid(strListMain, InStr(strListMain, strDelimiter) + 1)
 
-    If InStr(strListToKeep, stritem) > 0 Then
-        strNewList = strNewList & Mid(stritem, 2)
+    If InStr(strListToKeep, strItem) > 0 Then
+        strNewList = strNewList & Mid(strItem, 2)
     End If
 Loop
 
@@ -567,16 +567,16 @@ End Function
 Public Function ListCompare(strListMain As String, ByVal strListToRemove As String, strDelimiter As String) As String
 
 'Compares two semicolon-delimited lists and eliminates items from strListMain that are in strListToRemove
-Dim stritem As String
+Dim strItem As String
 Dim intI As Integer
 Dim strNewList As String
 
 Do Until InStr(strListToRemove, strDelimiter) = 0
-    stritem = Trim(Left(strListToRemove, InStr(strListToRemove, strDelimiter) - 1))
+    strItem = Trim(Left(strListToRemove, InStr(strListToRemove, strDelimiter) - 1))
     strListToRemove = Mid(strListToRemove, InStr(strListToRemove, strDelimiter) + 1)
 
     'Remove the item from inside the body of the Main List
-    strListMain = ReplaceListItem(strListMain, stritem, "", strDelimiter, False, True)
+    strListMain = ReplaceListItem(strListMain, strItem, "", strDelimiter, False, True)
 Loop
 
     'Do the last item in the list

@@ -216,17 +216,17 @@ End Function
 ' Revisions:    John R. Boetsch, May 17, 2006 - documentation and error-trapping
 ' =================================
 
-Function adhTrimNull(ByVal stritem As String) As String
+Function adhTrimNull(ByVal strItem As String) As String
     On Error GoTo Err_Handler
 
     Dim intPos As Integer
 
-    intPos = InStr(stritem, vbNullChar)
+    intPos = InStr(strItem, vbNullChar)
     If intPos > 0 Then
         ' If the Null character is present, trim the string
-        adhTrimNull = Left(stritem, intPos - 1)
+        adhTrimNull = Left(strItem, intPos - 1)
     Else
-        adhTrimNull = stritem
+        adhTrimNull = strItem
     End If
 
 Exit_Procedure:

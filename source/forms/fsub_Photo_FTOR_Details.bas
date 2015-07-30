@@ -13,10 +13,10 @@ Begin Form
     Width =6780
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =2595
-    Top =3060
-    Right =11550
-    Bottom =9765
+    Left =996
+    Top =624
+    Right =9960
+    Bottom =6672
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc1f3db6ed487e440
@@ -243,10 +243,10 @@ Begin Form
                     PressedForeColor =6750156
                     PressedForeThemeColorIndex =-1
                     PressedForeTint =100.0
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin OptionGroup
@@ -805,8 +805,8 @@ Begin Form
                     OverlapFlags =85
                     Left =4500
                     Top =3960
-                    Width =1860
-                    Height =420
+                    Width =2220
+                    Height =720
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
@@ -816,8 +816,8 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =4500
                     LayoutCachedTop =3960
-                    LayoutCachedWidth =6360
-                    LayoutCachedHeight =4380
+                    LayoutCachedWidth =6720
+                    LayoutCachedHeight =4680
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
