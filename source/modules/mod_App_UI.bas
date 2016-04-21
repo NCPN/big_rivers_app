@@ -72,7 +72,7 @@ On Error GoTo Err_Handler
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strTitle
         If strContext <> "DbAdmin" Then
-            ctrl.visible = True
+            ctrl.Visible = True
         End If
     End If
     
@@ -151,7 +151,7 @@ On Error GoTo Err_Handler
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strInstructions
         If strContext <> "DbAdmin" Then
-            ctrl.visible = True
+            ctrl.Visible = True
         End If
     End If
     

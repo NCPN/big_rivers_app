@@ -16,10 +16,10 @@ Begin Form
     Width =4500
     DatasheetFontHeight =11
     ItemSuffix =5
-    Left =7896
-    Top =2508
-    Right =21360
-    Bottom =11700
+    Left =9120
+    Top =3324
+    Right =22584
+    Bottom =11676
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -247,12 +247,12 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         DataEntrySelect
+' Form:         SelectSingle
 ' Level:        Application form
 ' Version:      1.00
-' Basis:        Dropdown (DdSelect) form
+' Basis:        Dropdown form
 '
-' Description:  Data entry select form object related properties, events, functions & procedures for UI display
+' Description:  Select single form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, April 20, 2016
 ' References:   -
@@ -398,29 +398,73 @@ End Property
 Private Sub Form_Load()
 On Error GoTo Err_Handler
 
-    Me.Title = "Park"
-    Me.DropdownLabel = "Park"
-    Me.Directions = "Select the desired park."
-    Me.ButtonCaption = "Next >"
-    
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
     Dim strSQL As String
-    strSQL = "SELECT ID, ParkCode FROM Park WHERE IsActiveForProtocol = 1;"
     
-    Me.DropdownDataSource = strSQL
-    With Me.cbxDropdown
-        .Requery
-        .BoundColumn = 1
-        .ColumnCount = 2
-        .ColumnWidths = "0;1.6"
-    End With
-    
+    'determine which form info
+    Select Case Me.OpenArgs
+        Case "park"
+            Me.Title = "Park"
+            Me.DropdownLabel = "Park"
+            Me.Directions = "Select the desired park."
+            Me.ButtonCaption = "Next >"
+            
+            strSQL = "SELECT ID, ParkCode FROM Park " _
+                        & "WHERE IsActiveForProtocol = 1 " _
+                        & "ORDER BY ParkCode ASC;"
+        
+        Case "river"
+            Me.Title = "River"
+            Me.DropdownLabel = "River"
+            Me.Directions = "Select the desired river segment."
+            Me.ButtonCaption = "Next >"
+            
+            strSQL = "SELECT ID, Segment FROM River " _
+                        & "JOIN Park p ON p.ParkID = ParkID " _
+                        & "WHERE ParkCode = '" & TempVars("park") & "' " _
+                        & "ORDER BY Segment ASC;"
+        
+        Case "site"
+            Me.Title = "Site"
+            Me.DropdownLabel = "Site"
+            Me.Directions = "Select the desired site."
+            Me.ButtonCaption = "Next >"
+            
+            strSQL = "SELECT ID, SiteName + ' (' + SiteCode + ')' AS Site FROM Site " _
+                        & "JOIN Park p ON p.ParkID = ParkID " _
+                        & "WHERE ParkCode = '" & TempVars("park") & "' " _
+                        & "AND IsActiveForProtocol = 1 " _
+                        & "ORDER BY Site ASC;"
+        
+        Case "data_entry"
+            Me.Title = "Data Entry"
+            Me.DropdownLabel = "User"
+            Me.Directions = "Select the current user."
+            Me.ButtonCaption = "Next >"
+            
+            strSQL = "SELECT ID, FirstName + ' ' + LastName as Name FROM Contact;"
+
+    End Select
+        
+        'fetch data
+        Me.DropdownDataSource = strSQL
+        
+        With Me.cbxDropdown
+            .Requery
+            .BoundColumn = 1
+            .ColumnCount = 2
+            .ColumnWidths = "0;1.6"
+        End With
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[DdSelect form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -450,7 +494,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxDropdown_Change[DdSelect form])"
+            "Error encountered (#" & Err.Number & " - cbxDropdown_Change[SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -471,9 +515,20 @@ End Sub
 Private Sub btnEnter_Click()
 On Error GoTo Err_Handler
     
-    'store selected ID
-    TempVars.Add "park", Me.SelectedID
-    TempVars.Add "ParkCode", Me.SelectedValue
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+    
+    Select Case Me.OpenArgs
+        Case "park"
+            'store selected ID
+            TempVars.Add "park", Me.SelectedID
+            TempVars.Add "ParkCode", Me.SelectedValue
+        Case "site"
+            'store selected ID
+            TempVars.Add "segment", Me.SelectedID
+            TempVars.Add "river", Me.SelectedValue
+        Case "river"
+        Case "data_entry"
+    End Select
     
     DoCmd.Close
     
@@ -483,7 +538,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEnter_Click[DdSelect form])"
+            "Error encountered (#" & Err.Number & " - btnEnter_Click[SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -511,7 +566,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[DdSelect form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub

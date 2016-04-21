@@ -239,7 +239,7 @@ End Property
 
 Public Property Let BreadcrumbVisible(Value As Byte)
     m_BreadcrumbVisible = Value
-    Me.visible = m_BreadcrumbVisible
+    Me.Visible = m_BreadcrumbVisible
 End Property
 
 '---------------------

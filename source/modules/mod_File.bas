@@ -380,7 +380,7 @@ Public Function OpenExcelFile(ByVal strPath As String)
 
     ' Open the file
     With objExcel
-        .visible = True
+        .Visible = True
         .Workbooks.Open (strPath)
     End With
     

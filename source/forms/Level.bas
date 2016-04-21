@@ -2,7 +2,6 @@
 VersionRequired =20
 Begin Form
     PopUp = NotDefault
-    Modal = NotDefault
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
@@ -16,11 +15,11 @@ Begin Form
     GridY =24
     Width =5820
     DatasheetFontHeight =11
-    ItemSuffix =12
-    Left =7896
-    Top =2508
-    Right =13716
-    Bottom =2976
+    ItemSuffix =16
+    Left =9120
+    Top =3324
+    Right =14940
+    Bottom =3792
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -130,21 +129,19 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     Left =60
-                    Top =96
+                    Top =60
                     Width =1380
-                    Height =300
                     ForeColor =4210752
                     Name ="btnLevel0"
-                    Caption ="Park Missing > "
+                    Caption ="level0"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
-                    BackStyle =0
 
                     LayoutCachedLeft =60
-                    LayoutCachedTop =96
+                    LayoutCachedTop =60
                     LayoutCachedWidth =1440
-                    LayoutCachedHeight =396
+                    LayoutCachedHeight =420
                     Gradient =0
                     BackThemeColorIndex =1
                     BackTint =100.0
@@ -164,27 +161,25 @@ Begin Form
                     WebImagePaddingTop =3
                     WebImagePaddingRight =3
                     WebImagePaddingBottom =3
-                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
                     Left =1500
-                    Top =96
+                    Top =60
                     Width =1380
-                    Height =300
+                    Height =372
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnLevel1"
-                    Caption ="River Missing > "
+                    Caption ="level1"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
-                    BackStyle =0
 
                     LayoutCachedLeft =1500
-                    LayoutCachedTop =96
+                    LayoutCachedTop =60
                     LayoutCachedWidth =2880
-                    LayoutCachedHeight =396
+                    LayoutCachedHeight =432
                     Gradient =0
                     BackThemeColorIndex =1
                     BackTint =100.0
@@ -198,32 +193,30 @@ Begin Form
                     PressedShade =100.0
                     HoverForeColor =9974127
                     HoverForeThemeColorIndex =-1
+                    HoverForeTint =100.0
                     PressedForeColor =4210752
                     WebImagePaddingLeft =3
                     WebImagePaddingTop =3
                     WebImagePaddingRight =3
                     WebImagePaddingBottom =3
-                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
                     Left =2940
-                    Top =96
+                    Top =60
                     Width =1380
-                    Height =300
                     TabIndex =2
                     ForeColor =4210752
                     Name ="btnLevel2"
-                    Caption ="Site Missing > "
+                    Caption ="level2"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
-                    BackStyle =0
 
                     LayoutCachedLeft =2940
-                    LayoutCachedTop =96
+                    LayoutCachedTop =60
                     LayoutCachedWidth =4320
-                    LayoutCachedHeight =396
+                    LayoutCachedHeight =420
                     Gradient =0
                     BackThemeColorIndex =1
                     BackTint =100.0
@@ -237,19 +230,19 @@ Begin Form
                     PressedShade =100.0
                     HoverForeColor =9974127
                     HoverForeThemeColorIndex =-1
+                    HoverForeTint =100.0
                     PressedForeColor =4210752
                     WebImagePaddingLeft =3
                     WebImagePaddingTop =3
                     WebImagePaddingRight =3
                     WebImagePaddingBottom =3
-                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
                     Left =4380
-                    Top =96
+                    Top =60
                     Width =1380
-                    Height =300
+                    Height =372
                     TabIndex =3
                     ForeColor =4210752
                     Name ="btnLevel3"
@@ -257,12 +250,11 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
-                    BackStyle =0
 
                     LayoutCachedLeft =4380
-                    LayoutCachedTop =96
+                    LayoutCachedTop =60
                     LayoutCachedWidth =5760
-                    LayoutCachedHeight =396
+                    LayoutCachedHeight =432
                     Gradient =0
                     BackThemeColorIndex =1
                     BackTint =100.0
@@ -276,12 +268,12 @@ Begin Form
                     PressedShade =100.0
                     HoverForeColor =9974127
                     HoverForeThemeColorIndex =-1
+                    HoverForeTint =100.0
                     PressedForeColor =4210752
                     WebImagePaddingLeft =3
                     WebImagePaddingTop =3
                     WebImagePaddingRight =3
                     WebImagePaddingBottom =3
-                    Overlaps =1
                 End
             End
         End
@@ -322,10 +314,10 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_Level0 As String
-Private m_Level1 As String
-Private m_Level2 As String
-Private m_Level3 As String
+'Private m_Level0 As String
+'Private m_Level1 As String
+'Private m_Level2 As String
+'Private m_Level3 As String
 Private m_Level0Color As Long
 Private m_Level1Color As Long
 Private m_Level2Color As Long
@@ -352,57 +344,57 @@ Public Event InvalidColor(Value As Long)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Level0(Value As String)
-    If Len(Value) > 0 Then
-        m_Level0 = Value
-        btnLevel0.Caption = Value
-    Else
-        RaiseEvent InvalidLevel(Value)
-    End If
-End Property
-
-Public Property Get Level0() As String
-    Level0 = m_Level0
-End Property
-
-Public Property Let Level1(Value As String)
-    If Len(Value) > 1 Then
-        m_Level1 = Value
-        btnLevel1.Caption = Value
-    Else
-        RaiseEvent InvalidLevel(Value)
-    End If
-End Property
-
-Public Property Get Level1() As String
-    Level1 = m_Level1
-End Property
-
-Public Property Let Level2(Value As String)
-    If Len(Value) > 2 Then
-        m_Level2 = Value
-        btnLevel2.Caption = Value
-    Else
-        RaiseEvent InvalidLevel(Value)
-    End If
-End Property
-
-Public Property Get Level2() As String
-    Level2 = m_Level2
-End Property
-
-Public Property Let Level3(Value As String)
-    If Len(Value) > 3 Then
-        m_Level3 = Value
-        btnLevel3.Caption = Value
-    Else
-        RaiseEvent InvalidLevel(Value)
-    End If
-End Property
-
-Public Property Get Level3() As String
-    Level3 = m_Level3
-End Property
+'Public Property Let Level0(Value As String)
+'    If Len(Value) > 0 Then
+'        m_Level0 = Value
+'        btnLevel0.Caption = Value
+'    Else
+'        RaiseEvent InvalidLevel(Value)
+'    End If
+'End Property
+'
+'Public Property Get Level0() As String
+'    Level0 = m_Level0
+'End Property
+'
+'Public Property Let Level1(Value As String)
+'    If Len(Value) > 1 Then
+'        m_Level1 = Value
+'        btnLevel1.Caption = Value
+'    Else
+'        RaiseEvent InvalidLevel(Value)
+'    End If
+'End Property
+'
+'Public Property Get Level1() As String
+'    Level1 = m_Level1
+'End Property
+'
+'Public Property Let Level2(Value As String)
+'    If Len(Value) > 2 Then
+'        m_Level2 = Value
+'        btnLevel2.Caption = Value
+'    Else
+'        RaiseEvent InvalidLevel(Value)
+'    End If
+'End Property
+'
+'Public Property Get Level2() As String
+'    Level2 = m_Level2
+'End Property
+'
+'Public Property Let Level3(Value As String)
+'    If Len(Value) > 3 Then
+'        m_Level3 = Value
+'        btnLevel3.Caption = Value
+'    Else
+'        RaiseEvent InvalidLevel(Value)
+'    End If
+'End Property
+'
+'Public Property Get Level3() As String
+'    Level3 = m_Level3
+'End Property
 
 '-- std color/bgd color --
 Public Property Let Level0Color(Value As Long)
@@ -640,22 +632,15 @@ On Error GoTo Err_Handler
     CreateMenu "river"
     CreateMenu "site"
     
-    Me.Level0 = Nz(TempVars("ParkCode"), "Park Missing") & " > "
-    Me.Level1 = Nz(TempVars("River"), "River Missing") & " > "
-    Me.Level2 = Nz(TempVars("Site"), "Site Missing") & " > "
-    Me.Level3 = " "
+    Me.btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park Missing") & " > "
+    Me.btnLevel1.Caption = Nz(TempVars("River"), "River Missing") & " > "
+    Me.btnLevel2.Caption = Nz(TempVars("Site"), "Site Missing") & " > "
+    
+    'hide level3
+    Me.btnLevel3.Visible = False
+    Me.btnLevel3.Caption = " "
         
     Dim ctrl As Control
-    For Each ctrl In Me.Controls
-        If ctrl.ControlType = acCommandButton Then
-            ctrl.BackStyle = acNormal
-            ctrl.HoverColor = lngYelLime
-            ctrl.HoverForeColor = lngPurple
-            ctrl.PressedColor = lngLtBlue
-        End If
-    Next
-    
-'    Me.Refresh
     
 Exit_Handler:
     Set ctrl = Nothing
@@ -686,12 +671,6 @@ End Sub
 Private Sub Form_GotFocus()
 On Error GoTo Err_Handler
         
-    Me.Level0 = Nz(TempVars("ParkCode"), "Park Missing") & " > "
-    Me.Level1 = Nz(TempVars("River"), "River Missing") & " > "
-    Me.Level2 = Nz(TempVars("Site"), "Site Missing") & " > "
-    Me.Level3 = " "
-            
-    Me.Refresh
     
 Exit_Handler:
     Exit Sub
@@ -721,12 +700,6 @@ End Sub
 Private Sub Form_Activate()
 On Error GoTo Err_Handler
         
-    Me.Level0 = Nz(TempVars("ParkCode"), "Park Missing") & " > "
-    Me.Level1 = Nz(TempVars("River"), "River Missing") & " > "
-    Me.Level2 = Nz(TempVars("Site"), "Site Missing") & " > "
-    Me.Level3 = " "
-            
-    Me.Refresh
     
 Exit_Handler:
     Exit Sub
@@ -756,12 +729,6 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
         
-    Me.Level0 = Nz(TempVars("ParkCode"), "Park Missing") & " > "
-    Me.Level1 = Nz(TempVars("River"), "River Missing") & " > "
-    Me.Level2 = Nz(TempVars("Site"), "Site Missing") & " > "
-    Me.Level3 = " "
-            
-    Me.Refresh
     
 Exit_Handler:
     Exit Sub

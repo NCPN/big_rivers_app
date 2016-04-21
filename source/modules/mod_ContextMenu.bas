@@ -98,7 +98,10 @@ On Error GoTo Err_Handler
                 Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="park")
                 mnuItem.Caption = "Set &Park"
                 mnuItem.OnAction = "mnuSetPark"
-            
+                Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="data_entry")
+                mnuItem.Caption = "Set &User"
+                mnuItem.OnAction = "mnuSetDataEntryUser"
+                
             Case "river"
                 Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="river")
                 mnuItem.Caption = "Set &River"
@@ -182,22 +185,27 @@ End Sub
 
 Public Sub mnuSetPark()
     
-    DoCmd.OpenForm "SelectPark", acNormal, OpenArgs:="park"
+    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="park"
     
 End Sub
 
 Public Sub mnuSetRiver()
     
-    DoCmd.OpenForm "River", acNormal, OpenArgs:="river"
+    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="river"
     
 End Sub
 
 Public Sub mnuSetSite()
     
-    DoCmd.OpenForm "Site", acNormal, OpenArgs:="site"
+    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="site"
     
 End Sub
 
+Public Sub mnuSetDataEntryUser()
+    
+    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="data_entry"
+    
+End Sub
 
 
 
@@ -342,4 +350,17 @@ On Error Resume Next
         End With
 
    
+End Function
+
+Public Function reposit()
+'    For Each ctrl In Me.Controls
+'        If ctrl.ControlType = acCommandButton Then
+'            ctrl.BackStyle = acNormal
+'            ctrl.HoverColor = lngYelLime
+'            ctrl.HoverForeColor = lngPurple
+'            ctrl.PressedColor = lngLtBlue
+'        End If
+'    Next
+    
+'    Me.Refresh
 End Function
