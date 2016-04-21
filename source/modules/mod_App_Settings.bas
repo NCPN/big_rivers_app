@@ -9,7 +9,7 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - initial version
-'               BLC, 7/10/2015 - adapted for Big Rivers
+'               BLC, 11/20/2015 - added priority & status icons
 ' =================================
 
 ' ---------------------------------
@@ -32,6 +32,7 @@ Option Explicit
 '               BLC, 5/19/2015 - added FIX_LINKED_DBS flag to handle applications which require updates of tbl_Dbs via FixLinkedDb
 '                                (usually when DbAdmin is not fully implemented)
 '               BLC, 5/28/2015 - added MAIN_APP_MENU to handle applications w/ main menu forms (not tabbed switchboards)
+'               BLC, 4/4/2016  - added LOCATION_TYPES to allow specific types only, RECORD_ACTIONS, CONTACT_ROLES, PARKS
 ' ---------------------------------
 Public Const USER_ACCESS_CONTROL As Boolean = False             'Boolean flag -> db includes user access control or not
 Public Const DB_ADMIN_CONTROL As Boolean = False                'Boolean flag -> db does not include DbAdmin subform & controls
@@ -80,8 +81,66 @@ Public Const TEXT_DISABLED As Long = lngGray
 Public Const PROGRESS_BAR As Long = lngLime
 
 '-----------------------------------------------------------------------
-' Photo Types
+' Icons
 '-----------------------------------------------------------------------
-Public Const PHOTO_TYPES_MAIN As String = "Reference,Overview,Feature,Transect,Other"      'String -> basic photo types
-Public Const PHOTO_TYPES_OTHER As String = "Animal,Plant,Cultural,Disturbance,Field Work,Scenic,Weather,Other"      'String -> other photo types
-Public Const PHOTO_EXT_ALLOWED As String = "jpg,jpeg,png"
+Public Const ICON_PATH As String = "Z:\_____LIB\dev\git_projects\icons\small\"
+
+Public Const FLAG_RED As String = ICON_PATH & "flag_red" & ".png"
+Public Const FLAG_LIME As String = ICON_PATH & "flag_lime" & ".png"
+Public Const FLAG_ORANGE As String = ICON_PATH & "flag_orange" & ".png"
+Public Const FLAG_LTBLUE As String = ICON_PATH & "flag_ltblue" & ".png"
+Public Const FLAG_BLUE As String = ICON_PATH & "flag_blue" & ".png"
+Public Const FLAG_NAVY As String = ICON_PATH & "flag_navy" & ".png"
+Public Const FLAG_PURPLE As String = ICON_PATH & "flag_purple" & ".png"
+
+Public Const DOT_RED As String = ICON_PATH & "dot_red" & ".png"
+Public Const DOT_LIME As String = ICON_PATH & "dot_lime" & ".png"
+Public Const DOT_ORANGE As String = ICON_PATH & "dot_orange" & ".png"
+Public Const DOT_LTBLUE As String = ICON_PATH & "dot_ltblue" & ".png"
+Public Const DOT_BLUE As String = ICON_PATH & "dot_blue" & ".png"
+Public Const DOT_NAVY As String = ICON_PATH & "dot_navy" & ".png"
+Public Const DOT_PURPLE As String = ICON_PATH & "dot_purple" & ".png"
+
+'-----------------------------------------------------------------------
+' Big Rivers Components
+'-----------------------------------------------------------------------
+Public Const APP_IMAGES_DIR As String = ""
+Public Const PARKS = "BLCA,CANY,DINO"
+' O - Observer, R - Recorder, DE - DataEntry, V - DataVerify, C - DataCertify
+Public Const RECORD_ACTIONS As String = "O,R,DE,V,C"
+' O - Observer, R - Recorder, DE - DataEntry, V - DataVerify
+' PD - PhotoDownload, P - Photographer, C - DataCertify
+Public Const CONTACT_ROLES As String = "O,R,DE,V,C,P,PD"  'add P, PD to db?
+
+Public Const LOCATION_TYPES As String = "F,T,P"     'F=feature, T=transects, P=point
+
+Public Const LINE_DIST_SOURCES As String = "T,P"    'transect & plot
+
+'Measurement type - initially ALL = SC
+'WP-water pin, SC-slope change, U-upland, R-river
+Public Const LINE_DIST_TYPES As String = "WP,SC,U,R"
+
+'Height of tagline above ...
+'H-headpin @ 0, W-water, G-ground, V-vegetation,  WRS - water @ water pin
+'SC: Points where tagline bends or stretches while slope changes
+'W-water, G-ground, V-vegetation, R- rock, D-debris
+Public Const HEIGHT_TYPES As String = "H,W,G,V,WRS,V,R,D"
+
+'Transect, Feature, Reference or Overview (T, F, R, O - transect, feature, reference, overview/point-to-point),
+'Other photos: OA-animal, OC-cultural, OD-disturbance, OF-field work, OP-plants, OS-scenic, OW-weather, OO-other
+Public Const PHOTO_TYPES As String = "T,F,O,R,OA,OC,OD,OF,OP,OS,OW,OO"
+
+'Transducer types - A-air, W-water
+Public Const TRANSDUCER_TYPES As String = "A,W"
+
+'Timing of actions (BD-before-download, AD-after-download/reinstallation)
+Public Const TRANSDUCER_TIMING As String = "BD,AD"
+
+'Plot densities
+Public Const PLOT_DENSITIES As String = "1,2,4,8"
+
+'Transect numbers --> BLCA & CANY, range 1-8, DINO has no transects
+Public Const TRANSECT_NUMBERS As String = "1,2,3,4,5,6,7,8"
+
+'Veg walk collection types --> Site or Feature to handle prior non-site data (S or F)
+Public Const COLLECTION_TYPES As String = "S,F"

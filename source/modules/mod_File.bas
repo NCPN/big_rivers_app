@@ -4,12 +4,11 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_File
 ' Level:        Framework module
-' Version:      1.01
+' Version:      1.00
 ' Description:  File and directory related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
-'               BLC, 5/18/2015 - 1.01 - renamed, removed fxn prefix
 ' =================================
 
 ' ---------------------------------
@@ -89,6 +88,7 @@ Err_Handler:
     End Select
     Resume Exit_Function
 End Function
+
 
 ' ---------------------------------
 '  FILE RELATED
@@ -178,7 +178,7 @@ Public Function SaveFile(ByVal strFilename As String, ByVal strFileType As Strin
         Filter:=strFilter, _
         flags:=lngFlags, _
         DialogTitle:=strTitle, _
-        fileName:=strFilename)
+        Filename:=strFilename)
 
 Exit_Function:
     Exit Function
@@ -273,7 +273,7 @@ End Function
 
 ' =================================
 ' FUNCTION:     ParseFileName
-' Description:  Parses an input path string to return only the file name, if present
+' Description:  Parses an input path string to return only the file extension, if present
 ' Parameters:   strFullPath - string for the full file path
 ' Returns:      string including only the file name
 ' Throws:       none

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_User
 ' Level:        Framework module
-' Version:      1.04
+' Version:      1.06
 ' Description:  Access related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, May 2014
@@ -14,6 +14,9 @@ Option Explicit
 '               BLC, 4/30/2015 - 1.02 - added level & version info, move blnRunQueries & blnUpdateAll to mod_Initialize_App
 '               BLC, 5/18/2015 - 1.03 - removed fxn prefixes
 '               BLC, 6/12/2015 - 1.04 - replaced TempVars.item(... with TempVars("...
+'               BLC, 6/30/2015 - 1.05 - updated cmd button prefixes to btn
+'               BLC, 4/4/2016  - 1.06 - changed Exit_Handler/Exit_Procedure > Exit_Handler
+'               BLC, 4/20/2016 - 1.07 - added getADCommonName() to retrieve person's name
 ' =================================
 
 ' ---------------------------------
@@ -42,6 +45,7 @@ Option Explicit
 '               BLC, 4/22/2015 - handle global USER_ACCESS_CONTROL setting to enable full access
 '                                for apps w/o user access controls
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
+'               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler, dbCurrent to CurrentDb
 ' ---------------------------------
 Public Function getDbUserAccess() As String
 On Error GoTo Err_Handler
@@ -57,7 +61,8 @@ Dim rs As DAO.Recordset
         strSQL = "SELECT User_role FROM tsys_User_Roles WHERE User_name = '" & Environ("Username") & "';"
     
         'fetch User role & set UserAccessLevel
-        Set rs = dbCurrent.OpenRecordset(strSQL)
+        'Set rs = dbCurrent.OpenRecordset(strSQL)
+        Set rs = CurrentDb.OpenRecordset(strSQL)
         If Not rs.BOF And Not rs.EOF Then
             'db user role
             TempVars("UserAccessLevel") = CStr(rs!User_role)
@@ -72,7 +77,7 @@ Dim rs As DAO.Recordset
     
     getDbUserAccess = TempVars("UserAccessLevel")
     
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -81,7 +86,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - getUserAccess[mod_User])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 
 End Function
 
@@ -99,6 +104,7 @@ End Function
 ' Revisions:    BLC, 7/29/2014 - initial version
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
+'               BLC, 4/4/2016  - changed Exit_Procedure > Exit_Handler
 ' ---------------------------------
 Public Sub setUserAccess(frm As Form, Optional flag As String)
 On Error GoTo Err_Handler
@@ -127,7 +133,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
         ' admin (full control)
         '-------------------------------
             Case "admin"
-                Select Case .name
+                Select Case .Name
                     Case "frm_App_Releases"
                         With .subBugs
                             .Locked = False
@@ -135,10 +141,10 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         End With
                     Case "frm_Set_Defaults"
                         .tbxTimeframe.Locked = False
-                        .tbxTimeframe.backstyle = 1
+                        .tbxTimeframe.BackStyle = 1
                         .tbxProject.Enabled = True
                         .tbxProject.Locked = False
-                        .tbxProject.backstyle = 1
+                        .tbxProject.BackStyle = 1
                         .tbxProject.SpecialEffect = 2
                         .btnNewUser.Enabled = True
                     Case "frm_Switchboard"
@@ -172,16 +178,16 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
         ' power user
         '-------------------------------
             Case "power user"
-                Select Case .name
+                Select Case .Name
                     Case "frm_App_Releases"
                         'power user, data entry & read only the same
                         GoTo Catch_All_Else:
                     Case "frm_Set_Defaults"
                         .tbxTimeframe.Locked = False
-                        .tbxTimeframe.backstyle = 1
+                        .tbxTimeframe.BackStyle = 1
                         .tbxProject.Enabled = False
                         .tbxProject.Locked = True
-                        .tbxProject.backstyle = 0
+                        .tbxProject.BackStyle = 0
                         .tbxProject.SpecialEffect = 0
                         .btnNewUser.Enabled = True
                     Case "frm_Switchboard"
@@ -211,16 +217,16 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
         ' data entry
         '-------------------------------
             Case "data entry"
-                Select Case .name
+                Select Case .Name
                     Case "frm_App_Releases"
                         'power user, data entry & read only the same
                         GoTo Catch_All_Else:
                     Case "frm_Set_Defaults"
                         .tbxTimeframe.Locked = True
-                        .tbxTimeframe.backstyle = 0
+                        .tbxTimeframe.BackStyle = 0
                         .tbxProject.Enabled = False
                         .tbxProject.Locked = True
-                        .tbxProject.backstyle = 0
+                        .tbxProject.BackStyle = 0
                         .tbxProject.SpecialEffect = 0
                         .btnNewUser.Enabled = True
                     Case "fsub_DbAdmin"
@@ -249,7 +255,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         .optgScheduledMode.Enabled = True     ' user can enter data for unscheduled locs
                         .cmbYearFilter.Locked = True          ' current year only to minimize confusion
                         .togFilterByYear.Enabled = False
-                        .txtLoc_code.forecolor = 0            ' black - no direct link to data browser
+                        .txtLoc_code.ForeColor = 0            ' black - no direct link to data browser
                         .btnDeleteRec.Enabled = True
                         .btnNewLoc.Enabled = True
                         .btnNewRareObs.Enabled = True
@@ -320,7 +326,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
         ' read only (default)
         '-------------------------------
             Case Else
-                Select Case .name
+                Select Case .Name
                     Case "frm_App_Releases"
                         'power user, data entry & read only the same
                         GoTo Catch_All_Else:
@@ -347,10 +353,10 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         End If
                     Case "frm_Set_Defaults"
                         .tbxTimeframe.Locked = True
-                        .tbxTimeframe.backstyle = 0
+                        .tbxTimeframe.BackStyle = 0
                         .tbxProject.Enabled = False
                         .tbxProject.Locked = True
-                        .tbxProject.backstyle = 0
+                        .tbxProject.BackStyle = 0
                         .tbxProject.SpecialEffect = 0
                         .btnNewUser.Enabled = False
                     Case "fsub_DbAdmin"
@@ -364,7 +370,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         .optgScheduledMode.Enabled = False
                         .cmbYearFilter.Locked = False         ' enable seeing multiple years
                         .togFilterByYear.Enabled = True
-                        .txtLoc_code.forecolor = 0            ' black - no direct link to data browser
+                        .txtLoc_code.ForeColor = 0            ' black - no direct link to data browser
                         .btnDeleteRec.Enabled = False
                         .btnNewLoc.Enabled = False
                         .btnNewRareObs.Enabled = False
@@ -430,7 +436,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
 
     End With
     
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
     
 '------------------------------------
@@ -439,7 +445,7 @@ Exit_Procedure:
 Admin_PowerUser:
 
     With frm
-        Select Case .name
+        Select Case .Name
             Case "fsub_DbAdmin"
                 .btnEditLog.Enabled = True
                 .btnSetRoles.Enabled = True
@@ -451,7 +457,7 @@ Admin_PowerUser:
                 .optgScheduledMode.Enabled = True
                 .cmbYearFilter.Locked = False
                 .togFilterByYear.Enabled = True
-                .txtLoc_code.forecolor = 16711680     ' blue to indicate link to data browser
+                .txtLoc_code.ForeColor = 16711680     ' blue to indicate link to data browser
                 .btnDeleteRec.Enabled = True
                 .btnNewLoc.Enabled = True
                 .btnNewRareObs.Enabled = True
@@ -525,28 +531,28 @@ Admin_PowerUser:
         End Select
     End With
     
-    GoTo Exit_Procedure
+    GoTo Exit_Handler
 
 '------------------------------------------
 ' admin, power user, data entry (same)
 '------------------------------------------
 Admin_PowerUser_DataEntry:
     With frm
-        Select Case .name
+        Select Case .Name
             Case "fsub_Events_Browser"
                 .btnEdit.Caption = "Edit"           'Set button caption
             Case ""
         End Select
     End With
     
-    GoTo Exit_Procedure
+    GoTo Exit_Handler
 
 '------------------------------------
 ' data entry & read only (both the same)
 '------------------------------------
 DataEntry_ReadOnly:
     With frm
-        Select Case .name
+        Select Case .Name
             Case "frm_Schedule"
                 .subSchedule.Form.AllowAdditions = False
                 .subSchedule.Form.AllowDeletions = False
@@ -556,14 +562,14 @@ DataEntry_ReadOnly:
         End Select
     End With
     
-    GoTo Exit_Procedure
+    GoTo Exit_Handler
 
 '------------------------------------------
 ' power user, data entry, read only (same)
 '------------------------------------------
 Catch_All_Else:
     With frm
-        Select Case .name
+        Select Case .Name
             Case "frm_App_Releases"
                 With .subBugs
                     .Locked = True
@@ -573,7 +579,7 @@ Catch_All_Else:
         End Select
     End With
     
-    GoTo Exit_Procedure
+    GoTo Exit_Handler
 
 Err_Handler:
     Select Case Err.Number
@@ -581,7 +587,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SetUserAccess[mod_User])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Sub
 
@@ -606,7 +612,7 @@ Dim strSQL As String
     '-------------------------------
     With frm
     
-        Select Case .name
+        Select Case .Name
             Case "frm_Switchboard"
                 ' Log the user exit time if the back end is connected and the user has write privileges
                 If TempVars("Connected") And TempVars("WritePermission") Then
@@ -622,7 +628,7 @@ Dim strSQL As String
         DoCmd.RunSQL strSQL
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 
 Err_Handler:
@@ -631,7 +637,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - logUserAction[mod_db_Utilities])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Sub
 
@@ -646,6 +652,7 @@ End Sub
 ' Revisions:    JRB, 12/31/2009 - initial version
 '               BLC, 4/30/2015  - moved from mod_Utilities
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler
 ' =================================
 Public Function UserName() As String
     On Error GoTo Err_Handler
@@ -653,7 +660,7 @@ Public Function UserName() As String
     UserName = "Unknown"
     UserName = Environ("Username")
 
-Exit_Procedure:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -662,6 +669,60 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - UserName[mod_User])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
+End Function
 
+' =================================
+' FUNCTION:     GetADCommonName
+' Description:  Returns the currently logged in user's common name
+' Note:
+'       AD/LDAP directories use objects referenced by
+'       Distinguished Name (DN)
+'       DN parts are delimited by commas & represent where in
+'       the AD hierarchy objects exist
+'       DN monikers include:
+'           Common name (cn) - John Doe
+'           Organizational unit (ou) - Marketing
+'           Domain component (dc) - MyCompany
+'
+' Parameters:   none
+' Returns:      common name (cn) - Joe User (string)
+' Throws:       none
+' References:
+'   Andrey V Artemyev & h2fsell, February 22, 2011
+'   https://social.msdn.microsoft.com/Forums/office/en-US/1b38c289-af3f-471a-8bb6-d04d6e281964/os-compatible-way-to-get-the-full-user-name-via-vba?forum=accessdev
+' Source/date:  Bonnie Campbell, April 20, 2016
+' Revisions:    BLC, 4/20/2016 - initial version
+' =================================
+Public Function GetADCommonName() As String
+On Error GoTo Err_Handler
+
+    Dim ADSI As Object, tmp As Variant
+ 
+    Set ADSI = CreateObject("ADSystemInfo")
+    
+    tmp = Split(ADSI.UserName, ",")
+ 
+    'retrieve first & last name
+    GetADCommonName = Right(tmp(0), Len(tmp(0)) - 3)
+  
+' Automation Error
+'No mapping between account names and security IDs was done.
+'Print Err.Number
+'-2147023564
+
+ 
+Exit_Handler:
+    'cleanup
+    Set ADSI = Nothing
+
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - UserName[mod_User])"
+    End Select
+    Resume Exit_Handler
 End Function

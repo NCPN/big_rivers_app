@@ -1,6 +1,0 @@
-﻿Size_Description	Size_Class
-1 to few plants	1
-1000 - 2000m sq.	5
-40 - 400m sq.	3
-400 - 1000m sq.	4
-few plants - 40m sq.	2

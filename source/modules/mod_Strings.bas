@@ -4,12 +4,11 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.01
+' Version:      1.00
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
-'               BLC, 5/18/2015 - 1.01 - removed fxn prefixes
 ' =================================
 
 ' =================================
@@ -104,7 +103,7 @@ End Function
 ' FUNCTION:     InsertSpace
 ' Description:  Inserts a space between capitalized letters
 ' Parameters:   str - string to inspect
-' Returns:      Modified string
+' Returns:      -
 ' Throws:       -
 ' References:   -
 ' Source/date:  theDBguy, May 20, 2010
@@ -152,7 +151,7 @@ End Function
 ' Assumptions:  -
 ' Parameters:   strInspect - string to check
 '               strFind - string to count
-' Returns:      count - number of instances strFind is found in strInspect
+' Returns:      count - number o instances strFind is found in strInspect
 ' Throws:       none
 ' References:   none
 ' Source/date:

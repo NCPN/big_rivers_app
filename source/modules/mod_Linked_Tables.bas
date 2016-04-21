@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Linked_Tables
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.01
 ' Description:  Linked table related functions & subroutines
 '
 ' Adapted from: John R. Boetsch, May 24, 2006
@@ -15,30 +15,7 @@ Option Explicit
 '               BLC, 4/30/2015 - 1.00 - added fxnVerifyLinks, fxnRefreshLinks, fxnVerifyLinkTableInfo,
 '                                fxnMakeBackup from mod_Custom_Functions
 '               BLC, 5/19/2015 - 1.01 - renamed functions, removed fxn prefix
-'               BLC, 6/10/2015 - 1.02 - fixed VerifyLinkTableInfo to add new linked tables to tsys_Link_Tables
-'               BLC, 6/12/2015 - 1.03 - replaced TempVars.item(... with TempVars("...
 ' =================================
-
-' ---------------------------------
-'  References
-' ---------------------------------
-
-' --------------------------------------------------------------------------------
-'   Msys Objects
-' --------------------------------------------------------------------------------
-' Source: Pat Hartman March 13, 2006
-'         http://www.access-programmers.co.uk/forums/showthread.php?t=103811
-' --------------------------------------------------------------------------------
-'   Type   TypeDesc           Type  TypeDesc
-'  -32768  Form                 1   Table - Local Access Tables
-'  -32766  Macro                2   Access Object - Database
-'  -32764  Reports              3   Access Object - Containers
-'  -32761  Module               4   Table - Linked ODBC Tables
-'  -32758  Users                5   Queries
-'  -32757  Database Document    6   Table - Linked Access Tables
-'  -32756  Data Access Pages    8   SubDataSheets
-' --------------------------------------------------------------------------------
-
 
 ' ---------------------------------
 '   Database Level
@@ -68,7 +45,6 @@ Option Explicit
 '               BLC, 4/30/2015 - switched from fxnSwitchboardIsOpen to FormIsOpen(frmSwitchboard)
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/22/2015 - moved from mod_Initialize_App to mod_Linked_Tables
-'               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 ' ---------------------------------
 Public Function VerifyConnections()
     On Error GoTo Err_Handler
@@ -84,8 +60,8 @@ Public Function VerifyConnections()
     Dim blnHasError As Boolean
 
     Set db = CurrentDb
-    TempVars("Connected") = False           ' Default in case of error
-    TempVars("HasAccessBE") = False         ' Flag to indicate that at least 1 Access BE exists
+    TempVars.item("Connected") = False           ' Default in case of error
+    TempVars.item("HasAccessBE") = False         ' Flag to indicate that at least 1 Access BE exists
     strSysTable = "tsys_Link_Dbs"   ' System table listing linked tables
     blnHasError = False             ' Flag to indicate error status
 
@@ -120,7 +96,7 @@ Public Function VerifyConnections()
             End If
         Else
             ' Access back-end - update the global variable
-            TempVars("HasAccessBE") = True
+            TempVars.item("HasAccessBE") = True
             If Not IsNull(rst![File_path]) Then
                 strDbPath = rst![File_path]
                 If FileExists(strDbPath) = False Then
@@ -154,7 +130,7 @@ Public Function VerifyConnections()
         ' Check the status of individual table links, depending on application settings
         If FormIsOpen("frmSwitchboard") And blnHasError = False Then
             If Forms!frm_Switchboard.fsub_DbAdmin.Form.chkVerifyOnStartup Then
-                If TempVars("HasAccessBE") = True Then
+                If TempVars.item("HasAccessBE") = True Then
                     If MsgBox("Would you like all linked table connections to be tested?", _
                         vbYesNo + vbDefaultButton2, _
                         "Checking back-end connections ...") = vbNo Then GoTo Proc_Final_Status
@@ -185,7 +161,7 @@ Proc_Final_Status:
             DoCmd.OpenForm "frm_Connect_Dbs"
         End If
     Else  ' If no connection errors, then set the global variable flag to True
-        TempVars("Connected") = True
+        TempVars.item("Connected") = True
     End If
 
 Exit_Procedure:
@@ -483,7 +459,7 @@ Public Function CheckLink(strTableName As String) As Boolean
     On Error Resume Next
     ' Check for failure.  If can't determine the name of
     ' the first field in the table, the link must be bad.
-    varRet = CurrentDb.tabledefs(strTableName).Fields(0).name
+    varRet = CurrentDb.tabledefs(strTableName).Fields(0).Name
     If Err <> 0 Then
         CheckLink = False
     Else
@@ -707,7 +683,7 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
             frm.Repaint
             strTable = rst![Link_table]
             Debug.Print strTable
-            varReturn = dbGet.tabledefs(strTable).Fields(0).name
+            varReturn = dbGet.tabledefs(strTable).Fields(0).Name
             rst.MoveNext
         Loop
 
@@ -876,9 +852,6 @@ End Function
 '               BLC, 4/30/2015 - moved to mod_Linked_Tables from mod_Custom_Functions
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/19/2015 - added check for FIX_LINKED_DBS flag when DbAdmin is not fully implemented
-'               BLC, 6/10/2015 - updated SQL insert into tsys_Link_Tables for missing MSysObjects tables
-'                                captured by qsys_Linked_tables_not_in_tsys_Link_Tables (missing Link_type)
-'                                bug resulted in new linked tables never being inserted into tsys_Link_Tables & subsequent errors
 ' =================================
 Public Function VerifyLinkTableInfo() As Boolean
     On Error GoTo Err_Handler
@@ -939,15 +912,10 @@ Public Function VerifyLinkTableInfo() As Boolean
         DoCmd.OpenQuery "qsys_Linked_dbs_not_in_tsys_Link_Dbs"
         ' Append missing table records to tsys_Link_Tables
         strSQL = "INSERT INTO tsys_Link_Tables " & _
-               "( Link_table, Link_db,  Link_type ) " & _
+            "( Link_table, Link_db ) " & _
             "SELECT qsys_Linked_tables_not_in_tsys_Link_Tables.CurrTable, " & _
-            "qsys_Linked_tables_not_in_tsys_Link_Tables.CurrDb, tsys_Link_Dbs.Db_desc " & _
-            "FROM qsys_Linked_tables_not_in_tsys_Link_Tables " & _
-            "INNER JOIN tsys_Link_Dbs ON qsys_Linked_tables_not_in_tsys_Link_Tables.CurrDb = tsys_Link_Dbs.Link_db;"
-
-'            "SELECT qsys_Linked_tables_not_in_tsys_Link_Tables.CurrTable, " & _
-'            "qsys_Linked_tables_not_in_tsys_Link_Tables.CurrDb " & _
-'            "FROM qsys_Linked_tables_not_in_tsys_Link_Tables;"
+            "qsys_Linked_tables_not_in_tsys_Link_Tables.CurrDb " & _
+            "FROM qsys_Linked_tables_not_in_tsys_Link_Tables;"
         DoCmd.RunSQL strSQL
         DoCmd.SetWarnings True
         ' Update descriptions
@@ -1117,7 +1085,7 @@ Public Function VerifyLinks() As Boolean
         strProgress = String(Round(19 * intI / intNumTables), "Û")
         frm!tbxProgress = strProgress
         frm.Repaint
-        strLinkTableName = rst![name]
+        strLinkTableName = rst![Name]
         ' Make sure the linked table opens properly
         If CheckLink(strLinkTableName) = False Then
             ' Unable to open a linked table (not a critical error)

@@ -5,12 +5,12 @@ Option Explicit
 ' MODULE:       mod_Color
 ' Level:        Framework module
 ' Version:      1.02
-' Description:  initialize functions & procedures
+' Description:  color functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
 ' Revisions:    BLC, 2/9/2015 - 1.00 - initial version
 '               BLC, 5/1/2015 - 1.01 - integrated into Invasives Reporting tool
-'               BLC, 5/18/2015 - 1.02 - renamed & removed fxn prefix
+'               BLC, 11/10/2015 - 1.02 - added additional colors
 ' =================================
 
 ' ---------------------------------
@@ -44,7 +44,10 @@ Public Const lngWhite As Long = 16777215    '?RGB(255,255,255) #FFFFFF
 Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
 Public Const lngYellow As Long = 65535      '?RGB(255,255,0) #FFFF00
 Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
-
+Public Const lngBrown As Long = 13107       '?RGB(51,51,0) #333300
+Public Const lngPutty As Long = 3355443     '?RGB(51,51,51) #333333
+Public Const lngPurple As Long = 9974127    '?RGB(111,49,152) #6F3198
+Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
 ' ---------------------------------
 '  Subroutines & Functions
 ' ---------------------------------
@@ -57,6 +60,7 @@ Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
 ' Returns:      RGB - as dicitionary object (R, G, B components)
 ' Throws:       none
 ' References:   none
+' Requires:     Microsoft Scriping Runtime, scrrun.dll reference for dictionary object
 ' Source/date:
 ' Chirag, March 12, 2008
 ' http://www.pcreview.co.uk/threads/convert-long-integer-color-value-to-rgb.3447564/
@@ -65,6 +69,7 @@ Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
 ' Adapted:      Bonnie Campbell, March 4, 2015 - for NCPN tools
 ' Revisions:
 '   BLC - 3/4/2015  - initial version
+'   BLC - 11/10/2015 - added reference requirements
 ' ---------------------------------
 Public Function ConvertLongToRGB(ByVal lngValue As Long) As Dictionary
 On Error GoTo Err_Handler

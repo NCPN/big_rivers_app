@@ -1,6 +1,0 @@
-﻿Cover_Description	Cover_Class
-High (26 - 50%)	4
-Low (1 - 5 %)	2
-Majority (51 - 100%)	5
-Moderate (6 - 25 %)	3
-Trace (<1%)	1
