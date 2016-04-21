@@ -4,26 +4,23 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.00
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 5/26/2015 - 1.01 - added PopulateSpeciesPriorities function from mod_Species
-'               BLC, 6/1/2015  - 1.02 - changed View to Search tab
-'               BLC, 6/12/2015 - 1.03 - added EnableTargetTool button
-'               BLC, 6/30/2015 - 1.04 - added ClearFields()
-'               BLC, 7/27/2015 - 1.05 - added SetHints()
+'               BLC, 11/19/2015 - 1.02 - added CreateEnums call to initApp
 ' =================================
 
 ' =================================
 ' SUB:     PopulateInsetTitle
 ' Description:  Sets inset title on form
 ' Assumptions:
-' Parameters:   ctrl - control whose text is being set (control)
-'               strContext - identifies which title to use,
-'                            specifies the context for the title (string)
-' Returns:      -
+' Parameters:   frm - form holding crumb labels
+'               aryCrumbs - breadcrumb array
+'               separator - non-clickable value between crumbs, default = >
+' Returns:      aryCrumbs - array of breadcrumb values
 ' Throws:       none
 ' References:   none
 ' Source/date:
@@ -33,7 +30,6 @@ Option Explicit
 '               BLC, 4/21/2015 - Adapted for NCPN Invasives Reports - Species Target List tool
 '                                Converted QAQC to Create, Logs to View
 '               BLC, 5/26/2015 - Added error handling
-'               BLC, 6/4/2015 - Changed View to Search tab, added "or modify" for create tab
 ' =================================
 Public Sub PopulateInsetTitle(ctrl As Control, strContext As String)
 On Error GoTo Err_Handler
@@ -42,7 +38,7 @@ On Error GoTo Err_Handler
     
     Select Case strContext
         Case "Create" ' Create main
-            strTitle = "Choose what you'd like to create or modify"
+            strTitle = "Choose what you'd like to create"
         Case "CreateTgtLists" ' Create species target lists
             strTitle = "Create > Species Target Lists"
         Case "AddTgtArea" ' Add target areas
@@ -52,8 +48,8 @@ On Error GoTo Err_Handler
             strTitle = "Data Validation > " & strContext
         Case "Data Validation" ' QA/QC analysis project selection
             strTitle = "Data Validation > Field > Duplicates (NFV)" '<<<<< Make this so it ties back to the selected analysis
-        Case "Search" ' Search main
-            strTitle = "Species Search"
+        Case "View" ' View main
+            strTitle = "View"
         Case "Reports" ' Reports main
             strTitle = "Reports"
         Case "CrewSpeciesList" ' Reports > Field Crew Species List
@@ -69,18 +65,18 @@ On Error GoTo Err_Handler
         Case "UtahLab" ' Exports > Utah Lab etc.
             strContext = Replace(strContext, "Lab", " Lab")
             strTitle = "Exports > " & strContext
-        Case "DbAdmin" ' DB Admin main
-            strTitle = "Db Admin"
+        Case "DB Admin" ' DB Admin main
+            strTitle = ""
     End Select
     
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strTitle
-        If strContext <> "DbAdmin" Or DB_ADMIN_CONTROL = False Then
+        If strContext <> "DbAdmin" Then
             ctrl.visible = True
         End If
     End If
     
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -89,7 +85,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateInsetTitle[mod_App_UI])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' =================================
@@ -107,7 +103,6 @@ End Sub
 '               BLC, 4/21/2015 - Adapted for NCPN Invasives Reports - Species Target List tool
 '                                Converted QAQC to Create, Logs to View
 '               BLC, 5/26/2015 - Added error handling
-'               BLC, 6/4/2015  - Changed View to Search
 ' =================================
 Public Sub PopulateInstructions(ctrl As Control, strContext As String)
 On Error GoTo Err_Handler
@@ -117,21 +112,16 @@ On Error GoTo Err_Handler
     
     Select Case strContext
         Case "Create" ' Create main
-            strInstructions = "Choose what you would like to create/modify."
+            strInstructions = "Choose what you would like to create."
         Case "CreateTgtLists" ' Create > Species Target Lists
-            strInstructions = "Choose the park and year for your list. Click 'Continue' to prepare your list." & vbCrLf & vbCrLf & _
-                    "Only existing lists for the current or future years may be modified." & vbCrLf & vbCrLf & _
-                    "Please contact the project lead or data management if a prior year list must be modified."
+            strInstructions = "Choose the park and year for your list. Click 'Continue' to prepare your list."
         Case "AddTgtArea" ' Create > Add Target Area
             strInstructions = "" '"Choose the park and year for your target area. Click 'Continue' to create your area."
         Case "Outliers", "MissingData", "SuspectValues", "SuspectDO", "SuspectpH", "SuspectSC", "SuspectWT", "Duplicates" ' QA/QC main
             strInstructions = "Complete the fields to define the data set or subset you are validating. " _
                     & "Leave the fields blank if you are validating all data. Click 'Run' to validate."
-        Case "Search" ' Search main
-            strInstructions = "Search for species family, name, codes. " & _
-                    "Latin, common, and state specific (UT, CO, WY) genus species names " & _
-                    "and lookup (6-letter) and ITIS codes are included." & vbCrLf & vbCrLf & _
-                    "Searches can be made across all or only a few species names/codes."
+        Case "View" ' View main
+            strInstructions = "The view menu is currently not in use for this application."
             'strInstructions = "Log your modifications to data within the edit log. " _
             '        & "Be as complete as possible to aid others in tracing data changes."
         Case "Reports" ' Reports main
@@ -154,17 +144,18 @@ On Error GoTo Err_Handler
             strInstructions = "Choose the export you would like to run."
         Case "DbAdmin" ' DB Admin main
             strInstructions = "The database administration tab is currently not in use for this application."
+            'strInstructions = ""
     End Select
     
     'populate caption & display instructions
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strInstructions
-        If strContext <> "DbAdmin" Or DB_ADMIN_CONTROL = False Then
+        If strContext <> "DbAdmin" Then
             ctrl.visible = True
         End If
     End If
     
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -173,7 +164,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateInstructions[mod_App_UI])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -245,163 +236,46 @@ End Function
 '   BLC - 2/19/2015 - added dynamic getParkState() & standard error handling
 '   BLC - 3/4/2015  - shifted colors to mod_Color, removed setting of park, state, tgtYear TempVars
 '   BLC - 5/13/2015 - stub only
+'   BLC - 11/19/2015 - added CreateEnums call to create application specific Enums,
+'                      updated documentation to reflect mod_App_UI vs. mod_Init
 ' ---------------------------------
 Public Sub Initialize()
 On Error GoTo Err_Handler
 
+    'create the enums specific to this application from the Enums table & mod_App_Enum stub module
+    CreateEnums
 
-Exit_Sub:
+    'set application UI display
+'     SetStartupOptions "AppTitle", dbText, "NCPN Big Rivers"
+
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Initialize[mod_Init])"
+            "Error encountered (#" & Err.Number & " - Initialize[mod_App_UI])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' SUB:          EnableTargetTool
-' Description:  enable the target tool button
-' Assumptions:  -
-' Parameters:   N/A
-' Returns:      N/A
-' Throws:       none
-' References:   none
-' Source/date:  Bonnie Campbell, June 4, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/4/2015  - initial version
-'   BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
-' ---------------------------------
-Public Sub EnableTargetTool(ctrl As Control)
-On Error GoTo Err_Handler
-    
-    'enable button if connected
-    If TempVars("Connected") Then
-        ctrl.Enabled = True
-    Else
-        ctrl.Enabled = False
-    End If
-
-Exit_Sub:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - EnableTargetTool[mod_Init])"
-    End Select
-    Resume Exit_Sub
-End Sub
-
-' ---------------------------------
-' SUB:          ClearFields
-' Description:  initialize application values
-' Assumptions:  -
-' Parameters:   frm - Form whose fields should be cleared
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:  Bonnie Campbell, February 20, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 2/20/2015  - initial version
-'   BLC - 5/18/2015  - fixed error documentation ClearFields vs. ITIS_Click, mod_Forms vs. frm_SpeciesSearch
-'   BLC - 6/30/2015  - moved to mod_App_UI
-' ---------------------------------
-Public Sub ClearFields(frm As Form)
-On Error GoTo Err_Handler
-
-    Select Case frm.name
-    
-        Case "frm_Species_Search"
-            frm.Controls("cbxCO").DefaultValue = False
-            frm.Controls("cbxUT").DefaultValue = False
-            frm.Controls("cbxWY").DefaultValue = False
-            frm.Controls("cbxITIS").DefaultValue = False
-            frm.Controls("cbxCommon").DefaultValue = False
-            frm.Controls("tbxSearchFor").Value = ""
-    End Select
-    
-Exit_Sub:
-    Exit Sub
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ClearFields[form_Forms])"
-    End Select
-    Resume Exit_Sub
-End Sub
-
-' ================================ Big Rivers ===========================
-
-' ---------------------------------
-' SUB:          SetHints
-' Description:  set field hints for form
-' Assumptions:  -
-' Parameters:   frm - form where fields reside(form object)
-'               strForm - name of subform (string)
-' Returns:      N/A
-' Throws:       none
-' References:   none
-' Source/date:
-' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/27/2015  - initial version
-' ---------------------------------
-Public Sub SetHints(frm As Form, strForm As String)
-On Error GoTo Err_Handler
-
-'Forms!Mainform!Subform1.Form!
-    
-    With frm!fsub.Form
-    
-        Select Case strForm
-            
-            Case "fsub_Photo_FTOR_Details"
-
-                !lblCloseupHint.Caption = "Is the photo a closeup?"
-                !lblReplacementHint.Caption = "Does photo replace another?"
-                !lblCommentHint.Caption = ""
-                
-                Select Case TempVars("phototype")
-                    Case "R" 'reference
-                        !lblPhotogLocHint.Caption = "from river, 10m upstream, etc."
-                        !lblSubjectLocHint.Caption = "CP1, RM2, etc."
-                    Case "O" 'overview
-                        !lblPhotogLocHint.Caption = ""
-                        !lblSubjectLocHint.Caption = "O1, O2, etc."
-                    Case "T" 'transect
-                        !lblPhotogLocHint.Caption = "T + transect# - order# (T2-1)"
-                        !lblSubjectLocHint.Caption = ""
-                    Case "F" 'feature
-                        !lblPhotogLocHint.Caption = "F + transect# - order# " & vbCrLf & "(F3/4-2)"
-                        !lblSubjectLocHint.Caption = ""
-                End Select
-            
-            Case "fsub_Photo_Other_Details"
-                !lblDescriptionHint.Caption = ""
-            Case Else
-                
-        End Select
-
-        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# " & vbCrLf & "(PA010300 = Jan 1, #300)"
-                
-    End With
-    
-Exit_Sub:
-    Exit Sub
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - SetHints[form_Forms])"
-    End Select
-    Resume Exit_Sub
-End Sub
+Public Function SetStartupOptions(propertyname As String, _
+    propertytype As Variant, propertyvalue As Variant) _
+    As Boolean
+  Dim dbs As Object
+  Dim prp As Object
+  Set dbs = Application.CurrentDb
+  On Error Resume Next
+  dbs.Properties(propertyname) = propertyvalue
+  If Err.Number = 3270 Then
+    Set prp = dbs.CreateProperty(propertyname, _
+        propertytype, propertyvalue)
+    dbs.Properties.Append prp
+    Application.RefreshTitleBar
+  Else
+    SetStartupOptions = False
+  End If
+  Set dbs = Nothing
+  Set prp = Nothing
+End Function

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Zip_Files
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  Standard module for compressing files using Windows XP's built-in
 '                   'Compressed (Zipped) Folders' feature
 ' Source/date:  Alan Williams at nps.gov, 7/20/2007 - collected code bits and cleaned
@@ -15,6 +15,7 @@ Option Explicit
 '               -------------------------------------
 '               BLC, 5/26/2015 - 1.00 - included in NCPN invasives reporting tool &
 '                   moved sapiSleep & fxnPause(Delay) to mod_Time
+'               BLC, 4/4/2016 - 1.01 - changed Exit_Procedure > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -86,7 +87,7 @@ Public Function ZipFiles(strSourceFiles As String, strZipFileName As String, _
         MsgBox "This function is not supported by " & strProcName & _
         " with an OS version of: " & OSVersion, vbCritical, strProcName & " Error"
         ZipFiles = False
-        GoTo Exit_Procedure
+        GoTo Exit_Handler
     End If
 
     If (AppendToZip = False) Or (Len(Dir(strZipFileName)) = 0) Then
@@ -98,7 +99,7 @@ Public Function ZipFiles(strSourceFiles As String, strZipFileName As String, _
         MsgBox "The source file(s): " & vbNewLine & strSourceFiles & vbNewLine & _
         "Are missing...", vbCritical, strProcName & " Error"
         ZipFiles = False
-        GoTo Exit_Procedure
+        GoTo Exit_Handler
     End If
     
     'Copy files
@@ -106,7 +107,7 @@ Public Function ZipFiles(strSourceFiles As String, strZipFileName As String, _
     objShell.NameSpace(CVar(Trim(strZipFileName))).CopyHere CVar(Trim(strSourceFiles))
     ZipFiles = True
     
-Exit_Procedure:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -115,7 +116,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ZipFiles[mod_Zip])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Function
 
@@ -142,7 +143,7 @@ Public Function NewZip(sPath)
     Print #1, chr$(80) & chr$(75) & chr$(5) & chr$(6) & String(18, 0)
     Close #1
 
-Exit_Procedure:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -151,7 +152,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - NewZip[mod_Zip_Files])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Function
 
@@ -223,7 +224,7 @@ Private Function GetVersion(Optional VersionNumber) As String
         End If
     End With
 
-Exit_Procedure:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -232,6 +233,6 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetVersion[mod_Zip_Files])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Function

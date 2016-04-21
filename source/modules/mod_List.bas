@@ -4,13 +4,11 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_List
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.00
 ' Description:  Listview & listbox related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
-'               BLC, 6/12/2015 - 1.01 - updated documentation, TempVars("... vs. TempVars.item("...
-'               BLC, 6/18/2015 - 1.02 - updated lvwPopulateFromQuery to use aryHeadings vs aryFields
 ' =================================
 
 ' ---------------------------------
@@ -34,9 +32,8 @@ Option Explicit
 '                   http://support2.microsoft.com/default.aspx?scid=kb;en-us;194784
 '                   http://forums.esri.com/Thread.asp?c=93&f=992&t=198775
 '               BLC, 4/30/2015 - added error handling & moved from mod_Common_UI to mod_List
-'               BLC, 6/18/2015 - renamed aryFields to aryHeadings per documentation
 ' =================================
-Public Sub lvwPopulateFromQuery(ctrl As MSComctlLib.ListView, strSQL As String, aryHeadings As Variant)
+Public Sub lvwPopulateFromQuery(ctrl As MSComctlLib.ListView, strSQL As String, aryFields As Variant)
 On Error GoTo Err_Handler
     Dim dbs As Database
     Dim rs As Recordset
@@ -53,9 +50,9 @@ On Error GoTo Err_Handler
     If rs.RecordCount > 0 Then
         rs.MoveFirst
         Do Until rs.EOF
-            Set item = ctrl.ListItems.Add(, , rs(aryHeadings(i)))
-            For i = 1 To UBound(aryHeadings)
-              item.SubItems(i) = rs(aryHeadings(i))
+            Set item = ctrl.ListItems.Add(, , rs(aryFields(i)))
+            For i = 1 To UBound(aryFields)
+              item.SubItems(i) = rs(aryFields(i))
             Next
             On Error Resume Next 'continue even in error
             rs.MoveNext
@@ -100,11 +97,11 @@ On Error GoTo Err_Handler
 
     Dim rows As Integer, cols As Integer, i As Integer, j As Integer, matches As Integer
     Dim frm As Form
-    Dim stritem As String, strColHeads As String, aryColWidths() As String
+    Dim strItem As String, strColHeads As String, aryColWidths() As String
 
     'exit if subform control (hdrs are static & present on sfrm)
     If ctrl.ControlType = 112 Then
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
 
     Set frm = ctrl.Parent
@@ -114,7 +111,7 @@ On Error GoTo Err_Handler
     
     If Nz(rows, 0) = 0 Then
         MsgBox "Sorry, no records found..."
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     'fetch column widths
@@ -125,7 +122,7 @@ On Error GoTo Err_Handler
         strColHeads = ""
         For i = 0 To cols - 1
             If CInt(aryColWidths(i)) > 0 Then
-                strColHeads = strColHeads & rs.Fields(i).name & ";"
+                strColHeads = strColHeads & rs.Fields(i).Name & ";"
             End If
         Next i
         ctrl.AddItem strColHeads
@@ -134,7 +131,7 @@ On Error GoTo Err_Handler
     'save headers
     TempVars.Add "lbxHdr", strColHeads
 
-Exit_Sub:
+Exit_Handler:
     'leave rs for remaining values
     Exit Sub
     
@@ -144,7 +141,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateListHeaders[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -181,11 +178,11 @@ On Error GoTo Err_Handler
         With ctrl
             If CStr(.Column(tgtCol, counter)) = normVal Then
                 For col = 0 To .ColumnCount - 1
-                    .Column(col, counter).forecolor = normColor
+                    .Column(col, counter).ForeColor = normColor
                 Next col
             ElseIf CStr(.Column(tgtCol, counter)) = altVal Then
                 For col = 0 To .ColumnCount - 1
-                    .Column(col, counter).forecolor = altColor
+                    .Column(col, counter).ForeColor = altColor
                 Next col
             End If
         End With
@@ -274,7 +271,6 @@ End Function
 ' Revisions:
 '   BLC - 3/5/2015 - initial version
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
-'   BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 ' ---------------------------------
 Public Sub SortList(lbx As ListBox) ', orderCol As Integer)
 
@@ -286,7 +282,7 @@ On Error GoTo Err_Handler
   
   'skip first row if lbx has headers
   iHdr = 0
-  If Len(TempVars("lbxHdr")) > 0 Then
+  If Len(TempVars.item("lbxHdr")) > 0 Then
     iHdr = 1
   End If
   
@@ -302,7 +298,7 @@ On Error GoTo Err_Handler
      Next j
    Next i
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -311,7 +307,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SortList[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -405,10 +401,8 @@ End Function
 ' SUB:          SaveListToTable
 ' Description:  Save list items to table
 ' Assumptions:  -
-' Parameters:   ctrl - control to iterate through (control object)
-'               tbl - table being populated (string)
-'               tblFields - array of fields to populate (variant)
-'               blnSelectedOnly - copy only selected list items (boolean)
+' Parameters:   ctrl - control to iterate through
+'               tbl - table being populated
 ' Returns:      N/A
 ' Throws:       none
 ' References:   none
@@ -417,7 +411,6 @@ End Function
 ' Revisions:
 '   BLC - 2/8/2015  - initial version
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
-'   BLC - 6/18/2015 - updated documentation
 ' ---------------------------------
 Public Sub SaveListToTable(ctrl As Control, tbl As String, tblFields As Variant, blnSelectedOnly As Boolean)
 
@@ -452,7 +445,7 @@ On Error GoTo Err_Handler
             Next
     Next 'iRow
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -461,7 +454,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SaveListToTable[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -516,7 +509,7 @@ Dim blnTableExists As Boolean
 '                "Please check the table's records and remove them (or remove the table)." & vbCrLf & _
 '                "Then return here and recreate your list.", _
 '                vbCritical, "Oops! " & tblName & " Already Exists!"
-'            GoTo Exit_Sub
+'            GoTo Exit_Handler
             
         'Replace Records --> delete existing records
         ElseIf HasRecords(tblName) And blnReplace = True Then
@@ -534,7 +527,7 @@ Dim blnTableExists As Boolean
     aryFieldNames = Split(CStr(aryFields(0)), ";")
 
     'handle empty listbox (aside from header record)
-    If UBound(aryFields) = 0 Then GoTo Exit_Sub
+    If UBound(aryFields) = 0 Then GoTo Exit_Handler
 
     'prepare data arrays
     ReDim Preserve aryData(0 To UBound(aryFields) - 1, 0 To UBound(aryFieldNames))
@@ -602,7 +595,7 @@ Dim blnTableExists As Boolean
         
     End If
 
-Exit_Sub:
+Exit_Handler:
     Set tdf = Nothing
     Set rsProcess = Nothing
     Exit Sub
@@ -613,11 +606,12 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SetListRecordset[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
+
 ' ---------------------------------
-' SUB:          AddListRecordset
+' SUB:          SetListRecordset
 ' Description:  Add list items to existing records in a list recordset table via DAO.
 ' Assumptions:  Recordset contains the same number and type of fields as the list recordset table.
 ' Parameters:   tblName - temporary table name (string)
@@ -727,7 +721,7 @@ Dim blnTableExists As Boolean
         
     End If
 
-Exit_Sub:
+Exit_Handler:
     Set tdf = Nothing
     Set rsProcess = Nothing
     Exit Sub
@@ -738,7 +732,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - AddListRecordset[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -806,13 +800,13 @@ Public Sub MoveSingleItem(frm As Form, strSourceControl As String, strTargetCont
     
 On Error GoTo Err_Handler
     
-    Dim stritem As String
+    Dim strItem As String
     Dim intColumnCount As Integer
     
     'if source = target, just remove the item
     If strSourceControl = strTargetControl Then
         RemoveSelectedItems frm.Controls(strSourceControl)
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     'check for control type
@@ -820,40 +814,40 @@ On Error GoTo Err_Handler
     'MsgBox frm.Controls(strSourceControl).ControlType, vbOKOnly, "ctrltype"
         'subform control is a continuous form
         Call frm.Controls(strSourceControl).Form.tbxCode_DblClick(False)
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     'check for at *least* one selected item
     If frm.Controls(strSourceControl).ItemsSelected.count = 0 Then
         MsgBox "Please select at least one item.", vbExclamation, "Oops!"
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     If frm.Controls(strSourceControl).ItemsSelected.count > 1 Then
         MoveSelectedItems frm, strSourceControl, strTargetControl
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     For intColumnCount = 0 To frm.Controls(strSourceControl).ColumnCount - 1
-        stritem = stritem & frm.Controls(strSourceControl).Column(intColumnCount) & ";"
+        strItem = strItem & frm.Controls(strSourceControl).Column(intColumnCount) & ";"
     Next
     
     'remove extra semi-colon (;)
-    stritem = Left(stritem, Len(stritem) - 1)
+    strItem = Left(strItem, Len(strItem) - 1)
 
     'Check the length to make sure something is selected
     ' -------------------------------------------------------------------------
     '  NOTE: ListIndex is zero based, so add 1 to remove proper item
     ' -------------------------------------------------------------------------
-    If Len(stritem) > 0 Then
-        frm.Controls(strTargetControl).AddItem stritem
+    If Len(strItem) > 0 Then
+        frm.Controls(strTargetControl).AddItem strItem
         frm.Controls(strSourceControl).RemoveItem frm.Controls(strSourceControl).ListIndex + 1
     Else
         MsgBox "Please select an item to move."
     End If
 
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -862,7 +856,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - MoveSingleItem[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -887,20 +881,20 @@ Public Sub MoveAllItems(frm As Form, strSourceControl As String, strTargetContro
     
 On Error GoTo Err_Handler
     
-    Dim stritem As String
+    Dim strItem As String
     Dim intColumnCount As Integer, startRow As Integer
     Dim lngRowCount As Long
     
     'if source = target, just remove the items
     If strSourceControl = strTargetControl Then
         RemoveSelectedItems (frm.Controls(strSourceControl))
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
         
     'check for at *least* one item
     If frm.Controls(strSourceControl).ListCount = 0 Then
         MsgBox "Your list needs at least one item to move.", vbExclamation, "Oops!"
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     startRow = 0 'default
@@ -911,11 +905,11 @@ On Error GoTo Err_Handler
     
     For lngRowCount = startRow To frm.Controls(strSourceControl).ListCount - 1
         For intColumnCount = 0 To frm.Controls(strSourceControl).ColumnCount - 1
-            stritem = stritem & frm.Controls(strSourceControl).Column(intColumnCount, lngRowCount) & ";"
+            strItem = strItem & frm.Controls(strSourceControl).Column(intColumnCount, lngRowCount) & ";"
         Next
-        stritem = Left(stritem, Len(stritem) - 1)
-        frm.Controls(strTargetControl).AddItem stritem
-        stritem = ""
+        strItem = Left(strItem, Len(strItem) - 1)
+        frm.Controls(strTargetControl).AddItem strItem
+        strItem = ""
     Next
         
     'clear the list
@@ -929,7 +923,7 @@ On Error GoTo Err_Handler
         frm.Controls(strSourceControl).AddItem TempVars("lbxHdr")
     End If
     
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -938,7 +932,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - MoveAllItems[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -960,27 +954,26 @@ End Sub
 '   BLC - 3/5/2015 - added ability to remove from list w/o adding to target if strSourceControl = strTargetControl
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 '   BLC - 5/22/2015 - updated documentation
-'   BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 ' ---------------------------------
 Public Sub MoveSelectedItems(frm As Form, strSourceControl As String, strTargetControl As String)
     
 On Error GoTo Err_Handler
     
-    Dim iRow As Integer, startRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
+    Dim iRow As Integer, startRow As Integer, i As Integer, X As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
-    Dim stritem As String
+    Dim strItem As String
     
     'if source = target, just remove the items
     If strSourceControl = strTargetControl Then
         RemoveSelectedItems (frm.Controls(strSourceControl))
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     'check for at *least* one selected item
     If frm.Controls(strSourceControl).ItemsSelected.count = 0 Then
         MsgBox "Please select at least one item.", vbExclamation, "Oops!"
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     startRow = 0 'default
@@ -991,8 +984,8 @@ On Error GoTo Err_Handler
     
     'add back the header if it doesn't exist
     If frm.Controls(strTargetControl).ColumnHeads = True And frm.Controls(strTargetControl).ListCount = 0 Then
-       stritem = TempVars("lbxHdr") & stritem
-       frm.Controls(strTargetControl).AddItem stritem
+       strItem = TempVars.item("lbxHdr") & strItem
+       frm.Controls(strTargetControl).AddItem strItem
     End If
     
     'generate array of selected items
@@ -1030,20 +1023,20 @@ On Error GoTo Err_Handler
     iRemovedItems = 0
     
     'iterate through selected items
-    For x = LBound(arySelectedItems) To UBound(arySelectedItems)
+    For X = LBound(arySelectedItems) To UBound(arySelectedItems)
                         
-        iRow = arySelectedItems(x) - iRemovedItems
+        iRow = arySelectedItems(X) - iRemovedItems
             
         'clear string
-        stritem = ""
+        strItem = ""
         
         'add all columns
         For i = 0 To frm.Controls(strSourceControl).ColumnCount
-            stritem = stritem & frm.Controls(strSourceControl).Column(i, iRow) & ";"
+            strItem = strItem & frm.Controls(strSourceControl).Column(i, iRow) & ";"
         Next i
         
         'add to target
-        frm.Controls(strTargetControl).AddItem stritem
+        frm.Controls(strTargetControl).AddItem strItem
         
         'remove from source
         frm.Controls(strSourceControl).RemoveItem iRow
@@ -1053,9 +1046,9 @@ On Error GoTo Err_Handler
             iRemovedItems = iRemovedItems + 1
         End If
     
-    Next x
+    Next X
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -1064,7 +1057,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - MoveSelectedItems[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -1105,7 +1098,7 @@ On Error GoTo Err_Handler
       .RowSource = strBuild
     End With
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -1114,7 +1107,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - RemoveSelectedItems[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -1164,7 +1157,7 @@ On Error GoTo Err_Handler
         Next
     End If
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -1173,7 +1166,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - RemoveListDupes[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -1198,7 +1191,7 @@ On Error GoTo Err_Handler
     'clear listbox items
     lbx.RowSource = ""
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -1207,5 +1200,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ClearList[mod_List])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub

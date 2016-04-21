@@ -3,12 +3,13 @@ Option Explicit
 
 ' =================================
 ' MODULE:       mod_QA
-' VERSION:      1.01
+' VERSION:      1.02
 ' Description:  QA related properties, functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, 8/22/2014
 ' Revisions:    BLC, 8/22/2014 - 1.00 - initial version
 '               BLC, 6/12/2015 - 1.01 - replaced TempVars.item(... with TempVars("...
+'               BLC, 4/4/2016  - 1.02 - changed Exit_Procedure/Exit_Function > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -93,6 +94,7 @@ Option Explicit
 ' Revisions:    BLC, 7/29/2014 - updated to use TempVars.Item("Timeframe") vs. cTimeframe
 '               BLC, 8/22/2014 - shifted to mod_QA & dropped fxn prefix
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
+'               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler, dbCurrent to CurrentDb
 ' ---------------------------------
 Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
     Optional strSingleQName As String, Optional blnCreateNew As Boolean = False)
@@ -136,7 +138,7 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
     intNQueries = 0
 
     For Each qdf In qdfs
-        If Left(qdf.name, 3) = "qa_" Then intNQueries = intNQueries + 1
+        If Left(qdf.Name, 3) = "qa_" Then intNQueries = intNQueries + 1
     Next qdf
 
     On Error Resume Next
@@ -154,7 +156,7 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
     intScope = Forms!frm_QA_Tool.optgScope ' Me.optgScope
 
     For Each qdf In qdfs
-        If Left(qdf.name, 3) = "qa_" Then
+        If Left(qdf.Name, 3) = "qa_" Then
             intI = intI + 1
             ' Update the percent complete in the progress popup
             frm!txtPercent = Round(100 * intI / intNQueries)
@@ -164,7 +166,7 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
             frm!txtProgress = strProgress
             ' Update the progress meter in the status bar
             varReturn = SysCmd(acSysCmdUpdateMeter, intI)
-            strQName = qdf.name
+            strQName = qdf.Name
             ' Update the query name in the progress popup
             frm!txtMsg = strQName
             frm.Repaint
@@ -191,7 +193,7 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
                     "[Query_name]=""" & strQName & """ AND [Time_frame]=""" _
                     & strTimeframe & """ AND [Data_scope]=" & intScope)
                 ' Update existing records to refresh the results
-                strQResult = DCount("*", qdf.name)  ' the number of records currently returned
+                strQResult = DCount("*", qdf.Name)  ' the number of records currently returned
                 ' Create the statement to add the query description and expression
                 '   (expression not always present)
                 strQDesc = " - none defined - "         ' Default in case of error
@@ -267,7 +269,7 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
         Loop
     End If
 
-Exit_Procedure:
+Exit_Handler:
     On Error Resume Next
     varReturn = SysCmd(acSysCmdRemoveMeter)
     DoCmd.Close acForm, strProgForm, acSaveNo
@@ -282,6 +284,6 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - UpdateQAResults[mod_QA])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Function

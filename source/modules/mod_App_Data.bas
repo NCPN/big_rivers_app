@@ -44,7 +44,7 @@ On Error GoTo Err_Handler
     'output to form or listbox control?
    
     'determine data source
-    Select Case ctrlSource.name
+    Select Case ctrlSource.Name
     
         Case "lbxDataSheets", "sfrmDatasheets" 'Datasheets
             strQuery = "qry_Active_Datasheets"
@@ -70,7 +70,8 @@ On Error GoTo Err_Handler
         'populate only ctrlSource headers
         PopulateListHeaders ctrlSource, rs
     End If
-Exit_Sub:
+    
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -79,7 +80,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - fillList[mod_App_Data])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -108,7 +109,7 @@ On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim rows As Integer, cols As Integer, i As Integer, j As Integer, matches As Integer, iZeroes As Integer
-    Dim stritem As String, strColHeads As String, aryColWidths() As String
+    Dim strItem As String, strColHeads As String, aryColWidths() As String
 
     Set frm = ctrlSource.Parent
     
@@ -118,7 +119,7 @@ On Error GoTo Err_Handler
     'address no records
     If Nz(rows, 0) = 0 Then
         MsgBox "Sorry, no records found..."
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     'handle sfrm controls (acSubform = 112)
@@ -137,7 +138,7 @@ On Error GoTo Err_Handler
         ctrlSource.Parent.Form.Controls("lblSfrmSpeciesCount").Caption = rs.RecordCount & " species"
         rs.MoveFirst
         
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
     
     'fetch column widths array
@@ -172,24 +173,24 @@ On Error GoTo Err_Handler
             Do Until rs.EOF
             
                 'initialize item
-                stritem = ""
+                strItem = ""
                     
                 'generate item
                 For j = 0 To cols - 1
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        stritem = stritem & rs.Fields(j).Value & ";"
+                        strItem = strItem & rs.Fields(j).Value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
-                        matches = (Len(stritem) - Len(Replace$(stritem, ";", ""))) / Len(";")
+                        matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
                         
                         'add item if not already in list --> # of ; should equal cols - 1
                         'but # in list should only be # of non-zero columns --> cols - iZeroes
                         If matches = cols - iZeroes Then
-                            ctrlSource.AddItem stritem
+                            ctrlSource.AddItem strItem
                             'reset the string
-                            stritem = ""
+                            strItem = ""
                         End If
                     
                     End If
@@ -203,7 +204,7 @@ On Error GoTo Err_Handler
         Case "Field List"
     End Select
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -212,7 +213,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateList[mod_App_Data])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -264,7 +265,7 @@ Dim iRow As Integer, iTransectOnly As Integer, iTgtAreaID As Integer
     'save the existing records to temp_Listbox_Recordset & replace any existing records
     SetListRecordset lbx, True, aryFields, aryFieldTypes, "temp_Listbox_Recordset", True
 
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -273,7 +274,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateList[mod_App_Data])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -461,10 +462,10 @@ On Error GoTo Err_Handler
         
         
     Else
-        GoTo Exit_Sub
+        GoTo Exit_Handler
     End If
        
-Exit_Sub:
+Exit_Handler:
     Exit Sub
     
 Err_Handler:
@@ -473,5 +474,57 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateTree[mod_App_Data])"
     End Select
-    Resume Exit_Sub
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          PopulateCombobox
+' Description:
+' Parameters:    - treeview type (string)
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+'  https://msdn.microsoft.com/en-us/library/office/ff845773.aspx
+' Adapted:      Bonnie Campbell, June 3, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 6/3/2015  - initial version
+' ---------------------------------
+Public Sub PopulateCombobox(cbx As ComboBox, BoxType As String)
+
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    
+    Select Case BoxType
+        Case ""
+        Case "priority"
+            strSQL = "SELECT ID, Priority FROM Priority ORDER BY Sequence ASC;"
+        Case "status"
+            strSQL = "SELECT ID, Status FROM Status ORDER BY Sequence ASC;"
+    End Select
+ 
+     'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+ 
+    'assume only 1 record returned
+    If rs.RecordCount > 0 Then
+        cbx.Recordset = rs
+    Else
+        GoTo Exit_Handler
+    End If
+       
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateTree[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub

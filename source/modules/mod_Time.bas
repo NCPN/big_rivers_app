@@ -4,13 +4,14 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Time
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  File and directory related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 5/18/2015 - 1.01 - removed fxn prefixes
 '               BLC, 5/26/2015 - 1.02 - added sapiSleep, Delay from mod_Zip_Files
+'               BLC, 4/4/2016 -  1.03 - changed Exit_Procedure > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -125,7 +126,7 @@ Public Function Delay(lngMilliSec As Long)
         Call sapiSleep(lngMilliSec)
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -134,5 +135,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Delay[mod_Time])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Function
