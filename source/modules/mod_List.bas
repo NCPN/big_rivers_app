@@ -583,7 +583,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryData, 2) ' - 1
                 
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                    rsProcess(aryFieldNames(iCol)).Value = aryData(iRow, iCol)
+                    rsProcess(aryFieldNames(iCol)).value = aryData(iRow, iCol)
 
             Next
             
@@ -707,7 +707,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryFieldNames) ' - 1
             
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                rsProcess(aryFieldNames(iCol)).Value = rsList(aryFieldNames(iCol)).Value
+                rsProcess(aryFieldNames(iCol)).value = rsList(aryFieldNames(iCol)).value
 
 '                iCol = iCol + 1
             Next

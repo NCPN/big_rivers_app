@@ -37,44 +37,44 @@ Private m_LinkSeparatorVisible As Byte
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let Text(Value As String)
-    m_Text = Value
+Public Property Let Text(value As String)
+    m_Text = value
 End Property
 
 Public Property Get Text() As String
     Text = m_Text
 End Property
 
-Public Property Let Action(Value As String)
-    m_Action = Value
+Public Property Let action(value As String)
+    m_Action = value
 End Property
 
-Public Property Get Action() As String
-    Action = m_Action
+Public Property Get action() As String
+    action = m_Action
 End Property
 
-Public Property Let LinkFontColor(Value As Long)
-    m_LinkFontColor = Value
+Public Property Let LinkFontColor(value As Long)
+    m_LinkFontColor = value
 End Property
 
 Public Property Get LinkFontColor() As Long
     LinkFontColor = m_LinkFontColor
 End Property
 
-Public Property Let LinkBgColor(Value As Long)
-    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
-    m_LinkBgColor = Value
+Public Property Let LinkBgColor(value As Long)
+    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
+    m_LinkBgColor = value
     
     'set font color to match
-    Select Case Value
+    Select Case value
         Case vbGreen
             Me.LinkFontColor = vbBlack
         Case vbRed, vbBlue
@@ -86,16 +86,16 @@ Public Property Get LinkBgColor() As Long
     LinkBgColor = m_LinkBgColor 'FormHeader.BackColor
 End Property
 
-Public Property Let LinkVisible(Value As Byte)
-    m_LinkVisible = Value
+Public Property Let LinkVisible(value As Byte)
+    m_LinkVisible = value
 End Property
 
 Public Property Get LinkVisible() As Byte
     LinkVisible = m_LinkVisible
 End Property
 
-Public Property Let LinkSeparatorVisible(Value As Byte)
-    m_LinkSeparatorVisible = Value
+Public Property Let LinkSeparatorVisible(value As Byte)
+    m_LinkSeparatorVisible = value
 End Property
 
 Public Property Get LinkSeparatorVisible() As Byte

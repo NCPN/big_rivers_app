@@ -181,7 +181,7 @@ On Error GoTo Err_Handler
         'add rsB values as new rsOut records
         rsOut.AddNew
         For iCount = 0 To rsB.Fields.count - 1
-            rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
+            rsOut.Fields(iCount).value = rsB.Fields(iCount).value
         Next
         rsOut.Update
         rsB.MoveNext

@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =9120
-    Top =3324
-    Right =14940
-    Bottom =3792
+    Left =9216
+    Top =3348
+    Right =15036
+    Bottom =3816
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -295,7 +295,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Level
+' Form:         _Level
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Level form
@@ -338,8 +338,8 @@ Private m_Level3HoverBgdColor As Long
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidLevel(Value As String)
-Public Event InvalidColor(Value As Long)
+Public Event InvalidLevel(value As String)
+Public Event InvalidColor(value As Long)
 
 '---------------------
 ' Properties
@@ -397,12 +397,12 @@ Public Event InvalidColor(Value As Long)
 'End Property
 
 '-- std color/bgd color --
-Public Property Let Level0Color(Value As Long)
-    If Len(Value) > 0 Then
-        m_Level0Color = Value
-        Me.btnLevel0.BackColor = Value
+Public Property Let Level0Color(value As Long)
+    If Len(value) > 0 Then
+        m_Level0Color = value
+        Me.btnLevel0.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -410,12 +410,12 @@ Public Property Get Level0Color() As Long
     Level0Color = m_Level0Color
 End Property
 
-Public Property Let Level1Color(Value As Long)
-    If Len(Value) > 1 Then
-        m_Level1Color = Value
-        Me.btnLevel1.BackColor = Value
+Public Property Let Level1Color(value As Long)
+    If Len(value) > 1 Then
+        m_Level1Color = value
+        Me.btnLevel1.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -423,12 +423,12 @@ Public Property Get Level1Color() As Long
     Level1Color = m_Level1Color
 End Property
 
-Public Property Let Level2Color(Value As Long)
-    If Len(Value) > 2 Then
-        m_Level2Color = Value
-        Me.btnLevel2.BackColor = Value
+Public Property Let Level2Color(value As Long)
+    If Len(value) > 2 Then
+        m_Level2Color = value
+        Me.btnLevel2.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -436,12 +436,12 @@ Public Property Get Level2Color() As Long
     Level2Color = m_Level2Color
 End Property
 
-Public Property Let Level3Color(Value As Long)
-    If Len(Value) > 3 Then
-        m_Level3Color = Value
-        Me.btnLevel3.BackColor = Value
+Public Property Let Level3Color(value As Long)
+    If Len(value) > 3 Then
+        m_Level3Color = value
+        Me.btnLevel3.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -449,12 +449,12 @@ Public Property Get Level3Color() As Long
     Level3Color = m_Level3Color
 End Property
 
-Public Property Let Level0BgdColor(Value As Long)
-    If Len(Value) > 0 Then
-        m_Level0BgdColor = Value
-        Me.btnLevel0.BackColor = Value
+Public Property Let Level0BgdColor(value As Long)
+    If Len(value) > 0 Then
+        m_Level0BgdColor = value
+        Me.btnLevel0.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -462,12 +462,12 @@ Public Property Get Level0BgdColor() As Long
     Level0BgdColor = m_Level0BgdColor
 End Property
 
-Public Property Let Level1BgdColor(Value As Long)
-    If Len(Value) > 1 Then
-        m_Level1BgdColor = Value
-        Me.btnLevel1.BackColor = Value
+Public Property Let Level1BgdColor(value As Long)
+    If Len(value) > 1 Then
+        m_Level1BgdColor = value
+        Me.btnLevel1.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -475,12 +475,12 @@ Public Property Get Level1BgdColor() As Long
     Level1BgdColor = m_Level1BgdColor
 End Property
 
-Public Property Let Level2BgdColor(Value As Long)
-    If Len(Value) > 2 Then
-        m_Level2BgdColor = Value
-        Me.btnLevel2.BackColor = Value
+Public Property Let Level2BgdColor(value As Long)
+    If Len(value) > 2 Then
+        m_Level2BgdColor = value
+        Me.btnLevel2.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -488,12 +488,12 @@ Public Property Get Level2BgdColor() As Long
     Level2BgdColor = m_Level2BgdColor
 End Property
 
-Public Property Let Level3BgdColor(Value As Long)
-    If Len(Value) > 3 Then
-        m_Level3BgdColor = Value
-        Me.btnLevel3.BackColor = Value
+Public Property Let Level3BgdColor(value As Long)
+    If Len(value) > 3 Then
+        m_Level3BgdColor = value
+        Me.btnLevel3.BackColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -502,12 +502,12 @@ Public Property Get Level3BgdColor() As Long
 End Property
 
 '-- on hover --
-Public Property Let Level0HoverColor(Value As Long)
-    If Len(Value) > 0 Then
-        m_Level0HoverColor = Value
-        Me.btnLevel0.HoverForeColor = Value
+Public Property Let Level0HoverColor(value As Long)
+    If Len(value) > 0 Then
+        m_Level0HoverColor = value
+        Me.btnLevel0.HoverForeColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -515,12 +515,12 @@ Public Property Get Level0HoverColor() As Long
     Level0HoverColor = m_Level0HoverColor
 End Property
 
-Public Property Let Level1HoverColor(Value As Long)
-    If Len(Value) > 1 Then
-        m_Level1HoverColor = Value
-        Me.btnLevel1.HoverForeColor = Value
+Public Property Let Level1HoverColor(value As Long)
+    If Len(value) > 1 Then
+        m_Level1HoverColor = value
+        Me.btnLevel1.HoverForeColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -528,12 +528,12 @@ Public Property Get Level1HoverColor() As Long
     Level1HoverColor = m_Level1HoverColor
 End Property
 
-Public Property Let Level2HoverColor(Value As Long)
-    If Len(Value) > 2 Then
-        m_Level2HoverColor = Value
-        Me.btnLevel2.HoverForeColor = Value
+Public Property Let Level2HoverColor(value As Long)
+    If Len(value) > 2 Then
+        m_Level2HoverColor = value
+        Me.btnLevel2.HoverForeColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -541,12 +541,12 @@ Public Property Get Level2HoverColor() As Long
     Level2HoverColor = m_Level2HoverColor
 End Property
 
-Public Property Let Level3HoverColor(Value As Long)
-    If Len(Value) > 3 Then
-        m_Level3HoverColor = Value
-        Me.btnLevel3.HoverForeColor = Value
+Public Property Let Level3HoverColor(value As Long)
+    If Len(value) > 3 Then
+        m_Level3HoverColor = value
+        Me.btnLevel3.HoverForeColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -554,12 +554,12 @@ Public Property Get Level3HoverColor() As Long
     Level3HoverColor = m_Level3HoverColor
 End Property
 
-Public Property Let Level0HoverBgdColor(Value As Long)
-    If Len(Value) > 0 Then
-        m_Level0HoverBgdColor = Value
-        Me.btnLevel0.HoverColor = Value
+Public Property Let Level0HoverBgdColor(value As Long)
+    If Len(value) > 0 Then
+        m_Level0HoverBgdColor = value
+        Me.btnLevel0.HoverColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -567,12 +567,12 @@ Public Property Get Level0HoverBgdColor() As Long
     Level0HoverBgdColor = m_Level0HoverBgdColor
 End Property
 
-Public Property Let Level1HoverBgdColor(Value As Long)
-    If Len(Value) > 1 Then
-        m_Level1HoverBgdColor = Value
-        Me.btnLevel1.HoverColor = Value
+Public Property Let Level1HoverBgdColor(value As Long)
+    If Len(value) > 1 Then
+        m_Level1HoverBgdColor = value
+        Me.btnLevel1.HoverColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -580,12 +580,12 @@ Public Property Get Level1HoverBgdColor() As Long
     Level1HoverBgdColor = m_Level1HoverBgdColor
 End Property
 
-Public Property Let Level2HoverBgdColor(Value As Long)
-    If Len(Value) > 2 Then
-        m_Level2HoverBgdColor = Value
-        Me.btnLevel2.HoverColor = Value
+Public Property Let Level2HoverBgdColor(value As Long)
+    If Len(value) > 2 Then
+        m_Level2HoverBgdColor = value
+        Me.btnLevel2.HoverColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -593,12 +593,12 @@ Public Property Get Level2HoverBgdColor() As Long
     Level2HoverBgdColor = m_Level2HoverBgdColor
 End Property
 
-Public Property Let Level3HoverBgdColor(Value As Long)
-    If Len(Value) > 3 Then
-        m_Level3HoverBgdColor = Value
-        Me.btnLevel3.HoverColor = Value
+Public Property Let Level3HoverBgdColor(value As Long)
+    If Len(value) > 3 Then
+        m_Level3HoverBgdColor = value
+        Me.btnLevel3.HoverColor = value
     Else
-        RaiseEvent InvalidColor(Value)
+        RaiseEvent InvalidColor(value)
     End If
 End Property
 
@@ -650,7 +650,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Level form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -679,7 +679,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_GotFocus[Level form])"
+            "Error encountered (#" & Err.Number & " - Form_GotFocus[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -708,7 +708,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Activate[Level form])"
+            "Error encountered (#" & Err.Number & " - Form_Activate[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -737,7 +737,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[Level form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -767,7 +767,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel0_Click[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel0_Click[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -796,7 +796,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel1_Click[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel1_Click[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -825,7 +825,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel2_Click[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel2_Click[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -854,7 +854,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel3_Click[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel3_Click[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -886,7 +886,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel0_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel0_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -918,7 +918,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel1_MouseDown[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel1_MouseDown[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -950,7 +950,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel2_MouseDown[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel2_MouseDown[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -982,7 +982,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnLevel3_MouseDown[Level form])"
+            "Error encountered (#" & Err.Number & " - btnLevel3_MouseDown[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1019,7 +1019,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_MouseDown[Level form])"
+            "Error encountered (#" & Err.Number & " - Form_MouseDown[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1050,7 +1050,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[Level form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[_Level form])"
     End Select
     Resume Exit_Handler
 End Sub

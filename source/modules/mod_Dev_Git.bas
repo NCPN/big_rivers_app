@@ -52,33 +52,33 @@ On Error GoTo Err_Handler
     ' appropriate extension.
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     Dim Extension As String
-    Dim FName As String
+    Dim fName As String
     Extension = GetFileExtension(VBComp:=VBComp)
     If Trim(Filename) = vbNullString Then
-        FName = VBComp.Name & Extension
+        fName = VBComp.Name & Extension
     Else
-        FName = Filename
-        If InStr(1, FName, ".", vbBinaryCompare) = 0 Then
-            FName = FName & Extension
+        fName = Filename
+        If InStr(1, fName, ".", vbBinaryCompare) = 0 Then
+            fName = fName & Extension
         End If
     End If
     
     If StrComp(Right(FolderName, 1), "\", vbBinaryCompare) = 0 Then
-        FName = FolderName & FName
+        fName = FolderName & fName
     Else
-        FName = FolderName & "\" & FName
+        fName = FolderName & "\" & fName
     End If
     
-    If Dir(FName, vbNormal + vbHidden + vbSystem) <> vbNullString Then
+    If Dir(fName, vbNormal + vbHidden + vbSystem) <> vbNullString Then
         If OverwriteExisting = True Then
-            Kill FName
+            Kill fName
         Else
             ExportVBComponent = False
             Exit Function
         End If
     End If
     
-    VBComp.Export Filename:=FName
+    VBComp.Export Filename:=fName
     ExportVBComponent = True
 
 Exit_Function:
@@ -402,7 +402,7 @@ On Error Resume Next
         Debug.Print tbl.Name
     Next
  
-    dsc = Catalog.Tables("table_name").Columns("column_name").Properties("Description").Value
+    dsc = Catalog.Tables("table_name").Columns("column_name").Properties("Description").value
  
     For Each tbl In tabledefs
         Debug.Print tbl.Name

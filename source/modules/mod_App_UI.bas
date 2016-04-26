@@ -11,6 +11,7 @@ Option Explicit
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 5/26/2015 - 1.01 - added PopulateSpeciesPriorities function from mod_Species
 '               BLC, 11/19/2015 - 1.02 - added CreateEnums call to initApp
+'               BLC, 4/26/2016  - 1.03 - added ClickAction() for handling various app actions
 ' =================================
 
 ' =================================
@@ -259,6 +260,82 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          ClickAction
+' Description:  Handles click events for various form links
+' Assumptions:  Link caption and tag text matches action text values.
+'               If a link caption &/or tag changes, the corresponding action must change
+'               here too.
+' Parameters:   action - concatenated link label caption & tag (string)
+' Returns:      N/A
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, February 6, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 4/26/2016  - initial version
+' ---------------------------------
+Public Sub ClickAction(action As String)
+On Error GoTo Err_Handler
+
+    Dim fName As String, rName As String
+    
+    action = LCase(Nz(Trim(action), ""))
+    
+    'defaults
+    fName = ""
+    rName = ""
+    
+    Select Case action
+        'Where?
+        Case "site"
+        Case "feature"
+        Case "transect"
+        Case "plot"
+        'Sampling
+        Case "event"
+            fName = "Task"
+        Case "location"
+        Case "people"
+        'Vegetation
+        Case "woody canopy cover"
+            fName = "WoodyCanopyCover"
+        Case "understory cover"
+        Case "vegetation walk"
+        Case "species"
+        'Observations
+        Case "obs-photos"
+        Case "obs-transducers"
+        'Trip Prep
+        Case "vegplot"
+        Case "vegwalk"
+        Case "photos"
+        Case "tasks"
+            fName = "Task"
+        'Reports
+        Case "link1"
+            rName = "rptNew"
+    End Select
+
+    If Len(fName) > 0 Then
+        DoCmd.OpenForm fName, acNormal
+    ElseIf Len(rName) > 0 Then
+        DoCmd.OpenReport rName, acViewNormal
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ClickAction[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 Public Function SetStartupOptions(propertyname As String, _
     propertytype As Variant, propertyvalue As Variant) _

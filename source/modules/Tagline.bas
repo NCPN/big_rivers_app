@@ -31,30 +31,30 @@ Private m_Height As Integer
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidLineDistSource(Value As String)
-Public Event InvalidLineDistType(Value As String)
-Public Event InvalidLineDistance(Value As Integer) 'in m
-Public Event InvalidHeightType(Value As String)
-Public Event InvalidHeight(Value As Integer)    'in cm
+Public Event InvalidLineDistSource(value As String)
+Public Event InvalidLineDistType(value As String)
+Public Event InvalidLineDistance(value As Integer) 'in m
+Public Event InvalidHeightType(value As String)
+Public Event InvalidHeight(value As Integer)    'in cm
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let LineDistSource(Value As String)
+Public Property Let LineDistSource(value As String)
     Dim arySources() As String
     arySources = Split(LINE_DIST_SOURCES, ",")
-    If IsInArray(Value, arySources) Then
-            m_LineDistSource = Value
+    If IsInArray(value, arySources) Then
+            m_LineDistSource = value
     Else
-        RaiseEvent InvalidLineDistSource(Value)
+        RaiseEvent InvalidLineDistSource(value)
     End If
 End Property
 
@@ -62,21 +62,21 @@ Public Property Get LineDistSource() As String
     LineDistSource = m_LineDistSource
 End Property
 
-Public Property Let LineDistSourceID(Value As Long)
-    m_LineDistSourceID = Value
+Public Property Let LineDistSourceID(value As Long)
+    m_LineDistSourceID = value
 End Property
 
 Public Property Get LineDistSourceID() As Long
     LineDistSourceID = m_LineDistSourceID
 End Property
 
-Public Property Let LineDistType(Value As String)
+Public Property Let LineDistType(value As String)
     Dim aryTypes() As String
     aryTypes = Split(LINE_DIST_TYPES, ",")
-    If IsInArray(Value, aryTypes) Then
-            m_LineDistType = Value
+    If IsInArray(value, aryTypes) Then
+            m_LineDistType = value
     Else
-        RaiseEvent InvalidLineDistType(Value)
+        RaiseEvent InvalidLineDistType(value)
     End If
 End Property
 
@@ -84,21 +84,21 @@ Public Property Get LineDistType() As String
     LineDistType = m_LineDistType
 End Property
 
-Public Property Let LineDistance(Value As Integer)
-    m_LineDistance = Value
+Public Property Let LineDistance(value As Integer)
+    m_LineDistance = value
 End Property
 
 Public Property Get LineDistance() As Integer
     LineDistance = m_LineDistance
 End Property
 
-Public Property Let HeightType(Value As String)
+Public Property Let HeightType(value As String)
     Dim aryTypes() As String
     aryTypes = Split(HEIGHT_TYPES, ",")
-    If IsInArray(Value, aryTypes) Then
-        m_HeightType = Value
+    If IsInArray(value, aryTypes) Then
+        m_HeightType = value
     Else
-        RaiseEvent InvalidHeightType(Value)
+        RaiseEvent InvalidHeightType(value)
     End If
 End Property
 
@@ -106,8 +106,8 @@ Public Property Get HeightType() As String
     HeightType = m_HeightType
 End Property
 
-Public Property Let Height(Value As Integer)
-    m_Height = Value
+Public Property Let Height(value As Integer)
+    m_Height = value
 End Property
 
 Public Property Get Height() As Integer

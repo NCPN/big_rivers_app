@@ -185,25 +185,25 @@ End Sub
 
 Public Sub mnuSetPark()
     
-    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="park"
+    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="park"
     
 End Sub
 
 Public Sub mnuSetRiver()
     
-    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="river"
+    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="river"
     
 End Sub
 
 Public Sub mnuSetSite()
     
-    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="site"
+    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="site"
     
 End Sub
 
 Public Sub mnuSetDataEntryUser()
     
-    DoCmd.OpenForm "SelectSingle", acNormal, OpenArgs:="data_entry"
+    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="data_entry"
     
 End Sub
 

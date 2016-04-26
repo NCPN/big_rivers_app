@@ -19,10 +19,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =10476
-    Top =2508
-    Right =23940
-    Bottom =11700
+    Left =13980
+    Top =3684
+    Right =27696
+    Bottom =12036
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -123,7 +123,7 @@ Begin Form
                     Height =300
                     ForeColor =15921906
                     Name ="lblTitle"
-                    Caption ="Title"
+                    Caption ="Data Entry"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -138,7 +138,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7008
+            Height =7080
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -249,7 +249,7 @@ Begin Form
             End
         End
         Begin FormFooter
-            Height =1500
+            Height =240
             Name ="FormFooter"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -307,6 +307,7 @@ On Error GoTo Err_Handler
     oLTile.Link4Caption = "Plot"
     oLTile.Link5Caption = ""
     oLTile.Link6Caption = ""
+    oLTile.Link6Visible = 0
     
     'Center
     Set oCTile = CTile.Form
@@ -337,6 +338,7 @@ On Error GoTo Err_Handler
     'Left
     Set oBLTile = BLTile.Form
     oBLTile.Title = "Observations"
+    oBLTile.TileTag = "Obs-"
     oBLTile.BarColor = vbGreen
     oBLTile.TileHeaderColor = vbGreen
     oBLTile.Link1Caption = "Photos"
@@ -364,7 +366,12 @@ On Error GoTo Err_Handler
     oBRTile.Title = "Reports"
     oBRTile.BarColor = vbYellow
     oBRTile.TileHeaderColor = vbBlue
-    oBRTile.Link1Caption = ""
+    oBRTile.Link1Caption = "rpt1"
+    oBRTile.Link2Visible = 0
+    oBRTile.Link3Visible = 0
+    oBRTile.Link4Visible = 0
+    oBRTile.Link5Visible = 0
+    oBRTile.Link6Visible = 0
     oBRTile.Link2Caption = ""
     oBRTile.Link3Caption = ""
     oBRTile.Link4Caption = ""

@@ -16,10 +16,10 @@ Begin Form
     Width =4500
     DatasheetFontHeight =11
     ItemSuffix =5
-    Left =9120
-    Top =3324
-    Right =22584
-    Bottom =11676
+    Left =9216
+    Top =3348
+    Right =22680
+    Bottom =11700
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -247,7 +247,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         SelectSingle
+' Form:         _SelectSingle
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -277,24 +277,24 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidDataSource(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidDataSource(value As String)
+Public Event InvalidCaption(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -302,14 +302,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -317,14 +317,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let DropdownLabel(Value As String)
-    If Len(Value) > 0 Then
-        m_DropdownLabel = Value
+Public Property Let DropdownLabel(value As String)
+    If Len(value) > 0 Then
+        m_DropdownLabel = value
 
         'set the form dropdown
         Me.lblDropdown.Caption = m_DropdownLabel
     Else
-        RaiseEvent InvalidLabel(Value)
+        RaiseEvent InvalidLabel(value)
     End If
 End Property
 
@@ -332,14 +332,14 @@ Public Property Get DropdownLabel() As String
     DropdownLabel = m_DropdownLabel
 End Property
 
-Public Property Let DropdownDataSource(Value As String)
-    If Len(Value) > 0 Then
-        m_DropdownDataSource = Value
+Public Property Let DropdownDataSource(value As String)
+    If Len(value) > 0 Then
+        m_DropdownDataSource = value
 
         'set the form dropdown
         Me.cbxDropdown.RowSource = m_DropdownDataSource
     Else
-        RaiseEvent InvalidDataSource(Value)
+        RaiseEvent InvalidDataSource(value)
     End If
 End Property
 
@@ -347,14 +347,14 @@ Public Property Get DropdownDataSource() As String
     DropdownDataSource = m_DropdownDataSource
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
+Public Property Let ButtonCaption(value As String)
+    If Len(value) > 0 Then
+        m_ButtonCaption = value
 
         'set the form button caption
         Me.btnEnter.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCaption(value)
     End If
 End Property
 
@@ -362,16 +362,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
+Public Property Let SelectedID(value As Integer)
+        m_SelectedID = value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
+Public Property Let SelectedValue(value As String)
+        m_SelectedValue = value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -464,7 +464,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[SelectSingle form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[_SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -494,7 +494,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxDropdown_Change[SelectSingle form])"
+            "Error encountered (#" & Err.Number & " - cbxDropdown_Change[_SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -538,7 +538,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEnter_Click[SelectSingle form])"
+            "Error encountered (#" & Err.Number & " - btnEnter_Click[_SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -566,7 +566,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[SelectSingle form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[_SelectSingle form])"
     End Select
     Resume Exit_Handler
 End Sub

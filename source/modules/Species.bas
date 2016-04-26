@@ -48,29 +48,29 @@ Private m_Nativity As String '255 or ZLS
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidMasterPlantCode(Value As String)
-Public Event InvalidLUCode(Value As String)
-Public Event InvalidFamily(Value As String)
-Public Event InvalidSpecies(Value As String)
-Public Event InvalidCode(Value As String)
+Public Event InvalidMasterPlantCode(value As String)
+Public Event InvalidLUCode(value As String)
+Public Event InvalidFamily(value As String)
+Public Event InvalidSpecies(value As String)
+Public Event InvalidCode(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let MasterPlantCode(Value As String)
+Public Property Let MasterPlantCode(value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(Value), 1, 20, True) Then
-        m_MasterPlantCode = Value
+    If IsBetween(Len(value), 1, 20, True) Then
+        m_MasterPlantCode = value
     Else
-        RaiseEvent InvalidMasterPlantCode(Value)
+        RaiseEvent InvalidMasterPlantCode(value)
     End If
 End Property
 
@@ -78,12 +78,12 @@ Public Property Get MasterPlantCode() As String
     MasterPlantCode = m_MasterPlantCode
 End Property
 
-Public Property Let COfamily(Value As String)
+Public Property Let COfamily(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_COfamily = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_COfamily = value
     Else
-        RaiseEvent InvalidFamily(Value)
+        RaiseEvent InvalidFamily(value)
     End If
 End Property
 
@@ -91,12 +91,12 @@ Public Property Get COfamily() As String
     COfamily = m_COfamily
 End Property
 
-Public Property Let UTfamily(Value As String)
+Public Property Let UTfamily(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_UTfamily = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_UTfamily = value
     Else
-        RaiseEvent InvalidFamily(Value)
+        RaiseEvent InvalidFamily(value)
     End If
 End Property
 
@@ -104,12 +104,12 @@ Public Property Get UTfamily() As String
     UTfamily = m_UTfamily
 End Property
 
-Public Property Let WYfamily(Value As String)
+Public Property Let WYfamily(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_WYfamily = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_WYfamily = value
     Else
-        RaiseEvent InvalidFamily(Value)
+        RaiseEvent InvalidFamily(value)
     End If
 End Property
 
@@ -117,12 +117,12 @@ Public Property Get WYfamily() As String
     WYfamily = m_WYfamily
 End Property
 
-Public Property Let COspecies(Value As String)
+Public Property Let COspecies(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_COspecies = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_COspecies = value
     Else
-        RaiseEvent InvalidSpecies(Value)
+        RaiseEvent InvalidSpecies(value)
     End If
 End Property
 
@@ -130,12 +130,12 @@ Public Property Get COspecies() As String
     COspecies = m_COspecies
 End Property
 
-Public Property Let UTspecies(Value As String)
+Public Property Let UTspecies(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_UTspecies = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_UTspecies = value
     Else
-        RaiseEvent InvalidSpecies(Value)
+        RaiseEvent InvalidSpecies(value)
     End If
 End Property
 
@@ -143,12 +143,12 @@ Public Property Get UTspecies() As String
     UTspecies = m_UTspecies
 End Property
 
-Public Property Let WYspecies(Value As String)
+Public Property Let WYspecies(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_WYspecies = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_WYspecies = value
     Else
-        RaiseEvent InvalidSpecies(Value)
+        RaiseEvent InvalidSpecies(value)
     End If
 End Property
 
@@ -156,12 +156,12 @@ Public Property Get WYspecies() As String
     WYspecies = m_WYspecies
 End Property
 
-Public Property Let LUcode(Value As String)
+Public Property Let LUcode(value As String)
     'valid length varchar(25) but 6-letter lookup
-    If Not IsNull(Value) And IsBetween(Len(Value), 1, 6, True) Then
-        m_LUcode = Value
+    If Not IsNull(value) And IsBetween(Len(value), 1, 6, True) Then
+        m_LUcode = value
     Else
-        RaiseEvent InvalidLUCode(Value)
+        RaiseEvent InvalidLUCode(value)
     End If
 End Property
 
@@ -169,12 +169,12 @@ Public Property Get LUcode() As String
     LUcode = m_LUcode
 End Property
 
-Public Property Let MasterFamily(Value As String)
+Public Property Let MasterFamily(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_MasterFamily = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_MasterFamily = value
     Else
-        RaiseEvent InvalidFamily(Value)
+        RaiseEvent InvalidFamily(value)
     End If
 End Property
 
@@ -182,12 +182,12 @@ Public Property Get MasterFamily() As String
     MasterFamily = m_MasterFamily
 End Property
 
-Public Property Let MasterCode(Value As String)
+Public Property Let MasterCode(value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(Value), 1, 20, True) Then
-        m_MasterCode = Value
+    If IsBetween(Len(value), 1, 20, True) Then
+        m_MasterCode = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -195,12 +195,12 @@ Public Property Get MasterCode() As String
     MasterCode = m_MasterCode
 End Property
 
-Public Property Let MasterSpecies(Value As String)
+Public Property Let MasterSpecies(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_MasterSpecies = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_MasterSpecies = value
     Else
-        RaiseEvent InvalidFamily(Value)
+        RaiseEvent InvalidFamily(value)
     End If
 End Property
 
@@ -208,12 +208,12 @@ Public Property Get MasterSpecies() As String
     MasterSpecies = m_MasterSpecies
 End Property
 
-Public Property Let UTcode(Value As String)
+Public Property Let UTcode(value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(Value), 1, 20, True) Then
-        m_UTcode = Value
+    If IsBetween(Len(value), 1, 20, True) Then
+        m_UTcode = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -221,12 +221,12 @@ Public Property Get UTcode() As String
     UTcode = m_UTcode
 End Property
 
-Public Property Let COcode(Value As String)
+Public Property Let COcode(value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(Value), 1, 20, True) Then
-        m_COcode = Value
+    If IsBetween(Len(value), 1, 20, True) Then
+        m_COcode = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -234,12 +234,12 @@ Public Property Get COcode() As String
     COcode = m_COcode
 End Property
 
-Public Property Let WYcode(Value As String)
+Public Property Let WYcode(value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(Value), 1, 20, True) Then
-        m_WYcode = Value
+    If IsBetween(Len(value), 1, 20, True) Then
+        m_WYcode = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -247,12 +247,12 @@ Public Property Get WYcode() As String
     WYcode = m_WYcode
 End Property
 
-Public Property Let MasterCommonName(Value As String)
+Public Property Let MasterCommonName(value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(Value), 1, 50, True) Then
-        m_MasterCommonName = Value
+    If IsBetween(Len(value), 1, 50, True) Then
+        m_MasterCommonName = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -260,12 +260,12 @@ Public Property Get MasterCommonName() As String
     MasterCommonName = m_MasterCommonName
 End Property
 
-Public Property Let Lifeform(Value As String)
+Public Property Let Lifeform(value As String)
     'valid length varchar(255) or ZLS
-    If IsBetween(Len(Value), 1, 255, True) Then
-        m_Lifeform = Value
+    If IsBetween(Len(value), 1, 255, True) Then
+        m_Lifeform = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -273,12 +273,12 @@ Public Property Get Lifeform() As String
     Lifeform = m_Lifeform
 End Property
 
-Public Property Let Duration(Value As String)
+Public Property Let Duration(value As String)
     'valid length varchar(255) or ZLS
-    If IsBetween(Len(Value), 1, 255, True) Then
-        m_Duration = Value
+    If IsBetween(Len(value), 1, 255, True) Then
+        m_Duration = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
@@ -286,12 +286,12 @@ Public Property Get Duration() As String
     Duration = m_Duration
 End Property
 
-Public Property Let Nativity(Value As String)
+Public Property Let Nativity(value As String)
     'valid length varchar(255) or ZLS
-    If IsBetween(Len(Value), 1, 255, True) Then
-        m_Nativity = Value
+    If IsBetween(Len(value), 1, 255, True) Then
+        m_Nativity = value
     Else
-        RaiseEvent InvalidCode(Value)
+        RaiseEvent InvalidCode(value)
     End If
 End Property
 
