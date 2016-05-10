@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =12576
-    Top =6948
-    Right =15156
-    Bottom =10104
+    Left =2520
+    Top =2400
+    Right =18912
+    Bottom =11808
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -113,7 +113,7 @@ Begin Form
                     Width =1980
                     Height =300
                     Name ="lblTitle"
-                    Caption ="Trip Prep"
+                    Caption ="Title"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -161,7 +161,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink1"
-                    Caption ="VegPlot"
+                    Caption ="Link1"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -207,7 +207,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink2"
-                    Caption ="VegWalk"
+                    Caption ="Link2"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -225,7 +225,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink3"
-                    Caption ="Photos"
+                    Caption ="Link3"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -234,7 +234,6 @@ Begin Form
                     LayoutCachedHeight =1020
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =1140
@@ -253,7 +252,6 @@ Begin Form
                     LayoutCachedHeight =1380
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =1500
@@ -280,7 +278,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink6"
-                    Caption ="Tasks"
+                    Caption ="Link6"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =1860

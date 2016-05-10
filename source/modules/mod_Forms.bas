@@ -50,9 +50,9 @@ Option Explicit
 '=================================================================
 '  Declarations
 '=================================================================
-Declare Function IsZoomed Lib "user32" (ByVal hwnd As Long) As _
+Declare Function IsZoomed Lib "user32" (ByVal hWnd As Long) As _
      Integer
-Declare Function IsIconic Lib "user32" (ByVal hwnd As Long) As _
+Declare Function IsIconic Lib "user32" (ByVal hWnd As Long) As _
      Integer
 
 '=================================================================

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.05
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -13,6 +13,8 @@ Option Explicit
 '               BLC - 5/1/2015  - 1.02 - integerated into Invasives Reporting tool
 '               BLC - 5/22/2015 - 1.03 - added PopulateList
 '               BLC - 6/3/2015  - 1.04 - added IsUsedTargetArea
+'               BLC - 5/5/2016  - 1.05 - added GetRiverSegments, GetProtocolVersion
+'                                        changed to Exit_Handler vs. Exit_Function
 ' =================================
 
 ' ---------------------------------
@@ -290,7 +292,7 @@ End Sub
 ' Revisions:
 '   BLC - 2/19/2015  - initial version
 ' ---------------------------------
-Public Function getParkState(parkCode As String) As String
+Public Function getParkState(ParkCode As String) As String
 
 On Error GoTo Err_Handler
     
@@ -299,12 +301,12 @@ On Error GoTo Err_Handler
     Dim State As String, strSQL As String
    
     'handle only appropriate park codes
-    If Len(parkCode) <> 4 Then
-        GoTo Exit_Function
+    If Len(ParkCode) <> 4 Then
+        GoTo Exit_Handler
     End If
     
     'generate SQL ==> NOTE: LIMIT 1; syntax not viable for Access, use SELECT TOP x instead
-    strSQL = "SELECT TOP 1 ParkState FROM tlu_Parks WHERE ParkCode LIKE '" & parkCode & "';"
+    strSQL = "SELECT TOP 1 ParkState FROM tlu_Parks WHERE ParkCode LIKE '" & ParkCode & "';"
             
     'fetch data
     Set db = CurrentDb
@@ -318,7 +320,7 @@ On Error GoTo Err_Handler
     'return value
     getParkState = State
     
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -327,7 +329,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - getParkState[mod_App_Data])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -345,26 +347,26 @@ End Function
 ' Revisions:
 '   BLC - 6/10/2015  - initial version
 ' ---------------------------------
-Public Function getListLastModifiedDate(TgtYear As Integer, parkCode As String) As String
+Public Function getListLastModifiedDate(TgtYear As Integer, ParkCode As String) As String
 
 On Error GoTo Err_Handler
     
     Dim strCriteria As String
 
     'handle only appropriate park codes
-    If Len(parkCode) <> 4 Or TgtYear < 2000 Then
-        GoTo Exit_Function
+    If Len(ParkCode) <> 4 Or TgtYear < 2000 Then
+        GoTo Exit_Handler
     End If
     
     'set lookup criteria
-    strCriteria = "Park_Code LIKE '" & parkCode & "' AND CInt(Target_Year) = " & CInt(TgtYear)
+    strCriteria = "Park_Code LIKE '" & ParkCode & "' AND CInt(Target_Year) = " & CInt(TgtYear)
     
     'Debug.Print strCriteria
         
     'lookup last modified date & return value
     getListLastModifiedDate = Nz(Format(DLookup("Last_Modified", "tbl_Target_List", strCriteria), "mmm-d-yyyy H:nn AMPM"), "")
     
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -373,7 +375,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - getListLastModifiedDate[mod_App_Data])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -410,10 +412,10 @@ On Error GoTo Err_Handler
     If rs.RecordCount > 0 Then
         IsUsedTargetArea = True
     Else
-        GoTo Exit_Function
+        GoTo Exit_Handler
     End If
        
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -422,7 +424,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - IsUsedTargetArea[mod_App_Data])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -528,3 +530,203 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' FUNCTION:     GetProtocolVersion
+' Description:  Retrieve protocol version, effective & retire dates
+' Assumptions:  Assumes only one version of the protocol is active at once
+' Parameters:   blnAllVersions - indicator if all versions should be retrieved (boolean)
+' Returns:      Protocol name, version, effective & retire dates, last modified date
+' Note:         To retrieve values, data must be retrieved from the array:
+'                   ary(0,0) = ProtocolName
+'                   ary(1,0) = Version
+'                   ary(2,0) = EffectiveDate
+'                   ary(3,0) = RetireDate
+'                   ary(4,0) = LastModified
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, May 5, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 5/5/2016  - initial version
+' ---------------------------------
+Public Function GetProtocolVersion(Optional blnAllVersions As Boolean = False) As Variant
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String, strWHERE As String
+    Dim count As Integer
+    Dim metadata() As Variant
+   
+    'handle only appropriate park codes
+    If blnAllVersions Then
+        strWHERE = ""
+    Else
+        strWHERE = "WHERE RetireDate IS NULL"
+    End If
+    
+    'generate SQL
+    strSQL = "SELECT ProtocolName, Version, EffectiveDate, RetireDate, LastModified FROM Protocol " _
+                & strWHERE & ";"
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+        
+    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+        
+    With rs
+        .MoveLast
+        .MoveFirst
+        count = .RecordCount
+    
+        metadata = rs.GetRows(count)
+ 
+        .Close
+    End With
+    
+    'return value
+    GetProtocolVersion = metadata
+    
+Exit_Handler:
+    Set rs = Nothing
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetProtocolVersion[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetSOPNum
+' Description:  Retrieve SOP number
+' Assumptions:  Assumes only one SOP # for a given area
+' Parameters:   area - area covered by the SOP (string)
+' Returns:      number for the SOP
+' Note:         To retrieve value, data must be retrieved from the array:
+'                   ary(0,0) = SOP #
+'               Assuming there is only one matching SOP
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, May 5, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 5/5/2016  - initial version
+' ---------------------------------
+Public Function GetSOPNum(area As String) As Variant
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String, strWHERE As String
+    Dim count As Integer, sopnum As Integer
+    Dim SOP() As Variant
+    
+    'generate SQL
+    strSQL = "SELECT [Label] FROM Enum " _
+                & "WHERE EnumType = 'SOP' AND LCASE([Label]) LIKE '" & LCase(area) & "%';"
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL, dbOpenDynaset)
+    
+    sopnum = CInt(Replace(rs.Fields("Label"), area, ""))
+    
+    'If rs.BOF And rs.EOF Then GoTo Exit_Handler
+    
+'    With rs
+'        .MoveFirst
+'        .MoveLast
+'        count = .RecordCount
+'        .MoveFirst
+'
+'        sop = rs.GetRows(count)
+'
+'        .Close
+'    End With
+    
+    'cleanup SOP # trim off area name leaving only #
+'    sopnum = CInt(Replace(sop(0, 0), area, ""))
+    
+    'return value
+    GetSOPNum = sopnum
+    
+Exit_Handler:
+    Set rs = Nothing
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetSOPNum[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetRiverSegments
+' Description:  Retrieve the river segments associated with a park
+' Assumptions:  River segments are properly associate w/ park
+' Parameters:   ParkCode - 4 character park designator
+' Returns:      segments - river segments (Green, CAC, GBC, Yampa, CBC, GBC, etc.)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, May 5, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 5/5/2016  - initial version
+' ---------------------------------
+Public Function GetRiverSegments(ParkCode As String) As Variant
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    Dim count As Integer
+    Dim segments() As Variant
+   
+    'handle only appropriate park codes
+    If Len(ParkCode) <> 4 Then
+        GoTo Exit_Handler
+    End If
+    
+    'generate SQL
+    strSQL = "SELECT Segment FROM River " _
+                & "LEFT JOIN Park ON Park.ID = River.Park_ID " _
+                & "WHERE ParkCode LIKE '" & ParkCode & "';"
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+
+    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+
+    rs.MoveLast
+    rs.MoveFirst
+    count = rs.RecordCount
+    
+    segments = rs.GetRows(count)
+ 
+    rs.Close
+    
+    'return value
+    GetRiverSegments = segments
+    
+Exit_Handler:
+    Set rs = Nothing
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetRiverSegments[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function

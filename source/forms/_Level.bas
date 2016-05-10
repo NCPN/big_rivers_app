@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =9216
-    Top =3348
-    Right =15036
-    Bottom =3816
+    Left =2520
+    Top =2400
+    Right =19152
+    Bottom =11808
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -164,10 +164,9 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =1500
+                    Left =1440
                     Top =60
-                    Width =1380
-                    Height =372
+                    Width =1500
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnLevel1"
@@ -176,10 +175,10 @@ Begin Form
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1500
+                    LayoutCachedLeft =1440
                     LayoutCachedTop =60
-                    LayoutCachedWidth =2880
-                    LayoutCachedHeight =432
+                    LayoutCachedWidth =2940
+                    LayoutCachedHeight =420
                     Gradient =0
                     BackThemeColorIndex =1
                     BackTint =100.0
@@ -204,7 +203,6 @@ Begin Form
                     OverlapFlags =85
                     Left =2940
                     Top =60
-                    Width =1380
                     TabIndex =2
                     ForeColor =4210752
                     Name ="btnLevel2"
@@ -215,7 +213,7 @@ Begin Form
 
                     LayoutCachedLeft =2940
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4320
+                    LayoutCachedWidth =4380
                     LayoutCachedHeight =420
                     Gradient =0
                     BackThemeColorIndex =1
@@ -242,7 +240,6 @@ Begin Form
                     Left =4380
                     Top =60
                     Width =1380
-                    Height =372
                     TabIndex =3
                     ForeColor =4210752
                     Name ="btnLevel3"
@@ -254,7 +251,7 @@ Begin Form
                     LayoutCachedLeft =4380
                     LayoutCachedTop =60
                     LayoutCachedWidth =5760
-                    LayoutCachedHeight =432
+                    LayoutCachedHeight =420
                     Gradient =0
                     BackThemeColorIndex =1
                     BackTint =100.0
@@ -631,14 +628,16 @@ On Error GoTo Err_Handler
     CreateMenu "park"
     CreateMenu "river"
     CreateMenu "site"
+    CreateMenu "feature"
     
     Me.btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park Missing") & " > "
     Me.btnLevel1.Caption = Nz(TempVars("River"), "River Missing") & " > "
     Me.btnLevel2.Caption = Nz(TempVars("Site"), "Site Missing") & " > "
+    Me.btnLevel3.Caption = Nz(TempVars("Feature"), "Feature Missing")
     
     'hide level3
-    Me.btnLevel3.Visible = False
-    Me.btnLevel3.Caption = " "
+'    Me.btnLevel3.Visible = False
+'    Me.btnLevel3.Caption = " "
         
     Dim ctrl As Control
     
@@ -872,7 +871,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -904,7 +903,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -936,7 +935,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -968,13 +967,13 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
-'    If Button = acRightButton Then
-'        CommandBars("").ShowPopup
-'        DoCmd.CancelEvent
-'    End If
+    If Button = acRightButton Then
+        CommandBars("feature").ShowPopup
+        DoCmd.CancelEvent
+    End If
     
 Exit_Handler:
     Exit Sub
@@ -1002,7 +1001,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then

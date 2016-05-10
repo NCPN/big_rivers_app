@@ -68,6 +68,8 @@ On Error GoTo Err_Handler
             mnu = "river"
         Case "site"
             mnu = "site"
+        Case "feature"
+            mnu = "feature"
         Case "level"
             mnu = "setlevel"
         Case "transect"
@@ -111,6 +113,11 @@ On Error GoTo Err_Handler
                 Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="site")
                 mnuItem.Caption = "Set &Site"
                 mnuItem.OnAction = "mnuSetSite"
+            
+            Case "feature"
+                Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="feature")
+                mnuItem.Caption = "Set &Feature"
+                mnuItem.OnAction = "mnuSetFeature"
             
             Case "setlevel"
                 Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="park")
@@ -198,6 +205,12 @@ End Sub
 Public Sub mnuSetSite()
     
     DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="site"
+    
+End Sub
+
+Public Sub mnuSetFeature()
+    
+    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="feature"
     
 End Sub
 

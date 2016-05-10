@@ -798,41 +798,10 @@ Public Sub doit()
 End Sub
 
 Public Sub testme()
-    DoCmd.OpenForm "Tagline", acNormal, OpenArgs:="t|4" '"p|1"
+'    DoCmd.OpenForm "Tagline", acNormal, OpenArgs:="t|4" '"p|1"
+'    DoCmd.OpenForm "SpeciesList", acNormal, OpenArgs:="1|2016|WCC"
 
-'    Me.RecordSource = strSQL
-        
-'    Set rs = Me.RecordsetClone
-'    If Not (rs.BOF And rs.EOF) Then
-'        MsgBox "ld", vbOKOnly, rs.Fields("LineDistance_m").value
-'    End If
-        
-'    Me.tbxDistance.ControlSource = "LineDistance_m"
-'    Me.tbxHeight.ControlSource = "Height_cm"
-    
-'    Me.Requery
-
-    
-'    strSQL2 = "SELECT ID, Label, Summary FROM Enum WHERE EnumType = 'TaglineType';"
-'
-'    'setup tagline types
-'    With Me.cbxTaglineType
-'        .RowSource = strSQL2
-'        .ColumnCount = 3
-'        .ColumnWidths = "0, 0, 2"
-'        .BoundColumn = "3"
-'
-'        'set value of tagline type
-'        Dim i As Integer
-'
-'        For i = 0 To (.ListCount - 1)
-'            If .Column(3, i) = Me!HeightType Then
-'                .value = .ItemData(i)
-'            End If
-'        Next
-'
-'    End With
-'
-'    'setup button face
-
+'    GetRiverSegments "BLCA"
+'     GetProtocolVersion
+    GetSOPNum "transducer"
 End Sub

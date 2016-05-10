@@ -183,7 +183,7 @@ End Sub
 '   BLC - 4/9/2015 - initial version
 '   BLC - 5/26/2015 - moved from mod_Species to mod_App_UI
 ' ---------------------------------
-Public Function PopulateSpeciesPriorities(parkCode As String, priorities As String) As String
+Public Function PopulateSpeciesPriorities(ParkCode As String, priorities As String) As String
 
 On Error GoTo Err_Handler
 
@@ -191,7 +191,7 @@ Dim ParkPriorities As Variant
 Dim i As Integer
 
     'check if parkCode is in priorities string
-    If Len(priorities) > Len(Replace(priorities, parkCode, "")) Then
+    If Len(priorities) > Len(Replace(priorities, ParkCode, "")) Then
     
         'prepare the Park Priority values
         ParkPriorities = Split(priorities, "|")
@@ -199,8 +199,8 @@ Dim i As Integer
         'set park priority values
         For i = 0 To UBound(ParkPriorities)
             'does Park have a priority value?
-            If parkCode = Left(ParkPriorities(i), 4) Then
-                PopulateSpeciesPriorities = Replace(ParkPriorities(i), parkCode + "-", "")
+            If ParkCode = Left(ParkPriorities(i), 4) Then
+                PopulateSpeciesPriorities = Replace(ParkPriorities(i), ParkCode + "-", "")
             End If
         Next
         
@@ -279,18 +279,21 @@ End Sub
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
 
-    Dim fName As String, rName As String
+    Dim fName As String, rName As String, oArgs As String
     
     action = LCase(Nz(Trim(action), ""))
     
     'defaults
     fName = ""
     rName = ""
+    oArgs = ""
     
     Select Case action
         'Where?
         Case "site"
+            fName = "Task"
         Case "feature"
+            fName = "Task"
         Case "transect"
         Case "plot"
         'Sampling
@@ -300,7 +303,8 @@ On Error GoTo Err_Handler
         Case "people"
         'Vegetation
         Case "woody canopy cover"
-            fName = "WoodyCanopyCover"
+            fName = "SpeciesList" '"WoodyCanopyCover"
+            oArgs = "1|2016|WCC"
         Case "understory cover"
         Case "vegetation walk"
         Case "species"
@@ -311,6 +315,8 @@ On Error GoTo Err_Handler
         Case "vegplot"
         Case "vegwalk"
         Case "photos"
+        Case "transducer"
+            rName = "Transducer"
         Case "tasks"
             fName = "Task"
         'Reports
@@ -319,9 +325,10 @@ On Error GoTo Err_Handler
     End Select
 
     If Len(fName) > 0 Then
-        DoCmd.OpenForm fName, acNormal
+        DoCmd.OpenForm fName, acNormal, OpenArgs:=oArgs
     ElseIf Len(rName) > 0 Then
-        DoCmd.OpenReport rName, acViewNormal
+        'print preview mode - acViewPreview
+        DoCmd.OpenReport rName, acViewPreview
     End If
 
 Exit_Handler:
@@ -335,7 +342,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 Public Function SetStartupOptions(propertyname As String, _
     propertytype As Variant, propertyvalue As Variant) _

@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 4/26/2016  - 1.02 - latest enum update from db
-'                                         last updated: 4/26/2016 10:43:34 AM
+'               app - 5/5/2016  - 1.02 - latest enum update from db
+'                                         last updated: 5/5/2016 5:48:37 PM
 ' =================================
 
 '-----------------------------
@@ -145,6 +145,18 @@ Public Enum SlopeChangeCause
 End Enum
 
 '-----------------------------
+'  SOPs
+'-----------------------------
+Public Enum SOP
+    [_First] = 90
+    Transducer7 = 90
+    Photo5 = 91
+    VegWalk6 = 92
+    VegPlot6 = 93
+    [_Last] = 93
+End Enum
+
+'-----------------------------
 '  Status
 '-----------------------------
 Public Enum Status
@@ -154,6 +166,22 @@ Public Enum Status
     Completed = 49
     Deferred = 50
     [_Last] = 50
+End Enum
+
+'-----------------------------
+'  TaglineTypes
+'-----------------------------
+Public Enum TaglineType
+    [_First] = 82
+    H = 82
+    WRS = 83
+    rs = 84
+    V = 85
+    G = 86
+    W = 87
+    R = 88
+    D = 89
+    [_Last] = 89
 End Enum
 
 '-----------------------------

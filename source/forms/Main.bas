@@ -1,14 +1,11 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
-    AutoResize = NotDefault
     PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
-    MinButton = NotDefault
     ControlBox = NotDefault
     NavigationButtons = NotDefault
-    CloseButton = NotDefault
     DividingLines = NotDefault
     DefaultView =0
     BorderStyle =1
@@ -18,21 +15,21 @@ Begin Form
     GridY =24
     Width =8640
     DatasheetFontHeight =11
-    ItemSuffix =18
-    Left =13980
-    Top =3684
-    Right =27696
-    Bottom =12036
+    ItemSuffix =21
+    Left =2520
+    Top =2400
+    Right =18912
+    Bottom =11808
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
     End
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
     AllowPivotChartView =0
@@ -47,6 +44,7 @@ Begin Form
     AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
+    FitToScreen =255
     DatasheetBackThemeColorIndex =1
     BorderThemeColorIndex =3
     ThemeFontIndex =1
@@ -64,6 +62,16 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Rectangle
+            SpecialEffect =3
+            BackStyle =0
+            BorderLineStyle =0
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -246,6 +254,57 @@ Begin Form
                     LayoutCachedWidth =8172
                     LayoutCachedHeight =7008
                 End
+                Begin Subform
+                    OverlapFlags =215
+                    OldBorderStyle =0
+                    Left =120
+                    Top =60
+                    Width =5832
+                    Height =360
+                    TabIndex =6
+                    BorderColor =10921638
+                    Name ="fsubBreadcrumb"
+                    SourceObject ="Form._Level"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =5952
+                    LayoutCachedHeight =420
+                    Begin
+                        Begin Label
+                            OverlapFlags =93
+                            Left =120
+                            Width =1176
+                            Height =300
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="breadcrumb Label"
+                            Caption ="breadcrumb"
+                            EventProcPrefix ="breadcrumb_Label"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =120
+                            LayoutCachedWidth =1296
+                            LayoutCachedHeight =300
+                        End
+                    End
+                End
+                Begin Rectangle
+                    SpecialEffect =0
+                    BackStyle =1
+                    OldBorderStyle =0
+                    OverlapFlags =223
+                    Width =8640
+                    Height =480
+                    BackColor =5540500
+                    BorderColor =10921638
+                    Name ="rctTop"
+                    GridlineColor =10921638
+                    LayoutCachedWidth =8640
+                    LayoutCachedHeight =480
+                    BackThemeColorIndex =3
+                    BackShade =50.0
+                End
             End
         End
         Begin FormFooter
@@ -278,7 +337,8 @@ Attribute oTile.VB_VarHelpID = -1
 '---------------------
 ' Methods
 '---------------------
-Private Sub Form_Load()
+'Private Sub Form_Load()
+Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
     'initialize app (mod_App_UI)
@@ -307,6 +367,7 @@ On Error GoTo Err_Handler
     oLTile.Link4Caption = "Plot"
     oLTile.Link5Caption = ""
     oLTile.Link6Caption = ""
+    oLTile.Link5Visible = 0
     oLTile.Link6Visible = 0
     
     'Center
@@ -355,9 +416,8 @@ On Error GoTo Err_Handler
     oBCTile.TileHeaderColor = vbGreen
     oBCTile.Link1Caption = "VegPlot"
     oBCTile.Link2Caption = "VegWalk"
-    oBCTile.Link3Caption = "Transducer"
     oBCTile.Link3Caption = "Photos"
-    oBCTile.Link4Visible = 0
+    oBCTile.Link4Caption = "Transducer"
     oBCTile.Link5Visible = 0
     oBCTile.Link6Caption = "Tasks"
 
@@ -385,7 +445,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Main form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[Main form])"
     End Select
     Resume Exit_Handler
 End Sub

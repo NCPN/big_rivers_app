@@ -14,16 +14,15 @@ Begin Form
     GridY =24
     Width =6600
     DatasheetFontHeight =11
-    ItemSuffix =13
+    ItemSuffix =14
     Left =8208
     Top =3024
-    Right =22440
+    Right =18804
     Bottom =11424
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x3c1b90d8d5bee440
+        0xa3116d04ebbee440
     End
-    RecordSource ="SELECT * FROM Tagline; "
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -35,6 +34,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -242,7 +243,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxHeight"
-                    ControlSource ="Height_cm"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2760
@@ -261,7 +261,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDistance"
-                    ControlSource ="LineDistance_m"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4080
@@ -270,7 +269,7 @@ Begin Form
                     LayoutCachedHeight =420
                 End
                 Begin ComboBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
                     Left =120
                     Top =120
@@ -280,8 +279,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="cbxTaglineType"
-                    ControlSource ="HeightType"
                     RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
                     OnClick ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     GridlineColor =10921638
@@ -420,6 +419,25 @@ Begin Form
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
                 End
+                Begin TextBox
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =120
+                    Top =180
+                    Width =2520
+                    Height =300
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxTaglineType"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =2640
+                    LayoutCachedHeight =480
+                End
             End
         End
         Begin FormFooter
@@ -538,6 +556,40 @@ On Error GoTo Err_Handler
             & "WHERE LineDistanceSource = '" & SourceType & "' AND " _
             & "LineDistanceSource_ID = " & SourceID & ""
     
+    'open DAO recordset & assign to form
+    Set rs = CurrentDb.OpenRecordset(strSQL, dbOpenDynaset)
+    
+    Set Me.Form.Recordset = rs
+    
+    'assign field values
+    Me.tbxDistance.ControlSource = "LineDistance_m"
+    Me.tbxHeight.ControlSource = "Height_cm"
+    Me.tbxTaglineType.ControlSource = "TaglineType"
+
+'    Me.Requery
+    
+    strSQL2 = "SELECT ID, Label, Summary FROM Enum WHERE EnumType = 'TaglineType';"
+
+    'setup tagline types w/ bound column = ID
+    With Me.cbxTaglineType
+        .RowSource = strSQL2
+        .ColumnCount = 3
+        .ColumnWidths = "0, 0, 2"
+        .BoundColumn = "1"
+
+'        'set value of tagline type
+'        Dim i As Integer
+'
+'        For i = 0 To (.ListCount - 1)
+'            If .Column(1, i) = Me!HeightType Then
+'                cbxTaglineType = .ItemData(i)
+'            End If
+'        Next
+
+    End With
+
+    'setup button face
+
     
 Exit_Handler:
     Exit Sub
@@ -578,6 +630,46 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          tbxTaglineType_Click
+' Description:  Tagline type click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 26, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 4/26/2016 - initial version
+' ---------------------------------
+Private Sub tbxTaglineType_Click()
+On Error GoTo Err_Handler
+
+'        'set value of tagline type
+'        Dim i As Integer
+'
+'        For i = 0 To (.ListCount - 1)
+'            If .Column(1, i) = Me!HeightType Then
+'                cbxTaglineType = .ItemData(i)
+'            End If
+'        Next
+
+
+    'bring selection box to front
+    cbxTaglineType.SetFocus
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxTaglineType_Click[Tagline form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          cbxTaglineType_Click
 ' Description:  Tagline type click actions
 ' Assumptions:  -
@@ -600,6 +692,33 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - cbxTaglineType_Click[Tagline form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxTaglineType_AfterUpdate
+' Description:  Tagline type actions after update
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 26, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 4/26/2016 - initial version
+' ---------------------------------
+Private Sub cbxTaglineType_AfterUpdate()
+On Error GoTo Err_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTaglineType_AfterUpdate[Tagline form])"
     End Select
     Resume Exit_Handler
 End Sub

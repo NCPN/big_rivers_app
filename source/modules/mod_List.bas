@@ -959,7 +959,7 @@ Public Sub MoveSelectedItems(frm As Form, strSourceControl As String, strTargetC
     
 On Error GoTo Err_Handler
     
-    Dim iRow As Integer, startRow As Integer, i As Integer, X As Integer, iRemovedItems As Integer
+    Dim iRow As Integer, startRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
     Dim strItem As String
@@ -1023,9 +1023,9 @@ On Error GoTo Err_Handler
     iRemovedItems = 0
     
     'iterate through selected items
-    For X = LBound(arySelectedItems) To UBound(arySelectedItems)
+    For x = LBound(arySelectedItems) To UBound(arySelectedItems)
                         
-        iRow = arySelectedItems(X) - iRemovedItems
+        iRow = arySelectedItems(x) - iRemovedItems
             
         'clear string
         strItem = ""
@@ -1046,7 +1046,7 @@ On Error GoTo Err_Handler
             iRemovedItems = iRemovedItems + 1
         End If
     
-    Next X
+    Next x
 
 Exit_Handler:
     Exit Sub

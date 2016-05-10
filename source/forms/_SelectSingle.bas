@@ -16,10 +16,10 @@ Begin Form
     Width =4500
     DatasheetFontHeight =11
     ItemSuffix =5
-    Left =9216
-    Top =3348
-    Right =22680
-    Bottom =11700
+    Left =2520
+    Top =2400
+    Right =22788
+    Bottom =11808
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -437,6 +437,18 @@ On Error GoTo Err_Handler
                         & "WHERE ParkCode = '" & TempVars("park") & "' " _
                         & "AND IsActiveForProtocol = 1 " _
                         & "ORDER BY Site ASC;"
+        
+        Case "feature"
+            Me.Title = "Feature"
+            Me.DropdownLabel = "Feature"
+            Me.Directions = "Select the desired feature."
+            Me.ButtonCaption = "Next >"
+            
+            strSQL = "SELECT ID, Feature FROM Feature " _
+                        & "JOIN Park p ON p.ParkID = ParkID " _
+                        & "WHERE ParkCode = '" & TempVars("park") & "' " _
+                        & "AND IsActiveForProtocol = 1 " _
+                        & "ORDER BY Feature ASC;"
         
         Case "data_entry"
             Me.Title = "Data Entry"
