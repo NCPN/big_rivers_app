@@ -39,8 +39,8 @@ Public Sub fillList(frm As Form, ctrlSource As Control, Optional ctrlDest As Con
 
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strQuery As String, strSQL As String
     
     'output to form or listbox control?
@@ -182,7 +182,7 @@ On Error GoTo Err_Handler
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        strItem = strItem & rs.Fields(j).value & ";"
+                        strItem = strItem & rs.Fields(j).Value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
                         matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
@@ -296,8 +296,8 @@ Public Function getParkState(ParkCode As String) As String
 
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim State As String, strSQL As String
    
     'handle only appropriate park codes
@@ -314,7 +314,7 @@ On Error GoTo Err_Handler
     
     'assume only 1 record returned
     If rs.RecordCount > 0 Then
-        State = rs.Fields("ParkState").value
+        State = rs.Fields("ParkState").Value
     End If
    
     'return value
@@ -394,8 +394,8 @@ Public Function IsUsedTargetArea(TgtAreaID As Integer) As Boolean
 
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strSQL As String
     
     'default
@@ -443,8 +443,8 @@ Public Sub PopulateTree(TreeType As String)
 
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strSQL As String
     
     Select Case TreeType
@@ -496,8 +496,8 @@ Public Sub PopulateCombobox(cbx As ComboBox, BoxType As String)
 
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strSQL As String
     
     Select Case BoxType
@@ -553,8 +553,8 @@ End Sub
 Public Function GetProtocolVersion(Optional blnAllVersions As Boolean = False) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strSQL As String, strWHERE As String
     Dim count As Integer
     Dim metadata() As Variant
@@ -603,58 +603,58 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
-' FUNCTION:     GetSOPNum
-' Description:  Retrieve SOP number
-' Assumptions:  Assumes only one SOP # for a given area
+' FUNCTION:     GetSOPMetadata
+' Description:  Retrieve SOP metadata (abbreviation code, #, version, effective date)
+' Assumptions:  Assumes only one active/effective SOP # for a given area
 ' Parameters:   area - area covered by the SOP (string)
-' Returns:      number for the SOP
+' Returns:      SOP metadata - Code, SOP #, Version, EffectiveDate
 ' Note:         To retrieve value, data must be retrieved from the array:
 '                   ary(0,0) = SOP #
-'               Assuming there is only one matching SOP
+'               Assuming there is only one matching SOP for each area
 ' Throws:       none
 ' References:   none
 ' Source/date:
 ' Adapted:      Bonnie Campbell, May 5, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 5/5/2016  - initial version
+'   BLC - 5/11/2016 - revised to getting full SOP metadata vs. number only
 ' ---------------------------------
-Public Function GetSOPNum(area As String) As Variant
+Public Function GetSOPMetadata(area As String) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    Dim strSQL As String, strWHERE As String
-    Dim count As Integer, sopnum As Integer
-    Dim SOP() As Variant
-    
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
+    Dim strSQL As String
+        
     'generate SQL
-    strSQL = "SELECT [Label] FROM Enum " _
-                & "WHERE EnumType = 'SOP' AND LCASE([Label]) LIKE '" & LCase(area) & "%';"
-            
+    '---------------------------------------------------------------------
+    ' NOTE: use * vs % for the LIKE wildcard
+    '       if it is not used strSQL will work in a query directly,
+    '       but will fail to return records via a VBA recordset
+    '       So    "...LIKE '" & LCase(area) & "*';"   works
+    '       But   "...LIKE '" & LCase(area) & "%';"   does not (except in direct Query SQL)
+    '
+    ' c.f.  Hans Up, May 17, 2011 & discussion
+    '       http://stackoverflow.com/questions/6037290/use-of-like-works-in-ms-access-but-not-vba
+    '---------------------------------------------------------------------
+    strSQL = "SELECT Code, SOPnumber, Version, EffectiveDate  FROM SOP " _
+                & "WHERE LCASE(Code) LIKE '" & LCase(area) & "*'" _
+                & "AND RetireDate IS NULL;"
+    
     'fetch data
     Set db = CurrentDb
     Set rs = db.OpenRecordset(strSQL, dbOpenDynaset)
     
-    sopnum = CInt(Replace(rs.Fields("Label"), area, ""))
-    
-    'If rs.BOF And rs.EOF Then GoTo Exit_Handler
-    
-'    With rs
-'        .MoveFirst
-'        .MoveLast
-'        count = .RecordCount
-'        .MoveFirst
+'    'get accurate count & return to start
+'    rs.MoveLast
+'    rs.MoveFirst
 '
-'        sop = rs.GetRows(count)
-'
-'        .Close
-'    End With
-    
-    'cleanup SOP # trim off area name leaving only #
-'    sopnum = CInt(Replace(sop(0, 0), area, ""))
+'    If rs.RecordCount > 0 Then
+'        sopnum = CInt(Replace(rs.Fields("Label"), area, ""))
+'    End If
     
     'return value
-    GetSOPNum = sopnum
+    Set GetSOPMetadata = rs
     
 Exit_Handler:
     Set rs = Nothing
@@ -685,8 +685,8 @@ End Function
 Public Function GetRiverSegments(ParkCode As String) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strSQL As String
     Dim count As Integer
     Dim segments() As Variant

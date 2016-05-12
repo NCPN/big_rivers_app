@@ -314,6 +314,8 @@ On Error GoTo Err_Handler
         'Trip Prep
         Case "vegplot"
         Case "vegwalk"
+            rName = "SpeciesList"
+            oArgs = ""
         Case "photos"
         Case "transducer"
             rName = "Transducer"
@@ -325,6 +327,7 @@ On Error GoTo Err_Handler
     End Select
 
     If Len(fName) > 0 Then
+        Forms("Main").Visible = False
         DoCmd.OpenForm fName, acNormal, OpenArgs:=oArgs
     ElseIf Len(rName) > 0 Then
         'print preview mode - acViewPreview
@@ -342,6 +345,62 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+
+' ---------------------------------
+' Function:     Detail_Format
+' Description:  report detail formatting actions
+' Assumptions:  -
+' Parameters:   Cancel - if format action should be cancelled (integer)
+'               FormatCount - items to format (integer)
+' Returns:      -
+' Throws:       none
+' References:
+'   Duane Hookom, October 6, 2008
+'   http://www.pcreview.co.uk/threads/circle-a-word-in-access-report.3639434/
+'
+'   https://msdn.microsoft.com/en-us/library/office/aa195881(v=office.11).aspx
+' Source/date:  Bonnie Campbell, May 10, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/10/2016 - initial version
+' ---------------------------------
+Public Sub CircleControl(ctrl As Control, Optional ellipse As Boolean = False)
+On Error GoTo Err_Handler
+    
+    Dim iWidth As Integer, iHeight As Integer
+    Dim iCenterX As Integer, iCenterY As Integer
+    Dim iRadius As Integer
+    Dim dblAspect As Double
+    Dim sngStart As Single, sngEnd As Single
+
+    iCenterX = ctrl.Left + ctrl.Width / 2
+    iCenterY = ctrl.Top + ctrl.Height / 2
+    iRadius = ctrl.Width '/ 3 '/ 2 + 100
+    dblAspect = 1 'ctrl.Height / ctrl.Width
+    
+    sngStart = -0.00000001                    ' Start of pie slice.
+
+    sngEnd = -2 * PI / 3                         ' End of pie slice.
+    ctrl.Parent.fillColor = RGB(51, 51, 51)            ' Color pie slice red.
+    ctrl.Parent.FillStyle = 0                          ' Fill pie slice.
+    
+    'add the circle to the parent
+    ' X,Y center | radius | [ color, start, end, aspect ]
+    ctrl.Parent.Circle (iCenterX, iCenterY), iRadius, lngLime, sngStart, sngEnd, dblAspect
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CircleControl[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 Public Function SetStartupOptions(propertyname As String, _
     propertytype As Variant, propertyvalue As Variant) _

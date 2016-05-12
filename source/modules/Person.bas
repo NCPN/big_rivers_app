@@ -34,26 +34,26 @@ Private m_Role As String
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidName(value)
-Public Event InvalidEmail(value)
-Public Event InvalidRole(value)
+Public Event InvalidName(Value)
+Public Event InvalidEmail(Value)
+Public Event InvalidRole(Value)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let FirstName(value As String)
-    If IsName(value) Then
-        m_FirstName = value
+Public Property Let FirstName(Value As String)
+    If IsName(Value) Then
+        m_FirstName = Value
     Else
-        RaiseEvent InvalidName(value)
+        RaiseEvent InvalidName(Value)
     End If
 End Property
 
@@ -61,11 +61,11 @@ Public Property Get FirstName() As String
     FirstName = m_FirstName
 End Property
 
-Public Property Let LastName(value As String)
-    If IsName(value) Then
-        m_LastName = value
+Public Property Let LastName(Value As String)
+    If IsName(Value) Then
+        m_LastName = Value
     Else
-        RaiseEvent InvalidName(value)
+        RaiseEvent InvalidName(Value)
     End If
 End Property
 
@@ -73,19 +73,19 @@ Public Property Get LastName() As String
     LastName = m_LastName
 End Property
 
-Public Property Let Name(value As String) 'Optional first As String, Value As String)
-    m_Name = value
+Public Property Let Name(Value As String) 'Optional first As String, Value As String)
+    m_Name = Value
 End Property
 
 Public Property Get Name() As String 'Optional first As String) As String
     Name = m_Name
 End Property
 
-Public Property Let Email(value As String)
-    If IsEmail(value) Then
-        m_Email = value
+Public Property Let Email(Value As String)
+    If IsEmail(Value) Then
+        m_Email = Value
     Else
-        RaiseEvent InvalidEmail(value)
+        RaiseEvent InvalidEmail(Value)
     End If
 End Property
 
@@ -93,22 +93,22 @@ Public Property Get Email() As String
     Email = m_Email
 End Property
 
-Public Property Let Organization(value As String)
-    m_Organization = value
+Public Property Let Organization(Value As String)
+    m_Organization = Value
 End Property
 
 Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
-Public Property Let Role(value As String)
+Public Property Let Role(Value As String)
     Dim aryRoles() As String
     aryRoles = Split(CONTACT_ROLES, ",")
 
-    If IsInArray(value, aryRoles) Then
-        m_Role = value
+    If IsInArray(Value, aryRoles) Then
+        m_Role = Value
     Else
-        RaiseEvent InvalidRole(value)
+        RaiseEvent InvalidRole(Value)
     End If
 End Property
 
@@ -195,8 +195,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     
     Set db = CurrentDb
     

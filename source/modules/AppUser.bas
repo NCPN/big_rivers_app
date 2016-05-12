@@ -33,24 +33,24 @@ Private m_Logins As Integer
 '---------------------
 ' Properties
 '---------------------
-Public Property Let UserName(value As String)
-    m_Username = value
+Public Property Let UserName(Value As String)
+    m_Username = Value
 End Property
 
 Public Property Get UserName() As String
     UserName = m_Username
 End Property
 
-Public Property Let Password(value As String)
-    m_Password = value
+Public Property Let Password(Value As String)
+    m_Password = Value
 End Property
 
 Public Property Get Password() As String
     Password = m_Password
 End Property
 
-Public Property Let Logins(value As Integer)
-    m_Logins = value
+Public Property Let Logins(Value As Integer)
+    m_Logins = Value
 End Property
 
 Public Property Get Logins() As Integer

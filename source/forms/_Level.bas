@@ -335,8 +335,8 @@ Private m_Level3HoverBgdColor As Long
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidLevel(value As String)
-Public Event InvalidColor(value As Long)
+Public Event InvalidLevel(Value As String)
+Public Event InvalidColor(Value As Long)
 
 '---------------------
 ' Properties
@@ -394,12 +394,12 @@ Public Event InvalidColor(value As Long)
 'End Property
 
 '-- std color/bgd color --
-Public Property Let Level0Color(value As Long)
-    If Len(value) > 0 Then
-        m_Level0Color = value
-        Me.btnLevel0.BackColor = value
+Public Property Let Level0Color(Value As Long)
+    If Len(Value) > 0 Then
+        m_Level0Color = Value
+        Me.btnLevel0.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -407,12 +407,12 @@ Public Property Get Level0Color() As Long
     Level0Color = m_Level0Color
 End Property
 
-Public Property Let Level1Color(value As Long)
-    If Len(value) > 1 Then
-        m_Level1Color = value
-        Me.btnLevel1.BackColor = value
+Public Property Let Level1Color(Value As Long)
+    If Len(Value) > 1 Then
+        m_Level1Color = Value
+        Me.btnLevel1.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -420,12 +420,12 @@ Public Property Get Level1Color() As Long
     Level1Color = m_Level1Color
 End Property
 
-Public Property Let Level2Color(value As Long)
-    If Len(value) > 2 Then
-        m_Level2Color = value
-        Me.btnLevel2.BackColor = value
+Public Property Let Level2Color(Value As Long)
+    If Len(Value) > 2 Then
+        m_Level2Color = Value
+        Me.btnLevel2.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -433,12 +433,12 @@ Public Property Get Level2Color() As Long
     Level2Color = m_Level2Color
 End Property
 
-Public Property Let Level3Color(value As Long)
-    If Len(value) > 3 Then
-        m_Level3Color = value
-        Me.btnLevel3.BackColor = value
+Public Property Let Level3Color(Value As Long)
+    If Len(Value) > 3 Then
+        m_Level3Color = Value
+        Me.btnLevel3.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -446,12 +446,12 @@ Public Property Get Level3Color() As Long
     Level3Color = m_Level3Color
 End Property
 
-Public Property Let Level0BgdColor(value As Long)
-    If Len(value) > 0 Then
-        m_Level0BgdColor = value
-        Me.btnLevel0.BackColor = value
+Public Property Let Level0BgdColor(Value As Long)
+    If Len(Value) > 0 Then
+        m_Level0BgdColor = Value
+        Me.btnLevel0.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -459,12 +459,12 @@ Public Property Get Level0BgdColor() As Long
     Level0BgdColor = m_Level0BgdColor
 End Property
 
-Public Property Let Level1BgdColor(value As Long)
-    If Len(value) > 1 Then
-        m_Level1BgdColor = value
-        Me.btnLevel1.BackColor = value
+Public Property Let Level1BgdColor(Value As Long)
+    If Len(Value) > 1 Then
+        m_Level1BgdColor = Value
+        Me.btnLevel1.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -472,12 +472,12 @@ Public Property Get Level1BgdColor() As Long
     Level1BgdColor = m_Level1BgdColor
 End Property
 
-Public Property Let Level2BgdColor(value As Long)
-    If Len(value) > 2 Then
-        m_Level2BgdColor = value
-        Me.btnLevel2.BackColor = value
+Public Property Let Level2BgdColor(Value As Long)
+    If Len(Value) > 2 Then
+        m_Level2BgdColor = Value
+        Me.btnLevel2.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -485,12 +485,12 @@ Public Property Get Level2BgdColor() As Long
     Level2BgdColor = m_Level2BgdColor
 End Property
 
-Public Property Let Level3BgdColor(value As Long)
-    If Len(value) > 3 Then
-        m_Level3BgdColor = value
-        Me.btnLevel3.BackColor = value
+Public Property Let Level3BgdColor(Value As Long)
+    If Len(Value) > 3 Then
+        m_Level3BgdColor = Value
+        Me.btnLevel3.BackColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -499,12 +499,12 @@ Public Property Get Level3BgdColor() As Long
 End Property
 
 '-- on hover --
-Public Property Let Level0HoverColor(value As Long)
-    If Len(value) > 0 Then
-        m_Level0HoverColor = value
-        Me.btnLevel0.HoverForeColor = value
+Public Property Let Level0HoverColor(Value As Long)
+    If Len(Value) > 0 Then
+        m_Level0HoverColor = Value
+        Me.btnLevel0.HoverForeColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -512,12 +512,12 @@ Public Property Get Level0HoverColor() As Long
     Level0HoverColor = m_Level0HoverColor
 End Property
 
-Public Property Let Level1HoverColor(value As Long)
-    If Len(value) > 1 Then
-        m_Level1HoverColor = value
-        Me.btnLevel1.HoverForeColor = value
+Public Property Let Level1HoverColor(Value As Long)
+    If Len(Value) > 1 Then
+        m_Level1HoverColor = Value
+        Me.btnLevel1.HoverForeColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -525,12 +525,12 @@ Public Property Get Level1HoverColor() As Long
     Level1HoverColor = m_Level1HoverColor
 End Property
 
-Public Property Let Level2HoverColor(value As Long)
-    If Len(value) > 2 Then
-        m_Level2HoverColor = value
-        Me.btnLevel2.HoverForeColor = value
+Public Property Let Level2HoverColor(Value As Long)
+    If Len(Value) > 2 Then
+        m_Level2HoverColor = Value
+        Me.btnLevel2.HoverForeColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -538,12 +538,12 @@ Public Property Get Level2HoverColor() As Long
     Level2HoverColor = m_Level2HoverColor
 End Property
 
-Public Property Let Level3HoverColor(value As Long)
-    If Len(value) > 3 Then
-        m_Level3HoverColor = value
-        Me.btnLevel3.HoverForeColor = value
+Public Property Let Level3HoverColor(Value As Long)
+    If Len(Value) > 3 Then
+        m_Level3HoverColor = Value
+        Me.btnLevel3.HoverForeColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -551,12 +551,12 @@ Public Property Get Level3HoverColor() As Long
     Level3HoverColor = m_Level3HoverColor
 End Property
 
-Public Property Let Level0HoverBgdColor(value As Long)
-    If Len(value) > 0 Then
-        m_Level0HoverBgdColor = value
-        Me.btnLevel0.HoverColor = value
+Public Property Let Level0HoverBgdColor(Value As Long)
+    If Len(Value) > 0 Then
+        m_Level0HoverBgdColor = Value
+        Me.btnLevel0.HoverColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -564,12 +564,12 @@ Public Property Get Level0HoverBgdColor() As Long
     Level0HoverBgdColor = m_Level0HoverBgdColor
 End Property
 
-Public Property Let Level1HoverBgdColor(value As Long)
-    If Len(value) > 1 Then
-        m_Level1HoverBgdColor = value
-        Me.btnLevel1.HoverColor = value
+Public Property Let Level1HoverBgdColor(Value As Long)
+    If Len(Value) > 1 Then
+        m_Level1HoverBgdColor = Value
+        Me.btnLevel1.HoverColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -577,12 +577,12 @@ Public Property Get Level1HoverBgdColor() As Long
     Level1HoverBgdColor = m_Level1HoverBgdColor
 End Property
 
-Public Property Let Level2HoverBgdColor(value As Long)
-    If Len(value) > 2 Then
-        m_Level2HoverBgdColor = value
-        Me.btnLevel2.HoverColor = value
+Public Property Let Level2HoverBgdColor(Value As Long)
+    If Len(Value) > 2 Then
+        m_Level2HoverBgdColor = Value
+        Me.btnLevel2.HoverColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 
@@ -590,12 +590,12 @@ Public Property Get Level2HoverBgdColor() As Long
     Level2HoverBgdColor = m_Level2HoverBgdColor
 End Property
 
-Public Property Let Level3HoverBgdColor(value As Long)
-    If Len(value) > 3 Then
-        m_Level3HoverBgdColor = value
-        Me.btnLevel3.HoverColor = value
+Public Property Let Level3HoverBgdColor(Value As Long)
+    If Len(Value) > 3 Then
+        m_Level3HoverBgdColor = Value
+        Me.btnLevel3.HoverColor = Value
     Else
-        RaiseEvent InvalidColor(value)
+        RaiseEvent InvalidColor(Value)
     End If
 End Property
 

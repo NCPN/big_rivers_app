@@ -18,8 +18,8 @@ Begin Form
     ItemSuffix =21
     Left =2520
     Top =2400
-    Right =18912
-    Bottom =11808
+    Right =11412
+    Bottom =10068
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440

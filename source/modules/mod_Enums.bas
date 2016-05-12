@@ -44,8 +44,8 @@ Option Explicit
 Public Function CreateEnums(Optional EnumType As String)
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
 
     Set db = CurrentDb
     'Set rs = db.OpenRecordset("Enum", dbOpenSnapshot) <-- replace w/ SQL to get sort by enumtype

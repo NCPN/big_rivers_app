@@ -45,8 +45,8 @@ Option Explicit
 Public Sub ChangeMSysConnection(ByVal strTable As String, ByVal strConn As String)
 On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim tdf As DAO.TableDef
+    Dim db As dao.Database
+    Dim tdf As dao.TableDef
 
     Set db = CurrentDb()
     Set tdf = db.tabledefs(strTable) 'TableName)
@@ -89,8 +89,8 @@ End Sub
 Public Sub ChangeMSysDb(ByVal strTable As String, ByVal strDbPath As String)
 On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim tdf As DAO.TableDef
+    Dim db As dao.Database
+    Dim tdf As dao.TableDef
 
     Set db = CurrentDb()
     Set tdf = db.tabledefs(strTable)
@@ -177,7 +177,7 @@ End Sub
 ' ---------------------------------
 Public Sub SetDebugDbPaths(ByVal strDbPath As String)
 On Error GoTo Err_Handler
-    Dim rs As DAO.Recordset
+    Dim rs As dao.Recordset
     Dim strDb As String, strTable As String
     
     'change the tsys_Link_Files & tsys_Link_Dbs tables
@@ -803,5 +803,7 @@ Public Sub testme()
 
 '    GetRiverSegments "BLCA"
 '     GetProtocolVersion
-    GetSOPNum "transducer"
+Dim rs As Variant
+Set rs = GetSOPMetadata("transducer")
+Debug.Print rs(1)
 End Sub

@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 5/5/2016  - 1.02 - latest enum update from db
-'                                         last updated: 5/5/2016 5:48:37 PM
+'               app - 5/11/2016  - 1.02 - latest enum update from db
+'                                         last updated: 5/11/2016 8:46:08 PM
 ' =================================
 
 '-----------------------------
@@ -142,18 +142,6 @@ Public Enum SlopeChangeCause
     Veg = 58
     Water = 59
     [_Last] = 59
-End Enum
-
-'-----------------------------
-'  SOPs
-'-----------------------------
-Public Enum SOP
-    [_First] = 90
-    Transducer7 = 90
-    Photo5 = 91
-    VegWalk6 = 92
-    VegPlot6 = 93
-    [_Last] = 93
 End Enum
 
 '-----------------------------

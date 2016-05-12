@@ -13,7 +13,7 @@ Begin Report
     GridY =24
     Width =15120
     DatasheetFontHeight =11
-    ItemSuffix =77
+    ItemSuffix =79
     Right =16392
     Bottom =7248
     DatasheetGridlinesColor =14806254
@@ -21,7 +21,7 @@ Begin Report
     RecSrcDt = Begin
         0x32f638d6d6a9e440
     End
-    Caption ="Transducer"
+    Caption ="_Landscape"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
@@ -184,18 +184,17 @@ Begin Report
                 Begin Label
                     Left =1860
                     Top =960
-                    Width =5340
+                    Width =3300
                     Height =324
                     FontSize =12
                     FontWeight =700
                     BorderColor =8355711
                     Name ="lblRiverSegments"
-                    Caption ="Gunnison"
                     FontName ="Arial Narrow"
                     GridlineColor =10921638
                     LayoutCachedLeft =1860
                     LayoutCachedTop =960
-                    LayoutCachedWidth =7200
+                    LayoutCachedWidth =5160
                     LayoutCachedHeight =1284
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
@@ -788,7 +787,6 @@ Begin Report
                     BorderColor =8355711
                     ForeColor =6447974
                     Name ="lblTitle"
-                    Caption ="BLCA Transducers"
                     FontName ="Arial Narrow"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -982,6 +980,47 @@ Begin Report
                     LayoutCachedTop =648
                     LayoutCachedWidth =15060
                     LayoutCachedHeight =972
+                    ThemeFontIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =4
+                    Left =5280
+                    Top =960
+                    Width =1392
+                    Height =324
+                    FontSize =12
+                    FontWeight =700
+                    BorderColor =8355711
+                    Name ="lblSiteID"
+                    Caption ="Site ID (circle):"
+                    FontName ="Arial Narrow"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5280
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =6672
+                    LayoutCachedHeight =1284
+                    ThemeFontIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =4
+                    Left =6720
+                    Top =960
+                    Width =3300
+                    Height =324
+                    FontSize =12
+                    FontWeight =700
+                    BorderColor =8355711
+                    Name ="lblSiteIDs"
+                    FontName ="Arial Narrow"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6720
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =10020
+                    LayoutCachedHeight =1284
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1218,7 +1257,6 @@ Begin Report
         End
         Begin FormFooter
             KeepTogether = NotDefault
-            ForceNewPage =2
             Height =0
             Name ="ReportFooter"
             AlternateBackThemeColorIndex =1
@@ -1236,17 +1274,17 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Transducer
+' Form:         Photo
 ' Level:        Application form
 ' Version:      1.00
 '
-' Description:  Transducer form object related properties, events, functions & procedures for UI display
+' Description:  Photo form object related properties, events, functions & procedures for UI display
 '
-' Source/date:  Bonnie Campbell, November 10, 2015
+' Source/date:  Bonnie Campbell, May 10, 2016
 ' References:
 '  Allen Browne, April 2010
 '  http://allenbrowne.com/ser-43.html
-' Revisions:    BLC - 11/10/2015 - 1.00 - initial version
+' Revisions:    BLC - 5/10/2016 - 1.00 - initial version
 ' =================================
 
 '---------------------
@@ -1287,7 +1325,6 @@ On Error GoTo Err_Handler
     Dim ary() As String, strPark As String, strSegments As String
     Dim strSQL As String, strWHERE As String, strORDERBY As String
     Dim strSQL2 As String
-    Dim sopdata As Variant
     Dim arySegments() As Variant, aryProtocol() As Variant
     Dim i As Integer, sopnum As Integer
     
@@ -1305,16 +1342,15 @@ On Error GoTo Err_Handler
     End If
         
     'set title
-    Me.lblTitle.Caption = strPark & " Transducers"
+    Me.lblTitle.Caption = strPark & " Photos"
 
     'protocol version
     aryProtocol = GetProtocolVersion
-    Set sopdata = GetSOPMetadata("Transducer") '0-code, 1-SOP#, 2-Version, 3-Effective Date
-
-    i = CInt(sopdata(1))
+    'sopnum = GetSOPNum("Photo")
+    'If IsArray(sopnum) Then i = CInt(sopnum(0, 0))
     
     lblMonitoring.Caption = "NCPN " & aryProtocol(0, 0)
-    lblProtocolVersion.Caption = aryProtocol(0, 0) & " - " & "SOP #" & i & " - Version " & Format(sopdata(2), "0.00") & " - " & Format(sopdata(3), "mmm yyyy")
+    lblProtocolVersion.Caption = aryProtocol(0, 0) & " - " & "SOP #" & i & " - Version " & aryProtocol(1, 0) & " - " & Format(aryProtocol(2, 0), "mmm yyyy")
 
     'set river segment(s)
     arySegments = GetRiverSegments(strPark)
@@ -1357,7 +1393,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Report_Open[Transducer form])"
+            "Error encountered (#" & Err.Number & " - Report_Open[Photo form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1374,10 +1410,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, November 10, 2015 - for NCPN tools
+' Source/date:  Bonnie Campbell, May 10, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 11/10/2015 - initial version
+'   BLC - 5/10/2016 - initial version
 ' ---------------------------------
 Public Function NoData(rpt As Report)
 On Error GoTo Err_Handler
@@ -1402,7 +1438,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Transducer report])"
+            "Error encountered (#" & Err.Number & " - Form_Load[Photo report])"
     End Select
     Resume Exit_Function
 End Function

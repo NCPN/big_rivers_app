@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =2520
-    Top =2400
-    Right =18912
-    Bottom =11808
+    Left =972
+    Top =4176
+    Right =3300
+    Bottom =7080
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -360,17 +360,17 @@ Private m_Link6Action As String
 '---------------------
 ' Events
 '---------------------
-Public Event Selected(value As Boolean)
-Public Event CriticalState(value As Boolean)
-Public Event GoodState(value As Boolean)
+Public Event Selected(Value As Boolean)
+Public Event CriticalState(Value As Boolean)
+Public Event GoodState(Value As Boolean)
 'Public Event Initialize()
 'Public Event Terminate()
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    m_Title = value
+Public Property Let Title(Value As String)
+    m_Title = Value
     lblTitle.Caption = m_Title
 End Property
 
@@ -378,8 +378,8 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let TileTag(value As String)
-    m_TileTag = value
+Public Property Let TileTag(Value As String)
+    m_TileTag = Value
     lblLink1.Tag = m_TileTag
     lblLink2.Tag = m_TileTag
     lblLink3.Tag = m_TileTag
@@ -396,9 +396,9 @@ Public Property Get Link1Caption() As String
     Link1Caption = m_Link1Caption
 End Property
 
-Public Property Let Link1Caption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link1"
-    m_Link1Caption = value
+Public Property Let Link1Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link1"
+    m_Link1Caption = Value
     lblLink1.Caption = m_Link1Caption
 End Property
 
@@ -406,9 +406,9 @@ Public Property Get Link2Caption() As String
     Link2Caption = m_Link2Caption
 End Property
 
-Public Property Let Link2Caption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link2"
-    m_Link2Caption = value
+Public Property Let Link2Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link2"
+    m_Link2Caption = Value
     lblLink2.Caption = m_Link2Caption
 End Property
 
@@ -416,9 +416,9 @@ Public Property Get Link3Caption() As String
     Link3Caption = m_Link3Caption
 End Property
 
-Public Property Let Link3Caption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link3"
-    m_Link3Caption = value
+Public Property Let Link3Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link3"
+    m_Link3Caption = Value
     lblLink3.Caption = m_Link3Caption
 End Property
 
@@ -426,9 +426,9 @@ Public Property Get Link4Caption() As String
     Link4Caption = m_Link4Caption
 End Property
 
-Public Property Let Link4Caption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link4"
-    m_Link4Caption = value
+Public Property Let Link4Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link4"
+    m_Link4Caption = Value
     lblLink4.Caption = m_Link4Caption
 End Property
 
@@ -436,9 +436,9 @@ Public Property Get Link5Caption() As String
     Link5Caption = m_Link5Caption
 End Property
 
-Public Property Let Link5Caption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link5"
-    m_Link5Caption = value
+Public Property Let Link5Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link5"
+    m_Link5Caption = Value
     lblLink5.Caption = m_Link5Caption
 End Property
 
@@ -446,9 +446,9 @@ Public Property Get Link6Caption() As String
     Link6Caption = m_Link6Caption
 End Property
 
-Public Property Let Link6Caption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link6"
-    m_Link6Caption = value
+Public Property Let Link6Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link6"
+    m_Link6Caption = Value
     lblLink6.Caption = m_Link6Caption
 End Property
 
@@ -456,9 +456,9 @@ Public Property Get Link1Action() As String
     Link1Action = m_Link1Action
 End Property
 
-Public Property Let Link1Action(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link1"
-    m_Link1Action = value
+Public Property Let Link1Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link1"
+    m_Link1Action = Value
     'lblLink1.Action = m_Link1Action
 End Property
 
@@ -466,9 +466,9 @@ Public Property Get Link2Action() As String
     Link2Action = m_Link2Action
 End Property
 
-Public Property Let Link2Action(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link2"
-    m_Link2Action = value
+Public Property Let Link2Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link2"
+    m_Link2Action = Value
     'lblLink2.Action = m_Link2Action
 End Property
 
@@ -476,9 +476,9 @@ Public Property Get Link3Action() As String
     Link3Action = m_Link3Action
 End Property
 
-Public Property Let Link3Action(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link3"
-    m_Link3Action = value
+Public Property Let Link3Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link3"
+    m_Link3Action = Value
     'lblLink3.Action = m_Link3Action
 End Property
 
@@ -486,9 +486,9 @@ Public Property Get Link4Action() As String
     Link4Action = m_Link4Action
 End Property
 
-Public Property Let Link4Action(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link4"
-    m_Link4Action = value
+Public Property Let Link4Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link4"
+    m_Link4Action = Value
     'lblLink4.Action = m_Link4Action
 End Property
 
@@ -496,9 +496,9 @@ Public Property Get Link5Action() As String
     Link5Action = m_Link5Action
 End Property
 
-Public Property Let Link5Action(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link5"
-    m_Link5Action = value
+Public Property Let Link5Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link5"
+    m_Link5Action = Value
     'lblLink5.Action = m_Link5Action
 End Property
 
@@ -506,14 +506,14 @@ Public Property Get Link6Action() As String
     Link6Action = m_Link6Action
 End Property
 
-Public Property Let Link6Action(value As String)
-    If Len(Trim(value)) = 0 Then value = "Link6"
-    m_Link6Action = value
+Public Property Let Link6Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link6"
+    m_Link6Action = Value
     'lblLink6.Action = m_Link6Action
 End Property
 
-Public Property Let TitleFontColor(value As Long)
-    m_TitleFontColor = value
+Public Property Let TitleFontColor(Value As Long)
+    m_TitleFontColor = Value
     lblTitle.ForeColor = m_TitleFontColor
 End Property
 
@@ -521,12 +521,12 @@ Public Property Get TitleFontColor() As Long
     TitleFontColor = m_TitleFontColor
 End Property
 
-Public Property Let TileHeaderColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_TileHeaderColor = value
+Public Property Let TileHeaderColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_TileHeaderColor = Value
     FormHeader.BackColor = m_TileHeaderColor
     'set font color to match
-    Select Case value
+    Select Case Value
         Case vbGreen
             Me.TitleFontColor = vbBlack
         Case vbRed, vbBlue
@@ -538,8 +538,8 @@ Public Property Get TileHeaderColor() As Long
     TileHeaderColor = m_TileHeaderColor 'FormHeader.BackColor
 End Property
 
-Public Property Let BarColor(value As Variant)
-    m_BarColor = value
+Public Property Let BarColor(Value As Variant)
+    m_BarColor = Value
     Me.lineIndicator.BorderColor = m_BarColor
 End Property
 
@@ -551,62 +551,62 @@ Public Property Get Link1FontColor() As Long
     Link1FontColor = m_Link1FontColor
 End Property
 
-Public Property Let Link1FontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen
-    m_Link1FontColor = value
+Public Property Let Link1FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen
+    m_Link1FontColor = Value
 End Property
 
 Public Property Get Link2FontColor() As Long
     Link2FontColor = m_Link2FontColor
 End Property
 
-Public Property Let Link2FontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen
-    m_Link2FontColor = value
+Public Property Let Link2FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen
+    m_Link2FontColor = Value
 End Property
 
 Public Property Get Link3FontColor() As Long
     Link3FontColor = m_Link3FontColor
 End Property
 
-Public Property Let Link3FontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen
-    m_Link3FontColor = value
+Public Property Let Link3FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen
+    m_Link3FontColor = Value
 End Property
 
 Public Property Get Link4FontColor() As Long
     Link4FontColor = m_Link4FontColor
 End Property
 
-Public Property Let Link4FontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_Link4FontColor = value
+Public Property Let Link4FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_Link4FontColor = Value
 End Property
 
 Public Property Get Link5FontColor() As Long
     Link5FontColor = m_Link5FontColor
 End Property
 
-Public Property Let Link5FontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_Link5FontColor = value
+Public Property Let Link5FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_Link5FontColor = Value
 End Property
 
 Public Property Get Link6FontColor() As Long
     Link6FontColor = m_Link6FontColor
 End Property
 
-Public Property Let Link6FontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_Link6FontColor = value
+Public Property Let Link6FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_Link6FontColor = Value
 End Property
 
 Public Property Get TileVisible() As Byte
     TileVisible = m_TileVisible
 End Property
 
-Public Property Let TileVisible(value As Byte)
-    m_TileVisible = value
+Public Property Let TileVisible(Value As Byte)
+    m_TileVisible = Value
     Me.Visible = m_TileVisible
 End Property
 
@@ -614,8 +614,8 @@ Public Property Get Link1Visible() As Byte
     Link1Visible = m_Link1Visible
 End Property
 
-Public Property Let Link1Visible(value As Byte)
-    m_Link1Visible = value
+Public Property Let Link1Visible(Value As Byte)
+    m_Link1Visible = Value
     Me.lblLink1.Visible = m_Link1Visible
 End Property
 
@@ -623,8 +623,8 @@ Public Property Get Link2Visible() As Byte
     Link2Visible = m_Link2Visible
 End Property
 
-Public Property Let Link2Visible(value As Byte)
-    m_Link2Visible = value
+Public Property Let Link2Visible(Value As Byte)
+    m_Link2Visible = Value
     Me.lblLink2.Visible = m_Link2Visible
 End Property
 
@@ -632,8 +632,8 @@ Public Property Get Link3Visible() As Byte
     Link3Visible = m_Link3Visible
 End Property
 
-Public Property Let Link3Visible(value As Byte)
-    m_Link3Visible = value
+Public Property Let Link3Visible(Value As Byte)
+    m_Link3Visible = Value
     Me.lblLink3.Visible = m_Link3Visible
 End Property
 
@@ -641,8 +641,8 @@ Public Property Get Link4Visible() As Byte
     Link4Visible = m_Link4Visible
 End Property
 
-Public Property Let Link4Visible(value As Byte)
-    m_Link4Visible = value
+Public Property Let Link4Visible(Value As Byte)
+    m_Link4Visible = Value
     Me.lblLink4.Visible = m_Link4Visible
 End Property
 
@@ -650,8 +650,8 @@ Public Property Get Link5Visible() As Byte
     Link5Visible = m_Link5Visible
 End Property
 
-Public Property Let Link5Visible(value As Byte)
-    m_Link5Visible = value
+Public Property Let Link5Visible(Value As Byte)
+    m_Link5Visible = Value
     Me.lblLink5.Visible = m_Link5Visible
 End Property
 
@@ -659,8 +659,8 @@ Public Property Get Link6Visible() As Byte
     Link6Visible = m_Link6Visible
 End Property
 
-Public Property Let Link6Visible(value As Byte)
-    m_Link6Visible = value
+Public Property Let Link6Visible(Value As Byte)
+    m_Link6Visible = Value
     Me.lblLink6.Visible = m_Link6Visible
 End Property
 
@@ -685,6 +685,7 @@ Private Sub lblLink1_Click()
 On Error GoTo Err_Handler
     
     With Me.lblLink1
+        DoCmd.Minimize
         ClickAction .Tag & .Caption
     End With
     
@@ -749,6 +750,7 @@ Private Sub lblLink3_Click()
 On Error GoTo Err_Handler
     
     With Me.lblLink3
+        DoCmd.Minimize
         ClickAction .Tag & .Caption
     End With
 
@@ -781,6 +783,7 @@ Private Sub lblLink4_Click()
 On Error GoTo Err_Handler
     
     With Me.lblLink4
+        DoCmd.Minimize
         ClickAction .Tag & .Caption
     End With
 
@@ -813,6 +816,7 @@ Private Sub lblLink5_Click()
 On Error GoTo Err_Handler
     
     With Me.lblLink5
+        DoCmd.Minimize
         ClickAction .Tag & .Caption
     End With
 
@@ -845,6 +849,7 @@ Private Sub lblLink6_Click()
 On Error GoTo Err_Handler
     
     With Me.lblLink6
+        DoCmd.Minimize
         ClickAction .Tag & .Caption
     End With
 

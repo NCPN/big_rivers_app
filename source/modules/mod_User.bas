@@ -50,7 +50,7 @@ Option Explicit
 Public Function getDbUserAccess() As String
 On Error GoTo Err_Handler
 Dim strSQL As String
-Dim rs As DAO.Recordset
+Dim rs As dao.Recordset
 
     '-------------------------------
     ' set defaults

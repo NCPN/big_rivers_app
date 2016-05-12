@@ -101,8 +101,8 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
 
     On Error GoTo Err_Handler
 
-    Dim qdf As DAO.QueryDef     ' Individual query objects
-    Dim qdfs As DAO.QueryDefs   ' The database query set
+    Dim qdf As dao.QueryDef     ' Individual query objects
+    Dim qdfs As dao.QueryDefs   ' The database query set
     Dim strTimeframe As String  ' Data timeframe, from the switchboard
     Dim intScope As Integer     ' Indicates whether or not certified records are included
                                 '   in query runs: 0=no, 1=yes, 2=both certified and uncertified

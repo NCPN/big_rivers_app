@@ -30,36 +30,36 @@ Private m_Segment As String
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidParkID(value As Long)
-Public Event InvalidName(value As String)
-Public Event InvalidSegment(value As String)
+Public Event InvalidParkID(Value As Long)
+Public Event InvalidName(Value As String)
+Public Event InvalidSegment(Value As String)
 
-Public Event InvalidContactID(value As Long)
+Public Event InvalidContactID(Value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let ParkID(value As Long)
-    m_ParkID = value
+Public Property Let ParkID(Value As Long)
+    m_ParkID = Value
 End Property
 
 Public Property Get ParkID() As Long
     ParkID = m_ParkID
 End Property
 
-Public Property Let Name(value As String)
+Public Property Let Name(Value As String)
     If Len(Name) > 25 Then
-        m_Name = value
+        m_Name = Value
     Else
-        RaiseEvent InvalidName(value)
+        RaiseEvent InvalidName(Value)
     End If
 End Property
 
@@ -67,11 +67,11 @@ Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let Segment(value As String)
+Public Property Let Segment(Value As String)
     If Len(Name) > 5 Then
-        m_Segment = value
+        m_Segment = Value
     Else
-        RaiseEvent InvalidSegment(value)
+        RaiseEvent InvalidSegment(Value)
     End If
 End Property
 
@@ -163,8 +163,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     
     Set db = CurrentDb
     

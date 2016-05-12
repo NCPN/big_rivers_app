@@ -39,40 +39,40 @@ Public Event Removed()
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let SiteID(value As Integer)
-    m_SiteID = value
+Public Property Let SiteID(Value As Integer)
+    m_SiteID = Value
 End Property
 
 Public Property Get SiteID() As Integer
     SiteID = m_SiteID
 End Property
 
-Public Property Let LocationID(value As Integer)
-    m_LocationID = value
+Public Property Let LocationID(Value As Integer)
+    m_LocationID = Value
 End Property
 
 Public Property Get LocationID() As Integer
     LocationID = m_LocationID
 End Property
 
-Public Property Let ProtocolID(value As Integer)
-    m_ProtocolID = value
+Public Property Let ProtocolID(Value As Integer)
+    m_ProtocolID = Value
 End Property
 
 Public Property Get ProtocolID() As Integer
     ProtocolID = m_ProtocolID
 End Property
 
-Public Property Let StartDate(value As Date)
-    m_StartDate = value
+Public Property Let StartDate(Value As Date)
+    m_StartDate = Value
 End Property
 
 Public Property Get StartDate() As Date
@@ -163,8 +163,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     
     Set db = CurrentDb
     

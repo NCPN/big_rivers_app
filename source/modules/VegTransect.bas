@@ -35,22 +35,22 @@ Private m_Park As String
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidTransectNumber(value As Integer)
+Public Event InvalidTransectNumber(Value As Integer)
 
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let LocationID(value As Long)
-    m_LocationID = value
+Public Property Let LocationID(Value As Long)
+    m_LocationID = Value
     'set the appropriate park value
 '    Me.Park = GetParkCode(Value)
 End Property
@@ -59,15 +59,15 @@ Public Property Get LocationID() As Long
     LocationID = m_LocationID
 End Property
 
-Public Property Let EventID(value As Long)
-    m_EventID = value
+Public Property Let EventID(Value As Long)
+    m_EventID = Value
 End Property
 
 Public Property Get EventID() As Long
     EventID = m_EventID
 End Property
 
-Public Property Let TransectNumber(value As Integer)
+Public Property Let TransectNumber(Value As Integer)
     If IsNull(Me.Park) Then
         MsgBox "Park must be set before setting transect number.", vbCritical, "Missing Park"
         
@@ -79,17 +79,17 @@ Public Property Let TransectNumber(value As Integer)
             'validate transect #
             Dim aryTransectNum() As String
             aryTransectNum = Split(TRANSECT_NUMBERS, ",")
-            If IsInArray(CStr(value), aryTransectNum) Then
-                m_TransectNumber = value
+            If IsInArray(CStr(Value), aryTransectNum) Then
+                m_TransectNumber = Value
             Else
-                RaiseEvent InvalidTransectNumber(value)
+                RaiseEvent InvalidTransectNumber(Value)
             End If
         Case "DINO"
             'invalid
-            RaiseEvent InvalidTransectNumber(value)
+            RaiseEvent InvalidTransectNumber(Value)
         Case Else
             'invalid
-            RaiseEvent InvalidTransectNumber(value)
+            RaiseEvent InvalidTransectNumber(Value)
     End Select
 End Property
 
@@ -97,8 +97,8 @@ Public Property Get TransectNumber() As Integer
     TransectNumber = m_TransectNumber
 End Property
 
-Public Property Let SampleDate(value As Date)
-    m_SampleDate = value
+Public Property Let SampleDate(Value As Date)
+    m_SampleDate = Value
 End Property
 
 Public Property Get SampleDate() As Date
@@ -106,8 +106,8 @@ Public Property Get SampleDate() As Date
 End Property
 
 
-Public Property Let Park(value As String)
-    m_Park = value
+Public Property Let Park(Value As String)
+    m_Park = Value
 End Property
 
 Public Property Get Park() As String
@@ -230,8 +230,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     
     Set db = CurrentDb
     

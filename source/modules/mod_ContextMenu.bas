@@ -76,11 +76,24 @@ On Error GoTo Err_Handler
             mnu = "dataentry"
         Case "plot"
         Case "plotestablish"
-        Case "transducer"
-        Case "photo"
-        Case "vegwalk"
+        
+        '-- observations --
+        Case "obs-photos"
+        Case "obs-Transducers"
+        
+        '-- trip prep --
         Case "vegplot"
+            mnu = "vegplot"
+        Case "photos"
+            mnu = "photos"
+        Case "vegwalk"
+            mnu = "vegwalk"
+        Case "transducer"
+            mnu = "transducer"
         Case "task"
+            mnu = "task"
+            
+        '-- xx --
         Case "comment"
     End Select
 

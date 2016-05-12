@@ -277,24 +277,24 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidDataSource(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidDataSource(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -302,14 +302,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -317,14 +317,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let DropdownLabel(value As String)
-    If Len(value) > 0 Then
-        m_DropdownLabel = value
+Public Property Let DropdownLabel(Value As String)
+    If Len(Value) > 0 Then
+        m_DropdownLabel = Value
 
         'set the form dropdown
         Me.lblDropdown.Caption = m_DropdownLabel
     Else
-        RaiseEvent InvalidLabel(value)
+        RaiseEvent InvalidLabel(Value)
     End If
 End Property
 
@@ -332,14 +332,14 @@ Public Property Get DropdownLabel() As String
     DropdownLabel = m_DropdownLabel
 End Property
 
-Public Property Let DropdownDataSource(value As String)
-    If Len(value) > 0 Then
-        m_DropdownDataSource = value
+Public Property Let DropdownDataSource(Value As String)
+    If Len(Value) > 0 Then
+        m_DropdownDataSource = Value
 
         'set the form dropdown
         Me.cbxDropdown.RowSource = m_DropdownDataSource
     Else
-        RaiseEvent InvalidDataSource(value)
+        RaiseEvent InvalidDataSource(Value)
     End If
 End Property
 
@@ -347,14 +347,14 @@ Public Property Get DropdownDataSource() As String
     DropdownDataSource = m_DropdownDataSource
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         Me.btnEnter.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -362,16 +362,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String

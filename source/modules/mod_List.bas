@@ -482,15 +482,15 @@ End Sub
 ' ---------------------------------
 Public Sub SetListRecordset(lbx As ListBox, blnHeaders As Boolean, _
                 aryFields As Variant, aryFieldTypes As Variant, tblName As String, _
-                blnReplace As Boolean, Optional rsList As DAO.Recordset)
+                blnReplace As Boolean, Optional rsList As dao.Recordset)
 On Error GoTo Err_Handler
 
 Dim iRow As Integer, iStart As Integer, iCol As Integer
 Dim strSQL As String, aryFieldNames() As String
 Dim aryRecord() As String
 Dim aryData() As String
-Dim rsProcess As DAO.Recordset
-Dim tdf As DAO.TableDef
+Dim rsProcess As dao.Recordset
+Dim tdf As dao.TableDef
 Dim blnTableExists As Boolean
 
     'set default table exists
@@ -583,7 +583,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryData, 2) ' - 1
                 
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                    rsProcess(aryFieldNames(iCol)).value = aryData(iRow, iCol)
+                    rsProcess(aryFieldNames(iCol)).Value = aryData(iRow, iCol)
 
             Next
             
@@ -628,7 +628,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2015 - initial version
 ' ---------------------------------
-Public Sub AddListRecordset(tblName As String, rsList As DAO.Recordset, strFieldNames As String, _
+Public Sub AddListRecordset(tblName As String, rsList As dao.Recordset, strFieldNames As String, _
                 aryFieldTypes As Variant, blnReplace As Boolean)
 On Error GoTo Err_Handler
 
@@ -636,8 +636,8 @@ Dim iRow As Integer, iStart As Integer, iCol As Integer
 Dim strSQL As String, aryFieldNames() As String
 Dim aryRecord() As String
 Dim aryData() As String
-Dim rsProcess As DAO.Recordset
-Dim tdf As DAO.TableDef
+Dim rsProcess As dao.Recordset
+Dim tdf As dao.TableDef
 Dim blnTableExists As Boolean
 
     'set default table exists
@@ -707,7 +707,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryFieldNames) ' - 1
             
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                rsProcess(aryFieldNames(iCol)).value = rsList(aryFieldNames(iCol)).value
+                rsProcess(aryFieldNames(iCol)).Value = rsList(aryFieldNames(iCol)).Value
 
 '                iCol = iCol + 1
             Next
@@ -748,7 +748,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/26/2015 - initial version
 ' ---------------------------------
-Public Function GetListRecordset(tblName As String) As DAO.Recordset
+Public Function GetListRecordset(tblName As String) As dao.Recordset
 On Error GoTo Err_Handler
     
     'check for table
@@ -882,7 +882,7 @@ Public Sub MoveAllItems(frm As Form, strSourceControl As String, strTargetContro
 On Error GoTo Err_Handler
     
     Dim strItem As String
-    Dim intColumnCount As Integer, startRow As Integer
+    Dim intColumnCount As Integer, StartRow As Integer
     Dim lngRowCount As Long
     
     'if source = target, just remove the items
@@ -897,13 +897,13 @@ On Error GoTo Err_Handler
         GoTo Exit_Handler
     End If
     
-    startRow = 0 'default
+    StartRow = 0 'default
     'set start row
     If frm.Controls(strSourceControl).ColumnHeads = True Then
-        startRow = 1
+        StartRow = 1
     End If
     
-    For lngRowCount = startRow To frm.Controls(strSourceControl).ListCount - 1
+    For lngRowCount = StartRow To frm.Controls(strSourceControl).ListCount - 1
         For intColumnCount = 0 To frm.Controls(strSourceControl).ColumnCount - 1
             strItem = strItem & frm.Controls(strSourceControl).Column(intColumnCount, lngRowCount) & ";"
         Next
@@ -959,7 +959,7 @@ Public Sub MoveSelectedItems(frm As Form, strSourceControl As String, strTargetC
     
 On Error GoTo Err_Handler
     
-    Dim iRow As Integer, startRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
+    Dim iRow As Integer, StartRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
     Dim strItem As String
@@ -976,10 +976,10 @@ On Error GoTo Err_Handler
         GoTo Exit_Handler
     End If
     
-    startRow = 0 'default
+    StartRow = 0 'default
     'set start row
     If frm.Controls(strSourceControl).ColumnHeads = True Then
-        startRow = 1
+        StartRow = 1
     End If
     
     'add back the header if it doesn't exist
@@ -989,7 +989,7 @@ On Error GoTo Err_Handler
     End If
     
     'generate array of selected items
-    For iRow = startRow To frm.Controls(strSourceControl).ListCount - 1
+    For iRow = StartRow To frm.Controls(strSourceControl).ListCount - 1
     
         'fetch array of selected items
         '--------------------------------------------------
