@@ -20,7 +20,7 @@ Begin Report
     Width =5520
     DatasheetFontHeight =11
     ItemSuffix =103
-    Right =10356
+    Right =8064
     Bottom =6240
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
@@ -789,11 +789,11 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         PhotoKey
-' Level:        Application form
+' Report:       PhotoKey
+' Level:        Application report
 ' Version:      1.00
 '
-' Description:  PhotoKey form object related properties, events, functions & procedures for UI display
+' Description:  PhotoKey report object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 10, 2016
 ' References:
@@ -919,7 +919,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Report_Open[PhotoKey form])"
+            "Error encountered (#" & Err.Number & " - Report_Open[PhotoKey Report])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =77
-    Right =16392
-    Bottom =7248
+    Right =8064
+    Bottom =6240
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -1236,11 +1236,11 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Transducer
-' Level:        Application form
+' Report:       Transducer
+' Level:        Application report
 ' Version:      1.00
 '
-' Description:  Transducer form object related properties, events, functions & procedures for UI display
+' Description:  Transducer report object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, November 10, 2015
 ' References:
@@ -1357,7 +1357,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Report_Open[Transducer form])"
+            "Error encountered (#" & Err.Number & " - Report_Open[Transducer Report])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1402,7 +1402,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Transducer report])"
+            "Error encountered (#" & Err.Number & " - Form_Load[Transducer Report])"
     End Select
     Resume Exit_Function
 End Function

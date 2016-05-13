@@ -4,12 +4,31 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
+'               BLC, 5/12/2016 - 1.01 - added Unicode strings, GetUnicode()
 ' =================================
+
+'---------------------
+' Declarations
+'---------------------
+' Hex Unicode constants --> use w/ ChrW()
+Public Const uRArrow = &H2192 'right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
+Public Const uMu = &H3BC 'microns
+Public Const uAmpersand = &H26 'doesn't work :(
+Public Const uCircle1 = &H2460
+Public Const uCircle2 = &H2461
+Public Const uCircle3 = &H2462
+Public Const uCircleFilled1 = &H278A
+Public Const uCircleFilled2 = &H278B
+Public Const uCircleFilled3 = &H278C
+Public Const uCheck = &H2714
+Public Const uLessThanOrEqual = &H2264
+Public Const uGreaterThanOrEqual = &H2264
+Public Const uBullet = &H25CF
 
 ' =================================
 ' FUNCTION:     ReplaceString

@@ -20,8 +20,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =120
-    Right =20520
-    Bottom =9660
+    Right =8064
+    Bottom =6240
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -660,11 +660,11 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         SpeciesList
-' Level:        Application form
+' Report:       SpeciesList
+' Level:        Application report
 ' Version:      1.00
 '
-' Description:  SpeciesList form object related properties, events, functions & procedures for UI display
+' Description:  SpeciesList report object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 11, 2016
 ' References:
@@ -853,7 +853,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Report_Open[SpeciesList form])"
+            "Error encountered (#" & Err.Number & " - Report_Open[SpeciesList Report])"
     End Select
     Resume Exit_Handler
 End Sub

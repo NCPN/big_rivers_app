@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =79
-    Right =16392
-    Bottom =7248
+    Right =8064
+    Bottom =6240
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -985,7 +985,6 @@ Begin Report
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =4
                     Left =5280
                     Top =960
                     Width =1392
@@ -1006,7 +1005,6 @@ Begin Report
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =4
                     Left =6720
                     Top =960
                     Width =3300
@@ -1274,11 +1272,11 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Photo
-' Level:        Application form
+' Report:       Photo
+' Level:        Application report
 ' Version:      1.00
 '
-' Description:  Photo form object related properties, events, functions & procedures for UI display
+' Description:  Photo report object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 10, 2016
 ' References:
