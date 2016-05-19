@@ -482,15 +482,15 @@ End Sub
 ' ---------------------------------
 Public Sub SetListRecordset(lbx As ListBox, blnHeaders As Boolean, _
                 aryFields As Variant, aryFieldTypes As Variant, tblName As String, _
-                blnReplace As Boolean, Optional rsList As dao.Recordset)
+                blnReplace As Boolean, Optional rsList As DAO.Recordset)
 On Error GoTo Err_Handler
 
 Dim iRow As Integer, iStart As Integer, iCol As Integer
 Dim strSQL As String, aryFieldNames() As String
 Dim aryRecord() As String
 Dim aryData() As String
-Dim rsProcess As dao.Recordset
-Dim tdf As dao.TableDef
+Dim rsProcess As DAO.Recordset
+Dim tdf As DAO.TableDef
 Dim blnTableExists As Boolean
 
     'set default table exists
@@ -628,7 +628,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2015 - initial version
 ' ---------------------------------
-Public Sub AddListRecordset(tblName As String, rsList As dao.Recordset, strFieldNames As String, _
+Public Sub AddListRecordset(tblName As String, rsList As DAO.Recordset, strFieldNames As String, _
                 aryFieldTypes As Variant, blnReplace As Boolean)
 On Error GoTo Err_Handler
 
@@ -636,8 +636,8 @@ Dim iRow As Integer, iStart As Integer, iCol As Integer
 Dim strSQL As String, aryFieldNames() As String
 Dim aryRecord() As String
 Dim aryData() As String
-Dim rsProcess As dao.Recordset
-Dim tdf As dao.TableDef
+Dim rsProcess As DAO.Recordset
+Dim tdf As DAO.TableDef
 Dim blnTableExists As Boolean
 
     'set default table exists
@@ -748,7 +748,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/26/2015 - initial version
 ' ---------------------------------
-Public Function GetListRecordset(tblName As String) As dao.Recordset
+Public Function GetListRecordset(tblName As String) As DAO.Recordset
 On Error GoTo Err_Handler
     
     'check for table

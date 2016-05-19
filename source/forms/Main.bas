@@ -16,10 +16,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =2520
-    Top =2400
-    Right =11412
-    Bottom =10068
+    Left =13230
+    Top =3825
+    Right =22125
+    Bottom =11490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -30,6 +30,7 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
+    OnGotFocus ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
     AllowPivotChartView =0
@@ -324,6 +325,19 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
+' =================================
+' Form:         Main
+' Level:        Application form
+' Version:      1.00
+' Basis:        Main form
+'
+' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
+'
+' Source/date:  Bonnie Campbell, April 20, 2016
+' References:   -
+' Revisions:    BLC - 4/20/2016 - 1.00 - initial version
+' =================================
+
 '---------------------
 ' Declarations
 '---------------------
@@ -338,6 +352,19 @@ Attribute oTile.VB_VarHelpID = -1
 ' Methods
 '---------------------
 'Private Sub Form_Load()
+' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 20, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 4/27/2016 - initial version
+' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
@@ -446,6 +473,89 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Open[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          UpdateBreadcrumb
+' Description:  Update captions w/in breadcrumb
+' Assumptions:
+' Parameters:   ClearValues - breadcrumb values to clear? (integer)
+'                             0,1,2,3-highest level to clear, levels below this level are cleared (captions set to "Missing XX >")
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 18, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/18/2016 - initial version
+' ---------------------------------
+Public Sub UpdateBreadcrumb(Optional ClearValues As Integer = 4)
+On Error GoTo Err_Handler
+    
+    Dim i As Integer
+    Dim strLevel As String
+    Dim strHierarchy() As Variant
+    Dim frm As Form
+    Set frm = Me!fsubBreadcrumb.Form
+    
+    With frm
+        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Missing Park") & Space(4) & ">"
+        .btnLevel1.Caption = Nz(TempVars("River"), "Missing River") & Space(4) & ">"
+        .btnLevel2.Caption = Nz(TempVars("Site"), "Missing Site") & Space(4) & ">"
+        .btnLevel3.Caption = Nz(TempVars("Feature"), "Missing Feature") & Space(4) & ">"
+
+    
+        'clear
+        strHierarchy() = Array("Park", "River", "Site", "Feature")
+        
+        For i = ClearValues + 1 To 3 - ClearValues
+        
+            strLevel = "btnLevel" & i
+            .Controls(strLevel).Caption = "Missing " & strHierarchy(i) & Space(4) & ">"
+        
+        Next
+        
+    End With
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - UpdateBreadcrumb[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_GotFocus
+' Description:  Form actions after form receives focus
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 18, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/18/2016 - initial version
+' ---------------------------------
+Private Sub Form_GotFocus()
+On Error GoTo Err_Handler
+
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_GotFocus[Main form])"
     End Select
     Resume Exit_Handler
 End Sub

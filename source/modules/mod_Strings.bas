@@ -29,6 +29,9 @@ Public Const uCheck = &H2714
 Public Const uLessThanOrEqual = &H2264
 Public Const uGreaterThanOrEqual = &H2264
 Public Const uBullet = &H25CF
+Public Const uCheckboxEmpty = &H2610
+Public Const uCheckboxCheck = &H2611
+Public Const uCheckboxX = &H2612
 
 ' =================================
 ' FUNCTION:     ReplaceString

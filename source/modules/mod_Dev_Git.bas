@@ -180,9 +180,9 @@ On Error Resume Next
     MkDir Path & "\Scripts\"
 
 On Error GoTo Err_Handler
-    Dim dbs As dao.Database
-    Dim cnt As dao.Container
-    Dim doc As dao.Document
+    Dim dbs As DAO.Database
+    Dim cnt As DAO.Container
+    Dim doc As DAO.Document
     Dim i As Integer
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -437,9 +437,9 @@ Function TableInfo(strTableName As String)
 On Error GoTo TableInfoErr
    ' Purpose:   Display the field names, types, sizes and descriptions for a table.
    ' Argument:  Name of a table in the current database.
-   Dim db As dao.Database
-   Dim tdf As dao.TableDef
-   Dim fld As dao.Field
+   Dim db As DAO.Database
+   Dim tdf As DAO.TableDef
+   Dim fld As DAO.Field
    
    Set db = CurrentDb()
    Set tdf = db.tabledefs(strTableName)
@@ -504,7 +504,7 @@ End Function
 '   BLC - 2/13/2015 - initial version
 '   BLC - 6/30/2015 - added error handling
 ' ---------------------------------
-Function FieldTypeName(fld As dao.Field) As String
+Function FieldTypeName(fld As DAO.Field) As String
 On Err GoTo Err_Handler
 
     Dim strReturn As String    'Name to return

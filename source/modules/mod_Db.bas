@@ -50,8 +50,8 @@ Option Explicit
 Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
     On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim intNumUpdates As Integer
     Dim varReturn As Variant
     Dim intI As Integer
@@ -136,22 +136,22 @@ End Function
 '   BLC - 2/7/2015  - initial version
 '   BLC - 5/13/2015 - moved from mod_App_Data to mod_Db
 ' ---------------------------------
-Public Function MergeRecordsets(rsA As dao.Recordset, rsB As dao.Recordset) As dao.Recordset
+Public Function MergeRecordsets(rsA As DAO.Recordset, rsB As DAO.Recordset) As DAO.Recordset
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rsOut As dao.Recordset
+    Dim db As DAO.Database
+    Dim rsOut As DAO.Recordset
     Dim iCount As Integer
     
     'handle empty recordsets
     If rsA Is Nothing Then
         'check rsB
         If rsB Is Nothing Then
-            GoTo Exit_Function
+            GoTo Exit_Handler
         Else
             Set MergeRecordsets = rsB
-            GoTo Exit_Function
+            GoTo Exit_Handler
         End If
     End If
     
@@ -162,7 +162,7 @@ On Error GoTo Err_Handler
         'rsA not populated
         If (rsB.EOF And rsB.BOF) Then
             'neither is populated --> EXIT!
-            GoTo Exit_Function
+            GoTo Exit_Handler
         Else
             'rsB populated --> return rsB
             Set MergeRecordsets = rsB
@@ -171,7 +171,7 @@ On Error GoTo Err_Handler
         'rsA populated --> if rsB not populated, return rsA
         If (rsB.EOF And rsB.BOF) Then
             Set MergeRecordsets = rsA
-            GoTo Exit_Function
+            GoTo Exit_Handler
         End If
     'End If
     
@@ -204,7 +204,7 @@ On Error GoTo Err_Handler
 End If
     Set MergeRecordsets = rsOut
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -213,9 +213,8 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - MergeRecordsets[mod_Db])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
-
 
 ' ---------------------------------
 ' FUNCTION:     ClearTable
@@ -277,7 +276,7 @@ Public Function TableExists(ByVal strTableName As String) As Boolean
     TableExists = DCount("*", "MSysObjects", "(([Type] In (1,4,6)) AND ([Name]=""" & _
         strTableName & """))")
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -286,7 +285,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - TableExists[mod_Db])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 
 End Function
 
@@ -305,8 +304,8 @@ End Function
 Function QueryExists(strQueryName As String) As Boolean
 On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim tdf As dao.QueryDef
+    Dim db As DAO.Database
+    Dim tdf As DAO.QueryDef
     
     On Error GoTo Err_Handler
     Set db = CurrentDb
@@ -314,19 +313,19 @@ On Error GoTo Err_Handler
     
     QueryExists = True
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
     Select Case Err.Number
       Case 3265
         QueryExists = False
-        Resume Exit_Function
+        Resume Exit_Handler
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - QueryExists[mod_Db])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -343,7 +342,7 @@ End Function
 ' ---------------------------------
 Public Function qryExists(strQueryName As String) As Boolean
 
-    Dim qdf As dao.QueryDef
+    Dim qdf As DAO.QueryDef
     
     'default
     qryExists = False
@@ -356,7 +355,7 @@ Public Function qryExists(strQueryName As String) As Boolean
         End If
     Next
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -365,7 +364,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - qryExists[mod_Db])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -400,7 +399,7 @@ On Error GoTo Err_Handler:
 
     getAccessObjectType = DLookup("Type", "MSysObjects", "NAME = '" & strObject & "'")
    
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -409,7 +408,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - getAccessObjectType[mod_Db])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -441,7 +440,7 @@ Dim i As Integer
     'none found -> return -1
     GetTempVarIndex = -1
     
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -450,7 +449,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetTempVarIndex[mod_Db])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -467,7 +466,7 @@ End Function
 Public Function HasRecords(ByVal strName As String) As Boolean
     On Error GoTo Err_Handler
     
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
     Dim blnHasRecords As Boolean
     
     blnHasRecords = False
@@ -484,7 +483,8 @@ Public Function HasRecords(ByVal strName As String) As Boolean
     End If
 
     HasRecords = blnHasRecords
-Exit_Function:
+
+Exit_Handler:
     Set rs = Nothing
     Exit Function
 
@@ -494,6 +494,90 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - HasRecords[mod_Db])"
     End Select
-    Resume Exit_Function
-
+    Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' SUB:     GetSQLTemplates
+' Description:  loads SQL templates (queries as SQL string) into memory as a dictionary object
+'               with query SQL strings available without querying the db tsys_SQL_templates table
+' Parameters:
+' Returns:      dictionary object stored in tempVars.Item("SQL")
+' Assumptions:  placing
+' Throws:       none
+' References:   tsys_Db_templates, Microsoft Scripting Runtime (dictionary object)
+' Source/date:  Bonnie Campbell, June 2014
+' Revisions:    BLC, 6/16/2014 - initial version
+'               BLC, 5/13/2016 - shifted from mod_Db_Templates to mod_Db & adjusted to match tsys_Db_Templates
+' ---------------------------------
+Public Sub GetSQLTemplates(Optional strVersion As String = "")
+
+    Dim db As DAO.Database
+    Dim rst As DAO.Recordset
+    Dim strSQL As String, strSQLWhere As String, key As String, Value As String
+    
+    'handle default
+    strSQLWhere = " WHERE Is_Supported > 0"
+    
+    If Len(strVersion) > 0 Then
+        strSQLWhere = " AND LCase(versionID) = LCase(" & strVersion & " )"
+    End If
+    
+    'sql -> ID, Version, IsSupported, Context, Syntax, TemplateName, Params, Template, Remarks,
+    '       EffectiveDate, RetireDate, CreateDate, CreatedBy_ID, LastModified, LastModifiedBy_ID
+    strSQL = "SELECT * FROM tsys_Db_Templates" & strSQLWhere
+    
+    Set db = CurrentDb
+    Set rst = db.OpenRecordset(strSQL)
+    
+    'handle no records
+    If rst.EOF Then
+        MsgBox "Sorry, no templates were found for this database version.", vbExclamation, _
+            "Linked Database Templates Not Found"
+        DoCmd.CancelEvent
+        GoTo Exit_Handler
+    End If
+    
+    'prepare dictionary
+    Dim dict As New Scripting.Dictionary
+    Dim ary(1 To 4) As String
+    Dim i As Integer
+    
+    'prepare the dictionary key array
+    ary(1) = "context"
+    ary(2) = "template_Name"
+    ary(3) = "SQLstring" 'template
+    ary(4) = "var_list"
+    
+    rst.MoveFirst
+    Do Until rst.EOF
+        'populate the dictionary
+        For i = 1 To UBound(ary)
+            key = ary(i)
+            If (ary(i) = "SQLstring") Then
+                Value = rst!template
+            Else
+                Value = rst.Fields(ary(i))
+            End If
+            If Not dict.Exists(key) Then
+                dict.Add key, Value
+            End If
+        Next
+        rst.MoveNext
+    Loop
+    
+    TempVars.Add "SQL", dict
+    
+Exit_Handler:
+    'cleanup
+    Set dict = Nothing
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetSQLTemplates[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub

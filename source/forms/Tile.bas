@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =972
-    Top =4176
-    Right =3300
-    Bottom =7080
+    Left =13395
+    Top =5115
+    Right =15975
+    Bottom =8265
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -113,7 +113,7 @@ Begin Form
                     Width =1980
                     Height =300
                     Name ="lblTitle"
-                    Caption ="Title"
+                    Caption ="Where?"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -161,7 +161,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink1"
-                    Caption ="Link1"
+                    Caption ="Site"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -191,10 +191,10 @@ Begin Form
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                     Overlaps =1
                 End
                 Begin Label
@@ -207,7 +207,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink2"
-                    Caption ="Link2"
+                    Caption ="Feature"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -225,7 +225,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink3"
-                    Caption ="Link3"
+                    Caption ="Transect"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -243,7 +243,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink4"
-                    Caption ="Link4"
+                    Caption ="Plot"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -252,6 +252,7 @@ Begin Form
                     LayoutCachedHeight =1380
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =1500
@@ -269,6 +270,7 @@ Begin Form
                     LayoutCachedHeight =1740
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =180
                     Top =1860

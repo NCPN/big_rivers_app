@@ -16,10 +16,10 @@ Begin Form
     Width =4500
     DatasheetFontHeight =11
     ItemSuffix =5
-    Left =2520
-    Top =2400
-    Right =22788
-    Bottom =11808
+    Left =12675
+    Top =3495
+    Right =22845
+    Bottom =13995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -206,10 +206,10 @@ Begin Form
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                     Overlaps =1
                 End
                 Begin Label
@@ -402,6 +402,10 @@ On Error GoTo Err_Handler
     If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
 
     Dim strSQL As String
+    Dim DropDownWidth As Double
+    
+    'default
+    DropDownWidth = 1.2083 * TWIPS_PER_INCH
     
     'determine which form info
     Select Case Me.OpenArgs
@@ -421,9 +425,9 @@ On Error GoTo Err_Handler
             Me.Directions = "Select the desired river segment."
             Me.ButtonCaption = "Next >"
             
-            strSQL = "SELECT ID, Segment FROM River " _
-                        & "JOIN Park p ON p.ParkID = ParkID " _
-                        & "WHERE ParkCode = '" & TempVars("park") & "' " _
+            strSQL = "SELECT River.ID, Segment FROM River " _
+                        & "LEFT JOIN Park p ON p.ID = River.Park_ID " _
+                        & "WHERE ParkCode = '" & TempVars("ParkCode") & "' " _
                         & "ORDER BY Segment ASC;"
         
         Case "site"
@@ -432,11 +436,13 @@ On Error GoTo Err_Handler
             Me.Directions = "Select the desired site."
             Me.ButtonCaption = "Next >"
             
-            strSQL = "SELECT ID, SiteName + ' (' + SiteCode + ')' AS Site FROM Site " _
-                        & "JOIN Park p ON p.ParkID = ParkID " _
-                        & "WHERE ParkCode = '" & TempVars("park") & "' " _
-                        & "AND IsActiveForProtocol = 1 " _
-                        & "ORDER BY Site ASC;"
+            strSQL = "SELECT Site.ID, SiteName + ' (' + SiteCode + ')' AS Site FROM Site " _
+                        & "LEFT JOIN Park p ON p.ID = Site.Park_ID " _
+                        & "WHERE ParkCode = '" & TempVars("ParkCode") & "' " _
+                        & "AND Site.IsActiveForProtocol = 1 " _
+                        & "ORDER BY SiteName ASC;"
+                        
+            DropDownWidth = 2 * TWIPS_PER_INCH
         
         Case "feature"
             Me.Title = "Feature"
@@ -444,9 +450,11 @@ On Error GoTo Err_Handler
             Me.Directions = "Select the desired feature."
             Me.ButtonCaption = "Next >"
             
-            strSQL = "SELECT ID, Feature FROM Feature " _
-                        & "JOIN Park p ON p.ParkID = ParkID " _
-                        & "WHERE ParkCode = '" & TempVars("park") & "' " _
+            strSQL = "SELECT Feature.ID, Feature FROM Feature " _
+                        & "LEFT JOIN Site_Feature ON Site_Feature.Feature_ID = Feature.ID " _
+                        & "LEFT JOIN Site ON Site.ID = Site_Feature.Site_ID " _
+                        & "LEFT JOIN Park ON Park.ID = Site.Park_ID " _
+                        & "WHERE Park.ParkCode = '" & TempVars("ParkCode") & "' " _
                         & "AND IsActiveForProtocol = 1 " _
                         & "ORDER BY Feature ASC;"
         
@@ -460,6 +468,8 @@ On Error GoTo Err_Handler
 
     End Select
         
+        Debug.Print strSQL
+        
         'fetch data
         Me.DropdownDataSource = strSQL
         
@@ -468,6 +478,7 @@ On Error GoTo Err_Handler
             .BoundColumn = 1
             .ColumnCount = 2
             .ColumnWidths = "0;1.6"
+            .Width = DropDownWidth
         End With
 
 Exit_Handler:
@@ -527,6 +538,11 @@ End Sub
 Private Sub btnEnter_Click()
 On Error GoTo Err_Handler
     
+    Dim iClearBelow As Integer
+    
+    'default (clear no values)
+    iClearBelow = 4
+    
     If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
     
     Select Case Me.OpenArgs
@@ -534,16 +550,30 @@ On Error GoTo Err_Handler
             'store selected ID
             TempVars.Add "park", Me.SelectedID
             TempVars.Add "ParkCode", Me.SelectedValue
-        Case "site"
+            iClearBelow = 0
+        Case "river"
             'store selected ID
             TempVars.Add "segment", Me.SelectedID
             TempVars.Add "river", Me.SelectedValue
-        Case "river"
+            iClearBelow = 1
+        Case "site"
+            'store selected ID
+            TempVars.Add "site", Me.SelectedID
+            TempVars.Add "SiteName", Me.SelectedValue
+            iClearBelow = 2
+        Case "feature"
+            'store selected ID
+            TempVars.Add "feature", Me.SelectedID
+            TempVars.Add "FeatureName", Me.SelectedValue
+            iClearBelow = 3
         Case "data_entry"
     End Select
     
-    DoCmd.Close
+    'update calling form
+    Call Forms("Main").UpdateBreadcrumb(iClearBelow)
     
+    DoCmd.Close acForm, "_SelectSingle"
+
 Exit_Handler:
     Exit Sub
 Err_Handler:

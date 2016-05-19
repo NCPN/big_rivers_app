@@ -39,8 +39,8 @@ Public Sub fillList(frm As Form, ctrlSource As Control, Optional ctrlDest As Con
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strQuery As String, strSQL As String
     
     'output to form or listbox control?
@@ -296,8 +296,8 @@ Public Function getParkState(ParkCode As String) As String
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim State As String, strSQL As String
    
     'handle only appropriate park codes
@@ -394,8 +394,8 @@ Public Function IsUsedTargetArea(TgtAreaID As Integer) As Boolean
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     'default
@@ -443,8 +443,8 @@ Public Sub PopulateTree(TreeType As String)
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     Select Case TreeType
@@ -496,8 +496,8 @@ Public Sub PopulateCombobox(cbx As ComboBox, BoxType As String)
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     Select Case BoxType
@@ -553,8 +553,8 @@ End Sub
 Public Function GetProtocolVersion(Optional blnAllVersions As Boolean = False) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String, strWHERE As String
     Dim count As Integer
     Dim metadata() As Variant
@@ -622,8 +622,8 @@ End Function
 Public Function GetSOPMetadata(area As String) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
         
     'generate SQL
@@ -685,8 +685,8 @@ End Function
 Public Function GetRiverSegments(ParkCode As String) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     Dim count As Integer
     Dim segments() As Variant

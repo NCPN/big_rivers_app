@@ -47,6 +47,11 @@ Public Const APP_URL As String = "science.nature.nps.gov/im/units/ncpn/datamanag
 Public Const DEV_MODE As Boolean = True                         'Boolean flag -> enable menus when typically they'd be OFF
 
 '-----------------------------------------------------------------------
+' Database Type
+'-----------------------------------------------------------------------
+Public Const BACKEND_TYPE As String = "ACCESS"
+
+'-----------------------------------------------------------------------
 ' Database System Tables
 '-----------------------------------------------------------------------
 '   Array("App_Defaults", "BE_Updates", "Link_Dbs", "Link_Tables")

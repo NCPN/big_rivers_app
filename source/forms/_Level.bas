@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =2520
-    Top =2400
-    Right =19152
-    Bottom =11808
+    Left =13380
+    Top =4620
+    Right =19215
+    Bottom =4980
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -133,7 +133,7 @@ Begin Form
                     Width =1380
                     ForeColor =4210752
                     Name ="btnLevel0"
-                    Caption ="level0"
+                    Caption ="9    >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -157,10 +157,10 @@ Begin Form
                     HoverForeThemeColorIndex =-1
                     HoverForeTint =100.0
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =3
-                    WebImagePaddingBottom =3
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -170,7 +170,7 @@ Begin Form
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnLevel1"
-                    Caption ="level1"
+                    Caption ="Gunnison    >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -194,10 +194,10 @@ Begin Form
                     HoverForeThemeColorIndex =-1
                     HoverForeTint =100.0
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =3
-                    WebImagePaddingBottom =3
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -206,7 +206,7 @@ Begin Form
                     TabIndex =2
                     ForeColor =4210752
                     Name ="btnLevel2"
-                    Caption ="level2"
+                    Caption ="7    >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -230,10 +230,10 @@ Begin Form
                     HoverForeThemeColorIndex =-1
                     HoverForeTint =100.0
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =3
-                    WebImagePaddingBottom =3
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -243,7 +243,7 @@ Begin Form
                     TabIndex =3
                     ForeColor =4210752
                     Name ="btnLevel3"
-                    Caption ="level3"
+                    Caption ="Missing Feature    >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -267,10 +267,10 @@ Begin Form
                     HoverForeThemeColorIndex =-1
                     HoverForeTint =100.0
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =3
-                    WebImagePaddingBottom =3
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End

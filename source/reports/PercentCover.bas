@@ -19,9 +19,9 @@ Begin Report
     GridY =24
     Width =11521
     DatasheetFontHeight =11
-    ItemSuffix =151
-    Right =16392
-    Bottom =7248
+    ItemSuffix =185
+    Right =20268
+    Bottom =9408
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -135,7 +135,7 @@ Begin Report
             AlternateBackShade =95.0
         End
         Begin PageHeader
-            Height =2364
+            Height =1680
             Name ="PageHeaderSection"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -188,7 +188,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =1
-                    Top =1920
+                    Top =1308
                     Width =11520
                     Height =360
                     FontSize =8
@@ -199,20 +199,19 @@ Begin Report
                     Name ="lblCheckboxRow"
                     Caption ="No Canopy Veg?"
                     GridlineColor =10921638
-                    LayoutCachedTop =1920
+                    LayoutCachedTop =1308
                     LayoutCachedWidth =11520
-                    LayoutCachedHeight =2280
+                    LayoutCachedHeight =1668
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    BackStyle =1
                     OldBorderStyle =1
                     TextAlign =1
-                    Top =768
+                    Top =660
                     Width =11520
-                    Height =288
+                    Height =360
                     FontSize =8
                     TopMargin =29
                     BackColor =14869733
@@ -220,17 +219,16 @@ Begin Report
                     Name ="lblTotalCover"
                     Caption ="Total Plot Cover %"
                     GridlineColor =10921638
-                    LayoutCachedTop =768
+                    LayoutCachedTop =660
                     LayoutCachedWidth =11520
-                    LayoutCachedHeight =1056
+                    LayoutCachedHeight =1020
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OldBorderStyle =1
                     TextAlign =1
-                    Top =1188
+                    Top =36
                     Width =5760
                     Height =288
                     FontSize =7
@@ -238,21 +236,21 @@ Begin Report
                     TopMargin =29
                     BackColor =14869733
                     BorderColor =8355711
+                    ForeColor =16777215
                     Name ="lblLeftKey"
                     Caption ="left key"
                     GridlineColor =10921638
-                    LayoutCachedTop =1188
+                    LayoutCachedTop =36
                     LayoutCachedWidth =5760
-                    LayoutCachedHeight =1476
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OldBorderStyle =1
                     TextAlign =3
                     Left =5760
-                    Top =1188
+                    Top =36
                     Width =5760
                     Height =288
                     FontSize =7
@@ -260,13 +258,14 @@ Begin Report
                     RightMargin =288
                     BackColor =14869733
                     BorderColor =8355711
+                    ForeColor =16777215
                     Name ="lblRightKey"
                     Caption ="right key"
                     GridlineColor =10921638
                     LayoutCachedLeft =5760
-                    LayoutCachedTop =1188
+                    LayoutCachedTop =36
                     LayoutCachedWidth =11520
-                    LayoutCachedHeight =1476
+                    LayoutCachedHeight =324
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -276,7 +275,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Top =1560
+                    Top =1020
                     Width =11520
                     Height =288
                     FontSize =8
@@ -286,9 +285,9 @@ Begin Report
                     Name ="lblSubTitle"
                     Caption ="Key"
                     GridlineColor =10921638
-                    LayoutCachedTop =1560
+                    LayoutCachedTop =1020
                     LayoutCachedWidth =11520
-                    LayoutCachedHeight =1848
+                    LayoutCachedHeight =1308
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -296,7 +295,7 @@ Begin Report
                 Begin Label
                     TextAlign =3
                     Left =5760
-                    Top =1560
+                    Top =1020
                     Width =5760
                     Height =288
                     FontSize =8
@@ -308,9 +307,784 @@ Begin Report
                     Caption ="right key"
                     GridlineColor =10921638
                     LayoutCachedLeft =5760
-                    LayoutCachedTop =1560
+                    LayoutCachedTop =1020
                     LayoutCachedWidth =11520
-                    LayoutCachedHeight =1848
+                    LayoutCachedHeight =1308
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =3276
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT1"
+                    Caption ="c1"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3276
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =3794
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =3792
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT2"
+                    Caption ="c2"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3792
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =4310
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =4308
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT3"
+                    Caption ="c3"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4308
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =4826
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =4824
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT4"
+                    Caption ="c4"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4824
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =5342
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =5340
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT5"
+                    Caption ="c5"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5340
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =5858
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =5856
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT6"
+                    Caption ="c6"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5856
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =6374
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =6372
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT7"
+                    Caption ="c7"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6372
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =6890
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =6888
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT8"
+                    Caption ="c8"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6888
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =7406
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =7380
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT9"
+                    Caption ="c9"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7380
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =7898
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =7896
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT10"
+                    Caption ="c10"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7896
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =8414
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =8413
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT11"
+                    Caption ="c11"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8413
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =8931
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =8929
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT12"
+                    Caption ="c12"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8929
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =9447
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =9446
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT13"
+                    Caption ="c13"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =9446
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =9964
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =9964
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT14"
+                    Caption ="c14"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =9964
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =10482
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =10483
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT15"
+                    Caption ="c15"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10483
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =11001
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =11003
+                    Top =660
+                    Width =518
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColT16"
+                    Caption ="c16"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =11003
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =11521
+                    LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =3276
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC1"
+                    Caption ="c1"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3276
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =3794
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =3792
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC2"
+                    Caption ="c2"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3792
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =4310
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =4308
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC3"
+                    Caption ="c3"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4308
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =4826
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =4824
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC4"
+                    Caption ="c4"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4824
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =5342
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =5340
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC5"
+                    Caption ="c5"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5340
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =5858
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =5856
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC6"
+                    Caption ="c6"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5856
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =6374
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =6372
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC7"
+                    Caption ="c7"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6372
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =6890
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =6888
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC8"
+                    Caption ="c8"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6888
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =7406
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =7380
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC9"
+                    Caption ="c9"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7380
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =7898
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =7896
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC10"
+                    Caption ="c10"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7896
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =8414
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =8413
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC11"
+                    Caption ="c11"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8413
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =8931
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =8929
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC12"
+                    Caption ="c12"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8929
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =9447
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =9446
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC13"
+                    Caption ="c13"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =9446
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =9964
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =9964
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC14"
+                    Caption ="c14"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =9964
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =10482
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =10483
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC15"
+                    Caption ="c15"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10483
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =11001
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =11003
+                    Top =1308
+                    Width =518
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblColC16"
+                    Caption ="c16"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =11003
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =11521
+                    LayoutCachedHeight =1668
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    TextAlign =4
+                    Top =1308
+                    Width =11520
+                    Height =360
+                    FontSize =14
+                    FontWeight =600
+                    LeftMargin =3384
+                    TopMargin =29
+                    RightMargin =144
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblCheckboxes"
+                    Caption ="checkboxes"
+                    GridlineColor =10921638
+                    LayoutCachedTop =1308
+                    LayoutCachedWidth =11520
+                    LayoutCachedHeight =1668
+                    ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -349,9 +1123,8 @@ Begin Report
                     BackStyle =0
                     IMESentenceMode =3
                     Left =60
-                    Top =24
                     Width =960
-                    Height =300
+                    Height =360
                     FontSize =8
                     TopMargin =29
                     BorderColor =10921638
@@ -360,9 +1133,8 @@ Begin Report
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
-                    LayoutCachedTop =24
                     LayoutCachedWidth =1020
-                    LayoutCachedHeight =324
+                    LayoutCachedHeight =360
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -393,9 +1165,8 @@ Begin Report
                     BackStyle =0
                     IMESentenceMode =3
                     Left =1248
-                    Top =12
                     Width =960
-                    Height =300
+                    Height =360
                     FontSize =8
                     TabIndex =1
                     TopMargin =29
@@ -405,9 +1176,8 @@ Begin Report
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1248
-                    LayoutCachedTop =12
                     LayoutCachedWidth =2208
-                    LayoutCachedHeight =312
+                    LayoutCachedHeight =360
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -848,8 +1618,9 @@ Option Explicit
 Dim m_Park As String
 Dim m_CoverType As String
 Dim m_Title As String
+Dim m_ShowTitleKey As Boolean
 Dim m_ShowKey As Boolean
-Dim m_ShowSubHeader As Boolean
+Dim m_ShowSubTitle As Boolean
 Dim m_ShowCheckboxes As Boolean
 Dim m_ShowTotalPct As Boolean
 Dim m_ShowFA As Boolean
@@ -896,16 +1667,30 @@ Public Property Let ShowKey(Value As Boolean)
     m_ShowKey = Value
 End Property
 
+Public Property Get ShowTitleKey() As Boolean
+    ShowTitleKey = m_ShowTitleKey
+    'set display
+    ToggleRow "titlekey", ShowTitleKey
+End Property
+
+Public Property Let ShowTitleKey(Value As Boolean)
+    m_ShowTitleKey = Value
+End Property
+
 Public Property Get ShowKey() As Boolean
     ShowKey = m_ShowKey
+    'set display
+    ToggleRow "key", ShowKey
 End Property
 
-Public Property Let ShowSubHeader(Value As Boolean)
-    m_ShowSubHeader = Value
+Public Property Let ShowSubTitle(Value As Boolean)
+    m_ShowSubTitle = Value
 End Property
 
-Public Property Get ShowSubHeader() As Boolean
-    ShowSubHeader = m_ShowSubHeader
+Public Property Get ShowSubTitle() As Boolean
+    ShowSubTitle = m_ShowSubTitle
+    'set display
+    ToggleRow "subtitle", ShowKey
 End Property
 
 Public Property Let ShowCheckboxes(Value As Boolean)
@@ -918,6 +1703,8 @@ End Property
 
 Public Property Let ShowTotalPct(Value As Boolean)
     m_ShowTotalPct = Value
+    'set display
+    ToggleRow "total", ShowKey
 End Property
 
 Public Property Get ShowTotalPct() As Boolean
@@ -961,10 +1748,16 @@ On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String
     Dim strCoverType As String ', strWCC As String, strARC As String, strURC As String
-    Dim strLabel As String
+    Dim strLabel As String, strCheckboxes As String, strSQL As String
+    Dim ChkBoxTop As Double
     Dim i As Integer
     
     'defaults
+    strCheckboxes = ""
+    ChkBoxTop = 0.9083 '0.9083" when key & subtitle are shown, 0.25" when not
+    ShowTitleKey = True
+    ShowKey = True
+    ShowSubTitle = True
     
     If Len(Nz(OpenArgs, "")) > 0 Or IsNull(OpenArgs) Then
         strPark = Nz(TempVars("ParkCode"), "")
@@ -979,22 +1772,43 @@ On Error GoTo Err_Handler
             Select Case Me.CoverType
                 Case "WCC"
                     strCoverType = "Woody Canopy"
+                    ShowKey = False
+                    ShowSubTitle = False
+                    ChkBoxTop = 0.25
+                    strSQL = ""
                 Case "URS"
                     strCoverType = "Understory Rooted"
+                    strSQL = ""
             End Select
         Case "CANY"
             Select Case Me.CoverType
                 Case "WCC"
                     strCoverType = "Woody Canopy"
+                    ShowKey = False
+                    ShowSubTitle = False
+                    ChkBoxTop = 0.25
+                    strSQL = ""
                 Case "URS"
                     strCoverType = "Understory Rooted"
+                    ShowTitleKey = False
+                    strSQL = ""
             End Select
         Case "DINO"
             'Cover type = ARC
             strCoverType = "All Rooted Species"
+            ShowKey = False
+            ShowSubTitle = False
+            ChkBoxTop = 0.25
+            strSQL = ""
     End Select
     
-    'header
+    'set checkbox row position
+    MoveCheckboxRow ChkBoxTop
+    
+    'show or hide key & subtitle
+    
+    
+    'headers & keys
     lblTitle.Caption = strCoverType & "% Cover"
     lblLeftKey.Caption = "R = rooted in plot"
     lblRightKey.Caption = "Rooted && Unrooted > 1.5m " _
@@ -1014,11 +1828,21 @@ On Error GoTo Err_Handler
     
     lblFAKey.Caption = "incl. attached macrophytes & FA < 0.5cm long"
     
-    'columns
+    'columns (total %, checkboxes & species)
     For i = 1 To 16
+        strLabel = "lblColT" & i
+        Me.Controls(strLabel).Caption = ""
+    
+        strLabel = "lblColC" & i
+        Me.Controls(strLabel).Caption = ""
+        
         strLabel = "lblCol" & i
         Me.Controls(strLabel).Caption = ""
+        
+        strCheckboxes = strCheckboxes & ChrW(uCheckboxEmpty)
     Next
+    
+    lblCheckboxes.Caption = strCheckboxes
     
 Exit_Handler:
     Exit Sub
@@ -1037,7 +1861,7 @@ End Sub
 '---------------------
 
 ' ---------------------------------
-' Function:     Detail_Format
+' SUB:          Detail_Format
 ' Description:  report detail formatting actions
 ' Assumptions:  -
 ' Parameters:   Cancel - if format action should be cancelled (integer)
@@ -1067,7 +1891,7 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Function:     Detail_Print
+' SUB:          Detail_Print
 ' Description:  report detail printing actions
 ' Assumptions:  -
 ' Parameters:   Cancel - if print action should be cancelled (integer)
@@ -1092,6 +1916,102 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Detail_Print[PercentCover Report])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          MoveCheckboxRow
+' Description:  Moves the no XX veg checkbox row
+' Assumptions:  -
+' Parameters:   pos - location for top edge of controls in inches (double)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/13/2016 - initial version
+' ---------------------------------
+Private Sub MoveCheckboxRow(pos As Double)
+On Error GoTo Err_Handler
+
+    Dim strLabel As String
+    Dim i As Integer
+    
+    'convert to twips
+    pos = pos * TWIPS_PER_INCH
+    
+    lblCheckboxes.top = pos
+    lblCheckboxRow.top = pos
+    
+    'move columns
+    For i = 1 To 16
+        strLabel = "lblColC" & i
+        Me.Controls(strLabel).top = pos
+    Next
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MoveCheckboxRow[PercentCover Report])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          ToggleRow
+' Description:  Shows/Hides the row for key & subtitle
+' Assumptions:  -
+' Parameters:   row - row of controls to hide (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/13/2016 - initial version
+' ---------------------------------
+Private Sub ToggleRow(row As String, show As Boolean)
+On Error GoTo Err_Handler
+
+    Dim strLabel As String
+    Dim i As Integer
+    
+    Select Case row
+        Case "titlekey"  'key on title row
+            Me.lblLeftKey.Visible = show
+            Me.lblRightKey.Visible = show
+        Case "key"  'key row below title
+            Me.lblKey.Visible = show
+            
+        Case "total"    'total plot % cover
+            lblTotalCover.Visible = show
+            
+            'show/hide columns
+            For i = 1 To 16
+                strLabel = "lblColT" & i
+                Me.Controls(strLabel).Visible = show
+            Next
+                    
+        Case "subtitle" 'subtitle row above checkboxes
+            lblSubTitle.Visible = show
+            lblRightKeySub.Visible = show
+    End Select
+        
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MoveCheckboxRow[PercentCover Report])"
     End Select
     Resume Exit_Handler
 End Sub

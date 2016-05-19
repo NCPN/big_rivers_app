@@ -542,7 +542,7 @@ On Error GoTo Err_Handler
     Dim ary() As String, SourceType As String
     Dim SourceID As Integer
     Dim strSQL As String, strSQL2 As String
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
         
     If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
     

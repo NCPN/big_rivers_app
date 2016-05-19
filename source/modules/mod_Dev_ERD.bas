@@ -17,7 +17,7 @@ Option Explicit
 ' ---------------------------------
 Private Type RECT
     Left As Long
-    Top As Long
+    top As Long
     Right As Long
     Bottom As Long
 End Type
@@ -208,7 +208,7 @@ On Error GoTo Err_Handler
         lngRet = GetWindowRect(hWndTemp, rc)
         If rc.Left < 1 Then
             rc.Left = 1
-            lngRet = SetWindowPos(hWndTemp, 0&, rc.Left, rc.Top, 0&, 0&, SWP_NOSIZE)
+            lngRet = SetWindowPos(hWndTemp, 0&, rc.Left, rc.top, 0&, 0&, SWP_NOSIZE)
         End If
     End If
     
@@ -222,7 +222,7 @@ On Error GoTo Err_Handler
             lngRet = GetWindowRect(hWndTemp, rc)
             If rc.Left < 1 Then
                 rc.Left = 1
-                lngRet = SetWindowPos(hWndTemp, 0&, rc.Left, rc.Top, 0&, _
+                lngRet = SetWindowPos(hWndTemp, 0&, rc.Left, rc.top, 0&, _
                                         0&, SWP_NOSIZE)
             End If
         End If
