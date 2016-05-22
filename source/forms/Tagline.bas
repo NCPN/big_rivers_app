@@ -15,10 +15,10 @@ Begin Form
     Width =6600
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =8208
-    Top =3024
-    Right =18804
-    Bottom =11424
+    Left =3150
+    Top =3105
+    Right =28545
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xa3116d04ebbee440
@@ -350,10 +350,10 @@ Begin Form
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -414,10 +414,10 @@ Begin Form
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
                 Begin TextBox
                     OverlapFlags =247
@@ -552,9 +552,10 @@ On Error GoTo Err_Handler
     SourceID = CInt(ary(1))
     
     'setup form source
-    strSQL = "SELECT * FROM Tagline " _
-            & "WHERE LineDistanceSource = '" & SourceType & "' AND " _
-            & "LineDistanceSource_ID = " & SourceID & ""
+'    strSQL = "SELECT * FROM Tagline " _
+'            & "WHERE LineDistanceSource = '" & SourceType & "' AND " _
+'            & "LineDistanceSource_ID = " & SourceID & ""
+    strSQL = GetTemplate("s_tagline")
     
     'open DAO recordset & assign to form
     Set rs = CurrentDb.OpenRecordset(strSQL, dbOpenDynaset)

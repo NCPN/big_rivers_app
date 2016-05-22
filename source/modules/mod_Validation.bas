@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Validation
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  string functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/10/2015
@@ -14,6 +14,7 @@ Option Explicit
 '                                         & verifications via VerifyString()
 '               BLC - 4/4/2016 - 1.02 - added IsInArray(), updated ValidString(),
 '                                       replaced Exit_Function w/ Exit_Handler
+'               BLC - 5/20/2016 - 1.03 - added IsTypeMatch()
 ' =================================
 
 ' ---------------------------------
@@ -696,9 +697,9 @@ End Function
 Function IsBetween(iValue As Variant, lowBound As Double, highBound As Double, inclusive As Boolean) As Boolean
 On Error GoTo Err_Handler
 
-    Dim isOk As Boolean
+    Dim isOK As Boolean
     'default
-    isOk = False
+    isOK = False
     
     'ensure numeric
     If Not IsNumeric(iValue) Then GoTo Exit_Handler
@@ -711,11 +712,11 @@ On Error GoTo Err_Handler
             
             'valid cases
             Case Is = lowBound
-                isOk = True
+                isOK = True
             Case Is = highBound
-                isOk = True
+                isOK = True
             Case Is > lowBound And (iValue < highBound)
-                isOk = True
+                isOK = True
         End Select
     Else
         Select Case iValue
@@ -727,11 +728,11 @@ On Error GoTo Err_Handler
             
             'valid cases
             Case Is > lowBound And (iValue < highBound)
-                isOk = True
+                isOK = True
         End Select
     End If
     
-    IsBetween = isOk
+    IsBetween = isOK
     
 Exit_Handler:
     Exit Function
@@ -740,7 +741,90 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - IsInArray[mod_Validation])"
+            "Error encountered (#" & Err.Number & " - IsBetween[mod_Validation])"
     End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     IsTypeMatch
+' Description:  Checks if value is or can be converted to the data type noted
+'               Relies on attempting to convert, if it fails via type mismatch or otherwise false is returned
+' Assumptions:  -
+' Note:
+'               Value     Variant type          Value     Variant type
+'               0     Empty (unitialized)       10     Error Value
+'               1     Null (no valid data)      11     Boolean
+'               2     Integer                   12     Variant (only used with arrays of variants)
+'               3     Long Integer              13     Data access object
+'               4     Single                    14     Decimal value
+'               5     Double                    17     Byte
+'               6     Currency                  36     User Defined Type
+'               7     Date                      8192           Array
+'               8     String
+'               9     Object
+'
+' Parameters:   iValue - value to check (variant)
+'               dataType - data type name (string)
+' Returns:      boolean - True (value is or can be converted), False (value isn't/can't be converted to the data type passed in)
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, May 20, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2016 - initial version
+' ---------------------------------
+Function IsTypeMatch(iValue As Variant, DataType As String) As Boolean
+On Error GoTo Err_Handler
+
+    Dim isOK As Boolean
+    Dim result As Variant
+    
+    'default
+    isOK = True
+    
+    'check type
+    Select Case DataType
+        Case "boolean"  '0 or 1, yes/no values are mismatches
+            result = CBool(iValue)
+        Case "byte"     '0 or 1, yes/no values are mismatches
+            result = CByte(iValue)
+        Case "number"
+            If Not IsNumeric(iValue) Then isOK = False
+        Case "integer"
+            result = CInt(iValue)
+        Case "long"
+            result = CLng(iValue)
+        Case "double"
+            result = CDbl(iValue)
+        Case "single"
+            result = CSng(iValue)
+        Case "decimal"
+            result = CDec(iValue)
+        Case "string"
+            result = CStr(iValue)
+        Case "date"
+            result = CDate(iValue)
+        Case "currency"
+            result = CDate(iValue)
+        Case Else
+            isOK = False
+    End Select
+    
+Exit_Handler:
+    IsTypeMatch = isOK
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case "13" 'RunTime Error 13: Type Mismatch
+        isOK = False
+        Resume Exit_Handler
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - IsTypeMatch[mod_Validation])"
+    End Select
+    'fail on error
+    isOK = False
     Resume Exit_Handler
 End Function

@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =13380
-    Top =4620
-    Right =19215
-    Bottom =4980
+    Left =4110
+    Top =6090
+    Right =9945
+    Bottom =6450
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -632,7 +632,7 @@ On Error GoTo Err_Handler
     
     Me.btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park Missing") & " > "
     Me.btnLevel1.Caption = Nz(TempVars("River"), "River Missing") & " > "
-    Me.btnLevel2.Caption = Nz(TempVars("Site"), "Site Missing") & " > "
+    Me.btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site Missing") & " > "
     Me.btnLevel3.Caption = Nz(TempVars("Feature"), "Feature Missing")
     
     'hide level3

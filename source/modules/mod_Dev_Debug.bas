@@ -803,7 +803,14 @@ Public Sub testme()
 
 '    GetRiverSegments "BLCA"
 '     GetProtocolVersion
-Dim rs As Variant
-Set rs = GetSOPMetadata("transducer")
-Debug.Print rs(1)
+'Dim rs As Variant
+'Set rs = GetSOPMetadata("transducer")
+'Debug.Print rs(1)
+
+
+    GetTemplates
+'    Dim strSQL As String
+'    strSQL = GetDbTemplate("s_park_list")
+    Debug.Print GetTemplate("s_park_list")
+    Debug.Print GetTemplate("s_tagline", "SourceType:S|SourceID:3")
 End Sub

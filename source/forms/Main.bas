@@ -16,10 +16,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =13230
-    Top =3825
-    Right =22125
-    Bottom =11490
+    Left =17940
+    Top =4140
+    Right =26835
+    Bottom =11805
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -495,25 +495,30 @@ Public Sub UpdateBreadcrumb(Optional ClearValues As Integer = 4)
 On Error GoTo Err_Handler
     
     Dim i As Integer
-    Dim strLevel As String
+    Dim strLevel As String, strMore As String
     Dim strHierarchy() As Variant
     Dim frm As Form
+        
     Set frm = Me!fsubBreadcrumb.Form
     
     With frm
-        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Missing Park") & Space(4) & ">"
-        .btnLevel1.Caption = Nz(TempVars("River"), "Missing River") & Space(4) & ">"
-        .btnLevel2.Caption = Nz(TempVars("Site"), "Missing Site") & Space(4) & ">"
-        .btnLevel3.Caption = Nz(TempVars("Feature"), "Missing Feature") & Space(4) & ">"
+        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park") & Space(4) & ">"
+        .btnLevel1.Caption = Nz(TempVars("River"), "River") & Space(4) & ">"
+        .btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site") & Space(4) & ">"
+        .btnLevel3.Caption = Nz(TempVars("Feature"), "Feature")
 
-    
         'clear
         strHierarchy() = Array("Park", "River", "Site", "Feature")
         
         For i = ClearValues + 1 To 3 - ClearValues
+            
+            'default
+            strMore = ""
+            
+            If i < 4 Then strMore = Space(4) & ">"
         
             strLevel = "btnLevel" & i
-            .Controls(strLevel).Caption = "Missing " & strHierarchy(i) & Space(4) & ">"
+            .Controls(strLevel).Caption = strHierarchy(i) & strMore
         
         Next
         

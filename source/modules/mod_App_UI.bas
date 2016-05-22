@@ -346,6 +346,38 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          GetParks
+' Description:  Retrieves list of parks from database
+' Assumptions:  -
+' Parameters:   active - flag if park is currently being sampled, 1-active, 0-inactive (boolean)
+' Returns:      parks - list of park codes separated by "|" (string)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, May 18, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 5/18/2016  - initial version
+' ---------------------------------
+Public Function GetParks() As String
+On Error GoTo Err_Handler
+
+    'defaults
+        
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetParks[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+
 Public Function SetStartupOptions(propertyname As String, _
     propertytype As Variant, propertyvalue As Variant) _
     As Boolean

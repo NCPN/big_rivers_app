@@ -13,6 +13,11 @@ Option Explicit
 ' =================================
 
 ' ---------------------------------
+' Declarations
+' ---------------------------------
+Global AppTemplates As Scripting.Dictionary
+
+' ---------------------------------
 ' Types & Type Descriptions
 ' ---------------------------------
 ' -32768  Form                    1   Table - Local Access Tables
@@ -498,40 +503,44 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
-' SUB:     GetSQLTemplates
-' Description:  loads SQL templates (queries as SQL string) into memory as a dictionary object
-'               with query SQL strings available without querying the db tsys_SQL_templates table
-' Parameters:
-' Returns:      dictionary object stored in tempVars.Item("SQL")
-' Assumptions:  placing
+' SUB:     GetTemplates
+' Description:  loads templates into memory as a global dictionary object (dictTemplates)
+'               makes current templates available without querying the db tsys_SQL_templates table
+' Parameters:   strSyntax - specifies syntax of the template to retrieve (T-SQL, JET, etc.)
+'               strParams - specifies the parameters & their datatypes for the template
+' Returns:      -
+' Assumptions:  -
 ' Throws:       none
 ' References:   tsys_Db_templates, Microsoft Scripting Runtime (dictionary object)
 ' Source/date:  Bonnie Campbell, June 2014
 ' Revisions:    BLC, 6/16/2014 - initial version
 '               BLC, 5/13/2016 - shifted from mod_Db_Templates to mod_Db & adjusted to match tsys_Db_Templates
+'               BLC, 5/19/2016 - revised documentation & renamed GetTemplates() vs. GetSQLTemplates() since tsys_Db_Templates
+'                                can accommodate more than SQL
 ' ---------------------------------
-Public Sub GetSQLTemplates(Optional strVersion As String = "")
+Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As String = "")
 
     Dim db As DAO.Database
-    Dim rst As DAO.Recordset
-    Dim strSQL As String, strSQLWhere As String, key As String, Value As String
+    Dim rs As DAO.Recordset
+    Dim strSQL As String, strSQLWhere As String, key As String
+    Dim Value As Variant
     
     'handle default
-    strSQLWhere = " WHERE Is_Supported > 0"
+    strSQLWhere = " WHERE IsSupported > 0"
     
-    If Len(strVersion) > 0 Then
-        strSQLWhere = " AND LCase(versionID) = LCase(" & strVersion & " )"
+    If Len(strSyntax) > 0 Then
+        strSQLWhere = " AND LCase(Syntax) = LCase(" & strSyntax & " )"
     End If
     
     'sql -> ID, Version, IsSupported, Context, Syntax, TemplateName, Params, Template, Remarks,
     '       EffectiveDate, RetireDate, CreateDate, CreatedBy_ID, LastModified, LastModifiedBy_ID
-    strSQL = "SELECT * FROM tsys_Db_Templates" & strSQLWhere
+    strSQL = "SELECT * FROM tsys_Db_Templates" & strSQLWhere & ";"
     
     Set db = CurrentDb
-    Set rst = db.OpenRecordset(strSQL)
+    Set rs = db.OpenRecordset(strSQL)
     
     'handle no records
-    If rst.EOF Then
+    If rs.EOF Then
         MsgBox "Sorry, no templates were found for this database version.", vbExclamation, _
             "Linked Database Templates Not Found"
         DoCmd.CancelEvent
@@ -539,38 +548,76 @@ Public Sub GetSQLTemplates(Optional strVersion As String = "")
     End If
     
     'prepare dictionary
-    Dim dict As New Scripting.Dictionary
-    Dim ary(1 To 4) As String
-    Dim i As Integer
+    Dim dict As New Scripting.Dictionary, dictParam As New Scripting.Dictionary
+    Dim ary(1 To 5) As String, ary2() As String, param() As String
+    Dim i As Integer, j As Integer
     
     'prepare the dictionary key array
-    ary(1) = "context"
-    ary(2) = "template_Name"
-    ary(3) = "SQLstring" 'template
-    ary(4) = "var_list"
+    ary(1) = "Context"
+    ary(2) = "TemplateName"
+    ary(3) = "Template" 'template
+    ary(4) = "Params"
+    ary(5) = "Syntax"
     
-    rst.MoveFirst
-    Do Until rst.EOF
+    'prepare array of dictionaries
+    Dim dictTemplates As Dictionary
+    Set dictTemplates = New Scripting.Dictionary
+    
+    rs.MoveFirst
+    Do Until rs.EOF
+        'create new dictionary object
+        Set dict = New Scripting.Dictionary
+        
         'populate the dictionary
         For i = 1 To UBound(ary)
+            
             key = ary(i)
-            If (ary(i) = "SQLstring") Then
-                Value = rst!template
+            
+            If key = "Params" Then
+                'create new dictionary for param name & data type
+                Set dictParam = New Scripting.Dictionary
+                
+                'separate parameters
+                ary2 = Split(Nz(rs.Fields(ary(i)), ":"), "|")
+                
+                'prepare sets of param name & data type --> split(ary2(i), ":") yields name & data type
+                For j = 0 To UBound(ary2)
+                
+                    'split the param into name & data type
+                    param = Split(ary2(j), ":")
+                    
+                    If Not dictParam.Exists(param(0)) And Len(param(0)) <> 0 Then
+                        dictParam.Add param(0), param(1)
+                    End If
+                
+                Next
+                
+                Set Value = dictParam
+
             Else
-                Value = rst.Fields(ary(i))
+                Value = Nz(rs.Fields(ary(i)), "")
             End If
+            
+            'add key if it isn't already there
             If Not dict.Exists(key) Then
                 dict.Add key, Value
             End If
+            
         Next
-        rst.MoveNext
+        
+        'add template dictionary to dictionary of templates
+        dictTemplates.Add dict("TemplateName"), dict
+        
+        rs.MoveNext
     Loop
     
-    TempVars.Add "SQL", dict
+    'load global AppTemplates As Scripting.Dictionary of templates
+    Set AppTemplates = dictTemplates
     
 Exit_Handler:
     'cleanup
     Set dict = Nothing
+    Set dictTemplates = Nothing
     Exit Sub
 
 Err_Handler:
@@ -581,3 +628,73 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:     GetTemplate
+' Description:  retrieves template from templates global template dictionary (AppTemplates)
+' Parameters:   strTemplate - name of template to fetch (string)
+'               params - pipe (|) separated parameter listing w/ parameter name:value pairs (: separated) (string)
+' Returns:      template - value of the template (string)
+'               most templates are SQL strings, so the SQL string (template) field of the given
+'               template name is retrieved
+' Assumptions:  tsys_Db_templates correctly list parameter:parameter type values & AppTemplates contain them
+' Throws:       none
+' References:   tsys_Db_templates, Microsoft Scripting Runtime (dictionary object)
+' Source/date:  Bonnie Campbell, May 2016
+' Revisions:    BLC, 5/19/2016 - initial version
+' ---------------------------------
+Public Function GetTemplate(strTemplate As String, Optional params As String = "") As String
+
+    Dim aryParams() As Variant
+    Dim ary() As String, ary2() As String
+    Dim i As Integer
+    Dim template As String, swap As String
+
+    'initialize AppTemplates if not populated
+    If AppTemplates Is Nothing Then GetTemplates
+
+    template = AppTemplates(strTemplate).item("Template")
+    
+    If Len(params) > 0 Then
+    
+        'prepare passed in param array --> array contains param:value pairs
+        ary = Split(params, "|")
+        
+        'prepare array of template parameters w/ their data type
+        'aryParams = Split(AppTemplates(strTemplate).item("Params"), "|")
+        'AppTemplates("s_tagline").Item("Params").Item("SourceID") --> integer
+    
+        'iterate through params
+        For i = 0 To UBound(ary)
+            
+            'split name:value pair --> ary2(0) = name, ary2(1) = value
+            ary2 = Split(ary(i), ":")
+                        
+            'compare datatype to aryParams value
+            If IsTypeMatch(ary2(1), AppTemplates(strTemplate).item("Params").item(ary2(0))) Then
+                
+                'prepare replaced value
+                swap = "[" & ary2(0) & "]"
+
+                'swap out the placeholder in the template
+                template = Replace(template, swap, ary2(1))
+                
+            End If
+            
+        Next
+    
+    End If
+    
+    GetTemplate = template
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetTemplate[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
