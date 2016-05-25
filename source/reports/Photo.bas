@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =79
-    Right =8064
-    Bottom =6240
+    Right =25395
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -1317,7 +1317,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(Cancel As Integer)
+Private Sub Report_Open(cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String, strSegments As String
@@ -1399,44 +1399,3 @@ End Sub
 '---------------------
 ' Methods
 '---------------------
-
-' ---------------------------------
-' Function:     NoData
-' Description:  report actions when no data is found
-' Assumptions:  -
-' Parameters:   rpt - report being referenced
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 10, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/10/2016 - initial version
-' ---------------------------------
-Public Function NoData(rpt As Report)
-On Error GoTo Err_Handler
-
-    'Purpose: Called by report's NoData event.
-    'Usage: =NoData([Report])
-    Dim strCaption As String   'Caption of report.
-    
-    strCaption = rpt.Caption
-    If strCaption = vbNullString Then
-        strCaption = rpt.Name
-    End If
-    
-    DoCmd.CancelEvent
-    MsgBox "There are no records to include in report """ & _
-        strCaption & """.", vbInformation, "No Data..."
-
-
-Exit_Function:
-    Exit Function
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Photo report])"
-    End Select
-    Resume Exit_Function
-End Function

@@ -134,6 +134,22 @@ Begin Report
             GroupFooter = NotDefault
             ControlSource ="=1"
         End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="=2"
+        End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="=3"
+        End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="=4"
+        End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="=5"
+        End
         Begin FormHeader
             KeepTogether = NotDefault
             Height =0
@@ -152,35 +168,13 @@ Begin Report
             KeepTogether = NotDefault
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =1668
+            Height =360
             Name ="GroupHeader0"
             AutoHeight =255
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             Begin
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =2
-                    Top =360
-                    Width =11448
-                    Height =288
-                    FontSize =8
-                    TopMargin =29
-                    BackColor =6842733
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblKey"
-                    Caption ="Key"
-                    GridlineColor =10921638
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =11448
-                    LayoutCachedHeight =648
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
                 Begin Label
                     BackStyle =1
                     OldBorderStyle =1
@@ -198,48 +192,6 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedWidth =11448
                     LayoutCachedHeight =360
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =1
-                    Top =1308
-                    Width =11448
-                    Height =360
-                    FontSize =8
-                    FontWeight =600
-                    TopMargin =29
-                    BackColor =14869733
-                    BorderColor =8355711
-                    Name ="lblCheckboxRow"
-                    Caption ="No Canopy Veg?"
-                    GridlineColor =10921638
-                    LayoutCachedTop =1308
-                    LayoutCachedWidth =11448
-                    LayoutCachedHeight =1668
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OldBorderStyle =1
-                    TextAlign =1
-                    Top =660
-                    Width =11448
-                    Height =360
-                    FontSize =8
-                    TopMargin =29
-                    BackColor =14869733
-                    BorderColor =8355711
-                    Name ="lblTotalCover"
-                    Caption ="Total Plot Cover %"
-                    GridlineColor =10921638
-                    LayoutCachedTop =660
-                    LayoutCachedWidth =11448
-                    LayoutCachedHeight =1020
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -289,45 +241,68 @@ Begin Report
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+            End
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =288
+            BreakLevel =1
+            Name ="GroupHeader1"
+            AutoHeight =255
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            Begin
                 Begin Label
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Top =1020
                     Width =11448
                     Height =288
                     FontSize =8
                     TopMargin =29
-                    BackColor =11265523
+                    BackColor =6842733
                     BorderColor =8355711
-                    Name ="lblSubTitle"
+                    ForeColor =16777215
+                    Name ="lblKey"
                     Caption ="Key"
                     GridlineColor =10921638
-                    LayoutCachedTop =1020
                     LayoutCachedWidth =11448
-                    LayoutCachedHeight =1308
+                    LayoutCachedHeight =288
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+            End
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =363
+            BreakLevel =2
+            Name ="GroupHeader2"
+            AutoHeight =255
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            Begin
                 Begin Label
-                    TextAlign =3
-                    Left =5685
-                    Top =1020
-                    Width =5760
-                    Height =288
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Width =11448
+                    Height =360
                     FontSize =8
                     TopMargin =29
-                    RightMargin =288
                     BackColor =14869733
                     BorderColor =8355711
-                    Name ="lblRightKeySub"
-                    Caption ="right key"
+                    Name ="lblTotalCover"
+                    Caption ="Total Plot Cover %"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5685
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =11445
-                    LayoutCachedHeight =1308
+                    LayoutCachedWidth =11448
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -337,7 +312,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =3195
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -349,9 +323,8 @@ Begin Report
                     Caption ="c1"
                     GridlineColor =10921638
                     LayoutCachedLeft =3195
-                    LayoutCachedTop =660
                     LayoutCachedWidth =3713
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -360,7 +333,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =3711
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -372,9 +344,8 @@ Begin Report
                     Caption ="c2"
                     GridlineColor =10921638
                     LayoutCachedLeft =3711
-                    LayoutCachedTop =660
                     LayoutCachedWidth =4229
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -384,7 +355,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =4227
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -396,9 +366,8 @@ Begin Report
                     Caption ="c3"
                     GridlineColor =10921638
                     LayoutCachedLeft =4227
-                    LayoutCachedTop =660
                     LayoutCachedWidth =4745
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -407,7 +376,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =4743
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -419,9 +387,8 @@ Begin Report
                     Caption ="c4"
                     GridlineColor =10921638
                     LayoutCachedLeft =4743
-                    LayoutCachedTop =660
                     LayoutCachedWidth =5261
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -431,7 +398,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =5259
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -443,9 +409,8 @@ Begin Report
                     Caption ="c5"
                     GridlineColor =10921638
                     LayoutCachedLeft =5259
-                    LayoutCachedTop =660
                     LayoutCachedWidth =5777
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -454,7 +419,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =5775
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -466,9 +430,8 @@ Begin Report
                     Caption ="c6"
                     GridlineColor =10921638
                     LayoutCachedLeft =5775
-                    LayoutCachedTop =660
                     LayoutCachedWidth =6293
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -478,7 +441,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =6291
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -490,9 +452,8 @@ Begin Report
                     Caption ="c7"
                     GridlineColor =10921638
                     LayoutCachedLeft =6291
-                    LayoutCachedTop =660
                     LayoutCachedWidth =6809
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -501,7 +462,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =6807
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -513,9 +473,8 @@ Begin Report
                     Caption ="c8"
                     GridlineColor =10921638
                     LayoutCachedLeft =6807
-                    LayoutCachedTop =660
                     LayoutCachedWidth =7325
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -525,7 +484,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =7299
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -537,9 +495,8 @@ Begin Report
                     Caption ="c9"
                     GridlineColor =10921638
                     LayoutCachedLeft =7299
-                    LayoutCachedTop =660
                     LayoutCachedWidth =7817
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -548,7 +505,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =7815
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -560,9 +516,8 @@ Begin Report
                     Caption ="c10"
                     GridlineColor =10921638
                     LayoutCachedLeft =7815
-                    LayoutCachedTop =660
                     LayoutCachedWidth =8333
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -572,7 +527,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =8332
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -584,9 +538,8 @@ Begin Report
                     Caption ="c11"
                     GridlineColor =10921638
                     LayoutCachedLeft =8332
-                    LayoutCachedTop =660
                     LayoutCachedWidth =8850
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -595,7 +548,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =8848
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -607,9 +559,8 @@ Begin Report
                     Caption ="c12"
                     GridlineColor =10921638
                     LayoutCachedLeft =8848
-                    LayoutCachedTop =660
                     LayoutCachedWidth =9366
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -619,7 +570,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =9365
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -631,9 +581,8 @@ Begin Report
                     Caption ="c13"
                     GridlineColor =10921638
                     LayoutCachedLeft =9365
-                    LayoutCachedTop =660
                     LayoutCachedWidth =9883
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -642,7 +591,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =9883
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -654,9 +602,8 @@ Begin Report
                     Caption ="c14"
                     GridlineColor =10921638
                     LayoutCachedLeft =9883
-                    LayoutCachedTop =660
                     LayoutCachedWidth =10401
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -666,7 +613,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =10402
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -678,9 +624,8 @@ Begin Report
                     Caption ="c15"
                     GridlineColor =10921638
                     LayoutCachedLeft =10402
-                    LayoutCachedTop =660
                     LayoutCachedWidth =10920
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -689,7 +634,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =10922
-                    Top =660
                     Width =518
                     Height =360
                     FontSize =8
@@ -701,9 +645,97 @@ Begin Report
                     Caption ="c16"
                     GridlineColor =10921638
                     LayoutCachedLeft =10922
-                    LayoutCachedTop =660
                     LayoutCachedWidth =11440
-                    LayoutCachedHeight =1020
+                    LayoutCachedHeight =360
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+            End
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =288
+            BreakLevel =3
+            Name ="GroupHeader3"
+            AutoHeight =255
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            Begin
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Width =11448
+                    Height =288
+                    FontSize =8
+                    TopMargin =29
+                    BackColor =11265523
+                    BorderColor =8355711
+                    Name ="lblSubTitle"
+                    Caption ="Key"
+                    GridlineColor =10921638
+                    LayoutCachedWidth =11448
+                    LayoutCachedHeight =288
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    TextAlign =3
+                    Left =5685
+                    Width =5760
+                    Height =288
+                    FontSize =8
+                    TopMargin =29
+                    RightMargin =288
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblRightKeySub"
+                    Caption ="right key"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5685
+                    LayoutCachedWidth =11445
+                    LayoutCachedHeight =288
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+            End
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =363
+            BreakLevel =4
+            Name ="GroupHeader4"
+            AutoHeight =255
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            Begin
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Top =3
+                    Width =11448
+                    Height =360
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblCheckboxRow"
+                    Caption ="No Canopy Veg?"
+                    GridlineColor =10921638
+                    LayoutCachedTop =3
+                    LayoutCachedWidth =11448
+                    LayoutCachedHeight =363
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -713,7 +745,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =3195
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -725,9 +756,8 @@ Begin Report
                     Caption ="c1"
                     GridlineColor =10921638
                     LayoutCachedLeft =3195
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =3713
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -736,7 +766,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =3711
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -748,9 +777,8 @@ Begin Report
                     Caption ="c2"
                     GridlineColor =10921638
                     LayoutCachedLeft =3711
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =4229
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -760,7 +788,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =4227
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -772,9 +799,8 @@ Begin Report
                     Caption ="c3"
                     GridlineColor =10921638
                     LayoutCachedLeft =4227
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =4745
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -783,7 +809,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =4743
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -795,9 +820,8 @@ Begin Report
                     Caption ="c4"
                     GridlineColor =10921638
                     LayoutCachedLeft =4743
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =5261
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -807,7 +831,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =5259
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -819,9 +842,8 @@ Begin Report
                     Caption ="c5"
                     GridlineColor =10921638
                     LayoutCachedLeft =5259
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =5777
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -830,7 +852,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =5775
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -842,9 +863,8 @@ Begin Report
                     Caption ="c6"
                     GridlineColor =10921638
                     LayoutCachedLeft =5775
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =6293
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -854,7 +874,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =6291
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -866,9 +885,8 @@ Begin Report
                     Caption ="c7"
                     GridlineColor =10921638
                     LayoutCachedLeft =6291
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =6809
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -877,7 +895,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =6807
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -889,9 +906,8 @@ Begin Report
                     Caption ="c8"
                     GridlineColor =10921638
                     LayoutCachedLeft =6807
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =7325
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -901,7 +917,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =7299
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -913,9 +928,8 @@ Begin Report
                     Caption ="c9"
                     GridlineColor =10921638
                     LayoutCachedLeft =7299
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =7817
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -924,7 +938,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =7815
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -936,9 +949,8 @@ Begin Report
                     Caption ="c10"
                     GridlineColor =10921638
                     LayoutCachedLeft =7815
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =8333
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -948,7 +960,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =8332
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -960,9 +971,8 @@ Begin Report
                     Caption ="c11"
                     GridlineColor =10921638
                     LayoutCachedLeft =8332
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =8850
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -971,7 +981,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =8848
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -983,9 +992,8 @@ Begin Report
                     Caption ="c12"
                     GridlineColor =10921638
                     LayoutCachedLeft =8848
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =9366
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -995,7 +1003,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =9365
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -1007,9 +1014,8 @@ Begin Report
                     Caption ="c13"
                     GridlineColor =10921638
                     LayoutCachedLeft =9365
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =9883
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1018,7 +1024,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =9883
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -1030,9 +1035,8 @@ Begin Report
                     Caption ="c14"
                     GridlineColor =10921638
                     LayoutCachedLeft =9883
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =10401
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1042,7 +1046,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =10402
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -1054,9 +1057,8 @@ Begin Report
                     Caption ="c15"
                     GridlineColor =10921638
                     LayoutCachedLeft =10402
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =10920
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1065,7 +1067,6 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Left =10922
-                    Top =1305
                     Width =518
                     Height =360
                     FontSize =14
@@ -1077,16 +1078,15 @@ Begin Report
                     Caption ="c16"
                     GridlineColor =10921638
                     LayoutCachedLeft =10922
-                    LayoutCachedTop =1305
                     LayoutCachedWidth =11440
-                    LayoutCachedHeight =1665
+                    LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     TextAlign =4
-                    Top =1308
+                    Top =3
                     Width =11448
                     Height =360
                     FontSize =14
@@ -1099,9 +1099,9 @@ Begin Report
                     Name ="lblCheckboxes"
                     Caption ="checkboxes"
                     GridlineColor =10921638
-                    LayoutCachedTop =1308
+                    LayoutCachedTop =3
                     LayoutCachedWidth =11448
-                    LayoutCachedHeight =1668
+                    LayoutCachedHeight =363
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -1111,10 +1111,13 @@ Begin Report
         End
         Begin Section
             KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
             Height =360
             OnFormat ="[Event Procedure]"
             OnPrint ="[Event Procedure]"
             Name ="Detail"
+            AutoHeight =255
             AlternateBackColor =14869733
             Begin
                 Begin Label

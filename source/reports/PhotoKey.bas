@@ -20,8 +20,8 @@ Begin Report
     Width =5520
     DatasheetFontHeight =11
     ItemSuffix =103
-    Right =8064
-    Bottom =6240
+    Right =20565
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -127,6 +127,10 @@ Begin Report
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="=1"
+        End
         Begin FormHeader
             KeepTogether = NotDefault
             Height =0
@@ -135,11 +139,19 @@ Begin Report
             AlternateBackShade =95.0
         End
         Begin PageHeader
-            Height =1380
+            Height =0
             Name ="PageHeaderSection"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =1379
+            Name ="GroupHeader0"
+            AlternateBackColor =16777215
             Begin
                 Begin Label
                     BackStyle =1
@@ -834,7 +846,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(Cancel As Integer)
+Private Sub Report_Open(cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String
@@ -942,7 +954,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/10/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     Dim ctrl As Control
@@ -999,7 +1011,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/10/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
     'CircleControl Me.lblNumEx1

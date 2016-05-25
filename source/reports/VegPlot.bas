@@ -9,20 +9,21 @@ Begin Report
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =9864
+    Width =11491
     DatasheetFontHeight =11
-    ItemSuffix =5
-    Right =25395
-    Bottom =11790
+    ItemSuffix =17
+    Right =25650
+    Bottom =12045
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
         0x32f638d6d6a9e440
     End
-    Caption ="_Default"
+    Caption ="VegPlot"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6a01000068010000680100006801000000000000201c0000e010000001000000 ,
+        0x6a01000068010000680100006801000000000000e32c00005820000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -70,6 +71,11 @@ Begin Report
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
+        Begin Subform
+            BorderLineStyle =0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin FormHeader
             KeepTogether = NotDefault
             Height =360
@@ -90,7 +96,7 @@ Begin Report
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="Label4"
+                    Name ="lblTitle"
                     Caption ="=[Report].[Caption]"
                     GridlineColor =10921638
                     LayoutCachedLeft =840
@@ -101,22 +107,93 @@ Begin Report
             End
         End
         Begin PageHeader
-            Height =360
+            Height =2400
             Name ="PageHeaderSection"
-            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
+            Begin
+                Begin Subform
+                    CanShrink = NotDefault
+                    OldBorderStyle =0
+                    Width =6599
+                    Name ="rsubModWentworth"
+                    SourceObject ="Report.ModWentworthKey"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedWidth =6599
+                    LayoutCachedHeight =1440
+                    ShowPageHeaderAndPageFooter =255
+                End
+                Begin Subform
+                    CanShrink = NotDefault
+                    OldBorderStyle =0
+                    Left =7830
+                    Top =1432
+                    Width =3615
+                    Height =720
+                    TabIndex =1
+                    Name ="rsubPlotDimensionsKey"
+                    SourceObject ="Report.PlotDimensionsKey"
+                    LeftPadding =0
+                    TopPadding =0
+                    RightPadding =0
+                    BottomPadding =0
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7830
+                    LayoutCachedTop =1432
+                    LayoutCachedWidth =11445
+                    LayoutCachedHeight =2152
+                End
+            End
         End
         Begin Section
             KeepTogether = NotDefault
-            Height =7560
+            CanGrow = NotDefault
+            Height =8280
             Name ="Detail"
             AutoHeight =1
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
+            Begin
+                Begin Subform
+                    CanShrink = NotDefault
+                    OldBorderStyle =0
+                    Left =14
+                    Width =11477
+                    Height =4320
+                    Name ="oTPctCover"
+                    SourceObject ="Report.PercentCover"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =14
+                    LayoutCachedWidth =11491
+                    LayoutCachedHeight =4320
+                End
+                Begin Subform
+                    CanShrink = NotDefault
+                    OldBorderStyle =0
+                    Left =14
+                    Top =4680
+                    Width =11477
+                    Height =2520
+                    TabIndex =1
+                    Name ="oBPctCover"
+                    SourceObject ="Report.PercentCover"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =14
+                    LayoutCachedTop =4680
+                    LayoutCachedWidth =11491
+                    LayoutCachedHeight =7200
+                End
+            End
         End
         Begin PageFooter
             Height =360
@@ -163,17 +240,15 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         _Default
-' Level:        Framework form
+' Report:       VegPlot
+' Level:        Application report
 ' Version:      1.00
 '
-' Description:  _Default form object related properties, events, functions & procedures for UI display
+' Description:  Vegetation plot report object related properties, events, functions & procedures for UI display
 '
-' Source/date:  Bonnie Campbell, November 10, 2015
-' References:
-'  Allen Browne, April 2010
-'  http://allenbrowne.com/ser-43.html
-' Revisions:    BLC - 11/10/2015 - 1.00 - initial version
+' Source/date:  Bonnie Campbell, May 25, 2016
+' References:   -
+' Revisions:    BLC - 5/25/2016 - 1.00 - initial version
 ' =================================
 
 '---------------------
@@ -183,6 +258,10 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
+Private WithEvents oTPctCover As Report_PercentCover
+Attribute oTPctCover.VB_VarHelpID = -1
+Private WithEvents oBPctCover As Report_PercentCover
+Attribute oBPctCover.VB_VarHelpID = -1
 
 '---------------------
 ' Event Declarations
@@ -220,7 +299,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - XX[Default form])"
+            "Error encountered (#" & Err.Number & " - XX[VegPlot report])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -228,3 +307,79 @@ End Sub
 '---------------------
 ' Methods
 '---------------------
+
+' ---------------------------------
+' Sub:          Report_Open
+' Description:  report opening actions
+' Assumptions:  Two separate percent cover subreport objects are present to
+'               handle WCC/ARS and URC
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 25, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/25/2016 - initial version
+' ---------------------------------
+Private Sub Report_Open(cancel As Integer)
+On Error GoTo Err_Handler
+    
+    'testing
+    TempVars.Add "ParkCode", "CANY"
+    
+    'prepare interface
+    Dim oTPctCover As New Report_PercentCover
+    Dim oBPctCover As New Report_PercentCover
+    
+    'VegPlot
+    lblTitle.Caption = "VegPlot"
+    
+    ' ------ Keys -------
+    Me.rsubModWentworth.SourceObject = "Report.ModWentworthKey"
+    
+    ' ------ Top -------
+    Set oTPctCover = oTPctCover.Report
+    With oTPctCover
+        .Park = TempVars("ParkCode")
+        Select Case .Park
+            Case "BLCA"
+                .CoverType = "WCC"
+            Case "CANY"
+                .CoverType = "WCC"
+            Case "DINO"
+                .CoverType = "ARS"
+        End Select
+    
+    End With
+        
+    ' ------ Bottom -------
+    Set oBPctCover = oBPctCover.Report
+    With oBPctCover
+        'default
+        .Visible = True
+        
+        .Park = TempVars("park")
+        .CoverType = "URC"
+        
+        Select Case .Park
+            Case "BLCA"
+            Case "CANY"
+            Case "DINO" 'DINO has only one percent cover displayed (ARS)
+                .Visible = False
+'               .Height = 0.1
+        End Select
+
+    End With
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Open[VegPlot report])"
+    End Select
+    Resume Exit_Handler
+End Sub

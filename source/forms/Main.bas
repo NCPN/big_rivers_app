@@ -3,7 +3,6 @@ VersionRequired =20
 Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
-    MaxButton = NotDefault
     ControlBox = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
@@ -16,10 +15,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =17940
-    Top =4140
-    Right =26835
-    Bottom =11805
+    Left =3150
+    Top =3105
+    Right =28545
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -351,7 +350,7 @@ Attribute oTile.VB_VarHelpID = -1
 '---------------------
 ' Methods
 '---------------------
-'Private Sub Form_Load()
+
 ' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
@@ -365,7 +364,7 @@ Attribute oTile.VB_VarHelpID = -1
 ' Revisions:
 '   BLC - 4/27/2016 - initial version
 ' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
+Private Sub Form_Open(cancel As Integer)
 On Error GoTo Err_Handler
     
     'initialize app (mod_App_UI)

@@ -567,9 +567,10 @@ On Error GoTo Err_Handler
     End If
     
     'generate SQL
-    strSQL = "SELECT ProtocolName, Version, EffectiveDate, RetireDate, LastModified FROM Protocol " _
-                & strWHERE & ";"
-            
+'    strSQL = "SELECT ProtocolName, Version, EffectiveDate, RetireDate, LastModified FROM Protocol " _
+'                & strWHERE & ";"
+    strSQL = GetTemplate("s_protocol_info", "strWHERE:" & strWHERE)
+    
     'fetch data
     Set db = CurrentDb
     Set rs = db.OpenRecordset(strSQL)
@@ -697,9 +698,12 @@ On Error GoTo Err_Handler
     End If
     
     'generate SQL
-    strSQL = "SELECT Segment FROM River " _
-                & "LEFT JOIN Park ON Park.ID = River.Park_ID " _
-                & "WHERE ParkCode LIKE '" & ParkCode & "';"
+'    strSQL = "SELECT Segment FROM River " _
+'                & "LEFT JOIN Park ON Park.ID = River.Park_ID " _
+'                & "WHERE ParkCode LIKE '" & ParkCode & "';"
+
+    strSQL = GetTemplate("s_get_river_segments", "ParkCode:" & ParkCode)
+
             
     'fetch data
     Set db = CurrentDb

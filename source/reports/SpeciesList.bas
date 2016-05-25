@@ -6,7 +6,6 @@ Begin Report
     MinButton = NotDefault
     ControlBox = NotDefault
     AutoCenter = NotDefault
-    CloseButton = NotDefault
     DividingLines = NotDefault
     ScrollBars =0
     BorderStyle =0
@@ -20,8 +19,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =120
-    Right =20268
-    Bottom =9408
+    Right =28035
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -29,6 +28,7 @@ Begin Report
     End
     Caption ="Species List"
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6a01000068010000680100006801000000000000100e0000a401000000000000 ,
@@ -580,7 +580,7 @@ Begin Report
         End
         Begin Section
             KeepTogether = NotDefault
-            Height =312
+            Height =315
             OnFormat ="[Event Procedure]"
             OnPrint ="[Event Procedure]"
             Name ="Detail"
@@ -597,7 +597,7 @@ Begin Report
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSpecies"
-                    ControlSource ="Species"
+                    ControlSource ="x"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =300
@@ -763,7 +763,7 @@ End Property
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(Cancel As Integer)
+Private Sub Report_Open(cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim arySegments() As Variant, aryProtocol() As Variant
@@ -811,13 +811,13 @@ On Error GoTo Err_Handler
     'setup data sources
     Select Case Me.Park
         Case "BLCA", ""
-            strFamily = "CO_Family"
+            strFamily = "Master_Family" '"CO_Family"
             strSpecies = "Co_species"
         Case "CANY"
-            strFamily = "UT_Family"
+            strFamily = "Master_Family" '"UT_Family"
             strSpecies = "Utah_species"
         Case "DINO"
-            strFamily = "UT_Family"
+            strFamily = "Master_Family" '"UT_Family"
             strSpecies = "Utah_species"
     End Select
     
@@ -825,27 +825,27 @@ On Error GoTo Err_Handler
     '# TODO: Adjust strSQL to filter by park, river segment & year     #
     '###################################################################
 
-'            & "WHERE Master_Family NOT IN ('Unknown','') " _
-'            & "AND Utah_Family NOT IN ('') " _
-'            & "OR Co_Family NOT IN ('') " _
+'    strSQL = "SELECT " & strFamily & " AS Family, " & strSpecies & " AS Species, LU_Code, " _
+'            & "1 AS SeqNum " _
+'            & "FROM tlu_NCPN_Plants " _
+'            & "WHERE Master_Family NOT IN ('','Unknown') " _
+'            & "UNION ALL " _
+'            & "SELECT " & strFamily & " AS Family, " & strSpecies & " AS Species, LU_Code, " _
+'            & "2 AS SeqNum " _
+'            & "FROM tlu_NCPN_Plants " _
+'            & "WHERE Master_Family = 'Unknown'" _
+'            & "ORDER BY SeqNum ASC;"
 
-    strSQL = "SELECT " & strFamily & " AS Family, " & strSpecies & " AS Species, LU_Code, " _
-            & "1 AS SeqNum " _
-            & "FROM tlu_NCPN_Plants " _
-            & "WHERE Master_Family NOT IN ('','Unknown') " _
-            & "UNION ALL " _
-            & "SELECT " & strFamily & " AS Family, " & strSpecies & " AS Species, LU_Code, " _
-            & "2 AS SeqNum " _
-            & "FROM tlu_NCPN_Plants " _
-            & "WHERE Master_Family = 'Unknown'" _
-            & "ORDER BY SeqNum ASC;"
+    strSQL = GetTemplate("s_vegwalk", "strFamily:" & strFamily & "|strSpecies:" & strSpecies)
     
     Me.RecordSource = strSQL
     Debug.Print strSQL
-    
-'    Me.tbxFamily.ControlSource = strFamily
-'    Me.tbxSpecies.ControlSource = strSpecies
 
+    tbxSpecies.ControlSource = "Species"
+    
+    'hide modal Main form
+    Forms("Main").Visible = False
+    
 Exit_Handler:
     Exit Sub
 
@@ -876,7 +876,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/11/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
 
@@ -906,7 +906,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/11/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
 
@@ -923,21 +923,23 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Function:     Detail_Print
-' Description:  report detail printing actions
+' Function:     Report_Close
+' Description:  report closing actions
 ' Assumptions:  -
 ' Parameters:   Cancel - if print action should be cancelled (integer)
-'               PrintCount - items to print (integer)
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, May 11, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, May 25, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/11/2016 - initial version
+'   BLC - 5/25/2016 - initial version
 ' ---------------------------------
 Private Sub Report_Close()
 On Error GoTo Err_Handler
+
+    'unhide modal Main form
+    Forms("Main").Visible = True
 
 Exit_Handler:
     Exit Sub

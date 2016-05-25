@@ -18,11 +18,6 @@ Option Explicit
 ' Declarations
 '---------------------
 
-Public Sub runtest()
- CreateSimpleShortcutMenu
- 
-End Sub
-
 '---------------------
 ' Menus
 '---------------------
@@ -174,6 +169,183 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' Sub:          CreateDynamicMenu
+' Description:  Creates various right click context menus from database records
+' Notes:
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+'   Dave Applegate, January 30, 2005
+'   http://vbcity.com/forums/t/88686.aspx
+'   Tony Jollans, October 16, 2014
+'   http://www.tek-tips.com/viewthread.cfm?qid=1739131
+' Source/date:  Bonnie Campbell, May 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/22/2016 - initial version
+' ---------------------------------
+Public Sub CreateDynamicMenu(context As String)
+On Error GoTo Err_Handler
+    
+    Dim cbar As CommandBar
+    Dim mnuItem As CommandBarControl
+    Dim mnu As String, action As String
+    Dim rs As DAO.Recordset
+
+    Select Case context
+        Case "park"
+            mnu = "park"
+        Case "river"
+            mnu = "river"
+        Case "site"
+            mnu = "site"
+        Case "feature"
+            mnu = "feature"
+        Case "level"
+            mnu = "setlevel"
+        Case "transect"
+            mnu = "dataentry"
+        Case "plot"
+        Case "plotestablish"
+        
+        '-- observations --
+        Case "obs-photos"
+        Case "obs-Transducers"
+        
+        '-- trip prep --
+        Case "vegplot"
+            mnu = "vegplot"
+        Case "photos"
+            mnu = "photos"
+        Case "vegwalk"
+            mnu = "vegwalk"
+        Case "transducer"
+            mnu = "transducer"
+        Case "task"
+            mnu = "task"
+            
+        '-- xx --
+        Case "comment"
+    End Select
+
+    'check for existing menu
+    For Each cbar In Application.CommandBars
+        If cbar.Name = mnu Then
+            CommandBars(mnu).Delete
+            Exit For
+        End If
+    Next cbar
+    
+    With CommandBars.Add(Name:=mnu, Position:=msoBarPopup)
+ 
+        Select Case mnu
+            
+            Case "park"
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_get_parks"), dbOpenDynaset)
+                
+                If Not (rs.BOF And rs.EOF) Then
+                
+                    rs.MoveFirst
+                    
+                    Do Until rs.EOF
+                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="park")
+                        mnuItem.Caption = rs.Fields("ParkCode") '"Set &Park"
+                        
+                        action = "mnuSetPark"
+                        mnuItem.Parameter = rs.Fields("ParkCode")
+                        mnuItem.OnAction = "mnuSetPark"
+                        
+                        rs.MoveNext
+                    Loop
+                
+                Else
+                    'clear menu
+                
+                End If
+                
+            Case "river"
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode:" & TempVars.item("ParkCode")), dbOpenDynaset)
+                
+                If Not (rs.BOF And rs.EOF) Then
+                    
+                    rs.MoveFirst
+                    
+                    Do Until rs.EOF
+                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="river")
+                        mnuItem.Caption = rs.Fields("Segment")
+                        mnuItem.Parameter = rs.Fields("Segment")
+                        mnuItem.OnAction = "mnuSetRiver"
+                        
+                        rs.MoveNext
+                    Loop
+                    
+                Else
+                    'clear menu
+                
+                End If
+            
+            Case "site"
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list", "ParkCode:" & TempVars.item("ParkCode")), dbOpenDynaset)
+                
+                If Not (rs.BOF And rs.EOF) Then
+                
+                    rs.MoveFirst
+                    
+                    Do Until rs.EOF
+                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="site")
+                        mnuItem.Caption = rs.Fields("Site")
+                        mnuItem.Parameter = Left(Right(rs.Fields("Site"), 3), 2)
+                        mnuItem.OnAction = "mnuSetSite"
+                        
+                        rs.MoveNext
+                    Loop
+                    
+                Else
+                    'clear menu
+                
+                End If
+            
+            Case "feature"
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode:" & TempVars.item("ParkCode")), dbOpenDynaset)
+                
+                If Not (rs.BOF And rs.EOF) Then
+                
+                    rs.MoveFirst
+                    
+                    Do Until rs.EOF
+                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="feature")
+                        mnuItem.Caption = rs.Fields("Feature")
+                        mnuItem.Parameter = rs.Fields("Feature")
+                        mnuItem.OnAction = "mnuSetFeature"
+                        
+                        rs.MoveNext
+                    Loop
+                
+                Else
+                    'clear menu
+                    
+                End If
+        End Select
+        
+    End With
+
+ 
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CreateMenu[mod_ContextMenu])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
 ' =================================
 '   Context Menu Actions
 ' =================================
@@ -204,27 +376,82 @@ Public Sub mnuComment()
 End Sub
 
 Public Sub mnuSetPark()
+    'DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="park"
     
-    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="park"
+    Dim ParkCode As String
+    Dim iClearBelow As Integer
+    
+    iClearBelow = 0
+    ParkCode = CommandBars.ActionControl.Parameter
+    
+    'set global
+    TempVars.Add "ParkCode", ParkCode
+    
+    'update dynamic menus
+    CreateDynamicMenu "river"
+    CreateDynamicMenu "site"
+    CreateDynamicMenu "feature"
+    
+    'update calling form
+    Call Forms("Main").UpdateBreadcrumb(iClearBelow)
     
 End Sub
 
 Public Sub mnuSetRiver()
+    'DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="river"
     
-    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="river"
+    Dim Segment As String
+    Dim iClearBelow As Integer
+    
+    iClearBelow = 1
+    Segment = CommandBars.ActionControl.Parameter
+    
+    'set global
+    TempVars.Add "River", Segment
+    
+    'update dynamic menus
+    CreateDynamicMenu "site"
+    CreateDynamicMenu "feature"
+    
+    'update calling form
+    Call Forms("Main").UpdateBreadcrumb(iClearBelow)
+    
     
 End Sub
 
 Public Sub mnuSetSite()
+    'DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="site"
+
+    Dim SiteCode As String
+    Dim iClearBelow As Integer
     
-    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="site"
+    iClearBelow = 2
+    SiteCode = CommandBars.ActionControl.Parameter
     
+    'set global
+    TempVars.Add "SiteCode", SiteCode
+    
+    'update dynamic menus
+    CreateDynamicMenu "feature"
+    
+    'update calling form
+    Call Forms("Main").UpdateBreadcrumb(iClearBelow)
 End Sub
 
 Public Sub mnuSetFeature()
+    'DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="feature"
+    Dim Feature As String
+    Dim iClearBelow As Integer
     
-    DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="feature"
+    iClearBelow = 3
+    Feature = CommandBars.ActionControl.Parameter
     
+    'set global
+    TempVars.Add "Feature", Feature
+    
+    'update calling form
+    Call Forms("Main").UpdateBreadcrumb(iClearBelow)
+
 End Sub
 
 Public Sub mnuSetDataEntryUser()

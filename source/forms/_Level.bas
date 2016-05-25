@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =4110
-    Top =6090
-    Right =9945
-    Bottom =6450
+    Left =3150
+    Top =3105
+    Right =23700
+    Bottom =12735
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -341,57 +341,6 @@ Public Event InvalidColor(Value As Long)
 '---------------------
 ' Properties
 '---------------------
-'Public Property Let Level0(Value As String)
-'    If Len(Value) > 0 Then
-'        m_Level0 = Value
-'        btnLevel0.Caption = Value
-'    Else
-'        RaiseEvent InvalidLevel(Value)
-'    End If
-'End Property
-'
-'Public Property Get Level0() As String
-'    Level0 = m_Level0
-'End Property
-'
-'Public Property Let Level1(Value As String)
-'    If Len(Value) > 1 Then
-'        m_Level1 = Value
-'        btnLevel1.Caption = Value
-'    Else
-'        RaiseEvent InvalidLevel(Value)
-'    End If
-'End Property
-'
-'Public Property Get Level1() As String
-'    Level1 = m_Level1
-'End Property
-'
-'Public Property Let Level2(Value As String)
-'    If Len(Value) > 2 Then
-'        m_Level2 = Value
-'        btnLevel2.Caption = Value
-'    Else
-'        RaiseEvent InvalidLevel(Value)
-'    End If
-'End Property
-'
-'Public Property Get Level2() As String
-'    Level2 = m_Level2
-'End Property
-'
-'Public Property Let Level3(Value As String)
-'    If Len(Value) > 3 Then
-'        m_Level3 = Value
-'        btnLevel3.Caption = Value
-'    Else
-'        RaiseEvent InvalidLevel(Value)
-'    End If
-'End Property
-'
-'Public Property Get Level3() As String
-'    Level3 = m_Level3
-'End Property
 
 '-- std color/bgd color --
 Public Property Let Level0Color(Value As Long)
@@ -625,24 +574,21 @@ On Error GoTo Err_Handler
     
     'add right click menu
     CreateMenu "level"
-    CreateMenu "park"
-    CreateMenu "river"
-    CreateMenu "site"
-    CreateMenu "feature"
+    CreateDynamicMenu "park"
+    CreateDynamicMenu "river"
+    CreateDynamicMenu "site"
+    CreateDynamicMenu "feature"
     
-    Me.btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park Missing") & " > "
-    Me.btnLevel1.Caption = Nz(TempVars("River"), "River Missing") & " > "
-    Me.btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site Missing") & " > "
-    Me.btnLevel3.Caption = Nz(TempVars("Feature"), "Feature Missing")
+    Me.btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park") & " > "
+    Me.btnLevel1.Caption = Nz(TempVars("River"), "River") & " > "
+    Me.btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site") & " > "
+    Me.btnLevel3.Caption = Nz(TempVars("Feature"), "Feature")
     
     'hide level3
 '    Me.btnLevel3.Visible = False
 '    Me.btnLevel3.Caption = " "
-        
-    Dim ctrl As Control
-    
+
 Exit_Handler:
-    Set ctrl = Nothing
     Exit Sub
     
 Err_Handler:

@@ -415,10 +415,6 @@ On Error GoTo Err_Handler
             Me.Directions = "Select the desired park."
             Me.ButtonCaption = "Next >"
             
-'            strSQL = "SELECT ID, ParkCode FROM Park " _
-'                        & "WHERE IsActiveForProtocol = 1 " _
-'                        & "ORDER BY ParkCode ASC;"
-        
             strSQL = GetTemplate("s_park_list")
         
         Case "river"
@@ -426,12 +422,7 @@ On Error GoTo Err_Handler
             Me.DropdownLabel = "River"
             Me.Directions = "Select the desired river segment."
             Me.ButtonCaption = "Next >"
-            
-'            strSQL = "SELECT River.ID, Segment FROM River " _
-'                        & "LEFT JOIN Park p ON p.ID = River.Park_ID " _
-'                        & "WHERE ParkCode = '" & TempVars("ParkCode") & "' " _
-'                        & "ORDER BY Segment ASC;"
-        
+                    
             strSQL = Replace(GetTemplate("s_river_list"), "[ParkCode]", TempVars("ParkCode"))
             
         Case "site"
@@ -439,13 +430,7 @@ On Error GoTo Err_Handler
             Me.DropdownLabel = "Site"
             Me.Directions = "Select the desired site."
             Me.ButtonCaption = "Next >"
-            
-'            strSQL = "SELECT Site.ID, SiteName + ' (' + SiteCode + ')' AS Site FROM Site " _
-'                        & "LEFT JOIN Park p ON p.ID = Site.Park_ID " _
-'                        & "WHERE ParkCode = '" & TempVars("ParkCode") & "' " _
-'                        & "AND Site.IsActiveForProtocol = 1 " _
-'                        & "ORDER BY SiteName ASC;"
-            
+                        
             strSQL = Replace(GetTemplate("s_site_list"), "[ParkCode]", TempVars("ParkCode"))
                         
             DropDownWidth = 2 * TWIPS_PER_INCH
@@ -455,15 +440,7 @@ On Error GoTo Err_Handler
             Me.DropdownLabel = "Feature"
             Me.Directions = "Select the desired feature."
             Me.ButtonCaption = "Next >"
-            
-'            strSQL = "SELECT Feature.ID, Feature FROM Feature " _
-'                        & "LEFT JOIN Site_Feature ON Site_Feature.Feature_ID = Feature.ID " _
-'                        & "LEFT JOIN Site ON Site.ID = Site_Feature.Site_ID " _
-'                        & "LEFT JOIN Park ON Park.ID = Site.Park_ID " _
-'                        & "WHERE Park.ParkCode = '" & TempVars("ParkCode") & "' " _
-'                        & "AND IsActiveForProtocol = 1 " _
-'                        & "ORDER BY Feature ASC;"
-        
+                    
             strSQL = Replace(GetTemplate("s_feature_list"), "[ParkCode]", TempVars("ParkCode"))
         
         Case "data_entry"
@@ -472,7 +449,6 @@ On Error GoTo Err_Handler
             Me.Directions = "Select the current user."
             Me.ButtonCaption = "Next >"
             
-'            strSQL = "SELECT ID, FirstName + ' ' + LastName as Name FROM Contact;"
             strSQL = GetTemplate("s_contact_list")
 
     End Select

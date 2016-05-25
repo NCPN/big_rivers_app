@@ -313,6 +313,8 @@ On Error GoTo Err_Handler
         Case "obs-transducers"
         'Trip Prep
         Case "vegplot"
+            rName = "PercentCover"
+            oArgs = ""
         Case "vegwalk"
             rName = "SpeciesList"
             oArgs = ""

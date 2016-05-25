@@ -149,3 +149,8 @@ Public Const TRANSECT_NUMBERS As String = "1,2,3,4,5,6,7,8"
 
 'Veg walk collection types --> Site or Feature to handle prior non-site data (S or F)
 Public Const COLLECTION_TYPES As String = "S,F"
+
+'Veg plot cover types --> WCC = woody canopy cover (BLCA & CANY)
+'                         URC - understory rooted cover (BLCA & CANY),
+'                         ARS - all rooted species (DINO)
+Public Const COVER_TYPES As String = "WCC,URC,ARS"

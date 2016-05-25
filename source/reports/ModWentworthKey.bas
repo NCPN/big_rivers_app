@@ -20,12 +20,12 @@ Begin Report
     Width =6600
     DatasheetFontHeight =11
     ItemSuffix =115
-    Right =8064
-    Bottom =6240
+    Right =20550
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
-        0x32f638d6d6a9e440
+        0xfe0d64e16dc2e440
     End
     Caption ="Modified Wentworth Key"
     OnOpen ="[Event Procedure]"
@@ -135,11 +135,21 @@ Begin Report
             AlternateBackShade =95.0
         End
         Begin PageHeader
-            Height =2364
+            Height =0
             Name ="PageHeaderSection"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
+        End
+        Begin Section
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =2364
+            OnFormat ="[Event Procedure]"
+            OnPrint ="[Event Procedure]"
+            Name ="Detail"
+            AlternateBackColor =12632256
             Begin
                 Begin Label
                     BackStyle =1
@@ -371,6 +381,7 @@ Begin Report
                 End
                 Begin Label
                     BackStyle =1
+                    OldBorderStyle =1
                     TextAlign =2
                     Width =6600
                     Height =360
@@ -436,14 +447,6 @@ Begin Report
                     LayoutCachedHeight =1920
                 End
             End
-        End
-        Begin Section
-            KeepTogether = NotDefault
-            Height =0
-            OnFormat ="[Event Procedure]"
-            OnPrint ="[Event Procedure]"
-            Name ="Detail"
-            AlternateBackColor =12632256
         End
         Begin PageFooter
             Height =0
@@ -516,7 +519,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(Cancel As Integer)
+Private Sub Report_Open(cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String
@@ -583,7 +586,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/12/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     
@@ -613,7 +616,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/12/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
 

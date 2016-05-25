@@ -20,8 +20,8 @@ Begin Report
     Width =3600
     DatasheetFontHeight =11
     ItemSuffix =115
-    Right =16392
-    Bottom =7248
+    Right =20565
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -135,11 +135,19 @@ Begin Report
             AlternateBackShade =95.0
         End
         Begin PageHeader
-            Height =588
+            Height =0
             Name ="PageHeaderSection"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
+        End
+        Begin Section
+            KeepTogether = NotDefault
+            Height =588
+            OnFormat ="[Event Procedure]"
+            OnPrint ="[Event Procedure]"
+            Name ="Detail"
+            AlternateBackColor =16777215
             Begin
                 Begin Label
                     BackStyle =1
@@ -204,14 +212,6 @@ Begin Report
                     ForeTint =100.0
                 End
             End
-        End
-        Begin Section
-            KeepTogether = NotDefault
-            Height =0
-            OnFormat ="[Event Procedure]"
-            OnPrint ="[Event Procedure]"
-            Name ="Detail"
-            AlternateBackColor =12632256
         End
         Begin PageFooter
             Height =0
@@ -284,7 +284,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(Cancel As Integer)
+Private Sub Report_Open(cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String
@@ -338,7 +338,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/12/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     
@@ -368,7 +368,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/12/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
 

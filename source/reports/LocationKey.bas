@@ -20,8 +20,8 @@ Begin Report
     Width =6840
     DatasheetFontHeight =11
     ItemSuffix =108
-    Right =8064
-    Bottom =6240
+    Right =20565
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -31,7 +31,7 @@ Begin Report
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6801000068010000680100006d01000000000000901500003804000001000000 ,
+        0x6801000068010000680100006d01000000000000b81a00000000000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -127,6 +127,10 @@ Begin Report
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="=1"
+        End
         Begin FormHeader
             KeepTogether = NotDefault
             Height =0
@@ -135,17 +139,26 @@ Begin Report
             AlternateBackShade =95.0
         End
         Begin PageHeader
-            Height =1680
+            Height =0
             BackColor =14540253
             Name ="PageHeaderSection"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =1679
+            BackColor =14540253
+            Name ="GroupHeader0"
+            AlternateBackColor =14540253
             Begin
                 Begin Label
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =24
+                    Left =60
                     Top =96
                     Width =180
                     Height =1498
@@ -157,9 +170,9 @@ Begin Report
                     Name ="lblLocation"
                     Caption ="LOCATION"
                     GridlineColor =10921638
-                    LayoutCachedLeft =24
+                    LayoutCachedLeft =60
                     LayoutCachedTop =96
-                    LayoutCachedWidth =204
+                    LayoutCachedWidth =240
                     LayoutCachedHeight =1594
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -169,7 +182,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =2412
+                    Left =2448
                     Top =60
                     Width =2160
                     Height =360
@@ -181,9 +194,9 @@ Begin Report
                     Name ="lblPhotogFeature"
                     Caption ="F"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2412
+                    LayoutCachedLeft =2448
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4572
+                    LayoutCachedWidth =4608
                     LayoutCachedHeight =420
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -193,7 +206,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =4596
+                    Left =4632
                     Top =60
                     Width =2160
                     Height =360
@@ -205,9 +218,9 @@ Begin Report
                     Name ="lblPhotogTransect"
                     Caption ="T"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4596
+                    LayoutCachedLeft =4632
                     LayoutCachedTop =60
-                    LayoutCachedWidth =6756
+                    LayoutCachedWidth =6792
                     LayoutCachedHeight =420
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -217,8 +230,8 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =228
-                    Top =84
+                    Left =270
+                    Top =60
                     Width =2160
                     Height =749
                     FontSize =8
@@ -229,10 +242,10 @@ Begin Report
                     Name ="lblPhotographer"
                     Caption ="PHOTOGRAPHER"
                     GridlineColor =10921638
-                    LayoutCachedLeft =228
-                    LayoutCachedTop =84
-                    LayoutCachedWidth =2388
-                    LayoutCachedHeight =833
+                    LayoutCachedLeft =270
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =2430
+                    LayoutCachedHeight =809
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -241,8 +254,8 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =228
-                    Top =864
+                    Left =270
+                    Top =855
                     Width =2160
                     Height =749
                     FontSize =7
@@ -253,10 +266,10 @@ Begin Report
                     Name ="lblSubject"
                     Caption ="SUBJECT"
                     GridlineColor =10921638
-                    LayoutCachedLeft =228
-                    LayoutCachedTop =864
-                    LayoutCachedWidth =2388
-                    LayoutCachedHeight =1613
+                    LayoutCachedLeft =270
+                    LayoutCachedTop =855
+                    LayoutCachedWidth =2430
+                    LayoutCachedHeight =1604
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -265,7 +278,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =2412
+                    Left =2448
                     Top =468
                     Width =2160
                     Height =360
@@ -276,9 +289,9 @@ Begin Report
                     Name ="lblPhotogOverview"
                     Caption ="O"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2412
+                    LayoutCachedLeft =2448
                     LayoutCachedTop =468
-                    LayoutCachedWidth =4572
+                    LayoutCachedWidth =4608
                     LayoutCachedHeight =828
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -288,7 +301,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =4596
+                    Left =4632
                     Top =468
                     Width =2160
                     Height =360
@@ -299,17 +312,17 @@ Begin Report
                     Name ="lblPhotogRef"
                     Caption ="R"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4596
+                    LayoutCachedLeft =4632
                     LayoutCachedTop =468
-                    LayoutCachedWidth =6756
+                    LayoutCachedWidth =6792
                     LayoutCachedHeight =828
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =264
-                    Top =1284
+                    Left =306
+                    Top =1275
                     Width =2016
                     Height =180
                     FontSize =6
@@ -322,10 +335,10 @@ Begin Report
                     RightPadding =0
                     BottomPadding =0
                     GridlineColor =10921638
-                    LayoutCachedLeft =264
-                    LayoutCachedTop =1284
-                    LayoutCachedWidth =2280
-                    LayoutCachedHeight =1464
+                    LayoutCachedLeft =306
+                    LayoutCachedTop =1275
+                    LayoutCachedWidth =2322
+                    LayoutCachedHeight =1455
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -334,7 +347,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =2412
+                    Left =2448
                     Top =864
                     Width =2160
                     Height =360
@@ -346,9 +359,9 @@ Begin Report
                     Name ="lblSubjectFeature"
                     Caption ="F"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2412
+                    LayoutCachedLeft =2448
                     LayoutCachedTop =864
-                    LayoutCachedWidth =4572
+                    LayoutCachedWidth =4608
                     LayoutCachedHeight =1224
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -358,7 +371,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =4596
+                    Left =4632
                     Top =864
                     Width =2160
                     Height =360
@@ -370,9 +383,9 @@ Begin Report
                     Name ="lblSubjectTransect"
                     Caption ="T"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4596
+                    LayoutCachedLeft =4632
                     LayoutCachedTop =864
-                    LayoutCachedWidth =6756
+                    LayoutCachedWidth =6792
                     LayoutCachedHeight =1224
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -382,7 +395,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =2412
+                    Left =2448
                     Top =1248
                     Width =2160
                     Height =360
@@ -393,9 +406,9 @@ Begin Report
                     Name ="lblSubjectOverview"
                     Caption ="O"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2412
+                    LayoutCachedLeft =2448
                     LayoutCachedTop =1248
-                    LayoutCachedWidth =4572
+                    LayoutCachedWidth =4608
                     LayoutCachedHeight =1608
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -405,7 +418,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =2
-                    Left =4596
+                    Left =4632
                     Top =1248
                     Width =2160
                     Height =360
@@ -416,9 +429,9 @@ Begin Report
                     Name ="lblSubjectRef"
                     Caption ="R"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4596
+                    LayoutCachedLeft =4632
                     LayoutCachedTop =1248
-                    LayoutCachedWidth =6756
+                    LayoutCachedWidth =6792
                     LayoutCachedHeight =1608
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -515,7 +528,7 @@ End Property
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(Cancel As Integer)
+Private Sub Report_Open(cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim strPF As String, strPT As String, strPO As String, strPR As String
@@ -630,7 +643,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/11/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
 
@@ -660,7 +673,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/11/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
 
