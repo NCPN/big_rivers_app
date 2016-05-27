@@ -638,23 +638,12 @@ On Error GoTo Err_Handler
     ' c.f.  Hans Up, May 17, 2011 & discussion
     '       http://stackoverflow.com/questions/6037290/use-of-like-works-in-ms-access-but-not-vba
     '---------------------------------------------------------------------
-'    strSQL = "SELECT Code, SOPnumber, Version, EffectiveDate  FROM SOP " _
-'                & "WHERE LCASE(Code) LIKE '" & LCase(area) & "*'" _
-'                & "AND RetireDate IS NULL;"
     strSQL = GetTemplate("s_sop_metadata", "area:" & LCase(area))
     
     'fetch data
     Set db = CurrentDb
     Set rs = db.OpenRecordset(strSQL, dbOpenDynaset)
-    
-'    'get accurate count & return to start
-'    rs.MoveLast
-'    rs.MoveFirst
-'
-'    If rs.RecordCount > 0 Then
-'        sopnum = CInt(Replace(rs.Fields("Label"), area, ""))
-'    End If
-    
+        
     'return value
     Set GetSOPMetadata = rs
     

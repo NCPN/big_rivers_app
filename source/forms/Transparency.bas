@@ -108,7 +108,7 @@ Private Sub Form_Load()
 Dim Transp As Long
 Transp = RGB(0, 0, 0) 'This is the color you want your background to be
  
-Me.Detail.BackColor = Transp
+Me.Detail.backColor = Transp
  
 Me.Painting = False
 SetFormOpacity Me, 0.5, Transp

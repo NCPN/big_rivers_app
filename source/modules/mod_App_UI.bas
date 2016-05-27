@@ -319,6 +319,8 @@ On Error GoTo Err_Handler
             rName = "SpeciesList"
             oArgs = ""
         Case "photos"
+            rName = "Photo"
+            oArgs = ""
         Case "transducer"
             rName = "Transducer"
         Case "tasks"

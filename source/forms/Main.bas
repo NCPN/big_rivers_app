@@ -17,19 +17,19 @@ Begin Form
     ItemSuffix =21
     Left =3150
     Top =3105
-    Right =28545
-    Bottom =14895
+    Right =12045
+    Bottom =10770
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
     End
+    OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    OnGotFocus ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
     AllowPivotChartView =0
@@ -348,7 +348,7 @@ Attribute oTile.VB_VarHelpID = -1
 '---------------------
 
 '---------------------
-' Methods
+' Events
 '---------------------
 
 ' ---------------------------------
@@ -463,7 +463,7 @@ On Error GoTo Err_Handler
     oBRTile.Link4Caption = ""
     oBRTile.Link5Caption = ""
     oBRTile.Link6Caption = ""
-    
+        
 Exit_Handler:
     Exit Sub
     
@@ -475,6 +475,43 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          Form_Current
+' Description:  Form actions when form the current form
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 18, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/18/2016 - initial version
+' ---------------------------------
+Private Sub Form_Current()
+On Error GoTo Err_Handler
+
+    'if no park --> deactivate links
+    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
+'        MsgBox "current" 'oBCTile.DisableLinks "1,2" '"1,2,3,4,5,6"
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+'---------------------
+' Methods
+'---------------------
 
 ' ---------------------------------
 ' Sub:          UpdateBreadcrumb
@@ -523,6 +560,16 @@ On Error GoTo Err_Handler
         
     End With
     
+    'if park --> enable links
+    If Len(Nz(TempVars("ParkCode"), "")) > 0 Then
+        frm.Parent!LTile.Form.EnableLinks frm.Parent!LTile.Form.TileTag & ",1,2,3,4,5,6"
+        frm.Parent!CTile.Form.EnableLinks frm.Parent!CTile.Form.TileTag & ",1,2,3,4,5,6"
+        frm.Parent!RTile.Form.EnableLinks frm.Parent!RTile.Form.TileTag & ",1,2,3,4,5,6"
+        frm.Parent!BLTile.Form.EnableLinks frm.Parent!BLTile.Form.TileTag & ",1,2,3,4,5,6"
+        frm.Parent!BCTile.Form.EnableLinks frm.Parent!BCTile.Form.TileTag & ",1,2,3,4,5,6"
+        frm.Parent!BRTile.Form.EnableLinks frm.Parent!BRTile.Form.TileTag & ",1,2,3,4,5,6"
+    End If
+    
 Exit_Handler:
     Exit Sub
     
@@ -531,35 +578,6 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - UpdateBreadcrumb[Main form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Form_GotFocus
-' Description:  Form actions after form receives focus
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 18, 2016 for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/18/2016 - initial version
-' ---------------------------------
-Private Sub Form_GotFocus()
-On Error GoTo Err_Handler
-
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_GotFocus[Main form])"
     End Select
     Resume Exit_Handler
 End Sub

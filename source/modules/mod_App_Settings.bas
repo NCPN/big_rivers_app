@@ -83,6 +83,10 @@ Public Const CTRL_REMOVE_ENABLED As Long = lngLtOrange
 Public Const TEXT_ENABLED As Long = lngBlue
 Public Const TEXT_DISABLED As Long = lngGray
 
+'highlight text for tile links
+Public Const LINK_HIGHLIGHT_TEXT As Long = lngBlue
+Public Const LINK_HIGHLIGHT_BKGD As Long = lngYellow
+
 Public Const PROGRESS_BAR As Long = lngLime
 
 '-----------------------------------------------------------------------

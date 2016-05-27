@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =142
-    Right =20565
-    Bottom =9630
+    Right =25395
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -145,6 +145,20 @@ Begin Report
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin Rectangle
+                    Top =600
+                    Width =15120
+                    Height =360
+                    BackColor =8355711
+                    BorderColor =10921638
+                    Name ="rctUnderHeader"
+                    GridlineColor =10921638
+                    LayoutCachedTop =600
+                    LayoutCachedWidth =15120
+                    LayoutCachedHeight =960
+                    BackThemeColorIndex =0
+                    BackTint =50.0
+                End
                 Begin Label
                     Top =975
                     Width =1332
@@ -218,20 +232,6 @@ Begin Report
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                End
-                Begin Rectangle
-                    Top =600
-                    Width =15120
-                    Height =360
-                    BackColor =8355711
-                    BorderColor =10921638
-                    Name ="rctUnderHeader"
-                    GridlineColor =10921638
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =15120
-                    LayoutCachedHeight =960
-                    BackThemeColorIndex =0
-                    BackTint =50.0
                 End
                 Begin Label
                     Left =6720
@@ -311,23 +311,6 @@ Begin Report
                     LayoutCachedLeft =13452
                     LayoutCachedWidth =15072
                     LayoutCachedHeight =420
-                    ThemeFontIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    Top =636
-                    Width =2460
-                    Height =324
-                    FontSize =12
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblMonitoring"
-                    FontName ="Arial Narrow"
-                    GridlineColor =10921638
-                    LayoutCachedTop =636
-                    LayoutCachedWidth =2460
-                    LayoutCachedHeight =960
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -492,6 +475,23 @@ Begin Report
                     LayoutCachedTop =1260
                     LayoutCachedWidth =8817
                     LayoutCachedHeight =1674
+                    ThemeFontIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    Top =636
+                    Width =2460
+                    Height =324
+                    FontSize =12
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblMonitoring"
+                    FontName ="Arial Narrow"
+                    GridlineColor =10921638
+                    LayoutCachedTop =636
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =960
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1152,53 +1152,53 @@ Begin Report
                     LayoutCachedWidth =14160
                     LayoutCachedHeight =375
                 End
-                Begin TextBox
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =10320
-                    Width =630
-                    Height =396
-                    TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxChkBox1"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =10320
-                    LayoutCachedWidth =10950
-                    LayoutCachedHeight =396
-                End
-                Begin TextBox
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =10950
-                    Width =630
-                    Height =396
-                    TabIndex =2
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxChkBox2"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =10950
-                    LayoutCachedWidth =11580
-                    LayoutCachedHeight =396
-                End
-                Begin TextBox
-                    BackStyle =0
-                    IMESentenceMode =3
+                Begin Label
+                    OldBorderStyle =1
                     Left =11580
                     Width =3539
                     Height =396
-                    TabIndex =3
-                    BorderColor =10921638
+                    BackColor =-2
+                    BorderColor =8355711
                     ForeColor =4210752
-                    Name ="tbxChkBox3"
+                    Name ="lblChkBox4"
                     GridlineColor =10921638
-
                     LayoutCachedLeft =11580
                     LayoutCachedWidth =15119
                     LayoutCachedHeight =396
+                    BackThemeColorIndex =-1
+                    ForeTint =75.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    Left =10950
+                    Width =630
+                    Height =396
+                    BackColor =-2
+                    BorderColor =8355711
+                    ForeColor =4210752
+                    Name ="lblChkBox3"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10950
+                    LayoutCachedWidth =11580
+                    LayoutCachedHeight =396
+                    BackThemeColorIndex =-1
+                    ForeTint =75.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    Left =10320
+                    Width =630
+                    Height =396
+                    BackColor =-2
+                    BorderColor =8355711
+                    ForeColor =4210752
+                    Name ="lblChkBox2"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10320
+                    LayoutCachedWidth =10950
+                    LayoutCachedHeight =396
+                    BackThemeColorIndex =-1
+                    ForeTint =75.0
                 End
             End
         End
@@ -1822,7 +1822,10 @@ On Error GoTo Err_Handler
     Dim strSQL As String
     Dim arySegments() As Variant, aryProtocol() As Variant
     Dim i As Integer
-    Dim sopnum() As Variant
+    Dim sopnum() As String
+    
+    'exit if no park
+    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then GoTo Exit_Handler
     
     'defaults
     Me.Park = Nz(TempVars("ParkCode"), "")
@@ -1863,24 +1866,16 @@ On Error GoTo Err_Handler
 
     'prep checkboxes
     Me.lblChkBox1.Caption = Space(2) & ChrW(uCheckboxEmpty)
-    Me.tbxChkbox1 = Space(2) & ChrW(uCheckboxEmpty)
-    Me.tbxChkBox2 = Space(2) & ChrW(uCheckboxEmpty)
-    Me.tbxChkBox3 = Space(2) & ChrW(uCheckboxEmpty)
+    Me.lblChkBox2.Caption = Space(2) & ChrW(uCheckboxEmpty)
+    Me.lblChkBox3.Caption = Space(2) & ChrW(uCheckboxEmpty)
+    Me.lblChkBox4.Caption = Space(2) & ChrW(uCheckboxEmpty)
 
     'prepare data source --> we simply want to print the detail multiple times, so create rs to handle it
     '                        rs("RecordCount") is datasource for tbxCount which invisibly generates rows
-    Dim rs As DAO.Recordset
-'    Set rs = VirtualDAORecordset("tbl", 10)
-    
-    strSQL = ""
-        
-'    Set Me.Recordset = rs
 
+    
 Exit_Handler:
-    'cleanup virtual recordset
-'    Set rs = Nothing
-    'DBEngine.Rollback
-'    Exit Sub
+    Exit Sub
 
 Err_Handler:
     Select Case Err.Number

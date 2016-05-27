@@ -1328,12 +1328,13 @@ On Error GoTo Err_Handler
     'set before/after
     
     'prepare data source
-    strSQL = "SELECT 'BD' AS Timing, ParkCode, Segment, SiteCode, SiteName, " _
-            & "Logger.ID, SensorType, SensorNumber, Sequence " _
-            & "FROM (((Logger " _
-            & "LEFT JOIN Site ON Site.ID = Logger.Site_ID) " _
-            & "LEFT JOIN River ON River.ID = Site.River_ID) " _
-            & "LEFT JOIN Park ON Park.ID = River.Park_ID) "
+'    strSQL = "SELECT 'BD' AS Timing, ParkCode, Segment, SiteCode, SiteName, " _
+'            & "Logger.ID, SensorType, SensorNumber, Sequence " _
+'            & "FROM (((Logger " _
+'            & "LEFT JOIN Site ON Site.ID = Logger.Site_ID) " _
+'            & "LEFT JOIN River ON River.ID = Site.River_ID) " _
+'            & "LEFT JOIN Park ON Park.ID = River.Park_ID) "
+    strSQL = GetTemplate("s_transducer_bd")
     
     'prepare after download set
     strSQL2 = Replace(strSQL, "BD", "AD")

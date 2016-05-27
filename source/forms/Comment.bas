@@ -568,7 +568,7 @@ End Property
 
 Public Property Let CommentHeaderColor(Value As Long)
     m_CommentHeaderColor = Value
-    FormHeader.BackColor = m_CommentHeaderColor
+    FormHeader.backColor = m_CommentHeaderColor
 End Property
 
 Public Property Get TitleFontColor() As Long
@@ -632,7 +632,7 @@ End Property
 Public Property Let AlertBoxBackgroundColor(Value As Long)
     rctAlert.BackStyle = 1 '1 = Normal, 0 = Transparent
     m_AlertBoxBackgroundColor = Value
-    rctAlert.BackColor = m_AlertBoxBackgroundColor
+    rctAlert.backColor = m_AlertBoxBackgroundColor
 End Property
 
 ' ==== Visibility ====
@@ -738,7 +738,7 @@ End Property
 
 Public Property Let AddButtonColor(Value As Long)
     m_AddButtonColor = Value
-    btnAdd.BackColor = m_AddButtonColor
+    btnAdd.backColor = m_AddButtonColor
 End Property
 
 Public Property Get CancelButtonForeColor() As Long
@@ -756,7 +756,7 @@ End Property
 
 Public Property Let CancelButtonColor(Value As Long)
     m_CancelButtonColor = Value
-    btnCancel.BackColor = m_CancelButtonColor
+    btnCancel.backColor = m_CancelButtonColor
 End Property
 
 Public Property Get AddButtonVisible() As Byte
@@ -827,7 +827,7 @@ End Property
 Private Sub Form_Load()
 On Error GoTo Err_Handler
     
-    Me.FormHeader.BackColor = lngBrown
+    Me.FormHeader.backColor = lngBrown
     Me.TitleFontColor = lngWhite
     
     Me.lineIndicator.Width = Me.Form.Width

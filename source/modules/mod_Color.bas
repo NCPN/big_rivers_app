@@ -4,13 +4,14 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Color
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  color functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
 ' Revisions:    BLC, 2/9/2015 - 1.00 - initial version
 '               BLC, 5/1/2015 - 1.01 - integrated into Invasives Reporting tool
 '               BLC, 11/10/2015 - 1.02 - added additional colors
+'               BLC, 5/27/2016 - 1.03 - added additional colors
 ' =================================
 
 ' ---------------------------------
@@ -31,6 +32,7 @@ Option Explicit
 ' ---------------------------------
 Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
 Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
+Public Const lngLtGray2 As Long = 8355711     '?RGB(127,127,127) Text 1, Lighter 50%
 Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
 Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
 Public Const lngLtOrange As Long = 52479    '?RGB(255,204,0) #FFCC00

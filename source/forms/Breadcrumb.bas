@@ -219,7 +219,7 @@ End Property
 Public Property Let BreadcrumbHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_BreadcrumbHeaderColor = Value
-    FormHeader.BackColor = m_BreadcrumbHeaderColor
+    FormHeader.backColor = m_BreadcrumbHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen, vbCyan, vbWhite

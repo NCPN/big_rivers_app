@@ -4,12 +4,19 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_UI
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  Generic UI functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 5/13/2016
 ' Revisions:    BLC, 5/13/2016 - 1.00 - initial version
+'               BLC, 6/27/2016 - 1.01 - added acNormal, acTransparent constants
 ' =================================
+
+' ---------------------------------
+' Declarations
+' ---------------------------------
+Public Const acNormal As Integer = 1
+Public Const acTransparent As Integer = 0
 
 ' ---------------------------------
 '  Properties
@@ -72,8 +79,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-
 
 ' ---------------------------------
 ' SUB:          ConvertLongToRGB

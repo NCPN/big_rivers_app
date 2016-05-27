@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =5580
-    Top =19380
-    Right =8160
-    Bottom =22530
+    Left =12930
+    Top =4020
+    Right =15780
+    Bottom =6735
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -32,6 +32,7 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
+    OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
     AllowPivotChartView =0
@@ -101,7 +102,7 @@ Begin Form
         End
         Begin FormHeader
             Height =447
-            BackColor =65280
+            BackColor =16711680
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -112,8 +113,9 @@ Begin Form
                     Top =60
                     Width =1980
                     Height =300
+                    ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Where?"
+                    Caption ="Reports"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -129,7 +131,7 @@ Begin Form
                     OverlapFlags =85
                     Top =432
                     Width =2592
-                    BorderColor =65280
+                    BorderColor =65535
                     Name ="lineIndicator"
                     LeftPadding =0
                     TopPadding =0
@@ -146,6 +148,7 @@ Begin Form
         Begin Section
             Height =2280
             Name ="Detail"
+            OnMouseMove ="[Event Procedure]"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -161,13 +164,16 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink1"
-                    Caption ="Site"
+                    Caption ="rpt1"
                     OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =300
+                    ForeThemeColorIndex =-1
                 End
                 Begin CommandButton
                     Visible = NotDefault
@@ -198,6 +204,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =420
@@ -207,8 +214,10 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink2"
-                    Caption ="Feature"
+                    Caption ="Link2"
                     OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -216,6 +225,7 @@ Begin Form
                     LayoutCachedHeight =660
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =780
@@ -225,8 +235,10 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink3"
-                    Caption ="Transect"
+                    Caption ="Link3"
                     OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =780
@@ -234,6 +246,7 @@ Begin Form
                     LayoutCachedHeight =1020
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =1140
@@ -243,8 +256,10 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink4"
-                    Caption ="Plot"
+                    Caption ="Link4"
                     OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =1140
@@ -263,6 +278,9 @@ Begin Form
                     ForeColor =8355711
                     Name ="lblLink5"
                     Caption ="Link5"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =1500
@@ -281,6 +299,9 @@ Begin Form
                     ForeColor =8355711
                     Name ="lblLink6"
                     Caption ="Link6"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =1860
@@ -517,7 +538,7 @@ End Property
 Public Property Let TileHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_TileHeaderColor = Value
-    FormHeader.BackColor = m_TileHeaderColor
+    FormHeader.backColor = m_TileHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen
@@ -662,6 +683,62 @@ End Property
 '---------------------
 
 ' ---------------------------------
+' Sub:          Form_Load
+' Description:  Form loading event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    Dim ctrl As Control
+    Dim strLink As String
+    Dim i As Integer
+    
+'    MsgBox "loading...", vbOKOnly
+    
+    'initialize labels (fixes if form inadvertently saved in non-standard state)
+    lblTitle.Caption = "Title"
+        
+    For i = 1 To 6
+        
+        strLink = "lblLink" & i
+    
+        For Each ctrl In Me.Controls
+        
+            If ctrl.Name = strLink Then
+                ctrl.Caption = Replace(strLink, "lbl", "")
+                ctrl.Visible = True
+                
+                'disable clicks until value set
+                ctrl.Tag = "DISABLED"
+                
+                Exit For
+            End If
+            
+        Next
+    Next
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          lblLink1_Click
 ' Description:  Link click event actions
 ' Assumptions:  -
@@ -676,6 +753,8 @@ End Property
 ' ---------------------------------
 Private Sub lblLink1_Click()
 On Error GoTo Err_Handler
+    
+    If lblLink1.Tag = "DISABLED" Then GoTo Exit_Handler
     
     With Me.lblLink1
         DoCmd.Minimize
@@ -694,6 +773,7 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+
 ' ---------------------------------
 ' Sub:          lblLink2_Click
 ' Description:  Link click event actions
@@ -702,18 +782,22 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, April 26, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 29, 2015 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 4/26/2016 - initial version
+'   BLC - 10/29/2015 - initial version
 ' ---------------------------------
+
 Private Sub lblLink2_Click()
 On Error GoTo Err_Handler
     
+    If lblLink2.Tag = "DISABLED" Then GoTo Exit_Handler
+    
     With Me.lblLink2
+        DoCmd.Minimize
         ClickAction .Tag & .Caption
     End With
-
+    
 Exit_Handler:
     Exit Sub
 
@@ -742,6 +826,8 @@ End Sub
 Private Sub lblLink3_Click()
 On Error GoTo Err_Handler
     
+    If lblLink3.Tag = "DISABLED" Then GoTo Exit_Handler
+
     With Me.lblLink3
         DoCmd.Minimize
         ClickAction .Tag & .Caption
@@ -774,6 +860,8 @@ End Sub
 ' ---------------------------------
 Private Sub lblLink4_Click()
 On Error GoTo Err_Handler
+    
+    If lblLink4.Tag = "DISABLED" Then GoTo Exit_Handler
     
     With Me.lblLink4
         DoCmd.Minimize
@@ -808,6 +896,8 @@ End Sub
 Private Sub lblLink5_Click()
 On Error GoTo Err_Handler
     
+    If lblLink5.Tag = "DISABLED" Then GoTo Exit_Handler
+    
     With Me.lblLink5
         DoCmd.Minimize
         ClickAction .Tag & .Caption
@@ -841,6 +931,8 @@ End Sub
 Private Sub lblLink6_Click()
 On Error GoTo Err_Handler
     
+    If lblLink6.Tag = "DISABLED" Then GoTo Exit_Handler
+    
     With Me.lblLink6
         DoCmd.Minimize
         ClickAction .Tag & .Caption
@@ -854,6 +946,282 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - lblLink6_Click[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink1_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink1
+        'avoid flicker w/ if statement
+'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
+'        If Not .BackStyle = acNormal Then .BackStyle = acNormal
+'        If Not .BackColor = lngYellow Then .BackColor = lngYellow
+        Me.LinkHighlight lblLink1
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink1_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink2_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink2
+        Me.LinkHighlight lblLink2
+'        'avoid flicker w/ if statement
+'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
+'        If Not .BackStyle = acNormal Then .BackStyle = acNormal
+'        If Not .backColor = lngYellow Then .backColor = lngYellow
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink2_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink3_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink3
+        Me.LinkHighlight lblLink3
+'        'avoid flicker w/ if statement
+'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
+'        If Not .BackStyle = acNormal Then .BackStyle = acNormal
+'        If Not .backColor = lngYellow Then .backColor = lngYellow
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink3_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink4_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink4
+        Me.LinkHighlight lblLink4
+'        'avoid flicker w/ if statement
+'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink4_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink5_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink5
+        Me.LinkHighlight lblLink5
+'        'avoid flicker w/ if statement
+'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink5_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink6_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink6
+        Me.LinkHighlight lblLink6
+'        'avoid flicker w/ if statement
+'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink6_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Detail_MouseMove
+' Description:  Detail mouse over event actions
+' Assumptions:  Similar mousemove events exist for links setting colors
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, May 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    Dim ctrl As Control
+    Dim strLink As String
+    Dim i As Integer
+    
+    For i = 1 To 6
+    
+        strLink = "lblLink" & i
+    
+        For Each ctrl In Me.Controls
+            
+            If ctrl.Name = strLink Then
+            
+                With ctrl
+                    'avoid flicker w/ if statement
+                    If Not .ForeColor = lngLtGray2 Then .ForeColor = lngLtGray2
+                    If Not .BackStyle = acTransparent Then .BackStyle = acTransparent
+                End With
+            
+            End If
+            
+        Next
+        
+    Next
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Detail_MouseMove[Tile form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -879,7 +1247,7 @@ Private Sub Class_Initialize()
 On Error GoTo Err_Handler
 
     MsgBox "Initializing...", vbOKOnly
-
+    
 Exit_Handler:
     Exit Sub
 
@@ -949,6 +1317,138 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SetHeaderColor[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          LinkHighlight
+' Description:  Actions to highlight links within a tile
+' Assumptions:  ctrl has .Fore & .Back colors as well as .BackStyle
+' Parameters:   ctrl - control to highlight (control)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 27, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Public Sub LinkHighlight(ctrl As Control)
+On Error GoTo Err_Handler
+    
+    With ctrl
+        'avoid flicker w/ if statement
+        If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
+        If Not .BackStyle = acNormal Then .BackStyle = acNormal
+        If Not .backColor = LINK_HIGHLIGHT_BKGD Then .backColor = LINK_HIGHLIGHT_BKGD
+    End With
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - LinkHighlight[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          DisableLinks
+' Description:  Actions to disable links within a tile
+' Assumptions:  -
+' Parameters:   links - comma separated links to disable (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 27, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Public Sub DisableLinks(links As String)
+On Error GoTo Err_Handler
+
+    Dim ctrl As Control
+    Dim ary() As String
+    Dim strLink As String
+    Dim i As Integer
+    
+    ary = Split(links, ",")
+    
+    For i = 0 To UBound(ary)
+        strLink = "lblLink" & ary(i)
+    
+        For Each ctrl In Me.Controls
+            
+            If ctrl.Name = strLink Then
+                'ctrl.Tag = "Disabled"
+            End If
+        Next
+        
+    Next
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DisableLinks[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          EnableLinks
+' Description:  Actions to Enable links within a tile
+' Assumptions:  TileTag is passed as the first value in the CSV string
+' Parameters:   links - comma separated links to Enable (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 27, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/27/2016 - initial version
+' ---------------------------------
+Public Sub EnableLinks(links As String)
+On Error GoTo Err_Handler
+
+    Dim ctrl As Control
+    Dim ary() As String
+    Dim strLink As String, strTileTag As String
+    Dim i As Integer
+    
+    ary = Split(links, ",")
+    
+    strTileTag = ary(0)
+    
+    For i = 1 To UBound(ary)
+        strLink = "lblLink" & ary(i)
+    
+        For Each ctrl In Me.Controls
+            
+            'set tag to overall tile tag
+            If ctrl.Name = strLink Then
+                ctrl.Tag = strTileTag
+            End If
+        Next
+        
+    Next
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - EnableLinks[Tile form])"
     End Select
     Resume Exit_Handler
 End Sub
