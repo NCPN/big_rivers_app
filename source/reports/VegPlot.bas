@@ -12,8 +12,8 @@ Begin Report
     Width =11491
     DatasheetFontHeight =11
     ItemSuffix =17
-    Right =25650
-    Bottom =12045
+    Right =20565
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -322,54 +322,54 @@ End Sub
 ' Revisions:
 '   BLC - 5/25/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(cancel As Integer)
+Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
     'testing
-    TempVars.Add "ParkCode", "CANY"
+'    TempVars.Add "ParkCode", "CANY"
     
     'prepare interface
     Dim oTPctCover As New Report_PercentCover
-    Dim oBPctCover As New Report_PercentCover
+    Dim oBPctCover As New Report_PercentCoverCOPY
     
     'VegPlot
-    lblTitle.Caption = "VegPlot"
+    lblTitle.Caption = Nz(TempVars("ParkCode"), "") & "VegPlot"
     
     ' ------ Keys -------
     Me.rsubModWentworth.SourceObject = "Report.ModWentworthKey"
     
     ' ------ Top -------
     Set oTPctCover = oTPctCover.Report
-    With oTPctCover
+    With oTPctCover.Report
+        
         .Park = TempVars("ParkCode")
         Select Case .Park
             Case "BLCA"
-                .CoverType = "WCC"
+                .SetCoverType "WCC"
             Case "CANY"
-                .CoverType = "WCC"
+                .SetCoverType "WCC"
             Case "DINO"
-                .CoverType = "ARS"
+                .SetCoverType "ARS"
         End Select
-    
+        Debug.Print .Park & " - " & .CoverType & vbCrLf
     End With
         
     ' ------ Bottom -------
     Set oBPctCover = oBPctCover.Report
-    With oBPctCover
+    With oBPctCover.Report
         'default
         .Visible = True
         
-        .Park = TempVars("park")
-        .CoverType = "URC"
+        .Park = TempVars("ParkCode")
+        .SetCoverType "URC"
         
         Select Case .Park
             Case "BLCA"
             Case "CANY"
             Case "DINO" 'DINO has only one percent cover displayed (ARS)
                 .Visible = False
-'               .Height = 0.1
         End Select
-
+        Debug.Print .Park & " - " & .CoverType & vbCrLf
     End With
     
 Exit_Handler:

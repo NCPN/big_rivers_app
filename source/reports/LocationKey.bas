@@ -20,8 +20,10 @@ Begin Report
     Width =6840
     DatasheetFontHeight =11
     ItemSuffix =108
-    Right =20565
-    Bottom =9630
+    Left =450
+    Top =2490
+    Right =7050
+    Bottom =3975
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -493,7 +495,12 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_Park As String
+Dim m_Park As String
+
+'---------------------
+' Event Declarations
+'---------------------
+Public Event InvalidPark(Park As String)
 
 '---------------------
 ' Event Declarations
@@ -505,12 +512,16 @@ Private m_Park As String
 Public Property Let Park(Value As String)
     If Len(Value) = 4 Then
         m_Park = Value
+    Else
+        RaiseEvent InvalidPark(Value)
     End If
 End Property
 
 Public Property Get Park() As String
     Park = m_Park
 End Property
+
+
 
 '---------------------
 ' Events
@@ -528,7 +539,7 @@ End Property
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(cancel As Integer)
+Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim strPF As String, strPT As String, strPO As String, strPR As String
@@ -643,7 +654,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/11/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
 
@@ -673,7 +684,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/11/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
 

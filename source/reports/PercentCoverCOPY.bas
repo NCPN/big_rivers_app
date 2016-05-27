@@ -17,8 +17,8 @@ Begin Report
     Width =11460
     DatasheetFontHeight =11
     ItemSuffix =185
-    Right =20565
-    Bottom =9630
+    Right =25395
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -1114,8 +1114,6 @@ Begin Report
             CanGrow = NotDefault
             CanShrink = NotDefault
             Height =360
-            OnFormat ="[Event Procedure]"
-            OnPrint ="[Event Procedure]"
             Name ="Detail"
             AutoHeight =255
             AlternateBackColor =14869733
@@ -1824,18 +1822,15 @@ End Property
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(cancel As Integer)
+Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    Dim ary() As String, strPark As String
-    'Dim strCoverType As String ', strWCC As String, strARC As String, strURC As String
+    Dim ary() As String
     Dim strLabel As String, strCheckboxes As String, strSQL As String
-    Dim ChkBoxTop As Double
     Dim i As Integer
     
     'defaults
     strCheckboxes = ""
-    ChkBoxTop = 0.9083 '0.9083" when key & subtitle are shown, 0.25" when not
     
     If Len(Nz(OpenArgs, "")) > 0 Or IsNull(OpenArgs) Then
         Park = Nz(TempVars("ParkCode"), "")
@@ -1845,14 +1840,13 @@ On Error GoTo Err_Handler
     End If
     
     'default
-    If Len(CoverType) = 0 Then Me.CoverType = "WCC"
+'    If Len(covertype) = 0 Then Me.covertype = "ARS"
     
     'customizations, if any
     Select Case Park
         Case "BLCA", ""
             Select Case Me.CoverType
                 Case "WCC"
-                    ChkBoxTop = 0.25
                     strSQL = ""
                 Case "URS"
                     strSQL = ""
@@ -1860,22 +1854,14 @@ On Error GoTo Err_Handler
         Case "CANY"
             Select Case Me.CoverType
                 Case "WCC"
-                    ChkBoxTop = 0.25
                     strSQL = ""
                 Case "URS"
                     strSQL = ""
             End Select
         Case "DINO"
-            'Cover type = ARS
-            ChkBoxTop = 0.25
             strSQL = ""
     End Select
-    
-    'set checkbox row position
-    MoveCheckboxRow ChkBoxTop
-    
-    'show or hide key & subtitle
-    
+
     'headers & keys
     lblTitle.Caption = Me.CoverTypeName & " % Cover"
     lblLeftKey.Caption = "R = rooted in plot"
@@ -1989,22 +1975,22 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:          Detail_Format
-' Description:  report detail formatting actions
+' SUB:          SetCoverType
+' Description:  Sets report cover type value
 ' Assumptions:  -
-' Parameters:   Cancel - if format action should be cancelled (integer)
-'               FormatCount - items to format (integer)
+' Parameters:   covertype - cover type to display (string)
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, May 12, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, May 25, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/12/2016 - initial version
+'   BLC - 5/25/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
+Private Sub SetCoverType(CoverType As String)
 On Error GoTo Err_Handler
 
+    Me.CoverType = CoverType
     
 Exit_Handler:
     Exit Sub
@@ -2013,80 +1999,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Detail_Format[PercentCover Report])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          Detail_Print
-' Description:  report detail printing actions
-' Assumptions:  -
-' Parameters:   Cancel - if print action should be cancelled (integer)
-'               PrintCount - items to print (integer)
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 12, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/12/2016 - initial version
-' ---------------------------------
-Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
-On Error GoTo Err_Handler
-
-
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Detail_Print[PercentCover Report])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          MoveCheckboxRow
-' Description:  Moves the no XX veg checkbox row
-' Assumptions:  -
-' Parameters:   pos - location for top edge of controls in inches (double)
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 13, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/13/2016 - initial version
-' ---------------------------------
-Private Sub MoveCheckboxRow(pos As Double)
-On Error GoTo Err_Handler
-
-    Dim strLabel As String
-    Dim i As Integer
-    
-    'convert to twips
-    pos = pos * TWIPS_PER_INCH
-    
-    lblCheckboxes.top = pos
-    lblCheckboxRow.top = pos
-    
-    'move columns
-    For i = 1 To 16
-        strLabel = "lblColC" & i
-        Me.Controls(strLabel).top = pos
-    Next
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - MoveCheckboxRow[PercentCover Report])"
+            "Error encountered (#" & Err.Number & " - SetCoverType[PercentCover Report])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2094,7 +2007,12 @@ End Sub
 ' ---------------------------------
 ' SUB:          ToggleRow
 ' Description:  Shows/Hides the row for key & subtitle
-' Assumptions:  -
+' Assumptions:  Group headers contain header rows
+'                   GroupHeader0 - title
+'                   GroupHeader1 - title key
+'                   GroupHeader2 - total % cover
+'                   GroupHeader3 - subtitle
+'                   GroupHeader4 - checkboxes
 ' Parameters:   row - row of controls to hide (string)
 ' Returns:      -
 ' Throws:       none
@@ -2115,9 +2033,11 @@ On Error GoTo Err_Handler
             lblLeftKey.Visible = show
             lblRightKey.Visible = show
         Case "key"  'key row below title
+            Me.GroupHeader1.Visible = show
             lblKey.Visible = show
             
         Case "total"    'total plot % cover
+            Me.GroupHeader2.Visible = show
             lblTotalCover.Visible = show
             
             'show/hide columns
@@ -2127,8 +2047,10 @@ On Error GoTo Err_Handler
             Next
                     
         Case "subtitle" 'subtitle row above checkboxes
+            Me.GroupHeader3.Visible = show
             lblSubTitle.Visible = show
             lblRightKeySub.Visible = show
+            
     End Select
         
     
@@ -2139,7 +2061,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - MoveCheckboxRow[PercentCover Report])"
+            "Error encountered (#" & Err.Number & " - ToggleRow[PercentCover Report])"
     End Select
     Resume Exit_Handler
 End Sub

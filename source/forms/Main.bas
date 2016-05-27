@@ -364,7 +364,7 @@ Attribute oTile.VB_VarHelpID = -1
 ' Revisions:
 '   BLC - 4/27/2016 - initial version
 ' ---------------------------------
-Private Sub Form_Open(cancel As Integer)
+Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
     'initialize app (mod_App_UI)

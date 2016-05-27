@@ -116,7 +116,7 @@ On Error GoTo Err_Handler
     Set frm = ctrlSource.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.count
+    cols = rs.Fields.Count
     
     'address no records
     If Nz(rows, 0) = 0 Then
@@ -556,7 +556,7 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String, strWHERE As String
-    Dim count As Integer
+    Dim Count As Integer
     Dim metadata() As Variant
    
     'handle only appropriate park codes
@@ -580,9 +580,9 @@ On Error GoTo Err_Handler
     With rs
         .MoveLast
         .MoveFirst
-        count = .RecordCount
+        Count = .RecordCount
     
-        metadata = rs.GetRows(count)
+        metadata = rs.GetRows(Count)
  
         .Close
     End With
@@ -638,9 +638,10 @@ On Error GoTo Err_Handler
     ' c.f.  Hans Up, May 17, 2011 & discussion
     '       http://stackoverflow.com/questions/6037290/use-of-like-works-in-ms-access-but-not-vba
     '---------------------------------------------------------------------
-    strSQL = "SELECT Code, SOPnumber, Version, EffectiveDate  FROM SOP " _
-                & "WHERE LCASE(Code) LIKE '" & LCase(area) & "*'" _
-                & "AND RetireDate IS NULL;"
+'    strSQL = "SELECT Code, SOPnumber, Version, EffectiveDate  FROM SOP " _
+'                & "WHERE LCASE(Code) LIKE '" & LCase(area) & "*'" _
+'                & "AND RetireDate IS NULL;"
+    strSQL = GetTemplate("s_sop_metadata", "area:" & LCase(area))
     
     'fetch data
     Set db = CurrentDb
@@ -689,7 +690,7 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String
-    Dim count As Integer
+    Dim Count As Integer
     Dim segments() As Variant
    
     'handle only appropriate park codes
@@ -713,9 +714,9 @@ On Error GoTo Err_Handler
 
     rs.MoveLast
     rs.MoveFirst
-    count = rs.RecordCount
+    Count = rs.RecordCount
     
-    segments = rs.GetRows(count)
+    segments = rs.GetRows(Count)
  
     rs.Close
     

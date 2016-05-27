@@ -1281,7 +1281,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(cancel As Integer)
+Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String, strSegments As String

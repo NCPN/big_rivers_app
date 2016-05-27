@@ -821,14 +821,27 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
+Dim m_Park As String
 
 '---------------------
 ' Event Declarations
 '---------------------
+Public Event InvalidPark(Park As String)
 
 '---------------------
 ' Properties
 '---------------------
+Public Property Let Park(Value As String)
+    If Len(Value) = 4 Then
+        m_Park = Value
+    Else
+        RaiseEvent InvalidPark(Value)
+    End If
+End Property
+
+Public Property Get Park() As String
+    Park = m_Park
+End Property
 
 '---------------------
 ' Events
@@ -846,7 +859,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(cancel As Integer)
+Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String
@@ -954,7 +967,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/10/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     Dim ctrl As Control
@@ -1011,7 +1024,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/10/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
     'CircleControl Me.lblNumEx1

@@ -358,15 +358,12 @@ Private m_Link4Action As String
 Private m_Link5Action As String
 Private m_Link6Action As String
 
-
 '---------------------
 ' Events
 '---------------------
 Public Event Selected(Value As Boolean)
 Public Event CriticalState(Value As Boolean)
 Public Event GoodState(Value As Boolean)
-'Public Event Initialize()
-'Public Event Terminate()
 
 '---------------------
 ' Properties
@@ -461,7 +458,6 @@ End Property
 Public Property Let Link1Action(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Link1"
     m_Link1Action = Value
-    'lblLink1.Action = m_Link1Action
 End Property
 
 Public Property Get Link2Action() As String
@@ -471,7 +467,6 @@ End Property
 Public Property Let Link2Action(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Link2"
     m_Link2Action = Value
-    'lblLink2.Action = m_Link2Action
 End Property
 
 Public Property Get Link3Action() As String
@@ -481,7 +476,6 @@ End Property
 Public Property Let Link3Action(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Link3"
     m_Link3Action = Value
-    'lblLink3.Action = m_Link3Action
 End Property
 
 Public Property Get Link4Action() As String
@@ -491,7 +485,6 @@ End Property
 Public Property Let Link4Action(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Link4"
     m_Link4Action = Value
-    'lblLink4.Action = m_Link4Action
 End Property
 
 Public Property Get Link5Action() As String
@@ -501,7 +494,6 @@ End Property
 Public Property Let Link5Action(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Link5"
     m_Link5Action = Value
-    'lblLink5.Action = m_Link5Action
 End Property
 
 Public Property Get Link6Action() As String
@@ -511,7 +503,6 @@ End Property
 Public Property Let Link6Action(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Link6"
     m_Link6Action = Value
-    'lblLink6.Action = m_Link6Action
 End Property
 
 Public Property Let TitleFontColor(Value As Long)

@@ -4,12 +4,13 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.01
+' Version:      1.02
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 5/26/2015 - 1.01 - added mod_db_Templates subs/functions - qryExists
+'               BLC, 5/26/2016 - 1.02 - added VirtualDAORecordset()
 ' =================================
 
 ' ---------------------------------
@@ -185,7 +186,7 @@ On Error GoTo Err_Handler
     Do Until rsB.EOF
         'add rsB values as new rsOut records
         rsOut.AddNew
-        For iCount = 0 To rsB.Fields.count - 1
+        For iCount = 0 To rsB.Fields.Count - 1
             rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
         Next
         rsOut.Update
@@ -434,7 +435,7 @@ On Error GoTo Err_Handler
 
 Dim i As Integer
 
-    For i = 0 To [TempVars].count - 1
+    For i = 0 To [TempVars].Count - 1
         If [TempVars].item(i).Name = strItem Then
             'fetch the index and exit
             GetTempVarIndex = i
@@ -630,7 +631,7 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:     GetTemplate
+' FUNCTION:     GetTemplate
 ' Description:  retrieves template from templates global template dictionary (AppTemplates)
 ' Parameters:   strTemplate - name of template to fetch (string)
 '               params - pipe (|) separated parameter listing w/ parameter name:value pairs (: separated) (string)
@@ -644,6 +645,7 @@ End Sub
 ' Revisions:    BLC, 5/19/2016 - initial version
 ' ---------------------------------
 Public Function GetTemplate(strTemplate As String, Optional params As String = "") As String
+On Error GoTo Err_Handler
 
     Dim aryParams() As Variant
     Dim ary() As String, ary2() As String
@@ -698,3 +700,98 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' FUNCTION:     VirtualDAORecordset
+' Description:  prepares a virtual -in memory only- DAO recordset
+' Parameters:   strTemplate - name of virtual table (string)
+'               iCount - number of records (integer)
+' Returns:      rs - recordset containing # of records = iCount (DAO.recordset)
+' Assumptions:  the virtual recordset is used in limited instances when
+'               a recordset is needed but doesn't exist
+' Throws:       none
+' References:
+'   Tom van Stiphout, July 17, 2006
+'   https://bytes.com/topic/access/answers/512790-dao-connectionless-recordset
+' Source/date:  Bonnie Campbell, May 2016
+' Revisions:    BLC, 5/26/2016 - initial version
+' ---------------------------------
+Public Function VirtualDAORecordset(iCount As Integer, Optional strTable As String = "temp") As Recordset
+On Error GoTo Err_Handler
+
+    Dim Counter As Long
+    Dim rs As DAO.Recordset
+    Dim i As Integer
+
+    With DBEngine
+        .BeginTrans
+        With .Workspaces(0)(0)
+
+            .Execute "CREATE TABLE " & strTable _
+                    & "(RecCount INT CONSTRAINT RecCount UNIQUE);"
+
+            Set rs = .OpenRecordset(strTable, dbOpenTable)
+            With rs
+                For i = 1 To iCount
+                    .AddNew
+                    .Fields("RecCount") = i
+                    .Update
+                Next
+                
+                .index = "RecCount"
+                '.Close
+            End With
+        End With
+    End With
+
+    Set VirtualDAORecordset = rs
+
+Exit_Handler:
+    'Set rs = Nothing
+    'DBEngine.Rollback
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case 3010
+        Counter = Counter + 1
+        strTable = "temp" & CStr(Counter)
+        Resume Next
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - VirtualDAORecordset[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     RemoveVirtualDAORecordset
+' Description:  removes a virtual -in memory only- DAO recordset
+' Parameters:   strTemplate - name of virtual table (string)
+'               iCount - number of records (integer)
+' Returns:      rs - recordset containing # of records = iCount (DAO.recordset)
+' Assumptions:  the virtual recordset is used in limited instances when
+'               a recordset is needed but doesn't exist
+' Throws:       none
+' References:
+'   Tom van Stiphout, July 17, 2006
+'   https://bytes.com/topic/access/answers/512790-dao-connectionless-recordset
+' Source/date:  Bonnie Campbell, May 2016
+' Revisions:    BLC, 5/26/2016 - initial version
+' ---------------------------------
+Public Sub RemoveVirtualDAORecordset()
+On Error GoTo Err_Handler
+
+    DBEngine.Rollback
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RemoveVirtualDAORecordset[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub

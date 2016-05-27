@@ -808,9 +808,18 @@ Public Sub testme()
 'Debug.Print rs(1)
 
 
-    GetTemplates
-'    Dim strSQL As String
-'    strSQL = GetDbTemplate("s_park_list")
-    Debug.Print GetTemplate("s_park_list")
-    Debug.Print GetTemplate("s_tagline", "SourceType:S|SourceID:3")
+'    GetTemplates
+''    Dim strSQL As String
+''    strSQL = GetDbTemplate("s_park_list")
+'    Debug.Print GetTemplate("s_park_list")
+'    Debug.Print GetTemplate("s_tagline", "SourceType:S|SourceID:3")
+'DBEngine.Rollback
+Dim rs As Recordset
+Set rs = VirtualDAORecordset(10, "tbl")
+
+Debug.Print rs("RecCount")
+
+Set rs = Nothing
+DBEngine.Rollback
+
 End Sub

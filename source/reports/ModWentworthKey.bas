@@ -519,7 +519,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
 ' ---------------------------------
-Private Sub Report_Open(cancel As Integer)
+Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String
@@ -586,7 +586,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/12/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Format(cancel As Integer, FormatCount As Integer)
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     
@@ -616,7 +616,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/12/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_Print(cancel As Integer, PrintCount As Integer)
+Private Sub Detail_Print(Cancel As Integer, PrintCount As Integer)
 On Error GoTo Err_Handler
 
 

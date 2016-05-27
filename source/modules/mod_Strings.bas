@@ -17,6 +17,9 @@ Option Explicit
 '---------------------
 ' Hex Unicode constants --> use w/ ChrW()
 Public Const uRArrow = &H2192 'right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
+Public Const uDArrow = &H2193 'down arrow
+Public Const uRHArrow = &H1F846 'heavy right arrow
+Public Const uLHArrow = &H1F844 'heavy left arrow
 Public Const uMu = &H3BC 'microns
 Public Const uAmpersand = &H26 'doesn't work :(
 Public Const uCircle1 = &H2460
@@ -25,6 +28,28 @@ Public Const uCircle3 = &H2462
 Public Const uCircleFilled1 = &H278A
 Public Const uCircleFilled2 = &H278B
 Public Const uCircleFilled3 = &H278C
+Public Const uLTriangle = &H2BC7 'left-pointing triangle
+Public Const uRTriangle = &H2BC8 'right-pointing triangle
+Public Const uBlkPennant = &H1F3F1 'right facing black pennant
+Public Const uWhtPennant = &H1F3F2 'right facing white pennant
+Public Const uMtn = &H30D8 'mountain (Katakana Letter He)
+Public Const uMtnSun = &H30DA 'mountain & sun (Katakana Letter Pe)
+Public Const uMtnSunrise = &H1F304 'mountain sunrise
+Public Const uCamera = &H1F4F7 'camera icon
+Public Const uFlashCamera = &H1F4F8 'camera w/flash icon
+Public Const uCow = &H1F404
+Public Const uLightningCloud = &H1F329
+Public Const uHerb = &H1F33F
+Public Const uGrass = &H1F33E 'grass(ear of rice)
+Public Const uPawPrints = &H1F43E
+Public Const uSnail = &H1F40C
+Public Const uNatlPark = &H1F3DE 'path & tree
+Public Const uDesert = &H1F3DC 'cactus & sun
+Public Const uHammer = &H1F528
+Public Const uPedestrian = &H1F6B6
+Public Const uLizard = &H1F98E
+Public Const uSpiral = &HAA5C '(Cham Punctuation Spiral)
+Public Const uCamping = &H1F3D5
 Public Const uCheck = &H2714
 Public Const uLessThanOrEqual = &H2264
 Public Const uGreaterThanOrEqual = &H2264
@@ -188,16 +213,16 @@ End Function
 ' ---------------------------------
 Public Function CountInString(ByVal strInspect As String, ByVal strFind As String) As Integer
 On Error GoTo Err_Handler:
-     Dim count As Integer
+     Dim Count As Integer
 
     'default
-    count = 0
+    Count = 0
     
     If Len(strInspect) > 0 Then
-        count = UBound(Split(strInspect, strFind))
+        Count = UBound(Split(strInspect, strFind))
     End If
     
-    CountInString = count
+    CountInString = Count
 
 Exit_Function:
     Exit Function
