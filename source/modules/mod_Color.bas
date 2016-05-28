@@ -50,6 +50,7 @@ Public Const lngBrown As Long = 13107       '?RGB(51,51,0) #333300
 Public Const lngPutty As Long = 3355443     '?RGB(51,51,51) #333333
 Public Const lngPurple As Long = 9974127    '?RGB(111,49,152) #6F3198
 Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
+
 ' ---------------------------------
 '  Subroutines & Functions
 ' ---------------------------------

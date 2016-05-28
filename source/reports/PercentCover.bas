@@ -1833,15 +1833,12 @@ On Error GoTo Err_Handler
     strCheckboxes = ""
     
     If Len(Nz(OpenArgs, "")) > 0 Or IsNull(OpenArgs) Then
-        Park = Nz(TempVars("ParkCode"), "")
+        Me.Park = Nz(TempVars("ParkCode"), "")
     Else
         ary = Split(OpenArgs, "|")
-        Park = UCase(ary(0))
+        Me.Park = UCase(ary(0))
     End If
-    
-    'default
-'    If Len(covertype) = 0 Then Me.covertype = "ARS"
-    
+
     'customizations, if any
     Select Case Park
         Case "BLCA", ""
@@ -1987,7 +1984,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/25/2016 - initial version
 ' ---------------------------------
-Private Sub SetCoverType(CoverType As String)
+Public Sub SetCoverType(CoverType As String)
 On Error GoTo Err_Handler
 
     Me.CoverType = CoverType
@@ -2022,7 +2019,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/13/2016 - initial version
 ' ---------------------------------
-Private Sub ToggleRow(row As String, show As Boolean)
+Public Sub ToggleRow(row As String, show As Boolean)
 On Error GoTo Err_Handler
 
     Dim strLabel As String

@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =12930
-    Top =4020
-    Right =15780
-    Bottom =6735
+    Left =3150
+    Top =3105
+    Right =23715
+    Bottom =12735
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -787,7 +787,6 @@ End Sub
 ' Revisions:
 '   BLC - 10/29/2015 - initial version
 ' ---------------------------------
-
 Private Sub lblLink2_Click()
 On Error GoTo Err_Handler
     

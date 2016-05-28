@@ -85,7 +85,8 @@ Public Const TEXT_DISABLED As Long = lngGray
 
 'highlight text for tile links
 Public Const LINK_HIGHLIGHT_TEXT As Long = lngBlue
-Public Const LINK_HIGHLIGHT_BKGD As Long = lngYellow
+Public Const LINK_HIGHLIGHT_BKGD As Long = lngYelLime
+Public Const HIGHLIGHT_MISSING_VALUE As Long = lngYellow
 
 Public Const PROGRESS_BAR As Long = lngLime
 

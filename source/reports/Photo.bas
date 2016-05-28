@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =142
-    Right =25395
-    Bottom =11790
+    Right =20565
+    Bottom =9645
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -650,7 +650,7 @@ Begin Report
                     BackColor =0
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="Label86"
+                    Name ="lblALL4"
                     Caption ="ALL"
                     GridlineColor =10921638
                     LayoutCachedLeft =8040
@@ -671,7 +671,7 @@ Begin Report
                     BackColor =0
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="Label85"
+                    Name ="lblALL3"
                     Caption ="ALL"
                     GridlineColor =10921638
                     LayoutCachedLeft =6000
@@ -1388,7 +1388,7 @@ Begin Report
                     RightMargin =144
                     BackColor =12632256
                     BorderColor =8355711
-                    Name ="Label119"
+                    Name ="lblCategory"
                     Caption ="Category (select one)"
                     LeftPadding =0
                     TopPadding =0
@@ -1418,7 +1418,7 @@ Begin Report
                     RightMargin =144
                     BackColor =12632256
                     BorderColor =8355711
-                    Name ="Label120"
+                    Name ="lblPhotographer"
                     Caption ="Photographer"
                     LeftPadding =0
                     TopPadding =0

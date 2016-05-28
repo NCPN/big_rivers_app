@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =3300
-    Top =3900
-    Right =9135
-    Bottom =4260
+    Left =3150
+    Top =3105
+    Right =23715
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -133,7 +133,7 @@ Begin Form
                     Width =1380
                     ForeColor =4210752
                     Name ="btnLevel0"
-                    Caption ="CANY    >"
+                    Caption ="Park   >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
