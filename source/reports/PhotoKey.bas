@@ -20,8 +20,8 @@ Begin Report
     Width =5520
     DatasheetFontHeight =11
     ItemSuffix =103
-    Right =20565
-    Bottom =9630
+    Right =25395
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -923,17 +923,17 @@ On Error GoTo Err_Handler
     For Each ctrl In Me.Controls
         Select Case ctrl.Name
             Case "lblNumEx1"
-                ctrl.Caption = ChrW(&H2460)
+                ctrl.Caption = ChrW(uCircle1)
             Case "lblNumEx2"
-                ctrl.Caption = ChrW(&H2461)
+                ctrl.Caption = ChrW(uCircle2)
             Case "lblNumEx3"
-                ctrl.Caption = ChrW(&H2462)
+                ctrl.Caption = ChrW(uCircle3)
             Case "lblEx1"
-                ctrl.Caption = ChrW(&H278A)
+                ctrl.Caption = ChrW(uCircleFilled1)
             Case "lblEx2"
-                ctrl.Caption = ChrW(&H278B)
+                ctrl.Caption = ChrW(uCircleFilled2)
             Case "lblEx3"
-                ctrl.Caption = ChrW(&H278C)
+                ctrl.Caption = ChrW(uCircleFilled3)
         End Select
     Next
     
@@ -978,17 +978,17 @@ On Error GoTo Err_Handler
         
         Select Case ctrl.Name
             Case "lblNumEx1"
-                ctrl.Caption = ChrW(&H2460)
+                ctrl.Caption = ChrW(uCircle1)
             Case "lblNumEx2"
-                ctrl.Caption = ChrW(&H2461)
+                ctrl.Caption = ChrW(uCircle2)
             Case "lblNumEx3"
-                ctrl.Caption = ChrW(&H2462)
+                ctrl.Caption = ChrW(uCircle3)
             Case "lblEx1"
-                ctrl.Caption = ChrW(&H278A)
+                ctrl.Caption = ChrW(uCircleFilled1)
             Case "lblEx2"
-                ctrl.Caption = ChrW(&H278B)
+                ctrl.Caption = ChrW(uCircleFilled2)
             Case "lblEx3"
-                ctrl.Caption = ChrW(&H278C)
+                ctrl.Caption = ChrW(uCircleFilled3)
         End Select
         
 '        If Left(ctrl.Name, 8) = "lblNumEx" Then

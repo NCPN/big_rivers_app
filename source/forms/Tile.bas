@@ -21,8 +21,8 @@ Begin Form
     ItemSuffix =9
     Left =3150
     Top =3105
-    Right =23715
-    Bottom =12735
+    Right =28545
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -968,10 +968,6 @@ Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, X As Single,
 On Error GoTo Err_Handler
     
     With Me.lblLink1
-        'avoid flicker w/ if statement
-'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
-'        If Not .BackStyle = acNormal Then .BackStyle = acNormal
-'        If Not .BackColor = lngYellow Then .BackColor = lngYellow
         Me.LinkHighlight lblLink1
     End With
 
@@ -1007,10 +1003,6 @@ On Error GoTo Err_Handler
     
     With Me.lblLink2
         Me.LinkHighlight lblLink2
-'        'avoid flicker w/ if statement
-'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
-'        If Not .BackStyle = acNormal Then .BackStyle = acNormal
-'        If Not .backColor = lngYellow Then .backColor = lngYellow
     End With
 
 Exit_Handler:
@@ -1045,10 +1037,6 @@ On Error GoTo Err_Handler
     
     With Me.lblLink3
         Me.LinkHighlight lblLink3
-'        'avoid flicker w/ if statement
-'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
-'        If Not .BackStyle = acNormal Then .BackStyle = acNormal
-'        If Not .backColor = lngYellow Then .backColor = lngYellow
     End With
 
 Exit_Handler:
@@ -1083,8 +1071,6 @@ On Error GoTo Err_Handler
     
     With Me.lblLink4
         Me.LinkHighlight lblLink4
-'        'avoid flicker w/ if statement
-'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
     End With
 
 Exit_Handler:
@@ -1119,8 +1105,6 @@ On Error GoTo Err_Handler
     
     With Me.lblLink5
         Me.LinkHighlight lblLink5
-'        'avoid flicker w/ if statement
-'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
     End With
 
 Exit_Handler:
@@ -1155,8 +1139,6 @@ On Error GoTo Err_Handler
     
     With Me.lblLink6
         Me.LinkHighlight lblLink6
-'        'avoid flicker w/ if statement
-'        If Not .ForeColor = lngBlue Then .ForeColor = lngBlue
     End With
 
 Exit_Handler:

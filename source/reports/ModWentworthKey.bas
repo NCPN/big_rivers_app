@@ -20,8 +20,8 @@ Begin Report
     Width =6600
     DatasheetFontHeight =11
     ItemSuffix =115
-    Right =20550
-    Bottom =9630
+    Right =25395
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -539,7 +539,7 @@ On Error GoTo Err_Handler
     lblRow2.Caption = "        Clay                               CL                                                       Pebble                     PB                 > 16 - 64"
     lblRow3.Caption = "    Loam/Clay                        LC                                                       Cobble                    CO                > 64 - 256"
     lblRow4.Caption = "       Loam                              LO                                                       Boulder                   BL                > 256 - 512"
-    lblRow5.Caption = "       Sand                               SA            0.5" & ChrW(&H3BC) & "m- 2mm              Bedrock, Hardpan       BR               > 512"
+    lblRow5.Caption = "       Sand                               SA            0.5" & ChrW(uMu) & "m- 2mm              Bedrock, Hardpan       BR               > 512"
 
     'arrow --> from lines
     

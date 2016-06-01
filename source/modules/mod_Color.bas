@@ -32,7 +32,7 @@ Option Explicit
 ' ---------------------------------
 Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
 Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
-Public Const lngLtGray2 As Long = 8355711     '?RGB(127,127,127) Text 1, Lighter 50%
+Public Const lngLtGray2 As Long = 8355711   '?RGB(127,127,127) Text 1, Lighter 50%
 Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
 Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
 Public Const lngLtOrange As Long = 52479    '?RGB(255,204,0) #FFCC00
@@ -50,6 +50,9 @@ Public Const lngBrown As Long = 13107       '?RGB(51,51,0) #333300
 Public Const lngPutty As Long = 3355443     '?RGB(51,51,51) #333333
 Public Const lngPurple As Long = 9974127    '?RGB(111,49,152) #6F3198
 Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
+Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
+Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
+Public Const lngDkGreen As Long = 690698    '?RGB(10,138,10) #0A8A0A
 
 ' ---------------------------------
 '  Subroutines & Functions

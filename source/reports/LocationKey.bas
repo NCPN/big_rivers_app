@@ -20,10 +20,8 @@ Begin Report
     Width =6840
     DatasheetFontHeight =11
     ItemSuffix =108
-    Left =450
-    Top =2490
-    Right =7050
-    Bottom =3975
+    Right =25395
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -548,7 +546,7 @@ On Error GoTo Err_Handler
     Dim ary() As String
     
     'default
-    strArrow = " " & ChrW(&H2192) & " " 'right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
+    strArrow = " " & ChrW(uRArrow) & " " 'right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
     
     'location (vertical display)
     lblLocation.Caption = "L" & vbCrLf & "O" & vbCrLf & "C" & vbCrLf & "A" _

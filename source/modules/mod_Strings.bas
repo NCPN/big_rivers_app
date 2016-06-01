@@ -15,48 +15,68 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-' Hex Unicode constants --> use w/ ChrW()
-Public Const uRArrow = &H2192 'right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
-Public Const uDArrow = &H2193 'down arrow
-Public Const uRHArrow = &H1F846 'heavy right arrow
-Public Const uLHArrow = &H1F844 'heavy left arrow
-Public Const uMu = &H3BC 'microns
-Public Const uAmpersand = &H26 'doesn't work :(
-Public Const uCircle1 = &H2460
-Public Const uCircle2 = &H2461
-Public Const uCircle3 = &H2462
-Public Const uCircleFilled1 = &H278A
-Public Const uCircleFilled2 = &H278B
-Public Const uCircleFilled3 = &H278C
-Public Const uLTriangle = &H2BC7 'left-pointing triangle
-Public Const uRTriangle = &H2BC8 'right-pointing triangle
-Public Const uBlkPennant = &H1F3F1 'right facing black pennant
-Public Const uWhtPennant = &H1F3F2 'right facing white pennant
-Public Const uMtn = &H30D8 'mountain (Katakana Letter He)
-Public Const uMtnSun = &H30DA 'mountain & sun (Katakana Letter Pe)
-Public Const uMtnSunrise = &H1F304 'mountain sunrise
-Public Const uCamera = &H1F4F7 'camera icon
-Public Const uFlashCamera = &H1F4F8 'camera w/flash icon
-Public Const uCow = &H1F404
-Public Const uLightningCloud = &H1F329
-Public Const uHerb = &H1F33F
-Public Const uGrass = &H1F33E 'grass(ear of rice)
-Public Const uPawPrints = &H1F43E
-Public Const uSnail = &H1F40C
-Public Const uNatlPark = &H1F3DE 'path & tree
-Public Const uDesert = &H1F3DC 'cactus & sun
-Public Const uHammer = &H1F528
-Public Const uPedestrian = &H1F6B6
-Public Const uLizard = &H1F98E
-Public Const uSpiral = &HAA5C '(Cham Punctuation Spiral)
-Public Const uCamping = &H1F3D5
-Public Const uCheck = &H2714
-Public Const uLessThanOrEqual = &H2264
-Public Const uGreaterThanOrEqual = &H2264
-Public Const uBullet = &H25CF
-Public Const uCheckboxEmpty = &H2610
-Public Const uCheckboxCheck = &H2611
-Public Const uCheckboxX = &H2612
+' Hex Unicode constants --> use w/ ChrW() or StringFromCodepoint() if supplementary unicode characters (codepoints) outside ChrW() range
+'                           Ranges: Chr (0-255) & ChrW (-32768 - 65535), StringFromCodepoint(all)
+'                           Out of Range? --> Argument exception error # 5 occurs
+'                           long values are listed below
+'---------------------
+Public Const uSpiral = &HAA5C               '-21924 (Cham Punctuation Spiral)
+Public Const uAmpersand = &H26              '38     doesn't work :(
+Public Const uMu = &H3BC                    '956    microns
+Public Const uRArrow = &H2192               '8594   right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
+Public Const uDArrow = &H2193               '8495   down arrow
+Public Const uLessThanOrEqual = &H2264      '8804
+Public Const uGreaterThanOrEqual = &H2265   '8805
+Public Const uCircle1 = &H2460              '9312
+Public Const uCircle2 = &H2461              '9313
+Public Const uCircle3 = &H2462              '9314
+Public Const uBullet = &H25CF               '9679
+Public Const uCheckboxEmpty = &H2610        '9744
+Public Const uCheckboxCheck = &H2611        '9745
+Public Const uCheckboxX = &H2612            '9746
+Public Const uCheck = &H2714                '10004
+Public Const uCircleFilled1 = &H278A        '10122
+Public Const uCircleFilled2 = &H278B        '10123
+Public Const uCircleFilled3 = &H278C        '10124
+Public Const uLTriangle = &H2BC7            '11207  left-pointing triangle
+Public Const uRTriangle = &H2BC8            '11208  right-pointing triangle
+Public Const uMtn = &H30D8                  '12504  mountain (Katakana Letter He)
+Public Const uMtnSun = &H30DA               '12506  mountain & sun (Katakana Letter Pe)
+'--- use StringFromCodepoint() from here ---
+Public Const uMtnSunrise = &H1F304          '127748 mountain sunrise
+Public Const uLightningCloud = &H1F329      '127785
+Public Const uGrass = &H1F33E               '127806 grass(ear of rice)
+Public Const uHerb = &H1F33F                '127807
+Public Const uCamping = &H1F3D5             '127957
+Public Const uNatlPark = &H1F3DE            '127966 path & tree
+Public Const uDesert = &H1F3DC              '127964 cactus & sun
+Public Const uBlkPennant = &H1F3F1          '127985 right facing black pennant
+Public Const uWhtPennant = &H1F3F2          '127986 right facing white pennant
+Public Const uSpeech = &H1F4AC              '128172
+Public Const uCow = &H1F404                 '128004
+Public Const uSnail = &H1F40C               '128012
+Public Const uPawPrints = &H1F43E           '128062
+Public Const uCalendarTearOff = &H1F4C6     '128198
+Public Const uClipboard = &H1F4CB           '128203
+Public Const uMemo = &H1F4DD                '128221
+Public Const uCamera = &H1F4F7              '128247 camera icon
+Public Const uFlashCamera = &H1F4F8         '128248 camera w/flash icon
+Public Const uLocked = &H1F512              '128274
+Public Const uUnlocked = &H1F513            '128275
+Public Const uHammer = &H1F528              '128296
+Public Const uFolder = &H1F5C0              '128448
+Public Const uFolderOpen = &H1F5C1          '128449
+Public Const uNotepad = &H1F5CA             '128458
+Public Const uDocument = &H1F5CE            '128462
+Public Const uCalendarSpiral = &H1F5D3      '128467
+Public Const uPedestrian = &H1F6B6          '128694
+Public Const uCancel = &H1F5D9              '128473
+Public Const uRHArrow = &H1F846             '129094 heavy right arrow
+Public Const uLHArrow = &H1F844             '129092 heavy left arrow
+Public Const uLizard = &H1F98E              '129422
+'Public Const u = &H1F                      '
+'Public Const u = &H1F                      '
+'Public Const u = &H1F                      '
 
 ' =================================
 ' FUNCTION:     ReplaceString
@@ -232,6 +252,62 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CountInString[mod_Strings])"
+    End Select
+    Resume Exit_Function
+End Function
+
+' ---------------------------------
+' FUNCTION:     StringFromCodepoint
+' Description:  Handles unicode character values beyond the ranges available to
+'               Chr (0-255) & ChrW (-32768 - 65535)
+'               Uses surrogate characters technique
+'               Uses 2 16-bit characters to code up to &H110000 characters
+'               outside the main plane of characters (the basic multilingual plane or BMP).
+'               The two surrogate characters are two bunches
+'               of 1024 characters coded between &HD800 and &HDBFF
+'               and between &HC00 and &HDFFF.
+'               Therefore only CodePoints less than &H110000 are allowed,
+'               and the 2 characters to code a valid CodePoint are computed
+' Assumptions:  -
+' Parameters:   CodePoint - string to check
+' Returns:      count - number o instances strFind is found in strInspect
+' Throws:       none
+' References:   none
+' Source/date:
+'   Ben - June 17, 2014 & user1771398 - June 18, 2014
+'   http://stackoverflow.com/questions/24272148/vba-word-insertsymbol-failure-with-high-value-unicode-for-maths-symbols
+'   Microsoft
+'   https://msdn.microsoft.com/en-us/library/windows/desktop/dd374069(v=vs.85).aspx
+' Adapted:      Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Revisions:
+'   BLC, 5/31/2016 - initial version
+' ---------------------------------
+Function StringFromCodepoint(ByVal CodePoint As Long) As String
+On Error GoTo Err_Handler
+    If CodePoint <= &HFFFF& Then
+        StringFromCodepoint = ChrW(CodePoint)
+        Exit Function
+    ElseIf CodePoint > &H10FFFF Or CodePoint <= 0 Then
+        Err.Raise 5, "Invalid Codepoint: " & str(CodePoint)
+        Exit Function
+    Else
+        CodePoint = CodePoint - &H10000
+        Dim SurrogateLow As Long
+        Dim SurrogateHigh As Long
+        SurrogateLow = CodePoint And &H3FF&
+        SurrogateHigh = (CodePoint - SurrogateLow) / &H400&
+        StringFromCodepoint = ChrW(SurrogateHigh Or &HD800&) + ChrW(SurrogateLow Or &HDC00&)
+        Exit Function
+    End If
+    
+Exit_Function:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - StringFromCodePoint[mod_Strings])"
     End Select
     Resume Exit_Function
 End Function

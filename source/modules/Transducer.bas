@@ -44,7 +44,6 @@ Private m_ActionTime As Date 'time
 
 Private m_ContactID As Long
 
-
 '---------------------
 ' Events
 '---------------------
@@ -236,20 +235,31 @@ End Sub
 Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
+    Dim strSQL As String, params As String
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     
     'record Transducers must have:
-    strSQL = "INSERT INTO Transducer(Event_ID, TransducerType, TransducerNumber, " _
-                & "SerialNumber, IsSurveyed, Timing, ActionDate, ActionTime) VALUES " _
-                & "(" & Me.EventID & ",'" & Me.TransducerType & "','" _
-                & Me.TransducerNumber & "','" & Me.SerialNumber & "'," _
-                & Me.IsSurveyed & ",'" & Me.Timing & "',#" _
-                & CDate(Me.ActionDate) & "#,#" & Format(Me.ActionTime, "hh:mm:ss") & "#);"
+'    strSQL = "INSERT INTO Transducer(Event_ID, TransducerType, TransducerNumber, " _
+'                & "SerialNumber, IsSurveyed, Timing, ActionDate, ActionTime) VALUES " _
+'                & "(" & Me.EventID & ",'" & Me.TransducerType & "','" _
+'                & Me.TransducerNumber & "','" & Me.SerialNumber & "'," _
+'                & Me.IsSurveyed & ",'" & Me.Timing & "',#" _
+'                & CDate(Me.ActionDate) & "#,#" & Format(Me.ActionTime, "hh:mm:ss") & "#);"
 
+    params = "EventID:" & Me.EventID & _
+            "|TransducerType:" & Me.TransducerType & _
+            "|TransducerNumber:" & Me.TransducerNumber & _
+            "|SerialNumber:" & Me.SerialNumber & _
+            "|IsSurveyed:" & Me.IsSurveyed & _
+            "|Timing:" & Me.Timing & _
+            "|ActionDate:" & CDate(Me.ActionDate) & _
+            "|ActionTime:" & Format(Me.ActionTime, "hh:mm:ss")
+
+    strSQL = GetTemplate("i_transducer", params)
+    
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 

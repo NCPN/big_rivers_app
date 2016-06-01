@@ -19,7 +19,7 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =120
-    Right =28035
+    Right =25395
     Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
@@ -679,7 +679,6 @@ Option Explicit
 '   These lists must be present to generate the appropriate species recordset for display.
 '---------------------
 
-
 '---------------------
 ' Simulated Inheritance
 '---------------------
@@ -806,7 +805,7 @@ On Error GoTo Err_Handler
     
     'column headers
     Me.lblSpeciesFound.Caption = "Species Found"
-    Me.lblCheckMark.Caption = ChrW(&H2714)
+    Me.lblCheckMark.Caption = ChrW(uCheck)
     
     'setup data sources
     Select Case Me.Park

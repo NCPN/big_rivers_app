@@ -140,7 +140,7 @@ Public Function NewZip(sPath)
 
     If Len(Dir(sPath)) > 0 Then Kill sPath
     Open sPath For Output As #1
-    Print #1, chr$(80) & chr$(75) & chr$(5) & chr$(6) & String(18, 0)
+    Print #1, Chr$(80) & Chr$(75) & Chr$(5) & Chr$(6) & String(18, 0)
     Close #1
 
 Exit_Handler:

@@ -311,6 +311,8 @@ On Error GoTo Err_Handler
         'Observations
         Case "obs-photos"
         Case "obs-transducers"
+            fName = "Transducer"
+            oArgs = ""
         'Trip Prep
         Case "vegplot"
             rName = "VegPlot"

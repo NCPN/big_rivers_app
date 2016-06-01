@@ -28,7 +28,7 @@ Begin Report
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6801000068010000680100006d01000000000000c42c00006801000001000000 ,
+        0x6a01000068010000680100006d01000000000000c42c00006801000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -1870,7 +1870,7 @@ On Error GoTo Err_Handler
                             & ChrW(uBullet) & " T " _
                             & ChrW(uLessThanOrEqual) & " 0.5"
     
-    lblKey.Caption = ChrW(&H2264) & " 1.5m height  " _
+    lblKey.Caption = ChrW(uLessThanOrEqual) & " 1.5m height  " _
                     & ChrW(uBullet) & "  to nearest 1%  " _
                     & ChrW(uBullet) & "  T(trace) " _
                     & ChrW(uLessThanOrEqual) & " 0.5  " _
