@@ -12,6 +12,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =18
+    Right =15015
+    Bottom =10500
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -19,6 +21,7 @@ Begin Report
     End
     Caption ="VegPlot"
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6a010000680100006801000068010000000000000c2d00005820000001000000 ,
@@ -593,7 +596,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - XX[VegPlot report])"
+            "Error encountered (#" & Err.Number & " - XX[VegPlot Report])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -708,7 +711,38 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Report_Open[VegPlot report])"
+            "Error encountered (#" & Err.Number & " - Report_Open[VegPlot Report])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Report_Close
+' Description:  Closing event actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 2, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/2/2016 - initial version
+' ---------------------------------
+Private Sub Report_Close()
+On Error GoTo Err_Handler
+
+    'unhide modal Main form
+    Forms("Main").Visible = True
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Close[VegPlot Report])"
     End Select
     Resume Exit_Handler
 End Sub

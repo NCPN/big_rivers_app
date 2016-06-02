@@ -205,20 +205,26 @@ On Error GoTo Err_Handler
     
     Set db = CurrentDb
     
-    'taglines must have:
-'    strSQL = "INSERT INTO Tagline(LineDistanceSource, LineDistanceSource_ID, " _
-'                & "LineDistanceType, LineDistance_m, HeightType, Height_cm) VALUES " _
-'                & "('" & Me.LineDistSource & "'," & Me.LineDistSourceID & ",'" _
-'                & Me.LineDistType & "'," & Me.LineDistance & ",'" & Me.HeightType _
-'                & "'," & Me.Height & ");"
-    strSQL = GetTemplate("i_tagline_record", "LineDistSource:" & Me.LineDistSource _
-                & "|LineDistSourceID:" & Me.LineDistSourceID _
-                & "|LineDistType:" & Me.LineDistType _
-                & "|LineDistance:" & Me.LineDistance _
-                & "|HeightType:" & Me.HeightType _
-                & "|Height:" & Me.Height)
-
-    Debug.Print strSQL
+    If Me.ID > 0 Then
+        'update tagline:
+        strSQL = GetTemplate("u_tagline_record", _
+                    "LineDistSource:" & Me.LineDistSource _
+                    & "|LineDistSourceID:" & Me.LineDistSourceID _
+                    & "|LineDistType:" & Me.LineDistType _
+                    & "|LineDistance:" & Me.LineDistance _
+                    & "|HeightType:" & Me.HeightType _
+                    & "|Height:" & Me.Height _
+                    & "|ID:" & Me.ID)
+    Else
+        'insert tagline
+        strSQL = GetTemplate("i_tagline_record", _
+                    "LineDistSource:" & Me.LineDistSource _
+                    & "|LineDistSourceID:" & Me.LineDistSourceID _
+                    & "|LineDistType:" & Me.LineDistType _
+                    & "|LineDistance:" & Me.LineDistance _
+                    & "|HeightType:" & Me.HeightType _
+                    & "|Height:" & Me.Height)
+    End If
     
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)

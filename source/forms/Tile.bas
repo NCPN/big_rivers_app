@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =3150
-    Top =3105
-    Right =28545
-    Bottom =14895
+    Left =5580
+    Top =19380
+    Right =8160
+    Bottom =22530
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -1321,7 +1321,7 @@ On Error GoTo Err_Handler
     With ctrl
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
-        If Not .BackStyle = acNormal Then .BackStyle = acNormal
+        If Not .BackStyle = acNormalSolid Then .BackStyle = acNormalSolid
         If Not .backColor = LINK_HIGHLIGHT_BKGD Then .backColor = LINK_HIGHLIGHT_BKGD
     End With
 

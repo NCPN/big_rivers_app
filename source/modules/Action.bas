@@ -215,9 +215,21 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'record actions must have:
-    strSQL = "INSERT INTO RecordAction(ReferenceType, Reference_ID, Contact_ID, Action, ActionDate) VALUES " _
-                & "('" & Me.RefTable & "'," & Me.RefID & "," _
-                & Me.ID & ",'" & Me.action & "', Now() );"
+'    strSQL = "INSERT INTO RecordAction(ReferenceType, Reference_ID, Contact_ID, Action, ActionDate) VALUES " _
+'                & "('" & Me.RefTable & "'," & Me.RefID & "," _
+'                & Me.ID & ",'" & Me.action & "', Now() );"
+
+    strSQL = GetTemplate("i_action_record", _
+                         "RefType:" & Me.RefTable _
+                        & "|RefID:" & Me.RefID _
+                        & "|ID:" & Me.ID _
+                        & "|action:" & Me.action _
+                        & "|actiondate:" & Now())
+                        
+'********************
+'  FIX: Me.RefTable & actiondate values
+'********************
+
 
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)

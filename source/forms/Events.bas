@@ -26,9 +26,9 @@ Begin Form
     Bottom =14130
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xc6cec65556c3e440
+        0x236ab60a61c3e440
     End
-    Caption ="Tagline Measurements"
+    Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -164,7 +164,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Tagline Measurements"
+                    Caption ="Events (Sampling Visits)"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -182,7 +182,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Select the appropriate slope change cause & enter tagline distance & height."
+                    Caption ="Enter the sampling start date."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -200,50 +200,12 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblDistance"
-                    Caption ="Distance (m)"
+                    Name ="lblStartDate"
+                    Caption ="Start Date"
                     GridlineColor =10921638
                     LayoutCachedLeft =2820
                     LayoutCachedTop =1080
                     LayoutCachedWidth =4065
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =4140
-                    Top =1080
-                    Width =1155
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblHeight"
-                    Caption ="Height (cm)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4140
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =5295
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =1200
-                    Top =1080
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblCause"
-                    Caption ="Slope Change Cause"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1200
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =2445
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -259,52 +221,12 @@ Begin Form
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
-                Begin ComboBox
-                    RowSourceTypeInt =1
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =1140
-                    Top =75
-                    Width =1740
-                    Height =300
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    ConditionalFormat = Begin
-                        0x0100000092000000020000000100000000000000000000001400000001000000 ,
-                        0x00000000fff20000000000000300000015000000180000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x630062007800430061007500730065002e00530065006c005400650078007400 ,
-                        0x3d0022002200000000002200220000000000
-                    End
-                    Name ="cbxCause"
-                    RowSourceType ="Value List"
-                    RowSource =" --SELECT-- ;D-debris;G-grd;R-rock;V-veg;W-water"
-                    ColumnWidths ="1440"
-                    OnChange ="[Event Procedure]"
-                    GridlineColor =10921638
-                    AllowValueListEdits =0
-
-                    LayoutCachedLeft =1140
-                    LayoutCachedTop =75
-                    LayoutCachedWidth =2880
-                    LayoutCachedHeight =375
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000130000006300 ,
-                        0x62007800430061007500730065002e00530065006c0054006500780074003d00 ,
-                        0x2200220000000000000000000000000000000000000000000000000000030000 ,
-                        0x000100000000000000ffffff0002000000220022000000000000000000000000 ,
-                        0x00000000000000000000
-                    End
-                End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
                     Width =720
-                    TabIndex =3
+                    TabIndex =1
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -366,71 +288,36 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =3000
+                    Left =2700
                     Top =60
-                    Width =1080
+                    Width =1860
                     Height =315
-                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="tbxDistance"
+                    Name ="tbxStartDate"
+                    OnLostFocus ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
-                        0x0100000094000000020000000100000000000000000000001500000001000000 ,
-                        0x00000000fff20000000000000300000016000000190000000100000000000000 ,
+                        0x010000009e000000020000000100000000000000000000001800000001000000 ,
+                        0x00000000fff2000000000000030000001a0000001d0000000100000000000000 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x740062007800440069007300740061006e00630065002e00560061006c007500 ,
-                        0x65003d0022002200000000002200220000000000
+                        0x5b007400620078005300740061007200740044006100740065005d002e005600 ,
+                        0x61006c00750065003d002200220000000000000022002200000000000000
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3000
+                    LayoutCachedLeft =2700
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4080
+                    LayoutCachedWidth =4560
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000140000007400 ,
-                        0x62007800440069007300740061006e00630065002e00560061006c0075006500 ,
-                        0x3d00220022000000000000000000000000000000000000000000000000000003 ,
-                        0x0000000100000000000000ffffff000200000022002200000000000000000000 ,
-                        0x000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =4260
-                    Top =60
-                    Width =1080
-                    Height =315
-                    TabIndex =2
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxHeight"
-                    OnChange ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x0100000090000000020000000100000000000000000000001300000001000000 ,
-                        0x00000000fff20000000000000300000014000000170000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x7400620078004800650069006700680074002e00560061006c00750065003d00 ,
-                        0x22002200000000002200220000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =5340
-                    LayoutCachedHeight =375
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000120000007400 ,
-                        0x620078004800650069006700680074002e00560061006c00750065003d002200 ,
-                        0x2200000000000000000000000000000000000000000000000000000300000001 ,
-                        0x00000000000000ffffff00020000002200220000000000000000000000000000 ,
-                        0x0000000000000000
+                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
+                        0x7400620078005300740061007200740044006100740065005d002e0056006100 ,
+                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
+                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
+                        0x000000000000000000000000000000000000
                     End
                 End
                 Begin TextBox
@@ -444,9 +331,9 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =3
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -465,7 +352,7 @@ Begin Form
                     Left =5760
                     Top =60
                     Width =720
-                    TabIndex =4
+                    TabIndex =2
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -532,10 +419,10 @@ Begin Form
                     Top =600
                     Width =7650
                     Height =4380
-                    TabIndex =6
+                    TabIndex =4
                     BorderColor =10921638
                     Name ="list"
-                    SourceObject ="Form.TaglineList"
+                    SourceObject ="Form.EventsList"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
@@ -571,7 +458,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =7
+                    TabIndex =5
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -606,7 +493,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Tagline
+' Form:         Events
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -733,7 +620,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -754,21 +641,15 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    Title = "Tagline Measurements"
-    Directions = "Select the appropriate slope change cause & enter tagline distance & height."
+    Title = "Events (Sampling Visits)"
+    Directions = "Enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
-    
-    'tagline slope change causes: Veg, Grd, Water, Rock, Debris
-    cbxCause.RowSourceType = "Value List"
-    cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
-  
+      
     'defaults
     tbxIcon.ForeColor = lngRed
     btnSave.Enabled = False
-    cbxCause.backColor = lngYellow
-    tbxDistance.backColor = lngYellow
-    tbxHeight.backColor = lngYellow
+    tbxStartDate.backColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -779,7 +660,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -806,13 +687,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          cbxCause_Change
+' Sub:          tbxStartDate_Change
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -824,11 +705,9 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub cbxCause_Change()
+Private Sub tbxStartDate_Change()
 On Error GoTo Err_Handler
 
-'    Me.SelectedID = CInt(cbxCause.Column(0))
-'    Me.SelectedValue = CStr(cbxCause.Column(1))
     ReadyForSave
     
 Exit_Handler:
@@ -837,13 +716,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxCause_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - tbxStartDate_Change[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxDistance_Change
+' Sub:          tbxStartDate_LostFocus
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -855,7 +734,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub tbxDistance_Change()
+Private Sub tbxStartDate_LostFocus()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -866,39 +745,11 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxDistance_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - tbxStartDate_LostFocus[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' Sub:          tbxHeight_Change
-' Description:  Dropdown change actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub tbxHeight_Change()
-On Error GoTo Err_Handler
-
-    ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxHeight_Change[Tagline form])"
-    End Select
-    Resume Exit_Handler
-End Sub
 
 ' ---------------------------------
 ' Sub:          btnUndo_Click
@@ -917,9 +768,7 @@ Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     'clear values
-    cbxCause.Value = ""
-    tbxDistance.Value = ""
-    tbxHeight.Value = ""
+    tbxStartDate.Value = ""
     
     btnSave.Enabled = False
     
@@ -931,7 +780,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnUndo_Click[Tagline form])"
+            "Error encountered (#" & Err.Number & " - btnUndo_Click[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -952,20 +801,17 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim tl As New tagline
+    Dim ev As New EventVisit
     
-    With tl
+    With ev
         'values passed into form
-        .LineDistSource = "T"
-        .LineDistSourceID = 14
-        
-        'default
-        .LineDistType = "SC" 'slope changes only
+        .LocationID = 1
+        .ProtocolID = 1
+        .SiteID = 1
         
         'form values
-        .HeightType = Left(cbxCause.Value, 1)
-        .Height = tbxHeight.Value
-        .LineDistance = tbxDistance.Value
+        .StartDate = tbxStartDate.Value
+        
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
     End With
@@ -973,12 +819,7 @@ On Error GoTo Err_Handler
     'clear values & refresh display
     Me.RecordSource = ""
     
-    'tagline slope change causes: Veg, Grd, Water, Rock, Debris
-    cbxCause.RowSourceType = "Value List"
-    cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
-    
-    tbxDistance.ControlSource = ""
-    tbxHeight.ControlSource = ""
+    tbxStartDate.ControlSource = ""
     tbxID.ControlSource = ""
     tbxID.Value = 0
     
@@ -995,7 +836,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSave_Click[Tagline form])"
+            "Error encountered (#" & Err.Number & " - btnSave_Click[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1016,6 +857,7 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
+    Forms("Main").Form.Visible = True
     
 Exit_Handler:
     Exit Sub
@@ -1023,7 +865,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1050,22 +892,9 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-'    If tbxID > 0 Then
-        'edit record -> use cbxCause.SelText
-        If tbxDistance > 0 And tbxHeight <> "" Then
-            cbxCause.SetFocus
-            If Len(cbxCause.SelText) <> 0 Then isOK = True
-            'btnSave.SetFocus
-        End If
-        
-'    Else
-'        'new record -> use cbxCause.Value
-'        If tbxDistance > 0 And tbxHeight <> "" Then
-'            cbxCause.SetFocus
-'            If Len(cbxCause.SelText) <> 0 Then isOK = True
-'            isOK = True
-'        End If
-'    End If
+    If IsDate(tbxStartDate) Then
+        isOK = True
+    End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
@@ -1079,7 +908,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ReadyForSave[Tagline form])"
+            "Error encountered (#" & Err.Number & " - ReadyForSave[Events form])"
     End Select
     Resume Exit_Handler
 End Sub

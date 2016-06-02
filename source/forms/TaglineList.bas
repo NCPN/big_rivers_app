@@ -24,10 +24,10 @@ Begin Form
     Bottom =10500
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x977c4ffe4fc3e440
+        0xa5fae2b260c3e440
     End
     RecordSource ="Tagline"
-    Caption ="_List"
+    Caption ="list"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -482,7 +482,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         _List
+' Form:         TaglineList
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -609,7 +609,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -649,7 +649,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -676,7 +676,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -706,7 +706,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[_List form])"
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -741,7 +741,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[_List form])"
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -769,7 +769,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -795,7 +795,7 @@ On Error GoTo Err_Handler
         
         'find the form & populate its controls from the ID
         Select Case .Name
-            Case "_List"
+            Case "TaglineList"
                 strSQL = GetTemplate("s_form_edit", "tbl:tagline|id:" & ID)
             Case "_Base"
                 strSQL = GetTemplate("s_form_edit", "tbl:tagline|id:" & ID)
@@ -815,7 +815,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[_List form])"
+            "Error encountered (#" & Err.Number & " - PopulateForm[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -839,7 +839,7 @@ On Error GoTo Err_Handler
 
     'find the form & populate its controls from the ID
     Select Case tbl
-        Case "_List"
+        Case "TaglineList"
             strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
         Case "Tagline"
             strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
@@ -861,7 +861,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[_List form])"
+            "Error encountered (#" & Err.Number & " - PopulateForm[TaglineList form])"
     End Select
     Resume Exit_Handler
 End Sub

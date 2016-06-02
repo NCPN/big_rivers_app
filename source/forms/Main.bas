@@ -4,6 +4,7 @@ Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
     ControlBox = NotDefault
+    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
     DefaultView =0
@@ -15,10 +16,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =3150
-    Top =3105
-    Right =12045
-    Bottom =10770
+    Left =4635
+    Top =3630
+    Right =14835
+    Bottom =14130
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -579,32 +580,6 @@ On Error GoTo Err_Handler
         End If
         
         HighlightBreadcrumb
-'        'highlight buttons where Park/River/Site/Feature not set
-'        If Len(.btnLevel0.Caption) <> Len(Replace(.btnLevel0.Caption, "Park", "")) Then
-'            bgcolor0 = HIGHLIGHT_MISSING_VALUE
-'        Else
-'            bgcolor0 = lngWhite
-'        End If
-'        If Len(.btnLevel1.Caption) <> Len(Replace(.btnLevel1.Caption, "River", "")) Then
-'            bgcolor1 = HIGHLIGHT_MISSING_VALUE
-'        Else
-'            bgcolor1 = lngWhite
-'        End If
-'        If Len(.btnLevel2.Caption) <> Len(Replace(.btnLevel2.Caption, "Site", "")) Then
-'            bgcolor2 = HIGHLIGHT_MISSING_VALUE
-'        Else
-'            bgcolor2 = lngWhite
-'        End If
-'        If Len(.btnLevel3.Caption) <> Len(Replace(.btnLevel3.Caption, "Feature", "")) Then
-'            bgcolor3 = HIGHLIGHT_MISSING_VALUE
-'        Else
-'            bgcolor3 = lngWhite
-'        End If
-'
-'        .btnLevel0.backColor = bgcolor0
-'        .btnLevel1.backColor = bgcolor1
-'        .btnLevel2.backColor = bgcolor2
-'        .btnLevel3.backColor = bgcolor3
 
     End With
     
@@ -637,52 +612,12 @@ End Sub
 Public Sub HighlightBreadcrumb(Optional ClearValues As Integer = 4)
 On Error GoTo Err_Handler
     
-'    Dim i As Integer
-'    Dim strLevel As String, strMore As String
-'    Dim strHierarchy() As Variant
     Dim frm As Form
     Dim bgcolor0 As Long, bgcolor1 As Long, bgcolor2 As Long, bgcolor3 As Long
         
     Set frm = Me!fsubBreadcrumb.Form
     
     With frm
-'        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park") & Space(4) & ">"
-'        .btnLevel1.Caption = Nz(TempVars("River"), "River") & Space(4) & ">"
-'        .btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site") & Space(4) & ">"
-'        .btnLevel3.Caption = Nz(TempVars("Feature"), "Feature")
-'
-'        'clear
-'        strHierarchy() = Array("Park", "River", "Site", "Feature")
-'
-'        For i = ClearValues + 1 To 3 - ClearValues
-'
-'            'default
-'            strMore = ""
-'
-'            If i < 4 Then strMore = Space(4) & ">"
-'
-'            strLevel = "btnLevel" & i
-'            .Controls(strLevel).Caption = strHierarchy(i) & strMore
-'
-'        Next
-'
-'        'if park --> enable links
-'        If Len(Nz(TempVars("ParkCode"), "")) > 0 Then
-'            'enable links
-'            .Parent!LTile.Form.EnableLinks .Parent!LTile.Form.TileTag & ",1,2,3,4,5,6"
-'            .Parent!CTile.Form.EnableLinks .Parent!CTile.Form.TileTag & ",1,2,3,4,5,6"
-'            .Parent!RTile.Form.EnableLinks .Parent!RTile.Form.TileTag & ",1,2,3,4,5,6"
-'            .Parent!BLTile.Form.EnableLinks .Parent!BLTile.Form.TileTag & ",1,2,3,4,5,6"
-'            .Parent!BCTile.Form.EnableLinks .Parent!BCTile.Form.TileTag & ",1,2,3,4,5,6"
-'            .Parent!BRTile.Form.EnableLinks .Parent!BRTile.Form.TileTag & ",1,2,3,4,5,6"
-'
-'            'disable feature for non-feature parks
-'            If TempVars("ParkCode") <> "BLCA" Then
-'                .btnLevel2.Caption = Replace(.btnLevel2.Caption, ">", "")
-'                .btnLevel3.Caption = ""
-'            End If
-'        End If
-'
         'highlight buttons where Park/River/Site/Feature not set
         If Len(.btnLevel0.Caption) <> Len(Replace(.btnLevel0.Caption, "Park", "")) Then
             bgcolor0 = HIGHLIGHT_MISSING_VALUE

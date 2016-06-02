@@ -777,43 +777,11 @@ Public Sub doit()
 ' Mark K, 10/6/2011
 ' http://www.access-programmers.co.uk/forums/showthread.php?t=216531
 
-
-'  Dim i As enMyEnumeratedtype
-'  For i = enMyEnumSetLow To enMyEnumOverTheTop
-'    MyArray(i) = i
-'  Next
-
-'Dim ary() As Variant
-'Dim i As ModWentworthClassSize
-'For i = SA To BL
-'    ary(i) = i
-'Next
-  
-   'Debug.Print ModWentworthClassSize
-   
-'   CreateEnums
-
     GetADCommonName
 
 End Sub
 
 Public Sub testme()
-'    DoCmd.OpenForm "Tagline", acNormal, OpenArgs:="t|4" '"p|1"
-'    DoCmd.OpenForm "SpeciesList", acNormal, OpenArgs:="1|2016|WCC"
-
-'    GetRiverSegments "BLCA"
-'     GetProtocolVersion
-'Dim rs As Variant
-'Set rs = GetSOPMetadata("transducer")
-'Debug.Print rs(1)
-
-
-'    GetTemplates
-''    Dim strSQL As String
-''    strSQL = GetDbTemplate("s_park_list")
-'    Debug.Print GetTemplate("s_park_list")
-'    Debug.Print GetTemplate("s_tagline", "SourceType:S|SourceID:3")
-'DBEngine.Rollback
 Dim rs As Recordset
 Set rs = VirtualDAORecordset(10, "tbl")
 

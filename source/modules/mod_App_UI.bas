@@ -298,7 +298,8 @@ On Error GoTo Err_Handler
         Case "plot"
         'Sampling
         Case "event"
-            fName = "Task"
+            fName = "Events"
+            oArgs = ""
         Case "location"
         Case "people"
         'Vegetation

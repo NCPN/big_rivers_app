@@ -4,7 +4,6 @@ Begin Form
     AllowFilters = NotDefault
     PopUp = NotDefault
     RecordSelectors = NotDefault
-    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
@@ -535,7 +534,7 @@ Begin Form
                     TabIndex =6
                     BorderColor =10921638
                     Name ="list"
-                    SourceObject ="Form.TaglineList"
+                    SourceObject ="Form._List"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
@@ -553,7 +552,7 @@ Begin Form
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
-                    Name ="rctList"
+                    Name ="Box27"
                     GridlineColor =10921638
                     LayoutCachedTop =480
                     LayoutCachedWidth =7860
@@ -606,7 +605,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Tagline
+' Form:         _List
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -733,7 +732,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -779,7 +778,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -806,7 +805,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -837,7 +836,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxCause_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - cbxCause_Change[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -866,7 +865,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxDistance_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - tbxDistance_Change[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -895,7 +894,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxHeight_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - tbxHeight_Change[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -931,7 +930,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnUndo_Click[Tagline form])"
+            "Error encountered (#" & Err.Number & " - btnUndo_Click[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -995,7 +994,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSave_Click[Tagline form])"
+            "Error encountered (#" & Err.Number & " - btnSave_Click[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1023,7 +1022,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[Tagline form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1079,7 +1078,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ReadyForSave[Tagline form])"
+            "Error encountered (#" & Err.Number & " - ReadyForSave[_List form])"
     End Select
     Resume Exit_Handler
 End Sub

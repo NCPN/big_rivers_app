@@ -20,13 +20,15 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =26
-    Right =10200
-    Bottom =10500
+    Left =150
+    Top =2400
+    Right =7785
+    Bottom =6765
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x977c4ffe4fc3e440
+        0xc2b74d8760c3e440
     End
-    RecordSource ="Tagline"
+    RecordSource ="Event"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -143,7 +145,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Title"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
@@ -159,50 +160,13 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Ì†ΩÌ≥ù"
+                    Caption ="Edit or Delete Records using the buttons for the record at right.\015\012Icon co"
+                        "des at left identify if record may be edited/deleted."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =120
                     LayoutCachedWidth =7440
                     LayoutCachedHeight =960
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =3240
-                    Top =1080
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblDistanceH"
-                    Caption ="Distance (m)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =3240
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =4485
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =4620
-                    Top =1080
-                    Width =1155
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblHeightV"
-                    Caption ="Height (cm)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4620
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =5775
-                    LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -215,8 +179,8 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblCause"
-                    Caption ="Slope Change Cause"
+                    Name ="lblStartDate"
+                    Caption ="Start Date"
                     GridlineColor =10921638
                     LayoutCachedLeft =1560
                     LayoutCachedTop =1080
@@ -316,48 +280,6 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4680
-                    Width =1080
-                    Height =315
-                    TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxHeight"
-                    ControlSource ="Height_cm"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4680
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =315
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =3300
-                    Width =1080
-                    Height =315
-                    TabIndex =2
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxDistance"
-                    ControlSource ="LineDistance_m"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3300
-                    LayoutCachedWidth =4380
-                    LayoutCachedHeight =315
-                End
-                Begin TextBox
                     OldBorderStyle =0
                     OverlapFlags =85
                     BackStyle =0
@@ -367,7 +289,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =1
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -389,7 +311,7 @@ Begin Form
                     Left =6780
                     Width =720
                     FontSize =14
-                    TabIndex =4
+                    TabIndex =2
                     ForeColor =255
                     Name ="btnDelete"
                     Caption ="Ì†ΩÌ∑¥"
@@ -426,11 +348,11 @@ Begin Form
                     Top =15
                     Width =1560
                     Height =300
-                    TabIndex =5
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxHeightType"
-                    ControlSource ="HeightType"
+                    Name ="tbxStartDate"
+                    ControlSource ="StartDate"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1440
@@ -451,7 +373,7 @@ Begin Form
                     Left =900
                     Width =480
                     Height =315
-                    TabIndex =6
+                    TabIndex =4
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxID"
@@ -482,7 +404,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         _List
+' Form:         EventsList
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -609,7 +531,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -640,16 +562,13 @@ On Error GoTo Err_Handler
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
 
-    'tagline slope change causes: Veg, Grd, Water, Rock, Debris
-
-
 Exit_Handler:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -676,7 +595,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -706,7 +625,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[_List form])"
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -733,7 +652,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Tagline", ID
+    If result = vbYes Then DeleteRecord "Event", ID
 
 Exit_Handler:
     Exit Sub
@@ -741,7 +660,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[_List form])"
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -769,7 +688,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[_List form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -795,14 +714,10 @@ On Error GoTo Err_Handler
         
         'find the form & populate its controls from the ID
         Select Case .Name
-            Case "_List"
-                strSQL = GetTemplate("s_form_edit", "tbl:tagline|id:" & ID)
-            Case "_Base"
-                strSQL = GetTemplate("s_form_edit", "tbl:tagline|id:" & ID)
+            Case "Event"
+                strSQL = GetTemplate("s_form_edit", "tbl:Event|id:" & ID)
                 .Controls("tbxID").ControlSource = "ID"
-                .Controls("cbxCause").ControlSource = "HeightType"
-                .Controls("tbxDistance").ControlSource = "LineDistance_m"
-                .Controls("tbxHeight").ControlSource = "Height_cm"
+                .Controls("tbxStartDate").ControlSource = "StartDate"
         End Select
     
         .RecordSource = strSQL
@@ -815,7 +730,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[_List form])"
+            "Error encountered (#" & Err.Number & " - PopulateForm[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -839,10 +754,10 @@ On Error GoTo Err_Handler
 
     'find the form & populate its controls from the ID
     Select Case tbl
-        Case "_List"
-            strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
-        Case "Tagline"
-            strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
+        Case "Event"
+            strSQL = GetTemplate("d_form_record", "tbl:Event|id:" & ID)
+        Case "Event"
+            strSQL = GetTemplate("d_form_record", "tbl:Event|id:" & ID)
     End Select
     
     DoCmd.SetWarnings False
@@ -850,7 +765,7 @@ On Error GoTo Err_Handler
     DoCmd.SetWarnings True
     
     'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, "Tagline|" & ID
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, "Event|" & ID
     
     'clear the deleted record
     Me.Requery
@@ -861,7 +776,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[_List form])"
+            "Error encountered (#" & Err.Number & " - PopulateForm[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub

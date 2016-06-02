@@ -169,10 +169,16 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'events must have: start date, site ID, location ID, protocol ID
-    strSQL = "INSERT INTO Event(Protocol_ID, Site_ID, Location_ID, StartDate) VALUES " _
-                & "(" & Me.ProtocolID & "," & Me.SiteID & "," _
-                & Me.LocationID & "," & Me.StartDate & ");"
+'    strSQL = "INSERT INTO Event(Protocol_ID, Site_ID, Location_ID, StartDate) VALUES " _
+'                & "(" & Me.ProtocolID & "," & Me.SiteID & "," _
+'                & Me.LocationID & "," & Me.StartDate & ");"
 
+    strSQL = GetTemplate("i_event_record", _
+                "ProtocolID:" & Me.ProtocolID & "|" _
+                & "SiteID:" & Me.SiteID & "|" _
+                & "LocationID:" & Me.LocationID & "|" _
+                & "StartDate:" & Format(Me.StartDate, "YYYY-mm-dd"))
+    
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 

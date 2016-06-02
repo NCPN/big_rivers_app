@@ -17,11 +17,11 @@ Begin Form
     GridY =24
     Width =10800
     DatasheetFontHeight =11
-    ItemSuffix =25
+    ItemSuffix =26
     Left =4635
     Top =3630
-    Right =15435
-    Bottom =5370
+    Right =14835
+    Bottom =14130
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc6cec65556c3e440
@@ -173,7 +173,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2820
+                    Left =3180
                     Top =1080
                     Width =1245
                     Height =315
@@ -183,16 +183,16 @@ Begin Form
                     Name ="lblDistance"
                     Caption ="Distance (m)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2820
+                    LayoutCachedLeft =3180
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =4065
+                    LayoutCachedWidth =4425
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4140
+                    Left =4500
                     Top =1080
                     Width =1155
                     Height =315
@@ -202,16 +202,16 @@ Begin Form
                     Name ="lblHeight"
                     Caption ="Height (cm)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4140
+                    LayoutCachedLeft =4500
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =5295
+                    LayoutCachedWidth =5655
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1200
+                    Left =1560
                     Top =1080
                     Width =1245
                     Height =315
@@ -221,9 +221,9 @@ Begin Form
                     Name ="lblCause"
                     Caption ="Slope Change Cause"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1200
+                    LayoutCachedLeft =1560
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2445
+                    LayoutCachedWidth =2805
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -231,7 +231,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =360
+            Height =480
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -242,8 +242,8 @@ Begin Form
                     RowSourceTypeInt =1
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =1020
-                    Top =15
+                    Left =1380
+                    Top =75
                     Width =1740
                     Height =300
                     BackColor =65535
@@ -264,10 +264,10 @@ Begin Form
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =2760
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =75
+                    LayoutCachedWidth =3120
+                    LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000130000006300 ,
@@ -280,7 +280,8 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =6660
+                    Left =7020
+                    Top =60
                     Width =720
                     TabIndex =3
                     ForeColor =4210752
@@ -325,9 +326,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6660
-                    LayoutCachedWidth =7380
-                    LayoutCachedHeight =360
+                    LayoutCachedLeft =7020
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -343,7 +345,8 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =2880
+                    Left =3240
+                    Top =60
                     Width =1080
                     Height =315
                     TabIndex =1
@@ -361,9 +364,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2880
-                    LayoutCachedWidth =3960
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =3240
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =4320
+                    LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000140000007400 ,
@@ -376,7 +380,8 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =4140
+                    Left =4500
+                    Top =60
                     Width =1080
                     Height =315
                     TabIndex =2
@@ -394,9 +399,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4140
-                    LayoutCachedWidth =5220
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =4500
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =5580
+                    LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000120000007400 ,
@@ -410,23 +416,25 @@ Begin Form
                     TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =15
-                    Width =720
+                    Top =75
+                    Width =1140
                     Height =300
                     FontSize =9
                     TabIndex =5
+                    LeftMargin =72
                     BorderColor =8355711
                     ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =840
-                    LayoutCachedHeight =315
+                    LayoutCachedTop =75
+                    LayoutCachedWidth =1260
+                    LayoutCachedHeight =375
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -435,7 +443,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5760
+                    Left =6120
+                    Top =60
                     Width =720
                     TabIndex =4
                     ForeColor =4210752
@@ -481,9 +490,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =5760
-                    LayoutCachedWidth =6480
-                    LayoutCachedHeight =360
+                    LayoutCachedLeft =6120
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =6840
+                    LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -495,6 +505,32 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                     Overlaps =1
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =7980
+                    Top =60
+                    Width =720
+                    Height =300
+                    FontSize =9
+                    TabIndex =6
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7980
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =8700
+                    LayoutCachedHeight =360
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
                 End
             End
         End
@@ -679,6 +715,9 @@ On Error GoTo Err_Handler
     cbxCause.backColor = lngYellow
     tbxDistance.backColor = lngYellow
     tbxHeight.backColor = lngYellow
+  
+    'ID default -> value used only for edits of existing table values
+    tbxID.Value = 0
   
 Exit_Handler:
     Exit Sub

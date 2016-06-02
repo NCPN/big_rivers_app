@@ -9,13 +9,13 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, 5/13/2016
 ' Revisions:    BLC, 5/13/2016 - 1.00 - initial version
-'               BLC, 6/27/2016 - 1.01 - added acNormal, acTransparent constants
+'               BLC, 6/27/2016 - 1.01 - added acNormalSolid, acTransparent constants
 ' =================================
 
 ' ---------------------------------
 ' Declarations
 ' ---------------------------------
-Public Const acNormal As Integer = 1
+Public Const acNormalSolid As Integer = 1
 Public Const acTransparent As Integer = 0
 
 ' ---------------------------------

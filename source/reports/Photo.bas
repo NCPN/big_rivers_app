@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =142
-    Right =20565
-    Bottom =9645
+    Right =15015
+    Bottom =10500
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -23,6 +23,7 @@ Begin Report
     End
     Caption ="Photos"
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6801000068010000680100006d01000000000000103b00008c01000001000000 ,
@@ -1755,7 +1756,7 @@ Option Explicit
 ' Level:        Application report
 ' Version:      1.00
 '
-' Description:  Photo report object related properties, events, functions & procedures for UI display
+' Description:  Photo Report object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 10, 2016
 ' References:
@@ -1881,7 +1882,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Report_Open[Photo form])"
+            "Error encountered (#" & Err.Number & " - Report_Open[Photo Report])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1912,7 +1913,38 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Details_Print[Photo form])"
+            "Error encountered (#" & Err.Number & " - Details_Print[Photo Report])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Report_Close
+' Description:  Closing event actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 2, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/2/2016 - initial version
+' ---------------------------------
+Private Sub Report_Close()
+On Error GoTo Err_Handler
+
+    'unhide modal Main form
+    Forms("Main").Visible = True
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Close[Photo Report])"
     End Select
     Resume Exit_Handler
 End Sub
