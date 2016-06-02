@@ -8,13 +8,14 @@ Option Explicit
 ' =================================
 ' CLASS:        Tagline
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Record Tagline object related properties, events, functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 11/3/2015
 ' References:   -
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
+'               BLC - 6/1/2016  - 1.01 - updated to use GetTemplate() in SaveToDb()
 ' =================================
 
 '---------------------
@@ -193,6 +194,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 6/1/2016 - updated to use GetTemplate()
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb()
 On Error GoTo Err_Handler
@@ -204,12 +206,20 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'taglines must have:
-    strSQL = "INSERT INTO Tagline(LineDistanceSource, LineDistanceSource_ID, " _
-                & "LineDistanceType, LineDistance_m, HeightType, Height_cm) VALUES " _
-                & "('" & Me.LineDistSource & "'," & Me.LineDistSourceID & ",'" _
-                & Me.LineDistType & "'," & Me.LineDistance & ",'" & Me.HeightType _
-                & "'," & Me.Height & ");"
+'    strSQL = "INSERT INTO Tagline(LineDistanceSource, LineDistanceSource_ID, " _
+'                & "LineDistanceType, LineDistance_m, HeightType, Height_cm) VALUES " _
+'                & "('" & Me.LineDistSource & "'," & Me.LineDistSourceID & ",'" _
+'                & Me.LineDistType & "'," & Me.LineDistance & ",'" & Me.HeightType _
+'                & "'," & Me.Height & ");"
+    strSQL = GetTemplate("i_tagline_record", "LineDistSource:" & Me.LineDistSource _
+                & "|LineDistSourceID:" & Me.LineDistSourceID _
+                & "|LineDistType:" & Me.LineDistType _
+                & "|LineDistance:" & Me.LineDistance _
+                & "|HeightType:" & Me.HeightType _
+                & "|Height:" & Me.Height)
 
+    Debug.Print strSQL
+    
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 

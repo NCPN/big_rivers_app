@@ -136,6 +136,10 @@ Public Const LINE_DIST_TYPES As String = "WP,SC,U,R"
 'W-water, G-ground, V-vegetation, R- rock, D-debris
 Public Const HEIGHT_TYPES As String = "H,W,G,V,WRS,V,R,D"
 
+'Slope Change Causes ...
+'V-vegetation, G-ground, W-water, R-rock, D-debris
+Public Const SLOPE_CHANGE_CAUSES As String = "D-debris,G-grd,R-rock,V-veg,W-water"
+
 'Transect, Feature, Reference or Overview (T, F, R, O - transect, feature, reference, overview/point-to-point),
 'Other photos: OA-animal, OC-cultural, OD-disturbance, OF-field work, OP-plants, OS-scenic, OW-weather, OO-other
 Public Const PHOTO_TYPES As String = "T,F,O,R,OA,OC,OD,OF,OP,OS,OW,OO"

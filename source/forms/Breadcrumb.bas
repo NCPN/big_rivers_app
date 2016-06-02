@@ -352,11 +352,11 @@ End Sub
 ' Revisions:
 '   BLC - 10/30/2015 - initial version
 ' ---------------------------------
-Private Sub SetHeaderColor(Color As Long)
+Private Sub SetHeaderColor(color As Long)
 On Error GoTo Err_Handler
     
     MsgBox "SetHeaderColor...", vbOKOnly
-    Me.BreadcrumbHeaderColor = Color
+    Me.BreadcrumbHeaderColor = color
 
 Exit_Handler:
     Exit Sub

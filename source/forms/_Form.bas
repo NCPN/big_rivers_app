@@ -1,28 +1,32 @@
 ÔªøVersion =20
 VersionRequired =20
 Begin Form
+    AllowFilters = NotDefault
+    PopUp = NotDefault
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    AllowEdits = NotDefault
+    DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7560
+    Width =10800
     DatasheetFontHeight =11
-    ItemSuffix =26
-    Right =15270
-    Bottom =10755
+    ItemSuffix =25
+    Left =4635
+    Top =3630
+    Right =15435
+    Bottom =5370
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x977c4ffe4fc3e440
+        0xc6cec65556c3e440
     End
-    RecordSource ="Tagline"
-    Caption ="_List"
+    Caption ="Tagline Measurements"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -133,15 +137,19 @@ Begin Form
             Begin
                 Begin Label
                     OverlapFlags =85
+                    Left =180
+                    Top =60
                     Width =3480
                     Height =300
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Title"
+                    Caption ="Tagline Measurements"
                     GridlineColor =10921638
-                    LayoutCachedWidth =3480
-                    LayoutCachedHeight =300
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =3660
+                    LayoutCachedHeight =360
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                 End
@@ -149,61 +157,61 @@ Begin Form
                     OverlapFlags =85
                     Left =180
                     Top =420
-                    Width =7260
-                    Height =540
+                    Width =9900
+                    Height =300
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Ì†ΩÌ≥ù"
+                    Caption ="Select the appropriate slope change cause & enter tagline distance & height."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
-                    LayoutCachedWidth =7440
-                    LayoutCachedHeight =960
+                    LayoutCachedWidth =10080
+                    LayoutCachedHeight =720
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =3240
+                    Left =2820
                     Top =1080
                     Width =1245
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblDistanceH"
+                    Name ="lblDistance"
                     Caption ="Distance (m)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3240
+                    LayoutCachedLeft =2820
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =4485
+                    LayoutCachedWidth =4065
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4620
+                    Left =4140
                     Top =1080
                     Width =1155
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblHeightV"
+                    Name ="lblHeight"
                     Caption ="Height (cm)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4620
+                    LayoutCachedLeft =4140
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =5775
+                    LayoutCachedWidth =5295
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
+                    Left =1200
                     Top =1080
                     Width =1245
                     Height =315
@@ -213,28 +221,9 @@ Begin Form
                     Name ="lblCause"
                     Caption ="Slope Change Cause"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1200
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2805
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =960
-                    Top =1080
-                    Width =270
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblHdrID"
-                    Caption ="ID"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =960
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =1230
+                    LayoutCachedWidth =2445
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -249,12 +238,53 @@ Begin Form
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
-                Begin CommandButton
+                Begin ComboBox
+                    RowSourceTypeInt =1
                     OverlapFlags =85
-                    Left =6000
+                    IMESentenceMode =3
+                    Left =1020
+                    Top =15
+                    Width =1740
+                    Height =300
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x0100000092000000020000000100000000000000000000001400000001000000 ,
+                        0x00000000fff20000000000000300000015000000180000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x630062007800430061007500730065002e00530065006c005400650078007400 ,
+                        0x3d0022002200000000002200220000000000
+                    End
+                    Name ="cbxCause"
+                    RowSourceType ="Value List"
+                    RowSource =" --SELECT-- ;D-debris;G-grd;R-rock;V-veg;W-water"
+                    ColumnWidths ="1440"
+                    OnChange ="[Event Procedure]"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =2760
+                    LayoutCachedHeight =315
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000130000006300 ,
+                        0x62007800430061007500730065002e00530065006c0054006500780074003d00 ,
+                        0x2200220000000000000000000000000000000000000000000000000000030000 ,
+                        0x000100000000000000ffffff0002000000220022000000000000000000000000 ,
+                        0x00000000000000000000
+                    End
+                End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =6660
                     Width =720
+                    TabIndex =3
                     ForeColor =4210752
-                    Name ="btnEdit"
+                    Name ="btnSave"
                     Caption ="Edit"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
@@ -262,41 +292,41 @@ Begin Form
                         0x2800000010000000100000000100200000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000303840ff404040ff505050ff504850f080686020 ,
+                        0x000000000000000000000000d0687050c06860ffb05850ffa05050ffa05050ff ,
+                        0xa05050ff904850ff904840ff904840ff804040ff803840ff803840ff703840ff ,
+                        0x703830ff0000000000000000d06870fff09090ffe08080ffb04820ff403020ff ,
+                        0xc0b8b0ffc0b8b0ffd0c0c0ffd0c8c0ff505050ffa04030ffa04030ffa03830ff ,
+                        0x703840ff0000000000000000d07070ffff98a0fff08880ffe08080ff705850ff ,
+                        0x404030ff907870fff0e0e0fff0e8e0ff908070ffa04030ffa04040ffa04030ff ,
+                        0x803840ff0000000000000000d07870ffffa0a0fff09090fff08880ff705850ff ,
+                        0x000000ff404030fff0d8d0fff0e0d0ff807860ffb04840ffb04840ffa04040ff ,
+                        0x804040ff0000000000000000d07880ffffa8b0ffffa0a0fff09090ff705850ff ,
+                        0x705850ff705850ff705850ff706050ff806860ffc05850ffb05050ffb04840ff ,
+                        0x804040ff0000000000000000e08080ffffb0b0ffffb0b0ffffa0a0fff09090ff ,
+                        0xf08880ffe08080ffe07880ffd07070ffd06870ffc06060ffc05850ffb05050ff ,
+                        0x904840ff0000000000000000e08890ffffb8c0ffffb8b0ffd06060ffc06050ff ,
+                        0xc05850ffc05040ffb05030ffb04830ffa04020ffa03810ffc06060ffc05850ff ,
+                        0x904840ff0000000000000000e09090ffffc0c0ffd06860ffffffffffffffffff ,
+                        0xfff8f0fff0f0f0fff0e8e0fff0d8d0ffe0d0c0ffe0c8c0ffa03810ffc06060ff ,
+                        0x904850ff0000000000000000e098a0ffffc0c0ffd07070ffffffffffffffffff ,
+                        0xfffffffffff8f0fff0f0f0fff0e8e0fff0d8d0ffe0d0c0ffa04020ffd06860ff ,
+                        0xa05050ff0000000000000000f0a0a0ffffc0c0ffe07870ffffffffffffffffff ,
+                        0xfffffffffffffffffff8f0fff0f0f0fff0e8e0fff0d8d0ffb04830ffd07070ff ,
+                        0xa05050ff0000000000000000f0a8a0ffffc0c0ffe08080ffffffffffffffffff ,
+                        0xfffffffffffffffffffffffffff8f0fff0f0f0fff0e8e0ffb05030ffe07880ff ,
+                        0xa05050ff0000000000000000f0b0b0ffffc0c0fff08890ffffffffffffffffff ,
+                        0xfffffffffffffffffffffffffffffffffff8f0fff0f0f0ffc05040ff603030ff ,
+                        0xb05850ff0000000000000000f0b0b0ffffc0c0ffff9090ffffffffffffffffff ,
+                        0xfffffffffffffffffffffffffffffffffffffffffff8f0ffc05850ffb05860ff ,
+                        0xb05860ff0000000000000000f0b8b0fff0b8b0fff0b0b0fff0b0b0fff0a8b0ff ,
+                        0xf0a0a0ffe098a0ffe09090ffe09090ffe08890ffe08080ffd07880ffd07870ff ,
+                        0xd07070ff00000000000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000606060ff909890ffd0d0d0ffa0a8b0ff304850ff ,
-                        0xa090905000000000000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000a0a0a0fff0f0f0fff0f8ffffc0e0f0ff5090b0ff ,
-                        0x204850ff80686020000000000000000000000000000000000000000000000000 ,
-                        0x00000000000000000000000080787080e0e0e0ffd0f0f0ff90e0f0ff50c0d0ff ,
-                        0x4098b0ff204850ff806860200000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000000000006090a080c0e8f0ffa0f0f0ff70e0f0ff ,
-                        0x50c0d0ff4098b0ff204850ff8068602000000000000000000000000000000000 ,
-                        0x00000000000000000000000000000000000000006090a090b0e8f0ffa0f0f0ff ,
-                        0x70e0f0ff50c0d0ff4098b0ff204850ff80686020000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000006090a090b0e8f0ff ,
-                        0xa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff806860200000000000000000 ,
-                        0x000000000000000000000000000000000000000000000000000000006090a0a0 ,
-                        0xb0e8f0ffa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff8068602000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x6090a0a0b0e8f0ffa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff80686020 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0xd08060006090a0a0b0e8f0ffa0f0f0ff70e0f0ff50b8d0ff4098b0ff204850ff ,
-                        0x8068602000000000000000000000000000000000000000000000000000000000 ,
-                        0x00000000d0d8e0006090a0b0b0e8f0ffa0f0f0ff70d0e0ff50a0b0ff808890ff ,
-                        0x303870ff80686020000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000d0d8e0006090a0b0c0f0f0ffa0e0e0ffb0b0a0ff5058b0ff ,
-                        0x303090ff505880ff000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000d0d8e0006090a0b0a0b8d0ff8088d0ff6070d0ff ,
-                        0x303090ff202860ff000000000000000000000000000000000000000000000000 ,
-                        0x00000000000000000000000000000000d0d8e0006070b0b09098d0ff7078d0ff ,
-                        0x4050a0ff9098b0ff000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000d0d8e000606090d05060a0ff ,
-                        0x9090b0ff00000000
+                        0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6000
-                    LayoutCachedWidth =6720
+                    LayoutCachedLeft =6660
+                    LayoutCachedWidth =7380
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
@@ -311,48 +341,73 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
                     OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
                     IMESentenceMode =3
-                    Left =4680
+                    Left =2880
                     Width =1080
                     Height =315
                     TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxHeight"
-                    ControlSource ="Height_cm"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4680
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =315
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =3300
-                    Width =1080
-                    Height =315
-                    TabIndex =2
+                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDistance"
-                    ControlSource ="LineDistance_m"
+                    OnChange ="[Event Procedure]"
+                    ConditionalFormat = Begin
+                        0x0100000094000000020000000100000000000000000000001500000001000000 ,
+                        0x00000000fff20000000000000300000016000000190000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x740062007800440069007300740061006e00630065002e00560061006c007500 ,
+                        0x65003d0022002200000000002200220000000000
+                    End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3300
-                    LayoutCachedWidth =4380
+                    LayoutCachedLeft =2880
+                    LayoutCachedWidth =3960
                     LayoutCachedHeight =315
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000140000007400 ,
+                        0x62007800440069007300740061006e00630065002e00560061006c0075006500 ,
+                        0x3d00220022000000000000000000000000000000000000000000000000000003 ,
+                        0x0000000100000000000000ffffff000200000022002200000000000000000000 ,
+                        0x000000000000000000000000
+                    End
                 End
                 Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =4140
+                    Width =1080
+                    Height =315
+                    TabIndex =2
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxHeight"
+                    OnChange ="[Event Procedure]"
+                    ConditionalFormat = Begin
+                        0x0100000090000000020000000100000000000000000000001300000001000000 ,
+                        0x00000000fff20000000000000300000014000000170000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x7400620078004800650069006700680074002e00560061006c00750065003d00 ,
+                        0x22002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4140
+                    LayoutCachedWidth =5220
+                    LayoutCachedHeight =315
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000120000007400 ,
+                        0x620078004800650069006700680074002e00560061006c00750065003d002200 ,
+                        0x2200000000000000000000000000000000000000000000000000000300000001 ,
+                        0x00000000000000ffffff00020000002200220000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+                End
+                Begin TextBox
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
                     BackStyle =0
@@ -362,9 +417,9 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =5
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -380,26 +435,57 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    TextFontFamily =2
-                    Left =6780
+                    Left =5760
                     Width =720
-                    FontSize =14
                     TabIndex =4
-                    ForeColor =255
-                    Name ="btnDelete"
-                    Caption ="Ì†ΩÌ∑¥"
+                    ForeColor =4210752
+                    Name ="btnUndo"
+                    Caption ="Edit"
                     OnClick ="[Event Procedure]"
-                    FontName ="Academy Engraved LET"
+                    ControlTipText ="Undo/Clear values"
                     GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000f0906060d0784080b0583010000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000e0785040f08850ffd07040ffa05830500000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000f0906020d0704060f08050ffd07050f0a050300000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000000000000c06840d0f08850ffc078508000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0xf0c0b01000000000000000000000000090482040e07840ffe08860ffe0a08000 ,
+                        0x00000000000000000000000000000000d07040ffd07040ffc06840ffb06030ff ,
+                        0xb05830ff905030ff0000000000000000b0603020c06840ffe08050ffd0886080 ,
+                        0x00000000000000000000000000000000d07850ffe07030fff08050fff09870ff ,
+                        0xe09060fff0a08040000000000000000080402000c06840ffe07840f0e09870c0 ,
+                        0x00000000000000000000000000000000d08050ffe08050fff09060fff0a070ff ,
+                        0x904830b0b0603040000000000000000080402000c06840ffd07040f0e09870d0 ,
+                        0x00000000000000000000000000000000d08860ffe09060fff09870fff08850f0 ,
+                        0xb06040ffb06040ffb060307000000000b0805020a05830f0d07840f0e09070d0 ,
+                        0x000000000000000000000000e0b09010c08060ffd09870e0d0886090d09070ff ,
+                        0xd08050ffc07040ffc06840ffb06030c0b07040e0a06040ffe08050ffd0a080e0 ,
+                        0x00000000000000000000000000000000c08860ffd0a0804000000000d08860c0 ,
+                        0xd08860ffd08050f0c06840ffb06840ffb06030f0e07840f0e0a080f0d09880e0 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0xf0a880c0e09880ffe09870f0e09070f0e09070e0e0a080f0e0a890f0f0b8a020 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x00000000f0b89060f0b090c0f0b8a0e0f0c0a0c0f0c0a090f0c0b02000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
 
-                    LayoutCachedLeft =6780
-                    LayoutCachedWidth =7500
+                    LayoutCachedLeft =5760
+                    LayoutCachedWidth =6480
                     LayoutCachedHeight =360
-                    PictureCaptionArrangement =5
-                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    ThemeFontIndex =-1
                     HoverColor =15060409
                     PressedColor =9592887
                     HoverForeColor =4210752
@@ -409,53 +495,6 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                     Overlaps =1
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =1440
-                    Top =15
-                    Width =1560
-                    Height =300
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxHeightType"
-                    ControlSource ="HeightType"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1440
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =315
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =900
-                    Width =480
-                    Height =315
-                    TabIndex =6
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxID"
-                    ControlSource ="ID"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =900
-                    LayoutCachedWidth =1380
-                    LayoutCachedHeight =315
                 End
             End
         End
@@ -549,7 +588,7 @@ Public Property Let ButtonCaption(Value As String)
         m_ButtonCaption = Value
 
         'set the form button caption
-        Me.btnEdit.Caption = m_ButtonCaption
+        Me.btnSave.Caption = m_ButtonCaption
     Else
         RaiseEvent InvalidCaption(Value)
     End If
@@ -598,12 +637,6 @@ On Error GoTo Err_Handler
     'eliminate NULLs
     If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
 
-    Dim strSQL As String
-    Dim DropDownWidth As Double
-    
-    'default
-    DropDownWidth = 1.2083 * TWIPS_PER_INCH
-
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -631,19 +664,22 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    lblTitle.Caption = "Taglines for " & TempVars("ParkCode") & "-"
-    lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
-                            & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
-    tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.ForeColor = lngDkGreen
+    Title = "Tagline Measurements"
+    Directions = "Select the appropriate slope change cause & enter tagline distance & height."
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
-
-    btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.ForeColor = lngRed
-
+    
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
-
-
+    cbxCause.RowSourceType = "Value List"
+    cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
+  
+    'defaults
+    tbxIcon.ForeColor = lngRed
+    btnSave.Enabled = False
+    cbxCause.backColor = lngYellow
+    tbxDistance.backColor = lngYellow
+    tbxHeight.backColor = lngYellow
+  
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -670,10 +706,7 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-
-'    tbxIcon.Value = StringFromCodepoint(uLocked)
-
-       
+              
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -686,37 +719,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          btnEdit_Click
-' Description:  Enter button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub btnEdit_Click()
-On Error GoTo Err_Handler
-    
-    PopulateForm Forms("Tagline"), ID
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[_List form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnDelete_Click
-' Description:  Delete button click actions
+' Sub:          cbxCause_Change
+' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -727,24 +731,161 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub btnDelete_Click()
+Private Sub cbxCause_Change()
 On Error GoTo Err_Handler
-    
-    Dim result As Integer
-    
-    'identify the record ID
-     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
-                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Tagline", ID
-
+'    Me.SelectedID = CInt(cbxCause.Column(0))
+'    Me.SelectedValue = CStr(cbxCause.Column(1))
+    ReadyForSave
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[_List form])"
+            "Error encountered (#" & Err.Number & " - cbxCause_Change[_List form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxDistance_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub tbxDistance_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDistance_Change[_List form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxHeight_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub tbxHeight_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxHeight_Change[_List form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' Sub:          btnUndo_Click
+' Description:  Undo button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub btnUndo_Click()
+On Error GoTo Err_Handler
+    
+    'clear values
+    cbxCause.Value = " --SELECT-- "
+    tbxDistance.Value = ""
+    tbxHeight.Value = ""
+    
+    btnSave.Enabled = False
+    
+    Me.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnUndo_Click[_List form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnSave_Click
+' Description:  Save button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub btnSave_Click()
+On Error GoTo Err_Handler
+    
+    Dim tl As New tagline
+    
+    With tl
+        'values passed into form
+        .LineDistSource = "T"
+        .LineDistSourceID = 14
+        
+        'default
+        .LineDistType = "SC" 'slope changes only
+        
+        'form values
+        .HeightType = Left(cbxCause.Value, 1)
+        .Height = tbxHeight.Value
+        .LineDistance = tbxDistance.Value
+        .SaveToDb
+    End With
+    
+    Me.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSave_Click[_List form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -778,76 +919,31 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          PopulateForm
-' Description:  Populate a form using a specific record for edits
+' Sub:          ReadyForSave
+' Description:  Check if form values are ready to save
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 5/31/2016 - initial version
 ' ---------------------------------
-Private Sub PopulateForm(frm As Form, ID As Long)
+Private Sub ReadyForSave()
 On Error GoTo Err_Handler
-    Dim strSQL As String
 
-    'find the form & populate its controls from the ID
-    Select Case frm.Name
-        Case "_List"
-            strSQL = GetTemplate("s_form_record", "tbl:tagline|id:" & ID)
-        Case "Tagline"
-            strSQL = GetTemplate("s_form_record", "tbl:tagline|id:" & ID)
-    End Select
-    Debug.Print strSQL
-    frm.RecordSource = strSQL
+    'set color of icon depending on if values are set
+    If Len(cbxCause.Value) <> 0 And tbxDistance > 0 And tbxHeight <> "" Then
+        tbxIcon.ForeColor = lngDkGreen
+        btnSave.Enabled = True
+    Else
+        tbxIcon.ForeColor = lngRed
+        btnSave.Enabled = False
+    End If
     
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[_List form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          DeleteRecord
-' Description:  Delete a specific record from a table
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub DeleteRecord(tbl As String, ID As Long)
-On Error GoTo Err_Handler
-    Dim strSQL As String
-
-    'find the form & populate its controls from the ID
-    Select Case tbl
-        Case "_List"
-            strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
-        Case "Tagline"
-            strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
-    End Select
-    
-    DoCmd.SetWarnings False
-    DoCmd.RunSQL strSQL
-    DoCmd.SetWarnings True
-    
-    'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, "Tagline|" & ID
-    
-    'clear the deleted record
+    'refresh form
     Me.Requery
     
 Exit_Handler:
@@ -856,7 +952,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[_List form])"
+            "Error encountered (#" & Err.Number & " - ReadyForSave[_List form])"
     End Select
     Resume Exit_Handler
 End Sub

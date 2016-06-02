@@ -58,25 +58,31 @@ Public Const uSnail = &H1F40C               '128012
 Public Const uPawPrints = &H1F43E           '128062
 Public Const uCalendarTearOff = &H1F4C6     '128198
 Public Const uClipboard = &H1F4CB           '128203
+Public Const uPushpin = &H1F4CC             '128204
+Public Const uPushpinRnd = &H1F4CD          '128205 round-head pushpin
+Public Const uPaperclip = &H1F4CE           '128206
 Public Const uMemo = &H1F4DD                '128221
 Public Const uCamera = &H1F4F7              '128247 camera icon
 Public Const uFlashCamera = &H1F4F8         '128248 camera w/flash icon
 Public Const uLocked = &H1F512              '128274
 Public Const uUnlocked = &H1F513            '128275
 Public Const uHammer = &H1F528              '128296
+Public Const uPencil = &H1F589              '128393
 Public Const uFolder = &H1F5C0              '128448
 Public Const uFolderOpen = &H1F5C1          '128449
 Public Const uNotepad = &H1F5CA             '128458
 Public Const uDocument = &H1F5CE            '128462
 Public Const uCalendarSpiral = &H1F5D3      '128467
+Public Const uRefresh = &H1F5D8             '128472 clockwise left & right arrows
+Public Const uCancel = &H1F5D9              '128473 X
+Public Const uDelete = &H1F5F4              '128500 script ballot X
+Public Const uCheckItem = &H1F5F9           '128505 checked ballot box
 Public Const uPedestrian = &H1F6B6          '128694
-Public Const uCancel = &H1F5D9              '128473
+Public Const uCancel2 = &H1F5D9             '128473
+Public Const uHammerWrench = &H1F6E0        '128736 crossed hammer and wrench
 Public Const uRHArrow = &H1F846             '129094 heavy right arrow
 Public Const uLHArrow = &H1F844             '129092 heavy left arrow
 Public Const uLizard = &H1F98E              '129422
-'Public Const u = &H1F                      '
-'Public Const u = &H1F                      '
-'Public Const u = &H1F                      '
 
 ' =================================
 ' FUNCTION:     ReplaceString

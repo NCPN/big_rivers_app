@@ -1071,11 +1071,11 @@ End Sub
 ' Revisions:
 '   BLC - 11/3/2015 - initial version
 ' ---------------------------------
-Private Sub SetHeaderColor(Color As Long)
+Private Sub SetHeaderColor(color As Long)
 On Error GoTo Err_Handler
     
     MsgBox "SetHeaderColor...", vbOKOnly
-    Me.CommentHeaderColor = Color
+    Me.CommentHeaderColor = color
 
 Exit_Handler:
     Exit Sub

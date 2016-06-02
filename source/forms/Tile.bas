@@ -1284,11 +1284,11 @@ End Sub
 ' Revisions:
 '   BLC - 10/28/2015 - initial version
 ' ---------------------------------
-Private Sub SetHeaderColor(Color As Long)
+Private Sub SetHeaderColor(color As Long)
 On Error GoTo Err_Handler
     
     MsgBox "SetHeaderColor...", vbOKOnly
-    Me.TileHeaderColor = Color
+    Me.TileHeaderColor = color
     
 Exit_Handler:
     Exit Sub

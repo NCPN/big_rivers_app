@@ -14,6 +14,8 @@ Option Explicit
 '               BLC - 6/30/2015 - 1.03 - shifted to mod_UI: ChangeBackColor
 '                                        shifted from mod_UI: FormIsOpen, FormIsLoaded, SwitchboardIsOpen
 '                                        shifted to mod_App_UI: ClearFields
+'               BLC - 6/1/2016  - 1.04 - added SetFormOpacity(), CaptureEscapeKey(), constants & functions
+'                                        from Uplands mod_App_UI
 ' =================================
 
 '=================================================================
@@ -50,10 +52,36 @@ Option Explicit
 '=================================================================
 '  Declarations
 '=================================================================
-Declare Function IsZoomed Lib "user32" (ByVal hWnd As Long) As _
+Declare Function IsZoomed Lib "user32" (ByVal hwnd As Long) As _
      Integer
-Declare Function IsIconic Lib "user32" (ByVal hWnd As Long) As _
+Declare Function IsIconic Lib "user32" (ByVal hwnd As Long) As _
      Integer
+
+' -- Constants --
+Private Const LWA_ALPHA     As Long = &H2
+Private Const GWL_EXSTYLE   As Long = -20
+Private Const WS_EX_LAYERED As Long = &H80000
+
+Public Const CTRL_DEFAULT_BACKCOLOR  As Long = 65535  'RGB(255, 255, 0) highlight yellow
+
+' -- Values --
+Public NoData As Scripting.Dictionary
+
+' -- Functions --
+Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" _
+  (ByVal hwnd As Long, _
+   ByVal nIndex As Long) As Long
+ 
+Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" _
+  (ByVal hwnd As Long, _
+   ByVal nIndex As Long, _
+   ByVal dwNewLong As Long) As Long
+ 
+Private Declare Function SetLayeredWindowAttributes Lib "user32" _
+  (ByVal hwnd As Long, _
+   ByVal crKey As Long, _
+   ByVal bAlpha As Byte, _
+   ByVal dwFlags As Long) As Long
 
 '=================================================================
 '  Properties
@@ -384,3 +412,87 @@ Err_Handler:
     End Select
     Resume Exit_Function
 End Function
+
+' ---------------------------------
+' SUB:          SetFormOpacity
+' Description:  Sets form opacity
+' Assumptions:  place in forms module mod_Form for protocols which utilize that module
+' Parameters:   frm - form to prepare
+'               sngOpacity - opacity of the form (single)
+'               TColor - color for the form display (long)
+' Returns:      N/A
+' Throws:       none
+' References:   none
+' Source/date:
+' Thenman, September 24, 2009
+' http://www.access-programmers.co.uk/forums/showthread.php?t=154907
+' Adapted:      Bonnie Campbell, February 9, 2016 - for NCPN tools
+' Revisions:
+'   BLC, 2/9/2016  - initial version
+'   BLC, 6/1/2016  - moved to mod_Forms from mod_App_UI (uplands)
+' ---------------------------------
+Public Sub SetFormOpacity(frm As Form, sngOpacity As Single, TColor As Long)
+On Error GoTo Err_Handler
+
+    Dim lngStyle As Long
+    
+    ' get the current window style, then set transparency
+    lngStyle = GetWindowLong(frm.hwnd, GWL_EXSTYLE)
+    SetWindowLong frm.hwnd, GWL_EXSTYLE, lngStyle Or WS_EX_LAYERED
+    SetLayeredWindowAttributes frm.hwnd, TColor, (sngOpacity * 255), LWA_ALPHA
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetFormOpacity[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' =================================
+' SUB:          CaptureEscapeKey
+' Description:  Handles ESCAPE key actions for certain forms
+' Assumptions:
+' Note:         Handles ESC for the following modal forms:
+'               fsub_Soil_Stability, fsub_Fuels_LD, frm_Locations, frm_Unknown_Species
+' Parameters:   KeyCode - keycode detected (key down)
+' Returns:      -
+' Throws:       none
+' References:
+'  John Spencer, 3/11/2010
+'  http://msgroups.net/microsoft.public.access/how-best-to-disable-esc-key-on-form/21881
+' Source/date:  Bonnie Campbell, August 21, 2015 - for NCPN tools
+' Revisions:    BLC, 8/21/2015 - initial version
+'               BLC, 6/1/2016  - added to mod_Forms from mod_App_UI (uplands)
+' =================================
+Public Sub CaptureEscapeKey(KeyCode As Integer)
+On Error GoTo Err_Handler
+
+    If KeyCode = vbKeyEscape Then
+        If MsgBox("Undo changes?" & vbCrLf & vbCrLf & _
+            "If yes, this may undo all recent changes (not just for a single field)." & vbCrLf & vbCrLf & _
+            "Note:" & vbCrLf & _
+            "If your cursor was in a..." & vbCrLf & _
+            "+ text field, dropdown listbox, or checkbox field >> ALL changes will be undone." & vbCrLf & _
+            "+ text field changed immediately before you clicked ESCAPE >> only the text field changes will be undone." & vbCrLf & vbCrLf & _
+            "Previously saved data will remain unchanged.", vbYesNo, "ESCAPE Pressed!") = vbNo Then
+            KeyCode = 0
+        End If
+        'KeyCode = 0
+    End If
+    
+Exit_Sub:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CaptureEscapeKey[mod_App_UI])"
+    End Select
+    Resume Exit_Sub
+End Sub

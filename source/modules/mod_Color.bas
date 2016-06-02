@@ -53,6 +53,7 @@ Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
 Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
 Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
 Public Const lngDkGreen As Long = 690698    '?RGB(10,138,10) #0A8A0A
+Public Const lngRobinEgg As Long = 16772541 '?RGB(189,237,255) #BDEDFF robin's egg blue
 
 ' ---------------------------------
 '  Subroutines & Functions
