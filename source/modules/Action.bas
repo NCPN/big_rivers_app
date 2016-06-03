@@ -224,7 +224,7 @@ On Error GoTo Err_Handler
                         & "|RefID:" & Me.RefID _
                         & "|ID:" & Me.ID _
                         & "|action:" & Me.action _
-                        & "|actiondate:" & Now())
+                        & "|actiondate:Now()")
                         
 '********************
 '  FIX: Me.RefTable & actiondate values

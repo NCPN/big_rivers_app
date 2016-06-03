@@ -3,7 +3,7 @@ VersionRequired =20
 Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
-    ControlBox = NotDefault
+    MaxButton = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
@@ -16,10 +16,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =4635
-    Top =3630
-    Right =14835
-    Bottom =14130
+    Left =6105
+    Top =3705
+    Right =15000
+    Bottom =11370
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -405,10 +405,10 @@ On Error GoTo Err_Handler
     oCTile.Link1Caption = "Event"
     oCTile.Link2Caption = ""
     oCTile.Link2Visible = 0
-    oCTile.Link3Caption = "Location"
+    oCTile.Link3Caption = "VegPlot"
     oCTile.Link4Visible = 0
-    oCTile.Link5Caption = "People"
-    oCTile.Link6Visible = 0
+    oCTile.Link5Caption = "Location"
+    oCTile.Link6Caption = "People"
 
     'Right
     Set oRTile = RTile.Form
@@ -439,6 +439,7 @@ On Error GoTo Err_Handler
     'Center
     Set oBCTile = BCTile.Form
     oBCTile.Title = "Trip Prep"
+    oBCTile.TileTag = "prep-"
     oBCTile.BarColor = vbGreen
     oBCTile.TileHeaderColor = vbGreen
     oBCTile.Link1Caption = "VegPlot"

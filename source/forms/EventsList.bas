@@ -20,10 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =26
-    Left =150
-    Top =2400
-    Right =7785
-    Bottom =6765
+    Left =7425
+    Top =2130
+    Right =15060
+    Bottom =6495
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc2b74d8760c3e440
@@ -558,6 +558,9 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
+    'set hover
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
@@ -653,6 +656,9 @@ On Error GoTo Err_Handler
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
     If result = vbYes Then DeleteRecord "Event", ID
+    
+    'clear the deleted record
+    Me.Requery
 
 Exit_Handler:
     Exit Sub
@@ -689,94 +695,6 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[EventsList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          PopulateForm
-' Description:  Populate a form using a specific record for edits
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub PopulateForm(frm As Form, ID As Long)
-On Error GoTo Err_Handler
-    Dim strSQL As String
-
-    With frm
-        
-        'find the form & populate its controls from the ID
-        Select Case .Name
-            Case "Event"
-                strSQL = GetTemplate("s_form_edit", "tbl:Event|id:" & ID)
-                .Controls("tbxID").ControlSource = "ID"
-                .Controls("tbxStartDate").ControlSource = "StartDate"
-        End Select
-    
-        .RecordSource = strSQL
-        
-    End With
-        
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[EventsList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          DeleteRecord
-' Description:  Delete a specific record from a table
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub DeleteRecord(tbl As String, ID As Long)
-On Error GoTo Err_Handler
-    Dim strSQL As String
-
-    'find the form & populate its controls from the ID
-    Select Case tbl
-        Case "Event"
-            strSQL = GetTemplate("d_form_record", "tbl:Event|id:" & ID)
-        Case "Event"
-            strSQL = GetTemplate("d_form_record", "tbl:Event|id:" & ID)
-    End Select
-    
-    DoCmd.SetWarnings False
-    DoCmd.RunSQL strSQL
-    DoCmd.SetWarnings True
-    
-    'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, "Event|" & ID
-    
-    'clear the deleted record
-    Me.Requery
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateForm[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub

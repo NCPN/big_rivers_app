@@ -19,16 +19,16 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =30
-    Left =10425
-    Top =2850
-    Right =18285
-    Bottom =9330
+    ItemSuffix =36
+    Left =3195
+    Top =3105
+    Right =23115
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
     End
-    Caption ="Events (Sampling Visits)"
+    Caption ="Transect"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -149,7 +149,7 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =1395
+            Height =1380
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -164,7 +164,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Events (Sampling Visits)"
+                    Caption ="Transect"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -182,31 +182,12 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the sampling start date."
+                    Caption ="Enter the transect data."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
                     LayoutCachedWidth =7020
                     LayoutCachedHeight =735
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =2820
-                    Top =1080
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblStartDate"
-                    Caption ="Start Date"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2820
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =4065
-                    LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -236,11 +217,49 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                 End
+                Begin Label
+                    OverlapFlags =85
+                    Left =2700
+                    Top =1065
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblSampleDate"
+                    Caption ="Sample Date"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =1065
+                    LayoutCachedWidth =3945
+                    LayoutCachedHeight =1380
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =1200
+                    Top =1065
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblNumber"
+                    Caption ="Transect #"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1200
+                    LayoutCachedTop =1065
+                    LayoutCachedWidth =2445
+                    LayoutCachedHeight =1380
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5100
+            Height =5160
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -252,7 +271,7 @@ Begin Form
                     Left =6660
                     Top =60
                     Width =720
-                    TabIndex =1
+                    TabIndex =2
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -313,41 +332,6 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =2700
-                    Top =60
-                    Width =1860
-                    Height =315
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxStartDate"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x010000009e000000020000000100000000000000000000001800000001000000 ,
-                        0x00000000fff2000000000000030000001a0000001d0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078005300740061007200740044006100740065005d002e005600 ,
-                        0x61006c00750065003d002200220000000000000022002200000000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2700
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =4560
-                    LayoutCachedHeight =375
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
-                        0x7400620078005300740061007200740044006100740065005d002e0056006100 ,
-                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
-                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
-                        0x000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
                     TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
@@ -375,11 +359,12 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin CommandButton
+                    TabStop = NotDefault
                     OverlapFlags =85
                     Left =5760
                     Top =60
                     Width =720
-                    TabIndex =2
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -441,37 +426,38 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
+                    TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =600
+                    Top =660
                     Width =7650
                     Height =4380
-                    TabIndex =4
+                    TabIndex =5
                     BorderColor =10921638
                     Name ="list"
-                    SourceObject ="Form.EventsList"
+                    SourceObject ="Form.TransectList"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =600
+                    LayoutCachedTop =660
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =4980
+                    LayoutCachedHeight =5040
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =480
+                    Top =540
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =480
+                    LayoutCachedTop =540
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5100
+                    LayoutCachedHeight =5160
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -485,7 +471,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =6
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -499,6 +485,73 @@ Begin Form
                     BorderTint =50.0
                     BorderShade =100.0
                     ForeTint =50.0
+                End
+                Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =2580
+                    Top =60
+                    Height =315
+                    TabIndex =1
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxSampleDate"
+                    OnLostFocus ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
+                    ConditionalFormat = Begin
+                        0x010000009a000000020000000100000000000000000000001600000001000000 ,
+                        0x00000000fff200000000000003000000180000001b0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b00740062007800420065006100720069006e0067005d002e00560061006c00 ,
+                        0x750065003d002200220000000000000022002200000000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =4020
+                    LayoutCachedHeight =375
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
+                        0x740062007800420065006100720069006e0067005d002e00560061006c007500 ,
+                        0x65003d0022002200000000000000000000000000000000000000000000000000 ,
+                        0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
+                        0x0000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =1020
+                    Top =60
+                    Height =315
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxNumber"
+                    ConditionalFormat = Begin
+                        0x0100000096000000020000000100000000000000000000001600000001000000 ,
+                        0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b00740062007800420065006100720069006e0067005d002e00560061006c00 ,
+                        0x750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =375
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
+                        0x740062007800420065006100720069006e0067005d002e00560061006c007500 ,
+                        0x65003d0022002200000000000000000000000000000000000000000000000000 ,
+                        0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
+                        0x0000000000000000000000000000
+                    End
                 End
             End
         End
@@ -520,12 +573,12 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Events
+' Form:         Transect
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, events, functions & procedures for UI display
+' Description:  List form object related properties, Transect, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
@@ -647,7 +700,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Events form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -668,8 +721,8 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    Title = "Events (Sampling Visits)"
-    Directions = "Enter the sampling start date."
+    Title = "Transect"
+    Directions = "Enter the transect information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -684,7 +737,8 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxStartDate.backColor = lngYellow
+    tbxNumber.backColor = lngYellow
+    tbxSampleDate.backColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -695,7 +749,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Events form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -724,13 +778,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[Events form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_Change
+' Sub:          tbxSampleDate_Change
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -742,7 +796,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_Change()
+Private Sub tbxSampleDate_Change()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -753,13 +807,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_Change[Events form])"
+            "Error encountered (#" & Err.Number & " - tbxSampleDate_Change[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_LostFocus
+' Sub:          tbxSampleDate_LostFocus
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -771,7 +825,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_LostFocus()
+Private Sub tbxSampleDate_LostFocus()
 On Error GoTo Err_Handler
 
     'ReadyForSave
@@ -782,7 +836,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_LostFocus[Events form])"
+            "Error encountered (#" & Err.Number & " - tbxSampleDate_LostFocus[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -804,7 +858,8 @@ Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     'clear values
-    tbxStartDate.Value = ""
+    tbxNumber.Value = ""
+    tbxSampleDate.Value = ""
     
     btnSave.Enabled = False
     
@@ -816,7 +871,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnUndo_Click[Events form])"
+            "Error encountered (#" & Err.Number & " - btnUndo_Click[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -837,16 +892,17 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim ev As New EventVisit
+    Dim vt As New VegTransect
     
-    With ev
+    With vt
         'values passed into form
+        .Park = TempVars("ParkCode")
         .LocationID = 1
-        .ProtocolID = 1
-        .SiteID = 1
-        
+        .EventID = 1
+                
         'form values
-        .StartDate = tbxStartDate.Value
+        .TransectNumber = tbxNumber.Value
+        .SampleDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
@@ -855,7 +911,9 @@ On Error GoTo Err_Handler
     'clear values & refresh display
     Me.RecordSource = ""
     
-    tbxStartDate.ControlSource = ""
+    tbxNumber.ControlSource = ""
+    tbxSampleDate.ControlSource = ""
+    
     tbxID.ControlSource = ""
     tbxID.Value = 0
     
@@ -872,7 +930,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSave_Click[Events form])"
+            "Error encountered (#" & Err.Number & " - btnSave_Click[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -894,7 +952,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "Transect|" & tbxID
     
 Exit_Handler:
     Exit Sub
@@ -902,11 +960,10 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnComment_Click[Events form])"
+            "Error encountered (#" & Err.Number & " - btnComment_Click[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          Form_Close
@@ -932,7 +989,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[Events form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -959,7 +1016,7 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If IsDate(tbxStartDate) Then
+    If Len(tbxNumber.Value) > 0 And IsDate(tbxSampleDate.Value) Then
         isOK = True
     End If
     
@@ -975,7 +1032,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ReadyForSave[Events form])"
+            "Error encountered (#" & Err.Number & " - ReadyForSave[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub

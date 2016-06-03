@@ -295,12 +295,19 @@ On Error GoTo Err_Handler
         Case "feature"
             fName = "Task"
         Case "transect"
+            fName = "Transect"
+            oArgs = ""
         Case "plot"
         'Sampling
         Case "event"
             fName = "Events"
-            oArgs = ""
+            oArgs = "" 'site & protocol IDs
+        Case "vegplot"
+            fName = "VegPlot"
+            oArgs = "" 'site & protocol IDs
         Case "location"
+            fName = "Location"
+            oArgs = "" 'collection source name - feature (A-G), transect #(1-8) &
         Case "people"
         'Vegetation
         Case "woody canopy cover"
@@ -315,18 +322,18 @@ On Error GoTo Err_Handler
             fName = "Transducer"
             oArgs = ""
         'Trip Prep
-        Case "vegplot"
+        Case "prep-vegplot"
             rName = "VegPlot"
             oArgs = ""
-        Case "vegwalk"
+        Case "prep-vegwalk"
             rName = "SpeciesList"
             oArgs = ""
-        Case "photos"
+        Case "prep-photos"
             rName = "Photo"
             oArgs = ""
-        Case "transducer"
+        Case "prep-transducer"
             rName = "Transducer"
-        Case "tasks"
+        Case "prep-tasks"
             fName = "Task"
         'Reports
         Case "link1"
@@ -384,6 +391,99 @@ Err_Handler:
     Resume Exit_Handler
 End Function
 
+' ---------------------------------
+' Sub:          PopulateForm
+' Description:  Populate a form using a specific record for edits
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+'   BLC - 6/2/2016 - moved from forms (EventsList, TaglineList)
+' ---------------------------------
+Public Sub PopulateForm(frm As Form, ID As Long)
+On Error GoTo Err_Handler
+    Dim strSQL As String
+
+    With frm
+        
+        'find the form & populate its controls from the ID
+        Select Case .Name
+            Case "Events"
+                strSQL = GetTemplate("s_form_edit", "tbl:Event|id:" & ID)
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxStartDate").ControlSource = "StartDate"
+            Case "Tagline"
+                strSQL = GetTemplate("s_form_edit", "tbl:Tagline|id:" & ID)
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("cbxCause").ControlSource = "HeightType"
+                .Controls("tbxDistance").ControlSource = "LineDistance_m"
+                .Controls("tbxHeight").ControlSource = "Height_cm"
+        End Select
+    
+        .RecordSource = strSQL
+        
+    End With
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateForm[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          DeleteRecord
+' Description:  Delete a specific record from a table
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+'   BLC - 6/2/2016 - moved from forms (TaglineList, EventsList) to mod_App_UI
+' ---------------------------------
+Public Sub DeleteRecord(tbl As String, ID As Long)
+On Error GoTo Err_Handler
+    Dim strSQL As String
+
+    'find the form & populate its controls from the ID
+    Select Case tbl
+        Case "Event"
+            strSQL = GetTemplate("d_form_record", "tbl:Event|id:" & ID)
+        Case "Tagline"
+            strSQL = GetTemplate("d_form_record", "tbl:Tagline|id:" & ID)
+    End Select
+    
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL strSQL
+    DoCmd.SetWarnings True
+    
+    'show deleted record message & clear
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, tbl & "|" & ID
+        
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DeleteRecord[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 Public Function SetStartupOptions(propertyname As String, _
     propertytype As Variant, propertyvalue As Variant) _

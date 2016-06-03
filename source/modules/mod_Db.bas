@@ -687,6 +687,8 @@ On Error GoTo Err_Handler
     
     End If
     
+    Debug.Print template
+    
     GetTemplate = template
     
 Exit_Handler:

@@ -20,14 +20,15 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =28
-    Left =4635
-    Top =3630
-    Right =14835
-    Bottom =14130
+    Left =10425
+    Top =2850
+    Right =18285
+    Bottom =9330
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xc6cec65556c3e440
+        0x417df2aa6fc3e440
     End
+    RecordSource ="SELECT * FROM Tagline WHERE ID = 27; "
     Caption ="Tagline Measurements"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -278,8 +279,9 @@ Begin Form
                         0x3d0022002200000000002200220000000000
                     End
                     Name ="cbxCause"
+                    ControlSource ="HeightType"
                     RowSourceType ="Value List"
-                    RowSource =" --SELECT-- ;D-debris;G-grd;R-rock;V-veg;W-water"
+                    RowSource ="D;G;R;V;W"
                     ColumnWidths ="1440"
                     OnChange ="[Event Procedure]"
                     GridlineColor =10921638
@@ -299,7 +301,6 @@ Begin Form
                     End
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -353,7 +354,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -375,6 +377,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDistance"
+                    ControlSource ="LineDistance_m"
+                    OnLostFocus ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000094000000020000000100000000000000000000001500000001000000 ,
@@ -410,6 +414,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxHeight"
+                    ControlSource ="Height_cm"
+                    OnLostFocus ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000090000000020000000100000000000000000000001300000001000000 ,
@@ -446,7 +452,7 @@ Begin Form
                     FontSize =9
                     TabIndex =5
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -515,7 +521,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -575,6 +582,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    ControlSource ="ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -759,6 +767,10 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     
+    'set hover
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
+    
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
     cbxCause.RowSourceType = "Value List"
     cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
@@ -901,6 +913,64 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          tbxDistance_LostFocus
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub tbxDistance_LostFocus()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDistance_LostFocus[Tagline form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxHeight_LostFocus
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub tbxHeight_LostFocus()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxHeight_LostFocus[Tagline form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnUndo_Click
 ' Description:  Undo button click actions
 ' Assumptions:  -
@@ -968,12 +1038,17 @@ On Error GoTo Err_Handler
         .LineDistance = tbxDistance.Value
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
+        
+        'set focus on the list record saved
+        Me.list.SetFocus
+        Me.Form.Recordset.Move tbxID.Value
     End With
     
     'clear values & refresh display
     Me.RecordSource = ""
     
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
+    cbxCause.ControlSource = ""
     cbxCause.RowSourceType = "Value List"
     cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
     
@@ -1055,7 +1130,8 @@ On Error GoTo Err_Handler
         If tbxDistance > 0 And tbxHeight <> "" Then
             cbxCause.SetFocus
             If Len(cbxCause.SelText) <> 0 Then isOK = True
-            'btnSave.SetFocus
+            'Forms("Tagline").SetFocus
+            'tbxHeight.SetFocus
         End If
         
 '    Else
@@ -1071,7 +1147,7 @@ On Error GoTo Err_Handler
     btnSave.Enabled = isOK
     
     'refresh form
-    Me.Requery
+'    Forms("Tagline").Controls("list").Form.Requery
     
 Exit_Handler:
     Exit Sub

@@ -4,11 +4,8 @@ Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
-    MinButton = NotDefault
-    ControlBox = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
-    CloseButton = NotDefault
     DividingLines = NotDefault
     DefaultView =0
     BorderStyle =1
@@ -19,10 +16,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =8208
-    Top =2700
-    Right =14760
-    Bottom =6192
+    Left =3195
+    Top =3105
+    Right =23115
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -234,10 +231,10 @@ Begin Form
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                     Overlaps =1
                 End
                 Begin CommandButton
@@ -263,10 +260,10 @@ Begin Form
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                     Overlaps =1
                 End
                 Begin TextBox
@@ -827,13 +824,21 @@ End Property
 Private Sub Form_Load()
 On Error GoTo Err_Handler
     
+    Dim ary() As String
+    
     Me.FormHeader.backColor = lngBrown
     Me.TitleFontColor = lngWhite
     
     Me.lineIndicator.Width = Me.Form.Width
     Me.lineIndicator.BorderColor = lngLime
     
-    Me.context = "Plot - 24"
+    'set comment context
+    ary = Split(Nz(Me.OpenArgs, ""), "|")
+    If IsArray(ary) Then
+        Me.context = ary(0) & " - " & ary(1) '"Plot - 24"
+    Else
+        GoTo Exit_Handler
+    End If
     
     Me.Instructions = "Enter your establishment comment."
     Me.CountLabelVisible = False

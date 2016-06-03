@@ -19,17 +19,15 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =26
-    Left =7425
-    Top =2130
-    Right =14805
-    Bottom =6495
+    ItemSuffix =30
+    Right =19920
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xa5fae2b260c3e440
+        0xf779ef0179c3e440
     End
-    RecordSource ="Tagline"
-    Caption ="list"
+    RecordSource ="VegTransect"
+    Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -172,65 +170,27 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =3240
-                    Top =1080
+                    Left =3000
+                    Top =1020
                     Width =1245
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblDistanceH"
-                    Caption ="Distance (m)"
+                    Name ="lblSampleDate"
+                    Caption ="Sample Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3240
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =4485
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =4620
-                    Top =1080
-                    Width =1155
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblHeightV"
-                    Caption ="Height (cm)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4620
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =5775
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =1560
-                    Top =1080
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblCause"
-                    Caption ="Slope Change Cause"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1560
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =2805
-                    LayoutCachedHeight =1395
+                    LayoutCachedLeft =3000
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =4245
+                    LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =960
-                    Top =1080
+                    Top =1020
                     Width =270
                     Height =315
                     FontWeight =500
@@ -240,16 +200,35 @@ Begin Form
                     Caption ="ID"
                     GridlineColor =10921638
                     LayoutCachedLeft =960
-                    LayoutCachedTop =1080
+                    LayoutCachedTop =1020
                     LayoutCachedWidth =1230
-                    LayoutCachedHeight =1395
+                    LayoutCachedHeight =1335
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =1440
+                    Top =1020
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblNumber"
+                    Caption ="Transect #"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1440
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =2685
+                    LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
             End
         End
         Begin Section
-            Height =360
+            Height =420
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -307,8 +286,7 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =65280
-                    HoverThemeColorIndex =-1
+                    HoverColor =15060409
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -319,67 +297,25 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4680
-                    Width =1080
-                    Height =315
-                    TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxHeight"
-                    ControlSource ="Height_cm"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4680
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =315
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =3300
-                    Width =1080
-                    Height =315
-                    TabIndex =2
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxDistance"
-                    ControlSource ="LineDistance_m"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3300
-                    LayoutCachedWidth =4380
-                    LayoutCachedHeight =315
-                End
-                Begin TextBox
                     OldBorderStyle =0
                     OverlapFlags =85
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =15
+                    Top =45
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =1
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =15
+                    LayoutCachedTop =45
                     LayoutCachedWidth =840
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =345
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -392,7 +328,7 @@ Begin Form
                     Left =6780
                     Width =720
                     FontSize =14
-                    TabIndex =4
+                    TabIndex =2
                     ForeColor =255
                     Name ="btnDelete"
                     Caption ="í ½í·´"
@@ -408,8 +344,7 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =65280
-                    HoverThemeColorIndex =-1
+                    HoverColor =15060409
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -427,20 +362,18 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =1440
-                    Top =15
-                    Width =1560
+                    Top =45
                     Height =300
-                    TabIndex =5
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxHeightType"
-                    ControlSource ="HeightType"
+                    Name ="tbxNumber"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1440
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =315
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =2880
+                    LayoutCachedHeight =345
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -453,9 +386,10 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =900
+                    Top =30
                     Width =480
                     Height =315
-                    TabIndex =6
+                    TabIndex =4
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxID"
@@ -463,8 +397,34 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =900
+                    LayoutCachedTop =30
                     LayoutCachedWidth =1380
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =345
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3000
+                    Top =45
+                    Width =1260
+                    Height =300
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxSampleDate"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3000
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =4260
+                    LayoutCachedHeight =345
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
             End
         End
@@ -486,7 +446,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         TaglineList
+' Form:         TransectList
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -613,7 +573,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[TaglineList form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[TransectList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -640,7 +600,6 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
-
     'set hover
     btnEdit.HoverColor = lngGreen
     btnDelete.HoverColor = lngGreen
@@ -648,16 +607,13 @@ On Error GoTo Err_Handler
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
 
-    'tagline slope change causes: Veg, Grd, Water, Rock, Debris
-
-
 Exit_Handler:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[TaglineList form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[TransectList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -684,7 +640,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[TaglineList form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[TransectList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -707,14 +663,14 @@ On Error GoTo Err_Handler
     
     'populate the parent form
     PopulateForm Me.Parent, ID
-    
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[TaglineList form])"
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[TransectList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -741,8 +697,8 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Tagline", ID
-
+    If result = vbYes Then DeleteRecord "Event", ID
+    
     'clear the deleted record
     Me.Requery
 
@@ -752,7 +708,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[TaglineList form])"
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[TransectList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -780,7 +736,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[TaglineList form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[TransectList form])"
     End Select
     Resume Exit_Handler
 End Sub
