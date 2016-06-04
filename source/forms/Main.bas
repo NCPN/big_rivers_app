@@ -16,10 +16,10 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =6105
-    Top =3705
-    Right =15000
-    Bottom =11370
+    Left =1455
+    Top =3735
+    Right =10350
+    Bottom =11400
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -405,7 +405,7 @@ On Error GoTo Err_Handler
     oCTile.Link1Caption = "Event"
     oCTile.Link2Caption = ""
     oCTile.Link2Visible = 0
-    oCTile.Link3Caption = "VegPlot"
+    oCTile.Link3Caption = "VegPlots"
     oCTile.Link4Visible = 0
     oCTile.Link5Caption = "Location"
     oCTile.Link6Caption = "People"

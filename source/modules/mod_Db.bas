@@ -56,8 +56,8 @@ Global AppTemplates As Scripting.Dictionary
 Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
     On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim intNumUpdates As Integer
     Dim varReturn As Variant
     Dim intI As Integer
@@ -142,12 +142,12 @@ End Function
 '   BLC - 2/7/2015  - initial version
 '   BLC - 5/13/2015 - moved from mod_App_Data to mod_Db
 ' ---------------------------------
-Public Function MergeRecordsets(rsA As DAO.Recordset, rsB As DAO.Recordset) As DAO.Recordset
+Public Function MergeRecordsets(rsA As dao.Recordset, rsB As dao.Recordset) As dao.Recordset
 
 On Error GoTo Err_Handler
     
-    Dim db As DAO.Database
-    Dim rsOut As DAO.Recordset
+    Dim db As dao.Database
+    Dim rsOut As dao.Recordset
     Dim iCount As Integer
     
     'handle empty recordsets
@@ -310,8 +310,8 @@ End Function
 Function QueryExists(strQueryName As String) As Boolean
 On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim tdf As DAO.QueryDef
+    Dim db As dao.Database
+    Dim tdf As dao.QueryDef
     
     On Error GoTo Err_Handler
     Set db = CurrentDb
@@ -348,7 +348,7 @@ End Function
 ' ---------------------------------
 Public Function qryExists(strQueryName As String) As Boolean
 
-    Dim qdf As DAO.QueryDef
+    Dim qdf As dao.QueryDef
     
     'default
     qryExists = False
@@ -472,7 +472,7 @@ End Function
 Public Function HasRecords(ByVal strName As String) As Boolean
     On Error GoTo Err_Handler
     
-    Dim rs As DAO.Recordset
+    Dim rs As dao.Recordset
     Dim blnHasRecords As Boolean
     
     blnHasRecords = False
@@ -521,8 +521,8 @@ End Function
 ' ---------------------------------
 Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As String = "")
 
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     Dim strSQL As String, strSQLWhere As String, key As String
     Dim Value As Variant
     
@@ -722,7 +722,7 @@ Public Function VirtualDAORecordset(iCount As Integer, Optional strTable As Stri
 On Error GoTo Err_Handler
 
     Dim Counter As Long
-    Dim rs As DAO.Recordset
+    Dim rs As dao.Recordset
     Dim i As Integer
 
     With DBEngine

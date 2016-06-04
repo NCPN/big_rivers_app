@@ -49,8 +49,8 @@ Option Explicit
 Public Function VerifyConnections()
     On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim rst As DAO.Recordset
+    Dim db As dao.Database
+    Dim rst As dao.Recordset
     Dim strSysTable As String
     Dim strDbName As String
     Dim strTable As String
@@ -320,7 +320,7 @@ Public Function MakeBackup()
         GoTo Exit_Procedure
     End If
 
-    Dim rst As DAO.Recordset
+    Dim rst As dao.Recordset
     Dim intNRecs As Integer
     Dim strDbFile As String
     Dim fs As Variant
@@ -541,8 +541,8 @@ Function TestODBCConnection(strTableName As String, _
 
     TestODBCConnection = False   ' Default in case of error
 
-    Dim db As DAO.Database
-    Dim qdf As DAO.QueryDef
+    Dim db As dao.Database
+    Dim qdf As dao.QueryDef
     Dim strDbName As String
 
     ' Create a blank pass-through query
@@ -626,10 +626,10 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
     On Error GoTo Err_Handler
 
     Dim varFileName As Variant
-    Dim dbGet As DAO.Database
-    Dim db As DAO.Database
-    Dim rst As DAO.Recordset
-    Dim tdf As DAO.TableDef
+    Dim dbGet As dao.Database
+    Dim db As dao.Database
+    Dim rst As dao.Recordset
+    Dim tdf As dao.TableDef
     Dim intNumTables As Integer
     Dim varReturn As Variant
     Dim intI As Integer
@@ -856,9 +856,9 @@ End Function
 Public Function VerifyLinkTableInfo() As Boolean
     On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim rst As DAO.Recordset
-    Dim tdf As DAO.TableDef
+    Dim db As dao.Database
+    Dim rst As dao.Recordset
+    Dim tdf As dao.TableDef
     Dim intNRecs As Integer
     Dim strTable As String
     Dim strDesc As String
@@ -1036,7 +1036,7 @@ End Function
 Public Function VerifyLinks() As Boolean
     On Error GoTo Err_Handler
 
-    Dim rst As DAO.Recordset
+    Dim rst As dao.Recordset
     Dim intNumTables As Integer
     Dim intI As Integer
     Dim varReturn As Variant
@@ -1139,7 +1139,7 @@ Public Sub FixLinkedDatabase(ByVal strTableName As String)
     On Error GoTo Err_Handler
 
     Dim strTemp As String, strSQL As String, strCurDb As String, strCurDbPath As String
-    Dim rs As DAO.Recordset
+    Dim rs As dao.Recordset
 
     strTemp = ParseConnectionStr(CurrentDb.tabledefs(strTableName).Connect)
     

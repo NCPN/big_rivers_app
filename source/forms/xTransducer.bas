@@ -12,13 +12,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =6600
+    Width =12960
     DatasheetFontHeight =11
-    ItemSuffix =14
-    Left =3195
-    Top =4350
-    Right =9795
-    Bottom =6135
+    ItemSuffix =15
+    Left =3150
+    Top =3105
+    Right =16110
+    Bottom =5370
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xa3116d04ebbee440
@@ -35,7 +35,9 @@ Begin Form
     AllowPivotChartView =0
     FilterOnLoad =0
     OrderByOnLoad =0
+    SplitFormOrientation =1
     OrderByOnLoad =0
+    SplitFormOrientation =1
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -147,7 +149,7 @@ Begin Form
                     Height =300
                     ForeColor =15921906
                     Name ="lblTitle"
-                    Caption ="Taglines"
+                    Caption ="Transducers"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedWidth =2100
@@ -163,13 +165,13 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     Top =360
-                    Width =6600
+                    Width =9360
                     Height =480
                     BorderColor =10921638
                     Name ="rctHeader"
                     GridlineColor =10921638
                     LayoutCachedTop =360
-                    LayoutCachedWidth =6600
+                    LayoutCachedWidth =9360
                     LayoutCachedHeight =840
                 End
                 Begin Label
@@ -181,8 +183,8 @@ Begin Form
                     FontSize =9
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="lblTagline"
-                    Caption ="Measurement Type"
+                    Name ="lblTransducerNum"
+                    Caption ="Transducer"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =480
@@ -223,10 +225,27 @@ Begin Form
                     LayoutCachedWidth =5304
                     LayoutCachedHeight =732
                 End
+                Begin Label
+                    OverlapFlags =85
+                    Left =5160
+                    Width =1980
+                    Height =300
+                    ForeColor =15921906
+                    Name ="lblEventID"
+                    Caption ="EventID:"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5160
+                    LayoutCachedWidth =7140
+                    LayoutCachedHeight =300
+                    BorderTint =100.0
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ForeShade =95.0
+                End
             End
         End
         Begin Section
-            Height =600
+            Height =1080
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -236,8 +255,8 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =2760
-                    Top =120
+                    Left =5400
+                    Top =60
                     Width =960
                     Height =300
                     BorderColor =10921638
@@ -245,16 +264,16 @@ Begin Form
                     Name ="tbxHeight"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2760
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =3720
-                    LayoutCachedHeight =420
+                    LayoutCachedLeft =5400
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =6360
+                    LayoutCachedHeight =360
                 End
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =4080
-                    Top =120
+                    Left =6720
+                    Top =60
                     Width =960
                     Height =300
                     TabIndex =1
@@ -263,23 +282,29 @@ Begin Form
                     Name ="tbxDistance"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4080
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =5040
-                    LayoutCachedHeight =420
+                    LayoutCachedLeft =6720
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =360
                 End
                 Begin ComboBox
-                    OverlapFlags =93
+                    OverlapFlags =85
                     IMESentenceMode =3
+                    ColumnCount =3
                     Left =120
                     Top =120
-                    Width =2520
+                    Width =1680
                     Height =300
                     TabIndex =2
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="cbxTaglineType"
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"0\""
+                    Name ="cbxTransducerNum"
                     RowSourceType ="Table/Query"
+                    RowSource ="SELECT ID, SWITCH(  TransducerType = 'A', 'Air', TransducerType = 'W','Water') A"
+                        "S TType, TransducerNumber + \" (\" + TType +\")\" AS Transducer FROM Transducer;"
+                        " "
+                    ColumnWidths ="0;0;2160"
                     AfterUpdate ="[Event Procedure]"
                     OnClick ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
@@ -287,13 +312,13 @@ Begin Form
 
                     LayoutCachedLeft =120
                     LayoutCachedTop =120
-                    LayoutCachedWidth =2640
+                    LayoutCachedWidth =1800
                     LayoutCachedHeight =420
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5280
-                    Top =120
+                    Left =7920
+                    Top =60
                     Width =576
                     Height =300
                     TabIndex =3
@@ -340,10 +365,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =5280
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =5856
-                    LayoutCachedHeight =420
+                    LayoutCachedLeft =7920
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =8496
+                    LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -357,8 +382,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5940
-                    Top =120
+                    Left =8580
+                    Top =60
                     Width =576
                     Height =300
                     TabIndex =4
@@ -404,10 +429,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =5940
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =6516
-                    LayoutCachedHeight =420
+                    LayoutCachedLeft =8580
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =9156
+                    LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -420,10 +445,10 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin TextBox
-                    OverlapFlags =247
+                    OverlapFlags =85
                     IMESentenceMode =3
-                    Left =120
-                    Top =180
+                    Left =2760
+                    Top =120
                     Width =2520
                     Height =300
                     TabIndex =5
@@ -433,10 +458,29 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =2640
-                    LayoutCachedHeight =480
+                    LayoutCachedLeft =2760
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =5280
+                    LayoutCachedHeight =420
+                End
+                Begin ComboBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =4380
+                    Top =540
+                    Width =2520
+                    Height =300
+                    TabIndex =6
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="cbxTaglineType"
+                    RowSourceType ="Table/Query"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4380
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =6900
+                    LayoutCachedHeight =840
                 End
             End
         End

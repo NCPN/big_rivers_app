@@ -193,7 +193,7 @@ On Error GoTo Err_Handler
     Dim cbar As CommandBar
     Dim mnuItem As CommandBarControl
     Dim mnu As String, action As String
-    Dim rs As DAO.Recordset
+    Dim rs As dao.Recordset
 
     Select Case context
         Case "park"

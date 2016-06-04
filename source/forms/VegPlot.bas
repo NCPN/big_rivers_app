@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =9960
-    Top =3300
-    Right =17820
-    Bottom =12585
+    Left =3195
+    Top =3105
+    Right =28545
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -851,7 +851,7 @@ Begin Form
                     Height =240
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="Label42"
+                    Name ="lblFA"
                     Caption ="FA"
                     GridlineColor =10921638
                     LayoutCachedLeft =2580
@@ -1015,7 +1015,7 @@ Begin Form
                             Height =315
                             BorderColor =8355711
                             ForeColor =8355711
-                            Name ="lblIndicatorSpecies"
+                            Name ="lblNoIndicatorSpecies"
                             Caption ="No Indicator Species"
                             GridlineColor =10921638
                             LayoutCachedLeft =3540
@@ -1049,7 +1049,7 @@ Begin Form
                             Height =315
                             BorderColor =8355711
                             ForeColor =8355711
-                            Name ="lblNoSocialTrails"
+                            Name ="lblHasSocialTrails"
                             Caption ="Has Social Trails"
                             GridlineColor =10921638
                             LayoutCachedLeft =3540
@@ -1436,7 +1436,16 @@ End Sub
 ' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
-' Assumptions:  -
+' Assumptions:
+'   Certain fields are not applicable across all parks as noted below.
+'       % Water (inundation) - DINO & CANY
+'       % Total URC - BLCA & CANY
+'       Plot Density - BLCA & CANY
+'       No Canopy Veg - BLCA & CANY
+'       No Indicator Species - BLCA only
+'       No Rooted Veg - DINO & CANY
+'       Has Social Trail - BLCA & CANY
+'
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -1484,6 +1493,68 @@ On Error GoTo Err_Handler
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
+  
+    'defaults --> turn off items
+    lblWater.Visible = False
+    tbxPctWater.Visible = False
+    lblURC.Visible = False
+    tbxPctURC.Visible = False
+    lblPlotDensity.Visible = False
+    lblFraction.Visible = False
+    tbxPlotDensity.Visible = False
+    chkNoCanopyVeg.Visible = False
+    lblNoCanopyVeg.Visible = False
+    chkNoIndicatorSpecies.Visible = False
+    lblNoIndicatorSpecies.Visible = False
+    chkNoRootedVeg.Visible = False
+    lblNoRootedVeg.Visible = False
+    chkHasSocialTrails.Visible = False
+    lblHasSocialTrails.Visible = False
+    btnWCC.Visible = False
+    btnURC.Visible = False
+    btnARC.Visible = False
+    
+    'adjust UI based on park
+    Select Case TempVars("ParkCode")
+        Case "BLCA"
+            lblURC.Visible = True
+            tbxPctURC.Visible = True
+            lblPlotDensity.Visible = True
+            lblFraction.Visible = True
+            tbxPlotDensity.Visible = True
+            chkNoCanopyVeg.Visible = True
+            lblNoCanopyVeg.Visible = True
+            chkNoIndicatorSpecies.Visible = True
+            lblNoIndicatorSpecies.Visible = True
+            chkHasSocialTrails.Visible = True
+            lblHasSocialTrails.Visible = True
+            btnWCC.Visible = True
+            btnURC.Visible = True
+        
+        Case "CANY"
+            lblURC.Visible = True
+            tbxPctURC.Visible = True
+            lblWater.Visible = True
+            tbxPctWater.Visible = True
+            lblPlotDensity.Visible = True
+            lblFraction.Visible = True
+            tbxPlotDensity.Visible = True
+            tbxPctURC.Visible = True
+            chkNoCanopyVeg.Visible = True
+            lblNoCanopyVeg.Visible = True
+            chkNoRootedVeg.Visible = True
+            lblNoRootedVeg.Visible = True
+            chkHasSocialTrails.Visible = True
+            lblHasSocialTrails.Visible = True
+            btnWCC.Visible = True
+            
+        Case "DINO"
+            lblWater.Visible = True
+            tbxPctWater.Visible = True
+            chkNoRootedVeg.Visible = True
+            lblNoRootedVeg.Visible = True
+            btnARC.Visible = True
+    End Select
   
 Exit_Handler:
     Exit Sub

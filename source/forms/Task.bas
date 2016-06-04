@@ -4,11 +4,8 @@ Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
-    MinButton = NotDefault
-    ControlBox = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
-    CloseButton = NotDefault
     DividingLines = NotDefault
     DefaultView =0
     BorderStyle =1
@@ -19,10 +16,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =3150
-    Top =2415
-    Right =18945
-    Bottom =14175
+    Left =4140
+    Top =3735
+    Right =11190
+    Bottom =14235
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440

@@ -372,8 +372,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    Dim db As dao.Database
+    Dim rs As dao.Recordset
     
     Set db = CurrentDb
     

@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =5580
-    Top =19380
-    Right =8160
-    Bottom =22530
+    Left =10530
+    Top =9270
+    Right =13110
+    Bottom =12420
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -400,12 +400,12 @@ End Property
 
 Public Property Let TileTag(Value As String)
     m_TileTag = Value
-    lblLink1.Tag = m_TileTag
-    lblLink2.Tag = m_TileTag
-    lblLink3.Tag = m_TileTag
-    lblLink4.Tag = m_TileTag
-    lblLink5.Tag = m_TileTag
-    lblLink6.Tag = m_TileTag
+'    lblLink1.Tag = m_TileTag
+'    lblLink2.Tag = m_TileTag
+'    lblLink3.Tag = m_TileTag
+'    lblLink4.Tag = m_TileTag
+'    lblLink5.Tag = m_TileTag
+'    lblLink6.Tag = m_TileTag
 End Property
 
 Public Property Get TileTag() As String
@@ -758,7 +758,7 @@ On Error GoTo Err_Handler
     
     With Me.lblLink1
         DoCmd.Minimize
-        ClickAction .Tag & .Caption
+        ClickAction Me.TileTag & .Caption
     End With
     
 Exit_Handler:
@@ -794,7 +794,7 @@ On Error GoTo Err_Handler
     
     With Me.lblLink2
         DoCmd.Minimize
-        ClickAction .Tag & .Caption
+        ClickAction Me.TileTag & .Caption
     End With
     
 Exit_Handler:
@@ -829,7 +829,7 @@ On Error GoTo Err_Handler
 
     With Me.lblLink3
         DoCmd.Minimize
-        ClickAction .Tag & .Caption
+        ClickAction Me.TileTag & .Caption
     End With
 
 Exit_Handler:
@@ -864,7 +864,7 @@ On Error GoTo Err_Handler
     
     With Me.lblLink4
         DoCmd.Minimize
-        ClickAction .Tag & .Caption
+        ClickAction Me.TileTag & .Caption
     End With
 
 Exit_Handler:
@@ -899,7 +899,7 @@ On Error GoTo Err_Handler
     
     With Me.lblLink5
         DoCmd.Minimize
-        ClickAction .Tag & .Caption
+        ClickAction Me.TileTag & .Caption
     End With
 
 Exit_Handler:
@@ -934,7 +934,7 @@ On Error GoTo Err_Handler
     
     With Me.lblLink6
         DoCmd.Minimize
-        ClickAction .Tag & .Caption
+        ClickAction Me.TileTag & .Caption
     End With
 
 Exit_Handler:

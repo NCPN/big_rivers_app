@@ -302,7 +302,7 @@ On Error GoTo Err_Handler
         Case "event"
             fName = "Events"
             oArgs = "" 'site & protocol IDs
-        Case "vegplot"
+        Case "vegplots"
             fName = "VegPlot"
             oArgs = "" 'site & protocol IDs
         Case "location"
@@ -317,23 +317,23 @@ On Error GoTo Err_Handler
         Case "vegetation walk"
         Case "species"
         'Observations
-        Case "obs-photos"
-        Case "obs-transducers"
+        Case "photos"
+        Case "transducers"
             fName = "Transducer"
             oArgs = ""
         'Trip Prep
-        Case "prep-vegplot"
+        Case "vegplot"
             rName = "VegPlot"
             oArgs = ""
-        Case "prep-vegwalk"
+        Case "vegwalk"
             rName = "SpeciesList"
             oArgs = ""
-        Case "prep-photos"
+        Case "photos"
             rName = "Photo"
             oArgs = ""
-        Case "prep-transducer"
+        Case "transducer"
             rName = "Transducer"
-        Case "prep-tasks"
+        Case "tasks"
             fName = "Task"
         'Reports
         Case "link1"
@@ -424,6 +424,31 @@ On Error GoTo Err_Handler
                 .Controls("cbxCause").ControlSource = "HeightType"
                 .Controls("tbxDistance").ControlSource = "LineDistance_m"
                 .Controls("tbxHeight").ControlSource = "Height_cm"
+            Case "Transducer"
+                strSQL = GetTemplate("s_form_edit", "tbl:Transducer|id:" & ID)
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("cbxTiming").ControlSource = "Timing"
+                .Controls("cbxTransducer").ControlSource = "TransducerNumber"
+                .Controls("tbxSerialNo").ControlSource = "SerialNumber"
+                .Controls("tbxSampleDate").ControlSource = "ActionDate"
+                .Controls("tbxSampleTime").ControlSource = "ActionTime"
+                .Controls("chkSurveyed").ControlSource = "IsSurveyed"
+            Case "VegPlot"
+                strSQL = GetTemplate("s_form_edit", "tbl:VegPlot|id:" & ID)
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxNumber").ControlSource = "PlotNumber"
+                .Controls("tbxDistance").ControlSource = "Distance"
+                .Controls("tbxModalSedSize").ControlSource = "ModalSedSize"
+                .Controls("tbxPctFines").ControlSource = "PctFines"
+                .Controls("tbxPctWater").ControlSource = "PctWater"
+                .Controls("tbxPctURC").ControlSource = "PctURC"
+                .Controls("tbxPlotDensity").ControlSource = "PlotDensity"
+                .Controls("chkNoCanopyVeg").ControlSource = "NoCanopyVeg"
+                .Controls("chkNoRootedVeg").ControlSource = "NoRootedVeg"
+                .Controls("chkNoIndicatorSpecies").ControlSource = "NoIndicatorSpecies"
+                .Controls("chkHasSocialTrails").ControlSource = "HasSocialTrails"
         End Select
     
         .RecordSource = strSQL
