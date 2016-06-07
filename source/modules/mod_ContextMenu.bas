@@ -193,7 +193,7 @@ On Error GoTo Err_Handler
     Dim cbar As CommandBar
     Dim mnuItem As CommandBarControl
     Dim mnu As String, action As String
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
 
     Select Case context
         Case "park"
@@ -267,7 +267,7 @@ On Error GoTo Err_Handler
                 End If
                 
             Case "river"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode:" & TempVars.item("ParkCode")), dbOpenDynaset)
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                 
                 If Not (rs.BOF And rs.EOF) Then
                     
@@ -288,7 +288,7 @@ On Error GoTo Err_Handler
                 End If
             
             Case "site"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list", "ParkCode:" & TempVars.item("ParkCode")), dbOpenDynaset)
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                 
                 If Not (rs.BOF And rs.EOF) Then
                 
@@ -309,7 +309,7 @@ On Error GoTo Err_Handler
                 End If
             
             Case "feature"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode:" & TempVars.item("ParkCode")), dbOpenDynaset)
+                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                 
                 If Not (rs.BOF And rs.EOF) Then
                 
@@ -338,6 +338,26 @@ Exit_Handler:
     
 Err_Handler:
     Select Case Err.Number
+      Case 3078 'Can't find template/template by that name
+        'This error could be caused by GetTemplates() finding a
+        'duplicate template -- tsys_Db_Templates finds more than one w/ same name
+        'Best option is to notify them to contact database manager
+        MsgBox "Application cannot find the template." & vbCrLf & vbCrLf & _
+            "Context: " & context & vbCrLf & vbCrLf & _
+            "Please contact your data manager to resolve this issue." & vbCrLf & vbCrLf & _
+            "Error #" & Err.Number & " - CreateDynamicMenu[mod_ContextMenu]:" & vbCrLf & _
+            Err.Description, vbExclamation, "Db Template for Creating ContextMenu Not Found!"
+
+            '********** PREVENT FORM FROM OPENING ***********
+            'Main form will not have correct context menus if duplicate templates exist
+            'Close it if it's open
+            If FormIsOpen("Main") Then
+                DoCmd.Close acForm, "Main"
+            End If
+            
+            '********** FATAL ERROR ****************
+            'terminate *ALL* VBA code to prevent other popups
+            End
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CreateMenu[mod_ContextMenu])"

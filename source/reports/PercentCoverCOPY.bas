@@ -2030,26 +2030,26 @@ On Error GoTo Err_Handler
     
     Select Case row
         Case "titlekey"  'key on title row
-            lblLeftKey.Visible = show
-            lblRightKey.Visible = show
+            lblLeftKey.visible = show
+            lblRightKey.visible = show
         Case "key"  'key row below title
-            Me.GroupHeader1.Visible = show
-            lblKey.Visible = show
+            Me.GroupHeader1.visible = show
+            lblKey.visible = show
             
         Case "total"    'total plot % cover
-            Me.GroupHeader2.Visible = show
-            lblTotalCover.Visible = show
+            Me.GroupHeader2.visible = show
+            lblTotalCover.visible = show
             
             'show/hide columns
             For i = 1 To 16
                 strLabel = "lblColT" & i
-                Me.Controls(strLabel).Visible = show
+                Me.Controls(strLabel).visible = show
             Next
                     
         Case "subtitle" 'subtitle row above checkboxes
-            Me.GroupHeader3.Visible = show
-            lblSubTitle.Visible = show
-            lblRightKeySub.Visible = show
+            Me.GroupHeader3.visible = show
+            lblSubTitle.visible = show
+            lblRightKeySub.visible = show
             
     End Select
         

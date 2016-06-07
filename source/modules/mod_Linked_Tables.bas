@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Linked_Tables
 ' Level:        Framework module
-' Version:      1.01
+' Version:      1.02
 ' Description:  Linked table related functions & subroutines
 '
 ' Adapted from: John R. Boetsch, May 24, 2006
@@ -15,6 +15,7 @@ Option Explicit
 '               BLC, 4/30/2015 - 1.00 - added fxnVerifyLinks, fxnRefreshLinks, fxnVerifyLinkTableInfo,
 '                                fxnMakeBackup from mod_Custom_Functions
 '               BLC, 5/19/2015 - 1.01 - renamed functions, removed fxn prefix
+'               BLC, 6/5/2016  - 1.02 - renamed frm_Progress_Meter to ProgressMeter, removed underscores from fields
 ' =================================
 
 ' ---------------------------------
@@ -45,12 +46,13 @@ Option Explicit
 '               BLC, 4/30/2015 - switched from fxnSwitchboardIsOpen to FormIsOpen(frmSwitchboard)
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/22/2015 - moved from mod_Initialize_App to mod_Linked_Tables
+'               BLC, 6/5/2016  - removed underscores from field names
 ' ---------------------------------
 Public Function VerifyConnections()
     On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim rst As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSysTable As String
     Dim strDbName As String
     Dim strTable As String
@@ -69,17 +71,17 @@ Public Function VerifyConnections()
     If VerifyLinkTableInfo = False Then GoTo Exit_Procedure
 
     ' Set the recordset to the system table
-    Set rst = db.OpenRecordset(strSysTable, dbOpenTable, dbReadOnly)
+    Set rs = db.OpenRecordset(strSysTable, dbOpenTable, dbReadOnly)
 
-    Do Until rst.EOF
-        strDbName = rst.Fields("Link_db")
-        If rst.Fields("Is_ODBC") = True Then
+    Do Until rs.EOF
+        strDbName = rs.Fields("LinkDb")
+        If rs.Fields("IsODBC") = True Then
             ' ODBC connection
-            If Not IsNull(rst![Server]) Then
-                strServer = rst![Server]
-                ' Test the first table in the list for this back-end to test the connection
-                strTable = DFirst("[Link_table]", "tsys_Link_Tables", _
-                    "[Link_db]=""" & strDbName & """")
+            If Not IsNull(rs![Server]) Then
+                strServer = rs![Server]
+                ' Test the firs table in the list for this back-end to test the connection
+                strTable = DFirst("[LinkTable]", "tsys_Link_Tables", _
+                    "[LinkDb]=""" & strDbName & """")
                 If TestODBCConnection(strTable, , , False) = False Then
                     blnHasError = True
                     If strErrMsg <> "" Then strErrMsg = strErrMsg & vbCrLf & vbCrLf
@@ -97,8 +99,8 @@ Public Function VerifyConnections()
         Else
             ' Access back-end - update the global variable
             TempVars.item("HasAccessBE") = True
-            If Not IsNull(rst![File_path]) Then
-                strDbPath = rst![File_path]
+            If Not IsNull(rs![FilePath]) Then
+                strDbPath = rs![FilePath]
                 If FileExists(strDbPath) = False Then
                     ' Cannot find the file
                     blnHasError = True
@@ -110,7 +112,7 @@ Public Function VerifyConnections()
                 'Else
                     ' Check if file is remote (network) & set bit to alert user that db (app) may be slow
                     'If IsNetworkFile(strDbPath) Then
-                    '    rst![Is_Network_Db] = 1
+                    '    rs![Is_Network_Db] = 1
                     'End If
                 End If
             Else    ' Missing file path
@@ -121,7 +123,7 @@ Public Function VerifyConnections()
                     vbCrLf & "  Db name: " & strDbName
             End If
         End If
-        rst.MoveNext
+        rs.MoveNext
     Loop
     
     'For applications with full DbAdmin subform (DB_ADMIN_CONTROL = True) otherwise ignore
@@ -166,8 +168,8 @@ Proc_Final_Status:
 
 Exit_Procedure:
     On Error Resume Next
-    rst.Close
-    Set rst = Nothing
+    rs.Close
+    Set rs = Nothing
     Set db = Nothing
     Exit Function
 
@@ -320,7 +322,7 @@ Public Function MakeBackup()
         GoTo Exit_Procedure
     End If
 
-    Dim rst As dao.Recordset
+    Dim rs As DAO.Recordset
     Dim intNRecs As Integer
     Dim strDbFile As String
     Dim fs As Variant
@@ -336,14 +338,14 @@ Public Function MakeBackup()
     strBackupDate = Format$(Now, "YYYYMMDD_HHNN")
 
     ' Set the recordset to the systems table, grouped by linked Access databases
-    Set rst = CurrentDb.OpenRecordset("SELECT Database " & _
+    Set rs = CurrentDb.OpenRecordset("SELECT Database " & _
         "FROM MSysObjects " & _
         "WHERE ((MSysObjects.Type) = 6) And ((MSysObjects.Name) Not Like '~*') " & _
         "GROUP BY MSysObjects.Database;", dbOpenSnapshot)
 
     ' Counts the number of linked Access back-end files in the database
-    rst.MoveLast    ' Need to do this to make the record count accurate
-    intNRecs = rst.RecordCount
+    rs.MoveLast    ' Need to do this to make the record count accurate
+    intNRecs = rs.RecordCount
     If intNRecs = 0 Then    ' No linked databases in the recordset
         MsgBox "There are no Access back-end files to back up ...", , _
             "No back-end file to back up"
@@ -351,9 +353,9 @@ Public Function MakeBackup()
     End If
 
     ' Loop through the recordset and back up each file as indicated in the system file
-    rst.MoveFirst
-    Do Until rst.EOF
-        strDbFile = rst![Database]
+    rs.MoveFirst
+    Do Until rs.EOF
+        strDbFile = rs![Database]
         ' If the string is not empty and backups are indicated for this back-end ...
         If strDbFile <> "" And _
             DLookup("[Backups]", "tsys_Link_Dbs", "[File_path]=""" & strDbFile & """") Then
@@ -413,13 +415,13 @@ Public Function MakeBackup()
             End If
             
         End If
-        rst.MoveNext
+        rs.MoveNext
     Loop    ' To next back-end
 
 Exit_Procedure:
     On Error Resume Next
-    rst.Close
-    Set rst = Nothing
+    rs.Close
+    Set rs = Nothing
     Set fs = Nothing
     Exit Function
 
@@ -541,8 +543,8 @@ Function TestODBCConnection(strTableName As String, _
 
     TestODBCConnection = False   ' Default in case of error
 
-    Dim db As dao.Database
-    Dim qdf As dao.QueryDef
+    Dim db As DAO.Database
+    Dim qdf As DAO.QueryDef
     Dim strDbName As String
 
     ' Create a blank pass-through query
@@ -619,6 +621,8 @@ End Function
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/20/2015 - updated progress meter control naming, added connection component for non-"DATABASE="
 '                                connection strings (e.g. Access 2010 w/ "Dbq=")
+'               BLC, 6/4/2016  - revised tsys_Link_Tables fields to match Big Rivers field naming revisions (LinkDb vs Link_db, LinkTable vs. Link_table)
+'                                renamed frm_Progress_Meter to ProgressMeter
 ' =================================
 Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String, _
     Optional strComponent As String = "DATABASE=", _
@@ -626,10 +630,10 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
     On Error GoTo Err_Handler
 
     Dim varFileName As Variant
-    Dim dbGet As dao.Database
-    Dim db As dao.Database
-    Dim rst As dao.Recordset
-    Dim tdf As dao.TableDef
+    Dim dbGet As DAO.Database
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim tdf As DAO.TableDef
     Dim intNumTables As Integer
     Dim varReturn As Variant
     Dim intI As Integer
@@ -643,17 +647,18 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
     RefreshLinks = False   ' Default unless all tables verified
 
     Set db = CurrentDb
-    Set rst = db.OpenRecordset("SELECT * FROM tsys_Link_Tables WHERE " & _
-                "[tsys_Link_Tables]![Link_db] = """ & strDbName & """", dbOpenSnapshot)
+    Set rs = db.OpenRecordset(GetTemplate("s_tsys_link_tables_by_dbname", "dbName" & PARAM_SEPARATOR & strDbName), dbOpenSnapshot)
+'    Set rs = db.OpenRecordset("SELECT * FROM tsys_Link_Tables WHERE " & _
+'                "[tsys_Link_Tables]![LinkDb] = """ & strDbName & """", dbOpenSnapshot)
 
     ' Counts the number of tables in the system table associated with this db
-    rst.MoveLast    ' Need to do this to make the record count accurate
-    intNumTables = rst.RecordCount
+    rs.MoveLast    ' Need to do this to make the record count accurate
+    intNumTables = rs.RecordCount
 
     ' Initialize the progress popup form
-    strProgForm = "frm_Progress_Meter"
+    strProgForm = "ProgressMeter"
     DoCmd.OpenForm strProgForm
-    Set frm = Forms!frm_Progress_Meter
+    Set frm = Forms!ProgressMeter
     frm.Caption = " Updating table connections"
     frm!tbxPercent = 0
 
@@ -670,8 +675,8 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
         ' Update the message below the progress meter
         frm!tbxMsg = "Verifying tables in " & strDbName
         intI = 0
-        rst.MoveFirst
-        Do Until rst.EOF
+        rs.MoveFirst
+        Do Until rs.EOF
             intI = intI + 1
             varReturn = SysCmd(acSysCmdUpdateMeter, intI)
             ' Update the popup progress meter
@@ -681,10 +686,10 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
             strProgress = String(Round(19 * intI / intNumTables), "Û")
             frm!tbxProgress = strProgress
             frm.Repaint
-            strTable = rst![Link_table]
+            strTable = rs![LinkTable]
             Debug.Print strTable
             varReturn = dbGet.tabledefs(strTable).Fields(0).Name
-            rst.MoveNext
+            rs.MoveNext
         Loop
 
         ' Second pass to refresh all links now that they are validated
@@ -694,8 +699,8 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
         ' Update the message below the progress meter
         frm!tbxMsg = "Updating table links in " & strDbName
         intI = 0
-        rst.MoveFirst
-        Do Until rst.EOF
+        rs.MoveFirst
+        Do Until rs.EOF
             intI = intI + 1
             varReturn = SysCmd(acSysCmdUpdateMeter, intI)
             ' Update the popup progress meter
@@ -705,7 +710,7 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
             strProgress = String(Round(19 * intI / intNumTables), "Û")
             frm!tbxProgress = strProgress
             frm.Repaint
-            strTable = rst![Link_table]
+            strTable = rs![LinkTable]
 Debug.Print strTable
             ' Update and refresh the table connection
             Set tdf = db.tabledefs(strTable)
@@ -713,15 +718,19 @@ Debug.Print strTable
             tdf.RefreshLink
             ' Update the table description in tsys_Link_Tables
             ' Set default description in case there is none
+            ' Encode SQL specials (",') in description
             strDesc = " - no description - "
-            strDesc = tdf.Properties("Description") ' Throws trapped error 3270 if none
-            strSQL = "UPDATE tsys_Link_Tables " & _
-                "SET tsys_Link_Tables.Description_text=""" & strDesc & _
-                """ WHERE (((tsys_Link_Tables.Link_table)=""" & strTable & """));"
+            strDesc = SQLencode(tdf.Properties("Description")) ' Throws trapped error 3270 if none
+Debug.Print strDesc
+            strSQL = GetTemplate("u_tsys_link_tables_description", "descr" & PARAM_SEPARATOR & strDesc & "|tbl" & PARAM_SEPARATOR & strTable)
+'
+'            strSQL = "UPDATE tsys_Link_Tables " & _
+'                "SET tsys_Link_Tables.DescriptionText=""" & strDesc & _
+'                """ WHERE (((tsys_Link_Tables.LinkTable)=""" & strTable & """));"
             DoCmd.SetWarnings False
             DoCmd.RunSQL strSQL
             DoCmd.SetWarnings True
-            rst.MoveNext
+            rs.MoveNext
         Loop
     Else    ' ODBC back-end
         ' First pass to verify the tables in the new back-end database (avoids partial updates)
@@ -731,8 +740,8 @@ Debug.Print strTable
         ' Update the message below the progress meter
         frm!tbxMsg = "Verifying tables in " & strDbName
         intI = 0
-        rst.MoveFirst
-        Do Until rst.EOF
+        rs.MoveFirst
+        Do Until rs.EOF
             intI = intI + 1
             varReturn = SysCmd(acSysCmdUpdateMeter, intI)
             ' Update the popup progress meter
@@ -742,9 +751,9 @@ Debug.Print strTable
             strProgress = String(Round(19 * intI / intNumTables), "Û")
             frm!tbxProgress = strProgress
             frm.Repaint
-            strTable = rst![Link_table]
+            strTable = rs![LinkTable]
             If TestODBCConnection(strTable, strNewConnStr) = False Then GoTo Exit_Procedure
-            rst.MoveNext
+            rs.MoveNext
         Loop
 
         ' Second pass to refresh all links now that they are validated
@@ -754,8 +763,8 @@ Debug.Print strTable
         ' Update the message below the progress meter
         frm!txtMsg = "Updating table links in " & strDbName
         intI = 0
-        rst.MoveFirst
-        Do Until rst.EOF
+        rs.MoveFirst
+        Do Until rs.EOF
             intI = intI + 1
             varReturn = SysCmd(acSysCmdUpdateMeter, intI)
             ' Update the popup progress meter
@@ -765,7 +774,7 @@ Debug.Print strTable
             strProgress = String(Round(19 * intI / intNumTables), "Û")
             frm!tbxProgress = strProgress
             frm.Repaint
-            strTable = rst![Link_table]
+            strTable = rs![LinkTable]
             ' Update and refresh the table connection
             Set tdf = db.tabledefs(strTable)
             ' Use test again to trap errors
@@ -775,7 +784,7 @@ Debug.Print strTable
             Else
                 GoTo Exit_Procedure
             End If
-            rst.MoveNext
+            rs.MoveNext
         Loop
     End If
 
@@ -789,9 +798,9 @@ Exit_Procedure:
     Set frm = Nothing
     dbGet.Close
     Set dbGet = Nothing
-    rst.Close
+    rs.Close
     Set tdf = Nothing
-    Set rst = Nothing
+    Set rs = Nothing
     Set db = Nothing
     Exit Function
 
@@ -852,13 +861,14 @@ End Function
 '               BLC, 4/30/2015 - moved to mod_Linked_Tables from mod_Custom_Functions
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/19/2015 - added check for FIX_LINKED_DBS flag when DbAdmin is not fully implemented
+'               BLC, 6/4/2016  - adapted to Big Rivers Application, adjust to renamed tsys_Link_Tables fields
 ' =================================
 Public Function VerifyLinkTableInfo() As Boolean
     On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim rst As dao.Recordset
-    Dim tdf As dao.TableDef
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim tdf As DAO.TableDef
     Dim intNRecs As Integer
     Dim strTable As String
     Dim strDesc As String
@@ -885,18 +895,19 @@ Public Function VerifyLinkTableInfo() As Boolean
     ' Look for linked table records that no longer actually exist in the database
     intNRecs = DCount("*", "qsys_Linked_tables_not_in_MSysObjects")
     If intNRecs > 0 Then
-        Set rst = db.OpenRecordset("qsys_Linked_tables_not_in_MSysObjects", _
+        Set rs = db.OpenRecordset("qsys_Linked_tables_not_in_MSysObjects", _
             dbOpenSnapshot)
-        Do Until rst.EOF
+        Do Until rs.EOF
             ' Delete mismatched records from tsys_Link_Tables
-            strSQL = "DELETE * FROM tsys_Link_Tables WHERE ([Link_table]=""" & _
-                rst![Link_table] & """);"
+'            strSQL = "DELETE * FROM tsys_Link_Tables WHERE ([LinkTable]=""" & _
+'                rs![Link_table] &
+            strSQL = GetTemplate("d_tsys_link_tables", "linktbl" & PARAM_SEPARATOR & rs![LinkTable])
             DoCmd.SetWarnings False
             DoCmd.RunSQL strSQL
             DoCmd.SetWarnings True
-            rst.MoveNext
+            rs.MoveNext
         Loop
-        rst.Close
+        rs.Close
         ' Throw an error if there are still mismatched records
         If DCount("*", "qsys_Linked_tables_not_in_MSysObjects") > 0 Then
             blnHasError = True
@@ -911,32 +922,35 @@ Public Function VerifyLinkTableInfo() As Boolean
         ' Run the append query to add databases not in tsys_Link_Dbs
         DoCmd.OpenQuery "qsys_Linked_dbs_not_in_tsys_Link_Dbs"
         ' Append missing table records to tsys_Link_Tables
-        strSQL = "INSERT INTO tsys_Link_Tables " & _
-            "( Link_table, Link_db ) " & _
-            "SELECT qsys_Linked_tables_not_in_tsys_Link_Tables.CurrTable, " & _
-            "qsys_Linked_tables_not_in_tsys_Link_Tables.CurrDb " & _
-            "FROM qsys_Linked_tables_not_in_tsys_Link_Tables;"
+'        strSQL = "INSERT INTO tsys_Link_Tables " & _
+'            "( LinkTable, LinkDb ) " & _
+'            "SELECT qsys_Linked_tables_not_in_tsys_Link_Tables.CurrTable, " & _
+'            "qsys_Linked_tables_not_in_tsys_Link_Tables.CurrDb " & _
+'            "FROM qsys_Linked_tables_not_in_tsys_Link_Tables;"
+        strSQL = GetTemplate("i_tsys_link_tables")
         DoCmd.RunSQL strSQL
         DoCmd.SetWarnings True
         ' Update descriptions
-        Set rst = db.OpenRecordset("SELECT * FROM tsys_Link_Tables " & _
-            "WHERE tsys_Link_Tables.Description_text Is Null", dbOpenSnapshot)
-        Do Until rst.EOF
-            strTable = rst![Link_table]
+'        Set rs = db.OpenRecordset("SELECT * FROM tsys_Link_Tables " & _
+'            "WHERE tsys_Link_Tables.Description_text Is Null", dbOpenSnapshot)
+        Set rs = db.OpenRecordset(GetTemplate("s_tsys_link_tables_no_description"), dbOpenSnapshot)
+        Do Until rs.EOF
+            strTable = rs![LinkTable]
             Set tdf = db.tabledefs(strTable)
             ' Update the table description in tsys_Link_Tables
             ' Set default description in case there is none
             strDesc = " - no description - "
             strDesc = tdf.Properties("Description") ' Throws trapped error 3270 if none
-            strSQL = "UPDATE tsys_Link_Tables " & _
-                "SET tsys_Link_Tables.Description_text=""" & strDesc & _
-                """ WHERE (((tsys_Link_Tables.Link_table)=""" & strTable & """));"
+'            strSQL = "UPDATE tsys_Link_Tables " & _
+'                "SET tsys_Link_Tables.DescriptionText=""" & strDesc & _
+'                """ WHERE (((tsys_Link_Tables.LinkTable)=""" & strTable & """));"
+            strSQL = GetTemplate("u_tsys_link_tables_description", "descr" & PARAM_SEPARATOR & strDesc & "|tbl" & PARAM_SEPARATOR & strTable)
             DoCmd.SetWarnings False
             DoCmd.RunSQL strSQL
             DoCmd.SetWarnings True
-            rst.MoveNext
+            rs.MoveNext
         Loop
-        rst.Close
+        rs.Close
         ' Throw an error if there are still mismatched records
         If DCount("*", "qsys_Linked_tables_not_in_tsys_Link_Tables") > 0 Then
             blnHasError = True
@@ -947,18 +961,19 @@ Public Function VerifyLinkTableInfo() As Boolean
     ' Look for linked db records without child table records
     intNRecs = DCount("*", "qsys_Linked_dbs_without_table_records")
     If intNRecs > 0 Then
-        Set rst = db.OpenRecordset("qsys_Linked_dbs_without_table_records", _
+        Set rs = db.OpenRecordset("qsys_Linked_dbs_without_table_records", _
             dbOpenSnapshot)
-        Do Until rst.EOF
+        Do Until rs.EOF
             ' Delete mismatched records from tsys_Link_Dbs
-            strSQL = "DELETE * FROM tsys_Link_Dbs WHERE ([Link_db]=""" & _
-                rst![Link_db] & """);"
+'            strSQL = "DELETE * FROM tsys_Link_Dbs WHERE ([LinkDb]=""" & _
+'                rs![Link_db] & """);"
+            strSQL = GetTemplate("d_tsys_link_tables_by_db", "link_db" & PARAM_SEPARATOR & rs![LinkDb])
             DoCmd.SetWarnings False
             DoCmd.RunSQL strSQL
             DoCmd.SetWarnings True
-            rst.MoveNext
+            rs.MoveNext
         Loop
-        rst.Close
+        rs.Close
         ' Throw an error if there are still mismatched records
         If DCount("*", "qsys_Linked_dbs_without_table_records") > 0 Then
             blnHasError = True
@@ -987,9 +1002,9 @@ Public Function VerifyLinkTableInfo() As Boolean
 Exit_Procedure:
     On Error Resume Next
     DoCmd.SetWarnings True
-    rst.Close
+    rs.Close
     Set tdf = Nothing
-    Set rst = Nothing
+    Set rs = Nothing
     Set db = Nothing
     Exit Function
 
@@ -1015,7 +1030,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - VerifyLinkTableInfo[mod_Linked_Tables])"
     End Select
     Resume Exit_Procedure
-
 End Function
 
 ' =================================
@@ -1032,11 +1046,12 @@ End Function
 '               -------------------------------------------------------------------------
 '               BLC, 4/30/2015 - moved to mod_Linked_Tables from mod_Custom_Functions & renamed VerifyLinks
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 6/5/2016  - adapted to Big Rivers Application, adjust to renamed tsys_Link_Tables fields
 ' =================================
 Public Function VerifyLinks() As Boolean
     On Error GoTo Err_Handler
 
-    Dim rst As dao.Recordset
+    Dim rs As DAO.Recordset
     Dim intNumTables As Integer
     Dim intI As Integer
     Dim varReturn As Variant
@@ -1048,20 +1063,21 @@ Public Function VerifyLinks() As Boolean
     VerifyLinks = False  ' Default unless successful
 
     ' Set the recordset to the system table to show all linked tables except those
-    '   that have recently been deleted (which have names starting with '~'
-    Set rst = CurrentDb.OpenRecordset("SELECT MSysObjects.Name, MSysObjects.Database " & _
-        "FROM MSysObjects " & _
-        "WHERE ((MSysObjects.Name) Not Like '~*') AND ((MSysObjects.Type) In (4,6)) " & _
-        "ORDER BY MSysObjects.Name;", dbOpenSnapshot)
+    '   that have recently been deleted (which have names starting with '~')
+'    Set rs = CurrentDb.OpenRecordset("SELECT MSysObjects.Name, MSysObjects.Database " & _
+'        "FROM MSysObjects " & _
+'        "WHERE ((MSysObjects.Name) Not Like '~*') AND ((MSysObjects.Type) In (4,6)) " & _
+'        "ORDER BY MSysObjects.Name;", dbOpenSnapshot)
+    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_msysobjects_except_deleted"), dbOpenSnapshot)
 
     ' Counts the number of linked tables in the recordset
-    rst.MoveLast    ' Need to do this to make the record count accurate
-    intNumTables = rst.RecordCount
+    rs.MoveLast    ' Need to do this to make the record count accurate
+    intNumTables = rs.RecordCount
 
     ' Initialize the progress popup form
-    strProgForm = "frm_Progress_Meter"
+    strProgForm = "ProgressMeter"
     DoCmd.OpenForm strProgForm
-    Set frm = Forms!frm_Progress_Meter
+    Set frm = Forms!ProgressMeter
     frm.Caption = " Verifying table connections"
     frm!txtPercent = 0
     ' Initialize the message below the progress meter
@@ -1070,11 +1086,11 @@ Public Function VerifyLinks() As Boolean
     '   Initialize the system meter to indicate progress
     varReturn = SysCmd(acSysCmdInitMeter, "Verifying table connections", intNumTables)
     intI = 0
-    rst.MoveFirst
+    rs.MoveFirst
 
     ' Loop through each record and check for bad links
     '   Send to error handler if a bad link is encountered
-    Do Until rst.EOF
+    Do Until rs.EOF
         intI = intI + 1
         ' Update the status bar progress meter
         varReturn = SysCmd(acSysCmdUpdateMeter, intI)
@@ -1085,7 +1101,7 @@ Public Function VerifyLinks() As Boolean
         strProgress = String(Round(19 * intI / intNumTables), "Û")
         frm!tbxProgress = strProgress
         frm.Repaint
-        strLinkTableName = rst![Name]
+        strLinkTableName = rs![Name]
         ' Make sure the linked table opens properly
         If CheckLink(strLinkTableName) = False Then
             ' Unable to open a linked table (not a critical error)
@@ -1094,7 +1110,7 @@ Public Function VerifyLinks() As Boolean
             GoTo Exit_Procedure
         Else
         ' Table link is valid
-            rst.MoveNext
+            rs.MoveNext
         End If
     Loop
 
@@ -1106,8 +1122,8 @@ Exit_Procedure:
     varReturn = SysCmd(acSysCmdRemoveMeter)
     DoCmd.Close acForm, strProgForm, acSaveNo
     Set frm = Nothing
-    rst.Close
-    Set rst = Nothing
+    rs.Close
+    Set rs = Nothing
     Exit Function
 
 Err_Handler:
@@ -1139,7 +1155,7 @@ Public Sub FixLinkedDatabase(ByVal strTableName As String)
     On Error GoTo Err_Handler
 
     Dim strTemp As String, strSQL As String, strCurDb As String, strCurDbPath As String
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
 
     strTemp = ParseConnectionStr(CurrentDb.tabledefs(strTableName).Connect)
     
@@ -1156,9 +1172,10 @@ Public Sub FixLinkedDatabase(ByVal strTableName As String)
             strCurDbPath = rs("CurrPath")
             
             'populate the current database in Link_Dbs
-            strSQL = "UPDATE tsys_Link_Dbs " & _
-                     "SET File_path = '" & strCurDbPath & "' " & _
-                     "WHERE Link_db = '" & strCurDb & "';"
+'            strSQL = "UPDATE tsys_Link_Dbs " & _
+'                     "SET FilePath = '" & strCurDbPath & "' " & _
+'                     "WHERE LinkDb = '" & strCurDb & "';"
+            strSQL = GetTemplate("", "curDbPath" & PARAM_SEPARATOR & strCurDbPath & "|curDb" & PARAM_SEPARATOR & strCurDb)
         
             DoCmd.RunSQL (strSQL)
         End If
@@ -1175,5 +1192,4 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - FixLinkedDatabase[mod_Linked_Tables])"
     End Select
     Resume Exit_Procedure
-
 End Sub

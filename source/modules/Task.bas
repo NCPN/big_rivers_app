@@ -196,8 +196,8 @@ On Error GoTo Err_Handler
                     status As Integer, priority As Integer, requestor As Integer, _
                     Optional completor As Integer
 
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     Set db = CurrentDb

@@ -163,8 +163,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     
@@ -174,10 +174,10 @@ On Error GoTo Err_Handler
 '                & Me.LocationID & "," & Me.StartDate & ");"
 
     strSQL = GetTemplate("i_event_record", _
-                "ProtocolID:" & Me.ProtocolID & "|" _
-                & "SiteID:" & Me.SiteID & "|" _
-                & "LocationID:" & Me.LocationID & "|" _
-                & "StartDate:" & Format(Me.StartDate, "YYYY-mm-dd"))
+                "ProtocolID" & PARAM_SEPARATOR & Me.ProtocolID & "|" _
+                & "SiteID" & PARAM_SEPARATOR & Me.SiteID & "|" _
+                & "LocationID" & PARAM_SEPARATOR & Me.LocationID & "|" _
+                & "StartDate" & PARAM_SEPARATOR & Format(Me.StartDate, "YYYY-mm-dd"))
     
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)

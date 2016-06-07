@@ -528,7 +528,7 @@ End Property
 
 Public Property Let TitleFontColor(Value As Long)
     m_TitleFontColor = Value
-    lblTitle.ForeColor = m_TitleFontColor
+    lblTitle.forecolor = m_TitleFontColor
 End Property
 
 Public Property Get TitleFontColor() As Long
@@ -538,7 +538,7 @@ End Property
 Public Property Let TileHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_TileHeaderColor = Value
-    FormHeader.backColor = m_TileHeaderColor
+    FormHeader.backcolor = m_TileHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen
@@ -554,7 +554,7 @@ End Property
 
 Public Property Let BarColor(Value As Variant)
     m_BarColor = Value
-    Me.lineIndicator.BorderColor = m_BarColor
+    Me.lineIndicator.borderColor = m_BarColor
 End Property
 
 Public Property Get BarColor()
@@ -621,7 +621,7 @@ End Property
 
 Public Property Let TileVisible(Value As Byte)
     m_TileVisible = Value
-    Me.Visible = m_TileVisible
+    Me.visible = m_TileVisible
 End Property
 
 Public Property Get Link1Visible() As Byte
@@ -630,7 +630,7 @@ End Property
 
 Public Property Let Link1Visible(Value As Byte)
     m_Link1Visible = Value
-    Me.lblLink1.Visible = m_Link1Visible
+    Me.lblLink1.visible = m_Link1Visible
 End Property
 
 Public Property Get Link2Visible() As Byte
@@ -639,7 +639,7 @@ End Property
 
 Public Property Let Link2Visible(Value As Byte)
     m_Link2Visible = Value
-    Me.lblLink2.Visible = m_Link2Visible
+    Me.lblLink2.visible = m_Link2Visible
 End Property
 
 Public Property Get Link3Visible() As Byte
@@ -648,7 +648,7 @@ End Property
 
 Public Property Let Link3Visible(Value As Byte)
     m_Link3Visible = Value
-    Me.lblLink3.Visible = m_Link3Visible
+    Me.lblLink3.visible = m_Link3Visible
 End Property
 
 Public Property Get Link4Visible() As Byte
@@ -657,7 +657,7 @@ End Property
 
 Public Property Let Link4Visible(Value As Byte)
     m_Link4Visible = Value
-    Me.lblLink4.Visible = m_Link4Visible
+    Me.lblLink4.visible = m_Link4Visible
 End Property
 
 Public Property Get Link5Visible() As Byte
@@ -666,7 +666,7 @@ End Property
 
 Public Property Let Link5Visible(Value As Byte)
     m_Link5Visible = Value
-    Me.lblLink5.Visible = m_Link5Visible
+    Me.lblLink5.visible = m_Link5Visible
 End Property
 
 Public Property Get Link6Visible() As Byte
@@ -675,7 +675,7 @@ End Property
 
 Public Property Let Link6Visible(Value As Byte)
     m_Link6Visible = Value
-    Me.lblLink6.Visible = m_Link6Visible
+    Me.lblLink6.visible = m_Link6Visible
 End Property
 
 '---------------------
@@ -715,7 +715,7 @@ On Error GoTo Err_Handler
         
             If ctrl.Name = strLink Then
                 ctrl.Caption = Replace(strLink, "lbl", "")
-                ctrl.Visible = True
+                ctrl.visible = True
                 
                 'disable clicks until value set
                 ctrl.Tag = "DISABLED"
@@ -964,7 +964,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink1
@@ -998,7 +998,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink2
@@ -1032,7 +1032,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink3
@@ -1066,7 +1066,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink4
@@ -1100,7 +1100,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink5
@@ -1134,7 +1134,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink6
@@ -1168,7 +1168,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
     
     Dim ctrl As Control
@@ -1185,8 +1185,8 @@ On Error GoTo Err_Handler
             
                 With ctrl
                     'avoid flicker w/ if statement
-                    If Not .ForeColor = lngLtGray2 Then .ForeColor = lngLtGray2
-                    If Not .BackStyle = acTransparent Then .BackStyle = acTransparent
+                    If Not .forecolor = lngLtGray2 Then .forecolor = lngLtGray2
+                    If Not .backstyle = acTransparent Then .backstyle = acTransparent
                 End With
             
             End If
@@ -1320,9 +1320,9 @@ On Error GoTo Err_Handler
     
     With ctrl
         'avoid flicker w/ if statement
-        If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
-        If Not .BackStyle = acNormalSolid Then .BackStyle = acNormalSolid
-        If Not .backColor = LINK_HIGHLIGHT_BKGD Then .backColor = LINK_HIGHLIGHT_BKGD
+        If Not .forecolor = LINK_HIGHLIGHT_TEXT Then .forecolor = LINK_HIGHLIGHT_TEXT
+        If Not .backstyle = acNormalSolid Then .backstyle = acNormalSolid
+        If Not .backcolor = LINK_HIGHLIGHT_BKGD Then .backcolor = LINK_HIGHLIGHT_BKGD
     End With
 
 Exit_Handler:

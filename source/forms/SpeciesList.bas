@@ -393,7 +393,7 @@ On Error GoTo Err_Handler
     Dim ary() As String, CoverType As String, speciestype As String
     Dim RiverSegID As Integer, FieldSeason As Integer
     Dim strSQL As String
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
         
     If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
     

@@ -671,20 +671,20 @@ On Error GoTo Err_Handler
     Title = "Events (Sampling Visits)"
     Directions = "Enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.ForeColor = lngLtBlue
+    lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
+    btnComment.forecolor = lngBlue
     
     'set hover
-    btnComment.HoverColor = lngGreen
-    btnSave.HoverColor = lngGreen
-    btnUndo.HoverColor = lngGreen
+    btnComment.hoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
+    btnUndo.hoverColor = lngGreen
       
     'defaults
-    tbxIcon.ForeColor = lngRed
+    tbxIcon.forecolor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxStartDate.backColor = lngYellow
+    tbxStartDate.backcolor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -924,7 +924,7 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.Visible = True
+    Forms("Main").Form.visible = True
     
 Exit_Handler:
     Exit Sub
@@ -963,7 +963,7 @@ On Error GoTo Err_Handler
         isOK = True
     End If
     
-    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

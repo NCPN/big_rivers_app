@@ -381,8 +381,8 @@ Public Sub Init(LUcode As String)
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     

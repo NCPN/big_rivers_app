@@ -565,7 +565,7 @@ End Property
 
 Public Property Let CommentHeaderColor(Value As Long)
     m_CommentHeaderColor = Value
-    FormHeader.backColor = m_CommentHeaderColor
+    FormHeader.backcolor = m_CommentHeaderColor
 End Property
 
 Public Property Get TitleFontColor() As Long
@@ -574,7 +574,7 @@ End Property
 
 Public Property Let TitleFontColor(Value As Long)
     m_TitleFontColor = Value
-    lblTitle.ForeColor = m_TitleFontColor
+    lblTitle.forecolor = m_TitleFontColor
 End Property
 
 Public Property Get InstructionFontColor() As Long
@@ -583,7 +583,7 @@ End Property
 
 Public Property Let InstructionFontColor(Value As Long)
     m_InstructionFontColor = Value
-    lblInstructions.ForeColor = m_InstructionFontColor
+    lblInstructions.forecolor = m_InstructionFontColor
 End Property
 
 Public Property Get CountLabelFontColor() As Long
@@ -592,7 +592,7 @@ End Property
 
 Public Property Let CountLabelFontColor(Value As Long)
     m_CountLabelFontColor = Value
-    lblCount.ForeColor = m_CountLabelFontColor
+    lblCount.forecolor = m_CountLabelFontColor
 End Property
 
 Public Property Get CurrentCountFontColor() As Long
@@ -601,7 +601,7 @@ End Property
 
 Public Property Let CurrentCountFontColor(Value As Long)
     m_CurrentCountFontColor = Value
-    lblCount.ForeColor = m_CurrentCountFontColor
+    lblCount.forecolor = m_CurrentCountFontColor
 End Property
 
 Public Property Get MaxCountFontColor() As Long
@@ -610,7 +610,7 @@ End Property
 
 Public Property Let MaxCountFontColor(Value As Long)
     m_MaxCountFontColor = Value
-    lblMaxCount.ForeColor = m_MaxCountFontColor
+    lblMaxCount.forecolor = m_MaxCountFontColor
 End Property
 
 Public Property Get RemainingCountFontColor() As Long
@@ -619,7 +619,7 @@ End Property
 
 Public Property Let RemainingCountFontColor(Value As Long)
     m_RemainingCountFontColor = Value
-    lblMaxCount.ForeColor = m_RemainingCountFontColor
+    lblMaxCount.forecolor = m_RemainingCountFontColor
 End Property
 
 Public Property Get AlertBoxBackgroundColor() As Long
@@ -627,9 +627,9 @@ Public Property Get AlertBoxBackgroundColor() As Long
 End Property
 
 Public Property Let AlertBoxBackgroundColor(Value As Long)
-    rctAlert.BackStyle = 1 '1 = Normal, 0 = Transparent
+    rctAlert.backstyle = 1 '1 = Normal, 0 = Transparent
     m_AlertBoxBackgroundColor = Value
-    rctAlert.backColor = m_AlertBoxBackgroundColor
+    rctAlert.backcolor = m_AlertBoxBackgroundColor
 End Property
 
 ' ==== Visibility ====
@@ -639,7 +639,7 @@ End Property
 
 Public Property Let CommentVisible(Value As Byte)
     m_CommentVisible = Value
-    tbxComment.Visible = m_CommentVisible
+    tbxComment.visible = m_CommentVisible
 End Property
 
 Public Property Get InstructionVisible() As Byte
@@ -648,7 +648,7 @@ End Property
 
 Public Property Let InstructionVisible(Value As Byte)
     m_InstructionVisible = Value
-    lblInstructions.Visible = m_InstructionVisible
+    lblInstructions.visible = m_InstructionVisible
 End Property
 
 Public Property Get CountLabelVisible() As Byte
@@ -657,7 +657,7 @@ End Property
 
 Public Property Let CountLabelVisible(Value As Byte)
     m_CountLabelVisible = Value
-    lblCount.Visible = m_CountLabelVisible
+    lblCount.visible = m_CountLabelVisible
 End Property
 
 Public Property Get CurrentCountVisible() As Byte
@@ -666,7 +666,7 @@ End Property
 
 Public Property Let CurrentCountVisible(Value As Byte)
     m_CurrentCountVisible = Value
-    lblCount.Visible = m_CurrentCountVisible
+    lblCount.visible = m_CurrentCountVisible
 End Property
 
 Public Property Get MaxCountVisible() As Byte
@@ -675,7 +675,7 @@ End Property
 
 Public Property Let MaxCountVisible(Value As Byte)
     m_MaxCountVisible = Value
-    lblMaxCount.Visible = m_MaxCountVisible
+    lblMaxCount.visible = m_MaxCountVisible
 End Property
 
 Public Property Get RemainingCountVisible() As Byte
@@ -692,7 +692,7 @@ End Property
 
 Public Property Let AlertBoxVisible(Value As Byte)
     m_AlertBoxVisible = Value
-    Me.rctAlert.Visible = m_AlertBoxVisible
+    Me.rctAlert.visible = m_AlertBoxVisible
 End Property
 
 ' ==== Buttons ====
@@ -726,7 +726,7 @@ End Property
 
 Public Property Let AddButtonForeColor(Value As Long)
     m_AddButtonForeColor = Value
-    btnAdd.ForeColor = m_AddButtonForeColor
+    btnAdd.forecolor = m_AddButtonForeColor
 End Property
 
 Public Property Get AddButtonColor() As Long
@@ -735,7 +735,7 @@ End Property
 
 Public Property Let AddButtonColor(Value As Long)
     m_AddButtonColor = Value
-    btnAdd.backColor = m_AddButtonColor
+    btnAdd.backcolor = m_AddButtonColor
 End Property
 
 Public Property Get CancelButtonForeColor() As Long
@@ -744,7 +744,7 @@ End Property
 
 Public Property Let CancelButtonForeColor(Value As Long)
     m_CancelButtonForeColor = Value
-    btnCancel.ForeColor = m_CancelButtonForeColor
+    btnCancel.forecolor = m_CancelButtonForeColor
 End Property
 
 Public Property Get CancelButtonColor() As Long
@@ -753,7 +753,7 @@ End Property
 
 Public Property Let CancelButtonColor(Value As Long)
     m_CancelButtonColor = Value
-    btnCancel.backColor = m_CancelButtonColor
+    btnCancel.backcolor = m_CancelButtonColor
 End Property
 
 Public Property Get AddButtonVisible() As Byte
@@ -826,11 +826,11 @@ On Error GoTo Err_Handler
     
     Dim ary() As String
     
-    Me.FormHeader.backColor = lngBrown
+    Me.FormHeader.backcolor = lngBrown
     Me.TitleFontColor = lngWhite
     
     Me.lineIndicator.Width = Me.Form.Width
-    Me.lineIndicator.BorderColor = lngLime
+    Me.lineIndicator.borderColor = lngLime
     
     'set comment context
     ary = Split(Nz(Me.OpenArgs, ""), "|")
@@ -843,7 +843,7 @@ On Error GoTo Err_Handler
     Me.Instructions = "Enter your establishment comment."
     Me.CountLabelVisible = False
     Me.CurrentCount = "Characters Remaining:"
-    Me.lblCharacterCount.Visible = False
+    Me.lblCharacterCount.visible = False
     Me.MaxCount = 50
     Me.AlertCount = 10
    

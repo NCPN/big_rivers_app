@@ -35,7 +35,7 @@ Option Explicit
 Public Function IsBlank(arg As Variant) As Boolean
 On Error GoTo Err_Handler
 
-    Select Case VarType(arg)
+    Select Case varType(arg)
         Case vbEmpty
             IsBlank = True
         Case vbNull

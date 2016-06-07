@@ -637,14 +637,14 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.ForeColor = lngDkGreen
-    lblDirections.ForeColor = lngLtBlue
+    tbxIcon.forecolor = lngDkGreen
+    lblDirections.forecolor = lngLtBlue
     'set hover
-    btnEdit.HoverColor = lngGreen
-    btnDelete.HoverColor = lngGreen
+    btnEdit.hoverColor = lngGreen
+    btnDelete.hoverColor = lngGreen
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.ForeColor = lngRed
+    btnDelete.forecolor = lngRed
 
 Exit_Handler:
     Exit Sub

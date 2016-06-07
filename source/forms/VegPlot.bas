@@ -1462,98 +1462,98 @@ On Error GoTo Err_Handler
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.ForeColor = lngLtBlue
+    lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
+    btnComment.forecolor = lngBlue
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblCover.Caption = "Cover" & vbCrLf & "Species"
     lblTagline.Caption = StringFromCodepoint(uRuler)
     'Me.btnTaglines.Caption = StringFromCodepoint(uTag)
     
     'set hover
-    btnComment.HoverColor = lngGreen
-    btnTaglines.HoverColor = lngGreen
-    btnWCC.HoverColor = lngGreen
-    btnURC.HoverColor = lngGreen
-    btnARC.HoverColor = lngGreen
-    btnSave.HoverColor = lngGreen
-    btnUndo.HoverColor = lngGreen
+    btnComment.hoverColor = lngGreen
+    btnTaglines.hoverColor = lngGreen
+    btnWCC.hoverColor = lngGreen
+    btnURC.hoverColor = lngGreen
+    btnARC.hoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
+    btnUndo.hoverColor = lngGreen
       
     'defaults
-    tbxIcon.ForeColor = lngRed
+    tbxIcon.forecolor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxNumber.backColor = lngYellow
-    tbxDistance.backColor = lngYellow
-    tbxModalSedSize.backColor = lngYellow
-    tbxPctFines.backColor = lngYellow
-    tbxPctWater.backColor = lngYellow
-    tbxPctURC.backColor = lngYellow
-    tbxPlotDensity.backColor = lngYellow
+    tbxNumber.backcolor = lngYellow
+    tbxDistance.backcolor = lngYellow
+    tbxModalSedSize.backcolor = lngYellow
+    tbxPctFines.backcolor = lngYellow
+    tbxPctWater.backcolor = lngYellow
+    tbxPctURC.backcolor = lngYellow
+    tbxPlotDensity.backcolor = lngYellow
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
   
     'defaults --> turn off items
-    lblWater.Visible = False
-    tbxPctWater.Visible = False
-    lblURC.Visible = False
-    tbxPctURC.Visible = False
-    lblPlotDensity.Visible = False
-    lblFraction.Visible = False
-    tbxPlotDensity.Visible = False
-    chkNoCanopyVeg.Visible = False
-    lblNoCanopyVeg.Visible = False
-    chkNoIndicatorSpecies.Visible = False
-    lblNoIndicatorSpecies.Visible = False
-    chkNoRootedVeg.Visible = False
-    lblNoRootedVeg.Visible = False
-    chkHasSocialTrails.Visible = False
-    lblHasSocialTrails.Visible = False
-    btnWCC.Visible = False
-    btnURC.Visible = False
-    btnARC.Visible = False
+    lblWater.visible = False
+    tbxPctWater.visible = False
+    lblURC.visible = False
+    tbxPctURC.visible = False
+    lblPlotDensity.visible = False
+    lblFraction.visible = False
+    tbxPlotDensity.visible = False
+    chkNoCanopyVeg.visible = False
+    lblNoCanopyVeg.visible = False
+    chkNoIndicatorSpecies.visible = False
+    lblNoIndicatorSpecies.visible = False
+    chkNoRootedVeg.visible = False
+    lblNoRootedVeg.visible = False
+    chkHasSocialTrails.visible = False
+    lblHasSocialTrails.visible = False
+    btnWCC.visible = False
+    btnURC.visible = False
+    btnARC.visible = False
     
     'adjust UI based on park
     Select Case TempVars("ParkCode")
         Case "BLCA"
-            lblURC.Visible = True
-            tbxPctURC.Visible = True
-            lblPlotDensity.Visible = True
-            lblFraction.Visible = True
-            tbxPlotDensity.Visible = True
-            chkNoCanopyVeg.Visible = True
-            lblNoCanopyVeg.Visible = True
-            chkNoIndicatorSpecies.Visible = True
-            lblNoIndicatorSpecies.Visible = True
-            chkHasSocialTrails.Visible = True
-            lblHasSocialTrails.Visible = True
-            btnWCC.Visible = True
-            btnURC.Visible = True
+            lblURC.visible = True
+            tbxPctURC.visible = True
+            lblPlotDensity.visible = True
+            lblFraction.visible = True
+            tbxPlotDensity.visible = True
+            chkNoCanopyVeg.visible = True
+            lblNoCanopyVeg.visible = True
+            chkNoIndicatorSpecies.visible = True
+            lblNoIndicatorSpecies.visible = True
+            chkHasSocialTrails.visible = True
+            lblHasSocialTrails.visible = True
+            btnWCC.visible = True
+            btnURC.visible = True
         
         Case "CANY"
-            lblURC.Visible = True
-            tbxPctURC.Visible = True
-            lblWater.Visible = True
-            tbxPctWater.Visible = True
-            lblPlotDensity.Visible = True
-            lblFraction.Visible = True
-            tbxPlotDensity.Visible = True
-            tbxPctURC.Visible = True
-            chkNoCanopyVeg.Visible = True
-            lblNoCanopyVeg.Visible = True
-            chkNoRootedVeg.Visible = True
-            lblNoRootedVeg.Visible = True
-            chkHasSocialTrails.Visible = True
-            lblHasSocialTrails.Visible = True
-            btnWCC.Visible = True
+            lblURC.visible = True
+            tbxPctURC.visible = True
+            lblWater.visible = True
+            tbxPctWater.visible = True
+            lblPlotDensity.visible = True
+            lblFraction.visible = True
+            tbxPlotDensity.visible = True
+            tbxPctURC.visible = True
+            chkNoCanopyVeg.visible = True
+            lblNoCanopyVeg.visible = True
+            chkNoRootedVeg.visible = True
+            lblNoRootedVeg.visible = True
+            chkHasSocialTrails.visible = True
+            lblHasSocialTrails.visible = True
+            btnWCC.visible = True
             
         Case "DINO"
-            lblWater.Visible = True
-            tbxPctWater.Visible = True
-            chkNoRootedVeg.Visible = True
-            lblNoRootedVeg.Visible = True
-            btnARC.Visible = True
+            lblWater.visible = True
+            tbxPctWater.visible = True
+            chkNoRootedVeg.visible = True
+            lblNoRootedVeg.visible = True
+            btnARC.visible = True
     End Select
   
 Exit_Handler:
@@ -1898,7 +1898,7 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.Visible = True
+    Forms("Main").Form.visible = True
     
 Exit_Handler:
     Exit Sub
@@ -1937,7 +1937,7 @@ On Error GoTo Err_Handler
         isOK = True
 '    End If
     
-    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

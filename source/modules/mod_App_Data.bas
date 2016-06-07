@@ -39,8 +39,8 @@ Public Sub fillList(frm As Form, ctrlSource As Control, Optional ctrlDest As Con
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strQuery As String, strSQL As String
     
     'output to form or listbox control?
@@ -296,8 +296,8 @@ Public Function getParkState(ParkCode As String) As String
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim State As String, strSQL As String
    
     'handle only appropriate park codes
@@ -394,8 +394,8 @@ Public Function IsUsedTargetArea(TgtAreaID As Integer) As Boolean
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     'default
@@ -443,8 +443,8 @@ Public Sub PopulateTree(TreeType As String)
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     Select Case TreeType
@@ -496,8 +496,8 @@ Public Sub PopulateCombobox(cbx As ComboBox, BoxType As String)
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     
     Select Case BoxType
@@ -553,8 +553,8 @@ End Sub
 Public Function GetProtocolVersion(Optional blnAllVersions As Boolean = False) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String, strWHERE As String
     Dim Count As Integer
     Dim metadata() As Variant
@@ -569,7 +569,7 @@ On Error GoTo Err_Handler
     'generate SQL
 '    strSQL = "SELECT ProtocolName, Version, EffectiveDate, RetireDate, LastModified FROM Protocol " _
 '                & strWHERE & ";"
-    strSQL = GetTemplate("s_protocol_info", "strWHERE:" & strWHERE)
+    strSQL = GetTemplate("s_protocol_info", "strWHERE" & PARAM_SEPARATOR & strWHERE)
     
     'fetch data
     Set db = CurrentDb
@@ -623,8 +623,8 @@ End Function
 Public Function GetSOPMetadata(area As String) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
         
     'generate SQL
@@ -638,7 +638,7 @@ On Error GoTo Err_Handler
     ' c.f.  Hans Up, May 17, 2011 & discussion
     '       http://stackoverflow.com/questions/6037290/use-of-like-works-in-ms-access-but-not-vba
     '---------------------------------------------------------------------
-    strSQL = GetTemplate("s_sop_metadata", "area:" & LCase(area))
+    strSQL = GetTemplate("s_sop_metadata", "area" & PARAM_SEPARATOR & LCase(area))
     
     'fetch data
     Set db = CurrentDb
@@ -676,8 +676,8 @@ End Function
 Public Function GetRiverSegments(ParkCode As String) As Variant
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String
     Dim Count As Integer
     Dim segments() As Variant
@@ -692,7 +692,7 @@ On Error GoTo Err_Handler
 '                & "LEFT JOIN Park ON Park.ID = River.Park_ID " _
 '                & "WHERE ParkCode LIKE '" & ParkCode & "';"
 
-    strSQL = GetTemplate("s_get_river_segments", "ParkCode:" & ParkCode)
+    strSQL = GetTemplate("s_get_river_segments", "ParkCode" & PARAM_SEPARATOR & ParkCode)
 
             
     'fetch data

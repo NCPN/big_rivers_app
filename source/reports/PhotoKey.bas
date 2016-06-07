@@ -905,10 +905,10 @@ On Error GoTo Err_Handler
             Select Case Left(ctrl.Name, 6)
                 Case "lblTra" ' "lblTransect"
                     .Left = LeftPos1
-                    .Visible = blnShow
+                    .visible = blnShow
                 Case "lblFea" ' "lblFeature"
                     .Left = LeftPos2
-                    .Visible = blnShow
+                    .visible = blnShow
                 Case "lblOve" ' "lblOverview"
                     .Left = LeftPos3
                     .Width = ShowWidth

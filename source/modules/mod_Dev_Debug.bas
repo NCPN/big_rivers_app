@@ -45,8 +45,8 @@ Option Explicit
 Public Sub ChangeMSysConnection(ByVal strTable As String, ByVal strConn As String)
 On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim tdf As dao.TableDef
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
 
     Set db = CurrentDb()
     Set tdf = db.tabledefs(strTable) 'TableName)
@@ -89,8 +89,8 @@ End Sub
 Public Sub ChangeMSysDb(ByVal strTable As String, ByVal strDbPath As String)
 On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim tdf As dao.TableDef
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
 
     Set db = CurrentDb()
     Set tdf = db.tabledefs(strTable)
@@ -177,7 +177,7 @@ End Sub
 ' ---------------------------------
 Public Sub SetDebugDbPaths(ByVal strDbPath As String)
 On Error GoTo Err_Handler
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
     Dim strDb As String, strTable As String
     
     'change the tsys_Link_Files & tsys_Link_Dbs tables
@@ -777,7 +777,9 @@ Public Sub doit()
 ' Mark K, 10/6/2011
 ' http://www.access-programmers.co.uk/forums/showthread.php?t=216531
 
-    GetADCommonName
+'    GetADCommonName
+
+GetTemplates
 
 End Sub
 

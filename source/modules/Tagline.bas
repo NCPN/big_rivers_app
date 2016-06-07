@@ -200,30 +200,30 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     
     If Me.ID > 0 Then
         'update tagline:
         strSQL = GetTemplate("u_tagline_record", _
-                    "LineDistSource:" & Me.LineDistSource _
-                    & "|LineDistSourceID:" & Me.LineDistSourceID _
-                    & "|LineDistType:" & Me.LineDistType _
-                    & "|LineDistance:" & Me.LineDistance _
-                    & "|HeightType:" & Me.HeightType _
-                    & "|Height:" & Me.Height _
-                    & "|ID:" & Me.ID)
+                    "LineDistSource" & PARAM_SEPARATOR & Me.LineDistSource _
+                    & "|LineDistSourceID" & PARAM_SEPARATOR & Me.LineDistSourceID _
+                    & "|LineDistType" & PARAM_SEPARATOR & Me.LineDistType _
+                    & "|LineDistance" & PARAM_SEPARATOR & Me.LineDistance _
+                    & "|HeightType" & PARAM_SEPARATOR & Me.HeightType _
+                    & "|Height" & PARAM_SEPARATOR & Me.Height _
+                    & "|ID" & PARAM_SEPARATOR & Me.ID)
     Else
         'insert tagline
         strSQL = GetTemplate("i_tagline_record", _
-                    "LineDistSource:" & Me.LineDistSource _
-                    & "|LineDistSourceID:" & Me.LineDistSourceID _
-                    & "|LineDistType:" & Me.LineDistType _
-                    & "|LineDistance:" & Me.LineDistance _
-                    & "|HeightType:" & Me.HeightType _
-                    & "|Height:" & Me.Height)
+                    "LineDistSource" & PARAM_SEPARATOR & Me.LineDistSource _
+                    & "|LineDistSourceID" & PARAM_SEPARATOR & Me.LineDistSourceID _
+                    & "|LineDistType" & PARAM_SEPARATOR & Me.LineDistType _
+                    & "|LineDistance" & PARAM_SEPARATOR & Me.LineDistance _
+                    & "|HeightType" & PARAM_SEPARATOR & Me.HeightType _
+                    & "|Height" & PARAM_SEPARATOR & Me.Height)
     End If
     
     db.Execute strSQL, dbFailOnError

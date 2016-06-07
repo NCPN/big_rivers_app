@@ -641,10 +641,10 @@ On Error GoTo Err_Handler
             bgcolor3 = lngWhite
         End If
 
-        .btnLevel0.backColor = bgcolor0
-        .btnLevel1.backColor = bgcolor1
-        .btnLevel2.backColor = bgcolor2
-        .btnLevel3.backColor = bgcolor3
+        .btnLevel0.backcolor = bgcolor0
+        .btnLevel1.backcolor = bgcolor1
+        .btnLevel2.backcolor = bgcolor2
+        .btnLevel3.backcolor = bgcolor3
 
     End With
     

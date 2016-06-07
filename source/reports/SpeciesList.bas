@@ -19,8 +19,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =120
-    Right =25395
-    Bottom =11790
+    Right =18870
+    Bottom =11010
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -835,7 +835,7 @@ On Error GoTo Err_Handler
 '            & "WHERE Master_Family = 'Unknown'" _
 '            & "ORDER BY SeqNum ASC;"
 
-    strSQL = GetTemplate("s_vegwalk", "strFamily:" & strFamily & "|strSpecies:" & strSpecies)
+    strSQL = GetTemplate("s_vegwalk", "strFamily" & PARAM_SEPARATOR & strFamily & "|strSpecies" & PARAM_SEPARATOR & strSpecies)
     
     Me.RecordSource = strSQL
     Debug.Print strSQL
@@ -843,7 +843,7 @@ On Error GoTo Err_Handler
     tbxSpecies.ControlSource = "Species"
     
     'hide modal Main form
-    Forms("Main").Visible = False
+    Forms("Main").visible = False
     
 Exit_Handler:
     Exit Sub
@@ -938,7 +938,7 @@ Private Sub Report_Close()
 On Error GoTo Err_Handler
 
     'unhide modal Main form
-    Forms("Main").Visible = True
+    Forms("Main").visible = True
 
 Exit_Handler:
     Exit Sub

@@ -44,7 +44,7 @@ Public Event InvalidCode(Value As String)
 ' Properties
 '---------------------
 Public Property Let IsSeedling(Value As Boolean)
-    If VarType(Value) = vbBoolean Then
+    If varType(Value) = vbBoolean Then
         m_IsSeedling = Value
     Else
         RaiseEvent InvalidIsSeedling(Value)
@@ -443,8 +443,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     

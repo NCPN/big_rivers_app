@@ -1935,7 +1935,7 @@ Private Sub Report_Close()
 On Error GoTo Err_Handler
 
     'unhide modal Main form
-    Forms("Main").Visible = True
+    Forms("Main").visible = True
 
 Exit_Handler:
     Exit Sub

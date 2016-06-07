@@ -1,0 +1,21 @@
+CREATE TABLE [tsys_App_Defaults] (
+  [ID] AUTOINCREMENT,
+  [Project] VARCHAR (50),
+  [Release_ID] LONG ,
+  [Data_timeframe] VARCHAR (30),
+  [UserName] VARCHAR (50),
+  [Park] VARCHAR (50),
+  [BackupPromptOnStartup] BYTE ,
+  [BackupPromptOnExit] BYTE ,
+  [CompactBEOnExit] BYTE ,
+  [VerifyLinksOnStartup] BYTE ,
+  [xBackup_prompt_startup] VARCHAR ,
+  [xBackup_prompt_exit] VARCHAR ,
+  [Compact_be_exit] VARCHAR ,
+  [Verify_links_startup] VARCHAR ,
+  [Web_address] VARCHAR (200),
+  [Contact_name] VARCHAR (50),
+  [Contact_org] VARCHAR (50),
+  [Contact_phone] VARCHAR (50),
+  [Contact_email] VARCHAR (50)
+)

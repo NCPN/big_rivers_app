@@ -342,7 +342,7 @@ Public Event InvalidColor(Value As Long)
 Public Property Let Level0Color(Value As Long)
     If Len(Value) > 0 Then
         m_Level0Color = Value
-        Me.btnLevel0.backColor = Value
+        Me.btnLevel0.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -355,7 +355,7 @@ End Property
 Public Property Let Level1Color(Value As Long)
     If Len(Value) > 1 Then
         m_Level1Color = Value
-        Me.btnLevel1.backColor = Value
+        Me.btnLevel1.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -368,7 +368,7 @@ End Property
 Public Property Let Level2Color(Value As Long)
     If Len(Value) > 2 Then
         m_Level2Color = Value
-        Me.btnLevel2.backColor = Value
+        Me.btnLevel2.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -381,7 +381,7 @@ End Property
 Public Property Let Level3Color(Value As Long)
     If Len(Value) > 3 Then
         m_Level3Color = Value
-        Me.btnLevel3.backColor = Value
+        Me.btnLevel3.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -394,7 +394,7 @@ End Property
 Public Property Let Level0BgdColor(Value As Long)
     If Len(Value) > 0 Then
         m_Level0BgdColor = Value
-        Me.btnLevel0.backColor = Value
+        Me.btnLevel0.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -407,7 +407,7 @@ End Property
 Public Property Let Level1BgdColor(Value As Long)
     If Len(Value) > 1 Then
         m_Level1BgdColor = Value
-        Me.btnLevel1.backColor = Value
+        Me.btnLevel1.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -420,7 +420,7 @@ End Property
 Public Property Let Level2BgdColor(Value As Long)
     If Len(Value) > 2 Then
         m_Level2BgdColor = Value
-        Me.btnLevel2.backColor = Value
+        Me.btnLevel2.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -433,7 +433,7 @@ End Property
 Public Property Let Level3BgdColor(Value As Long)
     If Len(Value) > 3 Then
         m_Level3BgdColor = Value
-        Me.btnLevel3.backColor = Value
+        Me.btnLevel3.backcolor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -447,7 +447,7 @@ End Property
 Public Property Let Level0HoverColor(Value As Long)
     If Len(Value) > 0 Then
         m_Level0HoverColor = Value
-        Me.btnLevel0.HoverForeColor = Value
+        Me.btnLevel0.hoverForeColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -460,7 +460,7 @@ End Property
 Public Property Let Level1HoverColor(Value As Long)
     If Len(Value) > 1 Then
         m_Level1HoverColor = Value
-        Me.btnLevel1.HoverForeColor = Value
+        Me.btnLevel1.hoverForeColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -473,7 +473,7 @@ End Property
 Public Property Let Level2HoverColor(Value As Long)
     If Len(Value) > 2 Then
         m_Level2HoverColor = Value
-        Me.btnLevel2.HoverForeColor = Value
+        Me.btnLevel2.hoverForeColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -486,7 +486,7 @@ End Property
 Public Property Let Level3HoverColor(Value As Long)
     If Len(Value) > 3 Then
         m_Level3HoverColor = Value
-        Me.btnLevel3.HoverForeColor = Value
+        Me.btnLevel3.hoverForeColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -499,7 +499,7 @@ End Property
 Public Property Let Level0HoverBgdColor(Value As Long)
     If Len(Value) > 0 Then
         m_Level0HoverBgdColor = Value
-        Me.btnLevel0.HoverColor = Value
+        Me.btnLevel0.hoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -512,7 +512,7 @@ End Property
 Public Property Let Level1HoverBgdColor(Value As Long)
     If Len(Value) > 1 Then
         m_Level1HoverBgdColor = Value
-        Me.btnLevel1.HoverColor = Value
+        Me.btnLevel1.hoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -525,7 +525,7 @@ End Property
 Public Property Let Level2HoverBgdColor(Value As Long)
     If Len(Value) > 2 Then
         m_Level2HoverBgdColor = Value
-        Me.btnLevel2.HoverColor = Value
+        Me.btnLevel2.hoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -538,7 +538,7 @@ End Property
 Public Property Let Level3HoverBgdColor(Value As Long)
     If Len(Value) > 3 Then
         m_Level3HoverBgdColor = Value
-        Me.btnLevel3.HoverColor = Value
+        Me.btnLevel3.hoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -813,7 +813,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -845,7 +845,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -877,7 +877,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -909,7 +909,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -943,7 +943,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then

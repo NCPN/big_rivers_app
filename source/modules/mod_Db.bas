@@ -4,19 +4,23 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 5/26/2015 - 1.01 - added mod_db_Templates subs/functions - qryExists
 '               BLC, 5/26/2016 - 1.02 - added VirtualDAORecordset()
+'               BLC, 6/6/2016  - 1.03 - added error handling for duplicate templates, renamed global to g_AppTemplates
+'                                       also added SQL sanitization (escape/replace special chars)
 ' =================================
 
 ' ---------------------------------
 ' Declarations
 ' ---------------------------------
-Global AppTemplates As Scripting.Dictionary
+'   AppTemplates global dictionary --> defined in std template [mod_Db]
+Public g_AppTemplates As Scripting.Dictionary
+Public Const PARAM_SEPARATOR As String = ">>"
 
 ' ---------------------------------
 ' Types & Type Descriptions
@@ -52,12 +56,13 @@ Global AppTemplates As Scripting.Dictionary
 '               BLC, 4/30/2015  - moved to mod_Db framework module from mod_Custom_Functions
 '                                 added check for BOF & EOF to avoid Error #3021 no current record on rs.MoveLast when no records exist
 '               BLC, 5/18/2015 - renamed & removed fxn prefix
+'               BLC, 6/5/2016  - adapted for Big Rivers App naming revisions (removed field underscores)
 ' =================================
 Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
     On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim intNumUpdates As Integer
     Dim varReturn As Variant
     Dim intI As Integer
@@ -65,7 +70,7 @@ Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
     
     Set db = CurrentDb
     Set rs = db.OpenRecordset("SELECT tsys_BE_Updates.* FROM tsys_BE_Updates " & _
-        "ORDER BY tsys_BE_Updates.Update_ID;", dbOpenDynaset)
+        "ORDER BY tsys_BE_Updates.ID;", dbOpenDynaset)
 
     ' Check for BOF & EOF to avoid Error # 3021 No current record
     If Not rs.BOF And rs.EOF Then
@@ -86,14 +91,14 @@ Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
         Do Until rs.EOF
             intI = intI + 1
             varReturn = SysCmd(acSysCmdUpdateMeter, intI)
-            If bRunAll = True Or rs![Is_done] = False Then
+            If bRunAll = True Or rs![IsDone] = False Then
                 DoCmd.SetWarnings False
-                strSQL = rs![SQL_statement]
+                strSQL = rs![SQLStatement]
                 DoCmd.RunSQL strSQL
                 With rs
                     .Edit
-                    ![Run_date] = Now()
-                    ![Is_done] = True
+                    ![RunDate] = Now()
+                    ![IsDone] = True
                     .Update
                 End With
             End If
@@ -142,12 +147,12 @@ End Function
 '   BLC - 2/7/2015  - initial version
 '   BLC - 5/13/2015 - moved from mod_App_Data to mod_Db
 ' ---------------------------------
-Public Function MergeRecordsets(rsA As dao.Recordset, rsB As dao.Recordset) As dao.Recordset
+Public Function MergeRecordsets(rsA As DAO.Recordset, rsB As DAO.Recordset) As DAO.Recordset
 
 On Error GoTo Err_Handler
     
-    Dim db As dao.Database
-    Dim rsOut As dao.Recordset
+    Dim db As DAO.Database
+    Dim rsOut As DAO.Recordset
     Dim iCount As Integer
     
     'handle empty recordsets
@@ -310,8 +315,8 @@ End Function
 Function QueryExists(strQueryName As String) As Boolean
 On Error GoTo Err_Handler
 
-    Dim db As dao.Database
-    Dim tdf As dao.QueryDef
+    Dim db As DAO.Database
+    Dim tdf As DAO.QueryDef
     
     On Error GoTo Err_Handler
     Set db = CurrentDb
@@ -348,7 +353,7 @@ End Function
 ' ---------------------------------
 Public Function qryExists(strQueryName As String) As Boolean
 
-    Dim qdf As dao.QueryDef
+    Dim qdf As DAO.QueryDef
     
     'default
     qryExists = False
@@ -472,7 +477,7 @@ End Function
 Public Function HasRecords(ByVal strName As String) As Boolean
     On Error GoTo Err_Handler
     
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
     Dim blnHasRecords As Boolean
     
     blnHasRecords = False
@@ -513,25 +518,31 @@ End Function
 ' Assumptions:  -
 ' Throws:       none
 ' References:   tsys_Db_templates, Microsoft Scripting Runtime (dictionary object)
+'   HansUp, June 27, 2013
+'   http://stackoverflow.com/questions/17328092/how-to-display-access-query-results-without-having-to-create-temporary-query
 ' Source/date:  Bonnie Campbell, June 2014
 ' Revisions:    BLC, 6/16/2014 - initial version
 '               BLC, 5/13/2016 - shifted from mod_Db_Templates to mod_Db & adjusted to match tsys_Db_Templates
 '               BLC, 5/19/2016 - revised documentation & renamed GetTemplates() vs. GetSQLTemplates() since tsys_Db_Templates
 '                                can accommodate more than SQL
+'               BLC, 6/5/2016  - revised to set strSyntax to "T-SQL" to avoid error due to multiple items of same name in dict
+'               BLC, 6/6/2016  - added error handling for duplicate templates, renamed global to g_AppTemplates
 ' ---------------------------------
 Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As String = "")
 
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     Dim strSQL As String, strSQLWhere As String, key As String
     Dim Value As Variant
     
     'handle default
     strSQLWhere = " WHERE IsSupported > 0"
     
-    If Len(strSyntax) > 0 Then
-        strSQLWhere = " AND LCase(Syntax) = LCase(" & strSyntax & " )"
+    If Len(strSyntax) = 0 Then
+        strSyntax = "T-SQL"
     End If
+    
+    strSQLWhere = strSQLWhere & " AND LCase(Syntax) = LCase('" & strSyntax & "')"
     
     'sql -> ID, Version, IsSupported, Context, Syntax, TemplateName, Params, Template, Remarks,
     '       EffectiveDate, RetireDate, CreateDate, CreatedBy_ID, LastModified, LastModifiedBy_ID
@@ -577,7 +588,9 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As St
             If key = "Params" Then
                 'create new dictionary for param name & data type
                 Set dictParam = New Scripting.Dictionary
-                
+
+Debug.Print rs.Fields(ary(i))
+
                 'separate parameters
                 ary2 = Split(Nz(rs.Fields(ary(i)), ":"), "|")
                 
@@ -601,10 +614,18 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As St
             
             'add key if it isn't already there
             If Not dict.Exists(key) Then
+                If IsNull(Value) Then MsgBox key, vbOKCancel, "is NULL"
+                'Debug.Print Nz(Value, key & "-NULL")
                 dict.Add key, Value
             End If
             
         Next
+        
+'        Debug.Print dict("TemplateName")
+        
+'        If dictTemplates.Exists("TemplateName") Then
+'            Debug.Print "dict: " & dict("TemplateName")
+'        End If
         
         'add template dictionary to dictionary of templates
         dictTemplates.Add dict("TemplateName"), dict
@@ -613,7 +634,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As St
     Loop
     
     'load global AppTemplates As Scripting.Dictionary of templates
-    Set AppTemplates = dictTemplates
+    Set g_AppTemplates = dictTemplates
     
 Exit_Handler:
     'cleanup
@@ -623,9 +644,39 @@ Exit_Handler:
 
 Err_Handler:
     Select Case Err.Number
+      Case 457  'Duplicate template -- tsys_Db_Templates finds more than one w/ same name
+        MsgBox "A duplicate template was found." & vbCrLf & vbCrLf & _
+            "When you click 'OK' a query will run to identify the problem template." & vbCrLf & vbCrLf & _
+            "You can close the query after it runs (save it if you like)." & vbCrLf & vbCrLf & _
+            "Please contact your data manager to resolve this issue." & vbCrLf & vbCrLf & _
+            "Error #" & Err.Number & " - GetTemplates[mod_Db]:" & vbCrLf & _
+            Err.Description, vbExclamation, "Duplicate Db Template Found! [tsys_Db_Templates]"
+
+            Dim strErrorSQL As String
+            strErrorSQL = "SELECT TemplateName, Count(TemplateName) AS NumberOfDupes " & _
+                    "FROM tsys_Db_Templates " & _
+                    "GROUP By TemplateName " & _
+                    "HAVING Count(TemplateName) > 1;"
+
+            Dim qdf As DAO.QueryDef
+            
+            If Not QueryExists("UsysTempQuery") Then
+                Set qdf = CurrentDb.CreateQueryDef("UsysTempQuery")
+            Else
+                Set qdf = CurrentDb.QueryDefs("UsysTempQuery")
+            End If
+            
+            qdf.sql = strErrorSQL
+            
+            DoCmd.OpenQuery "USysTempQuery", acViewNormal
+
+            '********** FATAL ERROR ****************
+            'terminate *ALL* VBA code to prevent other popups
+            'End
+            
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - GetSQLTemplates[mod_Db])"
+            "Error encountered (#" & Err.Number & " - GetTemplates[mod_Db])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -639,10 +690,14 @@ End Sub
 '               most templates are SQL strings, so the SQL string (template) field of the given
 '               template name is retrieved
 ' Assumptions:  tsys_Db_templates correctly list parameter:parameter type values & AppTemplates contain them
+'               params do not include PARAM_SEPARATOR w/in them as this is considered a separator
 ' Throws:       none
 ' References:   tsys_Db_templates, Microsoft Scripting Runtime (dictionary object)
+'   HansUp, June 27, 2013
+'   http://stackoverflow.com/questions/17328092/how-to-display-access-query-results-without-having-to-create-temporary-query
 ' Source/date:  Bonnie Campbell, May 2016
 ' Revisions:    BLC, 5/19/2016 - initial version
+'               BLC, 6/6/2016  - added error handling for duplicate templates, renamed global to g_AppTemplates
 ' ---------------------------------
 Public Function GetTemplate(strTemplate As String, Optional params As String = "") As String
 On Error GoTo Err_Handler
@@ -650,12 +705,16 @@ On Error GoTo Err_Handler
     Dim aryParams() As Variant
     Dim ary() As String, ary2() As String
     Dim i As Integer
-    Dim template As String, swap As String
+    Dim template As String, swap As String, param As String
+Debug.Print strTemplate
 
+If strTemplate = "s_tsys_Link_Files_new_db" Then
+    MsgBox "Stop!", vbExclamation
+End If
     'initialize AppTemplates if not populated
-    If AppTemplates Is Nothing Then GetTemplates
+    If g_AppTemplates Is Nothing Then GetTemplates
 
-    template = AppTemplates(strTemplate).item("Template")
+    template = g_AppTemplates(strTemplate).item("Template")
     
     If Len(params) > 0 Then
     
@@ -670,14 +729,17 @@ On Error GoTo Err_Handler
         For i = 0 To UBound(ary)
             
             'split name:value pair --> ary2(0) = name, ary2(1) = value
-            ary2 = Split(ary(i), ":")
+            ary2 = Split(ary(i), PARAM_SEPARATOR)
                         
             'compare datatype to aryParams value
-            If IsTypeMatch(ary2(1), AppTemplates(strTemplate).item("Params").item(ary2(0))) Then
+            If IsTypeMatch(ary2(1), g_AppTemplates(strTemplate).item("Params").item(ary2(0))) Then
                 
                 'prepare replaced value
                 swap = "[" & ary2(0) & "]"
-
+                
+                'SQL-ize parameter values to avoid SQL syntax errors
+                param = SQLencode(ary2(1))
+Debug.Print param
                 'swap out the placeholder in the template
                 template = Replace(template, swap, ary2(1))
                 
@@ -696,6 +758,36 @@ Exit_Handler:
 
 Err_Handler:
     Select Case Err.Number
+      Case 457  'Duplicate template -- tsys_Db_Templates finds more than one w/ same name
+        MsgBox "A duplicate template was found." & vbCrLf & vbCrLf & _
+            "When you click 'OK' a query will run to identify the problem template." & vbCrLf & vbCrLf & _
+            "You can close the query after it runs (save it if you like)." & vbCrLf & vbCrLf & _
+            "Please contact your data manager to resolve this issue." & vbCrLf & vbCrLf & _
+            "Error #" & Err.Number & " - GetTemplate[mod_Db]:" & vbCrLf & _
+            Err.Description, vbExclamation, "Duplicate Db Template Found! [tsys_Db_Templates]"
+
+            Dim strErrorSQL As String
+            strErrorSQL = "SELECT TemplateName, Count(TemplateName) AS NumberOfDupes " & _
+                    "FROM tsys_Db_Templates " & _
+                    "GROUP By TemplateName " & _
+                    "HAVING Count(TemplateName) > 1;"
+
+            Dim qdf As DAO.QueryDef
+            
+            If Not QueryExists("UsysTempQuery") Then
+                Set qdf = CurrentDb.CreateQueryDef("UsysTempQuery")
+            Else
+                Set qdf = CurrentDb.QueryDefs("UsysTempQuery")
+            End If
+            
+            qdf.sql = strErrorSQL
+            
+            DoCmd.OpenQuery "USysTempQuery", acViewNormal
+
+            '********** FATAL ERROR ****************
+            'terminate *ALL* VBA code to prevent other popups
+            'End
+        
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetTemplate[mod_Db])"
@@ -722,7 +814,7 @@ Public Function VirtualDAORecordset(iCount As Integer, Optional strTable As Stri
 On Error GoTo Err_Handler
 
     Dim Counter As Long
-    Dim rs As dao.Recordset
+    Dim rs As DAO.Recordset
     Dim i As Integer
 
     With DBEngine
@@ -762,6 +854,61 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - VirtualDAORecordset[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     SQLencode
+' Description:  sanitizes SQL to remove special characters
+' Parameters:   strSQL - SQL to sanitize (string)
+' Returns:      strSanitized - sanitized SQL (string)
+' Assumptions:
+' Throws:       none
+' References:
+'   Susan Harkins, March 2, 2011
+'   http://www.techrepublic.com/blog/microsoft-office/5-rules-for-embedding-strings-in-vba-code/
+' Source/date:  Bonnie Campbell, June 2016
+' Revisions:    BLC, 6/6/2016 - initial version
+' ---------------------------------
+Public Function SQLencode(strSQL)
+On Error GoTo Err_Handler
+    
+    Dim aryReplace(1, 2) As String
+    Dim i As Integer
+    Dim strNewSQL As String
+    
+    'default
+    strNewSQL = ""
+    
+    'exit if no description
+    If Len(strSQL) = 0 Then GoTo Exit_Handler
+    
+    '--------------------------
+    ' replacement characters
+    '--------------------------
+    '   "   Chr(34)
+    '   '   Chr(39)
+    '--------------------------
+    aryReplace(0, 0) = """"
+    aryReplace(0, 1) = 34
+    aryReplace(1, 0) = "'"
+    aryReplace(1, 1) = 39
+    
+    For i = 0 To UBound(aryReplace, 1)
+        strNewSQL = Replace(strSQL, aryReplace(i, 0), "Chr(" & aryReplace(i, 1) & ")")
+    Next
+
+    SQLencode = strNewSQL
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SQLencode[mod_Db])"
     End Select
     Resume Exit_Handler
 End Function

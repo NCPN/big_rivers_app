@@ -180,6 +180,7 @@ End Sub
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/28/2015 - added MAIN_APP_FORM open check to prevent Error #2450 where
 '                                frm_Tgt_List_Tool is not found on exit from frm_Connect_Dbs
+'               BLC, 6/5/2016 - removed underscores from field names
 ' =================================
 Public Function AppSetup()
     On Error GoTo Err_Handler
@@ -207,8 +208,8 @@ Public Function AppSetup()
     If SysTablesExist("app") = False Then GoTo Exit_Procedure
 
     ' Confirm that the application version is supported
-    Select Case DLookup("Is_supported", "tsys_App_Releases", _
-            "[Release_ID] = """ & strReleaseID & """")
+    Select Case DLookup("IsSupported", "tsys_App_Releases", _
+            "[ID] = """ & strReleaseID & """")
       Case 0    ' Application not supported
         If MsgBox("This version of the front-end application is out of date ... " _
             & vbCrLf & " ... a more recent version is available!" _
@@ -250,9 +251,10 @@ Public Function AppSetup()
     strRelease = Left(strReleaseID, 8) & " / " & TempVars.item("UserAccessLevel")
     If IsODBC("tsys_Logins") Then
         ' Use a pass-through query to test the connection for write privileges
-        strSQL = "INSERT INTO dbo.tsys_Logins " & _
-            "SELECT GETDATE() AS Time_stamp, '" & strUser & "' AS User_name, '" & _
-            strRelease & "' AS Action_taken"
+'        strSQL = "INSERT INTO dbo.tsys_Logins " & _
+'            "SELECT GETDATE() AS Time_stamp, '" & strUser & "' AS User_name, '" & _
+'            strRelease & "' AS Action_taken"
+        strSQL = GetTemplate("i_tsys_logins_odbc", "Username" & PARAM_SEPARATOR & strUser & "|action" & PARAM_SEPARATOR & strRelease)
         TempVars.item("WritePermission") = TestODBCConnection("tsys_Logins", , strSQL, False)
         ' Notify the user if their back-end privileges are insufficient to use the application
         If TempVars.item("WritePermission") = False And TempVars.item("UserAccessLevel") <> "read only" Then
@@ -263,8 +265,9 @@ Public Function AppSetup()
         End If
     Else
         TempVars.item("WritePermission") = True
-        strSQL = "INSERT INTO tsys_Logins ( User_name, Action_taken ) SELECT '" _
-            & strUser & "' AS User, """ & strRelease & """ AS Action;"
+'        strSQL = "INSERT INTO tsys_Logins ( UserName, ActionTaken ) SELECT '" _
+'            & strUser & "' AS User, """ & strRelease & """ AS Action;"
+        strSQL = GetTemplate("i_tsys_logins", "username" & PARAM_SEPARATOR & strUser & "|action" & PARAM_SEPARATOR & strRelease)
         DoCmd.SetWarnings False
         DoCmd.RunSQL strSQL     ' Will throw a trapped error if no write permissions
         DoCmd.SetWarnings True
@@ -273,23 +276,23 @@ Public Function AppSetup()
     ' If the current front-end release is not listed in the back-end file, run fxn to update
     '   Note: Needed where there are one or more back-end copies at remote locations that
     '   cannot be updated with new release information by the developer
-    If DCount("*", "tsys_App_Releases", "[Release_ID]=""" & strReleaseID & """") = 0 Then
+    If DCount("*", "tsys_App_Releases", "[ID]=""" & strReleaseID & """") = 0 Then
         If TempVars.item("WritePermission") Then BEUpdates (True)
         ' Check once more to make sure that the release was added properly - if not notify
-        If DCount("*", "tsys_App_Releases", "[Release_ID]=""" & strReleaseID & """") = 0 Then
+        If DCount("*", "tsys_App_Releases", "[ID]=""" & strReleaseID & """") = 0 Then
             MsgBox "Unable to determine the application version." & vbCrLf & vbCrLf & _
                 "Please notify the database administrator.", , "Application error"
             ' Skip the code to set the caption
             GoTo Update_Settings
         End If
     ' Or run updates only on new update lines (avoids issuing a new version for minor updates)
-    ElseIf DCount("*", "tsys_BE_Updates", "[Is_done]=False") > 0 Then
+    ElseIf DCount("*", "tsys_BE_Updates", "[IsDone]=0") > 0 Then
         If TempVars.item("WritePermission") Then BEUpdates (False)
     End If
 
     ' Set the table-driven caption of the switchboard
-    strCaption = DLookup("[Database_title]", "tsys_App_Releases", "[Release_ID] = '" _
-        & frm!Release_ID & "'")
+    strCaption = DLookup("[Database_title]", "tsys_App_Releases", "[ID] = '" _
+        & frm!ReleaseID & "'")
     frm.Caption = strCaption
 
 Exit_Procedure:
@@ -307,7 +310,7 @@ Update_Settings:
         If TempVars.item("HasAccessBE") Then DoCmd.OpenForm "frm_Lock_BE", , , , , acHidden
     
         ' If there is an Access back-end, make the backups button visible
-        frm!fsub_DbAdmin.Form!cmdBackup.Visible = TempVars.item("HasAccessBE")
+        frm!fsub_DbAdmin.Form!cmdBackup.visible = TempVars.item("HasAccessBE")
     
         ' Requery the control that shows the linked back-ends
         frm!lbxLinkedDbs.Requery

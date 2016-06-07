@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Color
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  color functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -12,6 +12,7 @@ Option Explicit
 '               BLC, 5/1/2015 - 1.01 - integrated into Invasives Reporting tool
 '               BLC, 11/10/2015 - 1.02 - added additional colors
 '               BLC, 5/27/2016 - 1.03 - added additional colors
+'               BLC, 6/4/2016  - 1.04 - added HTMLconvert()
 ' =================================
 
 ' ---------------------------------

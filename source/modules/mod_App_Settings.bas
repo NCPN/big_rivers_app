@@ -13,6 +13,16 @@ Option Explicit
 ' =================================
 
 ' ---------------------------------
+' GLOBALS:      global values set for application
+' Description:  values setting application level contants
+' References:   -
+' Source/date:  Bonnie Campbell, June 2016
+' Adapted:      -
+' Revisions:    BLC, 6/6/2016 - initial version (NCPN WQ Big Rivers App, App_Templates)
+' ---------------------------------
+'Public g_AppTemplates As Scripting.Dictionary     'global dictionary for application templates (if any)
+
+' ---------------------------------
 ' CONSTANTS:    global constant values
 ' Description:  values setting application level contants
 ' References:   -
@@ -36,9 +46,9 @@ Option Explicit
 ' ---------------------------------
 Public Const USER_ACCESS_CONTROL As Boolean = False             'Boolean flag -> db includes user access control or not
 Public Const DB_ADMIN_CONTROL As Boolean = False                'Boolean flag -> db does not include DbAdmin subform & controls
-Public Const FIX_LINKED_DBS As Boolean = True                   'Boolean flag -> db requires tbl_Dbs to be updated via FixLinkedDb (usually when DbAdmin is not fully implemented)
-Public Const MAIN_APP_FORM As String = "frm_Tgt_List_Tool"      'String -> main tabbed form (frm_Switchboard, etc.)
-Public Const MAIN_APP_MENU As String = "frm_Main_Menu"          'String -> main tabbed form (frm_Switchboard, etc.)
+Public Const FIX_LINKED_DBS As Boolean = False                  'Boolean flag -> db requires tbl_Dbs to be updated via FixLinkedDb (usually when DbAdmin is not fully implemented)
+Public Const MAIN_APP_FORM As String = "Main"                   'String -> main tabbed form (frm_Switchboard, etc.)
+Public Const MAIN_APP_MENU As String = "Main"                   'String -> main tabbed form (frm_Switchboard, etc.)
 Public Const APP_RELEASE_ID As String = ""                      'String -> release ID (tsys_App_Release.Release_ID) for current release
                                                                 '          used when db doesn't include full DbAdmin subform & controls, otherwise NULL
 Public Const APP_URL As String = "science.nature.nps.gov/im/units/ncpn/datamanagement.cfm"

@@ -236,8 +236,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String, params As String
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     
@@ -249,14 +249,14 @@ On Error GoTo Err_Handler
 '                & Me.IsSurveyed & ",'" & Me.Timing & "',#" _
 '                & CDate(Me.ActionDate) & "#,#" & Format(Me.ActionTime, "hh:mm:ss") & "#);"
 
-    params = "EventID:" & Me.EventID & _
-            "|TransducerType:" & Me.TransducerType & _
-            "|TransducerNumber:" & Me.TransducerNumber & _
-            "|SerialNumber:" & Me.SerialNumber & _
-            "|IsSurveyed:" & Me.IsSurveyed & _
-            "|Timing:" & Me.Timing & _
-            "|ActionDate:" & CDate(Me.ActionDate) & _
-            "|ActionTime:" & Format(Me.ActionTime, "hh:mm:ss")
+    params = "EventID" & PARAM_SEPARATOR & Me.EventID & _
+            "|TransducerType" & PARAM_SEPARATOR & Me.TransducerType & _
+            "|TransducerNumber" & PARAM_SEPARATOR & Me.TransducerNumber & _
+            "|SerialNumber" & PARAM_SEPARATOR & Me.SerialNumber & _
+            "|IsSurveyed" & PARAM_SEPARATOR & Me.IsSurveyed & _
+            "|Timing" & PARAM_SEPARATOR & Me.Timing & _
+            "|ActionDate" & PARAM_SEPARATOR & CDate(Me.ActionDate) & _
+            "|ActionTime" & PARAM_SEPARATOR & Format(Me.ActionTime, "hh::mm::ss")
 
     strSQL = GetTemplate("i_transducer", params)
     

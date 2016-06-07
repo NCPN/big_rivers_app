@@ -73,7 +73,7 @@ On Error GoTo Err_Handler
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strTitle
         If strContext <> "DbAdmin" Then
-            ctrl.Visible = True
+            ctrl.visible = True
         End If
     End If
     
@@ -152,7 +152,7 @@ On Error GoTo Err_Handler
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strInstructions
         If strContext <> "DbAdmin" Then
-            ctrl.Visible = True
+            ctrl.visible = True
         End If
     End If
     
@@ -341,7 +341,7 @@ On Error GoTo Err_Handler
     End Select
 
     If Len(fName) > 0 Then
-        Forms("Main").Visible = False
+        Forms("Main").visible = False
         DoCmd.OpenForm fName, acNormal, OpenArgs:=oArgs
     ElseIf Len(rName) > 0 Then
         'print preview mode - acViewPreview
@@ -414,18 +414,18 @@ On Error GoTo Err_Handler
         'find the form & populate its controls from the ID
         Select Case .Name
             Case "Events"
-                strSQL = GetTemplate("s_form_edit", "tbl:Event|id:" & ID)
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxStartDate").ControlSource = "StartDate"
             Case "Tagline"
-                strSQL = GetTemplate("s_form_edit", "tbl:Tagline|id:" & ID)
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxCause").ControlSource = "HeightType"
                 .Controls("tbxDistance").ControlSource = "LineDistance_m"
                 .Controls("tbxHeight").ControlSource = "Height_cm"
             Case "Transducer"
-                strSQL = GetTemplate("s_form_edit", "tbl:Transducer|id:" & ID)
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Transducer|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxTiming").ControlSource = "Timing"
@@ -435,7 +435,7 @@ On Error GoTo Err_Handler
                 .Controls("tbxSampleTime").ControlSource = "ActionTime"
                 .Controls("chkSurveyed").ControlSource = "IsSurveyed"
             Case "VegPlot"
-                strSQL = GetTemplate("s_form_edit", "tbl:VegPlot|id:" & ID)
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "VegPlot|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxNumber").ControlSource = "PlotNumber"
@@ -487,9 +487,9 @@ On Error GoTo Err_Handler
     'find the form & populate its controls from the ID
     Select Case tbl
         Case "Event"
-            strSQL = GetTemplate("d_form_record", "tbl:Event|id:" & ID)
+            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
         Case "Tagline"
-            strSQL = GetTemplate("d_form_record", "tbl:Tagline|id:" & ID)
+            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
     End Select
     
     DoCmd.SetWarnings False

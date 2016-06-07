@@ -3,13 +3,14 @@ Option Explicit
 
 ' =================================
 ' MODULE:       mod_QA
-' VERSION:      1.02
+' VERSION:      1.03
 ' Description:  QA related properties, functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, 8/22/2014
 ' Revisions:    BLC, 8/22/2014 - 1.00 - initial version
 '               BLC, 6/12/2015 - 1.01 - replaced TempVars.item(... with TempVars("...
 '               BLC, 4/4/2016  - 1.02 - changed Exit_Procedure/Exit_Function > Exit_Handler
+'               BLC, 6/5/2016  - 1.03 - renamed frm_Progress_Meter to ProgressMeter
 ' =================================
 
 ' ---------------------------------
@@ -95,14 +96,15 @@ Option Explicit
 '               BLC, 8/22/2014 - shifted to mod_QA & dropped fxn prefix
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler, dbCurrent to CurrentDb
+'               BLC, 6/5/2016  - renamed frm_Progress_Meter to ProgressMeter
 ' ---------------------------------
 Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
     Optional strSingleQName As String, Optional blnCreateNew As Boolean = False)
 
     On Error GoTo Err_Handler
 
-    Dim qdf As dao.QueryDef     ' Individual query objects
-    Dim qdfs As dao.QueryDefs   ' The database query set
+    Dim qdf As DAO.QueryDef     ' Individual query objects
+    Dim qdfs As DAO.QueryDefs   ' The database query set
     Dim strTimeframe As String  ' Data timeframe, from the switchboard
     Dim intScope As Integer     ' Indicates whether or not certified records are included
                                 '   in query runs: 0=no, 1=yes, 2=both certified and uncertified
@@ -130,9 +132,9 @@ Public Function UpdateQAResults(Optional blnUpdateAll As Boolean = True, _
     dtRunTime = Now()   ' Set the run time variable to now
 
     ' Initialize the progress popup form
-    strProgForm = "frm_Progress_Meter"
+    strProgForm = "ProgressMeter"
     DoCmd.OpenForm strProgForm
-    Set frm = Forms!frm_Progress_Meter
+    Set frm = Forms!ProgressMeter
     frm.Caption = " Running validation queries"
     frm!txtPercent = 0
     intNQueries = 0

@@ -1226,9 +1226,9 @@ On Error GoTo Err_Handler
     Title = "Transducer"
     Directions = "Enter the Transducer information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.ForeColor = lngLtBlue
+    lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
+    btnComment.forecolor = lngBlue
     lblDistance.Caption = StringFromCodepoint(uRuler)
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblSample.Caption = StringFromCodepoint(uTwoOClock)
@@ -1241,24 +1241,24 @@ On Error GoTo Err_Handler
     cbxTiming.RowSource = "BD;AD" 'before download, after download
     
     'set hover
-    btnComment.HoverColor = lngGreen
-    btnSave.HoverColor = lngGreen
-    btnUndo.HoverColor = lngGreen
+    btnComment.hoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
+    btnUndo.hoverColor = lngGreen
       
     'defaults
-    tbxIcon.ForeColor = lngRed
+    tbxIcon.forecolor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    cbxTransducer.backColor = lngYellow
-    tbxSerialNo.backColor = lngYellow
-    tbxEyeboltToScribeline.backColor = lngYellow
-    tbxEyeboltToWaterline.backColor = lngYellow
-    tbxRefToEyebolt.backColor = lngYellow
-    tbxRefToWaterline.backColor = lngYellow
-    tbxSampleDate.backColor = lngYellow
-    tbxSampleTime.backColor = lngYellow
-    cbxTiming.backColor = lngYellow
-    cbxTransducer.backColor = lngYellow
+    cbxTransducer.backcolor = lngYellow
+    tbxSerialNo.backcolor = lngYellow
+    tbxEyeboltToScribeline.backcolor = lngYellow
+    tbxEyeboltToWaterline.backcolor = lngYellow
+    tbxRefToEyebolt.backcolor = lngYellow
+    tbxRefToWaterline.backcolor = lngYellow
+    tbxSampleDate.backcolor = lngYellow
+    tbxSampleTime.backcolor = lngYellow
+    cbxTiming.backcolor = lngYellow
+    cbxTransducer.backcolor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1520,7 +1520,7 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.Visible = True
+    Forms("Main").Form.visible = True
     
 Exit_Handler:
     Exit Sub
@@ -1559,7 +1559,7 @@ On Error GoTo Err_Handler
         isOK = True
 '    End If
     
-    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

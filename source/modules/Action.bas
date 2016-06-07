@@ -209,8 +209,8 @@ Public Sub SaveToDb()
 On Error GoTo Err_Handler
     
     Dim strSQL As String
-    Dim db As dao.Database
-    Dim rs As dao.Recordset
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
     
     Set db = CurrentDb
     
@@ -220,11 +220,11 @@ On Error GoTo Err_Handler
 '                & Me.ID & ",'" & Me.action & "', Now() );"
 
     strSQL = GetTemplate("i_action_record", _
-                         "RefType:" & Me.RefTable _
-                        & "|RefID:" & Me.RefID _
-                        & "|ID:" & Me.ID _
-                        & "|action:" & Me.action _
-                        & "|actiondate:Now()")
+                         "RefType" & PARAM_SEPARATOR & Me.RefTable _
+                        & "|RefID" & PARAM_SEPARATOR & Me.RefID _
+                        & "|ID" & PARAM_SEPARATOR & Me.ID _
+                        & "|action" & PARAM_SEPARATOR & Me.action _
+                        & "|actiondate" & PARAM_SEPARATOR & "Now()")
                         
 '********************
 '  FIX: Me.RefTable & actiondate values

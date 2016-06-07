@@ -690,7 +690,7 @@ On Error GoTo Err_Handler
     Set oBPctCover = BPctCover
     With oBPctCover.Report
         'default
-        .Visible = True
+        .visible = True
         
         .Park = TempVars("ParkCode")
         .SetCoverType "URC"
@@ -699,7 +699,7 @@ On Error GoTo Err_Handler
             Case "BLCA"
             Case "CANY"
             Case "DINO" 'DINO has only one percent cover displayed (ARS)
-                .Visible = False
+                .visible = False
         End Select
         Debug.Print .Park & " - " & .CoverType & vbCrLf
     End With
@@ -733,7 +733,7 @@ Private Sub Report_Close()
 On Error GoTo Err_Handler
 
     'unhide modal Main form
-    Forms("Main").Visible = True
+    Forms("Main").visible = True
 
 Exit_Handler:
     Exit Sub

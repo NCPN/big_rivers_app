@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =26
-    Right =10200
-    Bottom =10500
+    Right =18870
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x977c4ffe4fc3e440
@@ -634,11 +634,11 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.ForeColor = lngDkGreen
-    lblDirections.ForeColor = lngLtBlue
+    tbxIcon.forecolor = lngDkGreen
+    lblDirections.forecolor = lngLtBlue
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.ForeColor = lngRed
+    btnDelete.forecolor = lngRed
 
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
 
@@ -796,9 +796,9 @@ On Error GoTo Err_Handler
         'find the form & populate its controls from the ID
         Select Case .Name
             Case "_List"
-                strSQL = GetTemplate("s_form_edit", "tbl:tagline|id:" & ID)
+                strSQL = GetTemplate("s_form_edit", "tbl:tagline|id" & PARAM_SEPARATOR & ID)
             Case "_Base"
-                strSQL = GetTemplate("s_form_edit", "tbl:tagline|id:" & ID)
+                strSQL = GetTemplate("s_form_edit", "tbl:tagline|id" & PARAM_SEPARATOR & ID)
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxCause").ControlSource = "HeightType"
                 .Controls("tbxDistance").ControlSource = "LineDistance_m"
@@ -840,9 +840,9 @@ On Error GoTo Err_Handler
     'find the form & populate its controls from the ID
     Select Case tbl
         Case "_List"
-            strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
+            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "tagline|id" & PARAM_SEPARATOR & ID)
         Case "Tagline"
-            strSQL = GetTemplate("d_form_record", "tbl:tagline|id:" & ID)
+            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "tagline|id" & PARAM_SEPARATOR & ID)
     End Select
     
     DoCmd.SetWarnings False
