@@ -1,4 +1,4 @@
-CREATE TABLE [Copy Of tsys_Db_Templates] (
+CREATE TABLE [xCopy Of tsys_Db_Templates] (
   [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
   [Version] DOUBLE ,
   [IsSupported] SHORT ,

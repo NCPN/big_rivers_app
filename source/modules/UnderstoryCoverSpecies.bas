@@ -6,7 +6,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' CLASS:        UnderstoryCover
+' CLASS:        UnderstoryCoverSpecies
 ' Level:        Framework class
 ' Version:      1.00
 '
@@ -360,7 +360,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Initialize[cls_UnderstoryCover])"
+            "Error encountered (#" & Err.Number & " - Class_Initialize[cls_UnderstoryCoverSpecies])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -392,7 +392,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[cls_UnderstoryCover])"
+            "Error encountered (#" & Err.Number & " - Class_Terminate[cls_UnderstoryCoverSpecies])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -422,7 +422,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Init[cls_UnderstoryCover])"
+                "Error encounter (#" & Err.Number & " - Init[cls_UnderstoryCoverSpecies])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -449,7 +449,7 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'record actions must have:
-    strSQL = "INSERT INTO Understory(VegPlot_ID, Master_PLANT_Code, PercentCover, IsSeedling) VALUES " _
+    strSQL = "INSERT INTO UnderstorySpecies(VegPlot_ID, Master_PLANT_Code, PercentCover, IsSeedling) VALUES " _
                 & "(" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
                 & Me.PercentCover & "," & Me.IsSeedling & ");"
 
@@ -464,7 +464,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Init[cls_UnderstoryCover])"
+                "Error encounter (#" & Err.Number & " - Init[cls_UnderstoryCoverSpecies])"
     End Select
     Resume Exit_Handler
 End Sub

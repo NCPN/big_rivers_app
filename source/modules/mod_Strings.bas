@@ -4,12 +4,14 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.01
+' Version:      1.03
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 5/12/2016 - 1.01 - added Unicode strings, GetUnicode()
+'               BLC, 5/13/2016 - 1.02 - StringFromCodePoint()
+'               BLC, 6/7/2016  - 1.03 - added InternalTrim()
 ' =================================
 
 '---------------------
@@ -259,6 +261,36 @@ Err_Handler:
     End Select
     Resume Exit_Function
 End Function
+
+' ---------------------------------
+' FUNCTION:     InternalTrim
+' Description:  Removes all spaces from string (before, inside, & after)
+' Parameters:   str - string to inspect
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  B. Campbell June 7, 2016
+' Adapted:      -
+' Revisions:    BLC, 6/7/2016 - initial version
+' ---------------------------------
+Public Function InternalTrim(str As String) As String
+     
+    On Error GoTo Err_Handler
+             
+     InternalTrim = Replace(Trim(str), " ", "")
+     
+Exit_Function:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - InternalTrim[mod_Strings])"
+    End Select
+    Resume Exit_Function
+End Function
+
 
 ' ---------------------------------
 ' FUNCTION:     CountInString

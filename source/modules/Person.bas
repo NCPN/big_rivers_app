@@ -23,6 +23,7 @@ Option Explicit
 Private m_ID As Integer
 Private m_FirstName As String
 Private m_LastName As String
+Private m_MiddleInitial As String
 Private m_Name As String
 Private m_Email As String
 Private m_Organization As String
@@ -30,14 +31,20 @@ Private m_PosTitle As String
 Private m_WorkPhone As Integer
 Private m_WorkExtension As Integer
 Private m_Role As String
+Private m_AccessLevel As Integer
+Private m_AccessRole As String
+Private m_Username As String
+Private m_IsActive As Byte 'using byte to avoid Access vs. SQL boolean issues
 
 '---------------------
 ' Events
 '---------------------
 Public Event InvalidName(Value)
+Public Event InvalidInitial(Value)
 Public Event InvalidEmail(Value)
 Public Event InvalidRole(Value)
-
+Public Event InvalidPhone(Value)
+Public Event InvalidAccessRole(Value)
 '---------------------
 ' Properties
 '---------------------
@@ -73,6 +80,18 @@ Public Property Get LastName() As String
     LastName = m_LastName
 End Property
 
+Public Property Let MiddleInitial(Value As String)
+    If IsAlpha(Value) And Len(Value) = 1 Then
+        m_MiddleInitial = Value
+    Else
+        RaiseEvent InvalidInitial(Value)
+    End If
+End Property
+
+Public Property Get MiddleInitial() As String
+    MiddleInitial = m_MiddleInitial
+End Property
+
 Public Property Let Name(Value As String) 'Optional first As String, Value As String)
     m_Name = Value
 End Property
@@ -101,6 +120,50 @@ Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
+Public Property Let WorkPhone(Value As String)
+    If IsPhone(Value) Then
+        m_WorkPhone = Value
+    Else
+        RaiseEvent InvalidPhone(Value)
+    End If
+End Property
+
+Public Property Get WorkPhone() As String
+    WorkPhone = m_WorkPhone
+End Property
+
+Public Property Let WorkExtension(Value As String)
+    m_WorkExtension = Value
+End Property
+
+Public Property Get WorkExtension() As String
+    WorkExtension = m_WorkExtension
+End Property
+
+Public Property Let PosTitle(Value As String)
+    m_PosTitle = Value
+End Property
+
+Public Property Get PosTitle() As String
+    PosTitle = m_PosTitle
+End Property
+
+Public Property Let Username(Value As String)
+    m_Username = Value
+End Property
+
+Public Property Get Username() As String
+    Username = m_Username
+End Property
+
+Public Property Let IsActive(Value As Byte)
+    m_IsActive = Value
+End Property
+
+Public Property Get IsActive() As Byte
+    IsActive = m_IsActive
+End Property
+
 Public Property Let Role(Value As String)
     Dim aryRoles() As String
     aryRoles = Split(CONTACT_ROLES, ",")
@@ -114,6 +177,31 @@ End Property
 
 Public Property Get Role() As String
     Role = m_Role
+End Property
+
+Public Property Let AccessRole(Value As String)
+    Dim aryAccessRoles() As String
+    aryAccessRoles = Split(ACCESS_ROLES, ",")
+
+    If IsInArray(Value, aryAccessRoles) Then
+        m_AccessRole = Value
+        'set access level based on role name (admin, power user, data entry, read only)
+        AccessLevel = AccessID(m_AccessRole)
+    Else
+        RaiseEvent InvalidAccessRole(Value)
+    End If
+End Property
+
+Public Property Get AccessRole() As String
+    AccessRole = m_AccessRole
+End Property
+
+Public Property Let AccessLevel(Value As Long)
+    m_AccessLevel = Value
+End Property
+
+Public Property Get AccessLevel() As Long
+    AccessLevel = m_AccessLevel
 End Property
 
 '======== Standard Methods ===========
@@ -201,12 +289,38 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'persons must have: first & last name, email, organization
-    strSQL = "INSERT INTO Contact(FirstName, LastName, Email, Organization) VALUES " _
-                & "('" & Me.FirstName & "','" & Me.LastName & "','" _
-                & Me.Email & "','" & Me.Organization & "');"
-
+    'optional: middleinitial, username, workphone, workextension, positiontitle
+'    strSQL = "INSERT INTO Contact(FirstName, LastName, Email, Organization," _
+'                & "MiddleInitial, Username, WorkPhone, WorkExtension, PositionTitle) VALUES " _
+'                & "('" & Me.FirstName & "','" & Me.LastName & "','" _
+'                & Me.Email & "','" & Me.Organization & "','" _
+'                & Me.MiddleInitial & "','" & Me.Username & "','" _
+'                & Me.WorkPhone & "','" & Me.WorkExtension & "','" _
+'                & Me.PositionTitle & "');"
+    strSQL = GetTemplate("i_contact", _
+                "FirstName" & PARAM_SEPARATOR & Me.FirstName & "|" & _
+                "LastName" & PARAM_SEPARATOR & Me.LastName & "|" & _
+                "email" & PARAM_SEPARATOR & Me.Email & "|" & _
+                "org" & PARAM_SEPARATOR & Me.Organization & "|" & _
+                "MI" & PARAM_SEPARATOR & Me.MiddleInitial & "|" & _
+                "username" & PARAM_SEPARATOR & Me.Username & "|" & _
+                "WorkPhone" & PARAM_SEPARATOR & Me.WorkPhone & "|" & _
+                "WorkExt" & PARAM_SEPARATOR & Me.WorkExtension & "|" & _
+                "position" & PARAM_SEPARATOR & Me.PosTitle & "|" & _
+                "IsActive" & PARAM_SEPARATOR & Me.IsActive)
+    
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+
+    'set the person's role
+    
+'    strSQL = "INSERT INTO Contact_Access(Contact_ID, Access_ID)" _
+'                & "VALUES (" & Me.ID & "," &  & ");"
+
+    strSQL = GetTemplate("i_contact_access", _
+                "contactID" & PARAM_SEPARATOR & Me.ID & "|" & _
+                "accessID" & PARAM_SEPARATOR & Me.AccessLevel)
+    db.Execute strSQL, dbFailOnError
 
 Exit_Handler:
     Exit Sub

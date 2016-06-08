@@ -589,7 +589,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As St
                 'create new dictionary for param name & data type
                 Set dictParam = New Scripting.Dictionary
 
-Debug.Print rs.Fields(ary(i))
+'Debug.Print rs.Fields(ary(i))
 
                 'separate parameters
                 ary2 = Split(Nz(rs.Fields(ary(i)), ":"), "|")
@@ -706,11 +706,12 @@ On Error GoTo Err_Handler
     Dim ary() As String, ary2() As String
     Dim i As Integer
     Dim template As String, swap As String, param As String
+
 Debug.Print strTemplate
 
-If strTemplate = "s_tsys_Link_Files_new_db" Then
-    MsgBox "Stop!", vbExclamation
-End If
+'If strTemplate = "s_tsys_Link_Files_new_db" Then
+'    MsgBox "Stop!", vbExclamation
+'End If
     'initialize AppTemplates if not populated
     If g_AppTemplates Is Nothing Then GetTemplates
 
@@ -719,7 +720,14 @@ End If
     If Len(params) > 0 Then
     
         'prepare passed in param array --> array contains param:value pairs
-        ary = Split(params, "|")
+        'ary = Split(params, "|")
+        If InStr(params, "|") Then
+            ary = Split(params, "|")
+        Else
+            ReDim Preserve ary(0) 'avoid Error #9 subscript out of range
+            ary(0) = params
+            'ary = Split(params, PARAM_SEPARATOR)
+        End If
         
         'prepare array of template parameters w/ their data type
         'aryParams = Split(AppTemplates(strTemplate).item("Params"), "|")
@@ -729,8 +737,12 @@ End If
         For i = 0 To UBound(ary)
             
             'split name:value pair --> ary2(0) = name, ary2(1) = value
-            ary2 = Split(ary(i), PARAM_SEPARATOR)
-                        
+            'If InStr(ary(1), PARAM_SEPARATOR) Then
+            If InStr(ary(i), PARAM_SEPARATOR) Then
+                ary2 = Split(ary(i), PARAM_SEPARATOR)
+            Else
+                ary2 = Split(ary(i), ":")
+            End If
             'compare datatype to aryParams value
             If IsTypeMatch(ary2(1), g_AppTemplates(strTemplate).item("Params").item(ary2(0))) Then
                 
@@ -739,7 +751,7 @@ End If
                 
                 'SQL-ize parameter values to avoid SQL syntax errors
                 param = SQLencode(ary2(1))
-Debug.Print param
+'Debug.Print param
                 'swap out the placeholder in the template
                 template = Replace(template, swap, ary2(1))
                 
@@ -941,6 +953,149 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - RemoveVirtualDAORecordset[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' FUNCTION:     CreateVirtualADORecordset
+' Description:  creates a virtual -in memory only- ADO recordset
+' Parameters:   strTemplate - name of virtual table (string)
+'               iCount - number of records (integer)
+' Returns:      rs - recordset containing # of records = iCount (ADO.recordset)
+' Assumptions:  the virtual recordset is used in limited instances when
+'               a recordset is needed but doesn't exist
+' Throws:       none
+' References:
+'   Danny Lesandrini, November 2, 2009
+'   http://www.databasejournal.com/features/msaccess/article.php/3846361/Create-In-Memory-ADO-Recordsets.htm
+' Source/date:  Bonnie Campbell, June 2016
+' Revisions:    BLC, 6/8/2016 - initial version
+' ---------------------------------
+Public Sub CreateVirtualADORecordset(iCount As Integer)
+On Error GoTo Err_Handler
+
+'    Dim rsADO As ADODB.Recordset
+'    Dim fld As ADODB.Field
+'
+'    'create rs
+'    Set rsADO = New ADODB.Recordset
+'    With rsADO
+'        .Fields.Append "Number", adInteger, , adFldMayBeNull
+'
+'        .CursorType = adOpenKeyset
+'        .CursorLocation = adUseClient
+'        .LockType = adLockPessimistic
+'        .Open
+'    End With
+'
+'    'populate rs
+'    For i = 0 To iCount - 1
+'        rsADO.AddNew
+'    Next
+
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CreateVirtualADORecordset[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' FUNCTION:     CreateTempRecordset
+' Description:  creates a temporary DAO recordset
+' Parameters:   strTemplate - name of virtual table (string)
+'               iCount - number of records (integer)
+' Returns:      rs - recordset containing # of records = iCount (DAO.recordset)
+' Assumptions:  the temporary recordset is used in limited instances when
+'               a recordset is needed but doesn't exist
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, June 2016
+' Revisions:    BLC, 6/8/2016 - initial version
+' ---------------------------------
+Public Function CreateTempRecordset(iCount As Integer) As DAO.Recordset
+On Error GoTo Err_Handler
+
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    Dim i As Integer
+    
+'    strSQL = "SELECT * FROM usys_Temp_Table;"
+    
+    Set rs = CurrentDb.OpenRecordset("usys_Temp_Table") 'strSQL, dbOpenSnapshot)
+
+    'add records to recordset
+    For i = 1 To iCount
+
+        rs.AddNew
+        rs.Fields(0) = i 'number integer field
+        rs.Update
+    Next
+    
+       
+    Set CreateTempRecordset = rs
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CreateTempRecordset[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' SUB:          CreateTempTable
+' Description:  creates a temporary table of numbers
+' Parameters:   iCount - number of records (integer)
+' Returns:      rs - recordset containing # of records = iCount (DAO.recordset)
+' Assumptions:  used for reports when a recordset doesn't exist for the report
+'               but it is necessary to repeat the report detail
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, June 2016
+' Revisions:    BLC, 6/8/2016 - initial version
+' ---------------------------------
+Public Sub CreateTempTable(iCount As Integer)
+On Error GoTo Err_Handler
+
+    Dim strSQL As String, strSQLDelete As String, strSQLInsert As String
+    Dim i As Integer
+    
+    'clear table
+    strSQLDelete = GetTemplate("d_usys_temp_table")
+    
+    strSQL = GetTemplate("i_usys_temp_table")
+     
+    'add records to table
+    For i = 1 To iCount
+
+        strSQLInsert = Replace(strSQL, "[i]", i)
+        
+        DoCmd.SetWarnings False
+        DoCmd.RunSQL strSQLInsert
+        DoCmd.SetWarnings True
+    
+    Next
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CreateTempTable[mod_Db])"
     End Select
     Resume Exit_Handler
 End Sub

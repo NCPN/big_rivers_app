@@ -150,7 +150,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "frm_Switchboard"
                         'handle updates
                         If flag = "update" Then
-                            With !fsub_DbAdmin.Form
+                            With !fsub_DBAdmin.Form
                                 !btnEditLog.Enabled = True
                                 !btnSetRoles.Enabled = True
                                 !btnDbWindow.Enabled = True
@@ -193,7 +193,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "frm_Switchboard"
                         'handle updates
                         If flag = "update" Then
-                            With !fsub_DbAdmin.Form
+                            With !fsub_DBAdmin.Form
                                 !btnEditLog.Enabled = True
                                 !btnSetRoles.Enabled = True
                                 !btnDbWindow.Enabled = True
@@ -236,7 +236,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         .pgSettings.Enabled = True
                         .btnChangeDbInfo.Enabled = False
                     Case "frm_Switchboard"
-                        With !fsub_DbAdmin.Form
+                        With !fsub_DBAdmin.Form
                             !btnEditLog.Enabled = False   ' automatically opens if certified data are edited
                             !btnSetRoles.Enabled = False
                             !btnDbWindow.Enabled = False
@@ -333,7 +333,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "frm_Switchboard"
                         ' Set default application mode to read only, and set up form accordingly in case of error
                         ' requires frm!fsub_DBAdmin.Form format or error #438 object doesn't support this property/method occurs
-                        With !fsub_DbAdmin.Form
+                        With !fsub_DBAdmin.Form
                             .btnSetRoles.Enabled = False
                             .btnDbWindow.Enabled = False
                             .pgSettings.Enabled = False
@@ -345,7 +345,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         
                         'handle updates
                         If flag = "update" Then
-                            !fsub_DbAdmin.Form!btnEditLog.Enabled = True
+                            !fsub_DBAdmin.Form!btnEditLog.Enabled = True
                             ' Turn off options (only apparent after the next time app is opened)
                             CurrentDb.Properties("AllowFullMenus") = False
                             CurrentDb.Properties("AllowShortcutMenus") = False
@@ -654,11 +654,11 @@ End Sub
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler
 ' =================================
-Public Function UserName() As String
+Public Function Username() As String
     On Error GoTo Err_Handler
 
-    UserName = "Unknown"
-    UserName = Environ("Username")
+    Username = "Unknown"
+    Username = Environ("Username")
 
 Exit_Handler:
     Exit Function
@@ -701,7 +701,7 @@ On Error GoTo Err_Handler
  
     Set ADSI = CreateObject("ADSystemInfo")
     
-    tmp = Split(ADSI.UserName, ",")
+    tmp = Split(ADSI.Username, ",")
  
     'retrieve first & last name
     GetADCommonName = Right(tmp(0), Len(tmp(0)) - 3)
@@ -723,6 +723,49 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - UserName[mod_User])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' =================================
+' FUNCTION:     AccessID
+' Description:  Returns the access level ID from the access level name
+' Assumptions:  Access levels include:
+'                   admin, power user, data entry, read only
+' Parameters:   AccessLevel - name of the level (string)
+' Returns:      access ID (long)
+' Throws:       none
+' References:   none
+' Source/date:  B. Campbell, 6/7/2016
+' Revisions:    BLC, 6/7/2016 - initial version
+' =================================
+Public Function AccessID(AccessLevel As String) As Long
+    On Error GoTo Err_Handler
+
+    Dim ID As Long, i As Long
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    
+    strSQL = GetTemplate("s_access_level", "lvl:" & LCase(AccessLevel))
+    
+    Set rs = CurrentDb.OpenRecordset(strSQL, dbOpenSnapshot)
+    
+    If rs.RecordCount > 0 Then
+        AccessID = rs("ID")
+    Else
+        'default --> 0 = no access, exit application
+        AccessID = 0
+    End If
+
+Exit_Handler:
+    Set rs = Nothing
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetAccessID[mod_User])"
     End Select
     Resume Exit_Handler
 End Function

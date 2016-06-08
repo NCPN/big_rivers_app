@@ -1,0 +1,4 @@
+CREATE TABLE [xAccessLevel] (
+  [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
+  [AccessLevel] VARCHAR (15)
+)

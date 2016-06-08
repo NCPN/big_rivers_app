@@ -4,12 +4,13 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Settings
 ' Level:        Application module
-' Version:      1.00
+' Version:      1.02
 ' Description:  Application-wide related values, functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
-' Revisions:    BLC, 4/30/2015 - initial version
-'               BLC, 11/20/2015 - added priority & status icons
+' Revisions:    BLC, 4/30/2015 -  1.00 - initial version
+'               BLC, 11/20/2015 - 1.01 - added priority & status icons
+'               BLC, 6/7/2016 -   1.02 - updated documentation & added ACCESS_ROLES (Big Rivers App)
 ' =================================
 
 ' ---------------------------------
@@ -43,6 +44,7 @@ Option Explicit
 '                                (usually when DbAdmin is not fully implemented)
 '               BLC, 5/28/2015 - added MAIN_APP_MENU to handle applications w/ main menu forms (not tabbed switchboards)
 '               BLC, 4/4/2016  - added LOCATION_TYPES to allow specific types only, RECORD_ACTIONS, CONTACT_ROLES, PARKS
+'               BLC, 6/7/2016  - added ACCESS_ROLES to set user application permissions
 ' ---------------------------------
 Public Const USER_ACCESS_CONTROL As Boolean = False             'Boolean flag -> db includes user access control or not
 Public Const DB_ADMIN_CONTROL As Boolean = False                'Boolean flag -> db does not include DbAdmin subform & controls
@@ -55,6 +57,9 @@ Public Const APP_URL As String = "science.nature.nps.gov/im/units/ncpn/datamanag
                                                                 'String -> website URL for application
                                                                 '          used when db doesn't include full DbAdmin subform & controls, otherwise NULL
 Public Const DEV_MODE As Boolean = True                         'Boolean flag -> enable menus when typically they'd be OFF
+
+Public Const ACCESS_ROLES As String = "admin,power user,data entry,read only"
+                                                                'String -> used in setting user application access level & permissions
 
 '-----------------------------------------------------------------------
 ' Database Type

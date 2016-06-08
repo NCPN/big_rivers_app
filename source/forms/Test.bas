@@ -11,8 +11,8 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =3
-    Right =20268
-    Bottom =9408
+    Right =16485
+    Bottom =11010
     DatasheetGridlinesColor =14806254
     ShortcutMenuBar ="dataentry"
     RecSrcDt = Begin
@@ -123,7 +123,7 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private WithEvents wcc As WoodyCanopy
+Private WithEvents wcc As WoodyCanopySpecies
 Attribute wcc.VB_VarHelpID = -1
 
 

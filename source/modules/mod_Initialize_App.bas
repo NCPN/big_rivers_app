@@ -310,7 +310,7 @@ Update_Settings:
         If TempVars.item("HasAccessBE") Then DoCmd.OpenForm "frm_Lock_BE", , , , , acHidden
     
         ' If there is an Access back-end, make the backups button visible
-        frm!fsub_DbAdmin.Form!cmdBackup.visible = TempVars.item("HasAccessBE")
+        frm!fsub_DBAdmin.Form!cmdBackup.visible = TempVars.item("HasAccessBE")
     
         ' Requery the control that shows the linked back-ends
         frm!lbxLinkedDbs.Requery

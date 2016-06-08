@@ -33,12 +33,12 @@ Private m_Logins As Integer
 '---------------------
 ' Properties
 '---------------------
-Public Property Let UserName(Value As String)
+Public Property Let Username(Value As String)
     m_Username = Value
 End Property
 
-Public Property Get UserName() As String
-    UserName = m_Username
+Public Property Get Username() As String
+    Username = m_Username
 End Property
 
 Public Property Let Password(Value As String)

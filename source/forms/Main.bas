@@ -15,11 +15,11 @@ Begin Form
     GridY =24
     Width =8640
     DatasheetFontHeight =11
-    ItemSuffix =21
-    Left =1455
-    Top =3735
-    Right =10350
-    Bottom =11400
+    ItemSuffix =23
+    Left =7515
+    Top =2805
+    Right =16410
+    Bottom =10530
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -109,6 +109,23 @@ Begin Form
             PressedForeThemeColorIndex =0
             PressedForeTint =75.0
         End
+        Begin TextBox
+            AddColon = NotDefault
+            FELineBreak = NotDefault
+            BorderLineStyle =0
+            LabelX =-1800
+            FontSize =11
+            FontName ="Calibri"
+            AsianLineBreak =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ThemeFontIndex =1
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin Subform
             BorderLineStyle =0
             BorderThemeColorIndex =1
@@ -118,7 +135,7 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =360
+            Height =420
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -142,6 +159,40 @@ Begin Form
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                     ForeShade =95.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =7080
+                    Top =60
+                    Height =299
+                    ForeColor =15921906
+                    Name ="btnAdmin"
+                    Caption ="Admin"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Go to administration settings"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7080
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =8520
+                    LayoutCachedHeight =359
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ForeShade =95.0
+                    Gradient =0
+                    BackColor =4144959
+                    BackThemeColorIndex =-1
+                    BackTint =100.0
+                    OldBorderStyle =0
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -382,6 +433,9 @@ On Error GoTo Err_Handler
     'Main
     Me.lblTitle.Caption = "Data Entry"
     
+    'Admin --> filter actions when form opens (disable form buttons based on TempVars("AccessLevel")
+    Me.btnAdmin.hoverColor = LINK_HIGHLIGHT_BKGD
+        
     ' ------ Top -------
     'Left
     Set oLTile = LTile.Form
@@ -509,6 +563,37 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnAdmin_Click
+' Description:  Admin button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 7, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/7/2016 - initial version
+' ---------------------------------
+Private Sub btnAdmin_Click()
+On Error GoTo Err_Handler
+
+    'open admin form
+    DoCmd.OpenForm "fsub_DbAdmin", acNormal
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAdmin_Click[Main form])"
     End Select
     Resume Exit_Handler
 End Sub

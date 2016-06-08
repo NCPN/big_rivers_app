@@ -6,7 +6,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' CLASS:        WoodyCanopy
+' CLASS:        RootedSpecies
 ' Level:        Framework class
 ' Version:      1.00
 '
@@ -359,7 +359,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Initialize[cls_WoodyCanopy])"
+            "Error encountered (#" & Err.Number & " - Class_Initialize[cls_RootedSpecies])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -421,7 +421,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Init[cls_WoodyCanopy])"
+                "Error encounter (#" & Err.Number & " - Init[cls_RootedSpecies])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -448,7 +448,7 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'record actions must have:
-    strSQL = "INSERT INTO WoodyCanopy(VegPlot_ID, Master_PLANT_Code, PercentCover) VALUES " _
+    strSQL = "INSERT INTO RootedSpecies(VegPlot_ID, Master_PLANT_Code, PercentCover) VALUES " _
                 & "(" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
                 & Me.PercentCover & ");"
 
@@ -462,7 +462,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Init[cls_WoodyCanopy])"
+                "Error encounter (#" & Err.Number & " - Init[cls_RootedSpecies])"
     End Select
     Resume Exit_Handler
 End Sub

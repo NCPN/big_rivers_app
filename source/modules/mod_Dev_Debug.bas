@@ -744,31 +744,48 @@ Public Sub Testing()
 'Debug.Print TypeName(myWoodyCanopyCoverSpecies)
 
 
-Dim vw As New VegWalk
-With vw
-    .EventID = 3
-    .CollectionPlaceID = 2
-    .CollectionType = "S"
-    .StartDate = Date
-    .CreatedByID = 4
-    .LastModifiedByID = .CreatedByID
-    .SaveToDb
-End With
+'Dim vw As New VegWalk
+'With vw
+'    .EventID = 3
+'    .CollectionPlaceID = 2
+'    .CollectionType = "S"
+'    .StartDate = Date
+'    .CreatedByID = 4
+'    .LastModifiedByID = .CreatedByID
+'    .SaveToDb
+'End With
+'
+'Dim vws As New VegWalkSpecies
+'With vws
+'    .Init ("EPHVIR")
+'    .VegWalkID = vw.id
+'    .SaveToDb
+'    Debug.Print "MasterCode= " & .MasterCode & vbCrLf
+'    Debug.Print "UTcode= " & .UTcode & vbCrLf
+'    Debug.Print "UTfamily= " & .UTfamily & vbCrLf
+'    Debug.Print "UTspecies= " & .UTspecies & vbCrLf
+'    Debug.Print "Nativity= " & .Nativity & vbCrLf
+'    Debug.Print "Lifeform= " & .Lifeform & vbCrLf
+'    Debug.Print "CommonName= " & .MasterCommonName & vbCrLf
+'End With
 
-Dim vws As New VegWalkSpecies
-With vws
-    .Init ("EPHVIR")
-    .VegWalkID = vw.ID
-    .SaveToDb
-    Debug.Print "MasterCode= " & .MasterCode & vbCrLf
-    Debug.Print "UTcode= " & .UTcode & vbCrLf
-    Debug.Print "UTfamily= " & .UTfamily & vbCrLf
-    Debug.Print "UTspecies= " & .UTspecies & vbCrLf
-    Debug.Print "Nativity= " & .Nativity & vbCrLf
-    Debug.Print "Lifeform= " & .Lifeform & vbCrLf
-    Debug.Print "CommonName= " & .MasterCommonName & vbCrLf
-End With
 
+Dim p As New Person
+
+With p
+    .FirstName = "Maija"
+    .LastName = "Tester"
+    .MiddleInitial = "X"
+    .Username = Username
+    .Email = "a@bc.com"
+    .Role = "d"
+    .AccessRole = "admin"
+    .SaveToDb
+    
+    Debug.Print .ID
+    Debug.Print .AccessLevel
+
+End With
 
 End Sub
 

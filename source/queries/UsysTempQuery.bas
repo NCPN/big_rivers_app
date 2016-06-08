@@ -1,16 +1,16 @@
 ﻿Operation =1
 Option =0
-Having ="Count(TemplateName) > 1"
+Having ="(((Count(tsys_Db_Templates.TemplateName))>1))"
 Begin InputTables
     Name ="tsys_Db_Templates"
 End
 Begin OutputColumns
-    Expression ="TemplateName"
+    Expression ="tsys_Db_Templates.TemplateName"
     Alias ="NumberOfDupes"
-    Expression ="Count(TemplateName)"
+    Expression ="Count(tsys_Db_Templates.TemplateName)"
 End
 Begin Groups
-    Expression ="TemplateName"
+    Expression ="tsys_Db_Templates.TemplateName"
     GroupLevel =0
 End
 dbBoolean "ReturnsRecords" ="-1"
@@ -44,12 +44,12 @@ Begin
     State =0
     Left =0
     Top =0
-    Right =1275
+    Right =771
     Bottom =750
     Left =-1
     Top =-1
-    Right =1259
-    Bottom =271
+    Right =755
+    Bottom =237
     Left =0
     Top =0
     ColumnsShown =543

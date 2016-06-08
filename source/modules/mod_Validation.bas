@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Validation
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  string functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/10/2015
@@ -15,6 +15,7 @@ Option Explicit
 '               BLC - 4/4/2016 - 1.02 - added IsInArray(), updated ValidString(),
 '                                       replaced Exit_Function w/ Exit_Handler
 '               BLC - 5/20/2016 - 1.03 - added IsTypeMatch()
+'               BLC - 6/7/2016  - 1.04 - added IsPhone()
 ' =================================
 
 ' ---------------------------------
@@ -597,6 +598,47 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - IsParagraph[mod_Validation])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     IsPhone
+' Description:  Checks if string is a valid phone #
+' Assumptions:  Assumes phone #s are U.S. numbers (7 or 10 digits w/ area code)
+' Parameters:   strInspect - string to check
+' Returns:      boolean - True (string is valid phone #), False (string contains non-phone characters)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, June 7, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/7/2016 - initial version
+' ---------------------------------
+Function IsPhone(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+
+    Dim strPhone As String
+    
+    'remove spaces, remove () & -, and
+    strPhone = Replace(Replace(Replace(InternalTrim(strInspect), "(", ""), ")", ""), "-", "")
+    
+    'check length is 7 or 10
+    If Len(strPhone) = 7 Or Len(strPhone) = 10 Then
+        'check if remainder is numeric
+        IsPhone = IsNumeric(strPhone)
+    Else
+        IsPhone = False
+    End If
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - IsPhone[mod_Validation])"
     End Select
     Resume Exit_Handler
 End Function

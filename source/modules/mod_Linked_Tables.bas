@@ -131,7 +131,7 @@ Public Function VerifyConnections()
     
         ' Check the status of individual table links, depending on application settings
         If FormIsOpen("frmSwitchboard") And blnHasError = False Then
-            If Forms!frm_Switchboard.fsub_DbAdmin.Form.chkVerifyOnStartup Then
+            If Forms!frm_Switchboard.fsub_DBAdmin.Form.chkVerifyOnStartup Then
                 If TempVars.item("HasAccessBE") = True Then
                     If MsgBox("Would you like all linked table connections to be tested?", _
                         vbYesNo + vbDefaultButton2, _

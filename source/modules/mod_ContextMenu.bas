@@ -267,66 +267,71 @@ On Error GoTo Err_Handler
                 End If
                 
             Case "river"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
-                
-                If Not (rs.BOF And rs.EOF) Then
+                If Not IsNull(TempVars("ParkCode")) Then
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                     
-                    rs.MoveFirst
-                    
-                    Do Until rs.EOF
-                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="river")
-                        mnuItem.Caption = rs.Fields("Segment")
-                        mnuItem.Parameter = rs.Fields("Segment")
-                        mnuItem.OnAction = "mnuSetRiver"
+                    If Not (rs.BOF And rs.EOF) Then
                         
-                        rs.MoveNext
-                    Loop
+                        rs.MoveFirst
+                        
+                        Do Until rs.EOF
+                            Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="river")
+                            mnuItem.Caption = rs.Fields("Segment")
+                            mnuItem.Parameter = rs.Fields("Segment")
+                            mnuItem.OnAction = "mnuSetRiver"
+                            
+                            rs.MoveNext
+                        Loop
+                        
+                    Else
+                        'clear menu
                     
-                Else
-                    'clear menu
-                
+                    End If
                 End If
-            
+                
             Case "site"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
-                
-                If Not (rs.BOF And rs.EOF) Then
-                
-                    rs.MoveFirst
+                If Not IsNull(TempVars("ParkCode")) Then
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                     
-                    Do Until rs.EOF
-                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="site")
-                        mnuItem.Caption = rs.Fields("Site")
-                        mnuItem.Parameter = Left(Right(rs.Fields("Site"), 3), 2)
-                        mnuItem.OnAction = "mnuSetSite"
+                    If Not (rs.BOF And rs.EOF) Then
+                    
+                        rs.MoveFirst
                         
-                        rs.MoveNext
-                    Loop
+                        Do Until rs.EOF
+                            Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="site")
+                            mnuItem.Caption = rs.Fields("Site")
+                            mnuItem.Parameter = Left(Right(rs.Fields("Site"), 3), 2)
+                            mnuItem.OnAction = "mnuSetSite"
+                            
+                            rs.MoveNext
+                        Loop
+                        
+                    Else
+                        'clear menu
                     
-                Else
-                    'clear menu
-                
+                    End If
                 End If
-            
             Case "feature"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
-                
-                If Not (rs.BOF And rs.EOF) Then
-                
-                    rs.MoveFirst
+                If Not IsNull(TempVars("ParkCode")) Then
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                     
-                    Do Until rs.EOF
-                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="feature")
-                        mnuItem.Caption = rs.Fields("Feature")
-                        mnuItem.Parameter = rs.Fields("Feature")
-                        mnuItem.OnAction = "mnuSetFeature"
+                    If Not (rs.BOF And rs.EOF) Then
+                    
+                        rs.MoveFirst
                         
-                        rs.MoveNext
-                    Loop
-                
-                Else
-                    'clear menu
+                        Do Until rs.EOF
+                            Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="feature")
+                            mnuItem.Caption = rs.Fields("Feature")
+                            mnuItem.Parameter = rs.Fields("Feature")
+                            mnuItem.OnAction = "mnuSetFeature"
+                            
+                            rs.MoveNext
+                        Loop
                     
+                    Else
+                        'clear menu
+                        
+                    End If
                 End If
         End Select
         

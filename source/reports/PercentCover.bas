@@ -17,12 +17,12 @@ Begin Report
     Width =11460
     DatasheetFontHeight =11
     ItemSuffix =185
-    Right =25395
-    Bottom =11790
+    Right =16485
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
-        0x32f638d6d6a9e440
+        0xf672b2af2fc4e440
     End
     Caption ="Percent Cover"
     OnOpen ="[Event Procedure]"
