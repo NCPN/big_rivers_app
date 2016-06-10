@@ -1,3 +1,3 @@
 CREATE TABLE [usys_temp_table] (
-  [Number] SHORT 
+  [Num] SHORT  CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL 
 )

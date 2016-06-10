@@ -332,7 +332,7 @@ End Property
 ' Methods
 '---------------------
 
-' ---------------------------------
+''' ---------------------------------
 ' Sub:          Class_Initialize
 ' Description:  Class initialization (starting) event
 ' Assumptions:  -
@@ -348,7 +348,7 @@ End Property
 Private Sub Class_Initialize()
 On Error GoTo Err_Handler
 
-    MsgBox "Initializing...", vbOKOnly
+'    MsgBox "Initializing...", vbOKOnly
     
     Set m_CoverSpecies = New CoverSpecies
 
@@ -380,7 +380,7 @@ End Sub
 Private Sub Class_Terminate()
 On Error GoTo Err_Handler
     
-    MsgBox "Terminating...", vbOKOnly
+'    MsgBox "Terminating...", vbOKOnly
         
     Set m_CoverSpecies = Nothing
 
@@ -394,7 +394,7 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - Class_Terminate[cls_WoodyCanopy])"
     End Select
     Resume Exit_Handler
-End Sub
+'End Sub
 
 '======== Custom Methods ===========
 '---------------------------------------------------------------------------------------

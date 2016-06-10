@@ -498,7 +498,7 @@ On Error GoTo Err_Handler
     oBCTile.TileHeaderColor = vbGreen
     oBCTile.Link1Caption = "VegPlot"
     oBCTile.Link2Caption = "VegWalk"
-    oBCTile.Link3Caption = "Photos"
+    oBCTile.Link3Caption = "Photo"
     oBCTile.Link4Caption = "Transducer"
     oBCTile.Link5Visible = 0
     oBCTile.Link6Caption = "Tasks"

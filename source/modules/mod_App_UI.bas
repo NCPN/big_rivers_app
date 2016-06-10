@@ -328,7 +328,7 @@ On Error GoTo Err_Handler
         Case "vegwalk"
             rName = "SpeciesList"
             oArgs = ""
-        Case "photos"
+        Case "photo"
             rName = "Photo"
             oArgs = ""
         Case "transducer"

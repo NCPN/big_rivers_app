@@ -332,7 +332,7 @@ End Property
 Private Sub Class_Initialize()
 On Error GoTo Err_Handler
 
-    MsgBox "Initializing...", vbOKOnly
+'    MsgBox "Initializing...", vbOKOnly
     
     Set m_Species = New Species
 
@@ -364,7 +364,7 @@ End Sub
 Private Sub Class_Terminate()
 On Error GoTo Err_Handler
     
-    MsgBox "Terminating...", vbOKOnly
+'    MsgBox "Terminating...", vbOKOnly
         
     Set m_Species = Nothing
 

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -13,6 +13,7 @@ Option Explicit
 '               BLC, 5/26/2016 - 1.02 - added VirtualDAORecordset()
 '               BLC, 6/6/2016  - 1.03 - added error handling for duplicate templates, renamed global to g_AppTemplates
 '                                       also added SQL sanitization (escape/replace special chars)
+'               BLC, 6/9/2016  - 1.04 - added CreateTempRecords()
 ' =================================
 
 ' ---------------------------------
@@ -1055,9 +1056,11 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
-' SUB:          CreateTempTable
-' Description:  creates a temporary table of numbers
+' SUB:          CreateTempRecords
+' Description:  fills a temporary table of numbers
+'               first clears usys_temp_table of values, then populates w/ desired set of #s
 ' Parameters:   iCount - number of records (integer)
+'               iStart - starting point (integer)
 ' Returns:      rs - recordset containing # of records = iCount (DAO.recordset)
 ' Assumptions:  used for reports when a recordset doesn't exist for the report
 '               but it is necessary to repeat the report detail
@@ -1066,7 +1069,7 @@ End Function
 ' Source/date:  Bonnie Campbell, June 2016
 ' Revisions:    BLC, 6/8/2016 - initial version
 ' ---------------------------------
-Public Sub CreateTempTable(iCount As Integer)
+Public Sub CreateTempRecords(iStart As Integer, iCount As Integer)
 On Error GoTo Err_Handler
 
     Dim strSQL As String, strSQLDelete As String, strSQLInsert As String
@@ -1075,13 +1078,18 @@ On Error GoTo Err_Handler
     'clear table
     strSQLDelete = GetTemplate("d_usys_temp_table")
     
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL strSQLDelete
+    DoCmd.SetWarnings True
+    
+    'prep for inserts
     strSQL = GetTemplate("i_usys_temp_table")
      
     'add records to table
-    For i = 1 To iCount
+    For i = iStart To iCount
 
         strSQLInsert = Replace(strSQL, "[i]", i)
-        
+
         DoCmd.SetWarnings False
         DoCmd.RunSQL strSQLInsert
         DoCmd.SetWarnings True
@@ -1095,7 +1103,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - CreateTempTable[mod_Db])"
+            "Error encountered (#" & Err.Number & " - CreateTempRecords[mod_Db])"
     End Select
     Resume Exit_Handler
 End Sub

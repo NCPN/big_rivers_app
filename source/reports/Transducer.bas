@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =77
-    Right =15015
-    Bottom =10500
+    Right =17985
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -1351,6 +1351,9 @@ On Error GoTo Err_Handler
                 & strSQL2 & strWHERE & strORDERBY & ";"
     
     Me.RecordSource = strSQL
+
+    'hide modal Main form
+    Forms("Main").visible = False
 
 Exit_Handler:
     Exit Sub

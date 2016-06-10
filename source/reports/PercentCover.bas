@@ -17,8 +17,8 @@ Begin Report
     Width =11460
     DatasheetFontHeight =11
     ItemSuffix =185
-    Right =16485
-    Bottom =10995
+    Right =14805
+    Bottom =8835
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -28,7 +28,7 @@ Begin Report
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6a01000068010000680100006d01000000000000c42c00006801000001000000 ,
+        0x6a010000a8000000660100001e01000000000000c42c00006801000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -1633,8 +1633,10 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, May 12, 2016
 ' References:
-'  Allen Browne, April 2010
-'  http://allenbrowne.com/ser-43.html
+'   Allen Browne, April 2010
+'   http://allenbrowne.com/ser-43.html
+'   Michael Lester, April 1, 2005
+'   http://forums.aspfree.com/microsoft-access-help-18/changing-record-source-subreports-vba-53031.html
 ' Revisions:    BLC - 5/12/2016 - 1.00 - initial version
 ' =================================
 
@@ -1858,6 +1860,20 @@ On Error GoTo Err_Handler
         Case "DINO"
             strSQL = ""
     End Select
+
+'    'ensure recordsource is set only once
+'    Static CallCount As Long
+'    If CallCount = 0 Then Me.RecordSource = strSQL
+'    CallCount = CallCount + 1
+    
+    'count which subreport is being opened
+    Dim recSources As Variant
+    Static iCallCount As Integer
+    If iCallCount = 0 Then
+        Me.RecordSource = recSources(gSubReportCount)
+        gSubReportCount = gSubReportCount + 1   'parent rpt counter
+    End If
+    iCallCount = iCallCount + 1
 
     'headers & keys
     lblTitle.Caption = Me.CoverTypeName & " % Cover"

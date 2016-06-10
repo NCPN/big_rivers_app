@@ -12,8 +12,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =18
-    Right =15015
-    Bottom =10500
+    Right =14805
+    Bottom =8835
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -448,7 +448,6 @@ Begin Report
                 Begin Subform
                     CanShrink = NotDefault
                     OldBorderStyle =0
-                    Left =14
                     Width =11477
                     Height =4320
                     Name ="TPctCover"
@@ -456,27 +455,24 @@ Begin Report
                     GridlineColor =10921638
                     FilterOnEmptyMaster =0
 
-                    LayoutCachedLeft =14
-                    LayoutCachedWidth =11491
+                    LayoutCachedWidth =11477
                     LayoutCachedHeight =4320
                 End
                 Begin Subform
                     CanShrink = NotDefault
                     OldBorderStyle =0
-                    Left =14
-                    Top =4680
+                    Top =4740
                     Width =11477
                     Height =2520
                     TabIndex =1
                     Name ="BPctCover"
-                    SourceObject ="Report.PercentCover"
+                    SourceObject ="Report.PercentCoverCOPY"
                     GridlineColor =10921638
                     FilterOnEmptyMaster =0
 
-                    LayoutCachedLeft =14
-                    LayoutCachedTop =4680
-                    LayoutCachedWidth =11491
-                    LayoutCachedHeight =7200
+                    LayoutCachedTop =4740
+                    LayoutCachedWidth =11477
+                    LayoutCachedHeight =7260
                 End
             End
         End
@@ -532,9 +528,16 @@ Option Explicit
 ' Description:  Vegetation plot report object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 25, 2016
-' References:   -
+' References:
+'   Michael Lester, April 1, 2005
+'   http://forums.aspfree.com/microsoft-access-help-18/changing-record-source-subreports-vba-53031.html
 ' Revisions:    BLC - 5/25/2016 - 1.00 - initial version
 ' =================================
+
+'---------------------
+' Global Declarations
+'---------------------
+'Public gSubReportCount As Integer --> in App settings
 
 '---------------------
 ' Simulated Inheritance
@@ -544,10 +547,8 @@ Option Explicit
 ' Declarations
 '---------------------
 Private m_Park As String
-Private WithEvents oTPctCover As Report_PercentCover
-Attribute oTPctCover.VB_VarHelpID = -1
-Private WithEvents oBPctCover As Report_PercentCover
-Attribute oBPctCover.VB_VarHelpID = -1
+'Private WithEvents oTPctCover As Report_PercentCover
+'Private WithEvents oBPctCover As Report_PercentCover
 
 '---------------------
 ' Event Declarations
@@ -654,15 +655,17 @@ On Error GoTo Err_Handler
     'set river segment(s)
     arySegments = GetRiverSegments(Me.Park)
     For i = 0 To UBound(arySegments, 2)
-        strSegments = strSegments & arySegments(0, i) & Space(4)
+        strSegments = strSegments & arySegments(0, i) & Space(2)
     Next
     strSegments = Left(strSegments, Len(strSegments) - 1)
     
     Me.lblRiverSegments.Caption = strSegments
         
     'prepare interface
+'    Dim oTPctCover As Report_PercentCover
+'    Dim oBPctCover As Report_PercentCoverCOPY
     Dim oTPctCover As Report_PercentCover
-    Dim oBPctCover As Report_PercentCoverCOPY
+    Dim oBPctCover As Report_PercentCover
     
     'VegPlot
     lblTitle.Caption = Nz(TempVars("ParkCode"), "") & "VegPlot"
@@ -670,39 +673,44 @@ On Error GoTo Err_Handler
     ' ------ Keys -------
     Me.rsubModWentworth.SourceObject = "Report.ModWentworthKey"
     
-    ' ------ Top -------
-    Set oTPctCover = TPctCover
-    With oTPctCover.Report
-        
-        .Park = TempVars("ParkCode")
-        Select Case .Park
-            Case "BLCA"
-                .SetCoverType "WCC"
-            Case "CANY"
-                .SetCoverType "WCC"
-            Case "DINO"
-                .SetCoverType "ARS"
-        End Select
-        Debug.Print .Park & " - " & .CoverType & vbCrLf
-    End With
-        
-    ' ------ Bottom -------
-    Set oBPctCover = BPctCover
-    With oBPctCover.Report
-        'default
-        .visible = True
-        
-        .Park = TempVars("ParkCode")
-        .SetCoverType "URC"
-        
-        Select Case .Park
-            Case "BLCA"
-            Case "CANY"
-            Case "DINO" 'DINO has only one percent cover displayed (ARS)
-                .visible = False
-        End Select
-        Debug.Print .Park & " - " & .CoverType & vbCrLf
-    End With
+'    ' ------ Top -------
+'    'Set oTPctCover = TPctCover
+'    'TPctCover.SourceObject = "PercentCover"
+'    Set oTPctCover = TPctCover '.Report '.Report
+'    With oTPctCover
+'
+'        .Park = TempVars("ParkCode")
+'        Select Case .Park
+'            Case "BLCA"
+'                .SetCoverType "WCC"
+'            Case "CANY"
+'                .SetCoverType "WCC"
+'            Case "DINO"
+'                .SetCoverType "ARS"
+'        End Select
+'        Debug.Print .Park & " - " & .CoverType & vbCrLf
+'    End With
+'
+'    ' ------ Bottom -------
+'    Set oBPctCover = BPctCover.Report
+'    With oBPctCover
+'        'default
+'        .visible = True
+'
+'        .Park = TempVars("ParkCode")
+'        .SetCoverType "URC"
+'
+'        Select Case .Park
+'            Case "BLCA"
+'            Case "CANY"
+'            Case "DINO" 'DINO has only one percent cover displayed (ARS)
+'                .visible = False
+'        End Select
+'        Debug.Print .Park & " - " & .CoverType & vbCrLf
+'    End With
+    
+    'hide modal Main form
+    Forms("Main").visible = False
     
 Exit_Handler:
     Exit Sub

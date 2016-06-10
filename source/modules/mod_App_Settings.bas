@@ -23,6 +23,8 @@ Option Explicit
 ' ---------------------------------
 'Public g_AppTemplates As Scripting.Dictionary     'global dictionary for application templates (if any)
 
+Public gSubReportCount As Integer                  'global counter for subreports
+
 ' ---------------------------------
 ' CONSTANTS:    global constant values
 ' Description:  values setting application level contants

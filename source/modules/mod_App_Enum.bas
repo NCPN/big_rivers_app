@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 6/8/2016  - 1.02 - latest enum update from db
-'                                         last updated: 6/8/2016 1:15:49 PM
+'               app - 6/9/2016  - 1.02 - latest enum update from db
+'                                         last updated: 6/9/2016 10:41:02 AM
 ' =================================
 
 '-----------------------------
@@ -205,7 +205,7 @@ Public Enum WentworthClassSize
     FG = 28
     MG = 29
     CG = 30
-    SP = 31
+    sp = 31
     LP = 32
     SC = 33
     LC = 34

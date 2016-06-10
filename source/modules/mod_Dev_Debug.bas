@@ -770,22 +770,55 @@ Public Sub Testing()
 'End With
 
 
-Dim p As New Person
+'Dim p As New Person
+'
+'With p
+'    .FirstName = "Maija"
+'    .LastName = "Tester"
+'    .MiddleInitial = "X"
+'    .Username = Username
+'    .Email = "a@bc.com"
+'    .Role = "d"
+'    .AccessRole = "admin"
+'    .SaveToDb
+'
+'    Debug.Print .ID
+'    Debug.Print .AccessLevel
+'
+'End With
 
-With p
-    .FirstName = "Maija"
-    .LastName = "Tester"
-    .MiddleInitial = "X"
-    .Username = Username
-    .Email = "a@bc.com"
-    .Role = "d"
-    .AccessRole = "admin"
-    .SaveToDb
+'add multiple species for WCC, URC, ARS
+Dim ary As Variant
+ary = Array("YUCCA", "SALIX", "RIBES", "POPFRE", "TAMARIX", "SALEXI", _
+            "GNAPAL", "ERAHYP", "CALCAN", "BROTEC", "ASTER", "CYMCON", "ERODIUM", "HELHOO")
+Dim i As Integer
+Dim str As String
+
+For i = LBound(ary) To UBound(ary)
+    str = CStr(ary(i))
+'    Dim wcc As New WoodyCanopySpecies
+'    With wcc
+'        .Init (str)
+'        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
+'        .VegPlotID = 4
+'        .SaveToDb
+'    End With
     
-    Debug.Print .ID
-    Debug.Print .AccessLevel
-
-End With
+    Dim urc As New UnderstoryCoverSpecies
+    With urc
+         .Init (str)
+        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
+        .VegPlotID = 4
+        .SaveToDb
+    End With
+'    Dim ars As New RootedSpecies
+'    With ars
+'        .Init (str)
+'        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
+'        .VegPlotID = 4
+'        .SaveToDb
+'    End With
+Next
 
 End Sub
 

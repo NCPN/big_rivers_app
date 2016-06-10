@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =3195
-    Top =3105
-    Right =28545
-    Bottom =14895
+    Left =4935
+    Top =3780
+    Right =22920
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1556,6 +1556,9 @@ On Error GoTo Err_Handler
             btnARC.visible = True
     End Select
   
+    'hide modal Main form
+    Forms("Main").visible = False
+  
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1849,8 +1852,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-
 
 ' ---------------------------------
 ' Sub:          btnComment_Click
