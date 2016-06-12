@@ -8,13 +8,14 @@ Option Explicit
 ' =================================
 ' CLASS:        CoverSpecies
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Cover Species object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 4/13/2016
 ' References:   -
 ' Revisions:    BLC - 4/13/2016 - 1.00 - initial version
+'               BLC - 6/11/2016 - 1.01 - updated to use GetTemplate()
 ' =================================
 
 '---------------------
@@ -421,6 +422,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/19/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/19/2016 - initial version
+'   BLC, 6/11/2016 - revised to GetTemplate()
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb()
 On Error GoTo Err_Handler
@@ -432,9 +434,14 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'record actions must have:
-    strSQL = "INSERT INTO CoverSpecies(VegPlot_ID, Master_PLANT_Code, PercentCover, IsSeedling) VALUES " _
-                & "('" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
-                & Me.PercentCover & "," & Me & "', Now() );"
+'    strSQL = "INSERT INTO CoverSpecies(VegPlot_ID, Master_PLANT_Code, PercentCover, IsSeedling) VALUES " _
+'                & "('" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
+'                & Me.PercentCover & "," & Me & "', Now() );"
+    strSQL = GetTemplate("i_cover_species", _
+                "tbl" & PARAM_SEPARATOR & "CoverSpecies" & _
+                "vegplotID" & PARAM_SEPARATOR & Me.VegPlotID & _
+                "|masterplantcode" & PARAM_SEPARATOR & Me.MasterPlantCode & _
+                "|pctcover" & PARAM_SEPARATOR & Me.PercentCover)
 
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)

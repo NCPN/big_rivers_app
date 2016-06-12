@@ -38,16 +38,6 @@ Private m_HasSocialTrail As Boolean
 Private m_FilamentousAlgae As Boolean
 Private m_NoIndicatorSpecies As Boolean
 
-'Private m_SiteID As Long
-'Private m_RiverID As Long
-'Private m_LocationID As Long
-'Private m_Observer As String
-'Private m_Recorder As String
-'Private m_ObserverID As Integer
-'Private m_RecorderID As Integer
-'Private m_CommentID As Integer
-'Private m_Comment As String
-
 '---------------------
 ' Events
 '---------------------
@@ -168,10 +158,10 @@ Public Property Get UnderstoryRootedPctCover() As Integer
 End Property
 
 Public Property Let PlotDensity(Value As Integer)
-    Dim aryDensity() As Integer
+    Dim aryDensity() As String
     aryDensity = Split(PLOT_DENSITIES, ",")
     If IsInArray(CStr(Value), aryDensity) Then
-        m_PlotDensity = Value
+        m_PlotDensity = CInt(Value)
     Else
         RaiseEvent InvalidPlotDensity(Value)
     End If
@@ -220,74 +210,6 @@ End Property
 Public Property Get NoIndicatorSpecies() As Boolean
     NoIndicatorSpecies = m_NoIndicatorSpecies
 End Property
-
-
-'Public Property Let SiteID(Value As Integer)
-'    m_SiteID = Value
-'End Property
-'
-'Public Property Get SiteID() As Integer
-'    SiteID = m_SiteID
-'End Property
-'
-'Public Property Let LocationID(Value As Integer)
-'    m_LocationID = Value
-'End Property
-'
-'Public Property Get LocationID() As Integer
-'    LocationID = m_LocationID
-'End Property
-'
-'Public Property Let ObserverID(Value As Integer)
-'    m_ObserverID = Value
-'End Property
-'
-'Public Property Get ObserverID() As Integer
-'    ObserverID = m_ObserverID
-'End Property
-'
-'Public Property Let Observer(Value As String)
-'    m_Observer = Value
-'End Property
-'
-'Public Property Get Observer() As String
-'    Observer = m_Observer
-'End Property
-'
-'Public Property Let RecorderID(Value As Integer)
-'    m_RecorderID = Value
-'End Property
-'
-'Public Property Get RecorderID() As Integer
-'    RecorderID = m_RecorderID
-'End Property
-'
-'Public Property Let Recorder(Value As String)
-'    m_Recorder = Value
-'End Property
-'
-'Public Property Get Recorder() As String
-'    Recorder = m_Recorder
-'End Property
-
-''---------------------
-''change to comment object instead??
-''---------------------
-'Public Property Let CommentID(Value As Integer)
-'    m_CommentID = Value
-'End Property
-'
-'Public Property Get CommentID() As Integer
-'    CommentID = m_CommentID
-'End Property
-'
-'Public Property Let Comment(Value As String)
-'    m_Comment = Value
-'End Property
-'
-'Public Property Get Comment() As String
-'    Comment = m_Comment
-'End Property
 
 '---------------------
 ' Methods

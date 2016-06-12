@@ -8,13 +8,15 @@ Option Explicit
 ' =================================
 ' CLASS:        UnderstoryCoverSpecies
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.02
 '
 ' Description:  UnderstoryCover species object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 4/19/2016
 ' References:   -
 ' Revisions:    BLC - 4/19/2016 - 1.00 - initial version
+'               BLC - 6/10/2016 - 1.01 - revised booleans to byte (values 0 & 1 vs. 0 & -1)
+'               BLC - 6/11/2016 - 1.02 - updated to use GetTemplate()
 ' =================================
 
 '---------------------
@@ -22,12 +24,12 @@ Option Explicit
 '---------------------
 Private m_CoverSpecies As New CoverSpecies
 
-Private m_IsSeedling As Boolean
+Private m_IsSeedling As Byte
 
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidIsSeedling(Value As Boolean)
+Public Event InvalidIsSeedling(Value As Byte)
 
 '-- base events (coverspecies)
 Public Event InvalidVegPlotID(Value As String)
@@ -43,15 +45,15 @@ Public Event InvalidCode(Value As String)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let IsSeedling(Value As Boolean)
-    If varType(Value) = vbBoolean Then
+Public Property Let IsSeedling(Value As Byte)
+    If varType(Value) = vbByte Then
         m_IsSeedling = Value
     Else
         RaiseEvent InvalidIsSeedling(Value)
     End If
 End Property
 
-Public Property Get IsSeedling() As Boolean
+Public Property Get IsSeedling() As Byte
     IsSeedling = m_IsSeedling
 End Property
 
@@ -438,6 +440,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/19/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/19/2016 - initial version
+'   BLC, 6/11/2016 - revised to GetTemplate()
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb()
 On Error GoTo Err_Handler
@@ -449,10 +452,14 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'record actions must have:
-    strSQL = "INSERT INTO UnderstorySpecies(VegPlot_ID, Master_PLANT_Code, PercentCover, IsSeedling) VALUES " _
-                & "(" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
-                & Me.PercentCover & "," & Me.IsSeedling & ");"
-
+'    strSQL = "INSERT INTO UnderstorySpecies(VegPlot_ID, Master_PLANT_Code, PercentCover, IsSeedling) VALUES " _
+'                & "(" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
+'                & Me.PercentCover & "," & Me.IsSeedling & ");"
+    strSQL = GetTemplate("i_understory_species", _
+                "vegplotID" & PARAM_SEPARATOR & Me.VegPlotID & _
+                "|masterplantcode" & PARAM_SEPARATOR & Me.MasterPlantCode & _
+                "|pctcover" & PARAM_SEPARATOR & Me.PercentCover & _
+                "|isseedling" & PARAM_SEPARATOR & Me.IsSeedling)
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 

@@ -55,6 +55,11 @@ Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
 Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
 Public Const lngDkGreen As Long = 690698    '?RGB(10,138,10) #0A8A0A
 Public Const lngRobinEgg As Long = 16772541 '?RGB(189,237,255) #BDEDFF robin's egg blue
+Public Const lngLtCyan As Long = 16777184   '?RGB(224,255,255) #E0FFFF
+Public Const lngGrnApple As Long = 1557580  '?RGB(76,196,23) #4CC417
+Public Const lngCoral As Long = 527564      '?RGB(255,127,80) #FF7F50
+Public Const lngYelGrn As Long = 1560658    '?RGB(82,208,23) #52D017
+Public Const lngPink As Long = 10582263     '?RGB(247,120,161) #F778A1 carnation red
 
 ' ---------------------------------
 '  Subroutines & Functions

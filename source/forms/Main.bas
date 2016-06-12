@@ -16,9 +16,9 @@ Begin Form
     Width =8640
     DatasheetFontHeight =11
     ItemSuffix =23
-    Left =7515
+    Left =8895
     Top =2805
-    Right =16410
+    Right =17790
     Bottom =10530
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -185,7 +185,8 @@ Begin Form
                     BackTint =100.0
                     OldBorderStyle =0
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =9699294
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -522,6 +523,13 @@ On Error GoTo Err_Handler
     
     HighlightBreadcrumb
     
+    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
+            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+            "msg" & PARAM_SEPARATOR & "Please select a park (right click)." & _
+            "|Type" & PARAM_SEPARATOR & "caution"
+    End If
+
+    
 Exit_Handler:
     Exit Sub
     
@@ -597,6 +605,8 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+
 
 '---------------------
 ' Methods

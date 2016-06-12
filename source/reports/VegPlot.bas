@@ -12,8 +12,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =18
-    Right =14805
-    Bottom =8835
+    Right =24465
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -466,7 +466,7 @@ Begin Report
                     Height =2520
                     TabIndex =1
                     Name ="BPctCover"
-                    SourceObject ="Report.PercentCoverCOPY"
+                    SourceObject ="Report.PercentCover"
                     GridlineColor =10921638
                     FilterOnEmptyMaster =0
 
@@ -668,7 +668,7 @@ On Error GoTo Err_Handler
     Dim oBPctCover As Report_PercentCover
     
     'VegPlot
-    lblTitle.Caption = Nz(TempVars("ParkCode"), "") & "VegPlot"
+    lblTitle.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & "VegPlot"
     
     ' ------ Keys -------
     Me.rsubModWentworth.SourceObject = "Report.ModWentworthKey"
@@ -713,6 +713,7 @@ On Error GoTo Err_Handler
     Forms("Main").visible = False
     
 Exit_Handler:
+    gSubReportCount = 0
     Exit Sub
     
 Err_Handler:
@@ -744,6 +745,7 @@ On Error GoTo Err_Handler
     Forms("Main").visible = True
 
 Exit_Handler:
+    gSubReportCount = 0
     Exit Sub
 
 Err_Handler:

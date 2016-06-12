@@ -652,6 +652,29 @@ Public Sub Testing()
 '    .NoIndicatorSpecies = False
 '    .SaveToDb
 'End With
+Dim i As Integer
+For i = 0 To 4
+Dim myVegPlot As New VegPlot
+With myVegPlot
+    .EventID = 2
+    .SiteID = 2
+    .FeatureID = 3
+    .VegTransectID = 4
+    .PlotNumber = 3
+    .PlotDistance = Int((10 - 0 + 1) * Rnd + 0)
+    .ModalSedimentSize = "S"
+    .PercentFines = Int((100 - 0 + 1) * Rnd + 0)
+    .PercentWater = Int((100 - 0 + 1) * Rnd + 0)
+    .UnderstoryRootedPctCover = Int((100 - 0 + 1) * Rnd + 0)
+    .PlotDensity = 4
+    .NoCanopyVeg = 0
+    .NoRootedVeg = 0
+    .HasSocialTrail = 0
+    .FilamentousAlgae = 1
+    .NoIndicatorSpecies = 0
+    .SaveToDb
+End With
+Next
 
 ''veg transects - park required before transectnumber is set!
 'Dim myVegTransect As New VegTransect
@@ -788,37 +811,37 @@ Public Sub Testing()
 'End With
 
 'add multiple species for WCC, URC, ARS
-Dim ary As Variant
-ary = Array("YUCCA", "SALIX", "RIBES", "POPFRE", "TAMARIX", "SALEXI", _
-            "GNAPAL", "ERAHYP", "CALCAN", "BROTEC", "ASTER", "CYMCON", "ERODIUM", "HELHOO")
-Dim i As Integer
-Dim str As String
-
-For i = LBound(ary) To UBound(ary)
-    str = CStr(ary(i))
-'    Dim wcc As New WoodyCanopySpecies
-'    With wcc
-'        .Init (str)
+'Dim ary As Variant
+'ary = Array("YUCCA", "SALIX", "RIBES", "POPFRE", "TAMARIX", "SALEXI", _
+'            "GNAPAL", "ERAHYP", "CALCAN", "BROTEC", "ASTER", "CYMCON", "ERODIUM", "HELHOO")
+'Dim i As Integer
+'Dim str As String
+'
+'For i = LBound(ary) To UBound(ary)
+'    str = CStr(ary(i))
+''    Dim wcc As New WoodyCanopySpecies
+''    With wcc
+''        .Init (str)
+''        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
+''        .VegPlotID = 4
+''        .SaveToDb
+''    End With
+'
+'    Dim urc As New UnderstoryCoverSpecies
+'    With urc
+'         .Init (str)
 '        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
 '        .VegPlotID = 4
 '        .SaveToDb
 '    End With
-    
-    Dim urc As New UnderstoryCoverSpecies
-    With urc
-         .Init (str)
-        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
-        .VegPlotID = 4
-        .SaveToDb
-    End With
-'    Dim ars As New RootedSpecies
-'    With ars
-'        .Init (str)
-'        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
-'        .VegPlotID = 4
-'        .SaveToDb
-'    End With
-Next
+''    Dim ars As New RootedSpecies
+''    With ars
+''        .Init (str)
+''        .PercentCover = Int((100 - 0 + 1) * Rnd + 0)
+''        .VegPlotID = 4
+''        .SaveToDb
+''    End With
+'Next
 
 End Sub
 
@@ -834,12 +857,31 @@ GetTemplates
 End Sub
 
 Public Sub testme()
-Dim rs As Recordset
-Set rs = VirtualDAORecordset(10, "tbl")
+'Dim rs As Recordset
+'Set rs = VirtualDAORecordset(10, "tbl")
+'
+'Debug.Print rs("RecCount")
+'
+'Set rs = Nothing
+'DBEngine.Rollback
 
-Debug.Print rs("RecCount")
+'    Dim aryDensity() As Variant
+'    aryDensity = SplitInt(PLOT_DENSITIES, ",")
+'Dim ID As Integer
+'ID = 5
+'
+'    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+'                "Tagline" & PARAM_SEPARATOR & ID & _
+'                "|Type" & PARAM_SEPARATOR & "info"
 
-Set rs = Nothing
-DBEngine.Rollback
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                "msg" & PARAM_SEPARATOR & "Please select a river segment." & _
+                "|Type" & PARAM_SEPARATOR & "alert"
+
+
+'    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+'                "msg" & PARAM_SEPARATOR & "Please select river segment." & _
+'                "|Type" & PARAM_SEPARATOR & "info"
+
 
 End Sub

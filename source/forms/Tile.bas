@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =10530
-    Top =9270
-    Right =13110
-    Bottom =12420
+    Left =11790
+    Top =7455
+    Right =14370
+    Bottom =10605
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -102,7 +102,7 @@ Begin Form
         End
         Begin FormHeader
             Height =447
-            BackColor =16711680
+            BackColor =65280
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -113,9 +113,8 @@ Begin Form
                     Top =60
                     Width =1980
                     Height =300
-                    ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Reports"
+                    Caption ="Trip Prep"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -131,7 +130,7 @@ Begin Form
                     OverlapFlags =85
                     Top =432
                     Width =2592
-                    BorderColor =65535
+                    BorderColor =65280
                     Name ="lineIndicator"
                     LeftPadding =0
                     TopPadding =0
@@ -161,10 +160,11 @@ Begin Form
                     Width =2160
                     Height =240
                     FontSize =9
+                    BackColor =9699294
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink1"
-                    Caption ="rpt1"
+                    Caption ="VegPlot"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -173,6 +173,7 @@ Begin Form
                     LayoutCachedTop =60
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =300
+                    BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                 End
                 Begin CommandButton
@@ -204,17 +205,17 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =420
                     Width =2160
                     Height =240
                     FontSize =9
+                    BackColor =9699294
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink2"
-                    Caption ="Link2"
+                    Caption ="VegWalk"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -223,19 +224,21 @@ Begin Form
                     LayoutCachedTop =420
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =660
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =780
                     Width =2160
                     Height =240
                     FontSize =9
+                    BackColor =9699294
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink3"
-                    Caption ="Link3"
+                    Caption ="Photo"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -244,19 +247,21 @@ Begin Form
                     LayoutCachedTop =780
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =1020
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =1140
                     Width =2160
                     Height =240
                     FontSize =9
+                    BackColor =9699294
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink4"
-                    Caption ="Link4"
+                    Caption ="Transducer"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -265,6 +270,8 @@ Begin Form
                     LayoutCachedTop =1140
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =1380
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
                 End
                 Begin Label
                     Visible = NotDefault
@@ -288,17 +295,17 @@ Begin Form
                     LayoutCachedHeight =1740
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =215
                     Left =180
                     Top =1860
                     Width =2160
                     Height =240
                     FontSize =9
+                    BackColor =9699294
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink6"
-                    Caption ="Link6"
+                    Caption ="Tasks"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -307,6 +314,8 @@ Begin Form
                     LayoutCachedTop =1860
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =2100
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
                 End
             End
         End

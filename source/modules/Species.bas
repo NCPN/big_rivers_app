@@ -8,13 +8,14 @@ Option Explicit
 ' =================================
 ' CLASS:        Species
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Species object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 10/30/2015
 ' References:   -
 ' Revisions:    BLC - 10/30/2015 - 1.00 - initial version
+'               BLC - 6/11/2016 - 1.01 - updated to use GetTemplate()
 ' =================================
 
 '---------------------
@@ -319,8 +320,7 @@ End Property
 Private Sub Class_Initialize()
 On Error GoTo Err_Handler
 
-    MsgBox "Initializing...", vbOKOnly
-
+'    MsgBox "Initializing...", vbOKOnly
 
 Exit_Handler:
     Exit Sub
@@ -350,7 +350,7 @@ End Sub
 Private Sub Class_Terminate()
 On Error GoTo Err_Handler
     
-    MsgBox "Terminating...", vbOKOnly
+'    MsgBox "Terminating...", vbOKOnly
     
 Exit_Handler:
     Exit Sub
@@ -376,6 +376,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/18/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/18/2016 - initial version
+'   BLC, 6/11/2016 - changed to GetTemplate()
 '---------------------------------------------------------------------------------------
 Public Sub Init(LUcode As String)
 On Error GoTo Err_Handler
@@ -387,12 +388,13 @@ On Error GoTo Err_Handler
     Set db = CurrentDb
     
     'species must have:
-    strSQL = "SELECT DISTINCT TOP 1 Master_Family, Master_PLANT_Code, Master_Species, " _
-            & "UT_Family, CO_Family, WY_Family, Utah_PLant_Code, " _
-            & "Utah_Species, CO_PLANT_Code, Co_Species, " _
-            & "Wy_PLANT_Code, Wy_Species, Master_Common_Name, " _
-            & "LU_Code, Lifeform, Duration, Nativity " _
-            & "FROM tlu_NCPN_plants WHERE LU_Code = '" & LUcode & "';"
+'    strSQL = "SELECT DISTINCT TOP 1 Master_Family, Master_PLANT_Code, Master_Species, " _
+'            & "UT_Family, CO_Family, WY_Family, Utah_PLant_Code, " _
+'            & "Utah_Species, CO_PLANT_Code, Co_Species, " _
+'            & "Wy_PLANT_Code, Wy_Species, Master_Common_Name, " _
+'            & "LU_Code, Lifeform, Duration, Nativity " _
+'            & "FROM tlu_NCPN_plants WHERE LU_Code = '" & LUcode & "';"
+    strSQL = GetTemplate("s_plant_species_by_LUcode", "lucode:" & LUcode)
 
     Set rs = db.OpenRecordset(strSQL)
     If Not (rs.EOF And rs.BOF) Then

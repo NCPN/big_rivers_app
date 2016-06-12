@@ -1,7 +1,6 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
-    AutoResize = NotDefault
     PopUp = NotDefault
     Modal = NotDefault
     RecordSelectors = NotDefault
@@ -22,10 +21,10 @@ Begin Form
     Width =8884
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =4635
-    Top =3630
-    Right =14835
-    Bottom =14130
+    Left =6315
+    Top =3780
+    Right =24300
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6ab456d96fb4e440
@@ -177,7 +176,8 @@ Begin Form
                 Begin Label
                     OverlapFlags =223
                     TextAlign =2
-                    Left =2700
+                    Left =2730
+                    Top =180
                     Width =720
                     Height =360
                     FontSize =12
@@ -188,16 +188,18 @@ Begin Form
                     Caption ="1"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2700
-                    LayoutCachedWidth =3420
-                    LayoutCachedHeight =360
+                    LayoutCachedLeft =2730
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =3450
+                    LayoutCachedHeight =540
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =215
                     TextAlign =2
-                    Left =330
+                    Left =360
+                    Top =180
                     Width =8085
                     Height =600
                     FontSize =12
@@ -206,9 +208,10 @@ Begin Form
                     Caption ="ID #           record deleted from table X."
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
-                    LayoutCachedLeft =330
-                    LayoutCachedWidth =8415
-                    LayoutCachedHeight =600
+                    LayoutCachedLeft =360
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =8445
+                    LayoutCachedHeight =780
                     ForeTint =100.0
                 End
             End
@@ -250,35 +253,74 @@ Option Explicit
 ' Revisions:
 '   BLC, 2/3/2016  - initial version
 '   BLC, 6/1/2016  - adjusted for Big Rivers application
+'   BLC, 6/10/2016 - adjusted to accommodate other messages
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
 
     Dim Transp As Long
-    Dim ary() As String
-    
-    'close when no transect # is passed
+    Dim Opac As Single 'opacity
+    Dim ary() As String, ary2() As String
+    Dim i As Integer
+        
+    'close when no message is passed
     If IsNull(Me.OpenArgs) Or Me.OpenArgs = 0 Then
         DoCmd.Close
         GoTo Exit_Handler
     End If
     
-    ary = Split(Me.OpenArgs, "|")
-    
-    'set table
-    Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary(0) & " table."
-    'set ID #
-    lblRecordNumber.Caption = ary(1)
-    
-    'set background color -- RGB(0, 0, 0)
+    'set background color default
     'to set color RGB, see http://www.rapidtables.com/web/color/RGB_Color.htm for Red/Green/Blue values
     Transp = lngRobinEgg 'RGB(153, 255, 51)
+    
+    If InStr(Me.OpenArgs, "|") Then
+        ary = Split(Me.OpenArgs, "|")
+        
+        For i = 0 To UBound(ary)
+            ary2 = Split(ary(i), PARAM_SEPARATOR)
+            Select Case i
+                Case 0 'message info
+                    Select Case LCase(ary2(0))
+                        Case "tagline"
+                            'set table
+                            Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
+                            'set ID #
+                            lblRecordNumber.Caption = ary2(1)
+                            lblRecordNumber.visible = True
+                            
+                        Case Else
+                            lblMessage.Caption = ary2(1)
+                            lblRecordNumber.visible = False
+                    End Select
+                    
+                Case 1 'overlay type
+                    Select Case ary2(1)
+                        Case "info"
+                            Transp = lngRobinEgg 'RGB(153, 255, 51)
+                            Opac = 0.9
+                        Case "caution"
+                            lblMessage.forecolor = lngBlue
+                            Transp = lngYellow
+                            Opac = 0.9
+                        Case "alert"
+                            lblMessage.forecolor = lngYellow
+                            Transp = lngPink
+                            Opac = 0.9
+                        Case "done"
+                            lblMessage.forecolor = lngBlack
+                            Transp = lngYelLime
+                            Opac = 0.9
+                    End Select
+            End Select
+        Next
      
+    End If
+    
     Me.Detail.backcolor = Transp
      
     Me.Painting = False
     'set background opacity
-    SetFormOpacity Me, 0.9, Transp
+    SetFormOpacity Me, Opac, Transp
     Me.Painting = True
 
 Exit_Handler:
@@ -309,6 +351,7 @@ End Sub
 Private Sub Form_Click()
 On Error GoTo Err_Handler
 
+    DoCmd.Close
     
 Exit_Handler:
     Exit Sub

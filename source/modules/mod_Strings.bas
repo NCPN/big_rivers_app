@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -12,6 +12,7 @@ Option Explicit
 '               BLC, 5/12/2016 - 1.01 - added Unicode strings, GetUnicode()
 '               BLC, 5/13/2016 - 1.02 - StringFromCodePoint()
 '               BLC, 6/7/2016  - 1.03 - added InternalTrim()
+'               BLC, 6/10/2016 - 1.04 - added SplitInt()
 ' =================================
 
 '---------------------
@@ -388,6 +389,48 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - StringFromCodePoint[mod_Strings])"
+    End Select
+    Resume Exit_Function
+End Function
+
+' ---------------------------------
+' FUNCTION:     SplitInt
+' Description:  Splits array of strings which are integers into an array of integers
+' Assumptions:  Array passed in is actually an array of integers
+' Parameters:   strInspect - string to check
+'               strDelimiter - string separator
+' Returns:      string array - array of integers found in strInspect
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, June 10, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC, 6/10/2016 - initial version
+' ---------------------------------
+Public Function SplitInt(ByVal strInspect As String, strDelimiter As String) As Variant
+On Error GoTo Err_Handler:
+    Dim i As Integer
+    
+    If Len(strInspect) > 0 Then
+        Dim ary() As String
+        ary = Split(strInspect, strDelimiter)
+        
+        For i = LBound(ary) To UBound(ary)
+            ary(i) = CInt(ary(i))
+        Next
+        
+    End If
+    
+    SplitInt = ary
+
+Exit_Function:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SplitInt[mod_Strings])"
     End Select
     Resume Exit_Function
 End Function

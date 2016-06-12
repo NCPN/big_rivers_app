@@ -14,11 +14,11 @@ Begin Report
     PictureType =1
     GridX =24
     GridY =24
-    Width =11460
+    Width =11448
     DatasheetFontHeight =11
-    ItemSuffix =185
-    Right =14805
-    Bottom =8835
+    ItemSuffix =202
+    Right =21285
+    Bottom =9645
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -28,7 +28,7 @@ Begin Report
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6a010000a8000000660100001e01000000000000c42c00006801000001000000 ,
+        0x0000000000000000000000000000000000000000c42c00006801000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -311,7 +311,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =1
-                    Left =3195
+                    Left =3180
                     Width =518
                     Height =360
                     FontSize =8
@@ -322,8 +322,8 @@ Begin Report
                     Name ="lblColT1"
                     Caption ="c1"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3195
-                    LayoutCachedWidth =3713
+                    LayoutCachedLeft =3180
+                    LayoutCachedWidth =3698
                     LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -744,7 +744,7 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =1
-                    Left =3195
+                    Left =3180
                     Width =518
                     Height =360
                     FontSize =14
@@ -755,8 +755,8 @@ Begin Report
                     Name ="lblColC1"
                     Caption ="c1"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3195
-                    LayoutCachedWidth =3713
+                    LayoutCachedLeft =3180
+                    LayoutCachedWidth =3698
                     LayoutCachedHeight =360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -1113,47 +1113,46 @@ Begin Report
             KeepTogether = NotDefault
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =360
+            Height =324
             Name ="Detail"
-            AutoHeight =255
             AlternateBackColor =14869733
             Begin
                 Begin Label
                     OldBorderStyle =1
                     TextAlign =1
                     Width =11448
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
                     BackColor =14869733
                     BorderColor =8355711
                     Name ="lblRow"
-                    Caption ="row"
                     GridlineColor =10921638
                     LayoutCachedWidth =11448
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin TextBox
                     FontItalic = NotDefault
+                    OldBorderStyle =0
                     BackStyle =0
                     IMESentenceMode =3
                     Left =60
-                    Width =960
-                    Height =360
+                    Width =2160
+                    Height =324
                     FontSize =8
                     TopMargin =29
                     BorderColor =10921638
                     Name ="tbxSpecies"
-                    ControlSource ="Species"
+                    ControlSource ="Master_Species"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
-                    LayoutCachedWidth =1020
-                    LayoutCachedHeight =360
+                    LayoutCachedWidth =2220
+                    LayoutCachedHeight =324
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -1161,9 +1160,9 @@ Begin Report
                     BackStyle =1
                     OldBorderStyle =1
                     TextAlign =1
-                    Left =3195
+                    Left =3180
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1172,9 +1171,9 @@ Begin Report
                     Name ="lblCol1"
                     Caption ="c1"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3195
-                    LayoutCachedWidth =3713
-                    LayoutCachedHeight =360
+                    LayoutCachedLeft =3180
+                    LayoutCachedWidth =3698
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1183,9 +1182,9 @@ Begin Report
                     FontItalic = NotDefault
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1248
+                    Left =2220
                     Width =960
-                    Height =360
+                    Height =324
                     FontSize =8
                     TabIndex =1
                     TopMargin =29
@@ -1194,9 +1193,9 @@ Begin Report
                     ControlSource ="LU_Code"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1248
-                    LayoutCachedWidth =2208
-                    LayoutCachedHeight =360
+                    LayoutCachedLeft =2220
+                    LayoutCachedWidth =3180
+                    LayoutCachedHeight =324
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -1205,7 +1204,7 @@ Begin Report
                     TextAlign =1
                     Left =3711
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1216,7 +1215,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =3711
                     LayoutCachedWidth =4229
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1227,7 +1226,7 @@ Begin Report
                     TextAlign =1
                     Left =4227
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1238,7 +1237,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =4227
                     LayoutCachedWidth =4745
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1248,7 +1247,7 @@ Begin Report
                     TextAlign =1
                     Left =4743
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1259,7 +1258,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =4743
                     LayoutCachedWidth =5261
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1270,7 +1269,7 @@ Begin Report
                     TextAlign =1
                     Left =5259
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1281,7 +1280,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =5259
                     LayoutCachedWidth =5777
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1291,7 +1290,7 @@ Begin Report
                     TextAlign =1
                     Left =5775
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1302,7 +1301,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =5775
                     LayoutCachedWidth =6293
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1313,7 +1312,7 @@ Begin Report
                     TextAlign =1
                     Left =6291
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1324,7 +1323,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =6291
                     LayoutCachedWidth =6809
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1334,7 +1333,7 @@ Begin Report
                     TextAlign =1
                     Left =6807
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1345,7 +1344,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =6807
                     LayoutCachedWidth =7325
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1356,7 +1355,7 @@ Begin Report
                     TextAlign =1
                     Left =7299
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1367,7 +1366,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =7299
                     LayoutCachedWidth =7817
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1377,7 +1376,7 @@ Begin Report
                     TextAlign =1
                     Left =7815
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1388,7 +1387,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =7815
                     LayoutCachedWidth =8333
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1399,7 +1398,7 @@ Begin Report
                     TextAlign =1
                     Left =8332
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1410,7 +1409,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =8332
                     LayoutCachedWidth =8850
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1420,7 +1419,7 @@ Begin Report
                     TextAlign =1
                     Left =8848
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1431,7 +1430,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =8848
                     LayoutCachedWidth =9366
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1442,7 +1441,7 @@ Begin Report
                     TextAlign =1
                     Left =9365
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1453,7 +1452,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =9365
                     LayoutCachedWidth =9883
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1463,7 +1462,7 @@ Begin Report
                     TextAlign =1
                     Left =9883
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1474,7 +1473,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =9883
                     LayoutCachedWidth =10401
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1485,7 +1484,7 @@ Begin Report
                     TextAlign =1
                     Left =10402
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1496,7 +1495,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =10402
                     LayoutCachedWidth =10920
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1506,7 +1505,7 @@ Begin Report
                     TextAlign =1
                     Left =10922
                     Width =518
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1517,7 +1516,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =10922
                     LayoutCachedWidth =11440
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1528,9 +1527,8 @@ Begin Report
             KeepTogether = NotDefault
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =720
+            Height =648
             Name ="GroupFooter1"
-            AutoHeight =255
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -1540,7 +1538,7 @@ Begin Report
                     OldBorderStyle =1
                     TextAlign =1
                     Width =11448
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1550,7 +1548,7 @@ Begin Report
                     Caption ="Filamentous Algae"
                     GridlineColor =10921638
                     LayoutCachedWidth =11448
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =324
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1558,9 +1556,9 @@ Begin Report
                 Begin Label
                     OldBorderStyle =1
                     TextAlign =1
-                    Top =360
+                    Top =324
                     Width =11448
-                    Height =360
+                    Height =324
                     FontSize =8
                     FontWeight =600
                     TopMargin =29
@@ -1569,9 +1567,30 @@ Begin Report
                     Name ="lblSocialTrails"
                     Caption ="SocialTrails"
                     GridlineColor =10921638
-                    LayoutCachedTop =360
+                    LayoutCachedTop =324
                     LayoutCachedWidth =11448
-                    LayoutCachedHeight =720
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =3180
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol1"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3180
+                    LayoutCachedWidth =3698
+                    LayoutCachedHeight =648
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -1580,7 +1599,7 @@ Begin Report
                     FontItalic = NotDefault
                     TextAlign =1
                     Top =60
-                    Width =2880
+                    Width =3180
                     Height =288
                     FontSize =6
                     LeftMargin =72
@@ -1591,11 +1610,329 @@ Begin Report
                     Caption ="FA key"
                     GridlineColor =10921638
                     LayoutCachedTop =60
-                    LayoutCachedWidth =2880
+                    LayoutCachedWidth =3180
                     LayoutCachedHeight =348
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =3705
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol2"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3705
+                    LayoutCachedWidth =4223
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =4226
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol3"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4226
+                    LayoutCachedWidth =4744
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =4740
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol4"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4740
+                    LayoutCachedWidth =5258
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =5259
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol5"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5259
+                    LayoutCachedWidth =5777
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =5775
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol6"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5775
+                    LayoutCachedWidth =6293
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =6290
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol7"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6290
+                    LayoutCachedWidth =6808
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =6810
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol8"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6810
+                    LayoutCachedWidth =7328
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =7298
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol9"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7298
+                    LayoutCachedWidth =7816
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =7815
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol10"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7815
+                    LayoutCachedWidth =8333
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =8331
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol11"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8331
+                    LayoutCachedWidth =8849
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =8850
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol12"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8850
+                    LayoutCachedWidth =9368
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =9365
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol13"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =9365
+                    LayoutCachedWidth =9883
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =9885
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol14"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =9885
+                    LayoutCachedWidth =10403
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =10402
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol15"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10402
+                    LayoutCachedWidth =10920
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    TextAlign =1
+                    Left =10920
+                    Width =518
+                    Height =648
+                    FontSize =8
+                    FontWeight =600
+                    TopMargin =29
+                    BackColor =14869733
+                    BorderColor =8355711
+                    Name ="lblFCol16"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10920
+                    LayoutCachedWidth =11438
+                    LayoutCachedHeight =648
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OldBorderStyle =1
+                    Width =11448
+                    Height =324
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblFARow"
+                    GridlineColor =10921638
+                    LayoutCachedWidth =11448
+                    LayoutCachedHeight =324
                 End
             End
         End
@@ -1841,6 +2178,19 @@ On Error GoTo Err_Handler
         Me.Park = UCase(ary(0))
     End If
 
+    'ensure river segment is selected
+    If IsNull(TempVars("River")) Then
+'            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+'                "msg" & PARAM_SEPARATOR & "Please select a river segment." & _
+'                "|Type" & PARAM_SEPARATOR & "alert"
+            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                "msg" & PARAM_SEPARATOR & "No river segment selected. Closing report." & _
+                "|Type" & PARAM_SEPARATOR & "caution"
+'        Cancel = True
+'        DoCmd.Close
+        'GoTo Exit_Handler
+    End If
+    
     'customizations, if any
     Select Case Park
         Case "BLCA", ""
@@ -1867,10 +2217,34 @@ On Error GoTo Err_Handler
 '    CallCount = CallCount + 1
     
     'count which subreport is being opened
-    Dim recSources As Variant
+    Dim recSources(0 To 2) As String
+    Dim iYear As Integer
+    iYear = Format(Now(), "yyyy") - 1
+       
+    recSources(0) = GetTemplate("s_top_cover_species_by_year", _
+                        "SampleYear" & PARAM_SEPARATOR & iYear & _
+                        "|ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+                        "|RiverSegment" & PARAM_SEPARATOR & TempVars("River") & _
+                        "|SpeciesType" & PARAM_SEPARATOR & "WoodyCanopySpecies")
+    recSources(1) = GetTemplate("s_top_cover_species_by_year", _
+                        "SampleYear" & PARAM_SEPARATOR & iYear & _
+                        "|ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+                        "|RiverSegment" & PARAM_SEPARATOR & TempVars("River") & _
+                        "|SpeciesType" & PARAM_SEPARATOR & "UnderstorySpecies")
+    recSources(2) = GetTemplate("s_top_cover_species_by_year", _
+                        "SampleYear" & PARAM_SEPARATOR & iYear & _
+                        "|ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+                        "|RiverSegment" & PARAM_SEPARATOR & TempVars("River") & _
+                        "|SpeciesType" & PARAM_SEPARATOR & "RootedSpecies")
+    
     Static iCallCount As Integer
     If iCallCount = 0 Then
-        Me.RecordSource = recSources(gSubReportCount)
+        Select Case TempVars("ParkCode")
+            Case "BLCA", "CANY"
+                Me.RecordSource = recSources(gSubReportCount)
+            Case "DINO"
+                Me.RecordSource = recSources(gSubReportCount + 2)
+        End Select
         gSubReportCount = gSubReportCount + 1   'parent rpt counter
     End If
     iCallCount = iCallCount + 1

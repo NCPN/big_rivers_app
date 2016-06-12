@@ -20,9 +20,9 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =4935
+    Left =6315
     Top =3780
-    Right =22920
+    Right =24300
     Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -1672,12 +1672,6 @@ End Sub
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
-    
-    'clear values
-    'tbxName.Value = ""
-'    tbxDistance.Value = ""
-'    tbxBearing.Value = ""
-'    tbxNotes.Value = ""
     
     btnSave.Enabled = False
     

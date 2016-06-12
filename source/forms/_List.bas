@@ -20,7 +20,7 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =26
-    Right =18870
+    Right =17985
     Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -850,7 +850,9 @@ On Error GoTo Err_Handler
     DoCmd.SetWarnings True
     
     'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, "Tagline|" & ID
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                "Tagline" & PARAM_SEPARATOR & ID & _
+                "|Type" & PARAM_SEPARATOR & "info"
     
     'clear the deleted record
     Me.Requery
