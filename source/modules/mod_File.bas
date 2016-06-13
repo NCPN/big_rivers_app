@@ -178,7 +178,7 @@ Public Function SaveFile(ByVal strFilename As String, ByVal strFileType As Strin
         Filter:=strFilter, _
         flags:=lngFlags, _
         DialogTitle:=strTitle, _
-        Filename:=strFilename)
+        FileName:=strFilename)
 
 Exit_Function:
     Exit Function

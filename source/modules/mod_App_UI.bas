@@ -261,6 +261,72 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ================================ Big Rivers ===========================
+' ---------------------------------
+' SUB:          SetHints
+' Description:  Sets hints for form actions
+' Assumptions:  -
+' Parameters:   frm - form object to set hints on (form)
+'               strForm - form name (string)
+' Returns:      N/A
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, February 6, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 4/26/2016  - initial version
+' ---------------------------------
+Public Sub SetHints(frm As Form, strForm As String)
+On Error GoTo Err_Handler
+
+ Forms!Mainform!Subform1.Form!
+ 
+    With frm!fsub.Form
+ 
+        Select Case strForm
+ 
+            Case "fsub_Photo_FTOR_Details"
+ 
+                !lblCloseupHint.Caption = "Is the photo a closeup?"
+                !lblReplacementHint.Caption = "Does photo replace another?"
+                !lblCommentHint.Caption = ""
+ 
+                Select Case TempVars("phototype")
+                    Case "R" 'reference
+                        !lblPhotogLocHint.Caption = "from river, 10m upstream, etc."
+                        !lblSubjectLocHint.Caption = "CP1, RM2, etc."
+                    Case "O" 'overview
+                        !lblPhotogLocHint.Caption = ""
+                        !lblSubjectLocHint.Caption = "O1, O2, etc."
+                    Case "T" 'transect
+                        !lblPhotogLocHint.Caption = "T + transect# - order# (T2-1)"
+                        !lblSubjectLocHint.Caption = ""
+                    Case "F" 'feature
+                        !lblPhotogLocHint.Caption = "F + transect# - order# (F3/4-2)"
+                        !lblSubjectLocHint.Caption = ""
+                End Select
+ 
+            Case "fsub_Photo_Other_Details"
+                !lblDescriptionHint.Caption = ""
+            Case Else
+ 
+        End Select
+ 
+        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# (PA010300)"
+    End With
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetHints[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ---------------------------------
 ' SUB:          ClickAction
 ' Description:  Handles click events for various form links
@@ -291,9 +357,9 @@ On Error GoTo Err_Handler
     Select Case action
         'Where?
         Case "site"
-            fName = "Task"
+'            fName = "Task"
         Case "feature"
-            fName = "Task"
+'            fName = "Task"
         Case "transect"
             fName = "Transect"
             oArgs = ""

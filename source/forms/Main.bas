@@ -8,18 +8,19 @@ Begin Form
     NavigationButtons = NotDefault
     DividingLines = NotDefault
     DefaultView =0
+    ScrollBars =0
     BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =8640
+    Width =8280
     DatasheetFontHeight =11
     ItemSuffix =23
-    Left =8895
-    Top =2805
-    Right =17790
-    Bottom =10530
+    Left =4080
+    Top =3105
+    Right =12360
+    Bottom =10590
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -45,7 +46,6 @@ Begin Form
     AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
-    FitToScreen =255
     DatasheetBackThemeColorIndex =1
     BorderThemeColorIndex =3
     ThemeFontIndex =1
@@ -162,8 +162,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =7080
-                    Top =60
+                    Left =6645
+                    Top =45
                     Height =299
                     ForeColor =15921906
                     Name ="btnAdmin"
@@ -172,10 +172,10 @@ Begin Form
                     ControlTipText ="Go to administration settings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7080
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =8520
-                    LayoutCachedHeight =359
+                    LayoutCachedLeft =6645
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =8085
+                    LayoutCachedHeight =344
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                     ForeShade =95.0
@@ -194,17 +194,17 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
             End
         End
         Begin Section
             CanGrow = NotDefault
             Height =7080
+            BackColor =2634567
             Name ="Detail"
-            AlternateBackColor =15921906
-            AlternateBackThemeColorIndex =1
+            AlternateBackColor =2634567
             AlternateBackShade =95.0
-            BackThemeColorIndex =1
             Begin
                 Begin Subform
                     OverlapFlags =85
@@ -347,13 +347,13 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =223
-                    Width =8640
+                    Width =8280
                     Height =480
                     BackColor =5540500
                     BorderColor =10921638
                     Name ="rctTop"
                     GridlineColor =10921638
-                    LayoutCachedWidth =8640
+                    LayoutCachedWidth =8280
                     LayoutCachedHeight =480
                     BackThemeColorIndex =3
                     BackShade =50.0
@@ -361,8 +361,10 @@ Begin Form
             End
         End
         Begin FormFooter
-            Height =240
+            CanShrink = NotDefault
+            Height =0
             Name ="FormFooter"
+            AutoHeight =255
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
@@ -430,6 +432,25 @@ On Error GoTo Err_Handler
     Dim oBLTile As Form_Tile
     Dim oBCTile As Form_Tile
     Dim oBRTile As Form_Tile
+    
+    Me.Detail.backcolor = lngNPSBrown
+    Me.Detail.AlternateBackColor = lngNPSBrown
+    
+'    Dim X1 As Single, X2 As Single, Y1 As Single, Y2 As Single
+'    Dim Offset As Single
+'    ' Define an offset of 1/8 inch from the text box to the rectangle.
+'    Offset = 1440 / 8
+'
+'    X1 = Me.LTile.Left - Offset
+'    Y1 = Me.LTile.top - Offset
+'    X2 = Me.rctTop.Width
+'    Y2 = Me.BCTile.top + Me.BCTile.Height + Offset
+'    Me.DrawWidth = 3
+'    Me.Line (X1, Y1)-(X2, Y2), lngSedona, B
+Debug.Print rctTop.Width
+Debug.Print Me.Width
+
+    Me.rctTop.Width = Me.Width
     
     'Main
     Me.lblTitle.Caption = "Data Entry"
@@ -592,7 +613,7 @@ Private Sub btnAdmin_Click()
 On Error GoTo Err_Handler
 
     'open admin form
-    DoCmd.OpenForm "fsub_DbAdmin", acNormal
+    DoCmd.OpenForm "DbAdmin", acNormal
     
 Exit_Handler:
     Exit Sub
@@ -605,8 +626,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-
 
 '---------------------
 ' Methods

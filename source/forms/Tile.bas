@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =11790
-    Top =7455
-    Right =14370
-    Bottom =10605
+    Left =4545
+    Top =4950
+    Right =6870
+    Bottom =7845
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -114,7 +114,7 @@ Begin Form
                     Width =1980
                     Height =300
                     Name ="lblTitle"
-                    Caption ="Trip Prep"
+                    Caption ="Where?"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -164,7 +164,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink1"
-                    Caption ="VegPlot"
+                    Caption ="Site"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -205,6 +205,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
+                    BackStyle =1
                     OverlapFlags =85
                     Left =180
                     Top =420
@@ -213,9 +214,9 @@ Begin Form
                     FontSize =9
                     BackColor =9699294
                     BorderColor =8355711
-                    ForeColor =8355711
+                    ForeColor =16711680
                     Name ="lblLink2"
-                    Caption ="VegWalk"
+                    Caption ="Feature"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -238,7 +239,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink3"
-                    Caption ="Photo"
+                    Caption ="Transect"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -261,7 +262,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink4"
-                    Caption ="Transducer"
+                    Caption ="Plot"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -295,6 +296,7 @@ Begin Form
                     LayoutCachedHeight =1740
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =180
                     Top =1860
@@ -305,7 +307,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink6"
-                    Caption ="Tasks"
+                    Caption ="Link6"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -973,7 +975,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink1
@@ -1007,7 +1009,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink2
@@ -1041,7 +1043,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink3
@@ -1075,7 +1077,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink4
@@ -1109,7 +1111,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink5
@@ -1143,7 +1145,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink6
@@ -1177,7 +1179,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     Dim ctrl As Control

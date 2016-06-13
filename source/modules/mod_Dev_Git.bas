@@ -41,7 +41,7 @@ Option Explicit
 ' ---------------------------------
 Public Function ExportVBComponent(VBComp As VBIDE.VBComponent, _
                 FolderName As String, _
-                Optional Filename As String, _
+                Optional FileName As String, _
                 Optional OverwriteExisting As Boolean = True) As Boolean
 On Error GoTo Err_Handler
 
@@ -54,10 +54,10 @@ On Error GoTo Err_Handler
     Dim Extension As String
     Dim fName As String
     Extension = GetFileExtension(VBComp:=VBComp)
-    If Trim(Filename) = vbNullString Then
+    If Trim(FileName) = vbNullString Then
         fName = VBComp.Name & Extension
     Else
-        fName = Filename
+        fName = FileName
         If InStr(1, fName, ".", vbBinaryCompare) = 0 Then
             fName = fName & Extension
         End If
@@ -78,7 +78,7 @@ On Error GoTo Err_Handler
         End If
     End If
     
-    VBComp.Export Filename:=fName
+    VBComp.Export FileName:=fName
     ExportVBComponent = True
 
 Exit_Function:
@@ -208,12 +208,12 @@ On Error GoTo Err_Handler
     Next doc
 
     Dim intfile As Long
-    Dim Filename As String
+    Dim FileName As String
     For i = 0 To dbs.QueryDefs.Count - 1
          Application.SaveAsText acQuery, dbs.QueryDefs(i).Name, Path & "\Queries\" & dbs.QueryDefs(i).Name & ".txt"
-         Filename = Path & "\Queries(SQL)\" & dbs.QueryDefs(i).Name & ".txt"
+         FileName = Path & "\Queries(SQL)\" & dbs.QueryDefs(i).Name & ".txt"
          intfile = FreeFile()
-         Open Filename For Output As #intfile
+         Open FileName For Output As #intfile
          Print #intfile, dbs.QueryDefs(i).sql
          Close #intfile
     Next i

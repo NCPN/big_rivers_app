@@ -47,7 +47,7 @@ ByVal wParam As Long, lParam As Any) As Long
 
 Private Declare Function SetWindowPos Lib "user32" _
 (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, _
-ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, _
+ByVal y As Long, ByVal cx As Long, ByVal cy As Long, _
 ByVal wFlags As Long) As Long
 
 ' ---------------------------------

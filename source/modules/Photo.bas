@@ -127,12 +127,12 @@ Public Property Get PhotographerID() As Long
     PhotographerID = m_PhotographerID
 End Property
     
-Public Property Let Filename(Value As String)
+Public Property Let FileName(Value As String)
     m_Filename = Value
 End Property
 
-Public Property Get Filename() As String
-    Filename = m_Filename
+Public Property Get FileName() As String
+    FileName = m_Filename
 End Property
 
 Public Property Let NCPNImageID(Value As Long)
@@ -407,7 +407,7 @@ On Error GoTo Err_Handler
                 & "LastPhotoUpdate, CreateDate, CreatedBy_ID, " _
                 & "LastModified, LastModifiedBy_ID) VALUES " _
                 & "(#" & Me.PhotoDate & "#,'" & Me.PhotoType & "'," _
-                & Me.PhotographerID & ",'" & Me.Filename & "','" _
+                & Me.PhotographerID & ",'" & Me.FileName & "','" _
                 & Me.NCPNImageID & "','" & Me.DirectionFacing & "','" _
                 & Me.PhotogLocation & "','" _
                 & Me.IsCloseup & "," & Me.IsInActive & "," & Me.IsSkipped & "," _

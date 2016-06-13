@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =9045
-    Top =3660
-    Right =14880
-    Bottom =4020
+    Left =4230
+    Top =3960
+    Right =10065
+    Bottom =4320
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -133,7 +133,7 @@ Begin Form
                     Width =1380
                     ForeColor =4210752
                     Name ="btnLevel0"
-                    Caption ="Park > "
+                    Caption ="BLCA > "
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -143,7 +143,6 @@ Begin Form
                     LayoutCachedWidth =1440
                     LayoutCachedHeight =420
                     Gradient =0
-                    BackColor =65535
                     BackThemeColorIndex =-1
                     BackTint =100.0
                     OldBorderStyle =0
@@ -162,6 +161,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -171,7 +171,7 @@ Begin Form
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnLevel1"
-                    Caption ="River > "
+                    Caption ="Gunnison > "
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -181,7 +181,6 @@ Begin Form
                     LayoutCachedWidth =2940
                     LayoutCachedHeight =420
                     Gradient =0
-                    BackColor =65535
                     BackThemeColorIndex =-1
                     BackTint =100.0
                     OldBorderStyle =0
@@ -200,6 +199,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -237,6 +237,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -275,6 +276,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
             End
         End
@@ -817,7 +819,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -849,7 +851,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -881,7 +883,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -913,7 +915,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -947,7 +949,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then

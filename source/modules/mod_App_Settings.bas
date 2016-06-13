@@ -62,6 +62,7 @@ Public Const DEV_MODE As Boolean = True                         'Boolean flag ->
 
 Public Const ACCESS_ROLES As String = "admin,power user,data entry,read only"
                                                                 'String -> used in setting user application access level & permissions
+Public Const SWITCHBOARD As String = "Main"
 
 '-----------------------------------------------------------------------
 ' Database Type
@@ -127,6 +128,12 @@ Public Const DOT_LTBLUE As String = ICON_PATH & "dot_ltblue" & ".png"
 Public Const DOT_BLUE As String = ICON_PATH & "dot_blue" & ".png"
 Public Const DOT_NAVY As String = ICON_PATH & "dot_navy" & ".png"
 Public Const DOT_PURPLE As String = ICON_PATH & "dot_purple" & ".png"
+
+'-----------------------------------------------------------------------
+' Photos
+'-----------------------------------------------------------------------
+Public Const PHOTO_TYPES_MAIN As String = ""
+
 
 '-----------------------------------------------------------------------
 ' Big Rivers Components

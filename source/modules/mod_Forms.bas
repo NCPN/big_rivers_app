@@ -182,19 +182,16 @@ End Function
 ' Revisions:    JRB, 5/5/2006 - initial version
 '               BLC, 4/30/2015  - moved to mod_Db framework module from mod_Custom_Functions
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 6/12/2016 - revised to use AppSettings SWITCHBOARD value
 ' =================================
 Public Function SwitchboardIsOpen() As Boolean
     On Error GoTo Err_Handler
 
     SwitchboardIsOpen = False    ' Default in case of error
 
-    Dim strSwitchboardName As String
-
-    strSwitchboardName = "frm_Switchboard"
-
     'check for switchboard in all open forms ( AllForms.IsLoaded() )
-    If CurrentProject.AllForms(strSwitchboardName).IsLoaded = True Then
-        If CurrentProject.AllForms(strSwitchboardName).CurrentView = 1 Then
+    If CurrentProject.AllForms(SWITCHBOARD).IsLoaded = True Then
+        If CurrentProject.AllForms(SWITCHBOARD).CurrentView = 1 Then
             SwitchboardIsOpen = True
         End If
     End If

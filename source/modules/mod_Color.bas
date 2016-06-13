@@ -60,6 +60,12 @@ Public Const lngGrnApple As Long = 1557580  '?RGB(76,196,23) #4CC417
 Public Const lngCoral As Long = 527564      '?RGB(255,127,80) #FF7F50
 Public Const lngYelGrn As Long = 1560658    '?RGB(82,208,23) #52D017
 Public Const lngPink As Long = 10582263     '?RGB(247,120,161) #F778A1 carnation red
+Public Const lngOceanBlue As Long = 15492395 '?RGB(43, 101, 236) #2B65EC ocean blue
+Public Const lngSedona As Long = 26316      '?RGB(204,102,0) #CC6600
+Public Const lngCocoa As Long = 5334161     '?RGB(145, 100, 81) #916451 cocoa brown NPS arrowhead bgd
+Public Const lngDkBlueGrn As Long = 4538399 '?RGB(31, 64, 69) #1f4045 dark blue-green NPS arrowhead trees & buffalo outline
+Public Const lngCream As Long = 11262179    '?RGB(227, 216, 171) #e3d8ab cream NPS arrowhead mtn & lake
+Public Const lngNPSBrown As Long = 2634567  '?RGB(71, 51, 40) #473328 NPS signs
 
 ' ---------------------------------
 '  Subroutines & Functions
