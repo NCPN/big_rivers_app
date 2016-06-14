@@ -4,11 +4,12 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_File
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  File and directory related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
+'               BLC, 6/13/2016 - 1.01 - adapted ParseFileName() for big rivers
 ' =================================
 
 ' ---------------------------------
@@ -273,7 +274,7 @@ End Function
 
 ' =================================
 ' FUNCTION:     ParseFileName
-' Description:  Parses an input path string to return only the file extension, if present
+' Description:  Parses an input path string to return only the name, if present
 ' Parameters:   strFullPath - string for the full file path
 ' Returns:      string including only the file name
 ' Throws:       none
@@ -282,6 +283,7 @@ End Function
 ' Revisions:    John R. Boetsch, 6/17/2009 - error trapping, documentation
 '               BLC, 4/30/2015 - moved from mod_Utilities to mod_File
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 6/13/2016 - adapted for big rivers
 ' =================================
 Public Function ParseFileName(ByVal strFullPath As String) As String
     On Error GoTo Err_Handler
@@ -295,7 +297,7 @@ Public Function ParseFileName(ByVal strFullPath As String) As String
     
     ParseFileName = strFullPath
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -304,7 +306,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ParseFileName[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================

@@ -272,14 +272,14 @@ End Sub
 ' Throws:       none
 ' References:   none
 ' Source/date:
-' Adapted:      Bonnie Campbell, February 6, 2015 - for NCPN tools
+' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
 ' Revisions:
-'   BLC - 4/26/2016  - initial version
+'   BLC - 7/27/2015  - initial version
 ' ---------------------------------
 Public Sub SetHints(frm As Form, strForm As String)
 On Error GoTo Err_Handler
 
- Forms!Mainform!Subform1.Form!
+' Forms!Mainform!Subform1.Form!
  
     With frm!fsub.Form
  
@@ -302,7 +302,7 @@ On Error GoTo Err_Handler
                         !lblPhotogLocHint.Caption = "T + transect# - order# (T2-1)"
                         !lblSubjectLocHint.Caption = ""
                     Case "F" 'feature
-                        !lblPhotogLocHint.Caption = "F + transect# - order# (F3/4-2)"
+                        !lblPhotogLocHint.Caption = "F + transect# - order# " & vbCrLf & "(F3/4-2)"
                         !lblSubjectLocHint.Caption = ""
                 End Select
  
@@ -312,9 +312,10 @@ On Error GoTo Err_Handler
  
         End Select
  
-        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# (PA010300)"
-    End With
-
+        !lblPhotoNumHint.Caption = "P + Month" & vbCrLf & "(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + " & vbCrLf & "4-digit camera seq# " & vbCrLf & "(PA010300 = Jan 1, #300)"
+                  
+      End With
+      
 Exit_Handler:
     Exit Sub
     

@@ -130,10 +130,10 @@ Public Const DOT_NAVY As String = ICON_PATH & "dot_navy" & ".png"
 Public Const DOT_PURPLE As String = ICON_PATH & "dot_purple" & ".png"
 
 '-----------------------------------------------------------------------
-' Photos
+' Photo Types
 '-----------------------------------------------------------------------
-Public Const PHOTO_TYPES_MAIN As String = ""
-
+Public Const PHOTO_TYPES_MAIN As String = "Reference,Overview,Feature,Transect,Other"      'String -> basic photo types
+Public Const PHOTO_TYPES_OTHER As String = "Animal,Plant,Cultural,Disturbance,Field Work,Scenic,Weather,Other"      'String -> other photo types
 
 '-----------------------------------------------------------------------
 ' Big Rivers Components
