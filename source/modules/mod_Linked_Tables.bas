@@ -851,10 +851,35 @@ End Function
 ' FUNCTION:     VerifyLinkTableInfo
 ' Description:  Verifies that the information in tsys_Link_Dbs and tsys_Link_Tables is
 '                   complete and matches that in MSysObjects
+' Note:
+'       MSysObjects types include:
+'           Type    TypeDesc                            Type    TypeDesc
+'           1       Table - Local Access Tables         -32756  Data Access Pages
+'           2       Access Object - Database            -32757  Database Document
+'           3       Access Object - Containers          -32758  Users
+'           4       Table - Linked ODBC Tables          -32761  Module
+'           5       Queries                             -32764  Reports
+'           6       Table - Linked Access Tables        -32766  Macro
+'           8       SubDataSheets                       -32768  Form
+'       2008 refs:
+'           0       Select Query (visible)              8       Select Query (hidden)
+'           16      Crosstab Query (visible)            24      Crosstab Query (hidden)
+'           32      Delete Query (visible)              40      Delete Query (hidden)
+'           48      Update Query (visible)              56      Update Query (hidden)
+'           64      Append Query (visible)              72      Append Query (hidden)
+'           80      Make table Query (visible)          88      Make table Query (hidden)
+'           96      Data definition Query (visible)     104     Data definition Query (hidden)
+'           112     Pass through Query (visible)        120     Pass through Query (hidden)
+'           128     Union Query (visible)               136     Union Query (hidden)
+'
 ' Parameters:   none
 ' Returns:      True if the information matches and there are no problems, False otherwise
 ' Throws:       none
-' References:   none
+' References:
+'       Tom Wickerath, April 26, 2008
+'       http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
+'       Fionnula, February 1, 2014
+'       http://stackoverflow.com/questions/3994956/meaning-of-msysobjects-values-32758-32757-and-3-microsoft-access
 ' Source/date:  John R. Boetsch, 7/9/2009
 ' Revisions:    JRB, 7/27/2009 - added a do loop to update missing table descriptions
 '               -------------------------------------------------------------------------

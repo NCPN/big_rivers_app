@@ -33,48 +33,48 @@ Private m_LastModifiedByID As Long
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidEventID(Value As Long)
-Public Event InvalidCollectionPlaceID(Value As Long)
-Public Event InvalidCollectionType(Value As String)
-Public Event InvalidStartDate(Value As Date)
-Public Event InvalidDate(Value As Date)
-Public Event InvalidContactID(Value As Long)
+Public Event InvalidEventID(value As Long)
+Public Event InvalidCollectionPlaceID(value As Long)
+Public Event InvalidCollectionType(value As String)
+Public Event InvalidStartDate(value As Date)
+Public Event InvalidDate(value As Date)
+Public Event InvalidContactID(value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let EventID(Value As Long)
-    m_EventID = Value
+Public Property Let EventID(value As Long)
+    m_EventID = value
 End Property
 
 Public Property Get EventID() As Long
     EventID = m_EventID
 End Property
 
-Public Property Let CollectionPlaceID(Value As Long)
-    m_CollectionPlaceID = Value
+Public Property Let CollectionPlaceID(value As Long)
+    m_CollectionPlaceID = value
 End Property
 
 Public Property Get CollectionPlaceID() As Long
     CollectionPlaceID = m_CollectionPlaceID
 End Property
 
-Public Property Let CollectionType(Value As String)
+Public Property Let CollectionType(value As String)
     Dim aryTypes() As String
     aryTypes = Split(COLLECTION_TYPES, ",")
     'check for valid collection type
-    If IsInArray(Value, aryTypes) Then
-        m_CollectionType = Value
+    If IsInArray(value, aryTypes) Then
+        m_CollectionType = value
     Else
-        RaiseEvent InvalidCollectionType(Value)
+        RaiseEvent InvalidCollectionType(value)
     End If
 End Property
 
@@ -82,40 +82,40 @@ Public Property Get CollectionType() As String
     CollectionType = m_CollectionType
 End Property
 
-Public Property Let StartDate(Value As Date)
-    m_StartDate = Value
+Public Property Let StartDate(value As Date)
+    m_StartDate = value
 End Property
 
 Public Property Get StartDate() As Date
     StartDate = m_StartDate
 End Property
 
-Public Property Let CreateDate(Value As Date)
-    m_CreateDate = Value
+Public Property Let CreateDate(value As Date)
+    m_CreateDate = value
 End Property
 
 Public Property Get CreateDate() As Date
     CreateDate = m_CreateDate
 End Property
 
-Public Property Let CreatedByID(Value As Long)
-    m_CreatedByID = Value
+Public Property Let CreatedByID(value As Long)
+    m_CreatedByID = value
 End Property
 
 Public Property Get CreatedByID() As Long
     CreatedByID = m_CreatedByID
 End Property
 
-Public Property Let LastModified(Value As Date)
-    m_LastModified = Value
+Public Property Let LastModified(value As Date)
+    m_LastModified = value
 End Property
 
 Public Property Get LastModified() As Date
     LastModified = m_LastModified
 End Property
 
-Public Property Let LastModifiedByID(Value As Long)
-    m_LastModifiedByID = Value
+Public Property Let LastModifiedByID(value As Long)
+    m_LastModifiedByID = value
 End Property
 
 Public Property Get LastModifiedByID() As Long

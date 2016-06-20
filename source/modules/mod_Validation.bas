@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Validation
 ' Level:        Framework module
-' Version:      1.04
+' Version:      1.05
 ' Description:  string functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/10/2015
@@ -16,6 +16,7 @@ Option Explicit
 '                                       replaced Exit_Function w/ Exit_Handler
 '               BLC - 5/20/2016 - 1.03 - added IsTypeMatch()
 '               BLC - 6/7/2016  - 1.04 - added IsPhone()
+'               BLC - 6/13/2016 - 1.05 - added IsNothing()
 ' =================================
 
 ' ---------------------------------
@@ -868,5 +869,35 @@ Err_Handler:
     End Select
     'fail on error
     isOK = False
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     IsNothing
+' Description:  Checks if string is nothing
+' Assumptions:  -
+' Parameters:   strFind - string to check
+' Returns:      boolean - True (string is nothing), False (string isn't nothing)
+' Throws:       none
+' References:   none
+' Source/date:  -
+' Adapted:      Bonnie Campbell, June 13, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/13/2016 - initial version
+' ---------------------------------
+Function IsNothing(strFind As String, aryLookIn As Variant) As Boolean
+On Error GoTo Err_Handler
+
+  IsNothing = False
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - IsNothing[mod_Validation])"
+    End Select
     Resume Exit_Handler
 End Function

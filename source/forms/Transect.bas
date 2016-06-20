@@ -601,23 +601,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidCaption(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -625,14 +625,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -640,14 +640,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
+Public Property Let ButtonCaption(value As String)
+    If Len(value) > 0 Then
+        m_ButtonCaption = value
 
         'set the form button caption
         Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCaption(value)
     End If
 End Property
 
@@ -655,16 +655,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
+Public Property Let SelectedID(value As Integer)
+        m_SelectedID = value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
+Public Property Let SelectedValue(value As String)
+        m_SelectedValue = value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -723,7 +723,7 @@ On Error GoTo Err_Handler
 
     Title = "Transect"
     Directions = "Enter the transect information and click save."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.forecolor = lngBlue
@@ -741,7 +741,7 @@ On Error GoTo Err_Handler
     tbxSampleDate.backcolor = lngYellow
   
     'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
+    tbxID.value = 0
   
 Exit_Handler:
     Exit Sub
@@ -858,8 +858,8 @@ Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     'clear values
-    tbxNumber.Value = ""
-    tbxSampleDate.Value = ""
+    tbxNumber.value = ""
+    tbxSampleDate.value = ""
     
     btnSave.Enabled = False
     
@@ -901,10 +901,10 @@ On Error GoTo Err_Handler
         .EventID = 1
                 
         'form values
-        .TransectNumber = tbxNumber.Value
-        .SampleDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
+        .TransectNumber = tbxNumber.value
+        .SampleDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
         
-        .ID = tbxID.Value '0 if new, edit if > 0
+        .ID = tbxID.value '0 if new, edit if > 0
         .SaveToDb
     End With
     
@@ -915,7 +915,7 @@ On Error GoTo Err_Handler
     tbxSampleDate.ControlSource = ""
     
     tbxID.ControlSource = ""
-    tbxID.Value = 0
+    tbxID.value = 0
     
     ReadyForSave
     
@@ -1016,7 +1016,7 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If Len(tbxNumber.Value) > 0 And IsDate(tbxSampleDate.Value) Then
+    If Len(tbxNumber.value) > 0 And IsDate(tbxSampleDate.value) Then
         isOK = True
     End If
     

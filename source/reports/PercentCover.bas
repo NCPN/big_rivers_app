@@ -2001,11 +2001,11 @@ Public Event InvalidCoverType(CoverType As String)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Park(Value As String)
-    If Len(Value) = 4 Then
-        m_Park = Value
+Public Property Let Park(value As String)
+    If Len(value) = 4 Then
+        m_Park = value
     Else
-        RaiseEvent InvalidPark(Value)
+        RaiseEvent InvalidPark(value)
     End If
 End Property
 
@@ -2013,13 +2013,13 @@ Public Property Get Park() As String
     Park = m_Park
 End Property
 
-Public Property Let CoverType(Value As String)
+Public Property Let CoverType(value As String)
     Dim aryCoverType() As String
     aryCoverType = Split(COVER_TYPES, ",")
     
-    If Len(Value) > 0 And IsInArray(Value, aryCoverType) Then
-        m_CoverType = Value
-        Select Case UCase(Value)
+    If Len(value) > 0 And IsInArray(value, aryCoverType) Then
+        m_CoverType = value
+        Select Case UCase(value)
             Case "WCC"
                 CoverTypeName = "Woody Canopy"
                 ShowTitleKey = True
@@ -2053,7 +2053,7 @@ Public Property Let CoverType(Value As String)
                 lblCheckboxes.Caption = "No Rooted Veg?"
         End Select
     Else
-        RaiseEvent InvalidCoverType(Value)
+        RaiseEvent InvalidCoverType(value)
     End If
 End Property
 
@@ -2061,9 +2061,9 @@ Public Property Get CoverType() As String
     CoverType = m_CoverType
 End Property
 
-Public Property Let CoverTypeName(Value As String)
-    If Len(Value) > 0 Then
-        m_CoverTypeName = Value
+Public Property Let CoverTypeName(value As String)
+    If Len(value) > 0 Then
+        m_CoverTypeName = value
     End If
 End Property
 
@@ -2071,9 +2071,9 @@ Public Property Get CoverTypeName() As String
     CoverTypeName = m_CoverTypeName
 End Property
 
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
     End If
 End Property
 
@@ -2081,8 +2081,8 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let ShowKey(Value As Boolean)
-    m_ShowKey = Value
+Public Property Let ShowKey(value As Boolean)
+    m_ShowKey = value
     'set display
     ToggleRow "key", Me.ShowKey
 End Property
@@ -2091,8 +2091,8 @@ Public Property Get ShowKey() As Boolean
     ShowKey = m_ShowKey
 End Property
 
-Public Property Let ShowTitleKey(Value As Boolean)
-    m_ShowTitleKey = Value
+Public Property Let ShowTitleKey(value As Boolean)
+    m_ShowTitleKey = value
     'set display
     ToggleRow "titlekey", Me.ShowTitleKey
 End Property
@@ -2101,8 +2101,8 @@ Public Property Get ShowTitleKey() As Boolean
     ShowTitleKey = m_ShowTitleKey
 End Property
 
-Public Property Let ShowSubTitle(Value As Boolean)
-    m_ShowSubTitle = Value
+Public Property Let ShowSubTitle(value As Boolean)
+    m_ShowSubTitle = value
     'set display
     ToggleRow "subtitle", Me.ShowSubTitle
 End Property
@@ -2111,16 +2111,16 @@ Public Property Get ShowSubTitle() As Boolean
     ShowSubTitle = m_ShowSubTitle
 End Property
 
-Public Property Let ShowCheckboxes(Value As Boolean)
-    m_ShowCheckboxes = Value
+Public Property Let ShowCheckboxes(value As Boolean)
+    m_ShowCheckboxes = value
 End Property
 
 Public Property Get ShowCheckboxes() As Boolean
     ShowCheckboxes = m_ShowCheckboxes
 End Property
 
-Public Property Let ShowTotalPct(Value As Boolean)
-    m_ShowTotalPct = Value
+Public Property Let ShowTotalPct(value As Boolean)
+    m_ShowTotalPct = value
     'set display
     ToggleRow "total", Me.ShowTotalPct
 End Property
@@ -2129,16 +2129,16 @@ Public Property Get ShowTotalPct() As Boolean
     ShowTotalPct = m_ShowTotalPct
 End Property
 
-Public Property Let ShowFA(Value As Boolean)
-    m_ShowFA = Value
+Public Property Let ShowFA(value As Boolean)
+    m_ShowFA = value
 End Property
 
 Public Property Get ShowFA() As Boolean
     ShowFA = m_ShowFA
 End Property
 
-Public Property Let ShowSocialTrails(Value As Boolean)
-    m_ShowSocialTrails = Value
+Public Property Let ShowSocialTrails(value As Boolean)
+    m_ShowSocialTrails = value
 End Property
 
 Public Property Get ShowSocialTrails() As Boolean

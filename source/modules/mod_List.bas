@@ -583,7 +583,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryData, 2) ' - 1
                 
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                    rsProcess(aryFieldNames(iCol)).Value = aryData(iRow, iCol)
+                    rsProcess(aryFieldNames(iCol)).value = aryData(iRow, iCol)
 
             Next
             
@@ -707,7 +707,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryFieldNames) ' - 1
             
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                rsProcess(aryFieldNames(iCol)).Value = rsList(aryFieldNames(iCol)).Value
+                rsProcess(aryFieldNames(iCol)).value = rsList(aryFieldNames(iCol)).value
 
 '                iCol = iCol + 1
             Next
@@ -959,7 +959,7 @@ Public Sub MoveSelectedItems(frm As Form, strSourceControl As String, strTargetC
     
 On Error GoTo Err_Handler
     
-    Dim iRow As Integer, StartRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
+    Dim iRow As Integer, StartRow As Integer, i As Integer, X As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
     Dim strItem As String
@@ -1023,9 +1023,9 @@ On Error GoTo Err_Handler
     iRemovedItems = 0
     
     'iterate through selected items
-    For x = LBound(arySelectedItems) To UBound(arySelectedItems)
+    For X = LBound(arySelectedItems) To UBound(arySelectedItems)
                         
-        iRow = arySelectedItems(x) - iRemovedItems
+        iRow = arySelectedItems(X) - iRemovedItems
             
         'clear string
         strItem = ""
@@ -1046,7 +1046,7 @@ On Error GoTo Err_Handler
             iRemovedItems = iRemovedItems + 1
         End If
     
-    Next x
+    Next X
 
 Exit_Handler:
     Exit Sub

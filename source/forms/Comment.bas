@@ -456,10 +456,10 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Title(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Form Title"
-    If ValidateString(Value, "alphanumdash") Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(Trim(value)) = 0 Then value = "Form Title"
+    If ValidateString(value, "alphanumdash") Then
+        m_Title = value
     End If
     lblTitle.Caption = m_Title
 End Property
@@ -468,10 +468,10 @@ Public Property Get context() As String
     context = m_Context
 End Property
 
-Public Property Let context(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Context"
-    If ValidateString(Value, "alphanumdashslashspace") Then
-        m_Context = Value
+Public Property Let context(value As String)
+    If Len(Trim(value)) = 0 Then value = "Context"
+    If ValidateString(value, "alphanumdashslashspace") Then
+        m_Context = value
     End If
     lblContext.Caption = m_Context
 End Property
@@ -480,10 +480,10 @@ Public Property Get Instructions() As String
     Instructions = m_Instructions
 End Property
 
-Public Property Let Instructions(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Instructions"
-    If ValidateString(Value, "paragraph") Then
-        m_Instructions = Value
+Public Property Let Instructions(value As String)
+    If Len(Trim(value)) = 0 Then value = "Instructions"
+    If ValidateString(value, "paragraph") Then
+        m_Instructions = value
     End If
     lblInstructions.Caption = m_Instructions
 End Property
@@ -492,10 +492,10 @@ Public Property Get CountLabel() As String
     CountLabel = m_CountLabel
 End Property
 
-Public Property Let CountLabel(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Character Count"
-    If ValidateString(Value, "alphanumdashslashspace") Then
-        m_CountLabel = Value
+Public Property Let CountLabel(value As String)
+    If Len(Trim(value)) = 0 Then value = "Character Count"
+    If ValidateString(value, "alphanumdashslashspace") Then
+        m_CountLabel = value
     End If
     lblCharacterCount.Caption = m_CountLabel
 End Property
@@ -504,10 +504,10 @@ Public Property Get CurrentCount() As String
     CurrentCount = m_CurrentCount
 End Property
 
-Public Property Let CurrentCount(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "1"
-    If ValidateString(Value, "numeric") Then
-        m_CurrentCount = Value
+Public Property Let CurrentCount(value As String)
+    If Len(Trim(value)) = 0 Then value = "1"
+    If ValidateString(value, "numeric") Then
+        m_CurrentCount = value
     End If
     lblCount.Caption = m_CurrentCount
 End Property
@@ -516,10 +516,10 @@ Public Property Get MaxCount() As String
     MaxCount = m_MaxCount
 End Property
 
-Public Property Let MaxCount(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "/ XX characters"
-    If ValidateString(Value, "alphanumdashslashspace") Then
-        m_MaxCount = Value
+Public Property Let MaxCount(value As String)
+    If Len(Trim(value)) = 0 Then value = "/ XX characters"
+    If ValidateString(value, "alphanumdashslashspace") Then
+        m_MaxCount = value
     End If
     lblMaxCount.Caption = m_MaxCount
 End Property
@@ -529,19 +529,19 @@ Public Property Get AlertCount() As Integer
     AlertCount = m_AlertCount
 End Property
 
-Public Property Let AlertCount(Value As Integer)
-    If Len(Trim(Value)) = 0 Then Value = 10
-    m_AlertCount = Value
+Public Property Let AlertCount(value As Integer)
+    If Len(Trim(value)) = 0 Then value = 10
+    m_AlertCount = value
 End Property
 
 Public Property Get RemainingCount() As String
     RemainingCount = m_RemainingCount
 End Property
 
-Public Property Let RemainingCount(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "XX characters remain"
-    If ValidateString(Value, "alphanumdashslashspace") Then
-        m_RemainingCount = Value
+Public Property Let RemainingCount(value As String)
+    If Len(Trim(value)) = 0 Then value = "XX characters remain"
+    If ValidateString(value, "alphanumdashslashspace") Then
+        m_RemainingCount = value
     End If
     lblMaxCount.Caption = m_RemainingCount
 End Property
@@ -550,12 +550,12 @@ Public Property Get Comment() As String
     Comment = m_Comment
 End Property
 
-Public Property Let Comment(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Comment"
-    If ValidateString(Value, "alphanumdashslashspace") Then
-        m_Comment = Value
+Public Property Let Comment(value As String)
+    If Len(Trim(value)) = 0 Then value = "Comment"
+    If ValidateString(value, "alphanumdashslashspace") Then
+        m_Comment = value
     End If
-    tbxComment.Value = m_Comment
+    tbxComment.value = m_Comment
 End Property
 
 ' ==== Color ====
@@ -563,8 +563,8 @@ Public Property Get CommentHeaderColor() As Long
     CommentHeaderColor = m_CommentHeaderColor
 End Property
 
-Public Property Let CommentHeaderColor(Value As Long)
-    m_CommentHeaderColor = Value
+Public Property Let CommentHeaderColor(value As Long)
+    m_CommentHeaderColor = value
     FormHeader.backcolor = m_CommentHeaderColor
 End Property
 
@@ -572,8 +572,8 @@ Public Property Get TitleFontColor() As Long
     TitleFontColor = m_TitleFontColor
 End Property
 
-Public Property Let TitleFontColor(Value As Long)
-    m_TitleFontColor = Value
+Public Property Let TitleFontColor(value As Long)
+    m_TitleFontColor = value
     lblTitle.forecolor = m_TitleFontColor
 End Property
 
@@ -581,8 +581,8 @@ Public Property Get InstructionFontColor() As Long
     InstructionFontColor = m_InstructionFontColor
 End Property
 
-Public Property Let InstructionFontColor(Value As Long)
-    m_InstructionFontColor = Value
+Public Property Let InstructionFontColor(value As Long)
+    m_InstructionFontColor = value
     lblInstructions.forecolor = m_InstructionFontColor
 End Property
 
@@ -590,8 +590,8 @@ Public Property Get CountLabelFontColor() As Long
     CountLabelFontColor = m_CountLabelFontColor
 End Property
 
-Public Property Let CountLabelFontColor(Value As Long)
-    m_CountLabelFontColor = Value
+Public Property Let CountLabelFontColor(value As Long)
+    m_CountLabelFontColor = value
     lblCount.forecolor = m_CountLabelFontColor
 End Property
 
@@ -599,8 +599,8 @@ Public Property Get CurrentCountFontColor() As Long
     CurrentCountFontColor = m_CurrentCountFontColor
 End Property
 
-Public Property Let CurrentCountFontColor(Value As Long)
-    m_CurrentCountFontColor = Value
+Public Property Let CurrentCountFontColor(value As Long)
+    m_CurrentCountFontColor = value
     lblCount.forecolor = m_CurrentCountFontColor
 End Property
 
@@ -608,8 +608,8 @@ Public Property Get MaxCountFontColor() As Long
     MaxCountFontColor = m_MaxCountFontColor
 End Property
 
-Public Property Let MaxCountFontColor(Value As Long)
-    m_MaxCountFontColor = Value
+Public Property Let MaxCountFontColor(value As Long)
+    m_MaxCountFontColor = value
     lblMaxCount.forecolor = m_MaxCountFontColor
 End Property
 
@@ -617,8 +617,8 @@ Public Property Get RemainingCountFontColor() As Long
     RemainingCountFontColor = m_RemainingCountFontColor
 End Property
 
-Public Property Let RemainingCountFontColor(Value As Long)
-    m_RemainingCountFontColor = Value
+Public Property Let RemainingCountFontColor(value As Long)
+    m_RemainingCountFontColor = value
     lblMaxCount.forecolor = m_RemainingCountFontColor
 End Property
 
@@ -626,9 +626,9 @@ Public Property Get AlertBoxBackgroundColor() As Long
     AlertBoxBackgroundColor = m_AlertBoxBackgroundColor
 End Property
 
-Public Property Let AlertBoxBackgroundColor(Value As Long)
+Public Property Let AlertBoxBackgroundColor(value As Long)
     rctAlert.backstyle = 1 '1 = Normal, 0 = Transparent
-    m_AlertBoxBackgroundColor = Value
+    m_AlertBoxBackgroundColor = value
     rctAlert.backcolor = m_AlertBoxBackgroundColor
 End Property
 
@@ -637,8 +637,8 @@ Public Property Get CommentVisible() As Byte
     CommentVisible = m_CommentVisible
 End Property
 
-Public Property Let CommentVisible(Value As Byte)
-    m_CommentVisible = Value
+Public Property Let CommentVisible(value As Byte)
+    m_CommentVisible = value
     tbxComment.visible = m_CommentVisible
 End Property
 
@@ -646,8 +646,8 @@ Public Property Get InstructionVisible() As Byte
     InstructionVisible = m_InstructionVisible
 End Property
 
-Public Property Let InstructionVisible(Value As Byte)
-    m_InstructionVisible = Value
+Public Property Let InstructionVisible(value As Byte)
+    m_InstructionVisible = value
     lblInstructions.visible = m_InstructionVisible
 End Property
 
@@ -655,8 +655,8 @@ Public Property Get CountLabelVisible() As Byte
     CountLabelVisible = m_CountLabelVisible
 End Property
 
-Public Property Let CountLabelVisible(Value As Byte)
-    m_CountLabelVisible = Value
+Public Property Let CountLabelVisible(value As Byte)
+    m_CountLabelVisible = value
     lblCount.visible = m_CountLabelVisible
 End Property
 
@@ -664,8 +664,8 @@ Public Property Get CurrentCountVisible() As Byte
     CurrentCountVisible = m_CurrentCountVisible
 End Property
 
-Public Property Let CurrentCountVisible(Value As Byte)
-    m_CurrentCountVisible = Value
+Public Property Let CurrentCountVisible(value As Byte)
+    m_CurrentCountVisible = value
     lblCount.visible = m_CurrentCountVisible
 End Property
 
@@ -673,8 +673,8 @@ Public Property Get MaxCountVisible() As Byte
     MaxCountVisible = m_MaxCountVisible
 End Property
 
-Public Property Let MaxCountVisible(Value As Byte)
-    m_MaxCountVisible = Value
+Public Property Let MaxCountVisible(value As Byte)
+    m_MaxCountVisible = value
     lblMaxCount.visible = m_MaxCountVisible
 End Property
 
@@ -682,16 +682,16 @@ Public Property Get RemainingCountVisible() As Byte
     RemainingCountVisible = m_RemainingCountVisible
 End Property
 
-Public Property Let RemainingCountVisible(Value As Byte)
-    m_RemainingCountVisible = Value
+Public Property Let RemainingCountVisible(value As Byte)
+    m_RemainingCountVisible = value
 End Property
 
 Public Property Get AlertBoxVisible() As Byte
     AlertBoxVisible = m_AlertBoxVisible
 End Property
 
-Public Property Let AlertBoxVisible(Value As Byte)
-    m_AlertBoxVisible = Value
+Public Property Let AlertBoxVisible(value As Byte)
+    m_AlertBoxVisible = value
     Me.rctAlert.visible = m_AlertBoxVisible
 End Property
 
@@ -700,10 +700,10 @@ Public Property Get AddButtonText() As String
     AddButtonText = m_AddButtonText
 End Property
 
-Public Property Let AddButtonText(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Add"
-    If ValidateString(Value, "alphaspace") Then
-        m_AddButtonText = Value
+Public Property Let AddButtonText(value As String)
+    If Len(Trim(value)) = 0 Then value = "Add"
+    If ValidateString(value, "alphaspace") Then
+        m_AddButtonText = value
     End If
     btnAdd.Caption = m_AddButtonText
 End Property
@@ -712,10 +712,10 @@ Public Property Get CancelButtonText() As String
     CancelButtonText = m_CancelButtonText
 End Property
 
-Public Property Let CancelButtonText(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "Cancel"
-    If ValidateString(Value, "alphaspace") Then
-        m_CancelButtonText = Value
+Public Property Let CancelButtonText(value As String)
+    If Len(Trim(value)) = 0 Then value = "Cancel"
+    If ValidateString(value, "alphaspace") Then
+        m_CancelButtonText = value
     End If
     btnCancel.Caption = m_CancelButtonText
 End Property
@@ -724,8 +724,8 @@ Public Property Get AddButtonForeColor() As Long
     AddButtonForeColor = m_AddButtonForeColor
 End Property
 
-Public Property Let AddButtonForeColor(Value As Long)
-    m_AddButtonForeColor = Value
+Public Property Let AddButtonForeColor(value As Long)
+    m_AddButtonForeColor = value
     btnAdd.forecolor = m_AddButtonForeColor
 End Property
 
@@ -733,8 +733,8 @@ Public Property Get AddButtonColor() As Long
     AddButtonColor = m_AddButtonColor
 End Property
 
-Public Property Let AddButtonColor(Value As Long)
-    m_AddButtonColor = Value
+Public Property Let AddButtonColor(value As Long)
+    m_AddButtonColor = value
     btnAdd.backcolor = m_AddButtonColor
 End Property
 
@@ -742,8 +742,8 @@ Public Property Get CancelButtonForeColor() As Long
     CancelButtonForeColor = m_CancelButtonForeColor
 End Property
 
-Public Property Let CancelButtonForeColor(Value As Long)
-    m_CancelButtonForeColor = Value
+Public Property Let CancelButtonForeColor(value As Long)
+    m_CancelButtonForeColor = value
     btnCancel.forecolor = m_CancelButtonForeColor
 End Property
 
@@ -751,8 +751,8 @@ Public Property Get CancelButtonColor() As Long
     CancelButtonColor = m_CancelButtonColor
 End Property
 
-Public Property Let CancelButtonColor(Value As Long)
-    m_CancelButtonColor = Value
+Public Property Let CancelButtonColor(value As Long)
+    m_CancelButtonColor = value
     btnCancel.backcolor = m_CancelButtonColor
 End Property
 
@@ -760,26 +760,26 @@ Public Property Get AddButtonVisible() As Byte
     AddButtonVisible = m_AddButtonVisible
 End Property
 
-Public Property Let AddButtonVisible(Value As Byte)
-    m_AddButtonVisible = Value
+Public Property Let AddButtonVisible(value As Byte)
+    m_AddButtonVisible = value
 End Property
 
 Public Property Get CancelButtonVisible() As Byte
     CancelButtonVisible = m_CancelButtonVisible
 End Property
 
-Public Property Let CancelButtonVisible(Value As Byte)
-    m_CancelButtonVisible = Value
+Public Property Let CancelButtonVisible(value As Byte)
+    m_CancelButtonVisible = value
 End Property
 
 Public Property Get AddAction() As String
     AddAction = m_AddAction
 End Property
 
-Public Property Let AddAction(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "add"
-    If ValidateString(Value, "alphanumdashunder") Then
-        m_AddAction = Value
+Public Property Let AddAction(value As String)
+    If Len(Trim(value)) = 0 Then value = "add"
+    If ValidateString(value, "alphanumdashunder") Then
+        m_AddAction = value
     End If
 End Property
 
@@ -787,20 +787,20 @@ Public Property Get CancelAction() As String
     CancelAction = m_CancelAction
 End Property
 
-Public Property Let CancelAction(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "cancel"
-    If ValidateString(Value, "alpha") Then
-        m_CancelAction = Value
+Public Property Let CancelAction(value As String)
+    If Len(Trim(value)) = 0 Then value = "cancel"
+    If ValidateString(value, "alpha") Then
+        m_CancelAction = value
     End If
 End Property
 Public Property Get EditAction() As String
     EditAction = m_EditAction
 End Property
 
-Public Property Let EditAction(Value As String)
-    If Len(Trim(Value)) = 0 Then Value = "edit"
-    If ValidateString(Value, "alpha") Then
-        m_EditAction = Value
+Public Property Let EditAction(value As String)
+    If Len(Trim(value)) = 0 Then value = "edit"
+    If ValidateString(value, "alpha") Then
+        m_EditAction = value
     End If
 End Property
 
@@ -947,7 +947,7 @@ On Error GoTo Err_Handler
     With oComment
         .CommentType = lblContext.Caption
         .TypeID = 4
-        .Comment = tbxComment.Value
+        .Comment = tbxComment.value
         .CommentorID = 3 'Requestor
         '.RequestedByID = 3 'Requestor
         .AddComment

@@ -775,7 +775,7 @@ Private Sub Form_Open(Cancel As Integer)
     Dim varReturn As Variant
 
     ' Close the form if the switchboard is not open
-    If fxnSwitchboardIsOpen = False Then
+    If SwitchboardIsOpen = False Then
         MsgBox "The main database switchboard must be" & vbCrLf & _
             "open for this form to function properly.", , "Cannot open the form ..."
         DoCmd.CancelEvent
@@ -1106,7 +1106,7 @@ Private Sub cmdTaskListRpt_Click()
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
-        strSaveFile = fxnSaveFile(strInitFile, "Snapshot Viewer (*.snp)", "*.snp")
+        strSaveFile = SaveFile(strInitFile, "Snapshot Viewer (*.snp)", "*.snp")
         ' Close the report because opening the new file in its own application
         DoCmd.Close acReport, strRptName, acSaveNo
         DoCmd.OutputTo acOutputReport, strRptName, acFormatSNP, strSaveFile, True

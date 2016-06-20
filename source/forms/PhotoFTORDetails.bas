@@ -13,8 +13,8 @@ Begin Form
     Width =6780
     DatasheetFontHeight =11
     ItemSuffix =55
-    Right =21285
-    Bottom =11790
+    Right =7650
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xcb7a7f08cdc4e440
@@ -1000,16 +1000,16 @@ End Sub
 Private Sub cbxPark_Change()
 On Error GoTo Err_Handler
     
-    'set park & enable continue when a 4-letter park code is selected
-    If Len(cbxPark.Value) > 3 Then
-        'set park
-        TempVars("park") = Trim(cbxPark.Value)
-        
-        'enable the continue button
-        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
-            btnContinue.Enabled = True
-        End If
-    End If
+'    'set park & enable continue when a 4-letter park code is selected
+'    If Len(cbxPark.value) > 3 Then
+'        'set park
+'        TempVars("park") = Trim(cbxPark.value)
+'
+'        'enable the continue button
+'        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
+'            btnContinue.Enabled = True
+'        End If
+'    End If
     
 Exit_Handler:
     Exit Sub
@@ -1040,15 +1040,15 @@ End Sub
 Private Sub cbxYear_Change()
 On Error GoTo Err_Handler
 
-    If Len(Trim(cbxYear)) > 0 Then
-        'set year
-        TempVars("TgtYear") = cbxYear.Value
-        
-        'enable the continue button
-        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
-            btnContinue.Enabled = True
-        End If
-    End If
+'    If Len(Trim(cbxYear)) > 0 Then
+'        'set year
+'        TempVars("TgtYear") = cbxYear.value
+'
+'        'enable the continue button
+'        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
+'            btnContinue.Enabled = True
+'        End If
+'    End If
 
 Exit_Handler:
     Exit Sub
@@ -1103,18 +1103,18 @@ End Sub
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub lblFacing_DblClick(Cancel As Integer)
     'clear options
-    optgRRRL.Value = ""
-    optgUSDS.Value = ""
+    optgRRRL.value = ""
+    optgUSDS.value = ""
 End Sub
 
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub optgRRRL_DblClick(Cancel As Integer)
     'clear options
-    optgRRRL.Value = ""
+    optgRRRL.value = ""
 End Sub
 
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub optgUSDS_DblClick(Cancel As Integer)
     'clear options
-    optgUSDS.Value = ""
+    optgUSDS.value = ""
 End Sub

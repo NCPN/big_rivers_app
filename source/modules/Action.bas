@@ -31,27 +31,27 @@ Private m_ActionDate As Date
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidAction(Value As String)
-Public Event InvalidRefTable(Value As String)
-Public Event InvalidRefID(Value As Long)
-Public Event InvalidContactID(Value As Long)
+Public Event InvalidAction(value As String)
+Public Event InvalidRefTable(value As String)
+Public Event InvalidRefID(value As Long)
+Public Event InvalidContactID(value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let RefTable(Value As String)
-    If ValidateString(Value, "alphadashunderscore") Then
-        m_RefTable = Value
+Public Property Let RefTable(value As String)
+    If ValidateString(value, "alphadashunderscore") Then
+        m_RefTable = value
     Else
-        RaiseEvent InvalidRefTable(Value)
+        RaiseEvent InvalidRefTable(value)
     End If
 End Property
 
@@ -59,16 +59,16 @@ Public Property Get RefTable() As String
     RefTable = m_RefTable
 End Property
 
-Public Property Let RefID(Value As Long)
-    m_RefID = Value
+Public Property Let RefID(value As Long)
+    m_RefID = value
 End Property
 
 Public Property Get RefID() As Long
     RefID = m_RefID
 End Property
 
-Public Property Let ContactID(Value As Long)
-    m_ContactID = Value
+Public Property Let ContactID(value As Long)
+    m_ContactID = value
 End Property
 
 Public Property Get ContactID() As Long
@@ -76,8 +76,8 @@ Public Property Get ContactID() As Long
 End Property
 
 'Action type is verbose for action
-Public Property Let ActionType(Value As String)
-    Select Case Value
+Public Property Let ActionType(value As String)
+    Select Case value
         Case "Observe"
             Me.action = "O"
         Case "Record"
@@ -96,21 +96,21 @@ Public Property Let ActionType(Value As String)
             Me.action = "C"
     End Select
 
-    m_ActionType = Value
+    m_ActionType = value
 End Property
 
 Public Property Get ActionType() As String
     ActionType = m_ActionType
 End Property
 
-Public Property Let action(Value As String)
+Public Property Let action(value As String)
     Dim aryActions() As String
     aryActions = Split(RECORD_ACTIONS, ",")
     
     If IsInArray(m_Action, aryActions) Then
-        m_Action = Value
+        m_Action = value
     Else
-        RaiseEvent InvalidAction(Value)
+        RaiseEvent InvalidAction(value)
     End If
 End Property
 
@@ -118,8 +118,8 @@ Public Property Get action() As String
     action = m_Action
 End Property
 
-Public Property Let ActionDate(Value As Date)
-    m_ActionDate = Value
+Public Property Let ActionDate(value As Date)
+    m_ActionDate = value
 End Property
 
 Public Property Get ActionDate() As Date

@@ -13,8 +13,8 @@ Begin Form
     Width =6420
     DatasheetFontHeight =11
     ItemSuffix =54
-    Right =21285
-    Bottom =11790
+    Right =7650
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x36469deccdc4e440
@@ -540,16 +540,16 @@ End Sub
 Private Sub cbxPark_Change()
 On Error GoTo Err_Handler
     
-    'set park & enable continue when a 4-letter park code is selected
-    If Len(cbxPark.Value) > 3 Then
-        'set park
-        TempVars("park") = Trim(cbxPark.Value)
-        
-        'enable the continue button
-        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
-            btnContinue.Enabled = True
-        End If
-    End If
+'    'set park & enable continue when a 4-letter park code is selected
+'    If Len(cbxPark.value) > 3 Then
+'        'set park
+'        TempVars("park") = Trim(cbxPark.value)
+'
+'        'enable the continue button
+'        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
+'            btnContinue.Enabled = True
+'        End If
+'    End If
     
 Exit_Handler:
     Exit Sub
@@ -580,15 +580,15 @@ End Sub
 Private Sub cbxYear_Change()
 On Error GoTo Err_Handler
 
-    If Len(Trim(cbxYear)) > 0 Then
-        'set year
-        TempVars("TgtYear") = cbxYear.Value
-        
-        'enable the continue button
-        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
-            btnContinue.Enabled = True
-        End If
-    End If
+'    If Len(Trim(cbxYear)) > 0 Then
+'        'set year
+'        TempVars("TgtYear") = cbxYear.value
+'
+'        'enable the continue button
+'        If Len(cbxPark) > 3 And TempVars("TgtYear") > 0 Then
+'            btnContinue.Enabled = True
+'        End If
+'    End If
 
 Exit_Handler:
     Exit Sub

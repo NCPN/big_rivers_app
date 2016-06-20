@@ -79,39 +79,39 @@ Private m_Comments As Comment
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidPhotoType(Value As String)
-Public Event InvalidPhotoNumber(Value As String)
-Public Event InvalidFilename(Value As String)
-Public Event InvalidDirectionFacing(Value As String)
-Public Event InvalidPhotographerID(Value As Long)
-Public Event Invalid(Value)
+Public Event InvalidPhotoType(value As String)
+Public Event InvalidPhotoNumber(value As String)
+Public Event InvalidFilename(value As String)
+Public Event InvalidDirectionFacing(value As String)
+Public Event InvalidPhotographerID(value As Long)
+Public Event Invalid(value)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let PhotoDate(Value As Date)
-    m_PhotoDate = Value
+Public Property Let PhotoDate(value As Date)
+    m_PhotoDate = value
 End Property
 
 Public Property Get PhotoDate() As Date
     PhotoDate = m_PhotoDate
 End Property
 
-Public Property Let PhotoType(Value As String)
+Public Property Let PhotoType(value As String)
     Dim aryTypes() As String
     aryTypes = Split(PHOTO_TYPES, ",")
-    If IsInArray(Value, aryTypes) Then
-        m_PhotoType = Value
+    If IsInArray(value, aryTypes) Then
+        m_PhotoType = value
     Else
-        RaiseEvent InvalidPhotoType(Value)
+        RaiseEvent InvalidPhotoType(value)
     End If
 End Property
 
@@ -119,40 +119,40 @@ Public Property Get PhotoType() As String
     PhotoType = m_PhotoType
 End Property
 
-Public Property Let PhotographerID(Value As Long)
-    m_PhotographerID = Value
+Public Property Let PhotographerID(value As Long)
+    m_PhotographerID = value
 End Property
 
 Public Property Get PhotographerID() As Long
     PhotographerID = m_PhotographerID
 End Property
     
-Public Property Let FileName(Value As String)
-    m_Filename = Value
+Public Property Let FileName(value As String)
+    m_Filename = value
 End Property
 
 Public Property Get FileName() As String
     FileName = m_Filename
 End Property
 
-Public Property Let NCPNImageID(Value As Long)
-    m_NCPNImageID = Value
+Public Property Let NCPNImageID(value As Long)
+    m_NCPNImageID = value
 End Property
 
 Public Property Get NCPNImageID() As Long
     NCPNImageID = m_NCPNImageID
 End Property
 
-Public Property Let DirectionFacing(Value As String)
-    m_DirectionFacing = Value
+Public Property Let DirectionFacing(value As String)
+    m_DirectionFacing = value
 End Property
 
 Public Property Get DirectionFacing() As String
     DirectionFacing = m_DirectionFacing
 End Property
 
-Public Property Let PhotogLocation(Value As String)
-    m_PhotogLocation = Value
+Public Property Let PhotogLocation(value As String)
+    m_PhotogLocation = value
 End Property
 
 Public Property Get PhotogLocation() As String
@@ -183,72 +183,72 @@ End Property
 '    SurveyPtID = m_SurveyPtID
 'End Property
 
-Public Property Let SubjectLocation(Value As String)
-    m_SubjectLocation = Value
+Public Property Let SubjectLocation(value As String)
+    m_SubjectLocation = value
 End Property
 
 Public Property Get SubjectLocation() As String
     SubjectLocation = m_SubjectLocation
 End Property
 
-Public Property Let IsCloseup(Value As Boolean)
-    m_IsCloseup = Value
+Public Property Let IsCloseup(value As Boolean)
+    m_IsCloseup = value
 End Property
 
 Public Property Get IsCloseup() As Boolean
     IsCloseup = m_IsCloseup
 End Property
 
-Public Property Let IsInActive(Value As Boolean)
-    m_IsInActive = Value
+Public Property Let IsInActive(value As Boolean)
+    m_IsInActive = value
 End Property
 
 Public Property Get IsInActive() As Boolean
     IsInActive = m_IsInActive
 End Property
 
-Public Property Let IsSkipped(Value As Boolean)
-    m_IsSkipped = Value
+Public Property Let IsSkipped(value As Boolean)
+    m_IsSkipped = value
 End Property
 
 Public Property Get IsSkipped() As Boolean
     IsSkipped = m_IsSkipped
 End Property
 
-Public Property Let IsReplacement(Value As Boolean)
-    m_IsReplacement = Value
+Public Property Let IsReplacement(value As Boolean)
+    m_IsReplacement = value
 End Property
 
 Public Property Get IsReplacement() As Boolean
     IsReplacement = m_IsReplacement
 End Property
 
-Public Property Let LastPhotoUpdate(Value As Date)
-    m_LastPhotoUpdate = Value
+Public Property Let LastPhotoUpdate(value As Date)
+    m_LastPhotoUpdate = value
 End Property
 
 Public Property Get LastPhotoUpdate() As Date
     LastPhotoUpdate = m_LastPhotoUpdate
 End Property
 
-Public Property Let CreatedByID(Value As Integer)
-    m_CreatedByID = Value
+Public Property Let CreatedByID(value As Integer)
+    m_CreatedByID = value
 End Property
 
 Public Property Get CreatedByID() As Integer
     CreatedByID = m_CreatedByID
 End Property
 
-Public Property Let CreateDate(Value As Date)
-    m_CreateDate = Value
+Public Property Let CreateDate(value As Date)
+    m_CreateDate = value
 End Property
 
 Public Property Get CreateDate() As Date
     CreateDate = m_CreateDate
 End Property
 
-Public Property Let LastModifiedByID(Value As Integer)
-    m_LastModifiedByID = Value
+Public Property Let LastModifiedByID(value As Integer)
+    m_LastModifiedByID = value
 End Property
 
 Public Property Get LastModifiedByID() As Integer

@@ -30,36 +30,36 @@ Private m_Segment As String
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidParkID(Value As Long)
-Public Event InvalidName(Value As String)
-Public Event InvalidSegment(Value As String)
+Public Event InvalidParkID(value As Long)
+Public Event InvalidName(value As String)
+Public Event InvalidSegment(value As String)
 
-Public Event InvalidContactID(Value As Long)
+Public Event InvalidContactID(value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let ParkID(Value As Long)
-    m_ParkID = Value
+Public Property Let ParkID(value As Long)
+    m_ParkID = value
 End Property
 
 Public Property Get ParkID() As Long
     ParkID = m_ParkID
 End Property
 
-Public Property Let Name(Value As String)
+Public Property Let Name(value As String)
     If Len(Name) > 25 Then
-        m_Name = Value
+        m_Name = value
     Else
-        RaiseEvent InvalidName(Value)
+        RaiseEvent InvalidName(value)
     End If
 End Property
 
@@ -67,11 +67,11 @@ Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let Segment(Value As String)
+Public Property Let Segment(value As String)
     If Len(Name) > 5 Then
-        m_Segment = Value
+        m_Segment = value
     Else
-        RaiseEvent InvalidSegment(Value)
+        RaiseEvent InvalidSegment(value)
     End If
 End Property
 

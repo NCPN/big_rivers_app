@@ -27,10 +27,10 @@ Begin Form
     Width =4320
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =7395
-    Top =3705
-    Right =11715
-    Bottom =6810
+    Left =4665
+    Top =3315
+    Right =12315
+    Bottom =14310
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x13562948b201e340
@@ -426,7 +426,7 @@ Private Sub Form_Open(Cancel As Integer)
     ' Set up form depending on application mode
     varOpenArgs = Me.OpenArgs
     
-    If fxnSwitchboardIsOpen Then
+    If SwitchboardIsOpen Then
         setUserAccess Me
     Else
         MsgBox "The main database switchboard must be" & vbCrLf & _
@@ -457,7 +457,7 @@ Private Sub Form_Open(Cancel As Integer)
     
     'TempVars not yet populated -> use fsub_DbAdmin control defaults
     If idxShift = -1 Then
-        initializeControls Me
+'        initializeControls Me
         GoTo Exit_Procedure
     End If
     
@@ -475,7 +475,7 @@ Private Sub Form_Open(Cancel As Integer)
             
             ctrlName = ctrlName & TempVars.item(i).Name
             
-            Me.Controls(ctrlName) = TempVars.item(i).Value
+            Me.Controls(ctrlName) = TempVars.item(i).value
         End With
     Next
 
@@ -627,13 +627,13 @@ Private Sub cmdOK_Click()
     End If
 
     ' Save changes to the switchboard record
-    If Nz(Me.cbxUser) <> Nz(TempVars.item("User")) Then TempVars.item("User") = Me.cbxUser.Value
-    If Nz(Me.cbxGPS_model) <> Nz(TempVars.item("GPS_model")) Then TempVars.item("GPS_model") = Me.cbxGPS_model.Value
-    If Nz(Me.cbxPark) <> Nz(TempVars.item("Park")) Then TempVars.item("Park") = Me.cbxPark.Value
-    If Nz(Me.cbxDatum) <> Nz(TempVars.item("Datum")) Then TempVars.item("Datum") = Me.cbxDatum.Value
-    If Nz(Me.tbxDeclination) <> Nz(TempVars.item("Declination")) Then TempVars.item("Declination") = Me.tbxDeclination.Value
-    If Nz(Me.tbxTimeframe) <> Nz(TempVars.item("Timeframe")) Then TempVars.item("Timeframe") = Me.tbxTimeframe.Value
-    If Nz(Me.tbxProject) <> Nz(TempVars.item("Project")) Then TempVars.item("Project") = Me.tbxProject.Value
+    If Nz(Me.cbxUser) <> Nz(TempVars.item("User")) Then TempVars.item("User") = Me.cbxUser.value
+    If Nz(Me.cbxGPS_model) <> Nz(TempVars.item("GPS_model")) Then TempVars.item("GPS_model") = Me.cbxGPS_model.value
+    If Nz(Me.cbxPark) <> Nz(TempVars.item("Park")) Then TempVars.item("Park") = Me.cbxPark.value
+    If Nz(Me.cbxDatum) <> Nz(TempVars.item("Datum")) Then TempVars.item("Datum") = Me.cbxDatum.value
+    If Nz(Me.tbxDeclination) <> Nz(TempVars.item("Declination")) Then TempVars.item("Declination") = Me.tbxDeclination.value
+    If Nz(Me.tbxTimeframe) <> Nz(TempVars.item("Timeframe")) Then TempVars.item("Timeframe") = Me.tbxTimeframe.value
+    If Nz(Me.tbxProject) <> Nz(TempVars.item("Project")) Then TempVars.item("Project") = Me.tbxProject.value
 
     strSQL = "UPDATE tsys_App_Defaults " _
         & "SET GPS_model = '" & TempVars.item("GPS_model") & "', " _
@@ -652,7 +652,7 @@ Private Sub cmdOK_Click()
     DoCmd.SetWarnings True
     
     'repaint fsub_DbAdmin to update values if switchboard is open
-    If fxnSwitchboardIsOpen Then Forms!frm_Switchboard.fsub_DBAdmin.Form.Repaint
+    If SwitchboardIsOpen Then Forms!frm_Switchboard.fsub_DBAdmin.Form.Repaint
     
     'close form & return to calling form
     DoCmd.Close , , acSaveNo

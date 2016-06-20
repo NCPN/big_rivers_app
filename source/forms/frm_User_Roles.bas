@@ -18,10 +18,10 @@ Begin Form
     Width =4560
     DatasheetFontHeight =9
     ItemSuffix =4
-    Left =9960
-    Top =2085
-    Right =14610
-    Bottom =10680
+    Left =4665
+    Top =3315
+    Right =12315
+    Bottom =14310
     DatasheetGridlinesColor =12632256
     OrderBy ="[frm_User_Roles].[User_role], User_name"
     RecSrcDt = Begin
@@ -245,7 +245,7 @@ Private Sub Form_Open(Cancel As Integer)
 
     varOpenArgs = Me.OpenArgs
     ' Control who can make edits or deletions
-    If fxnSwitchboardIsOpen Then
+    If SwitchboardIsOpen Then
         Select Case TempVars.item("UserAccessLevel")
             Case "admin"
                 Me.AllowEdits = True

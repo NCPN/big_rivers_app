@@ -25,10 +25,10 @@ Begin Form
     Width =5520
     DatasheetFontHeight =10
     ItemSuffix =14
-    Left =5340
-    Top =2160
-    Right =11310
-    Bottom =6750
+    Left =4665
+    Top =3315
+    Right =12315
+    Bottom =14310
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x99f562689172e440
@@ -382,7 +382,7 @@ Private Sub Form_Open(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Close if switchboard is not open
-    If fxnSwitchboardIsOpen = False Then
+    If SwitchboardIsOpen = False Then
         MsgBox "The main database switchboard must be" & vbCrLf & _
             "open for this form to function properly.", , "Cannot open the form ..."
         DoCmd.CancelEvent

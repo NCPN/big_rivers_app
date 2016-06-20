@@ -53,9 +53,9 @@ On Error GoTo Err_Handler
             strTitle = "View"
         Case "Reports" ' Reports main
             strTitle = "Reports"
-        Case "CrewSpeciesList" ' Reports > Field Crew Species List
+        Case "CrewVegWalk" ' Reports > Field Crew Species List
             strTitle = "Reports > Field Crew Species List"
-        Case "SpeciesListByPark" ' Reports > Species List By Park
+        Case "VegWalkByPark" ' Reports > Species List By Park
             strTitle = "Reports > Species List By Park"
         Case "TgtListAnnualSummary" ' Reports > Annual Species List Summary
             strTitle = "Reports > Annual Species List Summary"
@@ -127,9 +127,9 @@ On Error GoTo Err_Handler
             '        & "Be as complete as possible to aid others in tracing data changes."
         Case "Reports" ' Reports main
             strInstructions = "Choose the report you would like to run."
-        Case "CrewSpeciesList" ' Reports > Field Crew Species List
+        Case "CrewVegWalk" ' Reports > Field Crew Species List
             strInstructions = "Choose the park and year for your list. Click 'Continue' to prepare your report."
-        Case "SpeciesListByPark" ' Reports > Species List By Park
+        Case "VegWalkByPark" ' Reports > Species List By Park
             strInstructions = "Choose the park and year for your list. Click 'Continue' to prepare your report."
         Case "TgtListAnnualSummary"
             strInstructions = "Choose the year(s) for your list. Click 'Continue' to prepare your report." & vbCrLf & vbCrLf & _
@@ -378,7 +378,7 @@ On Error GoTo Err_Handler
         Case "people"
         'Vegetation
         Case "woody canopy cover"
-            fName = "SpeciesList" '"WoodyCanopyCover"
+            fName = "VegWalk" '"WoodyCanopyCover"
             oArgs = "1|2016|WCC"
         Case "understory cover"
         Case "vegetation walk"
@@ -393,7 +393,7 @@ On Error GoTo Err_Handler
             rName = "VegPlot"
             oArgs = ""
         Case "vegwalk"
-            rName = "SpeciesList"
+            rName = "VegWalk"
             oArgs = ""
         Case "photo"
             rName = "Photo"

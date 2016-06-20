@@ -18,12 +18,14 @@ dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
         dbText "Name" ="CurrDb"
+        dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin
             0x1d6334f8b432aa43be5b7e55da073fd3
         End
     End
     Begin
         dbText "Name" ="CurrPath"
+        dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin
             0x058ef6460b0ad243b200e1295c63b09c
         End

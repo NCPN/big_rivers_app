@@ -967,7 +967,7 @@ Public Sub PrepareCrumbs(frm As SubForm, aryCrumbs As Variant, Optional separato
                 .Caption = aryCrumbs(i)
             Else
                 'hyperlink control (displaytext vs caption)
-                .Value = aryCrumbs(i)
+                .value = aryCrumbs(i)
             End If
             
             'set control position
@@ -1047,7 +1047,7 @@ On Error GoTo Err_Handler
     Dim sngStart As Single, sngEnd As Single
 
     iCenterX = ctrl.Left + ctrl.Width / 2
-    iCenterY = ctrl.top + ctrl.Height / 2
+    iCenterY = ctrl.Top + ctrl.Height / 2
     iRadius = ctrl.Width '/ 3 '/ 2 + 100
     dblAspect = 1 'ctrl.Height / ctrl.Width
     

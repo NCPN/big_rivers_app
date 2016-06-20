@@ -839,8 +839,8 @@ Err_Handler:
 End Sub
 
 Private Sub Form_Current()
-    Me.imgPriority.Picture = IIf(Priority.Value = 52, FLAG_RED, FLAG_BLUE)
-    Me.imgStatus.Picture = IIf(Status.Value = 48, DOT_PURPLE, DOT_LIME)
+    Me.imgPriority.Picture = IIf(Priority.value = 52, FLAG_RED, FLAG_BLUE)
+    Me.imgStatus.Picture = IIf(Status.value = 48, DOT_PURPLE, DOT_LIME)
 End Sub
 
 ' ---------------------------------

@@ -23,10 +23,8 @@ Begin Form
     Width =14415
     DatasheetFontHeight =10
     ItemSuffix =677
-    Left =510
-    Top =30
-    Right =14925
-    Bottom =11550
+    Right =7650
+    Bottom =10995
     DatasheetGridlinesColor =12632256
     Filter ="[Query_name] = \"qa_a111_Overview_transect_pt_duplicates\" AND [Time_frame] = \""
         "2014\" AND [Data_scope] = 0"
@@ -1469,7 +1467,7 @@ Private Sub Form_Open(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Close the form if the switchboard is not open
-    If fxnSwitchboardIsOpen = False Then
+    If SwitchboardIsOpen = False Then
         MsgBox "The main database switchboard must be" & vbCrLf & _
             "open for this form to function properly.", , "Cannot open the form ..."
         DoCmd.CancelEvent
@@ -1607,7 +1605,7 @@ Private Sub PageTabs_Change()
         varReturn = UpdateQAResults(False, Me.selObject)
         Me.Requery
         fxnFilterRecords
-        strCriteria = "[Query_name] = """ & Me.selObject.Value & _
+        strCriteria = "[Query_name] = """ & Me.selObject.value & _
             """ AND [Time_frame] = """ & Me.cmbTimeframe & _
             """ AND [Data_scope] = " & Me.optgScope
 
@@ -1810,7 +1808,7 @@ Private Sub Form_Dirty(Cancel As Integer)
 
     ' Once a user starts to make edits in the record, update the user field
     '   on the results summary page
-    If fxnSwitchboardIsOpen Then Me.txtUser = Environ("Username")
+    If SwitchboardIsOpen Then Me.txtUser = Environ("Username")
     Me.txtRemedy_date = Now()
 
 Exit_Procedure:
@@ -1975,7 +1973,7 @@ Private Sub cmdViewReport_Click()
                 CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
-        strSaveFile = fxnSaveFile(strInitFile, "Snapshot Viewer (*.snp)", "*.snp")
+        strSaveFile = SaveFile(strInitFile, "Snapshot Viewer (*.snp)", "*.snp")
         DoCmd.OutputTo acOutputReport, strRptName, acFormatSNP, strSaveFile, True
         MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
     End If
@@ -2037,9 +2035,9 @@ Private Sub selObject_AfterUpdate()
     End If
     
     ' Bind the subform to the selected query
-    Me.subQueryResults.SourceObject = "Query." & Me.selObject.Value
+    Me.subQueryResults.SourceObject = "Query." & Me.selObject.value
     ' Build the filter string and see if a record already exists
-    strCriteria = "[Query_name] = """ & Me.selObject.Value & _
+    strCriteria = "[Query_name] = """ & Me.selObject.value & _
         """ AND [Time_frame] = """ & Me.cmbTimeframe & _
         """ AND [Data_scope] = " & Me.optgScope
     If DCount("*", "tbl_QA_Results", strCriteria) = 0 Then
@@ -2060,7 +2058,7 @@ Private Sub selObject_AfterUpdate()
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.selObject.Value Then
+        If qdf.Name = Me.selObject.value Then
             MsgBox ("This query returns (" & DCount("*", qdf.Name) & _
                 ") records that meet the following criteria: " & _
                 vbCrLf & vbCrLf & qdf.Properties("Description"))
@@ -2100,7 +2098,7 @@ Private Sub cmdDesignView_Click()
 
     ' Open the selected query in design view after checking that a query is selected
     If IsNull(Me.selObject) = False Then _
-        DoCmd.OpenQuery Me.selObject.Value, acViewDesign, acReadOnly
+        DoCmd.OpenQuery Me.selObject.value, acViewDesign, acReadOnly
 
 Exit_Procedure:
     Exit Sub
@@ -2138,7 +2136,7 @@ Private Sub cmdAutoFix_Click()
 
     On Error Resume Next
     Set ctlAutoFix = Forms!frm_QA_Tool.subQueryResults!varAutoFix
-    varAutoFix = ctlAutoFix.Value
+    varAutoFix = ctlAutoFix.value
     On Error GoTo Err_Handler
 
     If IsNull(varAutoFix) Then
@@ -2220,11 +2218,11 @@ Private Sub cmdOpenRecord_Click()
     
     On Error Resume Next
     Set ctlObject = Forms!frm_QA_Tool.subQueryResults!varObject
-    varObject = ctlObject.Value
+    varObject = ctlObject.value
     Set ctlFilter = Forms!frm_QA_Tool.subQueryResults!varFilter
-    varFilter = ctlFilter.Value
+    varFilter = ctlFilter.value
     Set ctlArgs = Forms!frm_QA_Tool.subQueryResults!varArgs
-    varArgs = ctlArgs.Value
+    varArgs = ctlArgs.value
     On Error GoTo Err_Handler
 
     If IsNull(varObject) Then
@@ -2390,9 +2388,9 @@ Private Sub cmdCloseup_Click()
     ' Open the selected query in a new window after checking that a query is selected
     If IsNull(Me.selObject) = False Then
         If Me.txtEditQuery = "OK" Then
-            DoCmd.OpenQuery Me.selObject.Value, acViewNormal, acEdit
+            DoCmd.OpenQuery Me.selObject.value, acViewNormal, acEdit
         Else
-            DoCmd.OpenQuery Me.selObject.Value, acViewNormal, acReadOnly
+            DoCmd.OpenQuery Me.selObject.value, acViewNormal, acReadOnly
         End If
         DoCmd.Maximize
     End If
@@ -2530,7 +2528,7 @@ Private Sub selTable_Enter()
     strSysTable = "tsys_Link_Tables"     ' System table listing linked tables
 
     ' If the system table does not exist, replace the row source with one that doesn't use it
-    If fxnTableExists(strSysTable) = False Then
+    If TableExists(strSysTable) = False Then
         Me.selTable.RowSource = "SELECT MSysObjects.Name " & _
             "FROM MSysObjects " & _
             "WHERE (((MSysObjects.Name) Like 'tbl_*' " & _
@@ -2572,8 +2570,8 @@ Private Sub selTable_AfterUpdate()
         Me.subDataTables.SourceObject = ""
     Else
     ' If a table is selected ...
-        If fxnTableExists(Me.selTable) Then
-            Me.subDataTables.SourceObject = "Table." & Me.selTable.Value
+        If TableExists(Me.selTable) Then
+            Me.subDataTables.SourceObject = "Table." & Me.selTable.value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"
@@ -2666,7 +2664,7 @@ Private Function fxnSetQueryFlag()
 
     ' Update the visual flag to indicate whether or not the query results are editable
     '   Note: suffix of "_X" means that the query results may be edited
-    If Right(Me.selObject.Value, 2) = "_X" Then
+    If Right(Me.selObject.value, 2) = "_X" Then
         Me.txtEditQuery = "OK"
         Me.txtEditQuery.forecolor = 16777215   'white
         Me.txtEditQuery.backcolor = 4227072    'green

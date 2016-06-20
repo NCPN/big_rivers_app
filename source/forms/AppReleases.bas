@@ -21,16 +21,13 @@ Begin Form
     Width =8100
     DatasheetFontHeight =10
     ItemSuffix =18
-    Left =4080
-    Top =3105
-    Right =25365
-    Bottom =14895
+    Left =4665
+    Top =3300
+    Right =12315
+    Bottom =14310
     DatasheetGridlinesColor =12632256
-    RecSrcDt = Begin
-        0x9224cdfd1362e340
-    End
     RecordSource ="SELECT tsys_App_Releases.* FROM tsys_App_Releases ORDER BY tsys_App_Releases.Rel"
-        "ease_date, tsys_App_Releases.Version_number; "
+        "ease_date, tsys_AppReleases.VersionNumber; "
     Caption =" Application Releases"
     AfterUpdate ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -462,12 +459,13 @@ Option Explicit
 ' Adapted:      Bonnie Campbell, June 2014
 ' Revisions:    BLC, 6/12/2014 - Revised to use TempVars.Item("UserAccessLevel") vs. cAppMode
 '               BLC, 8/5/2014 - changed to use setUserAccess for initializing control settings based on app mode
+'               BLC, 6/13/2016 - adapted for big rivers
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
     On Error GoTo Err_Handler
 
     DoCmd.GoToRecord , , acLast
-    If fxnSwitchboardIsOpen Then
+    If SwitchboardIsOpen Then
             'initialize controls based on app mode
             setUserAccess Me
     End If
@@ -491,11 +489,12 @@ End Sub
 ' Source/date:  Created John R. Boetsch, September 2008
 ' Adapted:      Bonnie Campbell, June 2014
 ' Revisions:    BLC, 6/12/2014 - Revised to use TempVars.Item("UserAccessLevel") vs. cAppMode
+'               BLC, 6/13/2016 - adapted for big rivers
 ' ---------------------------------
 Private Sub Form_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If fxnSwitchboardIsOpen Then Forms!frm_Switchboard!cmbVersion.Requery
+    If SwitchboardIsOpen Then Forms!frm_Switchboard!cmbVersion.Requery
 
 Exit_Procedure:
     Exit Sub

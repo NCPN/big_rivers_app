@@ -1,0 +1,9 @@
+CREATE TABLE [tsys_ERD_Views] (
+  [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
+  [LayoutName] VARCHAR (50),
+  [WinName] VARCHAR (255),
+  [X] SHORT ,
+  [Y] SHORT ,
+  [X1] SHORT ,
+  [Y1] SHORT 
+)

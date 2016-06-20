@@ -1329,23 +1329,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidCaption(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -1353,14 +1353,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -1368,14 +1368,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
+Public Property Let ButtonCaption(value As String)
+    If Len(value) > 0 Then
+        m_ButtonCaption = value
 
         'set the form button caption
         Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCaption(value)
     End If
 End Property
 
@@ -1383,16 +1383,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
+Public Property Let SelectedID(value As Integer)
+        m_SelectedID = value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
+Public Property Let SelectedValue(value As String)
+        m_SelectedValue = value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -1461,7 +1461,7 @@ On Error GoTo Err_Handler
     Title = "VegPlot (Sampling)"
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.forecolor = lngBlue
@@ -1492,7 +1492,7 @@ On Error GoTo Err_Handler
     tbxPlotDensity.backcolor = lngYellow
     
     'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
+    tbxID.value = 0
   
     'defaults --> turn off items
     lblWater.visible = False
@@ -1725,7 +1725,7 @@ On Error GoTo Err_Handler
 '        .HeadtoOrientDistance = tbxDistance.Value
 '        .HeadtoOrientBearing = tbxBearing.Value
         
-        .ID = tbxID.Value '0 if new, edit if > 0
+        .ID = tbxID.value '0 if new, edit if > 0
         .SaveToDb
     End With
     
@@ -1737,7 +1737,7 @@ On Error GoTo Err_Handler
 '    tbxNotes.ControlSource = ""
     
     tbxID.ControlSource = ""
-    tbxID.Value = 0
+    tbxID.value = 0
     
     ReadyForSave
     
@@ -1774,7 +1774,7 @@ Private Sub btnWCC_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "SpeciesList", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
+    DoCmd.OpenForm "VegWalk", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
     
 Exit_Handler:
     Exit Sub
@@ -1804,7 +1804,7 @@ Private Sub btnURC_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "SpeciesList", acNormal, , , , , "UnderstoryRootedSpecies|" & tbxID
+    DoCmd.OpenForm "VegWalk", acNormal, , , , , "UnderstoryRootedSpecies|" & tbxID
     
 Exit_Handler:
     Exit Sub
@@ -1834,7 +1834,7 @@ Private Sub btnARC_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "SpeciesList", acNormal, , , , , "AllRootedSpecies|" & tbxID
+    DoCmd.OpenForm "VegWalk", acNormal, , , , , "AllRootedSpecies|" & tbxID
     
 Exit_Handler:
     Exit Sub

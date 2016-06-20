@@ -75,16 +75,16 @@ Option Compare Database
 Option Explicit
 
 Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" _
-  (ByVal hwnd As Long, _
+  (ByVal hWnd As Long, _
    ByVal nIndex As Long) As Long
  
 Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" _
-  (ByVal hwnd As Long, _
+  (ByVal hWnd As Long, _
    ByVal nIndex As Long, _
    ByVal dwNewLong As Long) As Long
  
 Private Declare Function SetLayeredWindowAttributes Lib "user32" _
-  (ByVal hwnd As Long, _
+  (ByVal hWnd As Long, _
    ByVal crKey As Long, _
    ByVal bAlpha As Byte, _
    ByVal dwFlags As Long) As Long
@@ -99,9 +99,9 @@ Public Sub SetFormOpacity(frm As Form, sngOpacity As Single, TColor As Long)
     Dim lngStyle As Long
 
     ' get the current window style, then set transparency
-    lngStyle = GetWindowLong(frm.hwnd, GWL_EXSTYLE)
-    SetWindowLong frm.hwnd, GWL_EXSTYLE, lngStyle Or WS_EX_LAYERED
-    SetLayeredWindowAttributes frm.hwnd, TColor, (sngOpacity * 255), LWA_ALPHA
+    lngStyle = GetWindowLong(frm.hWnd, GWL_EXSTYLE)
+    SetWindowLong frm.hWnd, GWL_EXSTYLE, lngStyle Or WS_EX_LAYERED
+    SetLayeredWindowAttributes frm.hWnd, TColor, (sngOpacity * 255), LWA_ALPHA
 End Sub
 
 Private Sub Form_Load()

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =4080
-    Top =3105
-    Right =25365
-    Bottom =14895
+    Left =5175
+    Top =2940
+    Right =13035
+    Bottom =9105
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -612,7 +612,6 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnSpeciesListRpt"
                     Caption ="Species lists"
-                    OnClick ="[Event Procedure]"
                     ControlTipText ="Generate transect species lists"
                     GridlineColor =10921638
 
@@ -2376,23 +2375,23 @@ Private m_ButtonCaption
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidCaption(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -2400,14 +2399,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -2415,14 +2414,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
+Public Property Let ButtonCaption(value As String)
+    If Len(value) > 0 Then
+        m_ButtonCaption = value
 
         'set the form button caption
         'Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCaption(value)
     End If
 End Property
 
@@ -2881,11 +2880,11 @@ Private Sub btnReleaseHistory_Click()
 On Error GoTo Err_Handler
 
     ' View the release history form
-    If TempVars("Connected") Then
+    If Nz(TempVars("Connected"), False) Then
         If TempVars("UserAccessLevel") = "admin" Then
-            DoCmd.OpenForm "frm_App_Releases"
+            DoCmd.OpenForm "AppReleases"
         Else    ' read-only for all but admin users
-            DoCmd.OpenForm "frm_App_Releases", , , , acFormReadOnly
+            DoCmd.OpenForm "AppReleases", , , , acFormReadOnly
         End If
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
@@ -2984,7 +2983,7 @@ On Error GoTo Err_Handler
 
     ' Update database version and contact info
     If TempVars("UserAccessLevel") = "admin" Then
-        DoCmd.OpenForm "frm_Set_Db_Info"
+        DoCmd.OpenForm "SetDbInfo"
     End If
 
 Exit_Handler:
@@ -3024,7 +3023,7 @@ On Error GoTo Err_Handler
         ' Prompt to make a backup, depending on application settings
         '   Note:  only relevant for Access back-end files
         If Me.chkBackupOnStartup And TempVars("HasAccessBE") Then MakeBackup
-        DoCmd.OpenForm "frm_Set_Defaults", , , , , , 1
+        DoCmd.OpenForm "SetDefaults", , , , , , 1
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3100,7 +3099,7 @@ On Error GoTo Err_Handler
 
     ' Open the data browser
     If TempVars("Connected") Then
-        DoCmd.OpenForm "frm_Set_Defaults", , , , , , 2
+        DoCmd.OpenForm "SetDefaults", , , , , , 2
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3140,7 +3139,7 @@ On Error GoTo Err_Handler
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
     Else
-        DoCmd.OpenForm "frm_Lookups"
+        DoCmd.OpenForm "Lookups"
     End If
 
 
@@ -3174,7 +3173,7 @@ On Error GoTo Err_Handler
 
     ' Open the data validation tool
     If TempVars("Connected") Then
-        DoCmd.OpenForm "QAtool"
+        DoCmd.OpenForm "QATool"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3211,7 +3210,7 @@ On Error GoTo Err_Handler
 
     ' Open the edit log form
     If TempVars("Connected") Then
-        DoCmd.OpenForm "frm_Edit_Log"
+        DoCmd.OpenForm "EditLog"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3252,7 +3251,7 @@ On Error GoTo Err_Handler
 
     ' Open the data summary tool
     If TempVars("Connected") Then
-        DoCmd.OpenForm "frm_Summary_Tool"
+        DoCmd.OpenForm "SummaryTool"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3381,7 +3380,7 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:          btnSpeciesList_Click
+' SUB:          btnVegWalk_Click
 ' Description:  Open & generate species list report
 ' Parameters:   -
 ' Returns:      -
@@ -3395,7 +3394,7 @@ End Sub
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
 ' ---------------------------------
-Private Sub btnSpeciesListRpt_Click()
+Private Sub btnVegWalkRpt_Click()
 On Error GoTo Err_Handler
 
     ' Notify if not connected
@@ -3484,7 +3483,7 @@ Err_Handler:
         ' Canceled open report action - do nothing
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSpeciesListRpt_Click[DbAdmin form])"
+            "Error encountered (#" & Err.Number & " - btnVegWalkRpt_Click[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub

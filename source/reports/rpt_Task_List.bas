@@ -14,10 +14,8 @@ Begin Report
     Width =10080
     DatasheetFontHeight =9
     ItemSuffix =40
-    Left =270
-    Top =210
-    Right =12135
-    Bottom =6630
+    Right =21285
+    Bottom =11790
     DatasheetGridlinesColor =12632256
     OnNoData ="[Event Procedure]"
     RecSrcDt = Begin
@@ -450,13 +448,14 @@ Option Explicit
 ' Revisions:    JRB, 10/20/2008 - updated record source to show only active tasks
 '               JRB, 5/20/2009 - minor revisions, data source
 '               JRB, 6/8/2009 - moved filtering code to switchboard
+'               BLC, 6/13/2016 - adapted for big rivers
 ' =================================
 
 Private Sub Report_Open(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Close the report if the switchboard is not open
-    If fxnSwitchboardIsOpen = False Then
+    If SwitchboardIsOpen = False Then
         MsgBox "The main database switchboard must be" & vbCrLf & _
             "open for this report to function properly.", , "Cannot open the report ..."
         DoCmd.CancelEvent

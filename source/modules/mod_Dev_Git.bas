@@ -402,7 +402,7 @@ On Error Resume Next
         Debug.Print tbl.Name
     Next
  
-    dsc = Catalog.Tables("table_name").Columns("column_name").Properties("Description").Value
+    dsc = Catalog.Tables("table_name").Columns("column_name").Properties("Description").value
  
     For Each tbl In tabledefs
         Debug.Print tbl.Name

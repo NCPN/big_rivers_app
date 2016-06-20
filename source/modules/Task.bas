@@ -55,17 +55,17 @@ Private m_CompleteDate As Date
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let Task(Value As String)
-    If ValidateString(Value, "paragraph") Then
-        m_Task = Value
+Public Property Let Task(value As String)
+    If ValidateString(value, "paragraph") Then
+        m_Task = value
     End If
 End Property
 
@@ -73,9 +73,9 @@ Public Property Get Task() As String
     Task = m_Task
 End Property
 
-Public Property Let TaskType(Value As String)
-    If ValidateString(Value, "paragraph") Then
-        m_TaskType = Value
+Public Property Let TaskType(value As String)
+    If ValidateString(value, "paragraph") Then
+        m_TaskType = value
     End If
 End Property
 
@@ -83,88 +83,88 @@ Public Property Get TaskType() As String
     TaskType = m_TaskType
 End Property
 
-Public Property Let Priority(Value As String)
-    m_Priority = Value
+Public Property Let Priority(value As String)
+    m_Priority = value
 End Property
 
 Public Property Get Priority() As String
     Priority = m_Priority
 End Property
 
-Public Property Let Status(Value As String)
-    m_Status = Value
+Public Property Let Status(value As String)
+    m_Status = value
 End Property
 
 Public Property Get Status() As String
     Status = m_Status
 End Property
 
-Public Property Let RequestedByID(Value As Integer)
-    m_RequestedByID = Value
+Public Property Let RequestedByID(value As Integer)
+    m_RequestedByID = value
 End Property
 
 Public Property Get RequestedByID() As Integer
     RequestedByID = m_RequestedByID
 End Property
 
-Public Property Let FollowupByID(Value As Integer)
-    m_FollowupByID = Value
+Public Property Let FollowupByID(value As Integer)
+    m_FollowupByID = value
 End Property
 
 Public Property Get FollowupByID() As Integer
     FollowupByID = m_FollowupByID
 End Property
 
-Public Property Let CompletedByID(Value As Integer)
-    m_CompletedByID = Value
+Public Property Let CompletedByID(value As Integer)
+    m_CompletedByID = value
 End Property
 
 Public Property Get CompletedByID() As Integer
     CompletedByID = m_CompletedByID
 End Property
 
-Public Property Let Requestor(Value As String)
-    m_Requestor = Value
+Public Property Let Requestor(value As String)
+    m_Requestor = value
 End Property
 
 Public Property Get Requestor() As String
     Requestor = m_Requestor
 End Property
 
-Public Property Let FollowupBy(Value As String)
-    m_FollowupBy = Value
+Public Property Let FollowupBy(value As String)
+    m_FollowupBy = value
 End Property
 
 Public Property Get FollowupBy() As String
     FollowupBy = m_FollowupBy
 End Property
 
-Public Property Let CompletedBy(Value As String)
-    m_CompletedBy = Value
+Public Property Let CompletedBy(value As String)
+    m_CompletedBy = value
 End Property
 
 Public Property Get CompletedBy() As String
     CompletedBy = m_CompletedBy
 End Property
 
-Public Property Let RequestDate(Value As Date)
-    m_RequestDate = Value
+Public Property Let RequestDate(value As Date)
+    m_RequestDate = value
 End Property
 
 Public Property Get RequestDate() As Date
     RequestDate = m_RequestDate
 End Property
 
-Public Property Let FollowupDate(Value As Date)
-    m_FollowupDate = Value
+Public Property Let FollowupDate(value As Date)
+    m_FollowupDate = value
 End Property
 
 Public Property Get FollowupDate() As Date
     FollowupDate = m_FollowupDate
 End Property
 
-Public Property Let CompleteDate(Value As Date)
-    m_CompleteDate = Value
+Public Property Let CompleteDate(value As Date)
+    m_CompleteDate = value
 End Property
 
 Public Property Get CompleteDate() As Date

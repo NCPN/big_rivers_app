@@ -26,10 +26,10 @@ Begin Form
     Width =13215
     DatasheetFontHeight =10
     ItemSuffix =601
-    Left =4560
-    Top =2085
-    Right =17775
-    Bottom =12165
+    Left =4665
+    Top =3315
+    Right =12315
+    Bottom =14310
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3dabdfc735cde240
@@ -169,6 +169,9 @@ Begin Form
                     Name ="PageTabs"
                     OnChange ="[Event Procedure]"
 
+                    LayoutCachedTop =525
+                    LayoutCachedWidth =13215
+                    LayoutCachedHeight =10095
                     Begin
                         Begin Page
                             OverlapFlags =87
@@ -201,6 +204,10 @@ Begin Form
                                     OnClick ="[Event Procedure]"
                                     ControlTipText ="View closeup of selected record"
 
+                                    LayoutCachedLeft =9360
+                                    LayoutCachedTop =1020
+                                    LayoutCachedWidth =10740
+                                    LayoutCachedHeight =1331
                                     WebImagePaddingLeft =2
                                     WebImagePaddingTop =2
                                     WebImagePaddingRight =1
@@ -221,6 +228,10 @@ Begin Form
                                     OnClick ="[Event Procedure]"
                                     ControlTipText ="Add a new record"
 
+                                    LayoutCachedLeft =10920
+                                    LayoutCachedTop =1020
+                                    LayoutCachedWidth =12300
+                                    LayoutCachedHeight =1331
                                     WebImagePaddingLeft =2
                                     WebImagePaddingTop =2
                                     WebImagePaddingRight =1
@@ -237,8 +248,11 @@ Begin Form
                                     TabIndex =2
                                     BorderColor =0
                                     Name ="subTaxa"
-                                    SourceObject ="Form.fsub_Project_Taxa"
 
+                                    LayoutCachedLeft =120
+                                    LayoutCachedTop =1440
+                                    LayoutCachedWidth =13080
+                                    LayoutCachedHeight =9960
                                 End
                                 Begin OptionGroup
                                     SpecialEffect =3
@@ -255,6 +269,10 @@ Begin Form
                                     DefaultValue ="0"
                                     ControlTipText ="Change the data mode"
 
+                                    LayoutCachedLeft =6120
+                                    LayoutCachedTop =960
+                                    LayoutCachedWidth =8034
+                                    LayoutCachedHeight =1315
                                     Begin
                                         Begin OptionButton
                                             SpecialEffect =2
@@ -266,6 +284,10 @@ Begin Form
                                             BorderColor =0
                                             Name ="optEditMode"
 
+                                            LayoutCachedLeft =7200
+                                            LayoutCachedTop =1044
+                                            LayoutCachedWidth =7460
+                                            LayoutCachedHeight =1284
                                             Begin
                                                 Begin Label
                                                     FontItalic = NotDefault
@@ -284,6 +306,10 @@ Begin Form
                                                     Name ="labEditMode"
                                                     Caption ="Edit"
                                                     ControlTipText ="View all other records that matched valid fish codes"
+                                                    LayoutCachedLeft =7434
+                                                    LayoutCachedTop =1020
+                                                    LayoutCachedWidth =7824
+                                                    LayoutCachedHeight =1290
                                                 End
                                             End
                                         End
@@ -297,6 +323,10 @@ Begin Form
                                             BorderColor =0
                                             Name ="optViewMode"
 
+                                            LayoutCachedLeft =6240
+                                            LayoutCachedTop =1050
+                                            LayoutCachedWidth =6500
+                                            LayoutCachedHeight =1290
                                             Begin
                                                 Begin Label
                                                     FontItalic = NotDefault
@@ -315,6 +345,10 @@ Begin Form
                                                     Name ="labViewMode"
                                                     Caption ="View"
                                                     ControlTipText ="View mode"
+                                                    LayoutCachedLeft =6474
+                                                    LayoutCachedTop =1020
+                                                    LayoutCachedWidth =7014
+                                                    LayoutCachedHeight =1290
                                                 End
                                             End
                                         End
@@ -353,6 +387,10 @@ Begin Form
                                     OnClick ="[Event Procedure]"
                                     ControlTipText ="Add or edit contact records"
 
+                                    LayoutCachedLeft =9420
+                                    LayoutCachedTop =1020
+                                    LayoutCachedWidth =11460
+                                    LayoutCachedHeight =1334
                                     WebImagePaddingLeft =2
                                     WebImagePaddingTop =2
                                     WebImagePaddingRight =1
@@ -384,6 +422,10 @@ Begin Form
                                     ColumnWidths ="0;576;2592;2880;2592;2304;2016;1440"
                                     OnDblClick ="[Event Procedure]"
 
+                                    LayoutCachedLeft =120
+                                    LayoutCachedTop =1440
+                                    LayoutCachedWidth =13080
+                                    LayoutCachedHeight =9960
                                 End
                             End
                         End
@@ -414,6 +456,10 @@ Begin Form
                                     BorderColor =0
                                     Name ="subLookupTables"
 
+                                    LayoutCachedLeft =120
+                                    LayoutCachedTop =1500
+                                    LayoutCachedWidth =13080
+                                    LayoutCachedHeight =9957
                                 End
                                 Begin ComboBox
                                     LimitToList = NotDefault
@@ -447,6 +493,10 @@ Begin Form
                                     OnEnter ="[Event Procedure]"
                                     ControlTipText ="Select the lookup table to view"
 
+                                    LayoutCachedLeft =840
+                                    LayoutCachedTop =1020
+                                    LayoutCachedWidth =5160
+                                    LayoutCachedHeight =1272
                                     Begin
                                         Begin Label
                                             FontItalic = NotDefault
@@ -464,6 +514,10 @@ Begin Form
                                             ForeColor =-2147483630
                                             Name ="labTableFilter"
                                             Caption ="Table:"
+                                            LayoutCachedLeft =180
+                                            LayoutCachedTop =1020
+                                            LayoutCachedWidth =768
+                                            LayoutCachedHeight =1272
                                         End
                                     End
                                 End
@@ -487,6 +541,10 @@ Begin Form
                                         "omain values. Please contact the Project Lead if you need to make changes but ar"
                                         "e unable to."
                                     ControlTipText ="View mode"
+                                    LayoutCachedLeft =5280
+                                    LayoutCachedTop =960
+                                    LayoutCachedWidth =13080
+                                    LayoutCachedHeight =1440
                                 End
                             End
                         End
@@ -529,7 +587,7 @@ Option Explicit
 ' Description:  Standard form for viewing and editing lookup domains
 ' Data source:  unbound
 ' Data access:  edit only, no additions or deletions
-' Pages:        pgSpeciesList, pgProjectCrew, pgOtherLookups
+' Pages:        pgVegWalk, pgProjectCrew, pgOtherLookups
 ' Functions:    fxnSwitchboardIsOpen, fxnTableExists
 ' References:   none
 ' Source/date:  John R. Boetsch, Jan 2006
@@ -560,7 +618,7 @@ Private Sub Form_Open(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Set up form depending on application mode
-    If fxnSwitchboardIsOpen Then
+    If SwitchboardIsOpen Then
         'initialize controls based on app mode
         setUserAccess Me
     
@@ -634,7 +692,7 @@ Err_Handler:
 End Sub
 
 ' =================================
-' PAGE NAME:    Species List (pgSpeciesList)
+' PAGE NAME:    Species List (pgVegWalk)
 ' Description:  browse and edit species list
 ' Unbound ctls: cmdNewTaxon, cmdViewDetails
 ' Subforms:     subTaxa (fsub_Project_Taxa)
@@ -723,7 +781,7 @@ Private Sub cmdViewDetails_Click()
     Dim strRecID As String
 
     Set ctl = Forms!frm_Lookups.subTaxa.Form!txtTaxonID
-    strRecID = ctl.Value
+    strRecID = ctl.value
 
     ' Set the global reference control variable for requerying after updates
     Set gvarRefTaxonCtl = Me.subTaxa
@@ -779,10 +837,10 @@ Private Sub cmdEditContacts_Click()
     strFilter = ""
 
     ' Indicate the record to filter by if one is selected
-    If IsNull(ctl.Value) = False Then
-        strFilter = "[Contact_ID]=""" & ctl.Value & """"
+    If IsNull(ctl.value) = False Then
+        strFilter = "[Contact_ID]=""" & ctl.value & """"
         ' De-select the record
-        ctl.Value = Null
+        ctl.value = Null
     End If
     ' Set the global reference control variable for requerying after updates
     Set gvarRefContactCtl = ctl
@@ -849,7 +907,7 @@ Private Sub cmbTableFilter_Enter()
     strSysTable = "tsys_Link_Tables"     ' System table listing linked tables
 
     ' If the system table does not exist, replace the row source with one that doesn't use it
-    If fxnTableExists(strSysTable) = False Then
+    If TableExists(strSysTable) = False Then
         Me.cmbTableFilter.RowSource = "SELECT MSysObjects.Name " & _
             "FROM MSysObjects " & _
             "WHERE (((MSysObjects.Name) Like 'tlu_*' " & _
@@ -890,8 +948,8 @@ Private Sub cmbTableFilter_AfterUpdate()
         Me.subLookupTables.SourceObject = ""
     Else:
     ' If a table is selected ...
-        If fxnTableExists(Me.cmbTableFilter) Then
-            Me.subLookupTables.SourceObject = "Table." & Me.cmbTableFilter.Value
+        If TableExists(Me.cmbTableFilter) Then
+            Me.subLookupTables.SourceObject = "Table." & Me.cmbTableFilter.value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"
