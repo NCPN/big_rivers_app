@@ -561,8 +561,8 @@ Function TestODBCConnection(strTableName As String, _
 
     If IsMissing(varSQL) Then
         ' If no query statement passed, select a few records to test the connection string
-        qdf.sql = "SELECT TOP 2 * FROM " & strTableName
-    Else: qdf.sql = varSQL
+        qdf.SQL = "SELECT TOP 2 * FROM " & strTableName
+    Else: qdf.SQL = varSQL
     End If
     qdf.Execute
 
@@ -1185,7 +1185,7 @@ Public Sub FixLinkedDatabase(ByVal strTableName As String)
     strTemp = ParseConnectionStr(CurrentDb.tabledefs(strTableName).Connect)
     
     'fetch current database location
-    Set rs = CurrentDb.OpenRecordset("qsys_Linked_tables_mismatched_info_dbs")
+    Set rs = CurrentDb.OpenRecordset("qsys_Linked_tables_mismatched_info") '_dbs")
     
     If Not rs.EOF And rs.BOF Then
     
@@ -1193,7 +1193,7 @@ Public Sub FixLinkedDatabase(ByVal strTableName As String)
         
         'handle single db otherwise do it manually via tbl_Linked_Dbs?
         If rs.RecordCount = 1 Then
-            strCurDb = rs("Link_db")
+            strCurDb = rs("LinkDb") '_db")
             strCurDbPath = rs("CurrPath")
             
             'populate the current database in Link_Dbs

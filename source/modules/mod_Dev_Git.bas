@@ -214,7 +214,7 @@ On Error GoTo Err_Handler
          FileName = Path & "\Queries(SQL)\" & dbs.QueryDefs(i).Name & ".txt"
          intfile = FreeFile()
          Open FileName For Output As #intfile
-         Print #intfile, dbs.QueryDefs(i).sql
+         Print #intfile, dbs.QueryDefs(i).SQL
          Close #intfile
     Next i
 

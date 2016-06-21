@@ -66,6 +66,7 @@ Public Const lngCocoa As Long = 5334161     '?RGB(145, 100, 81) #916451 cocoa br
 Public Const lngDkBlueGrn As Long = 4538399 '?RGB(31, 64, 69) #1f4045 dark blue-green NPS arrowhead trees & buffalo outline
 Public Const lngCream As Long = 11262179    '?RGB(227, 216, 171) #e3d8ab cream NPS arrowhead mtn & lake
 Public Const lngNPSBrown As Long = 2634567  '?RGB(71, 51, 40) #473328 NPS signs
+Public Const lngVanilla As Long = 11265523  '?RGB(243, 229, 171) #F3E5AB
 
 ' ---------------------------------
 '  Subroutines & Functions

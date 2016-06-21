@@ -667,7 +667,7 @@ Err_Handler:
                 Set qdf = CurrentDb.QueryDefs("UsysTempQuery")
             End If
             
-            qdf.sql = strErrorSQL
+            qdf.SQL = strErrorSQL
             
             DoCmd.OpenQuery "USysTempQuery", acViewNormal
 
@@ -793,7 +793,7 @@ Err_Handler:
                 Set qdf = CurrentDb.QueryDefs("UsysTempQuery")
             End If
             
-            qdf.sql = strErrorSQL
+            qdf.SQL = strErrorSQL
             
             DoCmd.OpenQuery "USysTempQuery", acViewNormal
 

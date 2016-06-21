@@ -50,11 +50,11 @@ On Error GoTo Err_Handler
     
         Case "lbxDataSheets", "sfrmDatasheets" 'Datasheets
             strQuery = "qry_Active_Datasheets"
-            strSQL = CurrentDb.QueryDefs(strQuery).sql
+            strSQL = CurrentDb.QueryDefs(strQuery).SQL
             
         Case "lbxSpecies", "lbxTgtSpecies", "fsub_Species_Listbox" 'Species
             strQuery = "qry_Plant_Species"
-            strSQL = CurrentDb.QueryDefs(strQuery).sql
+            strSQL = CurrentDb.QueryDefs(strQuery).SQL
             
     End Select
 

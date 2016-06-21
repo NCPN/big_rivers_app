@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =5175
-    Top =2940
-    Right =13035
-    Bottom =9105
+    Left =4440
+    Top =3105
+    Right =23400
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -327,7 +327,7 @@ Begin Form
                     Width =1800
                     Height =405
                     ForeColor =4210752
-                    Name ="Command60"
+                    Name ="btnX"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -1763,10 +1763,10 @@ Begin Form
                                     ForeColor =-2147483607
                                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"0\""
                                     Name ="cbxVersion"
-                                    ControlSource ="Release_ID"
+                                    ControlSource ="ID"
                                     RowSourceType ="Table/Query"
-                                    RowSource ="SELECT tsys_App_Releases.Release_ID, 'Version ' & [VersionNumber] & ' (' & [Rele"
-                                        "aseDate] & ')' AS Version FROM tsys_App_Releases; "
+                                    RowSource ="SELECT tsys_App_Releases.ID, 'Version ' & [VersionNumber] & ' (' & [ReleaseDate]"
+                                        " & ')' AS Version FROM tsys_App_Releases; "
                                     ColumnWidths ="0;2880"
                                     FontName ="Arial"
                                     ControlTipText ="Version number of this application"

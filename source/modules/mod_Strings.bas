@@ -25,6 +25,7 @@ Option Explicit
 '---------------------
 Public Const uSpiral = &HAA5C               '-21924 (Cham Punctuation Spiral)
 Public Const uAmpersand = &H26              '38     doesn't work :(
+Public Const uOn = &H7C                     '124 Vertical Line
 Public Const uDegree = &HB0                 '176    degree sign
 Public Const uLineHorizontal = &H332        '818    horizontal line (Combining Low LIne)
 Public Const uMu = &H3BC                    '956    microns
@@ -33,6 +34,11 @@ Public Const uRArrow = &H2192               '8594   right arrow c.f. https://en.
 Public Const uDArrow = &H2193               '8495   down arrow
 Public Const uLessThanOrEqual = &H2264      '8804
 Public Const uGreaterThanOrEqual = &H2265   '8805
+' --- new in June 2016 (unicode 9.0 release) ----
+Public Const uPowerOn = &H23FD              '9213 |
+Public Const uPowerToggle = &H23FC          '9212
+Public Const uPower = &H23FB                '9211
+' -----------------------------------------------
 Public Const uCircle1 = &H2460              '9312
 Public Const uCircle2 = &H2461              '9313
 Public Const uCircle3 = &H2462              '9314
@@ -46,6 +52,9 @@ Public Const uCheck = &H2714                '10004
 Public Const uCircleFilled1 = &H278A        '10122
 Public Const uCircleFilled2 = &H278B        '10123
 Public Const uCircleFilled3 = &H278C        '10124
+Public Const uCircleBulletWhite = &H29BE    '10686  circled white bullet
+Public Const uCircleBullet = &H29BF         '10687  circled bullet
+Public Const uPowerOff = &H2B58             '11096  off (O), heavy circle
 Public Const uLTriangle = &H2BC7            '11207  left-pointing triangle
 Public Const uRTriangle = &H2BC8            '11208  right-pointing triangle
 Public Const uMtn = &H30D8                  '12504  mountain (Katakana Letter He)

@@ -22,10 +22,10 @@ Begin Form
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =111
-    Left =6435
-    Top =2610
-    Right =17235
-    Bottom =11175
+    Left =4440
+    Top =3105
+    Right =23400
+    Bottom =14895
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xfe27f5b1c5c3e440
@@ -771,13 +771,14 @@ Option Explicit
 '               BLC, 5/21/2015 - added to invasives reporting tool & updated fxnSwitchboardIsOpen to FormIsOpen function
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/5/2016 - removed underscores from field names
+'               BLC, 6/20/2016 - revised from "frm_Switchboard" to MAIN_APP_FORM
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     If DB_ADMIN_CONTROL Then
         ' Close the form if the switchboard is not open
-        If FormIsOpen("frm_Switchboard") = False Then
+        If FormIsOpen(MAIN_APP_FORM) = False Then
             MsgBox "The main database switchboard must be" & vbCrLf & _
                 "open for this form to function properly.", , "Cannot open the form ..."
             DoCmd.CancelEvent

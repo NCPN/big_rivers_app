@@ -2,97 +2,103 @@
     "pe, tsys_Link_Dbs.[IsODBC], IIf([Type]=4,ParseConnectionStr([Connect]),ParseFile"
     "Name([Database])) AS CurrDb, tsys_Link_Tables.[LinkDb], IIf([Type]=4,ParseConnec"
     "tionStr([Connect],'SERVER=')) AS CurrServer, tsys_Link_Dbs.Server, MSysObjects.D"
-    "atabase AS CurrPath, tsys_Link_Dbs.[FilePath]\015\012FROM tsys_Link_Dbs INNER JO"
-    "IN (MSysObjects INNER JOIN tsys_Link_Tables ON MSysObjects.Name = tsys_Link_Tabl"
-    "es.LinkTable) ON tsys_Link_Dbs.[LinkDb]=tsys_Link_Tables.[LinkDb]\015\012WHERE ("
-    "((MSysObjects.Type) In (4,6)) And ((IIf([Type]=4,ParseConnectionStr([Connect]),P"
-    "arseFileName([Database])))<>tsys_Link_Tables.[LinkDb])) Or (((MSysObjects.Type) "
-    "In (4,6)) And ((IIf([Type]=4,ParseConnectionStr([Connect],'SERVER=')))<>[Server]"
-    ")) Or (((MSysObjects.Type) In (4,6)) And ((MSysObjects.Database)<>[FilePath])) O"
-    "r (((MSysObjects.Type)=4) And ((tsys_Link_Dbs.[IsODBC])=False)) Or (((MSysObject"
-    "s.Type)=6) And ((tsys_Link_Dbs.[IsODBC])=True)) Or (((IIf([Type]=4,ParseConnecti"
-    "onStr([Connect],'SERVER='))) Is Null) And ((tsys_Link_Dbs.Server) Is Not Null)) "
-    "Or (((IIf([Type]=4,ParseConnectionStr([Connect],'SERVER='))) Is Not Null) And (("
-    "tsys_Link_Dbs.Server) Is Null)) Or (((MSysObjects.Database) Is Null) And ((tsys_"
-    "Link_Dbs.[FilePath]) Is Not Null)) Or (((MSysObjects.Database) Is Not Null) And "
-    "((tsys_Link_Dbs.[FilePath]) Is Null));\015\012"
+    "atabase AS CurrPath, tsys_Link_Dbs.[FilePath]\015\012FROM (tsys_Link_Dbs INNER J"
+    "OIN tsys_Link_Tables ON tsys_Link_Dbs.[LinkDb]=tsys_Link_Tables.[LinkDb]) INNER "
+    "JOIN MSysObjects ON MSysObjects.Name = tsys_Link_Tables.LinkTable\015\012WHERE M"
+    "SysObjects.Type In (4,6)\015\012AND\015\012(\015\012(\015\012IIf([Type]=4,ParseC"
+    "onnectionStr([Connect]),ParseFileName([Database]))<>tsys_Link_Tables.[LinkDb]\015"
+    "\012OR\015\012IIf([Type]=4,ParseConnectionStr([Connect],'SERVER='))<>[Server] \015"
+    "\012OR\015\012MSysObjects.Database<>[FilePath]\015\012)\015\012OR\015\012(\015\012"
+    "MSysObjects.Type=4\015\012AND\015\012tsys_Link_Dbs.[IsODBC]=False\015\012)\015\012"
+    "OR\015\012(\015\012MSysObjects.Type=6 \015\012AND\015\012tsys_Link_Dbs.[IsODBC]="
+    "True\015\012)\015\012OR\015\012(\015\012IIf([Type]=4,ParseConnectionStr([Connect"
+    "],'SERVER=')) IS NULL\015\012AND \015\012tsys_Link_Dbs.Server IS NOT NULL\015\012"
+    ")\015\012OR\015\012( \015\012IIf([Type]=4,ParseConnectionStr([Connect],'SERVER='"
+    ")) IS NOT NULL\015\012AND\015\012tsys_Link_Dbs.Server IS NULL\015\012) \015\012O"
+    "R\015\012(\015\012MSysObjects.Database IS NULL\015\012AND \015\012tsys_Link_Dbs."
+    "[FilePath] IS NOT NULL\015\012)\015\012\015\012OR \015\012(\015\012MSysObjects.D"
+    "atabase IS NOT NULL\015\012AND\015\012tsys_Link_Dbs.[FilePath] IS NULL\015\012)\015"
+    "\012\015\012);\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
-dbByte "RecordsetType" ="0"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbText "Description" ="Matches MSysObjects.Name with tsys_Link_Tables.Link_table, finds mismatches on d"
-    "b name, server, file path, or where ODBC doesn't match the actual table link typ"
-    "e"
+dbBinary "GUID" = Begin
+    0x847662cf74d5b440a20ee268493bf3f1
+End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
-dbBoolean "TotalsRow" ="0"
-dbBinary "GUID" = Begin
-    0x671dd0c2cdb5ac48b76fd089ad369a02
-End
 Begin
     Begin
-        dbText "Name" ="CurrDb"
-        dbInteger "ColumnWidth" ="3210"
-        dbBoolean "ColumnHidden" ="0"
+        dbText "Name" ="CurrTable"
         dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin
-            0x027c55cddfea224bb621541960f3718a
+            0x42d79bf5d8653c4899acf87c052a7a2c
+        End
+    End
+    Begin
+        dbText "Name" ="tsys_Link_Tables.LinkTable"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xe2f22821daba9c4b81915ec67c5a8a33
         End
     End
     Begin
         dbText "Name" ="MSysObjects.Type"
-        dbInteger "ColumnWidth" ="795"
-        dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x59d1d358657f7c4b88262b3a6d44d60d
+        End
+    End
+    Begin
+        dbText "Name" ="tsys_Link_Dbs.[IsODBC]"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x90d4307e0f63934da336f640c492849c
+        End
+    End
+    Begin
+        dbText "Name" ="CurrDb"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xfae7428c26074347b73fd40103193279
+        End
+    End
+    Begin
+        dbText "Name" ="tsys_Link_Tables.[LinkDb]"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x592cd6b58f4ac349a4ee12a44cc89213
+        End
     End
     Begin
         dbText "Name" ="CurrServer"
-        dbInteger "ColumnWidth" ="1875"
-        dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin
-            0xd2ffa600084b9948abbb3fefcfa53940
-        End
-    End
-    Begin
-        dbText "Name" ="CurrTable"
-        dbInteger "ColumnWidth" ="3255"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xe829b56b7af0dc4bacdca3fb337e7e84
-        End
-    End
-    Begin
-        dbText "Name" ="CurrPath"
-        dbInteger "ColumnWidth" ="8805"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x1632622226673b4686e3b38aa8033cd6
+            0x984810f2090cb8438b70134419a37b00
         End
     End
     Begin
         dbText "Name" ="tsys_Link_Dbs.Server"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xdeadb4c9288f694d8b4841df6d7f0f6f
+        End
     End
     Begin
-        dbText "Name" ="tsys_Link_Tables.LinkTable"
+        dbText "Name" ="CurrPath"
         dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tsys_Link_Dbs.[IsODBC]"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tsys_Link_Tables.[LinkDb]"
-        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x84824942b4bf944fbc0680297e93135e
+        End
     End
     Begin
         dbText "Name" ="tsys_Link_Dbs.[FilePath]"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x60e3607f08994748859bb4d13faa8101
+        End
     End
 End

@@ -189,19 +189,19 @@ Public Function AppSetup()
     Dim strSysTable As String, strAddress As String, strUser As String, strRelease As String
     Dim strSQL As String, strCaption As String, strReleaseID As String
 
-    If Not FormIsOpen(MAIN_APP_FORM) Then
-        DoCmd.OpenForm MAIN_APP_FORM, acNormal, , , , acHidden
+    If Not FormIsOpen(DB_ADMIN_FORM) Then
+        DoCmd.OpenForm DB_ADMIN_FORM, acNormal, , , , acHidden
     End If
 
-    Set frm = Forms(MAIN_APP_FORM) 'Forms!frm_Switchboard
+    Set frm = Forms(DB_ADMIN_FORM)
     TempVars.item("WritePermission") = False
     
     If DB_ADMIN_CONTROL Then
         strReleaseID = APP_RELEASE_ID
         strAddress = APP_URL
     Else
-        strReleaseID = frm!Release_ID
-        strAddress = frm!Web_address
+        strReleaseID = frm.Controls("cbxVersion").Column(1) 'ID
+        strAddress = frm.Controls("tbxWeb_address") 'frm!Web_address
     End If
     
     ' Check for required system tables
