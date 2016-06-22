@@ -21,9 +21,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =34
     Left =450
-    Top =-15
+    Top =2865
     Right =7830
-    Bottom =4095
+    Bottom =6975
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7db051a491c3e440
@@ -658,8 +658,8 @@ On Error GoTo Err_Handler
     Dim result As Integer
     
     'identify the record ID
-     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
-                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
+'     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
+'                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
     If result = vbYes Then DeleteRecord "Contact_Access", ID
     

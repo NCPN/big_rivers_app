@@ -19,9 +19,9 @@ Begin Form
     GridY =24
     Width =7500
     DatasheetFontHeight =11
-    ItemSuffix =37
-    Right =24360
-    Bottom =12045
+    ItemSuffix =39
+    Right =7275
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc299ade9b6c5e440
@@ -95,6 +95,24 @@ Begin Form
             PressedForeThemeColorIndex =0
             PressedForeTint =75.0
         End
+        Begin OptionButton
+            BorderLineStyle =0
+            LabelX =230
+            LabelY =-30
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin CheckBox
+            BorderLineStyle =0
+            LabelX =230
+            LabelY =-30
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin TextBox
             AddColon = NotDefault
             FELineBreak = NotDefault
@@ -128,6 +146,35 @@ Begin Form
             ForeShade =50.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
+        End
+        Begin ToggleButton
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =2
+            Bevel =1
+            BackColor =-1
+            BackThemeColorIndex =4
+            BackTint =60.0
+            OldBorderStyle =0
+            BorderLineStyle =0
+            BorderColor =-1
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverColor =0
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedColor =0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeColor =0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeColor =0
+            PressedForeThemeColorIndex =1
         End
         Begin FormHeader
             Height =1380
@@ -230,7 +277,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =900
+            Height =1200
             Name ="Detail"
             OnMouseMove ="[Event Procedure]"
             AlternateBackColor =15921906
@@ -549,43 +596,45 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    Enabled = NotDefault
                     OverlapFlags =85
                     TextAlign =2
-                    BackStyle =0
                     IMESentenceMode =3
                     Left =4500
-                    Top =495
-                    Width =480
+                    Top =720
+                    Width =1740
                     Height =315
                     TabIndex =8
-                    BackColor =14270637
-                    BorderColor =10921638
+                    BackColor =15060409
+                    BorderColor =14136213
                     ForeColor =4210752
                     Name ="tbxActivate"
-                    ControlSource ="=IIf([tbxIsActive]=1,\"O\",\"|\")"
                     OnMouseMove ="[Event Procedure]"
                     OnLostFocus ="[Event Procedure]"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Toggle IsActive flag"
                     ConditionalFormat = Begin
-                        0x010000006c000000020000000000000002000000000000000200000001000000 ,
-                        0x22b14c00ffffff000000000002000000030000000500000001000000ed1c2400 ,
+                        0x0100000098000000020000000100000000000000000000000d00000001000000 ,
+                        0xed1c2400ffffff0001000000000000000e0000001b0000000100000022b14c00 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x310000000000300000000000
+                        0x5b00490073004100630074006900760065005d003d003100000000005b004900 ,
+                        0x73004100630074006900760065005d003d00300000000000
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4500
-                    LayoutCachedTop =495
-                    LayoutCachedWidth =4980
-                    LayoutCachedHeight =810
-                    BackThemeColorIndex =-1
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =6240
+                    LayoutCachedHeight =1035
+                    BackThemeColorIndex =4
+                    BackTint =40.0
+                    BorderThemeColorIndex =4
+                    BorderTint =60.0
+                    BorderShade =100.0
                     ConditionalFormat14 = Begin
-                        0x01000200000000000000020000000100000022b14c00ffffff00010000003100 ,
-                        0x0000000000000000000000000000000000000000000000000002000000010000 ,
-                        0x00ed1c2400ffffff000100000030000000000000000000000000000000000000 ,
-                        0x00000000
+                        0x010002000000010000000000000001000000ed1c2400ffffff000c0000005b00 ,
+                        0x490073004100630074006900760065005d003d00310000000000000000000000 ,
+                        0x000000000000000000000001000000000000000100000022b14c00ffffff000c ,
+                        0x0000005b00490073004100630074006900760065005d003d0030000000000000 ,
+                        0x00000000000000000000000000000000
                     End
                 End
             End
@@ -768,9 +817,12 @@ On Error GoTo Err_Handler
     btnEdit.hoverColor = lngGreen
     btnDelete.hoverColor = lngGreen
 
-    btnActivate.Caption = "|" & "/" & StringFromCodepoint(uPowerOff)
+    btnActivate.Caption = StringFromCodepoint(uCheckMark) '"|" & "/" & StringFromCodepoint(uPowerOff)
    ' btnActivate.Caption = IIf(tbxIsActive = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
    ' btnActivate.forecolor = IIf([IsActive] = 1, lngRed, lngGreen)
+    'tbxActivate.value = IIf(tbxIsActive = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
+    'tbxActivate.forecolor = IIf([IsActive] = 1, lngRed, lngGreen)
+    tbxActivate = StringFromCodepoint(uCheckMark)
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.forecolor = lngRed
@@ -980,6 +1032,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 ' ---------------------------------
 ' Sub:          Detail_MouseMove
 ' Description:  Mouse over actions on activate textbox
@@ -996,7 +1049,8 @@ End Sub
 Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
 
-    tbxActivate.backcolor = lngLtBlue
+'    tbxActivate.backcolor = lngLtBlue
+'    tbxActivate.forecolor = lngBlack
 
 Exit_Handler:
     Exit Sub
@@ -1027,9 +1081,13 @@ On Error GoTo Err_Handler
 
     With tbxActivate
         .backcolor = lngGreen
-        .forecolor = IIf(tbxIsActive = 1, lngRed, lngGreen)
+'        If tbxIsActive = 1 Then
+'        .borderColor = lngRed
+'        Else
+'        .borderColor = lngGreen
+'        End If 'IIf(tbxIsActive = 1, lngRed, lngGreen)
     End With
-
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1058,8 +1116,8 @@ Private Sub tbxActivate_LostFocus()
 On Error GoTo Err_Handler
 
     With tbxActivate
-        .backcolor = lngLtBlue
-        .forecolor = IIf(tbxIsActive = 1, lngRed, lngGreen)
+'        .backcolor = lngLtBlue
+'        .forecolor = IIf(tbxIsActive = 1, lngRed, lngGreen)
     End With
 
 Exit_Handler:
@@ -1090,7 +1148,8 @@ Private Sub tbxActivate_Click()
 On Error GoTo Err_Handler
 
     'identify the record ID
-    ToggleIsActive ID, Abs(tbxIsActive - 1)
+    'ToggleIsActive ID, Abs(tbxIsActive - 1)
+    ToggleIsActive ID, Abs(IsActive - 1)
     
     'clear the Activated record
     Me.Requery
@@ -1104,4 +1163,14 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - tbxActivate_Click[ContactList form])"
     End Select
     Resume Exit_Handler
+End Sub
+
+Private Sub tglActivate_Click()
+
+    'identify the record ID
+    ToggleIsActive ID, Abs(tbxIsActive - 1)
+    
+    'clear the Activated record
+    Me.Requery
+
 End Sub

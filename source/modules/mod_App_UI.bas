@@ -565,12 +565,16 @@ On Error GoTo Err_Handler
 
     'find the form & populate its controls from the ID
     Select Case tbl
+        Case "Contact"
+            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
         Case "Event"
             strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
         Case "Tagline"
             strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
     End Select
     
+    If IsNull(strSQL) Or Len(strSQL) = 0 Then GoTo Exit_Handler
+Debug.Print strSQL
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
     DoCmd.SetWarnings True

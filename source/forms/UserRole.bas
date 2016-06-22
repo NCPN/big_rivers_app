@@ -917,20 +917,20 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim t As New UserRole
+    Dim t As New Person
         
     With t
         'values passed into form
-        .EventID = 1
+'        .EventID = 1
                 
         'form values
-        .UserRoleType = ""
-        .UserRoleNumber = cbxUserRole.SelText
-        .SerialNumber = tbxSerialNo.value
-        .IsSurveyed = chkSurveyed.value
-        .Timing = cbxTiming.SelText
-        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
-        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
+'        .UserRoleType = ""
+'        .UserRoleNumber = cbxUserRole.SelText
+'        .SerialNumber = tbxSerialNo.value
+'        .IsSurveyed = chkSurveyed.value
+'        .Timing = cbxTiming.SelText
+'        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
+'        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
         
         .ID = tbxID.value '0 if new, edit if > 0
         .SaveToDb
@@ -939,7 +939,7 @@ On Error GoTo Err_Handler
     'clear values & refresh display
     Me.RecordSource = ""
     
-    cbxUserRole.ControlSource = ""
+'    cbxUserRole.ControlSource = ""
     cbxAccessLevel.ControlSource = ""
         
     ReadyForSave

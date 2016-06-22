@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =4440
-    Top =3105
-    Right =23400
-    Bottom =14895
+    Left =5040
+    Top =3315
+    Right =13260
+    Bottom =12120
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -306,7 +306,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7620
+            Height =7380
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -316,8 +316,8 @@ Begin Form
                 Begin Label
                     BackStyle =1
                     OverlapFlags =93
-                    Left =120
-                    Top =720
+                    Left =180
+                    Top =540
                     Width =7620
                     Height =2100
                     FontSize =18
@@ -330,10 +330,10 @@ Begin Form
                     Name ="lblWork"
                     Caption ="work"
                     GridlineColor =10921638
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =7740
-                    LayoutCachedHeight =2820
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =7800
+                    LayoutCachedHeight =2640
                     BackThemeColorIndex =-1
                 End
                 Begin CommandButton
@@ -499,7 +499,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =3120
+                    Top =2880
                     Width =7995
                     Height =4380
                     TabIndex =11
@@ -509,25 +509,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3120
+                    LayoutCachedTop =2880
                     LayoutCachedWidth =8100
-                    LayoutCachedHeight =7500
+                    LayoutCachedHeight =7260
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3000
+                    Top =2760
                     Width =8220
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3000
+                    LayoutCachedTop =2760
                     LayoutCachedWidth =8220
-                    LayoutCachedHeight =7620
+                    LayoutCachedHeight =7380
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -668,8 +668,8 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =1740
-                    Top =1860
+                    Left =1800
+                    Top =1680
                     Width =2040
                     Height =315
                     TabIndex =5
@@ -689,10 +689,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1740
-                    LayoutCachedTop =1860
-                    LayoutCachedWidth =3780
-                    LayoutCachedHeight =2175
+                    LayoutCachedLeft =1800
+                    LayoutCachedTop =1680
+                    LayoutCachedWidth =3840
+                    LayoutCachedHeight =1995
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -704,8 +704,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =420
-                    Top =1860
+                    Left =480
+                    Top =1680
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -714,16 +714,16 @@ Begin Form
                     Name ="lblOrganization"
                     Caption ="Organization"
                     GridlineColor =10921638
-                    LayoutCachedLeft =420
-                    LayoutCachedTop =1860
-                    LayoutCachedWidth =1680
-                    LayoutCachedHeight =2175
+                    LayoutCachedLeft =480
+                    LayoutCachedTop =1680
+                    LayoutCachedWidth =1740
+                    LayoutCachedHeight =1995
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =1740
-                    Top =2295
+                    Left =1800
+                    Top =2115
                     Width =2040
                     Height =315
                     TabIndex =6
@@ -743,10 +743,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1740
-                    LayoutCachedTop =2295
-                    LayoutCachedWidth =3780
-                    LayoutCachedHeight =2610
+                    LayoutCachedLeft =1800
+                    LayoutCachedTop =2115
+                    LayoutCachedWidth =3840
+                    LayoutCachedHeight =2430
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -758,8 +758,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =420
-                    Top =2295
+                    Left =480
+                    Top =2115
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -768,16 +768,16 @@ Begin Form
                     Name ="lblPosition"
                     Caption ="Position"
                     GridlineColor =10921638
-                    LayoutCachedLeft =420
-                    LayoutCachedTop =2295
-                    LayoutCachedWidth =1680
-                    LayoutCachedHeight =2610
+                    LayoutCachedLeft =480
+                    LayoutCachedTop =2115
+                    LayoutCachedWidth =1740
+                    LayoutCachedHeight =2430
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =4260
-                    Top =900
+                    Left =4320
+                    Top =720
                     Width =3300
                     Height =315
                     TabIndex =3
@@ -797,10 +797,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =1215
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =1035
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -812,8 +812,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2940
-                    Top =900
+                    Left =3000
+                    Top =720
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -822,16 +822,16 @@ Begin Form
                     Name ="lblEmail"
                     Caption ="Email"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2940
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =4200
-                    LayoutCachedHeight =1215
+                    LayoutCachedLeft =3000
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =4260
+                    LayoutCachedHeight =1035
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =5520
-                    Top =1860
+                    Left =5580
+                    Top =1680
                     Width =2040
                     Height =315
                     TabIndex =7
@@ -851,10 +851,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5520
-                    LayoutCachedTop =1860
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =2175
+                    LayoutCachedLeft =5580
+                    LayoutCachedTop =1680
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =1995
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -866,8 +866,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =4200
-                    Top =1860
+                    Left =4260
+                    Top =1680
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -876,16 +876,16 @@ Begin Form
                     Name ="lblPhone"
                     Caption ="Phone"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4200
-                    LayoutCachedTop =1860
-                    LayoutCachedWidth =5460
-                    LayoutCachedHeight =2175
+                    LayoutCachedLeft =4260
+                    LayoutCachedTop =1680
+                    LayoutCachedWidth =5520
+                    LayoutCachedHeight =1995
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =5520
-                    Top =2295
+                    Left =5580
+                    Top =2115
                     Width =2040
                     Height =315
                     TabIndex =8
@@ -905,10 +905,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5520
-                    LayoutCachedTop =2295
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =2610
+                    LayoutCachedLeft =5580
+                    LayoutCachedTop =2115
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =2430
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -920,8 +920,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =4200
-                    Top =2295
+                    Left =4260
+                    Top =2115
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -930,16 +930,16 @@ Begin Form
                     Name ="lblExtension"
                     Caption ="Extension"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4200
-                    LayoutCachedTop =2295
-                    LayoutCachedWidth =5460
-                    LayoutCachedHeight =2610
+                    LayoutCachedLeft =4260
+                    LayoutCachedTop =2115
+                    LayoutCachedWidth =5520
+                    LayoutCachedHeight =2430
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =4260
-                    Top =1335
+                    Left =4320
+                    Top =1155
                     Width =3300
                     Height =315
                     TabIndex =4
@@ -959,10 +959,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =1335
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =1650
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =1155
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =1470
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -974,8 +974,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2940
-                    Top =1335
+                    Left =3000
+                    Top =1155
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -984,10 +984,10 @@ Begin Form
                     Name ="lblUsername"
                     Caption ="Username"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2940
-                    LayoutCachedTop =1335
-                    LayoutCachedWidth =4200
-                    LayoutCachedHeight =1650
+                    LayoutCachedLeft =3000
+                    LayoutCachedTop =1155
+                    LayoutCachedWidth =4260
+                    LayoutCachedHeight =1470
                 End
             End
         End
@@ -1209,7 +1209,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+      If Nz(tbxID, 0) > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1223,19 +1223,19 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSampleDate_Change
+' Sub:          tbxFirst_Change
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/22/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSampleDate_Change()
+Private Sub tbxFirst_Change()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1246,25 +1246,25 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_Change[Contact form])"
+            "Error encountered (#" & Err.Number & " - tbxFirst_Change[Contact form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSampleDate_LostFocus
+' Sub:          tbxFirst_LostFocus
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/22/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSampleDate_LostFocus()
+Private Sub tbxFirst_LostFocus()
 On Error GoTo Err_Handler
 
     'ReadyForSave
@@ -1275,7 +1275,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_LostFocus[Contact form])"
+            "Error encountered (#" & Err.Number & " - tbxFirst_LostFocus[Contact form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1295,6 +1295,9 @@ End Sub
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
+    
+    'clear recordsource
+    Me.RecordSource = ""
     
     'clear values
     tbxEmail.value = ""
@@ -1343,13 +1346,13 @@ On Error GoTo Err_Handler
         'form values
         .LastName = tbxLast.value
         .FirstName = tbxFirst.value
-        .MiddleInitial = tbxMI.value
+        If Not IsNull(tbxMI.value) Then p.MiddleInitial = tbxMI.value
         .Email = tbxEmail.value
         .Username = tbxUsername.value
         .Organization = tbxOrganization.value
         .PosTitle = tbxPosition.value
-        .WorkPhone = tbxPhone.value
-        .WorkExtension = tbxExtension.value
+        If Not IsNull(tbxPhone.value) Then .WorkPhone = tbxPhone.value
+        If Not IsNull(tbxExtension.value) Then .WorkExtension = tbxExtension.value
         
         .ID = tbxID.value '0 if new, edit if > 0
         .SaveToDb
