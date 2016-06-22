@@ -480,6 +480,18 @@ On Error GoTo Err_Handler
         
         'find the form & populate its controls from the ID
         Select Case .Name
+            Case "Contact"
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxFirst").ControlSource = "FirstName"
+                .Controls("tbxMI").ControlSource = "MiddleInitial"
+                .Controls("tbxLast").ControlSource = "LastName"
+                .Controls("tbxEmail").ControlSource = "Email"
+                .Controls("tbxUsername").ControlSource = "Username"
+                .Controls("tbxOrganization").ControlSource = "Organization"
+                .Controls("tbxPhone").ControlSource = "WorkPhone"
+                .Controls("tbxPosition").ControlSource = "PositionTitle"
+                .Controls("tbxExtension").ControlSource = "WorkExtension"
             Case "Events"
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
                 .Controls("tbxID").ControlSource = "ID"
