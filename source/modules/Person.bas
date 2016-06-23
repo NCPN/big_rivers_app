@@ -39,28 +39,28 @@ Private m_IsActive As Byte 'using byte to avoid Access vs. SQL boolean issues
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidName(value)
-Public Event InvalidInitial(value)
-Public Event InvalidEmail(value)
-Public Event InvalidRole(value)
-Public Event InvalidPhone(value)
-Public Event InvalidAccessRole(value)
+Public Event InvalidName(Value)
+Public Event InvalidInitial(Value)
+Public Event InvalidEmail(Value)
+Public Event InvalidRole(Value)
+Public Event InvalidPhone(Value)
+Public Event InvalidAccessRole(Value)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let FirstName(value As String)
-    If IsName(value) Then
-        m_FirstName = value
+Public Property Let FirstName(Value As String)
+    If IsName(Value) Then
+        m_FirstName = Value
     Else
-        RaiseEvent InvalidName(value)
+        RaiseEvent InvalidName(Value)
     End If
 End Property
 
@@ -68,11 +68,11 @@ Public Property Get FirstName() As String
     FirstName = m_FirstName
 End Property
 
-Public Property Let LastName(value As String)
-    If IsName(value) Then
-        m_LastName = value
+Public Property Let LastName(Value As String)
+    If IsName(Value) Then
+        m_LastName = Value
     Else
-        RaiseEvent InvalidName(value)
+        RaiseEvent InvalidName(Value)
     End If
 End Property
 
@@ -80,11 +80,11 @@ Public Property Get LastName() As String
     LastName = m_LastName
 End Property
 
-Public Property Let MiddleInitial(value As String)
-    If IsAlpha(value) And Len(value) = 1 Then
-        m_MiddleInitial = value
+Public Property Let MiddleInitial(Value As String)
+    If IsAlpha(Value) And Len(Value) = 1 Then
+        m_MiddleInitial = Value
     Else
-        RaiseEvent InvalidInitial(value)
+        RaiseEvent InvalidInitial(Value)
     End If
 End Property
 
@@ -92,19 +92,19 @@ Public Property Get MiddleInitial() As String
     MiddleInitial = m_MiddleInitial
 End Property
 
-Public Property Let Name(value As String) 'Optional first As String, Value As String)
-    m_Name = value
+Public Property Let Name(Value As String) 'Optional first As String, Value As String)
+    m_Name = Value
 End Property
 
 Public Property Get Name() As String 'Optional first As String) As String
     Name = m_Name
 End Property
 
-Public Property Let Email(value As String)
-    If IsEmail(value) Then
-        m_Email = value
+Public Property Let Email(Value As String)
+    If IsEmail(Value) Then
+        m_Email = Value
     Else
-        RaiseEvent InvalidEmail(value)
+        RaiseEvent InvalidEmail(Value)
     End If
 End Property
 
@@ -112,19 +112,19 @@ Public Property Get Email() As String
     Email = m_Email
 End Property
 
-Public Property Let Organization(value As String)
-    m_Organization = value
+Public Property Let Organization(Value As String)
+    m_Organization = Value
 End Property
 
 Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
-Public Property Let WorkPhone(value As String)
-    If IsPhone(value) Then
-        m_WorkPhone = value
+Public Property Let WorkPhone(Value As String)
+    If IsPhone(Value) Then
+        m_WorkPhone = Value
     Else
-        RaiseEvent InvalidPhone(value)
+        RaiseEvent InvalidPhone(Value)
     End If
 End Property
 
@@ -132,46 +132,46 @@ Public Property Get WorkPhone() As String
     WorkPhone = m_WorkPhone
 End Property
 
-Public Property Let WorkExtension(value As String)
-    m_WorkExtension = value
+Public Property Let WorkExtension(Value As String)
+    m_WorkExtension = Value
 End Property
 
 Public Property Get WorkExtension() As String
     WorkExtension = m_WorkExtension
 End Property
 
-Public Property Let PosTitle(value As String)
-    m_PosTitle = value
+Public Property Let PosTitle(Value As String)
+    m_PosTitle = Value
 End Property
 
 Public Property Get PosTitle() As String
     PosTitle = m_PosTitle
 End Property
 
-Public Property Let Username(value As String)
-    m_Username = value
+Public Property Let Username(Value As String)
+    m_Username = Value
 End Property
 
 Public Property Get Username() As String
     Username = m_Username
 End Property
 
-Public Property Let IsActive(value As Byte)
-    m_IsActive = value
+Public Property Let IsActive(Value As Byte)
+    m_IsActive = Value
 End Property
 
 Public Property Get IsActive() As Byte
     IsActive = m_IsActive
 End Property
 
-Public Property Let Role(value As String)
+Public Property Let Role(Value As String)
     Dim aryRoles() As String
     aryRoles = Split(CONTACT_ROLES, ",")
 
-    If IsInArray(value, aryRoles) Then
-        m_Role = value
+    If IsInArray(Value, aryRoles) Then
+        m_Role = Value
     Else
-        RaiseEvent InvalidRole(value)
+        RaiseEvent InvalidRole(Value)
     End If
 End Property
 
@@ -179,16 +179,16 @@ Public Property Get Role() As String
     Role = m_Role
 End Property
 
-Public Property Let AccessRole(value As String)
+Public Property Let AccessRole(Value As String)
     Dim aryAccessRoles() As String
     aryAccessRoles = Split(ACCESS_ROLES, ",")
 
-    If IsInArray(value, aryAccessRoles) Then
-        m_AccessRole = value
+    If IsInArray(Value, aryAccessRoles) Then
+        m_AccessRole = Value
         'set access level based on role name (admin, power user, data entry, read only)
         AccessLevel = AccessID(m_AccessRole)
     Else
-        RaiseEvent InvalidAccessRole(value)
+        RaiseEvent InvalidAccessRole(Value)
     End If
 End Property
 
@@ -196,8 +196,8 @@ Public Property Get AccessRole() As String
     AccessRole = m_AccessRole
 End Property
 
-Public Property Let AccessLevel(value As Long)
-    m_AccessLevel = value
+Public Property Let AccessLevel(Value As Long)
+    m_AccessLevel = Value
 End Property
 
 Public Property Get AccessLevel() As Long
@@ -274,10 +274,13 @@ End Sub
 '   Fionnuala, February 2, 2009
 '   David W. Fenton, October 27, 2009
 '   http://stackoverflow.com/questions/595132/how-to-get-id-of-newly-inserted-record-using-excel-vba
+'   MarkK, September 11, 2013
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=253284
 ' Source/Date:  Bonnie Campbell
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 6/22/2016 - revised to use parameterized qdf
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb()
 On Error GoTo Err_Handler
@@ -286,6 +289,11 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     
+    '---------------------
+    ' CurrentDb returns a different dao.database reference every time it is called
+    ' So set a reference to make sure CurrentDb isn't called multiple times
+    ' This ensures @@Identity will contain the proper ID #
+    '---------------------
     Set db = CurrentDb
     
     'persons must have: first & last name, email, organization
@@ -297,30 +305,90 @@ On Error GoTo Err_Handler
 '                & Me.MiddleInitial & "','" & Me.Username & "','" _
 '                & Me.WorkPhone & "','" & Me.WorkExtension & "','" _
 '                & Me.PositionTitle & "');"
-    strSQL = GetTemplate("i_contact", _
-                "FirstName" & PARAM_SEPARATOR & Me.FirstName & "|" & _
-                "LastName" & PARAM_SEPARATOR & Me.LastName & "|" & _
-                "email" & PARAM_SEPARATOR & Me.Email & "|" & _
-                "org" & PARAM_SEPARATOR & Me.Organization & "|" & _
-                "MI" & PARAM_SEPARATOR & Me.MiddleInitial & "|" & _
-                "username" & PARAM_SEPARATOR & Me.Username & "|" & _
-                "WorkPhone" & PARAM_SEPARATOR & Me.WorkPhone & "|" & _
-                "WorkExt" & PARAM_SEPARATOR & Me.WorkExtension & "|" & _
-                "position" & PARAM_SEPARATOR & Me.PosTitle & "|" & _
-                "IsActive" & PARAM_SEPARATOR & Me.IsActive)
+'    strSQL = GetTemplate("i_contact", _
+'                "FirstName" & PARAM_SEPARATOR & Me.FirstName & "|" & _
+'                "LastName" & PARAM_SEPARATOR & Me.LastName & "|" & _
+'                "email" & PARAM_SEPARATOR & Me.Email & "|" & _
+'                "org" & PARAM_SEPARATOR & Me.Organization & "|" & _
+'                "MI" & PARAM_SEPARATOR & IIf(IsZLS(Me.MiddleInitial), DbNull, Me.MiddleInitial) & "|" & _
+'                "username" & PARAM_SEPARATOR & Me.Username & "|" & _
+'                "WorkPhone" & PARAM_SEPARATOR & IIf(IsZero(Me.WorkPhone), DbNull, Me.WorkPhone) & "|" & _
+'                "WorkExt" & PARAM_SEPARATOR & IIf(IsZero(Me.WorkExtension), DbNull, Me.WorkExtension) & "|" & _
+'                "position" & PARAM_SEPARATOR & IIf(IsZLS(Me.PosTitle), DbNull, Me.PosTitle) & "|" & _
+'                "IsActive" & PARAM_SEPARATOR & Me.IsActive)
     
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
-
+    Dim qdf As DAO.QueryDef
+    
+    With db
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+            If Me.ID > 0 Then
+                .SQL = GetTemplate("u_contact")
+            Else
+                .SQL = GetTemplate("i_contact_new")
+            End If
+            '-- required parameters --
+            .Parameters("FirstName") = Me.FirstName
+            .Parameters("LastName") = Me.LastName
+            .Parameters("Email") = Me.Email
+            .Parameters("Username") = Me.Username
+            .Parameters("Org") = Me.Organization
+            
+            '-- optional parameters --
+ '           If Not IsZLS(Me.MiddleInitial) Then _
+                .Parameters("MiddleInitial") = Me.MiddleInitial
+                .Parameters("MI") = Me.MiddleInitial
+            
+'            If Not IsZLS(Me.PosTitle) Then '_
+                .Parameters("Position") = Me.PosTitle
+            
+'            If Not IsZero(Me.WorkPhone) Then '_
+                .Parameters("Phone") = Me.WorkPhone
+            
+'            If Not IsZero(Me.WorkExtension) Then '_
+                .Parameters("Ext") = Me.WorkExtension
+            
+            .Parameters("IsActive") = Me.IsActive
+            
+            .Execute dbFailOnError
+            
+            'cleanup
+            .Close
+        End With
+    
+'    db.Execute strSQL, dbFailOnError
+    
+        Me.ID = .OpenRecordset("SELECT @@IDENTITY")(0)
+    
     'set the person's role
     
 '    strSQL = "INSERT INTO Contact_Access(Contact_ID, Access_ID)" _
 '                & "VALUES (" & Me.ID & "," &  & ");"
-
-    strSQL = GetTemplate("i_contact_access", _
-                "contactID" & PARAM_SEPARATOR & Me.ID & "|" & _
-                "accessID" & PARAM_SEPARATOR & Me.AccessLevel)
-    db.Execute strSQL, dbFailOnError
+        
+'    strSQL = GetTemplate("i_contact_access", _
+'                "contactID" & PARAM_SEPARATOR & Me.ID & "|" & _
+'                "accessID" & PARAM_SEPARATOR & Me.AccessLevel)
+'
+'    db.Execute strSQL, dbFailOnError
+        
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+            .SQL = GetTemplate("i_contact_access")
+            
+            '-- required parameters --
+            .Parameters("ContactID") = Me.ID
+            .Parameters("AccessID") = Me.AccessLevel
+            
+            '-- optional parameters --
+            
+            .Execute dbFailOnError
+            
+            'cleanup
+            .Close
+        End With
+    End With
 
 Exit_Handler:
     Exit Sub

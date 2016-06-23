@@ -598,7 +598,7 @@ Private Sub Form_DblClick(Cancel As Integer)
     
     DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
         """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
-        Me.txtTask_desc & """", acFormEdit, , ctlPark.value
+        Me.txtTask_desc & """", acFormEdit, , ctlPark.Value
 
     ' This code must come after opening the form as the subform bookmark is lost when requerying
     ' Requery the referring form first (to show any recent changes before resetting)
@@ -641,11 +641,11 @@ Private Sub cmdCloseup_Click()
 
     If IsNull(Me.Location_ID) Then
     ' If there is no location, launch a new record
-        DoCmd.OpenForm "frm_Task_List_Popup", , , , acFormAdd, , ctlPark.value
+        DoCmd.OpenForm "frm_Task_List_Popup", , , , acFormAdd, , ctlPark.Value
     Else:
         DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
             """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
-            Me.txtTask_desc & """", acFormEdit, , ctlPark.value
+            Me.txtTask_desc & """", acFormEdit, , ctlPark.Value
     End If
 
     ' This code must come after opening the form as the subform bookmark is lost when requerying

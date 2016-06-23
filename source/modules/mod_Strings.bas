@@ -66,6 +66,8 @@ Public Const uSheepHead = &H14485           '83077  simple sheep head (Anatolian
 Public Const uSpiral2 = &H169B9             '92601  Bamum Letter Phase-E Ngkaami
 
 '--- use StringFromCodepoint() from here ---
+Public Const uUser = &H1F464                '128100 bust in silhouette
+Public Const uUsers = &H1F465               '128101 busts in silhouette
 Public Const uMtnSunrise = &H1F304          '127748 mountain sunrise
 Public Const uWave = &H1F30A                '127754
 Public Const uDropletBlack = &H1F322        '127778

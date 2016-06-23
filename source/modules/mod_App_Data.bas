@@ -182,7 +182,7 @@ On Error GoTo Err_Handler
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        strItem = strItem & rs.Fields(j).value & ";"
+                        strItem = strItem & rs.Fields(j).Value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
                         matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
@@ -314,7 +314,7 @@ On Error GoTo Err_Handler
     
     'assume only 1 record returned
     If rs.RecordCount > 0 Then
-        State = rs.Fields("ParkState").value
+        State = rs.Fields("ParkState").Value
     End If
    
     'return value

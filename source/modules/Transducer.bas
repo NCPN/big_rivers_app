@@ -47,38 +47,38 @@ Private m_ContactID As Long
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidTransducerType(value As String)
-Public Event InvalidTransducerNumber(value As String)
-Public Event InvalidSerialNumber(value As String)
-Public Event InvalidTransducerTiming(value As String)
+Public Event InvalidTransducerType(Value As String)
+Public Event InvalidTransducerNumber(Value As String)
+Public Event InvalidSerialNumber(Value As String)
+Public Event InvalidTransducerTiming(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let EventID(value As Long)
-    m_EventID = value
+Public Property Let EventID(Value As Long)
+    m_EventID = Value
 End Property
 
 Public Property Get EventID() As Long
     EventID = m_EventID
 End Property
 
-Public Property Let TransducerType(value As String)
+Public Property Let TransducerType(Value As String)
     Dim aryTypes() As String
     aryTypes = Split(TRANSDUCER_TYPES, ",")
     
     If IsInArray(m_TransducerType, aryTypes) Then
-        m_TransducerType = value
+        m_TransducerType = Value
     Else
-        RaiseEvent InvalidTransducerType(value)
+        RaiseEvent InvalidTransducerType(Value)
     End If
 End Property
 
@@ -86,11 +86,11 @@ Public Property Get TransducerType() As String
     TransducerType = m_TransducerType
 End Property
 
-Public Property Let TransducerNumber(value As String)
-    If Len(Trim(value)) < 11 Then
-        m_TransducerNumber = value
+Public Property Let TransducerNumber(Value As String)
+    If Len(Trim(Value)) < 11 Then
+        m_TransducerNumber = Value
     Else
-        RaiseEvent InvalidTransducerNumber(value)
+        RaiseEvent InvalidTransducerNumber(Value)
     End If
 End Property
 
@@ -98,29 +98,29 @@ Public Property Get TransducerNumber() As String
     TransducerNumber = m_TransducerNumber
 End Property
 
-Public Property Let SerialNumber(value As String)
-    m_SerialNumber = value
+Public Property Let SerialNumber(Value As String)
+    m_SerialNumber = Value
 End Property
 
 Public Property Get SerialNumber() As String
     SerialNumber = m_SerialNumber
 End Property
 
-Public Property Let IsSurveyed(value As Boolean)
-    m_IsSurveyed = value
+Public Property Let IsSurveyed(Value As Boolean)
+    m_IsSurveyed = Value
 End Property
 
 Public Property Get IsSurveyed() As Boolean
     IsSurveyed = m_IsSurveyed
 End Property
 
-Public Property Let Timing(value As String)
+Public Property Let Timing(Value As String)
     Dim aryTiming() As String
     aryTiming = Split(TRANSDUCER_TIMING, ",")
-    If IsInArray(value, aryTiming) Then
-        m_Timing = value
+    If IsInArray(Value, aryTiming) Then
+        m_Timing = Value
     Else
-        RaiseEvent InvalidTransducerTiming(value)
+        RaiseEvent InvalidTransducerTiming(Value)
     End If
 End Property
 
@@ -128,24 +128,24 @@ Public Property Get Timing() As String
     Timing = m_Timing
 End Property
 
-Public Property Let ActionDate(value As Date)
-    m_ActionDate = Format(value, "mm/dd/yyyy")
+Public Property Let ActionDate(Value As Date)
+    m_ActionDate = Format(Value, "mm/dd/yyyy")
 End Property
 
 Public Property Get ActionDate() As Date
     ActionDate = m_ActionDate
 End Property
 
-Public Property Let ActionTime(value As Date)
-    m_ActionTime = Format(value, "hh:mm:ss")
+Public Property Let ActionTime(Value As Date)
+    m_ActionTime = Format(Value, "hh:mm:ss")
 End Property
 
 Public Property Get ActionTime() As Date
     ActionTime = m_ActionTime
 End Property
 
-Public Property Let ContactID(value As Long)
-    m_ContactID = value
+Public Property Let ContactID(Value As Long)
+    m_ContactID = Value
 End Property
 
 Public Property Get ContactID() As Long

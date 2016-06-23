@@ -20,13 +20,12 @@ Begin Form
     Width =7500
     DatasheetFontHeight =11
     ItemSuffix =39
-    Right =7275
-    Bottom =10995
+    Right =20685
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xc299ade9b6c5e440
+        0x65176ebd09c6e440
     End
-    RecordSource ="Contact"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -277,9 +276,8 @@ Begin Form
             End
         End
         Begin Section
-            Height =1200
+            Height =480
             Name ="Detail"
-            OnMouseMove ="[Event Procedure]"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -339,7 +337,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -400,7 +399,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -466,7 +466,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxID"
-                    ControlSource ="ID"
+                    ControlSource ="Contact_ID"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001000000001000000 ,
                         0x22b14c00ffffff000100000000000000110000002100000001000000ff000000 ,
@@ -538,7 +538,7 @@ Begin Form
                     TabIndex =6
                     ForeColor =4210752
                     Name ="btnActivate"
-                    Caption ="Activate"
+                    Caption ="í ½í·¸"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Toggle IsActive flag"
                     GridlineColor =10921638
@@ -549,7 +549,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -557,6 +558,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin TextBox
                     Visible = NotDefault
@@ -593,48 +595,6 @@ Begin Form
                         0x0000000000000000000000000000000000000000000000000002000000010000 ,
                         0x00ed1c2400ffffff000100000030000000000000000000000000000000000000 ,
                         0x00000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =85
-                    TextAlign =2
-                    IMESentenceMode =3
-                    Left =4500
-                    Top =720
-                    Width =1740
-                    Height =315
-                    TabIndex =8
-                    BackColor =15060409
-                    BorderColor =14136213
-                    ForeColor =4210752
-                    Name ="tbxActivate"
-                    OnMouseMove ="[Event Procedure]"
-                    OnLostFocus ="[Event Procedure]"
-                    OnClick ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x0100000098000000020000000100000000000000000000000d00000001000000 ,
-                        0xed1c2400ffffff0001000000000000000e0000001b0000000100000022b14c00 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00490073004100630074006900760065005d003d003100000000005b004900 ,
-                        0x73004100630074006900760065005d003d00300000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4500
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =6240
-                    LayoutCachedHeight =1035
-                    BackThemeColorIndex =4
-                    BackTint =40.0
-                    BorderThemeColorIndex =4
-                    BorderTint =60.0
-                    BorderShade =100.0
-                    ConditionalFormat14 = Begin
-                        0x010002000000010000000000000001000000ed1c2400ffffff000c0000005b00 ,
-                        0x490073004100630074006900760065005d003d00310000000000000000000000 ,
-                        0x000000000000000000000001000000000000000100000022b14c00ffffff000c ,
-                        0x0000005b00490073004100630074006900760065005d003d0030000000000000 ,
-                        0x00000000000000000000000000000000
                     End
                 End
             End
@@ -685,23 +645,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -709,14 +669,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -724,14 +684,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         Me.btnEdit.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -739,16 +699,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -758,36 +718,6 @@ End Property
 '---------------------
 ' Methods
 '---------------------
-
-' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/20/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[ContactList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Open
@@ -808,7 +738,7 @@ On Error GoTo Err_Handler
     lblTitle.Caption = ""
     lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
-    tbxIcon.value = StringFromCodepoint(uLocked)
+    tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.forecolor = lngDkGreen
     lblDirections.forecolor = lngLtBlue
     
@@ -817,17 +747,18 @@ On Error GoTo Err_Handler
     btnEdit.hoverColor = lngGreen
     btnDelete.hoverColor = lngGreen
 
-    btnActivate.Caption = StringFromCodepoint(uCheckMark) '"|" & "/" & StringFromCodepoint(uPowerOff)
-   ' btnActivate.Caption = IIf(tbxIsActive = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
-   ' btnActivate.forecolor = IIf([IsActive] = 1, lngRed, lngGreen)
-    'tbxActivate.value = IIf(tbxIsActive = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
-    'tbxActivate.forecolor = IIf([IsActive] = 1, lngRed, lngGreen)
-    tbxActivate = StringFromCodepoint(uCheckMark)
+    btnActivate.Caption = StringFromCodepoint(uCheckMark)
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.forecolor = lngRed
 
     'tbxIsActive = IIf([IsActive] = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
+
+    'set data source
+    Me.RecordSource = GetTemplate("s_contact_access")
+    Me.Requery
+
+    'tbxName.ControlSource = [FirstName] & " " & IIf(Len([MiddleInitial]) > 0, [MiddleInitial] & " ", "") & [LastName]
 
 Exit_Handler:
     Exit Sub
@@ -836,6 +767,40 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Open[ContactList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/20/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+'    'set data source
+'    Me.RecordSource = GetTemplate("s_contact_access")
+'    Me.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[ContactList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -884,7 +849,7 @@ Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent, tbxID
 
 Exit_Handler:
     Exit Sub
@@ -919,7 +884,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Contact", ID
+    If result = vbYes Then DeleteRecord "Contact", tbxID
     
     'clear the deleted record
     Me.Requery
@@ -952,7 +917,7 @@ Private Sub btnActivate_Click()
 On Error GoTo Err_Handler
     
     'identify the record ID
-    ToggleIsActive ID, Abs(tbxIsActive - 1)
+    ToggleIsActive tbxID, Abs(tbxIsActive - 1)
     
     'clear the Activated record
     Me.Requery
@@ -1031,146 +996,4 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - ToggleIsActive[ContactList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Detail_MouseMove
-' Description:  Mouse over actions on activate textbox
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/20/2016 - initial version
-' ---------------------------------
-Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-On Error GoTo Err_Handler
-
-'    tbxActivate.backcolor = lngLtBlue
-'    tbxActivate.forecolor = lngBlack
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Detail_MouseMove[ContactList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxActivate_MouseMove
-' Description:  Mouse over actions on activate textbox
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/20/2016 - initial version
-' ---------------------------------
-Private Sub tbxActivate_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-On Error GoTo Err_Handler
-
-    With tbxActivate
-        .backcolor = lngGreen
-'        If tbxIsActive = 1 Then
-'        .borderColor = lngRed
-'        Else
-'        .borderColor = lngGreen
-'        End If 'IIf(tbxIsActive = 1, lngRed, lngGreen)
-    End With
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxActivate_MouseMove[ContactList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxActivate_LostFocus
-' Description:  Mouse out (lost focus) actions on activate textbox
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/20/2016 - initial version
-' ---------------------------------
-Private Sub tbxActivate_LostFocus()
-On Error GoTo Err_Handler
-
-    With tbxActivate
-'        .backcolor = lngLtBlue
-'        .forecolor = IIf(tbxIsActive = 1, lngRed, lngGreen)
-    End With
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxActivate_LostFocus[ContactList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxActivate_Click
-' Description:  Activate textbox click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/20/2016 - initial version
-' ---------------------------------
-Private Sub tbxActivate_Click()
-On Error GoTo Err_Handler
-
-    'identify the record ID
-    'ToggleIsActive ID, Abs(tbxIsActive - 1)
-    ToggleIsActive ID, Abs(IsActive - 1)
-    
-    'clear the Activated record
-    Me.Requery
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxActivate_Click[ContactList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-Private Sub tglActivate_Click()
-
-    'identify the record ID
-    ToggleIsActive ID, Abs(tbxIsActive - 1)
-    
-    'clear the Activated record
-    Me.Requery
-
 End Sub

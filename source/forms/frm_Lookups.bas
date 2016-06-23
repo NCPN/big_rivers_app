@@ -781,7 +781,7 @@ Private Sub cmdViewDetails_Click()
     Dim strRecID As String
 
     Set ctl = Forms!frm_Lookups.subTaxa.Form!txtTaxonID
-    strRecID = ctl.value
+    strRecID = ctl.Value
 
     ' Set the global reference control variable for requerying after updates
     Set gvarRefTaxonCtl = Me.subTaxa
@@ -837,10 +837,10 @@ Private Sub cmdEditContacts_Click()
     strFilter = ""
 
     ' Indicate the record to filter by if one is selected
-    If IsNull(ctl.value) = False Then
-        strFilter = "[Contact_ID]=""" & ctl.value & """"
+    If IsNull(ctl.Value) = False Then
+        strFilter = "[Contact_ID]=""" & ctl.Value & """"
         ' De-select the record
-        ctl.value = Null
+        ctl.Value = Null
     End If
     ' Set the global reference control variable for requerying after updates
     Set gvarRefContactCtl = ctl
@@ -949,7 +949,7 @@ Private Sub cmbTableFilter_AfterUpdate()
     Else:
     ' If a table is selected ...
         If TableExists(Me.cmbTableFilter) Then
-            Me.subLookupTables.SourceObject = "Table." & Me.cmbTableFilter.value
+            Me.subLookupTables.SourceObject = "Table." & Me.cmbTableFilter.Value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"

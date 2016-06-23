@@ -1103,18 +1103,18 @@ End Sub
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub lblFacing_DblClick(Cancel As Integer)
     'clear options
-    optgRRRL.value = ""
-    optgUSDS.value = ""
+    optgRRRL.Value = ""
+    optgUSDS.Value = ""
 End Sub
 
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub optgRRRL_DblClick(Cancel As Integer)
     'clear options
-    optgRRRL.value = ""
+    optgRRRL.Value = ""
 End Sub
 
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub optgUSDS_DblClick(Cancel As Integer)
     'clear options
-    optgUSDS.value = ""
+    optgUSDS.Value = ""
 End Sub

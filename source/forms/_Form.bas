@@ -580,23 +580,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -604,14 +604,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -619,14 +619,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -634,16 +634,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -702,7 +702,7 @@ On Error GoTo Err_Handler
 
     Title = "Tagline Measurements"
     Directions = "Select the appropriate slope change cause & enter tagline distance & height."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.forecolor = lngLtBlue
     
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
@@ -717,7 +717,7 @@ On Error GoTo Err_Handler
     tbxHeight.backcolor = lngYellow
   
     'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
+    tbxID.Value = 0
   
 Exit_Handler:
     Exit Sub
@@ -864,9 +864,9 @@ Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     'clear values
-    cbxCause.value = " --SELECT-- "
-    tbxDistance.value = ""
-    tbxHeight.value = ""
+    cbxCause.Value = " --SELECT-- "
+    tbxDistance.Value = ""
+    tbxHeight.Value = ""
     
     btnSave.Enabled = False
     
@@ -910,9 +910,9 @@ On Error GoTo Err_Handler
         .LineDistType = "SC" 'slope changes only
         
         'form values
-        .HeightType = Left(cbxCause.value, 1)
-        .Height = tbxHeight.value
-        .LineDistance = tbxDistance.value
+        .HeightType = Left(cbxCause.Value, 1)
+        .Height = tbxHeight.Value
+        .LineDistance = tbxDistance.Value
         .SaveToDb
     End With
     
@@ -974,7 +974,7 @@ Private Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     'set color of icon depending on if values are set
-    If Len(cbxCause.value) <> 0 And tbxDistance > 0 And tbxHeight <> "" Then
+    If Len(cbxCause.Value) <> 0 And tbxDistance > 0 And tbxHeight <> "" Then
         tbxIcon.forecolor = lngDkGreen
         btnSave.Enabled = True
     Else

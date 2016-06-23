@@ -691,15 +691,15 @@ Private m_NumRows As Integer
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidRow(value As Integer)
-Public Event InvalidNumRows(value As Integer)
+Public Event InvalidRow(Value As Integer)
+Public Event InvalidNumRows(Value As Integer)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Park(value As String)
-    If Len(value) = 4 Then
-        m_Park = value
+Public Property Let Park(Value As String)
+    If Len(Value) = 4 Then
+        m_Park = Value
     End If
 End Property
 
@@ -707,11 +707,11 @@ Public Property Get Park() As String
     Park = m_Park
 End Property
 
-Public Property Let StartRow(value As Integer)
-    If value > 0 Then
-        m_StartRow = value
+Public Property Let StartRow(Value As Integer)
+    If Value > 0 Then
+        m_StartRow = Value
     Else
-        RaiseEvent InvalidRow(value)
+        RaiseEvent InvalidRow(Value)
     End If
 End Property
 
@@ -719,11 +719,11 @@ Public Property Get StartRow() As Integer
     StartRow = m_StartRow
 End Property
 
-Public Property Let EndRow(value As Integer)
-    If value > 0 Then
-        m_EndRow = value
+Public Property Let EndRow(Value As Integer)
+    If Value > 0 Then
+        m_EndRow = Value
     Else
-        RaiseEvent InvalidRow(value)
+        RaiseEvent InvalidRow(Value)
     End If
 End Property
 
@@ -731,11 +731,11 @@ Public Property Get EndRow() As Integer
     EndRow = m_EndRow
 End Property
 
-Public Property Let NumRows(value As Integer)
-    If value > 0 Then
-        m_NumRows = value
+Public Property Let NumRows(Value As Integer)
+    If Value > 0 Then
+        m_NumRows = Value
     Else
-        RaiseEvent InvalidNumRows(value)
+        RaiseEvent InvalidNumRows(Value)
     End If
 End Property
 

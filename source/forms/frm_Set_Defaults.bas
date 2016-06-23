@@ -475,7 +475,7 @@ Private Sub Form_Open(Cancel As Integer)
             
             ctrlName = ctrlName & TempVars.item(i).Name
             
-            Me.Controls(ctrlName) = TempVars.item(i).value
+            Me.Controls(ctrlName) = TempVars.item(i).Value
         End With
     Next
 
@@ -627,13 +627,13 @@ Private Sub cmdOK_Click()
     End If
 
     ' Save changes to the switchboard record
-    If Nz(Me.cbxUser) <> Nz(TempVars.item("User")) Then TempVars.item("User") = Me.cbxUser.value
-    If Nz(Me.cbxGPS_model) <> Nz(TempVars.item("GPS_model")) Then TempVars.item("GPS_model") = Me.cbxGPS_model.value
-    If Nz(Me.cbxPark) <> Nz(TempVars.item("Park")) Then TempVars.item("Park") = Me.cbxPark.value
-    If Nz(Me.cbxDatum) <> Nz(TempVars.item("Datum")) Then TempVars.item("Datum") = Me.cbxDatum.value
-    If Nz(Me.tbxDeclination) <> Nz(TempVars.item("Declination")) Then TempVars.item("Declination") = Me.tbxDeclination.value
-    If Nz(Me.tbxTimeframe) <> Nz(TempVars.item("Timeframe")) Then TempVars.item("Timeframe") = Me.tbxTimeframe.value
-    If Nz(Me.tbxProject) <> Nz(TempVars.item("Project")) Then TempVars.item("Project") = Me.tbxProject.value
+    If Nz(Me.cbxUser) <> Nz(TempVars.item("User")) Then TempVars.item("User") = Me.cbxUser.Value
+    If Nz(Me.cbxGPS_model) <> Nz(TempVars.item("GPS_model")) Then TempVars.item("GPS_model") = Me.cbxGPS_model.Value
+    If Nz(Me.cbxPark) <> Nz(TempVars.item("Park")) Then TempVars.item("Park") = Me.cbxPark.Value
+    If Nz(Me.cbxDatum) <> Nz(TempVars.item("Datum")) Then TempVars.item("Datum") = Me.cbxDatum.Value
+    If Nz(Me.tbxDeclination) <> Nz(TempVars.item("Declination")) Then TempVars.item("Declination") = Me.tbxDeclination.Value
+    If Nz(Me.tbxTimeframe) <> Nz(TempVars.item("Timeframe")) Then TempVars.item("Timeframe") = Me.tbxTimeframe.Value
+    If Nz(Me.tbxProject) <> Nz(TempVars.item("Project")) Then TempVars.item("Project") = Me.tbxProject.Value
 
     strSQL = "UPDATE tsys_App_Defaults " _
         & "SET GPS_model = '" & TempVars.item("GPS_model") & "', " _

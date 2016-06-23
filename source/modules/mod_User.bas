@@ -746,7 +746,7 @@ Public Function AccessID(AccessLevel As String) As Long
     Dim rs As DAO.Recordset
     Dim strSQL As String
     
-    strSQL = GetTemplate("s_access_level", "lvl:" & LCase(AccessLevel))
+    strSQL = GetTemplate("s_access_level", "lvl" & PARAM_SEPARATOR & LCase(AccessLevel))
     
     Set rs = CurrentDb.OpenRecordset(strSQL, dbOpenSnapshot)
     

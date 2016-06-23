@@ -41,91 +41,91 @@ Private m_NoIndicatorSpecies As Boolean
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidSizeClass(value As String)
-Public Event InvalidPlotDensity(value As Integer)
-Public Event InvalidPercent(value As Integer)
+Public Event InvalidSizeClass(Value As String)
+Public Event InvalidPlotDensity(Value As Integer)
+Public Event InvalidPercent(Value As Integer)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let EventID(value As Long)
-    m_EventID = value
+Public Property Let EventID(Value As Long)
+    m_EventID = Value
 End Property
 
 Public Property Get EventID() As Long
     EventID = m_EventID
 End Property
 
-Public Property Let SiteID(value As Long)
-    m_SiteID = value
+Public Property Let SiteID(Value As Long)
+    m_SiteID = Value
 End Property
 
 Public Property Get SiteID() As Long
     SiteID = m_SiteID
 End Property
 
-Public Property Let FeatureID(value As Long)
-    m_FeatureID = value
+Public Property Let FeatureID(Value As Long)
+    m_FeatureID = Value
 End Property
 
 Public Property Get FeatureID() As Long
     FeatureID = m_FeatureID
 End Property
 
-Public Property Let VegTransectID(value As Long)
-    m_VegTransectID = value
+Public Property Let VegTransectID(Value As Long)
+    m_VegTransectID = Value
 End Property
 
 Public Property Get VegTransectID() As Long
     VegTransectID = m_VegTransectID
 End Property
 
-Public Property Let PlotNumber(value As Integer)
-    m_PlotNumber = value
+Public Property Let PlotNumber(Value As Integer)
+    m_PlotNumber = Value
 End Property
 
 Public Property Get PlotNumber() As Integer
     PlotNumber = m_PlotNumber
 End Property
 
-Public Property Let PlotDistance(value As Integer)
-    m_PlotDistance = value
+Public Property Let PlotDistance(Value As Integer)
+    m_PlotDistance = Value
 End Property
 
 Public Property Get PlotDistance() As Integer
     PlotDistance = m_PlotDistance
 End Property
 
-Public Property Let ModalSedimentSize(value As String)
+Public Property Let ModalSedimentSize(Value As String)
     'determine if valid ModWentworthClassSize
     Dim i As Integer
     For i = ModWentworthClassSize.[_First] To ModWentworthClassSize.[_Last]
 '        If (ModWentworthClassSize(i) = Value) Then
-            m_ModalSedimentSize = value
+            m_ModalSedimentSize = Value
 '            Exit For
 '        End If
     Next
     'catch invalid values
-    If Len(m_ModalSedimentSize) = 0 Then RaiseEvent InvalidSizeClass(value)
+    If Len(m_ModalSedimentSize) = 0 Then RaiseEvent InvalidSizeClass(Value)
 End Property
 
 Public Property Get ModalSedimentSize() As String
     ModalSedimentSize = m_ModalSedimentSize
 End Property
 
-Public Property Let PercentFines(value As Integer)
-    If IsBetween(value, 0, 100, True) Then
-        m_PercentFines = value
+Public Property Let PercentFines(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_PercentFines = Value
     Else
-        RaiseEvent InvalidPercent(value)
+        RaiseEvent InvalidPercent(Value)
     End If
 End Property
 
@@ -133,11 +133,11 @@ Public Property Get PercentFines() As Integer
     PercentFines = m_PercentFines
 End Property
 
-Public Property Let PercentWater(value As Integer)
-    If IsBetween(value, 0, 100, True) Then
-        m_PercentWater = value
+Public Property Let PercentWater(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_PercentWater = Value
     Else
-        RaiseEvent InvalidPercent(value)
+        RaiseEvent InvalidPercent(Value)
     End If
 End Property
 
@@ -145,11 +145,11 @@ Public Property Get PercentWater() As Integer
     PercentWater = m_PercentWater
 End Property
 
-Public Property Let UnderstoryRootedPctCover(value As Integer)
-    If IsBetween(value, 0, 100, True) Then
-        m_UnderstoryRootedPctCover = value
+Public Property Let UnderstoryRootedPctCover(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_UnderstoryRootedPctCover = Value
     Else
-        RaiseEvent InvalidPercent(value)
+        RaiseEvent InvalidPercent(Value)
     End If
 End Property
 
@@ -157,13 +157,13 @@ Public Property Get UnderstoryRootedPctCover() As Integer
     UnderstoryRootedPctCover = m_UnderstoryRootedPctCover
 End Property
 
-Public Property Let PlotDensity(value As Integer)
+Public Property Let PlotDensity(Value As Integer)
     Dim aryDensity() As String
     aryDensity = Split(PLOT_DENSITIES, ",")
-    If IsInArray(CStr(value), aryDensity) Then
-        m_PlotDensity = CInt(value)
+    If IsInArray(CStr(Value), aryDensity) Then
+        m_PlotDensity = CInt(Value)
     Else
-        RaiseEvent InvalidPlotDensity(value)
+        RaiseEvent InvalidPlotDensity(Value)
     End If
 End Property
 
@@ -171,40 +171,40 @@ Public Property Get PlotDensity() As Integer
     PlotDensity = m_PlotDensity
 End Property
 
-Public Property Let NoCanopyVeg(value As Boolean)
-    m_NoCanopyVeg = value
+Public Property Let NoCanopyVeg(Value As Boolean)
+    m_NoCanopyVeg = Value
 End Property
 
 Public Property Get NoCanopyVeg() As Boolean
     NoCanopyVeg = m_NoCanopyVeg
 End Property
 
-Public Property Let NoRootedVeg(value As Boolean)
-    m_NoRootedVeg = value
+Public Property Let NoRootedVeg(Value As Boolean)
+    m_NoRootedVeg = Value
 End Property
 
 Public Property Get NoRootedVeg() As Boolean
     NoRootedVeg = m_NoRootedVeg
 End Property
 
-Public Property Let HasSocialTrail(value As Boolean)
-    m_HasSocialTrail = value
+Public Property Let HasSocialTrail(Value As Boolean)
+    m_HasSocialTrail = Value
 End Property
 
 Public Property Get HasSocialTrail() As Boolean
     HasSocialTrail = m_HasSocialTrail
 End Property
 
-Public Property Let FilamentousAlgae(value As Boolean)
-    m_FilamentousAlgae = value
+Public Property Let FilamentousAlgae(Value As Boolean)
+    m_FilamentousAlgae = Value
 End Property
 
 Public Property Get FilamentousAlgae() As Boolean
     FilamentousAlgae = m_FilamentousAlgae
 End Property
 
-Public Property Let NoIndicatorSpecies(value As Boolean)
-    m_NoIndicatorSpecies = value
+Public Property Let NoIndicatorSpecies(Value As Boolean)
+    m_NoIndicatorSpecies = Value
 End Property
 
 Public Property Get NoIndicatorSpecies() As Boolean

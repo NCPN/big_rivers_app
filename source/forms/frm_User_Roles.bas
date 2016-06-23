@@ -23,12 +23,12 @@ Begin Form
     Right =12315
     Bottom =14310
     DatasheetGridlinesColor =12632256
-    OrderBy ="[frm_User_Roles].[User_role], User_name"
+    OrderBy ="frm_User_Roles.[UserRole], [Username]"
     RecSrcDt = Begin
-        0xc71a6a0bef61e340
+        0x793a08b808c6e440
     End
-    RecordSource ="SELECT tsys_User_Roles.* FROM tsys_User_Roles ORDER BY tsys_User_Roles.User_name"
-        "; "
+    RecordSource ="SELECT xtsys_User_Roles.* FROM xtsys_User_Roles ORDER BY [xtsys_User_Roles].[Use"
+        "rname]; "
     Caption =" Set User Access Roles"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
@@ -170,7 +170,7 @@ Begin Form
                     Height =255
                     ColumnWidth =2310
                     Name ="txtUser_name"
-                    ControlSource ="User_name"
+                    ControlSource ="Username"
 
                 End
                 Begin ComboBox
@@ -186,7 +186,7 @@ Begin Form
                     ColumnWidth =2310
                     TabIndex =1
                     Name ="cmbUser_role"
-                    ControlSource ="User_role"
+                    ControlSource ="UserRole"
                     RowSourceType ="Value List"
                     RowSource ="\"read only\";\"view data only\";\"data entry\";\"enter/edit data for the curren"
                         "t season\";\"power user\";\"set user roles, edit lookup values, edit certified d"

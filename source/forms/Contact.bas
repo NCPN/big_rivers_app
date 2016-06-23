@@ -19,16 +19,17 @@ Begin Form
     GridY =24
     Width =8220
     DatasheetFontHeight =11
-    ItemSuffix =55
-    Left =5040
-    Top =3315
-    Right =13260
-    Bottom =12120
+    ItemSuffix =60
+    Left =4440
+    Top =3105
+    Right =12660
+    Bottom =12330
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0xc4bda90909c6e440
     End
-    Caption ="Transect"
+    RecordSource ="SELECT * FROM Contact WHERE ID = 6; "
+    Caption ="Contact"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -210,7 +211,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the contact data."
+                    Caption ="Enter the contact information and click save."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -281,9 +282,9 @@ Begin Form
                     Left =6660
                     Top =900
                     Width =720
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="í ½í·©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -291,9 +292,11 @@ Begin Form
                     LayoutCachedTop =900
                     LayoutCachedWidth =7380
                     LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -301,12 +304,13 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7380
+            Height =7800
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -316,8 +320,8 @@ Begin Form
                 Begin Label
                     BackStyle =1
                     OverlapFlags =93
-                    Left =180
-                    Top =540
+                    Left =240
+                    Top =960
                     Width =7620
                     Height =2100
                     FontSize =18
@@ -328,12 +332,12 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblWork"
-                    Caption ="work"
+                    Caption ="Work\015\012Info"
                     GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =540
-                    LayoutCachedWidth =7800
-                    LayoutCachedHeight =2640
+                    LayoutCachedLeft =240
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =3060
                     BackThemeColorIndex =-1
                 End
                 Begin CommandButton
@@ -391,7 +395,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -484,7 +489,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -499,7 +505,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =2880
+                    Top =3300
                     Width =7995
                     Height =4380
                     TabIndex =11
@@ -509,25 +515,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =2880
+                    LayoutCachedTop =3300
                     LayoutCachedWidth =8100
-                    LayoutCachedHeight =7260
+                    LayoutCachedHeight =7680
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =2760
+                    Top =3180
                     Width =8220
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =2760
+                    LayoutCachedTop =3180
                     LayoutCachedWidth =8220
-                    LayoutCachedHeight =7380
+                    LayoutCachedHeight =7800
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -545,6 +551,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    ControlSource ="Contact_ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -568,6 +575,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxMI"
+                    ControlSource ="MiddleInitial"
                     OnLostFocus ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ControlTipText ="Enter your middle initial"
@@ -603,8 +611,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxFirst"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="FirstName"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your first name"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -640,8 +648,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxLast"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="LastName"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your last name"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -668,8 +676,8 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =1800
-                    Top =1680
+                    Left =1860
+                    Top =2100
                     Width =2040
                     Height =315
                     TabIndex =5
@@ -677,8 +685,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxOrganization"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="Organization"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your organization abbreviation (NCPN, etc.)"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -689,10 +697,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1800
-                    LayoutCachedTop =1680
-                    LayoutCachedWidth =3840
-                    LayoutCachedHeight =1995
+                    LayoutCachedLeft =1860
+                    LayoutCachedTop =2100
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =2415
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -704,8 +712,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =480
-                    Top =1680
+                    Left =540
+                    Top =2100
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -714,16 +722,16 @@ Begin Form
                     Name ="lblOrganization"
                     Caption ="Organization"
                     GridlineColor =10921638
-                    LayoutCachedLeft =480
-                    LayoutCachedTop =1680
-                    LayoutCachedWidth =1740
-                    LayoutCachedHeight =1995
+                    LayoutCachedLeft =540
+                    LayoutCachedTop =2100
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =2415
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =1800
-                    Top =2115
+                    Left =1860
+                    Top =2535
                     Width =2040
                     Height =315
                     TabIndex =6
@@ -731,8 +739,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPosition"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="PositionTitle"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your position"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -743,10 +751,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1800
-                    LayoutCachedTop =2115
-                    LayoutCachedWidth =3840
-                    LayoutCachedHeight =2430
+                    LayoutCachedLeft =1860
+                    LayoutCachedTop =2535
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =2850
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -758,8 +766,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =480
-                    Top =2115
+                    Left =540
+                    Top =2535
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -768,16 +776,16 @@ Begin Form
                     Name ="lblPosition"
                     Caption ="Position"
                     GridlineColor =10921638
-                    LayoutCachedLeft =480
-                    LayoutCachedTop =2115
-                    LayoutCachedWidth =1740
-                    LayoutCachedHeight =2430
+                    LayoutCachedLeft =540
+                    LayoutCachedTop =2535
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =2850
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =4320
-                    Top =720
+                    Left =4380
+                    Top =1140
                     Width =3300
                     Height =315
                     TabIndex =3
@@ -785,8 +793,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxEmail"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="Email"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your work email address (first_last@nps.gov, etc.)"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -797,10 +805,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4320
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =7620
-                    LayoutCachedHeight =1035
+                    LayoutCachedLeft =4380
+                    LayoutCachedTop =1140
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =1455
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -812,8 +820,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =3000
-                    Top =720
+                    Left =3060
+                    Top =1140
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -822,16 +830,16 @@ Begin Form
                     Name ="lblEmail"
                     Caption ="Email"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3000
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =4260
-                    LayoutCachedHeight =1035
+                    LayoutCachedLeft =3060
+                    LayoutCachedTop =1140
+                    LayoutCachedWidth =4320
+                    LayoutCachedHeight =1455
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =5580
-                    Top =1680
+                    Left =5640
+                    Top =2100
                     Width =2040
                     Height =315
                     TabIndex =7
@@ -839,8 +847,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPhone"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="WorkPhone"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your work phone #"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -851,10 +859,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5580
-                    LayoutCachedTop =1680
-                    LayoutCachedWidth =7620
-                    LayoutCachedHeight =1995
+                    LayoutCachedLeft =5640
+                    LayoutCachedTop =2100
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =2415
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -866,8 +874,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =4260
-                    Top =1680
+                    Left =4320
+                    Top =2100
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -876,16 +884,16 @@ Begin Form
                     Name ="lblPhone"
                     Caption ="Phone"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =1680
-                    LayoutCachedWidth =5520
-                    LayoutCachedHeight =1995
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =2100
+                    LayoutCachedWidth =5580
+                    LayoutCachedHeight =2415
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =5580
-                    Top =2115
+                    Left =5640
+                    Top =2535
                     Width =2040
                     Height =315
                     TabIndex =8
@@ -893,8 +901,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxExtension"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="WorkExtension"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your work extension (if any)"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -905,10 +913,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5580
-                    LayoutCachedTop =2115
-                    LayoutCachedWidth =7620
-                    LayoutCachedHeight =2430
+                    LayoutCachedLeft =5640
+                    LayoutCachedTop =2535
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =2850
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -920,8 +928,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =4260
-                    Top =2115
+                    Left =4320
+                    Top =2535
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -930,16 +938,16 @@ Begin Form
                     Name ="lblExtension"
                     Caption ="Extension"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =2115
-                    LayoutCachedWidth =5520
-                    LayoutCachedHeight =2430
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =2535
+                    LayoutCachedWidth =5580
+                    LayoutCachedHeight =2850
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =4320
-                    Top =1155
+                    Left =4380
+                    Top =1575
                     Width =3300
                     Height =315
                     TabIndex =4
@@ -947,8 +955,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxUsername"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    ControlSource ="Username"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter your username (AD)"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
@@ -959,10 +967,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4320
-                    LayoutCachedTop =1155
-                    LayoutCachedWidth =7620
-                    LayoutCachedHeight =1470
+                    LayoutCachedLeft =4380
+                    LayoutCachedTop =1575
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =1890
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -974,8 +982,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =3000
-                    Top =1155
+                    Left =3060
+                    Top =1575
                     Width =1260
                     Height =315
                     FontWeight =500
@@ -984,10 +992,134 @@ Begin Form
                     Name ="lblUsername"
                     Caption ="Username"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3000
-                    LayoutCachedTop =1155
-                    LayoutCachedWidth =4260
-                    LayoutCachedHeight =1470
+                    LayoutCachedLeft =3060
+                    LayoutCachedTop =1575
+                    LayoutCachedWidth =4320
+                    LayoutCachedHeight =1890
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6660
+                    Top =540
+                    Width =720
+                    TabIndex =14
+                    ForeColor =4210752
+                    Name ="btnSetRole"
+                    Caption ="Edit"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Set user's role"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000b04830ffb03830ffa03030ff903020ff903030ff00000000 ,
+                        0x0000000040a040ff309020ff308020ff307020ff206020ff0000000000000000 ,
+                        0x0000000000000000d04010ffd05020ffd05020ffc04010ff900800ff00000000 ,
+                        0x0000000020a800ff30b820ff30b020ff20a800ff006800ff0000000000000000 ,
+                        0x0000000000000000f06020fff09060fff08850ffe06020ff901000ff5058a0ff ,
+                        0x505880ff30c810ff70e860ff70e060ff40c820ff107000ff404090ff504890ff ,
+                        0x504880ff606890fff06830fff09870fff08860ffe06020ffa02010ff0088e0ff ,
+                        0x0070e0ff40d030ff90f070ff80e870ff40c820ff107000ff1020c0ff0008e0ff ,
+                        0x0000c0ff100860ffff7830fff0a890fff0a080ffd06830ff801810ff00c0ffff ,
+                        0x00a0ffff40d030ffa0f890ffa0f080ff50c840ff106800ff4058f0ff3030ffff ,
+                        0x0008d0ff000060ffff8040ffffd8c0ffffc8a0ffe08050ffa02010ff00c8ffff ,
+                        0x00a8ffff40d840ffd0ffc0ffc0ffc0ff70d860ff108000ff8080ffff5058f0ff ,
+                        0x0010c0ff000050ffffb080ffffb890ffffa880fff07030ff905840ff00c8ffff ,
+                        0x10b0ffff30b880ffa0f890ffa0f890ff50d840ff20a030ff8088ffff6068f0ff ,
+                        0x0010c0ff000850ff00000000d04020ffd01800ffa01810ff30a0c0ff30f0ffff ,
+                        0x10c0ffff0070a0ff109800ff10a800ff008800ff306890ff9090ffff7070ffff ,
+                        0x0010c0ff202870ffe07050ffd05830ffd06830ffc02810ffa04030ffa0ffffff ,
+                        0x20e0ffff009840ff40b820ff50c030ff10a010ff108820ffc0d0f0ff9090ffff ,
+                        0x1020d0ff202090ffe06020ffffc8a0ffffb890ffe07040ffc01800ff40c8f0ff ,
+                        0x10b0ffff30c030ffb0f8a0ffb0f8a0ff60d050ff109800ff6070e0ff4040ffff ,
+                        0x1018e0ff7078e0fff08850ffffd0b0ffffd8b0fff07040ffa02010ff0058c0ff ,
+                        0x0048b0ff30b850ffc0ffa0ffd0ffd0ff70e050ff109000ff0000b0ff0000b0ff ,
+                        0x3038b0ff0000000000000000f08860fff07040ffc04020ff306890ff00a8f0ff ,
+                        0x0078e0ff007090ff50d050ff60e840ff30b010ff104870ff3030e0ff2020e0ff ,
+                        0x0000b0ff5050b0ff000000000000000000000000b0a8c0ff20d8ffff80ffffff ,
+                        0x20d0ffff0060e0ff70b0b0ff00000000a0c0c0ff5048ffffc0c0ffff8080ffff ,
+                        0x1018d0ff2020a0ff000000000000000000000000b0e0ffff20c8ffff90ffffff ,
+                        0x30e0ffff0070d0ffa0b8e0ff00000000d0d8ffff4048ffffc0c0ffff8090ffff ,
+                        0x1010d0ff5050c0ff0000000000000000000000000000000080d0ffff10b0ffff ,
+                        0x1090f0ff70a8e0ff000000000000000000000000a0a8ffff3038f0ff2028f0ff ,
+                        0x5058e0ff00000000
+                    End
+
+                    LayoutCachedLeft =6660
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =7380
+                    LayoutCachedHeight =900
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin ComboBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    ColumnCount =2
+                    Left =2580
+                    Top =480
+                    Width =2880
+                    Height =315
+                    TabIndex =15
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x0100000096000000020000000100000000000000000000001600000001000000 ,
+                        0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b00740062007800420065006100720069006e0067005d002e00560061006c00 ,
+                        0x750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxUserRole"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1440"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Choose the contact's application role"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =5460
+                    LayoutCachedHeight =795
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
+                        0x740062007800420065006100720069006e0067005d002e00560061006c007500 ,
+                        0x65003d0022002200000000000000000000000000000000000000000000000000 ,
+                        0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
+                        0x0000000000000000000000000000
+                    End
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =900
+                    Top =480
+                    Width =1605
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblUserRole"
+                    Caption ="Application Role"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =2505
+                    LayoutCachedHeight =795
                 End
             End
         End
@@ -1037,23 +1169,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -1061,14 +1193,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1076,14 +1208,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -1091,16 +1223,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -1110,6 +1242,66 @@ End Property
 '---------------------
 ' Methods
 '---------------------
+
+' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/20/2016 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Title = "Contact"
+    Directions = "Enter the contact information and click save."
+    tbxIcon.Value = StringFromCodepoint(uBullet)
+    lblDirections.forecolor = lngLtBlue
+    btnComment.Caption = StringFromCodepoint(uComment)
+    btnComment.forecolor = lngBlue
+    lblWork.Caption = "Work" & vbCrLf & "Info"
+    
+    'set hover
+    btnComment.hoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
+    btnUndo.hoverColor = lngGreen
+      
+    'defaults
+'    tbxOrganization.Value = "NCPN"
+'    tbxOrganization.DefaultValue = "NCPN"
+    lblWork.backcolor = lngCream
+    tbxIcon.forecolor = lngRed
+    btnComment.Enabled = False
+    btnSave.Enabled = False
+'    tbxNumber.backcolor = lngYellow
+'    tbxSampleDate.backcolor = lngYellow
+
+    cbxUserRole.RowSource = GetTemplate("s_access")
+  
+    'ID default -> value used only for edits of existing table values
+    'tbxID.Value = 0
+    tbxID.DefaultValue = 0
+    
+    'initialize values
+    ClearForm
+'    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Load
@@ -1142,58 +1334,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          Form_Open
-' Description:  form opening actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/20/2016 - initial version
-' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    Title = "Contact"
-    Directions = "Enter the contact information and click save."
-    tbxIcon.value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
-    btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
-    lblWork.Caption = "Work" & vbCrLf & "Info"
-    
-    'set hover
-    btnComment.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
-      
-    'defaults
-    tbxOrganization.value = "NCPN"
-    lblWork.backcolor = lngCream
-    tbxIcon.forecolor = lngRed
-    btnComment.Enabled = False
-    btnSave.Enabled = False
-'    tbxNumber.backcolor = lngYellow
-'    tbxSampleDate.backcolor = lngYellow
-  
-    'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
-  
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Contact form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Current
 ' Description:  form current actions
 ' Assumptions:  -
@@ -1209,7 +1349,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If Nz(tbxID, 0) > 0 Then btnComment.Enabled = True
+      'If Nz(tbxID, 0) > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1223,8 +1363,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxFirst_Change
-' Description:  Dropdown change actions
+' Sub:          tbxFirst_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1235,7 +1375,37 @@ End Sub
 ' Revisions:
 '   BLC - 6/22/2016 - initial version
 ' ---------------------------------
-Private Sub tbxFirst_Change()
+Private Sub tbxFirst_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxFirst.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxFirst_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxLast_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Private Sub tbxLast_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1246,14 +1416,14 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxFirst_Change[Contact form])"
+            "Error encountered (#" & Err.Number & " - tbxLast_AfterUpdate[Contact form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxFirst_LostFocus
-' Description:  Dropdown change actions
+' Sub:          tbxEmail_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1264,10 +1434,10 @@ End Sub
 ' Revisions:
 '   BLC - 6/22/2016 - initial version
 ' ---------------------------------
-Private Sub tbxFirst_LostFocus()
+Private Sub tbxEmail_AfterUpdate()
 On Error GoTo Err_Handler
 
-    'ReadyForSave
+    ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1275,9 +1445,191 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxFirst_LostFocus[Contact form])"
+            "Error encountered (#" & Err.Number & " - tbxEmail_AfterUpdate[Contact form])"
     End Select
     Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxUsername_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Private Sub tbxUsername_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxUsername_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxOrganization_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Private Sub tbxOrganization_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxOrganization_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPosition_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Private Sub tbxPosition_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPosition_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPhone_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Private Sub tbxPhone_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPhone_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxExtension_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Private Sub tbxExtension_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxExtension_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+'' ---------------------------------
+'' Sub:          tbxFirst_LostFocus
+'' Description:  Dropdown change actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/22/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxFirst_LostFocus()
+'On Error GoTo Err_Handler
+'
+'    ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxFirst_LostFocus[Contact form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+
+Private Sub cbxUserRole_AfterUpdate()
+
+End Sub
+
+Private Sub btnSetRole_Click()
+
 End Sub
 
 ' ---------------------------------
@@ -1297,19 +1649,21 @@ Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     'clear recordsource
-    Me.RecordSource = ""
+'    Me.RecordSource = ""
     
     'clear values
-    tbxEmail.value = ""
-    tbxUsername.value = ""
-    tbxOrganization.value = ""
-    tbxPosition.value = ""
-    tbxPhone.value = ""
-    tbxExtension.value = ""
+'    tbxEmail.Value = ""
+'    tbxUsername.Value = ""
+'    tbxOrganization.Value = ""
+'    tbxPosition.Value = ""
+'    tbxPhone.Value = ""
+'    tbxExtension.Value = ""
     
-    btnSave.Enabled = False
+'    btnSave.Enabled = False
     
-    Me.Requery
+'    Me.Requery
+    
+    ClearForm
     
 Exit_Handler:
     Exit Sub
@@ -1344,28 +1698,29 @@ On Error GoTo Err_Handler
         'values passed into form
                 
         'form values
-        .LastName = tbxLast.value
-        .FirstName = tbxFirst.value
-        If Not IsNull(tbxMI.value) Then p.MiddleInitial = tbxMI.value
-        .Email = tbxEmail.value
-        .Username = tbxUsername.value
-        .Organization = tbxOrganization.value
-        .PosTitle = tbxPosition.value
-        If Not IsNull(tbxPhone.value) Then .WorkPhone = tbxPhone.value
-        If Not IsNull(tbxExtension.value) Then .WorkExtension = tbxExtension.value
+        .LastName = tbxLast.Value
+        .FirstName = tbxFirst.Value
+        If Not IsNull(tbxMI.Value) Then p.MiddleInitial = tbxMI.Value
+        .Email = tbxEmail.Value
+        .Username = tbxUsername.Value
+        .Organization = tbxOrganization.Value
+        If Not IsNull(tbxPosition.Value) Then .PosTitle = tbxPosition.Value
+        If Not IsNull(tbxPhone.Value) Then .WorkPhone = tbxPhone.Value
+        If Not IsNull(tbxExtension.Value) Then .WorkExtension = tbxExtension.Value
         
-        .ID = tbxID.value '0 if new, edit if > 0
+        .AccessRole = cbxUserRole.Column(1)
+        .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
     End With
     
     'clear values & refresh display
-    Me.RecordSource = ""
+    'Me.RecordSource = ""
     
 '    tbxNumber.ControlSource = ""
 '    tbxSampleDate.ControlSource = ""
-    
-    tbxID.ControlSource = ""
-    tbxID.value = 0
+
+    'tbxID.ControlSource = ""
+    'tbxID.Value = 0
     
     ReadyForSave
     
@@ -1431,7 +1786,7 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
+    If FormIsOpen("Main") Then Forms("Main").Form.visible = True
     
 Exit_Handler:
     Exit Sub
@@ -1440,6 +1795,85 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          ClearForm
+' Description:  Clear form fields
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/23/2016 - initial version
+' ---------------------------------
+Private Sub ClearForm()
+On Error GoTo Err_Handler
+    
+    'clear recordsource
+    Me.RecordSource = ""
+    
+    'clear values so they no longer look for original control sources
+'    tbxEmail.Value = ""
+'    tbxUsername.Value = ""
+'    tbxOrganization.Value = ""
+'    tbxPosition.Value = ""
+'    tbxPhone.Value = ""
+'    tbxExtension.Value = ""
+    Dim ctrl As Control
+    
+    'clear the control sources to clear the textboxes
+    For Each ctrl In Me.Controls
+'        If ctrl.Name = "tbxOrganization" Then
+'            'go here
+'            Debug.Print ctrl.Name & " " & ctrl.ControlSource
+'            ctrl.ControlSource = ""
+'            Debug.Print ctrl.Name & " " & ctrl.ControlSource
+'        End If
+        Select Case ctrl.ControlType
+            Case acTextBox
+                ctrl.ControlSource = ""
+            Case acComboBox
+                ctrl.Value = ""
+        End Select
+'        If ctrl.ControlType = acTextBox Then
+'            ctrl.Value = ""
+'        End If
+        
+    Next
+
+    
+'    tbxID.ControlSource = ""
+'    tbxFirst.ControlSource = ""
+'    tbxMI.ControlSource = ""
+'    tbxLast.ControlSource = ""
+'    tbxEmail.ControlSource = ""
+'    tbxUsername.ControlSource = ""
+'    tbxOrganization.ControlSource = ""
+'    tbxPosition.ControlSource = ""
+'    tbxPhone.ControlSource = ""
+'    tbxExtension.ControlSource = ""
+    
+    tbxID = 0
+    
+    btnSave.Enabled = False
+    
+    Me.list.Requery
+    
+    Me.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ClearForm[Contact form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1467,9 +1901,11 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: first, last, email, username, org, 'pos, phone, ext
-    If Len(tbxFirst.value) > 0 And Len(tbxLast.value) > 0 And _
-       IsEmail(tbxEmail.value) And Len(tbxUsername.value) > 0 And _
-       Len(tbxOrganization.value) > 0 Then
+    If Len(Nz(tbxFirst.Value, "")) > 0 _
+        And Len(Nz(tbxLast.Value, "")) > 0 _
+        And IsEmail(Nz(tbxEmail.Value, "")) _
+        And Len(Nz(tbxUsername.Value, "")) > 0 _
+        And Len(Nz(tbxOrganization.Value, "")) > 0 Then
         isOK = True
     End If
     

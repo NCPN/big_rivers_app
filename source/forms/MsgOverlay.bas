@@ -21,10 +21,10 @@ Begin Form
     Width =8884
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =6315
-    Top =3780
-    Right =24300
-    Bottom =14775
+    Left =9915
+    Top =4680
+    Right =18795
+    Bottom =5685
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6ab456d96fb4e440
@@ -281,6 +281,13 @@ On Error GoTo Err_Handler
             Select Case i
                 Case 0 'message info
                     Select Case LCase(ary2(0))
+                        Case "contact"
+                            'set table
+                            Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
+                            'set ID #
+                            lblRecordNumber.Caption = ary(1)
+                            lblRecordNumber.visible = True
+                            
                         Case "tagline"
                             'set table
                             Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Validation
 ' Level:        Framework module
-' Version:      1.05
+' Version:      1.06
 ' Description:  string functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/10/2015
@@ -17,6 +17,7 @@ Option Explicit
 '               BLC - 5/20/2016 - 1.03 - added IsTypeMatch()
 '               BLC - 6/7/2016  - 1.04 - added IsPhone()
 '               BLC - 6/13/2016 - 1.05 - added IsNothing()
+'               BLC - 6/22/2016 - 1.06 - removed IsNothing(), added IsZLS(), IsZero()
 ' =================================
 
 ' ---------------------------------
@@ -873,22 +874,29 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
-' FUNCTION:     IsNothing
-' Description:  Checks if string is nothing
+' FUNCTION:     IsZero
+' Description:  Checks if value is zero
 ' Assumptions:  -
-' Parameters:   strFind - string to check
-' Returns:      boolean - True (string is nothing), False (string isn't nothing)
+' Parameters:   chkValue - value to check
+' Returns:      boolean - True (value is zero), False (value isn't zero)
 ' Throws:       none
 ' References:   none
 ' Source/date:  -
-' Adapted:      Bonnie Campbell, June 13, 2016 - for NCPN tools
+' Adapted:      Bonnie Campbell, June 22, 2016 - for NCPN tools
 ' Revisions:
-'   BLC - 6/13/2016 - initial version
+'   BLC - 6/22/2016 - initial version
 ' ---------------------------------
-Function IsNothing(strFind As String, aryLookIn As Variant) As Boolean
+Function IsZero(ByVal chkValue) As Boolean
 On Error GoTo Err_Handler
 
-  IsNothing = False
+  Dim blnZero As Boolean
+  
+  'default
+  blnZero = False
+  
+  If chkValue = 0 Then blnZero = True
+
+  IsZero = blnZero
     
 Exit_Handler:
     Exit Function
@@ -897,7 +905,44 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - IsNothing[mod_Validation])"
+            "Error encountered (#" & Err.Number & " - IsZero[mod_Validation])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     IsZLS
+' Description:  Checks if string is a zero length string (ZLS)
+' Assumptions:  -
+' Parameters:   strCheck - string to check
+' Returns:      boolean - True (string is ZLS), False (string isn't ZLS)
+' Throws:       none
+' References:   none
+' Source/date:  -
+' Adapted:      Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
+Function IsZLS(strCheck As String) As Boolean
+On Error GoTo Err_Handler
+
+  Dim blnZLS As Boolean
+  
+  'default
+  blnZLS = False
+  
+  If Len(strCheck) = 0 Then blnZLS = True
+
+  IsZLS = blnZLS
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - IsZLS[mod_Validation])"
     End Select
     Resume Exit_Handler
 End Function

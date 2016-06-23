@@ -221,8 +221,8 @@ Public Event Terminate()
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    m_Title = value
+Public Property Let Title(Value As String)
+    m_Title = Value
     lblTitle.Caption = m_Title
 End Property
 
@@ -234,14 +234,14 @@ Public Property Get MessageCaption() As String
     MessageCaption = m_MessageCaption
 End Property
 
-Public Property Let MessageCaption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Message"
-    m_MessageCaption = value
+Public Property Let MessageCaption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Message"
+    m_MessageCaption = Value
     lblMessage.Caption = m_MessageCaption
 End Property
 
-Public Property Let TitleFontColor(value As Long)
-    m_TitleFontColor = value
+Public Property Let TitleFontColor(Value As Long)
+    m_TitleFontColor = Value
     lblTitle.forecolor = m_TitleFontColor
 End Property
 
@@ -249,12 +249,12 @@ Public Property Get TitleFontColor() As Long
     TitleFontColor = m_TitleFontColor
 End Property
 
-Public Property Let PanelHeaderColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_PanelHeaderColor = value
+Public Property Let PanelHeaderColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_PanelHeaderColor = Value
     FormHeader.backcolor = m_PanelHeaderColor
     'set font color to match
-    Select Case value
+    Select Case Value
         Case vbGreen
             Me.TitleFontColor = vbBlack
         Case vbRed, vbBlue
@@ -266,8 +266,8 @@ Public Property Get PanelHeaderColor() As Long
     PanelHeaderColor = m_PanelHeaderColor 'FormHeader.BackColor
 End Property
 
-Public Property Let BarColor(value As Variant)
-    m_BarColor = value
+Public Property Let BarColor(Value As Variant)
+    m_BarColor = Value
     Me.lineIndicator.borderColor = m_BarColor
 End Property
 
@@ -279,17 +279,17 @@ Public Property Get MessageFontColor() As Long
     MessageFontColor = m_MessageFontColor
 End Property
 
-Public Property Let MessageFontColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen
-    m_MessageFontColor = value
+Public Property Let MessageFontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen
+    m_MessageFontColor = Value
 End Property
 
 Public Property Get PanelVisible() As Byte
     PanelVisible = m_PanelVisible
 End Property
 
-Public Property Let PanelVisible(value As Byte)
-    m_PanelVisible = value
+Public Property Let PanelVisible(Value As Byte)
+    m_PanelVisible = Value
     Me.visible = m_PanelVisible
 End Property
 
@@ -297,8 +297,8 @@ Public Property Get MessageVisible() As Byte
     MessageVisible = m_MessageVisible
 End Property
 
-Public Property Let MessageVisible(value As Byte)
-    m_MessageVisible = value
+Public Property Let MessageVisible(Value As Byte)
+    m_MessageVisible = Value
     Me.lblMessage.visible = m_MessageVisible
 End Property
 

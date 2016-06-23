@@ -874,14 +874,22 @@ Public Sub testme()
 '                "Tagline" & PARAM_SEPARATOR & ID & _
 '                "|Type" & PARAM_SEPARATOR & "info"
 
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-                "msg" & PARAM_SEPARATOR & "Please select a river segment." & _
-                "|Type" & PARAM_SEPARATOR & "alert"
+'    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+'                "msg" & PARAM_SEPARATOR & "Please select a river segment." & _
+'                "|Type" & PARAM_SEPARATOR & "alert"
 
 
 '    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
 '                "msg" & PARAM_SEPARATOR & "Please select river segment." & _
 '                "|Type" & PARAM_SEPARATOR & "info"
-
-
+'    Dim mi As Variant
+'    mi = "P"
+'    DoCmd.RunSQL GetTemplate("TEST2")
+    Dim qdf As DAO.QueryDef
+    Set qdf = CurrentDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = GetTemplate("TEST2")
+    qdf.Parameters("mi").Value = "P"
+    'qdf.Parameters("mi").value = NullStr
+    'qdf.Parameters("mi").value = 7
+    qdf.Execute
 End Sub
