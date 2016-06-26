@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Forms
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.05
 ' Description:  generic form functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/19/2015
@@ -16,6 +16,7 @@ Option Explicit
 '                                        shifted to mod_App_UI: ClearFields
 '               BLC - 6/1/2016  - 1.04 - added SetFormOpacity(), CaptureEscapeKey(), constants & functions
 '                                        from Uplands mod_App_UI
+'               BLC - 6/24/2016 - 1.05 - added ToggleForm(), replaced Exit_Function > Exit_Handler
 ' =================================
 
 '=================================================================
@@ -118,7 +119,7 @@ On Error GoTo Err_Handler
         DoCmd.Close acReport, Reports(0).Name
     Loop
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -127,7 +128,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CloseFormsReports[mod_Forms])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -159,7 +160,7 @@ Public Function FormIsOpen(strFormName As String) As Boolean
       End If
     Next
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -168,7 +169,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FormIsOpen[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -196,7 +197,7 @@ Public Function SwitchboardIsOpen() As Boolean
         End If
     End If
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -205,7 +206,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SwitchboardIsOpen[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -238,7 +239,7 @@ Public Function FormIsLoaded(ByVal strFormName As String) As Integer
         End If
     End If
     
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -247,7 +248,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FormIsLoaded[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -394,7 +395,7 @@ On Error GoTo Err_Handler
         blnDontDoIt = True
     End If
 
-Exit_Function:
+Exit_Handler:
     ContinuousUpDownOk = Not blnDontDoIt
     Set ctl = Nothing
 
@@ -407,7 +408,7 @@ Err_Handler:
             MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
                 "Error encountered (#" & Err.Number & " - ContinuousUpDownOk[mod_Forms])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -492,4 +493,46 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - CaptureEscapeKey[mod_App_UI])"
     End Select
     Resume Exit_Sub
+End Sub
+
+' ---------------------------------
+' SUB:          ToggleForm
+' Description:  Minimizes, maximizes, or restores form display
+' Assumptions:
+' Note:         -
+' Parameters:   strForm - form to change (string)
+'               Sizing - how to change display (integer) -1 = minimize, 0 = normal/restore, 1 = maximize
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 24, 2016  - for NCPN tools
+' Revisions:    BLC, 6/24/2016 - initial version
+' ---------------------------------
+Public Sub ToggleForm(strForm As String, Sizing As Integer)
+On Error GoTo Err_Handler
+    
+    'ensure form is open, if not -> exit
+    If Not FormIsOpen(strForm) Then GoTo Exit_Handler
+    
+    Forms(strForm).SetFocus
+    
+    Select Case Sizing
+        Case -1 'minimize
+            DoCmd.Minimize
+        Case 0 'restore
+            DoCmd.Restore
+        Case 1 'maximize
+            DoCmd.Maximize
+    End Select
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[AppReleases form])"
+    End Select
+    Resume Exit_Handler
 End Sub

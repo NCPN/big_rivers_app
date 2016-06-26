@@ -22,10 +22,10 @@ Begin Form
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =111
-    Left =4440
-    Top =3105
-    Right =23400
-    Bottom =14895
+    Left =4875
+    Top =3390
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xfe27f5b1c5c3e440
@@ -772,9 +772,13 @@ Option Explicit
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/5/2016 - removed underscores from field names
 '               BLC, 6/20/2016 - revised from "frm_Switchboard" to MAIN_APP_FORM
+'               BLC, 6/24/2016 - minimized Main form
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+
+    'minimize DbAdmin
+    ToggleForm "DbAdmin", -1
 
     If DB_ADMIN_CONTROL Then
         ' Close the form if the switchboard is not open
@@ -1697,6 +1701,10 @@ Exit_Sub:
     rs.Close
     Set rs = Nothing
     DoCmd.Close , , acSaveNo
+    
+    'restore DbAdmin
+    ToggleForm "DbAdmin", 0
+    
     Exit Sub
 
 Err_Handler:

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.04
+' Version:      1.05
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -13,6 +13,8 @@ Option Explicit
 '               BLC, 5/13/2016 - 1.02 - StringFromCodePoint()
 '               BLC, 6/7/2016  - 1.03 - added InternalTrim()
 '               BLC, 6/10/2016 - 1.04 - added SplitInt()
+'               BLC, 6/24/2016 - 1.05 - added RemoveChars(),
+'                                       replaced Exit_Function > Exit_Handler
 ' =================================
 
 '---------------------
@@ -187,7 +189,7 @@ Public Function ReplaceString(strTextIn As String, strFind As String, _
 
     ReplaceString = strTemp
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -196,7 +198,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ReplaceString[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -226,7 +228,7 @@ Public Function ChangeDelimiter(strInputText As String, _
     strTemp = ReplaceString(strInputText, strCurrDelimiter, strNewDelimiter)
     ChangeDelimiter = strTemp
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -235,7 +237,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ChangeDelimiter[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -272,7 +274,7 @@ Public Function InsertSpace(str As String) As String
         
      InsertSpace = strTemp
      
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -281,7 +283,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - InsertSpace[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -301,7 +303,7 @@ Public Function InternalTrim(str As String) As String
              
      InternalTrim = Replace(Trim(str), " ", "")
      
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -310,7 +312,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - InternalTrim[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 
@@ -346,7 +348,7 @@ On Error GoTo Err_Handler:
     
     CountInString = Count
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -355,7 +357,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CountInString[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -402,7 +404,7 @@ On Error GoTo Err_Handler
         Exit Function
     End If
     
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -411,7 +413,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - StringFromCodePoint[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -444,7 +446,7 @@ On Error GoTo Err_Handler:
     
     SplitInt = ary
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -453,5 +455,52 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SplitInt[mod_Strings])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     RemoveChars
+' Description:  Removes non-numeric or numeric values from a string
+' Assumptions:  -
+' Parameters:   strInspect - string to remove non-numerics from
+'               blnNumeric - whether numbers or non-numerics are returned (boolean),
+'                            (true - return numbers only, false - return non-numerics only)
+' Returns:      string - numeric or non-numeric portion of string depending on blnNumeric
+' Throws:       none
+' References:
+'   Ivan F. Moala, June 12, 2004
+'   http://www.xtremevbtalk.com/archive/index.php/t-172627.html
+' Source/date:  Bonnie Campbell, June 24, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC, 6/24/2016 - initial version
+' ---------------------------------
+Public Function RemoveChars(ByVal strInspect As String, blnNumeric As Boolean) As String
+On Error GoTo Err_Handler:
+    
+    Dim oReg As RegExp
+    
+    Set oReg = CreateObject("vbScript.regexp")
+    
+    With oReg
+        If blnNumeric Then
+            .Pattern = "[^\d]+" '\d -> digit character of any length
+        Else
+            .Pattern = "[^\D]+" '\D -> non-digit character of any length
+        End If
+        .Global = True
+    End With
+    
+    RemoveChars = oReg.Replace(strInspect, "")
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RemoveNonNumerics[mod_Strings])"
+    End Select
+    Resume Exit_Handler
 End Function

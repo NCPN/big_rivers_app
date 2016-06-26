@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Dev_Debug
 ' Level:        Development module
-' Version:      1.01
+' Version:      1.03
 '
 ' Description:  Debugging related functions & procedures for version control
 '
@@ -12,6 +12,7 @@ Option Explicit
 ' Revisions:    BLC - 5/27/2015 - 1.00 - initial version
 '               BLC - 7/7/2015  - 1.01 - added GetErrorTrappingOption()
 '               BLC - 7/24/2015 - 1.02 - added RemoveVCSModules()
+'               BLC - 6/24/2016 - 1.03 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' ===================================================================================
@@ -317,7 +318,7 @@ On Error GoTo Err_Handler
   End Select
   GetErrorTrappingOption = strSetting
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -326,7 +327,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetErrorTrappingOption[mod_Dev_Debug])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -885,11 +886,19 @@ Public Sub testme()
 '    Dim mi As Variant
 '    mi = "P"
 '    DoCmd.RunSQL GetTemplate("TEST2")
-    Dim qdf As DAO.QueryDef
-    Set qdf = CurrentDb.QueryDefs("usys_temp_qdf")
-    qdf.SQL = GetTemplate("TEST2")
-    qdf.Parameters("mi").Value = "P"
-    'qdf.Parameters("mi").value = NullStr
-    'qdf.Parameters("mi").value = 7
-    qdf.Execute
+'    Dim qdf As DAO.QueryDef
+'    Set qdf = CurrentDb.QueryDefs("usys_temp_qdf")
+'    qdf.SQL = GetTemplate("TEST2")
+'    qdf.Parameters("mi").Value = "P"
+'    'qdf.Parameters("mi").value = NullStr
+'    'qdf.Parameters("mi").value = 7
+'    qdf.Execute
+Dim ID As Integer
+Dim tbl As String
+tbl = "Contact"
+ID = 2
+
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+            tbl & PARAM_SEPARATOR & ID & _
+            "|Type" & PARAM_SEPARATOR & "info"
 End Sub

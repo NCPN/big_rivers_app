@@ -4,11 +4,12 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_List
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  Listview & listbox related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
+'               BLC, 6/24/2016 - 1.01 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -235,11 +236,11 @@ On Error GoTo Err_Handler
         If lbx.Column(col, i) = item Then
             'duplicate, so exit
             isDupe = True
-            GoTo Exit_Function
+            GoTo Exit_Handler
         End If
     Next
 
-Exit_Function:
+Exit_Handler:
     IsListDuplicate = isDupe
     Exit Function
     
@@ -249,7 +250,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - IsListDuplicate[mod_List])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -337,7 +338,7 @@ Dim i As Integer
     
     GetListCount = i
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -346,7 +347,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetListCount[mod_List])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -385,7 +386,7 @@ On Error GoTo Err_Handler
     
     CountArrayValues = numItems
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -394,7 +395,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CountArrayValues[mod_List])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -762,7 +763,7 @@ On Error GoTo Err_Handler
     End If
         
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -771,7 +772,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetListRecordset[mod_List])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------

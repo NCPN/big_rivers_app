@@ -192,7 +192,7 @@ End Sub
 '======== Custom Methods ===========
 '---------------------------------------------------------------------------------------
 ' SUB:          SaveToDb
-' Description:  -
+' Description:  Save data to database
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       -

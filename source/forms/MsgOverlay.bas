@@ -21,10 +21,10 @@ Begin Form
     Width =8884
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =9915
-    Top =4680
-    Right =18795
-    Bottom =5685
+    Left =4875
+    Top =3375
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6ab456d96fb4e440
@@ -285,7 +285,7 @@ On Error GoTo Err_Handler
                             'set table
                             Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
                             'set ID #
-                            lblRecordNumber.Caption = ary(1)
+                            lblRecordNumber.Caption = ary2(1)
                             lblRecordNumber.visible = True
                             
                         Case "tagline"

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Git
 ' Level:        Development module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Git related functions & procedures for version control
 '
@@ -12,6 +12,7 @@ Option Explicit
 ' Revisions:    BLC - 2/12/2015 - 1.00 - initial version
 '               BLC - 5/27/2015 - 1.01 - renamed to note as development module
 '               BLC - 6/30/2015 - 1.02 - added error handling to FieldTypeName()
+'               BLC - 6/24/2016 - 1.03 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' ===================================================================================
@@ -81,7 +82,7 @@ On Error GoTo Err_Handler
     VBComp.Export FileName:=fName
     ExportVBComponent = True
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -90,7 +91,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ExportVBComponent[mod_Git])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
     
 ' ---------------------------------
@@ -128,7 +129,7 @@ On Error GoTo Err_Handler
                 GetFileExtension = ".bas"
         End Select
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -137,7 +138,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetFileExtension[mod_Git])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -564,7 +565,7 @@ On Err GoTo Err_Handler
 
     FieldTypeName = strReturn
     
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -573,7 +574,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FieldTypeName[mod_Git])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -652,7 +653,7 @@ On Err GoTo Err_Handler
     GetFieldTypeName = strReturn
 
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -661,5 +662,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetFieldTypeName[mod_Git])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function

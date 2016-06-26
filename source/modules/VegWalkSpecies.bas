@@ -20,7 +20,7 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_Species As New Species
+Private m_Species As New Species 'CoverSpecies??
 
 Private m_VegWalkID As Long
 Private m_IsSeedling As Boolean

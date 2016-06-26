@@ -62,7 +62,7 @@ Public Function FiscalYear(ByVal datDate As Date, _
         FiscalYear = strYear
     End If
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -71,7 +71,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FiscalYear[mod_Time])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -96,7 +96,7 @@ On Error GoTo Err_Handler
     DoEvents
     Loop
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -105,7 +105,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - NumberOfSeconds[mod_Time])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================

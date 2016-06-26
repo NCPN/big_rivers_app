@@ -32,9 +32,9 @@ Private m_ProtocolID As Integer
 '---------------------
 Public Event InvalidEventID()
 Public Event InvalidSiteID()
-Public Event Modified()
-Public Event SavedToDb()
-Public Event Removed()
+'Public Event Modified()
+'Public Event SavedToDb()
+'Public Event Removed()
 
 '---------------------
 ' Properties

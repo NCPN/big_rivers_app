@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_UI
 ' Level:        Framework module
-' Version:      1.05
+' Version:      1.06
 ' Description:  User interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -15,7 +15,7 @@ Option Explicit
 '                                       moved from mod_Forms: ChangeBackColor
 '               BLC, 5/13/2016 - 1.04 - adapted for Big Rivers
 '               BLC, 6/27/2016 - 1.05 - added acNormalSolid, acTransparent constants
-
+'               BLC, 6/24/2016 - 1.06 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -58,7 +58,7 @@ On Error GoTo Err_Handler
     End If
     
     GetRibbonXML = strXML
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -67,7 +67,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetRibbonXML[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -272,7 +272,7 @@ On Error GoTo Err_Handler
 
     ctrl.backcolor = lngColor
     
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -281,7 +281,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ChangeBackColor[mod_Forms])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -473,7 +473,7 @@ On Error GoTo Err_Handler
         End If
     End If
     
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -482,7 +482,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ReportIsLoaded[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -557,7 +557,7 @@ Public Function HideObject(strObjectName As String, _
 
     SetHiddenAttribute varType, strObjectName, blnHide
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -566,7 +566,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - HideObject[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -592,7 +592,7 @@ On Error GoTo Err_Handler
     End If
   Next ctl
   
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -601,7 +601,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ControlExists[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -811,7 +811,7 @@ On Error GoTo Err_Handler
         ctrl.pressedForeColor = pressedForeColor
     End If
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -820,7 +820,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - EnableControl[mod_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------

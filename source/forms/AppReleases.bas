@@ -21,16 +21,20 @@ Begin Form
     Width =8100
     DatasheetFontHeight =10
     ItemSuffix =18
-    Left =4665
-    Top =3300
-    Right =12315
-    Bottom =14310
+    Left =4875
+    Top =3390
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =12632256
+    RecSrcDt = Begin
+        0x1719458615c5e440
+    End
     RecordSource ="SELECT tsys_App_Releases.* FROM tsys_App_Releases ORDER BY tsys_App_Releases.Rel"
         "ease_date, tsys_AppReleases.VersionNumber; "
     Caption =" Application Releases"
     AfterUpdate ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
@@ -431,7 +435,7 @@ Option Explicit
 ' =================================
 ' FORM NAME:    AppReleases
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.04
 '
 ' Description:  Standard form for viewing and entering release information
 ' Data source:  In-line SQL statement based on tsys_App_Releases
@@ -442,10 +446,11 @@ Option Explicit
 ' References:   none
 ' Source/date:  John R. Boetsch, September 2008
 ' Adapted:      Bonnie Campbell, June 2014
-' Revisions:    JRB, 9/26/2008 - updated cmbIs_supported to allow 3 values instead of true/false
-'               JRB, 10/6/2008 - updated to unlock subform if in admin mode
-'               BLC, 6/12/2014 - Revised to use TempVars.Item("UserAccessLevel") vs. cAppMode
-'               BLC, 6/12/2016 - Adapted to big rivers
+' Revisions:    JRB, 9/26/2008 - 1.00 - updated cmbIs_supported to allow 3 values instead of true/false
+'               JRB, 10/6/2008 - 1.01 - updated to unlock subform if in admin mode
+'               BLC, 6/12/2014 - 1.02 - Revised to use TempVars.Item("UserAccessLevel") vs. cAppMode
+'               BLC, 6/12/2016 - 1.03 - Adapted to big rivers
+'               BLC, 6/24/2016 - 1.04 - updated error handling, form minimize/restore
 ' =================================
 
 ' ---------------------------------
@@ -460,23 +465,30 @@ Option Explicit
 ' Revisions:    BLC, 6/12/2014 - Revised to use TempVars.Item("UserAccessLevel") vs. cAppMode
 '               BLC, 8/5/2014 - changed to use setUserAccess for initializing control settings based on app mode
 '               BLC, 6/13/2016 - adapted for big rivers
+'               BLC, 6/24/2016 - updated error handling, added DbAdmin minimize
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
+    'minimize DbAdmin
+    ToggleForm "DbAdmin", -1
+    
     DoCmd.GoToRecord , , acLast
     If SwitchboardIsOpen Then
             'initialize controls based on app mode
             setUserAccess Me
     End If
     
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[AppReleases form])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -490,17 +502,50 @@ End Sub
 ' Adapted:      Bonnie Campbell, June 2014
 ' Revisions:    BLC, 6/12/2014 - Revised to use TempVars.Item("UserAccessLevel") vs. cAppMode
 '               BLC, 6/13/2016 - adapted for big rivers
+'               BLC, 6/24/2016 - updated error handling
 ' ---------------------------------
 Private Sub Form_AfterUpdate()
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     If SwitchboardIsOpen Then Forms!frm_Switchboard!cmbVersion.Requery
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterUpdate[AppReleases form])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
+' ---------------------------------
+' SUB:          Form_Close
+' Description:  Closes form
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  Bonnie Campbell, June 24, 2016
+' Adapted:      -
+' Revisions:    BLC, 6/24/2014 - initial
+' ---------------------------------
+Private Sub Form_Close()
+On Error GoTo Err_Handler
+
+    'restore DbAdmin
+    ToggleForm "DbAdmin", 0
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Close[AppReleases form])"
+    End Select
+    Resume Exit_Handler
 End Sub

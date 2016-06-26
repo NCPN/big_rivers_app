@@ -28,8 +28,8 @@ Private m_Name As String
 Private m_Email As String
 Private m_Organization As String
 Private m_PosTitle As String
-Private m_WorkPhone As Integer
-Private m_WorkExtension As Integer
+Private m_WorkPhone As Long
+Private m_WorkExtension As Long
 Private m_Role As String
 Private m_AccessLevel As Integer
 Private m_AccessRole As String
@@ -120,7 +120,7 @@ Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
-Public Property Let WorkPhone(Value As String)
+Public Property Let WorkPhone(Value As Long)
     If IsPhone(Value) Then
         m_WorkPhone = Value
     Else
@@ -128,15 +128,15 @@ Public Property Let WorkPhone(Value As String)
     End If
 End Property
 
-Public Property Get WorkPhone() As String
+Public Property Get WorkPhone() As Long
     WorkPhone = m_WorkPhone
 End Property
 
-Public Property Let WorkExtension(Value As String)
+Public Property Let WorkExtension(Value As Long)
     m_WorkExtension = Value
 End Property
 
-Public Property Get WorkExtension() As String
+Public Property Get WorkExtension() As Long
     WorkExtension = m_WorkExtension
 End Property
 
@@ -288,6 +288,7 @@ On Error GoTo Err_Handler
     Dim strSQL As String
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
+    Dim iCount As Integer
     
     '---------------------
     ' CurrentDb returns a different dao.database reference every time it is called
@@ -295,6 +296,9 @@ On Error GoTo Err_Handler
     ' This ensures @@Identity will contain the proper ID #
     '---------------------
     Set db = CurrentDb
+    
+    'default
+    iCount = 0
     
     'persons must have: first & last name, email, organization
     'optional: middleinitial, username, workphone, workextension, positiontitle
@@ -325,14 +329,19 @@ On Error GoTo Err_Handler
         With qdf
             If Me.ID > 0 Then
                 .SQL = GetTemplate("u_contact")
+                .Parameters("ContactID") = Me.ID
             Else
                 .SQL = GetTemplate("i_contact_new")
             End If
             '-- required parameters --
-            .Parameters("FirstName") = Me.FirstName
-            .Parameters("LastName") = Me.LastName
-            .Parameters("Email") = Me.Email
-            .Parameters("Username") = Me.Username
+'            .Parameters("FirstName") = Me.FirstName
+'            .Parameters("LastName") = Me.LastName
+'            .Parameters("Email") = Me.Email
+'            .Parameters("Username") = Me.Username
+            .Parameters("First") = Me.FirstName
+            .Parameters("Last") = Me.LastName
+            .Parameters("EmailAddress") = Me.Email
+            .Parameters("Login") = Me.Username
             .Parameters("Org") = Me.Organization
             
             '-- optional parameters --
@@ -349,7 +358,9 @@ On Error GoTo Err_Handler
 '            If Not IsZero(Me.WorkExtension) Then '_
                 .Parameters("Ext") = Me.WorkExtension
             
-            .Parameters("IsActive") = Me.IsActive
+'            .Parameters("IsActive") = Me.IsActive
+            .Parameters("IsActiveFlag") = Me.IsActive
+            
             
             .Execute dbFailOnError
             
@@ -358,8 +369,8 @@ On Error GoTo Err_Handler
         End With
     
 '    db.Execute strSQL, dbFailOnError
-    
-        Me.ID = .OpenRecordset("SELECT @@IDENTITY")(0)
+        If Not Me.ID > 0 Then _
+            Me.ID = .OpenRecordset("SELECT @@IDENTITY")(0)
     
     'set the person's role
     
@@ -375,7 +386,23 @@ On Error GoTo Err_Handler
         Set qdf = .QueryDefs("usys_temp_qdf")
         
         With qdf
-            .SQL = GetTemplate("i_contact_access")
+            'check if value exists in contact_access
+            .SQL = GetTemplate("s_count_tbl", _
+                    "field" & PARAM_SEPARATOR & "Contact_ID" & _
+                    "|tbl" & PARAM_SEPARATOR & "Contact_Access WHERE Contact_ID = " & Me.ID)
+            Set rs = .OpenRecordset
+            If rs.Fields(0) > 0 Then iCount = rs.Fields(0)
+        End With
+            
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+            'update if contact is in contact_access, otherwise insert new record
+            If iCount > 0 Then 'Me.AccessLevel
+                .SQL = GetTemplate("u_contact_access")
+            Else
+                .SQL = GetTemplate("i_contact_access")
+            End If
             
             '-- required parameters --
             .Parameters("ContactID") = Me.ID

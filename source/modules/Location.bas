@@ -20,7 +20,7 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_ID As Integer
+Private m_ID As Long 'Integer
 Private m_LocationType As String
 Private m_CollectionSourceName As String
 Private m_LocationName As String
@@ -28,9 +28,9 @@ Private m_HeadtoOrientDistance As Integer
 Private m_HeadtoOrientBearing As Integer
 Private m_LocationNotes As String
 Private m_LastModified As Date
-Private m_LastModifiedByID As Integer
+Private m_LastModifiedByID As Long 'Integer
 Private m_CreateDate As Date
-Private m_CreatedByID As Integer
+Private m_CreatedByID As Long 'Integer
 
 '---------------------
 ' Events
@@ -39,9 +39,9 @@ Public Event InvalidLocationType(Value)
 Public Event InvalidLocationName(Value)
 Public Event InvalidBearing(Value)
 Public Event InvalidSourceName(Value)
-Public Event Modified()
-Public Event SavedToDb()
-Public Event Deleted()
+'Public Event Modified()
+'Public Event SavedToDb()
+'Public Event Deleted()
 
 '---------------------
 ' Properties
@@ -52,20 +52,6 @@ End Property
 
 Public Property Get ID() As Long
     ID = m_ID
-End Property
-
-Public Property Let CollectionSourceName(Value As String)
-    'Collection feature ID (A, B, C, ...) or Transect number (1-8)
-    'limit = 25
-    If Len(Trim(Value)) < 26 Then
-        m_CollectionSourceName = Value
-    Else
-        RaiseEvent InvalidSourceName(Value)
-    End If
-End Property
-
-Public Property Get CollectionSourceName() As String
-    CollectionSourceName = m_CollectionSourceName
 End Property
 
 Public Property Let LocationType(Value As String)
@@ -83,6 +69,20 @@ End Property
 
 Public Property Get LocationType() As String
     LocationType = m_LocationType
+End Property
+
+Public Property Let CollectionSourceName(Value As String)
+    'Collection feature ID (A, B, C, ...) or Transect number (1-8)
+    'limit = 25
+    If Len(Trim(Value)) < 26 Then
+        m_CollectionSourceName = Value
+    Else
+        RaiseEvent InvalidSourceName(Value)
+    End If
+End Property
+
+Public Property Get CollectionSourceName() As String
+    CollectionSourceName = m_CollectionSourceName
 End Property
 
 Public Property Let LocationName(Value As String)

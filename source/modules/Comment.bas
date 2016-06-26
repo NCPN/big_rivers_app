@@ -25,7 +25,7 @@ Private m_CommentType As String
 Private m_TypeID As Integer
 Private m_Comment As String
 Private m_CommentDate As Date
-Private m_CommentorID As Integer
+Private m_CommentorID As Integer    'Long??
 Private m_MaxLength As Integer
 
 '---------------------

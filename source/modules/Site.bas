@@ -20,21 +20,21 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_ID As Integer 'siteID
-Private m_ParkID As Integer
-Private m_RiverID As Integer
+Private m_ID As Long 'Integer 'siteID
+Private m_ParkID As Long 'Integer
+Private m_RiverID As Long 'Integer
 Private m_Code As String
 Private m_Name As String
 Private m_Description As String
 Private m_Directions As String
 Private m_IsActiveForProtocol As Boolean
 Private m_Park As String
-Private m_LocationID As Integer
-Private m_ObserverID As Integer
-Private m_RecorderID As Integer
+Private m_LocationID As Long 'Integer
+Private m_ObserverID As Long 'Integer
+Private m_RecorderID As Long 'Integer
 Private m_Observer As String
 Private m_Recorder As String
-Private m_CommentID As Integer
+Private m_CommentID As Long 'Integer
 Private m_Comment As String
 
 '---------------------

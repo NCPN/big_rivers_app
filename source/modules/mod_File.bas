@@ -4,12 +4,13 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_File
 ' Level:        Framework module
-' Version:      1.01
+' Version:      1.02
 ' Description:  File and directory related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 6/13/2016 - 1.01 - adapted ParseFileName() for big rivers
+'               BLC, 6/24/2016 - 1.02 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -40,7 +41,7 @@ Public Function CreateFolder(ByVal strPath As String) As Boolean
         CreateFolder = True
     End If
 
-Exit_Function:
+Exit_Handler:
     On Error Resume Next
     Set fs = Nothing
     Exit Function
@@ -51,7 +52,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CreateFolder[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -76,7 +77,7 @@ Public Function FolderExists(ByVal strPath As String) As Boolean
     Set fs = CreateObject("Scripting.FileSystemObject")
     If fs.FolderExists(strPath) Then FolderExists = True
 
-Exit_Function:
+Exit_Handler:
     On Error Resume Next
     Set fs = Nothing
     Exit Function
@@ -87,7 +88,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FolderExists[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 
@@ -133,7 +134,7 @@ Public Function GetFile(Optional ByVal strInitialDir As String, _
         flags:=lngFlags, _
         DialogTitle:=strTitle)
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -142,7 +143,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetFile[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -181,7 +182,7 @@ Public Function SaveFile(ByVal strFilename As String, ByVal strFileType As Strin
         DialogTitle:=strTitle, _
         FileName:=strFilename)
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -190,7 +191,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SaveFile[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -215,7 +216,7 @@ Public Function FileExists(ByVal strPath As String) As Boolean
     Set fs = CreateObject("Scripting.FileSystemObject")
     If fs.FileExists(strPath) Then FileExists = True
 
-Exit_Function:
+Exit_Handler:
     On Error Resume Next
     Set fs = Nothing
     Exit Function
@@ -226,7 +227,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FileExists[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -258,7 +259,7 @@ Public Function DeleteFile(ByVal strPath As String) As Boolean
             "File delete error (DeleteFile)"
     End If
 
-Exit_Function:
+Exit_Handler:
     On Error Resume Next
     Set fs = Nothing
     Exit Function
@@ -269,7 +270,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - DeleteFile[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -325,7 +326,7 @@ End Function
 Public Function ParseFileExt(ByVal strFullPath As String, _
     Optional blnIncludeDot As Boolean = True) As String
 
-    On Error GoTo Exit_Function
+    On Error GoTo Exit_Handler
 
     Dim arrPath() As String
     Dim strFile As String
@@ -347,7 +348,7 @@ Public Function ParseFileExt(ByVal strFullPath As String, _
 
     ParseFileExt = strTemp
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -356,7 +357,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ParseFileExt[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -386,7 +387,7 @@ Public Function OpenExcelFile(ByVal strPath As String)
         .Workbooks.Open (strPath)
     End With
     
-Exit_Function:
+Exit_Handler:
     On Error Resume Next
     Set objExcel = Nothing
     Exit Function
@@ -397,7 +398,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - OpenExcelFile[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -413,7 +414,7 @@ End Function
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 ' =================================
 Public Function ParsePath(ByVal strFullPath As String) As String
-    On Error GoTo Exit_Function
+    On Error GoTo Exit_Handler
 
     Dim arrPath() As String
     Dim strFile As String
@@ -425,7 +426,7 @@ Public Function ParsePath(ByVal strFullPath As String) As String
     ' Path is the full string minus length of the file name
     ParsePath = Left(strFullPath, Len(strFullPath) - Len(arrPath(UBound(arrPath))))
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -434,5 +435,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ParsePath[mod_File])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function

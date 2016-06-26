@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Color
 ' Level:        Framework module
-' Version:      1.04
+' Version:      1.05
 ' Description:  color functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -13,6 +13,7 @@ Option Explicit
 '               BLC, 11/10/2015 - 1.02 - added additional colors
 '               BLC, 5/27/2016 - 1.03 - added additional colors
 '               BLC, 6/4/2016  - 1.04 - added HTMLconvert()
+'               BLC, 6/24/2016 - 1.05 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' ---------------------------------
@@ -102,7 +103,7 @@ On Error GoTo Err_Handler
     
     Set ConvertLongToRGB = dRGB
     
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -111,7 +112,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ConvertLongToRGB[mod_Color])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' =================================
@@ -135,7 +136,7 @@ On Error GoTo Err_Handler
     Rem converts a HTML color code number such as #D8B190 to an RGB value.
     HTMLConvert = RGB(CInt("&H" & Mid(strHTML, 2, 2)), CInt("&H" & Mid(strHTML, 4, 2)), CInt("&H" & Mid(strHTML, 6, 2)))
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -144,5 +145,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - HTMLConvert[mod_Color])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function

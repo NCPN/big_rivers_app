@@ -20,12 +20,13 @@ Begin Form
     Width =7500
     DatasheetFontHeight =11
     ItemSuffix =39
-    Right =20685
-    Bottom =11790
+    Left =3585
+    Top =5955
+    Right =11565
+    Bottom =10320
     DatasheetGridlinesColor =14806254
-    RecSrcDt = Begin
-        0x65176ebd09c6e440
-    End
+    RecordSource ="SELECT * FROM (Contact INNER JOIN Contact_Access ON Contact_Access.Contact_ID = "
+        "Contact.ID) INNER JOIN Access ON Access.ID = Contact_Access.Access_ID; "
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"

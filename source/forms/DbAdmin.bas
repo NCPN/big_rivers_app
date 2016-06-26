@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =4440
-    Top =3105
-    Right =25125
-    Bottom =14895
+    Left =5010
+    Top =3015
+    Right =12870
+    Bottom =9180
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -2477,6 +2477,15 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    'minimize Main
+    ToggleForm "Main", -1
+
+'    If FormIsOpen("Main") Then
+'        Forms("Main").SetFocus
+'        DoCmd.Minimize
+''        Forms("DbAdmin").SetFocus
+'    End If
+
     Title = "Db Admin"
     Directions = "Choose the desired action below."
     lblDirections.forecolor = lngLtBlue
@@ -2604,11 +2613,20 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 6/24/2016 - added check for open form, restore main form
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
+'    If FormIsOpen("Main") Then
+'        Forms("Main").Form.visible = True
+'        Forms("Main").SetFocus
+'        DoCmd.Restore
+'    End If
+
+    'restore Main
+    ToggleForm "Main", 0
+
     
 Exit_Handler:
     Exit Sub
@@ -2684,9 +2702,12 @@ Private Sub btnSetRoles_Click()
     Else
         Select Case TempVars("UserAccessLevel")
           Case "admin", "power user"
-            DoCmd.OpenForm "frm_User_Roles"
+            DoCmd.OpenForm "Contact"
         End Select
     End If
+
+'REMOVE / FIX:
+    DoCmd.OpenForm "Contact"
 
 Exit_Handler:
     Exit Sub

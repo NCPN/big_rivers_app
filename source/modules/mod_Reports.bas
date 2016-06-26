@@ -4,11 +4,12 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Reports
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  generic report functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 5/25/2016
 ' Revisions:    BLC - 5/25/2016 - 1.00 - initial version
+'               BLC - 6/24/2016 - 1.01 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 '---------------------
@@ -53,7 +54,7 @@ On Error GoTo Err_Handler
         strCaption & """.", vbInformation, "No Data..."
 
 
-Exit_Function:
+Exit_Handler:
     Exit Function
 Err_Handler:
     Select Case Err.Number
@@ -61,5 +62,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - NoData[mod_Reports])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function

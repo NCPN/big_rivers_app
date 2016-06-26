@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.03
+' Version:      1.04
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -12,6 +12,7 @@ Option Explicit
 '               BLC, 5/26/2015 - 1.01 - added PopulateSpeciesPriorities function from mod_Species
 '               BLC, 11/19/2015 - 1.02 - added CreateEnums call to initApp
 '               BLC, 4/26/2016  - 1.03 - added ClickAction() for handling various app actions
+'               BLC, 6/24/2016 - 1.04 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 ' =================================
@@ -210,7 +211,7 @@ Dim i As Integer
     
     End If
     
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -219,7 +220,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateSpeciesPriorities[mod_App_UI])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
 
 ' ---------------------------------
@@ -580,7 +581,9 @@ Debug.Print strSQL
     DoCmd.SetWarnings True
     
     'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, tbl & "|" & ID
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+        tbl & PARAM_SEPARATOR & ID & _
+        "|Type" & PARAM_SEPARATOR & "info"
         
 Exit_Handler:
     Exit Sub

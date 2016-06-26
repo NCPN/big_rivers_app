@@ -20,13 +20,13 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =4440
-    Top =3105
-    Right =12660
-    Bottom =12330
+    Left =6075
+    Top =2490
+    Right =14295
+    Bottom =11715
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xc4bda90909c6e440
+        0xef9c2c5010c6e440
     End
     RecordSource ="SELECT * FROM Contact WHERE ID = 6; "
     Caption ="Contact"
@@ -278,6 +278,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =900
@@ -341,11 +342,12 @@ Begin Form
                     BackThemeColorIndex =-1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
                     Width =720
-                    TabIndex =9
+                    TabIndex =10
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -417,9 +419,9 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =12
+                    TabIndex =13
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -439,7 +441,7 @@ Begin Form
                     Left =5760
                     Top =60
                     Width =720
-                    TabIndex =10
+                    TabIndex =11
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -508,7 +510,7 @@ Begin Form
                     Top =3300
                     Width =7995
                     Height =4380
-                    TabIndex =11
+                    TabIndex =12
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.ContactList"
@@ -547,11 +549,12 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =13
+                    TabIndex =14
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
-                    ControlSource ="Contact_ID"
+                    ControlSource ="ID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -680,7 +683,7 @@ Begin Form
                     Top =2100
                     Width =2040
                     Height =315
-                    TabIndex =5
+                    TabIndex =6
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -734,7 +737,7 @@ Begin Form
                     Top =2535
                     Width =2040
                     Height =315
-                    TabIndex =6
+                    TabIndex =7
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -788,7 +791,7 @@ Begin Form
                     Top =1140
                     Width =3300
                     Height =315
-                    TabIndex =3
+                    TabIndex =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -842,7 +845,7 @@ Begin Form
                     Top =2100
                     Width =2040
                     Height =315
-                    TabIndex =7
+                    TabIndex =8
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -896,7 +899,7 @@ Begin Form
                     Top =2535
                     Width =2040
                     Height =315
-                    TabIndex =8
+                    TabIndex =9
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -950,7 +953,7 @@ Begin Form
                     Top =1575
                     Width =3300
                     Height =315
-                    TabIndex =4
+                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -1002,11 +1005,10 @@ Begin Form
                     Left =6660
                     Top =540
                     Width =720
-                    TabIndex =14
+                    TabIndex =15
                     ForeColor =4210752
                     Name ="btnSetRole"
                     Caption ="Edit"
-                    OnClick ="[Event Procedure]"
                     ControlTipText ="Set user's role"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -1070,10 +1072,11 @@ Begin Form
                     Top =480
                     Width =2880
                     Height =315
-                    TabIndex =15
+                    TabIndex =3
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"30\""
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
                         0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
@@ -1083,6 +1086,7 @@ Begin Form
                     End
                     Name ="cbxUserRole"
                     RowSourceType ="Table/Query"
+                    RowSource ="SELECT * FROM Access; "
                     ColumnWidths ="0;1440"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Choose the contact's application role"
@@ -1143,7 +1147,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, Contact, functions & procedures for UI display
@@ -1151,6 +1155,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, June 20, 2016
 ' References:   -
 ' Revisions:    BLC - 6/20/2016 - 1.00 - initial version
+'               BLC - 6/24/2016 - 1.01 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 '---------------------
@@ -1259,6 +1264,16 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+'    If FormIsOpen("DbAdmin") Then
+'        Forms("DbAdmin").SetFocus
+'        DoCmd.Minimize
+'        Me.SetFocus
+'    End If
+
+    'minimize DbAdmin
+    ToggleForm "DbAdmin", -1
+    
+
     Title = "Contact"
     Directions = "Enter the contact information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
@@ -1364,7 +1379,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxFirst_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1394,7 +1409,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxLast_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1423,7 +1438,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxEmail_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1452,7 +1467,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxUsername_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1481,7 +1496,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxOrganization_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1510,7 +1525,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxPosition_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1539,7 +1554,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxPhone_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1568,7 +1583,7 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          tbxExtension_AfterUpdate
-' Description:  Dropdown AfterUpdate actions
+' Description:   AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1624,12 +1639,34 @@ End Sub
 '    Resume Exit_Handler
 'End Sub
 
+' ---------------------------------
+' Sub:          cbxUserRole_AfterUpdate
+' Description:  AfterUpdate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2016 - initial version
+' ---------------------------------
 Private Sub cbxUserRole_AfterUpdate()
+On Error GoTo Err_Handler
 
-End Sub
-
-Private Sub btnSetRole_Click()
-
+    If Len(cbxUserRole.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxUserRole_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -1705,12 +1742,18 @@ On Error GoTo Err_Handler
         .Username = tbxUsername.Value
         .Organization = tbxOrganization.Value
         If Not IsNull(tbxPosition.Value) Then .PosTitle = tbxPosition.Value
-        If Not IsNull(tbxPhone.Value) Then .WorkPhone = tbxPhone.Value
-        If Not IsNull(tbxExtension.Value) Then .WorkExtension = tbxExtension.Value
-        
+        If Not IsNull(tbxPhone.Value) Then
+            .WorkPhone = RemoveChars(tbxPhone.Value, True) 'remove non-numerics
+        End If
+        If Not IsNull(tbxExtension.Value) Then
+            .WorkExtension = RemoveChars(tbxExtension.Value, True) 'remove non-numerics
+        End If
         .AccessRole = cbxUserRole.Column(1)
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
+        
+        'set the tbxID.value
+        tbxID = .ID
     End With
     
     'clear values & refresh display
@@ -1723,6 +1766,8 @@ On Error GoTo Err_Handler
     'tbxID.Value = 0
     
     ReadyForSave
+    
+    PopulateForm Me, tbxID.Value
     
     'refresh list
     Me.list.Requery
@@ -1786,7 +1831,13 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    If FormIsOpen("Main") Then Forms("Main").Form.visible = True
+'    If FormIsOpen("DbAdmin") Then
+'        Forms("DbAdmin").SetFocus
+'        DoCmd.Restore
+'    End If
+    'restore DbAdmin
+    ToggleForm "DbAdmin", 0
+    
     
 Exit_Handler:
     Exit Sub

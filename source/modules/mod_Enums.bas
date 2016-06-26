@@ -4,11 +4,12 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Enums
 ' Level:        Application module
-' Version:      1.00
+' Version:      1.01
 ' Description:  enum functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 11/5/2015
 ' Revisions:    BLC - 11/5/2015  - 1.00 - initial version
+'               BLC - 6/24/2016  - 1.01 - replaced Exit_Function > Exit_Handler
 ' =================================
 
 '-----------------------------
@@ -185,7 +186,7 @@ On Error GoTo Err_Handler
     'save & close module
     DoCmd.Close acModule, "mod_App_Enum", acSaveYes
 
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Err_Handler:
@@ -194,5 +195,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CreateEnums[mod_Enums])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function

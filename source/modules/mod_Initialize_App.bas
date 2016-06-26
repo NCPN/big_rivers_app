@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Initialize_App
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  Standard module for setting initial app & database values/settings & global variables
 ' Source/date:  Bonnie Campbell, July 2014
 ' Adapted:      -
@@ -19,6 +19,7 @@ Option Explicit
 '               BLC, 4/30/2015 - 1.02 - shifted USER_ACCESS_CONTROL, DB_SYS_TABLES, APP_SYS_TABLES to mod_App_Settings
 '                                since these are application vs. framework specific, added Level & Version #
 '                                added blnRunQueries & blnUpdateAll from mod_User
+'               BLC, 6/24/2016 - 1.03 - replaced Exit_Function > Exit_Handler
 ' =================================
 ' HISTORY:
 ' MERGED MODULE: mod_Global_Variables (merged with mod_Initialize_App)
@@ -406,7 +407,7 @@ Dim missingTable As String
     'return result
     SysTablesExist = True
     
-Exit_Function:
+Exit_Handler:
     Exit Function
     
 Missing_Table:
@@ -440,5 +441,5 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SysTablesExist[mod_Initialize_App])"
     End Select
-    Resume Exit_Function
+    Resume Exit_Handler
 End Function
