@@ -22,7 +22,7 @@ Begin Form
     ItemSuffix =34
     Left =4875
     Top =3390
-    Right =13875
+    Right =17295
     Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -241,7 +241,7 @@ Begin Form
                     Top =60
                     Width =1920
                     Height =315
-                    FontWeight =500
+                    FontWeight =600
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblContext"
@@ -277,7 +277,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9180
+            Height =9060
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -786,13 +786,13 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+    'minimize Main
+    ToggleForm "Main", -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLtCyan
-    lblContext = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars.item("Segment"), "")
+    lblContext.forecolor = lngLime
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "")
 
     Title = "Feature"
     Directions = "Enter the feature details."
@@ -969,7 +969,7 @@ End Sub
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    ClearForm
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1084,8 +1084,8 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore DbAdmin
-    ToggleForm "DbAdmin", 0
+    'restore Main
+    ToggleForm "Main", 0
     
 Exit_Handler:
     Exit Sub
@@ -1098,56 +1098,56 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' Sub:          ClearForm
-' Description:  Clear form fields
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub ClearForm()
-On Error GoTo Err_Handler
-    
-    'clear recordsource
-    Me.RecordSource = ""
-    
-    'clear values so they no longer look for original control sources
-    Dim ctrl As Control
-    
-    'clear the control sources to clear the textboxes
-    For Each ctrl In Me.Controls
-        Select Case ctrl.ControlType
-            Case acTextBox
-                ctrl.ControlSource = ""
-            Case acComboBox
-                ctrl.Value = ""
-        End Select
-    Next
-    
-    tbxID = 0
-    
-    btnSave.Enabled = False
-    
-    Me.list.Requery
-    
-    Me.Requery
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ClearForm[Feature form])"
-    End Select
-    Resume Exit_Handler
-End Sub
+'' ---------------------------------
+'' Sub:          ClearForm
+'' Description:  Clear form fields
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub ClearForm()
+'On Error GoTo Err_Handler
+'
+'    'clear recordsource
+'    Me.RecordSource = ""
+'
+'    'clear values so they no longer look for original control sources
+'    Dim ctrl As Control
+'
+'    'clear the control sources to clear the textboxes
+'    For Each ctrl In Me.Controls
+'        Select Case ctrl.ControlType
+'            Case acTextBox
+'                ctrl.ControlSource = ""
+'            Case acComboBox
+'                ctrl.Value = ""
+'        End Select
+'    Next
+'
+'    tbxID = 0
+'
+'    btnSave.Enabled = False
+'
+'    Me.list.Requery
+'
+'    Me.Requery
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - ClearForm[Feature form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
 
 ' ---------------------------------
 ' Sub:          ReadyForSave

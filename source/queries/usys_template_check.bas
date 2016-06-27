@@ -15,20 +15,6 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
-        dbText "Name" ="Expr1000"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="TemplateName"
-        dbInteger "ColumnWidth" ="3870"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr1"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="cnt"
         dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin
@@ -57,5 +43,19 @@ Begin
         dbBinary "GUID" = Begin
             0x67584be957b8ef478077e95482442903
         End
+    End
+    Begin
+        dbText "Name" ="Expr1000"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="TemplateName"
+        dbInteger "ColumnWidth" ="3870"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr1"
+        dbLong "AggregateType" ="-1"
     End
 End

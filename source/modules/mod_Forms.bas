@@ -536,3 +536,60 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          ClearForm
+' Description:  Clear form fields
+' Assumptions:  Form setup is similar to big rivers contact form w/ data entry
+'               above and list below
+' Parameters:   frm - form
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/23/2016 - initial version
+'   BLC - 6/27/2016 - shifted to mod_Forms from big rivers forms
+' ---------------------------------
+Public Sub ClearForm(ByRef frm As Form)
+On Error GoTo Err_Handler
+    
+    With frm
+    
+        'clear recordsource
+        .RecordSource = ""
+        
+        'clear values so they no longer look for original control sources
+        Dim ctrl As Control
+        
+        'clear the control sources to clear the textboxes
+        For Each ctrl In frm.Controls
+            Select Case ctrl.ControlType
+                Case acTextBox
+                    ctrl.ControlSource = ""
+                Case acComboBox
+                    ctrl.Value = ""
+            End Select
+        Next
+        
+        .Controls("tbxID") = 0
+        
+        .Controls("btnSave").Enabled = False
+        
+        .list.Requery
+        
+        .Requery
+    
+    End With
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ClearForm[mod_Forms])"
+    End Select
+    Resume Exit_Handler
+End Sub

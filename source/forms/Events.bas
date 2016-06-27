@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =30
+    ItemSuffix =34
     Left =4875
     Top =3390
-    Right =13875
-    Bottom =14385
+    Right =12735
+    Bottom =9870
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -182,7 +182,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the sampling start date."
+                    Caption ="directions"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -193,7 +193,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2820
+                    Left =3840
                     Top =1080
                     Width =1245
                     Height =315
@@ -203,9 +203,9 @@ Begin Form
                     Name ="lblStartDate"
                     Caption ="Start Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2820
+                    LayoutCachedLeft =3840
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =4065
+                    LayoutCachedWidth =5085
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -235,16 +235,18 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin Label
                     OverlapFlags =85
+                    TextAlign =3
                     Left =5820
                     Top =60
                     Width =1920
                     Height =315
-                    FontWeight =500
+                    FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777215
+                    ForeColor =16777184
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
@@ -252,6 +254,44 @@ Begin Form
                     LayoutCachedTop =60
                     LayoutCachedWidth =7740
                     LayoutCachedHeight =375
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =1080
+                    Top =1080
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblSite"
+                    Caption ="Site"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1080
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =2325
+                    LayoutCachedHeight =1395
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =2520
+                    Top =1080
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblLocation"
+                    Caption ="Location"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2520
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =3765
+                    LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -334,7 +374,7 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =2700
+                    Left =3780
                     Top =60
                     Width =1860
                     Height =315
@@ -342,8 +382,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxStartDate"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Enter the date of this sampling visit started"
                     ConditionalFormat = Begin
                         0x010000009e000000020000000100000000000000000000001800000001000000 ,
                         0x00000000fff2000000000000030000001a0000001d0000000100000000000000 ,
@@ -353,9 +393,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2700
+                    LayoutCachedLeft =3780
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4560
+                    LayoutCachedWidth =5640
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -504,7 +544,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =6
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -518,6 +558,85 @@ Begin Form
                     BorderTint =50.0
                     BorderShade =100.0
                     ForeTint =50.0
+                End
+                Begin ComboBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =1080
+                    Top =60
+                    Height =315
+                    FontSize =8
+                    TabIndex =5
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x010000009a000000020000000100000000000000000000001800000001000000 ,
+                        0x00000000fff200000000000003000000190000001c0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078005300740061007200740044006100740065005d002e005600 ,
+                        0x61006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxSite"
+                    RowSourceType ="Table/Query"
+                    ControlTipText ="Select site of this sampling visit"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1080
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =2520
+                    LayoutCachedHeight =375
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
+                        0x7400620078005300740061007200740044006100740065005d002e0056006100 ,
+                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
+                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
+                        0x000000000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =2580
+                    Top =60
+                    Width =1080
+                    Height =315
+                    FontSize =8
+                    TabIndex =7
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x010000009a000000020000000100000000000000000000001800000001000000 ,
+                        0x00000000fff200000000000003000000190000001c0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078005300740061007200740044006100740065005d002e005600 ,
+                        0x61006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxLocation"
+                    RowSourceType ="Table/Query"
+                    ControlTipText ="Select location of this sampling visit"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =3660
+                    LayoutCachedHeight =375
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
+                        0x7400620078005300740061007200740044006100740065005d002e0056006100 ,
+                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
+                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
+                        0x000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -653,20 +772,21 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 6/27/2016 - updated to use ToggleForm() & ClearForm()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+    'minimize Main
+    ToggleForm "Main", -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLtCyan
-    lblContext = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars.item("Segment"), "")
+    lblContext.forecolor = lngLime
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "")
 
     Title = "Events (Sampling Visits)"
-    Directions = "Enter the sampling start date."
+    Directions = "Choose the site & location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -684,7 +804,10 @@ On Error GoTo Err_Handler
     tbxStartDate.backcolor = lngYellow
   
     'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
+    tbxID.DefaultValue = 0
+    
+    'initialize values
+    ClearForm Me
   
 Exit_Handler:
     Exit Sub
@@ -727,7 +850,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' Sub:          Form_Current
 ' Description:  form current actions
@@ -744,7 +866,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+'      If tbxID > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -758,19 +880,19 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_Change
-' Description:  Dropdown change actions
+' Sub:          tbxStartDate_AfterUpdate
+' Description:  Dropdown after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_Change()
+Private Sub tbxStartDate_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -781,36 +903,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_Change[Events form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxStartDate_LostFocus
-' Description:  Dropdown change actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub tbxStartDate_LostFocus()
-On Error GoTo Err_Handler
-
-    'ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_LostFocus[Events form])"
+            "Error encountered (#" & Err.Number & " - tbxStartDate_AfterUpdate[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -831,12 +924,7 @@ End Sub
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    'clear values
-    tbxStartDate.Value = ""
-    
-    btnSave.Enabled = False
-    
-    Me.Requery
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -869,25 +957,27 @@ On Error GoTo Err_Handler
     
     With ev
         'values passed into form
-        .LocationID = 1
-        .ProtocolID = 1
-        .SiteID = 1
         
         'form values
+        .LocationID = cbxLocation.Column(0)
+        .ProtocolID = 1 ' assumes this is for big rivers protocol
+        .SiteID = cbxSite.Column(0)
+        
         .StartDate = tbxStartDate.Value
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
+        
+        'set the tbxID.value
+        tbxID = .ID
+        
     End With
     
     'clear values & refresh display
-    Me.RecordSource = ""
-    
-    tbxStartDate.ControlSource = ""
-    tbxID.ControlSource = ""
-    tbxID.Value = 0
     
     ReadyForSave
+    
+    PopulateForm Me, tbxID.Value
     
     'refresh list
     Me.list.Requery
@@ -935,7 +1025,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' Sub:          Form_Close
 ' Description:  form closing actions
@@ -952,8 +1041,8 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore DbAdmin
-    ToggleForm "DbAdmin", 0
+    'restore Main
+    ToggleForm "Main", 0
     
 Exit_Handler:
     Exit Sub
@@ -965,6 +1054,57 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+'' ---------------------------------
+'' Sub:          ClearForm
+'' Description:  Clear form fields
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/23/2016 - initial version
+'' ---------------------------------
+'Private Sub ClearForm()
+'On Error GoTo Err_Handler
+'
+'    'clear recordsource
+'    Me.RecordSource = ""
+'
+'    'clear values so they no longer look for original control sources
+'    Dim ctrl As Control
+'
+'    'clear the control sources to clear the textboxes
+'    For Each ctrl In Me.Controls
+'        Select Case ctrl.ControlType
+'            Case acTextBox
+'                ctrl.ControlSource = ""
+'            Case acComboBox
+'                ctrl.Value = ""
+'        End Select
+'    Next
+'
+'    tbxID = 0
+'
+'    btnSave.Enabled = False
+'
+'    Me.list.Requery
+'
+'    Me.Requery
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - ClearForm[Event form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
 
 ' ---------------------------------
 ' Sub:          ReadyForSave
@@ -988,6 +1128,7 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
+    'requires: site ID, location ID, protocol ID, start date
     If IsDate(tbxStartDate) Then
         isOK = True
     End If

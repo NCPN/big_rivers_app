@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =3195
-    Top =3105
-    Right =28545
-    Bottom =14895
+    Left =4875
+    Top =3390
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1066,7 +1066,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          Form_Close

@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =4830
-    Top =1995
-    Right =13050
-    Bottom =11220
+    Left =4875
+    Top =3390
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xef9c2c5010c6e440
@@ -1148,7 +1148,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, Contact, functions & procedures for UI display
@@ -1157,6 +1157,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 6/20/2016 - 1.00 - initial version
 '               BLC - 6/24/2016 - 1.01 - replaced Exit_Function > Exit_Handler
+'               BLC - 6/27/2016 - 1.02 - adjusted for ToggleForm(),
+'                                        shifted ClearForm() to mod_Forms
 ' =================================
 
 '---------------------
@@ -1261,7 +1263,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
-'   BLC - 6/27/2016 - adjusted for ToggleForm
+'   BLC - 6/27/2016 - adjusted for ToggleForm()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1294,7 +1296,7 @@ On Error GoTo Err_Handler
     tbxID.DefaultValue = 0
     
     'initialize values
-    ClearForm
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1646,7 +1648,7 @@ End Sub
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    ClearForm
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1779,7 +1781,6 @@ On Error GoTo Err_Handler
     'restore parent
     ToggleForm strParent, 0
     
-    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1791,56 +1792,56 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' Sub:          ClearForm
-' Description:  Clear form fields
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/23/2016 - initial version
-' ---------------------------------
-Private Sub ClearForm()
-On Error GoTo Err_Handler
-    
-    'clear recordsource
-    Me.RecordSource = ""
-    
-    'clear values so they no longer look for original control sources
-    Dim ctrl As Control
-    
-    'clear the control sources to clear the textboxes
-    For Each ctrl In Me.Controls
-        Select Case ctrl.ControlType
-            Case acTextBox
-                ctrl.ControlSource = ""
-            Case acComboBox
-                ctrl.Value = ""
-        End Select
-    Next
-    
-    tbxID = 0
-    
-    btnSave.Enabled = False
-    
-    Me.list.Requery
-    
-    Me.Requery
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ClearForm[Contact form])"
-    End Select
-    Resume Exit_Handler
-End Sub
+'' ---------------------------------
+'' Sub:          ClearForm
+'' Description:  Clear form fields
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/23/2016 - initial version
+'' ---------------------------------
+'Private Sub xClearForm()
+'On Error GoTo Err_Handler
+'
+'    'clear recordsource
+'    Me.RecordSource = ""
+'
+'    'clear values so they no longer look for original control sources
+'    Dim ctrl As Control
+'
+'    'clear the control sources to clear the textboxes
+'    For Each ctrl In Me.Controls
+'        Select Case ctrl.ControlType
+'            Case acTextBox
+'                ctrl.ControlSource = ""
+'            Case acComboBox
+'                ctrl.Value = ""
+'        End Select
+'    Next
+'
+'    tbxID = 0
+'
+'    btnSave.Enabled = False
+'
+'    Me.list.Requery
+'
+'    Me.Requery
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - ClearForm[Contact form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
 
 ' ---------------------------------
 ' Sub:          ReadyForSave

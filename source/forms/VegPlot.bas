@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =6315
-    Top =3780
-    Right =24300
-    Bottom =14775
+    Left =4875
+    Top =3390
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -159,7 +159,7 @@ Begin Form
         End
         Begin FormHeader
             CanGrow = NotDefault
-            Height =1380
+            Height =1395
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -174,7 +174,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Events (Sampling Visits)"
+                    Caption ="VegPlot"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -192,7 +192,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the sampling start date."
+                    Caption ="directions"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -203,9 +203,9 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4260
-                    Top =1065
-                    Width =1245
+                    Left =4140
+                    Top =1080
+                    Width =2025
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -213,10 +213,10 @@ Begin Form
                     Name ="lblModalSedSize"
                     Caption ="Modal Sediment Size"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =1065
-                    LayoutCachedWidth =5505
-                    LayoutCachedHeight =1380
+                    LayoutCachedLeft =4140
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =6165
+                    LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -282,6 +282,26 @@ Begin Form
                     LayoutCachedTop =1065
                     LayoutCachedWidth =2445
                     LayoutCachedHeight =1380
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    TextAlign =3
+                    Left =4920
+                    Top =60
+                    Width =2820
+                    Height =315
+                    FontWeight =600
+                    BorderColor =8355711
+                    ForeColor =16777184
+                    Name ="lblContext"
+                    Caption ="Context"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4920
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -1458,6 +1478,14 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    'minimize Main
+    ToggleForm "Main", -1
+
+    'set context - based on TempVars
+    lblContext.forecolor = lngLime
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "")
+
     Title = "VegPlot (Sampling)"
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."
@@ -1555,9 +1583,12 @@ On Error GoTo Err_Handler
             lblNoRootedVeg.visible = True
             btnARC.visible = True
     End Select
-  
-    'hide modal Main form
-    Forms("Main").visible = False
+    
+    'ID default -> value used only for edits of existing table values
+    tbxID.DefaultValue = 0
+    
+    'initialize values
+    ClearForm Me
   
 Exit_Handler:
     Exit Sub
@@ -1669,13 +1700,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - revised to use ClearForm()
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    btnSave.Enabled = False
-    
-    Me.Requery
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1708,6 +1738,8 @@ On Error GoTo Err_Handler
     
     With vp
         'values passed into form
+
+
 '        .CollectionSourceName = "T"
 
 '        .CreateDate = ""
@@ -1719,6 +1751,27 @@ On Error GoTo Err_Handler
         '.SiteID = 1
         
         'form values
+        
+        .EventID = cbxEvent.Column(0)
+        .FeatureID = cbxFeature.Column(0)
+        
+        .PlotNumber = tbxNumber.Value
+        .PlotDistance = tbxDistance.Value
+        .ModalSedimentSize = tbxModalSedSize.Value
+        
+        .PlotDensity = tbxPlotDensity.Value
+        
+        'pct values
+        .PercentFines = tbxPctFines.Value
+        .PercentWater = tbxPctWater.Value
+        .UnderstoryRootedPctCover = tbxPctURC.Value
+        
+        'chk values
+        .NoCanopyVeg = chkNoCanopyVeg.Value
+        .NoRootedVeg = chkNoRootedVeg.Value
+        .NoIndicatorSpecies = chkNoIndicatorSpecies.Value
+        .HasSocialTrail = chkHasSocialTrails.Value
+        
 '        .LocationName = tbxName.Value
 '        .LocationType = "" 'cbxLocationType.SelText
 '
@@ -1727,19 +1780,17 @@ On Error GoTo Err_Handler
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
+        
+        'set the tbxID.value
+        tbxID = .ID
+        
     End With
     
     'clear values & refresh display
-    Me.RecordSource = ""
-    
-'    tbxDistance.ControlSource = ""
-'    tbxBearing.ControlSource = ""
-'    tbxNotes.ControlSource = ""
-    
-    tbxID.ControlSource = ""
-    tbxID.Value = 0
     
     ReadyForSave
+    
+    PopulateForm Me, tbxID.Value
     
     'refresh list
     Me.list.Requery
@@ -1889,11 +1940,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 6/27/2016 - revised to use ToggleForm()
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
+    'restore Main
+    ToggleForm "Main", 0
     
 Exit_Handler:
     Exit Sub
@@ -1928,15 +1981,38 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-'    If tbxDistance.Value > 0 And tbxBearing.Value <> "" Then
+    'requires:  EventID, SiteID, FeatureID, VegTransectID, PlotDistance_m,
+    '           ModalSedSize, PctFine, PctWater, PctURC, PlotDensity,
+    '           NoCanopyVeg, NoRootedVeg, HasSocialTrail, FA
+    '           BLCA only: NoIndicatorSpecies
+    If Nz(tbxDistance.Value, "") > 0 _
+        And Nz(tbxModalSedSize.Value, "") > -1 _
+        And Nz(tbxPctFines.Value, "") > -1 _
+        And Nz(tbxPctWater.Value, "") > -1 _
+        And Nz(tbxPctURC.Value, "") > -1 _
+        And Nz(tbxPlotDensity.Value, "") > -1 _
+        And Nz(chkNoCanopyVeg.Value, "") > -1 _
+        And Nz(chkNoRootedVeg.Value, "") > -1 _
+        And Nz(chkHasSocialTrails.Value, "") > -1 Then
+        
+        Select Case TempVars("ParkCode")
+            Case "BLCA"
+                'requires NoIndicatorSpecies
+                If Nz(chkNoIndicatorSpecies.Value, "") > -1 Then GoTo Exit_Handler
+            Case "CANY"
+            Case "DINO"
+        End Select
+        
         isOK = True
-'    End If
+        
+    End If
     
     tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form
     Me.Requery
+   
     
 Exit_Handler:
     Exit Sub

@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =26
-    Left =7425
-    Top =2130
-    Right =15060
-    Bottom =6495
+    ItemSuffix =30
+    Left =450
+    Top =2880
+    Right =7830
+    Bottom =6990
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc2b74d8760c3e440
@@ -132,7 +132,6 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =1395
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -172,7 +171,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
+                    Left =4380
                     Top =1080
                     Width =1245
                     Height =315
@@ -182,9 +181,9 @@ Begin Form
                     Name ="lblStartDate"
                     Caption ="Start Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =4380
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =5625
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -208,6 +207,44 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin Label
+                    OverlapFlags =85
+                    Left =3000
+                    Top =1080
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblLocation"
+                    Caption ="Location"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3000
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =4245
+                    LayoutCachedHeight =1395
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =1560
+                    Top =1080
+                    Width =1245
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblSite"
+                    Caption ="Site"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1560
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =2805
+                    LayoutCachedHeight =1395
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin Section
@@ -226,6 +263,7 @@ Begin Form
                     Name ="btnEdit"
                     Caption ="Edit"
                     OnClick ="[Event Procedure]"
+                    ControlTipText ="Edit record"
                     GridlineColor =10921638
                     ImageData = Begin
                         0x2800000010000000100000000100200000000000000000000000000000000000 ,
@@ -269,7 +307,8 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -317,6 +356,7 @@ Begin Form
                     Caption ="í ½í·´"
                     OnClick ="[Event Procedure]"
                     FontName ="Academy Engraved LET"
+                    ControlTipText ="Delete record"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6780
@@ -327,7 +367,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -344,9 +385,8 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1440
+                    Left =4380
                     Top =15
-                    Width =1560
                     Height =300
                     TabIndex =3
                     BorderColor =10921638
@@ -355,9 +395,9 @@ Begin Form
                     ControlSource ="StartDate"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1440
+                    LayoutCachedLeft =4380
                     LayoutCachedTop =15
-                    LayoutCachedWidth =3000
+                    LayoutCachedWidth =5820
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -383,6 +423,58 @@ Begin Form
                     LayoutCachedLeft =900
                     LayoutCachedWidth =1380
                     LayoutCachedHeight =315
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1425
+                    Top =15
+                    Width =1335
+                    Height =300
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxSite"
+                    ControlSource ="StartDate"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1425
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =2760
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2940
+                    Top =15
+                    Width =1380
+                    Height =300
+                    TabIndex =6
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxLocation"
+                    ControlSource ="StartDate"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2940
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =4320
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
             End
         End
@@ -564,6 +656,12 @@ On Error GoTo Err_Handler
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.forecolor = lngRed
+    
+    'set data source
+    Me.RecordSource = GetTemplate("s_events_list_by_park_river", _
+                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+    Me.Requery
 
 Exit_Handler:
     Exit Sub
@@ -620,7 +718,7 @@ Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent, tbxID
 
 Exit_Handler:
     Exit Sub
