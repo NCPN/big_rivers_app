@@ -121,7 +121,7 @@ Public Property Get Organization() As String
 End Property
 
 Public Property Let WorkPhone(Value As Long)
-    If IsPhone(Value) Then
+    If IsPhone(CStr(Value)) Then
         m_WorkPhone = Value
     Else
         RaiseEvent InvalidPhone(Value)

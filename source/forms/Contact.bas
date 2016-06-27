@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =6075
-    Top =2490
-    Right =14295
-    Bottom =11715
+    Left =4830
+    Top =1995
+    Right =13050
+    Bottom =11220
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xef9c2c5010c6e440
@@ -1001,6 +1001,7 @@ Begin Form
                     LayoutCachedHeight =1890
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =540
@@ -1260,19 +1261,13 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
+'   BLC - 6/27/2016 - adjusted for ToggleForm
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-'    If FormIsOpen("DbAdmin") Then
-'        Forms("DbAdmin").SetFocus
-'        DoCmd.Minimize
-'        Me.SetFocus
-'    End If
-
     'minimize DbAdmin
     ToggleForm "DbAdmin", -1
-    
 
     Title = "Contact"
     Directions = "Enter the contact information and click save."
@@ -1288,24 +1283,18 @@ On Error GoTo Err_Handler
     btnUndo.hoverColor = lngGreen
       
     'defaults
-'    tbxOrganization.Value = "NCPN"
-'    tbxOrganization.DefaultValue = "NCPN"
     lblWork.backcolor = lngCream
     tbxIcon.forecolor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-'    tbxNumber.backcolor = lngYellow
-'    tbxSampleDate.backcolor = lngYellow
 
     cbxUserRole.RowSource = GetTemplate("s_access")
   
     'ID default -> value used only for edits of existing table values
-    'tbxID.Value = 0
     tbxID.DefaultValue = 0
     
     'initialize values
     ClearForm
-'    ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1330,6 +1319,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
+'   BLC - 6/27/2016 - adjusted for ToggleForm
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -1610,35 +1600,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-'' ---------------------------------
-'' Sub:          tbxFirst_LostFocus
-'' Description:  Dropdown change actions
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 22, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/22/2016 - initial version
-'' ---------------------------------
-'Private Sub tbxFirst_LostFocus()
-'On Error GoTo Err_Handler
-'
-'    ReadyForSave
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - tbxFirst_LostFocus[Contact form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-
 ' ---------------------------------
 ' Sub:          cbxUserRole_AfterUpdate
 ' Description:  AfterUpdate actions
@@ -1684,21 +1645,6 @@ End Sub
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
-    
-    'clear recordsource
-'    Me.RecordSource = ""
-    
-    'clear values
-'    tbxEmail.Value = ""
-'    tbxUsername.Value = ""
-'    tbxOrganization.Value = ""
-'    tbxPosition.Value = ""
-'    tbxPhone.Value = ""
-'    tbxExtension.Value = ""
-    
-'    btnSave.Enabled = False
-    
-'    Me.Requery
     
     ClearForm
     
@@ -1757,13 +1703,6 @@ On Error GoTo Err_Handler
     End With
     
     'clear values & refresh display
-    'Me.RecordSource = ""
-    
-'    tbxNumber.ControlSource = ""
-'    tbxSampleDate.ControlSource = ""
-
-    'tbxID.ControlSource = ""
-    'tbxID.Value = 0
     
     ReadyForSave
     
@@ -1831,12 +1770,14 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-'    If FormIsOpen("DbAdmin") Then
-'        Forms("DbAdmin").SetFocus
-'        DoCmd.Restore
-'    End If
-    'restore DbAdmin
-    ToggleForm "DbAdmin", 0
+    Dim strParent As String
+    'default
+    strParent = "DbAdmin"
+    
+    If Not FormIsOpen("DbAdmin") Then strParent = "Main"
+
+    'restore parent
+    ToggleForm strParent, 0
     
     
 Exit_Handler:
@@ -1870,45 +1811,17 @@ On Error GoTo Err_Handler
     Me.RecordSource = ""
     
     'clear values so they no longer look for original control sources
-'    tbxEmail.Value = ""
-'    tbxUsername.Value = ""
-'    tbxOrganization.Value = ""
-'    tbxPosition.Value = ""
-'    tbxPhone.Value = ""
-'    tbxExtension.Value = ""
     Dim ctrl As Control
     
     'clear the control sources to clear the textboxes
     For Each ctrl In Me.Controls
-'        If ctrl.Name = "tbxOrganization" Then
-'            'go here
-'            Debug.Print ctrl.Name & " " & ctrl.ControlSource
-'            ctrl.ControlSource = ""
-'            Debug.Print ctrl.Name & " " & ctrl.ControlSource
-'        End If
         Select Case ctrl.ControlType
             Case acTextBox
                 ctrl.ControlSource = ""
             Case acComboBox
                 ctrl.Value = ""
         End Select
-'        If ctrl.ControlType = acTextBox Then
-'            ctrl.Value = ""
-'        End If
-        
     Next
-
-    
-'    tbxID.ControlSource = ""
-'    tbxFirst.ControlSource = ""
-'    tbxMI.ControlSource = ""
-'    tbxLast.ControlSource = ""
-'    tbxEmail.ControlSource = ""
-'    tbxUsername.ControlSource = ""
-'    tbxOrganization.ControlSource = ""
-'    tbxPosition.ControlSource = ""
-'    tbxPhone.ControlSource = ""
-'    tbxExtension.ControlSource = ""
     
     tbxID = 0
     

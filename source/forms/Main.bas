@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =23
-    Left =4080
-    Top =3105
-    Right =12360
-    Bottom =10590
+    Left =4800
+    Top =2580
+    Right =13080
+    Bottom =10065
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -447,8 +447,8 @@ On Error GoTo Err_Handler
 '    Y2 = Me.BCTile.top + Me.BCTile.Height + Offset
 '    Me.DrawWidth = 3
 '    Me.Line (X1, Y1)-(X2, Y2), lngSedona, B
-Debug.Print rctTop.Width
-Debug.Print Me.Width
+'Debug.Print rctTop.Width
+'Debug.Print Me.Width
 
     Me.rctTop.Width = Me.Width
     
@@ -469,9 +469,8 @@ Debug.Print Me.Width
     oLTile.Link3Caption = "Transect"
     oLTile.Link4Caption = "Plot"
     oLTile.Link5Caption = ""
-    oLTile.Link6Caption = ""
+    oLTile.Link6Caption = "Location"
     oLTile.Link5Visible = 0
-    oLTile.Link6Visible = 0
     
     'Center
     Set oCTile = CTile.Form
@@ -483,7 +482,7 @@ Debug.Print Me.Width
     oCTile.Link2Visible = 0
     oCTile.Link3Caption = "VegPlots"
     oCTile.Link4Visible = 0
-    oCTile.Link5Caption = "Location"
+    oCTile.Link5Caption = "Locations"
     oCTile.Link6Caption = "People"
 
     'Right

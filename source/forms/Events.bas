@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =30
-    Left =10425
-    Top =2850
-    Right =18285
-    Bottom =9330
+    Left =4875
+    Top =3390
+    Right =13875
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -235,6 +235,25 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =5820
+                    Top =60
+                    Width =1920
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblContext"
+                    Caption ="Context"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5820
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =375
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -623,36 +642,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Events form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -667,6 +656,14 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+
+    'minimize DbAdmin
+    ToggleForm "DbAdmin", -1
+    
+    'set context - based on TempVars
+    lblContext.forecolor = lngLtCyan
+    lblContext = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars.item("Segment"), "")
 
     Title = "Events (Sampling Visits)"
     Directions = "Enter the sampling start date."
@@ -699,6 +696,37 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 ' ---------------------------------
 ' Sub:          Form_Current
@@ -924,7 +952,8 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
+    'restore DbAdmin
+    ToggleForm "DbAdmin", 0
     
 Exit_Handler:
     Exit Sub

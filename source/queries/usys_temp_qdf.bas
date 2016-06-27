@@ -1,5 +1,5 @@
-﻿dbMemo "SQL" ="PARAMETERS ContactID Long, AccessID Long;\015\012INSERT INTO Contact_Access ( Co"
-    "ntact_ID, Access_ID )\015\012VALUES ([ContactID], [AccessID]);\015\012"
+﻿dbMemo "SQL" ="PARAMETERS ContactID Long, AccessID Long;\015\012UPDATE Contact_Access SET Acces"
+    "s_ID = [AccessID]\015\012WHERE ID = [ContactID];\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

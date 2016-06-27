@@ -19,11 +19,9 @@ Begin Form
     GridY =24
     Width =7500
     DatasheetFontHeight =11
-    ItemSuffix =39
-    Left =3585
-    Top =5955
-    Right =11565
-    Bottom =10320
+    ItemSuffix =44
+    Right =9000
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecordSource ="SELECT * FROM (Contact INNER JOIN Contact_Access ON Contact_Access.Contact_ID = "
         "Contact.ID) INNER JOIN Access ON Access.ID = Contact_Access.Access_ID; "
@@ -65,6 +63,16 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Rectangle
+            SpecialEffect =3
+            BackStyle =0
+            BorderLineStyle =0
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -236,7 +244,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    TextAlign =2
+                    TextAlign =1
                     Left =1620
                     Top =1020
                     Width =1245
@@ -256,7 +264,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    TextAlign =2
+                    TextAlign =1
                     Left =3180
                     Top =1020
                     Width =1245
@@ -289,6 +297,7 @@ Begin Form
                     Left =5940
                     Top =60
                     Width =720
+                    TabIndex =1
                     ForeColor =4210752
                     Name ="btnEdit"
                     Caption ="Edit"
@@ -359,7 +368,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =1
+                    TabIndex =3
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -415,25 +424,27 @@ Begin Form
                     Enabled = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
-                    TextAlign =2
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
                     Left =1440
                     Top =45
                     Height =300
-                    TabIndex =3
+                    FontSize =9
+                    TabIndex =5
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxName"
                     ControlSource ="=[FirstName] & \" \" & IIf(Len([MiddleInitial])>0,[MiddleInitial] & \" \",\"\") "
                         "& [LastName]"
                     ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001000000001000000 ,
+                        0x01000000de000000030000000100000000000000000000001000000001000000 ,
                         0x22b14c00ffffff000100000000000000110000002100000001000000ff000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0xffffff000100000000000000220000003e0000000100000000000000ffcc0000 ,
                         0x5b00740062007800490073004100630074006900760065005d003d0031000000 ,
                         0x00005b00740062007800490073004100630074006900760065005d003d003000 ,
-                        0x00000000
+                        0x0000000050006100720065006e0074002e00740062007800490044003d002200 ,
+                        0x74006200780043006f006e00740061006300740049004400220000000000
                     End
                     GridlineColor =10921638
 
@@ -445,11 +456,14 @@ Begin Form
                     ForeTint =100.0
                     ForeShade =50.0
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000022b14c00ffffff000f0000005b00 ,
+                        0x01000300000001000000000000000100000022b14c00ffffff000f0000005b00 ,
                         0x740062007800490073004100630074006900760065005d003d00310000000000 ,
                         0x0000000000000000000000000000000000010000000000000001000000ff0000 ,
                         0x00ffffff000f0000005b00740062007800490073004100630074006900760065 ,
-                        0x005d003d003000000000000000000000000000000000000000000000
+                        0x005d003d00300000000000000000000000000000000000000000000001000000 ,
+                        0x000000000100000000000000ffcc00001b00000050006100720065006e007400 ,
+                        0x2e00740062007800490044003d00220074006200780043006f006e0074006100 ,
+                        0x63007400490044002200000000000000000000000000000000000000000000
                     End
                 End
                 Begin TextBox
@@ -494,14 +508,15 @@ Begin Form
                     Enabled = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =93
-                    TextAlign =2
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
                     Left =2940
                     Top =60
                     Width =2160
                     Height =300
-                    TabIndex =5
+                    FontSize =9
+                    TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxEmail"
@@ -536,7 +551,6 @@ Begin Form
                     Left =5160
                     Top =60
                     Width =720
-                    TabIndex =6
                     ForeColor =4210752
                     Name ="btnActivate"
                     Caption ="í ½í·¸"
@@ -821,7 +835,7 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-       
+
 Exit_Handler:
     Exit Sub
 Err_Handler:

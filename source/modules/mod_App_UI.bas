@@ -359,13 +359,16 @@ On Error GoTo Err_Handler
     Select Case action
         'Where?
         Case "site"
-'            fName = "Task"
+            fName = "Site"
         Case "feature"
-'            fName = "Task"
+            fName = "Feature"
         Case "transect"
             fName = "Transect"
             oArgs = ""
         Case "plot"
+            fName = "VegPlot"
+        Case "location"
+            fName = "Location"
         'Sampling
         Case "event"
             fName = "Events"
@@ -373,10 +376,11 @@ On Error GoTo Err_Handler
         Case "vegplots"
             fName = "VegPlot"
             oArgs = "" 'site & protocol IDs
-        Case "location"
+        Case "locations"
             fName = "Location"
             oArgs = "" 'collection source name - feature (A-G), transect #(1-8) &
         Case "people"
+            fName = "Contact"
         'Vegetation
         Case "woody canopy cover"
             fName = "VegWalk" '"WoodyCanopyCover"
@@ -497,6 +501,16 @@ On Error GoTo Err_Handler
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxStartDate").ControlSource = "StartDate"
+            Case "Feature"
+                'strSQL = GetTemplate()
+                .Controls("tbxFeature").ControlSource = "Feature"
+                '.Controls("cbxLocation").ControlSource = ""
+            Case "Location"
+                'strSQL = GetTemplate()
+                '.Controls("").ControlSource = ""
+            Case "Site"
+                'strSQL = GetTemplate()
+                '.Controls("").ControlSource = ""
             Case "Tagline"
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
@@ -529,6 +543,10 @@ On Error GoTo Err_Handler
                 .Controls("chkNoRootedVeg").ControlSource = "NoRootedVeg"
                 .Controls("chkNoIndicatorSpecies").ControlSource = "NoIndicatorSpecies"
                 .Controls("chkHasSocialTrails").ControlSource = "HasSocialTrails"
+            Case "VegTransect"
+                'strSQL = GetTemplate()
+                '.Controls("").ControlSource = ""
+            
         End Select
     
         .RecordSource = strSQL
@@ -549,7 +567,7 @@ End Sub
 ' ---------------------------------
 ' Sub:          DeleteRecord
 ' Description:  Delete a specific record from a table
-' Assumptions:  -
+' Assumptions:  Assumes tbl name is properly capitalized & matches db table name
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -559,20 +577,33 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 6/2/2016 - moved from forms (TaglineList, EventsList) to mod_App_UI
+'   BLC - 6/27/2016- revised to match
 ' ---------------------------------
 Public Sub DeleteRecord(tbl As String, ID As Long)
 On Error GoTo Err_Handler
     Dim strSQL As String
 
     'find the form & populate its controls from the ID
-    Select Case tbl
-        Case "Contact"
-            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
-        Case "Event"
-            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
-        Case "Tagline"
-            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
-    End Select
+'    Select Case tbl
+'        Case "Contact"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
+'        Case "Event"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
+'        Case "Feature"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Feature|id" & PARAM_SEPARATOR & ID)
+'        Case "Location"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Location|id" & PARAM_SEPARATOR & ID)
+'        Case "Site"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
+'        Case "Tagline"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
+'        Case "VegPlot"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "VegPlot|id" & PARAM_SEPARATOR & ID)
+'        Case "VegTransect"
+'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "VegTransect|id" & PARAM_SEPARATOR & ID)
+'    End Select
+    
+    strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & tbl & "|id" & PARAM_SEPARATOR & ID)
     
     If IsNull(strSQL) Or Len(strSQL) = 0 Then GoTo Exit_Handler
 Debug.Print strSQL
