@@ -48,4 +48,8 @@ Begin
         dbText "Name" ="Params"
         dbLong "AggregateType" ="-1"
     End
+    Begin
+        dbText "Name" ="Remarks"
+        dbLong "AggregateType" ="-1"
+    End
 End

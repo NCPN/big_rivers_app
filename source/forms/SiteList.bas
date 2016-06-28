@@ -20,8 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =28
-    Right =9000
-    Bottom =10995
+    Left =285
+    Top =4470
+    Right =7920
+    Bottom =8835
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc2b74d8760c3e440
@@ -169,7 +171,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1440
+                    Left =1380
                     Top =1080
                     Width =960
                     Height =315
@@ -179,9 +181,9 @@ Begin Form
                     Name ="lblSiteCode"
                     Caption ="Site Code"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1440
+                    LayoutCachedLeft =1380
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2400
+                    LayoutCachedWidth =2340
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -207,7 +209,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2520
+                    Left =2400
                     Top =1080
                     Width =1440
                     Height =315
@@ -217,9 +219,9 @@ Begin Form
                     Name ="lblSiteName"
                     Caption ="Site Name"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2520
+                    LayoutCachedLeft =2400
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =3960
+                    LayoutCachedWidth =3840
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -373,6 +375,15 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxSiteCode"
                     ControlSource ="SiteCode"
+                    ConditionalFormat = Begin
+                        0x01000000c4000000020000000100000000000000000000001800000001000000 ,
+                        0x22b14c00ffffff000100000000000000190000003100000001000000ff000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004900730041006300740069007600650046006f007200500072006f007400 ,
+                        0x6f0063006f006c005d003d003100000000005b00490073004100630074006900 ,
+                        0x7600650046006f007200500072006f0074006f0063006f006c005d003d003000 ,
+                        0x00000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1440
@@ -382,6 +393,14 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000022b14c00ffffff00170000005b00 ,
+                        0x4900730041006300740069007600650046006f007200500072006f0074006f00 ,
+                        0x63006f006c005d003d0031000000000000000000000000000000000000000000 ,
+                        0x00010000000000000001000000ff000000ffffff00170000005b004900730041 ,
+                        0x006300740069007600650046006f007200500072006f0074006f0063006f006c ,
+                        0x005d003d003000000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -415,7 +434,8 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnActivate"
                     Caption ="í ½í·¸"
-                    ControlTipText ="Toggle IsActive flag"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Toggle IsActiveForProtocol flag"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5220
@@ -450,7 +470,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxIsActive"
-                    ControlSource ="=[IsActive]"
+                    ControlSource ="=[IsActiveForProtocol]"
                     ConditionalFormat = Begin
                         0x010000006c000000020000000000000002000000000000000200000001000000 ,
                         0x22b14c00ffffff000000000002000000030000000500000001000000ed1c2400 ,
@@ -474,7 +494,7 @@ Begin Form
                     Enabled = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =247
-                    TextAlign =2
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
                     Left =2400
@@ -486,6 +506,15 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxSiteName"
                     ControlSource ="SiteName"
+                    ConditionalFormat = Begin
+                        0x01000000c4000000020000000100000000000000000000001800000001000000 ,
+                        0x22b14c00ffffff000100000000000000190000003100000001000000ed1c2400 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004900730041006300740069007600650046006f007200500072006f007400 ,
+                        0x6f0063006f006c005d003d003100000000005b00490073004100630074006900 ,
+                        0x7600650046006f007200500072006f0074006f0063006f006c005d003d003000 ,
+                        0x00000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2400
@@ -495,6 +524,14 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000022b14c00ffffff00170000005b00 ,
+                        0x4900730041006300740069007600650046006f007200500072006f0074006f00 ,
+                        0x63006f006c005d003d0031000000000000000000000000000000000000000000 ,
+                        0x00010000000000000001000000ed1c2400ffffff00170000005b004900730041 ,
+                        0x006300740069007600650046006f007200500072006f0074006f0063006f006c ,
+                        0x005d003d003000000000000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -842,7 +879,6 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
-
     
 Exit_Handler:
     Exit Sub

@@ -389,6 +389,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
+'   BLC - 6/28/2016 - added setting of park & river segment IDs
 ' ---------------------------------
 Public Sub mnuAddTask()
     
@@ -413,6 +414,7 @@ Public Sub mnuSetPark()
     
     'set global
     TempVars.Add "ParkCode", ParkCode
+    TempVars.Add "ParkID", GetParkID(ParkCode)
     
     'update dynamic menus
     CreateDynamicMenu "river"
@@ -427,14 +429,15 @@ End Sub
 Public Sub mnuSetRiver()
     'DoCmd.OpenForm "_SelectSingle", acNormal, OpenArgs:="river"
     
-    Dim Segment As String
+    Dim segment As String
     Dim iClearBelow As Integer
     
     iClearBelow = 1
-    Segment = CommandBars.ActionControl.Parameter
+    segment = CommandBars.ActionControl.Parameter
     
     'set global
-    TempVars.Add "River", Segment
+    TempVars.Add "River", segment
+    TempVars.Add "RiverID", GetRiverSegmentID(segment)
     
     'update dynamic menus
     CreateDynamicMenu "site"
@@ -457,6 +460,7 @@ Public Sub mnuSetSite()
     
     'set global
     TempVars.Add "SiteCode", SiteCode
+    TempVars.Add "SiteID", GetSiteID(TempVars("ParkCode"), SiteCode)
     
     'update dynamic menus
     CreateDynamicMenu "feature"
@@ -475,6 +479,7 @@ Public Sub mnuSetFeature()
     
     'set global
     TempVars.Add "Feature", Feature
+    TempVars.Add "SiteID", GetFeatureID(TempVars("ParkCode"), Feature)
     
     'update calling form
     Call Forms("Main").UpdateBreadcrumb(iClearBelow)

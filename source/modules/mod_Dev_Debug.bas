@@ -893,12 +893,20 @@ Public Sub testme()
 '    'qdf.Parameters("mi").value = NullStr
 '    'qdf.Parameters("mi").value = 7
 '    qdf.Execute
-Dim ID As Integer
-Dim tbl As String
-tbl = "Contact"
-ID = 2
+'Dim id As Integer
+'Dim tbl As String
+'tbl = "Contact"
+'id = 2
+'
+'    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+'            tbl & PARAM_SEPARATOR & id & _
+'            "|Type" & PARAM_SEPARATOR & "info"
 
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-            tbl & PARAM_SEPARATOR & ID & _
-            "|Type" & PARAM_SEPARATOR & "info"
+
+'getting IDs
+
+'    Debug.Print GetParkID("BLCA")
+    Debug.Print GetRiverSegmentID("CBC")
+'    Debug.Print GetSiteID("BLCA", "EP")
+
 End Sub

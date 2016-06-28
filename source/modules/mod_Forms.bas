@@ -593,3 +593,89 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          LimitKeyPress
+' Description:  Limit form fields to a set number of characters
+' Assumptions:  Control passed in is a text or combo box
+' Parameters:   ctrl - textbox/combobox (control)
+'               iMaxLen - # of allowed characters (integer)
+'               KeyAscii - character passed in (integer)
+' Returns:      -
+' Throws:       none
+' Usage:        Call LimitKeyPress(Me.MyTextBox, 12, KeyAscii) in control's KeyPress event
+' References:   LimitChange() required in control's Change event also
+' Source/date:
+'   Allen Browne, unknown
+'   http://allenbrowne.com/ser-34.html
+' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Public Sub LimitKeyPress(ctrl As Control, iMaxLen As Integer, KeyAscii As Integer)
+On Error GoTo Err_Handler
+    
+    With ctrl
+        If Len(.Text) - .SelLength >= iMaxLen Then
+            If KeyAscii <> vbKeyBack Then
+                KeyAscii = 0
+                Beep
+            End If
+        End If
+    End With
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - LimitKeyPress[mod_Forms])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          LimitChange
+' Description:  Limit form fields to a set number of characters
+' Assumptions:  Control passed in is a textbox
+' Parameters:   ctrl - textbox cotnrol
+' Returns:      -
+' Throws:       none
+' Usage:        Call LimitChange(Me.MyTextBox, 12) in control's Change event
+' References:   LimitKeyPress() required in controls KeyPress event also
+' Source/date:
+'   Allen Browne, unknown
+'   http://allenbrowne.com/ser-34.html
+' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Public Sub LimitChange(ctrl As Control, iMaxLen As Integer)
+On Error GoTo Err_Handler
+
+    Dim msg As String
+    
+    With ctrl
+        If Len(.Text) > iMaxLen Then
+            msg = "Oops! " & .Name & " field too long. Truncated to " & iMaxLen & " characters."
+        
+            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                "msg" & PARAM_SEPARATOR & msg & _
+                "|Type" & PARAM_SEPARATOR & "caution"
+            
+            .Text = Left(.Text, iMaxLen)
+            .SelStart = iMaxLen
+        End If
+    End With
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - LimitChange[mod_Forms])"
+    End Select
+    Resume Exit_Handler
+End Sub

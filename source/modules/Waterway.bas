@@ -67,7 +67,7 @@ Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let Segment(Value As String)
+Public Property Let segment(Value As String)
     If Len(Name) > 5 Then
         m_Segment = Value
     Else
@@ -75,8 +75,8 @@ Public Property Let Segment(Value As String)
     End If
 End Property
 
-Public Property Get Segment() As String
-    Segment = m_Segment
+Public Property Get segment() As String
+    segment = m_Segment
 End Property
 
 
@@ -171,7 +171,7 @@ On Error GoTo Err_Handler
     ' Waterways must have:
     strSQL = "INSERT INTO River(Park_ID, River, Segment) VALUES " _
                 & "(" & Me.ParkID & ",'" & Me.Name & "','" _
-                & Me.Segment & "');"
+                & Me.segment & "');"
 
     db.Execute strSQL, dbFailOnError
     Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)

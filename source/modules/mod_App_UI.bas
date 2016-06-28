@@ -513,7 +513,7 @@ On Error GoTo Err_Handler
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxSiteCode").ControlSource = "SiteCode"
                 .Controls("tbxSiteName").ControlSource = "SiteName"
-                .Controls("tbxSiteDescription").ControlSource = "SiteDescription"
+                .Controls("tbxDescription").ControlSource = "SiteDescription"
                 .Controls("tbxSiteDirections").ControlSource = "SiteDirections"
             Case "Tagline"
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)

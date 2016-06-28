@@ -710,9 +710,6 @@ On Error GoTo Err_Handler
 
 Debug.Print strTemplate
 
-'If strTemplate = "s_tsys_Link_Files_new_db" Then
-'    MsgBox "Stop!", vbExclamation
-'End If
     'initialize AppTemplates if not populated
     If g_AppTemplates Is Nothing Then GetTemplates
 

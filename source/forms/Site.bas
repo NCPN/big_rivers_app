@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =4875
-    Top =3390
-    Right =13875
-    Bottom =14385
+    Left =5100
+    Top =3630
+    Right =12960
+    Bottom =13995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -278,7 +278,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9000
+            Height =8940
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -362,6 +362,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxSiteCode"
                     AfterUpdate ="[Event Procedure]"
+                    OnKeyPress ="[Event Procedure]"
                     OnLostFocus ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ControlTipText ="Enter 2 letter site code"
@@ -671,12 +672,12 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Events
+' Form:         Site
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, events, functions & procedures for UI display
+' Description:  Site form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
@@ -789,12 +790,12 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+    'minimize Main
+    ToggleForm "Main", -1
     
     'set context - based on TempVars
     lblContext.forecolor = lngLtCyan
-    lblContext = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+    lblContext.Caption = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars.item("River"), "")
 
     Title = "Site"
@@ -877,7 +878,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+      'If tbxID > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -886,6 +887,64 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Site form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxSiteCode_KeyPress
+' Description:  Textbox keypress actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub tbxSiteCode_KeyPress(KeyAscii As Integer)
+On Error GoTo Err_Handler
+
+    LimitKeyPress Me.tbxSiteCode, 2, KeyAscii
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxSiteCode_KeyPress[Site form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxSiteCode_Change
+' Description:  Textbox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub tbxSiteCode_Change()
+On Error GoTo Err_Handler
+
+    LimitChange Me.tbxSiteCode, 2
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxSiteCode_Change[Site form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1056,12 +1115,16 @@ On Error GoTo Err_Handler
     With s
         'values passed into form
         .Park = TempVars("ParkCode")
+        .River = TempVars("River")
         
         'form values
-        .SiteCode = tbxSiteCode.Value
-        .SiteName = tbxSiteName.Value
-        .SiteDirections = tbxSiteDirections.Value
-        .SiteDescription = tbxSiteDescription.Value
+        .Code = tbxSiteCode.Value
+        .Name = tbxSiteName.Value
+        .Directions = tbxSiteDirections.Value
+        .Description = tbxDescription.Value
+        
+        'assumed
+        .IsActiveForProtocol = 1 'all sites assumed active when added
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
@@ -1122,7 +1185,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' Sub:          Form_Close
 ' Description:  form closing actions
@@ -1139,8 +1201,8 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore DbAdmin
-    ToggleForm "DbAdmin", 0
+    'restore Main
+    ToggleForm "Main", 0
     
 Exit_Handler:
     Exit Sub
@@ -1175,7 +1237,9 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If IsDate(tbxStartDate) Then
+    'requires: site code & name (directions & description optional)
+    If Len(Nz(tbxSiteCode.Value, "")) > 0 _
+        And Len(Nz(tbxSiteName.Value, "")) > 0 Then
         isOK = True
     End If
     

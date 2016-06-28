@@ -27,6 +27,7 @@ Begin Form
     End
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -382,7 +383,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -390,6 +391,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, April 20, 2016
 ' References:   -
 ' Revisions:    BLC - 4/20/2016 - 1.00 - initial version
+'               BLC - 6/28/2016 - 1.01 - added Form_Close event to clear breadcrumb
 ' =================================
 
 '---------------------
@@ -625,6 +627,39 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          Form_Close
+' Description:  Form closing actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub Form_Close()
+On Error GoTo Err_Handler
+
+    'clear breadcrumb
+    TempVars.Remove "ParkCode"
+    TempVars.Remove "River"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Close[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 '---------------------
 ' Methods

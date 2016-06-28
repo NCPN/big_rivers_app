@@ -15,7 +15,7 @@ Option Explicit
 '               BLC - 6/3/2015  - 1.04 - added IsUsedTargetArea
 '               BLC - 5/5/2016  - 1.05 - added GetRiverSegments, GetProtocolVersion
 '                                        changed to Exit_Handler vs. Exit_Function
-'               BLC - 6/28/2016 - 1.06 - added ToggleIsActive()
+'               BLC - 6/28/2016 - 1.06 - added ToggleIsActive(), revised getParkState() to GetParkState()
 ' =================================
 
 ' ---------------------------------
@@ -281,7 +281,7 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' FUNCTION:     getParkState
+' FUNCTION:     GetParkState
 ' Description:  Retrieve the state associated with a park (via tlu_Parks)
 ' Assumptions:  Park state is properly identified in tlu_Parks
 ' Parameters:   parkCode - 4 character park designator
@@ -292,8 +292,9 @@ End Sub
 ' Adapted:      Bonnie Campbell, February 19, 2015 - for NCPN tools
 ' Revisions:
 '   BLC - 2/19/2015  - initial version
+'   BLC - 6/28/2016  - revised to uppercase GetParkState vs getParkState
 ' ---------------------------------
-Public Function getParkState(ParkCode As String) As String
+Public Function GetParkState(ParkCode As String) As String
 
 On Error GoTo Err_Handler
     
@@ -319,7 +320,7 @@ On Error GoTo Err_Handler
     End If
    
     'return value
-    getParkState = State
+    GetParkState = State
     
 Exit_Handler:
     Exit Function
@@ -328,7 +329,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - getParkState[mod_App_Data])"
+            "Error encountered (#" & Err.Number & " - GetParkState[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Function
@@ -689,10 +690,6 @@ On Error GoTo Err_Handler
     End If
     
     'generate SQL
-'    strSQL = "SELECT Segment FROM River " _
-'                & "LEFT JOIN Park ON Park.ID = River.Park_ID " _
-'                & "WHERE ParkCode LIKE '" & ParkCode & "';"
-
     strSQL = GetTemplate("s_get_river_segments", "ParkCode" & PARAM_SEPARATOR & ParkCode)
 
             
@@ -722,6 +719,248 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetRiverSegments[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetParkID
+' Description:  Retrieve the ID associated with a park
+' Assumptions:  -
+' Parameters:   ParkCode - 4 character park designator (string)
+' Returns:      ID - unique park identifier (long)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/28/2016  - initial version
+' ---------------------------------
+Public Function GetParkID(ParkCode As String) As Long
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    Dim ID As Long
+   
+    'handle only appropriate park codes
+    If Len(ParkCode) <> 4 Then
+        GoTo Exit_Handler
+    End If
+    
+    'generate SQL
+    strSQL = GetTemplate("s_park_id", "ParkCode" & PARAM_SEPARATOR & ParkCode)
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+
+    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+
+    rs.MoveLast
+    rs.MoveFirst
+    
+    If Not (rs.BOF And rs.EOF) Then
+        ID = rs.Fields("ID")
+    End If
+    
+    rs.Close
+    
+    'return value
+    GetParkID = ID
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetParkID[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetRiverSegmentID
+' Description:  Retrieve the ID associated with a River
+' Assumptions:  -
+' Parameters:   segment - river segment designator (string)
+' Returns:      ID - unique river identifier (long)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/28/2016  - initial version
+' ---------------------------------
+Public Function GetRiverSegmentID(segment As String) As Long
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    Dim ID As Long
+   
+    'handle only appropriate River codes
+    If Len(segment) < 1 Then
+        GoTo Exit_Handler
+    End If
+    
+    'generate SQL
+    strSQL = GetTemplate("s_river_segment_id", "waterway" & PARAM_SEPARATOR & segment)
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+
+    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+
+    rs.MoveLast
+    rs.MoveFirst
+    
+    If Not (rs.BOF And rs.EOF) Then
+        ID = rs.Fields("ID")
+    End If
+    
+    rs.Close
+    
+    'return value
+    GetRiverSegmentID = ID
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetRiverSegmentID[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetSiteID
+' Description:  Retrieve the ID associated with a site
+' Assumptions:  -
+' Parameters:   ParkCode - park designator (4-character string)
+'               SiteCode - site designator (2-character string)
+' Returns:      ID - unique site identifier (long)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/28/2016  - initial version
+' ---------------------------------
+Public Function GetSiteID(ParkCode As String, SiteCode As String) As Long
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    Dim ID As Long
+   
+    'handle only appropriate River codes
+    If Len(ParkCode) <> 4 Or Len(SiteCode) <> 2 Then
+        GoTo Exit_Handler
+    End If
+    
+    'generate SQL
+    strSQL = GetTemplate("s_site_id_by_code", _
+            "ParkCode" & PARAM_SEPARATOR & ParkCode & _
+            "|sitecode" & PARAM_SEPARATOR & SiteCode)
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+
+    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+
+    rs.MoveLast
+    rs.MoveFirst
+    
+    If Not (rs.BOF And rs.EOF) Then
+        ID = rs.Fields("ID")
+    End If
+    
+    rs.Close
+    
+    'return value
+    GetSiteID = ID
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetSiteID[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetFeatureID
+' Description:  Retrieve the ID associated with a feature
+' Assumptions:  -
+' Parameters:   ParkCode - park designator (4-character string)
+'               Feature - feature designator (2-character string)
+' Returns:      ID - unique feature identifier (long)
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/28/2016  - initial version
+' ---------------------------------
+Public Function GetFeatureID(ParkCode As String, Feature As String) As Long
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim strSQL As String
+    Dim ID As Long
+   
+    'handle only appropriate River codes
+    If Len(ParkCode) <> 4 Or Len(Feature) < 1 Then
+        GoTo Exit_Handler
+    End If
+    
+    'generate SQL
+    strSQL = GetTemplate("s_feature_id", _
+            "ParkCode" & PARAM_SEPARATOR & ParkCode & _
+            "|feature" & PARAM_SEPARATOR & Feature)
+            
+    'fetch data
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset(strSQL)
+
+    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+
+    rs.MoveLast
+    rs.MoveFirst
+    
+    If Not rs.BOF And rs.EOF Then
+        ID = rs.GetRows(1)
+    End If
+    
+    rs.Close
+    
+    'return value
+    GetFeatureID = ID
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetFeatureID[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Function
