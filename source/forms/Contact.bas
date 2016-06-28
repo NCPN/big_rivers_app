@@ -22,7 +22,7 @@ Begin Form
     ItemSuffix =60
     Left =4875
     Top =3390
-    Right =17295
+    Right =13875
     Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -1415,7 +1415,8 @@ End Sub
 Private Sub tbxLast_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxLast.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1444,7 +1445,8 @@ End Sub
 Private Sub tbxEmail_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxEmail.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1473,7 +1475,8 @@ End Sub
 Private Sub tbxUsername_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxUsername.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1502,7 +1505,8 @@ End Sub
 Private Sub tbxOrganization_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxOrganization.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1531,7 +1535,8 @@ End Sub
 Private Sub tbxPosition_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxPosition.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1560,7 +1565,8 @@ End Sub
 Private Sub tbxPhone_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxPhone.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1589,7 +1595,8 @@ End Sub
 Private Sub tbxExtension_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxExtension.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub

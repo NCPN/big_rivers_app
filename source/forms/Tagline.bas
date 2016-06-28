@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =28
-    Left =10425
-    Top =2850
-    Right =18285
-    Bottom =9330
+    Left =4875
+    Top =3390
+    Right =13875
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x417df2aa6fc3e440
@@ -283,7 +283,7 @@ Begin Form
                     RowSourceType ="Value List"
                     RowSource ="D;G;R;V;W"
                     ColumnWidths ="1440"
-                    OnChange ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
@@ -378,8 +378,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxDistance"
                     ControlSource ="LineDistance_m"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000094000000020000000100000000000000000000001500000001000000 ,
                         0x00000000fff20000000000000300000016000000190000000100000000000000 ,
@@ -415,8 +414,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxHeight"
                     ControlSource ="Height_cm"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000090000000020000000100000000000000000000001300000001000000 ,
                         0x00000000fff20000000000000300000014000000170000000100000000000000 ,
@@ -633,6 +631,8 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
+Dim ary() As String 'for passed in values
+
 Private m_Title As String
 Private m_Directions As String
 Private m_ButtonCaption
@@ -717,6 +717,70 @@ End Property
 '---------------------
 
 ' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    'ensure required arguments passed:
+    '   line distance source | source ID
+    '   line distance source options: F(eature), T(ransect), P(lot)
+    If Not InStr(Me.OpenArgs, "|") And Len(Me.OpenArgs) > 3 Then _
+            GoTo Exit_Handler
+    
+    ary = Split(Me.OpenArgs, "|")
+
+    'minimize VegPlot
+    ToggleForm "VegPlot", -1
+
+    Title = "Tagline Measurements"
+    Directions = "Select the appropriate slope change cause & enter tagline distance & height."
+    tbxIcon.Value = StringFromCodepoint(uBullet)
+    lblDirections.forecolor = lngLtBlue
+    
+    'set hover
+    btnSave.hoverColor = lngGreen
+    btnUndo.hoverColor = lngGreen
+    
+    'defaults
+    tbxIcon.forecolor = lngRed
+    btnSave.Enabled = False
+    cbxCause.backcolor = lngYellow
+    tbxDistance.backcolor = lngYellow
+    tbxHeight.backcolor = lngYellow
+    
+    'tagline slope change causes: Veg, Grd, Water, Rock, Debris
+    cbxCause.RowSourceType = "Value List"
+    cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
+    
+    'ID default -> value used only for edits of existing table values
+    tbxID.DefaultValue = 0
+    
+    'initialize values
+    ClearForm Me
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[Tagline form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Form_Load
 ' Description:  form loading actions
 ' Assumptions:  -
@@ -742,56 +806,6 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Load[Tagline form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Form_Open
-' Description:  form opening actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    Title = "Tagline Measurements"
-    Directions = "Select the appropriate slope change cause & enter tagline distance & height."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
-    
-    'set hover
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
-    
-    'tagline slope change causes: Veg, Grd, Water, Rock, Debris
-    cbxCause.RowSourceType = "Value List"
-    cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
-  
-    'defaults
-    tbxIcon.forecolor = lngRed
-    btnSave.Enabled = False
-    cbxCause.backcolor = lngYellow
-    tbxDistance.backcolor = lngYellow
-    tbxHeight.backcolor = lngYellow
-  
-    'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
-  
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Tagline form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -824,23 +838,25 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          cbxCause_Change
-' Description:  Dropdown change actions
+' Sub:          cbxCause_AfterUpdate
+' Description:  Dropdown after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub cbxCause_Change()
+Private Sub cbxCause_AfterUpdate()
 On Error GoTo Err_Handler
 
 '    Me.SelectedID = CInt(cbxCause.Column(0))
 '    Me.SelectedValue = CStr(cbxCause.Column(1))
+    If Len(cbxCause.Text) > 0 Then _
+        ReadyForSave
     ReadyForSave
     
 Exit_Handler:
@@ -849,14 +865,14 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxCause_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - cbxCause_AfterUpdate[Tagline form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxDistance_Change
-' Description:  Dropdown change actions
+' Sub:          tbxDistance_AfterUpdate
+' Description:  Dropdown AfterUpdate actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -867,10 +883,11 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub tbxDistance_Change()
+Private Sub tbxDistance_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxDistance.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -878,28 +895,29 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxDistance_Change[Tagline form])"
+            "Error encountered (#" & Err.Number & " - tbxDistance_AfterUpdate[Tagline form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxHeight_Change
-' Description:  Dropdown change actions
+' Sub:          tbxHeight_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub tbxHeight_Change()
+Private Sub tbxHeight_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+        If Len(tbxHeight.Text) > 0 Then _
+            ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -907,65 +925,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxHeight_Change[Tagline form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxDistance_LostFocus
-' Description:  Dropdown change actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub tbxDistance_LostFocus()
-On Error GoTo Err_Handler
-
-    ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxDistance_LostFocus[Tagline form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxHeight_LostFocus
-' Description:  Dropdown change actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub tbxHeight_LostFocus()
-On Error GoTo Err_Handler
-
-    ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxHeight_LostFocus[Tagline form])"
+            "Error encountered (#" & Err.Number & " - tbxHeight_AfterUpdate[Tagline form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -982,18 +942,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - adjusted to
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    'clear values
-    cbxCause.Value = ""
-    tbxDistance.Value = ""
-    tbxHeight.Value = ""
-    
-    btnSave.Enabled = False
-    
-    Me.Requery
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1026,8 +980,8 @@ On Error GoTo Err_Handler
     
     With tl
         'values passed into form
-        .LineDistSource = "T"
-        .LineDistSourceID = 14
+        .LineDistSource = ary(0) '"T"
+        .LineDistSourceID = CInt(ary(1)) '14
         
         'default
         .LineDistType = "SC" 'slope changes only
@@ -1036,14 +990,20 @@ On Error GoTo Err_Handler
         .HeightType = Left(cbxCause.Value, 1)
         .Height = tbxHeight.Value
         .LineDistance = tbxDistance.Value
+                
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
+        
+        'set the tbxID.value
+        tbxID = .ID
         
         'set focus on the list record saved
         Me.list.SetFocus
         Me.Form.Recordset.Move tbxID.Value
+
     End With
     
+'--------
     'clear values & refresh display
     Me.RecordSource = ""
     
@@ -1057,7 +1017,14 @@ On Error GoTo Err_Handler
     tbxID.ControlSource = ""
     tbxID.Value = 0
     
+    
+'---
+    
+    'clear values & refresh display
+    
     ReadyForSave
+    
+    PopulateForm Me, tbxID.Value
     
     'refresh list
     Me.list.Requery
@@ -1090,6 +1057,9 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
+
+    'restore Tagline
+    ToggleForm "Tagline", 0
 
     
 Exit_Handler:
@@ -1124,31 +1094,30 @@ On Error GoTo Err_Handler
     'default
     isOK = False
     
-    'set color of icon depending on if values are set
-'    If tbxID > 0 Then
-        'edit record -> use cbxCause.SelText
-        If tbxDistance > 0 And tbxHeight <> "" Then
-            cbxCause.SetFocus
-            If Len(cbxCause.SelText) <> 0 Then isOK = True
-            'Forms("Tagline").SetFocus
-            'tbxHeight.SetFocus
-        End If
-        
-'    Else
-'        'new record -> use cbxCause.Value
+'    'set color of icon depending on if values are set
+''    If tbxID > 0 Then
+'        'edit record -> use cbxCause.SelText
 '        If tbxDistance > 0 And tbxHeight <> "" Then
 '            cbxCause.SetFocus
 '            If Len(cbxCause.SelText) <> 0 Then isOK = True
-'            isOK = True
+'            'Forms("Tagline").SetFocus
+'            'tbxHeight.SetFocus
 '        End If
-'    End If
+    
+    'set color of icon depending on if values are set
+    'requires: height type, line distance, height (cm)
+    If Len(Nz(tbxDistance.Value, "")) > 0 _
+        And Len(Nz(tbxHeight.Value, "")) > 0 _
+        And Len(Nz(cbxCause.Value, "")) > 0 Then
+        isOK = True
+    End If
     
     tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form
-'    Forms("Tagline").Controls("list").Form.Requery
-    
+    Me.Requery
+
 Exit_Handler:
     Exit Sub
 Err_Handler:

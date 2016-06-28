@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =4875
-    Top =3390
-    Right =17295
-    Bottom =14385
+    Left =5010
+    Top =1575
+    Right =12870
+    Bottom =12060
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -819,7 +819,7 @@ On Error GoTo Err_Handler
     tbxID.DefaultValue = 0
     
     'initialize values
-    ClearForm
+    ClearForm Me
 
 
 Exit_Handler:

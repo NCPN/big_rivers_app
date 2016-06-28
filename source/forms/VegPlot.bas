@@ -22,8 +22,8 @@ Begin Form
     ItemSuffix =67
     Left =4875
     Top =3390
-    Right =17295
-    Bottom =14385
+    Right =12735
+    Bottom =12690
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -203,7 +203,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4140
+                    Left =4020
                     Top =1080
                     Width =2025
                     Height =315
@@ -213,9 +213,9 @@ Begin Form
                     Name ="lblModalSedSize"
                     Caption ="Modal Sediment Size"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4140
+                    LayoutCachedLeft =4020
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =6165
+                    LayoutCachedWidth =6045
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -249,8 +249,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2700
-                    Top =1065
+                    Left =2580
+                    Top =1080
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -259,17 +259,17 @@ Begin Form
                     Name ="lblDistance"
                     Caption ="Distance (m)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2700
-                    LayoutCachedTop =1065
-                    LayoutCachedWidth =3945
-                    LayoutCachedHeight =1380
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =3825
+                    LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1200
-                    Top =1065
+                    Left =1080
+                    Top =1080
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -278,10 +278,10 @@ Begin Form
                     Name ="lblNumber"
                     Caption ="Plot #"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1200
-                    LayoutCachedTop =1065
-                    LayoutCachedWidth =2445
-                    LayoutCachedHeight =1380
+                    LayoutCachedLeft =1080
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =2325
+                    LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -470,6 +470,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxModalSedSize"
+                    AfterUpdate ="[Event Procedure]"
                     OnLostFocus ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ControlTipText ="Size class"
@@ -635,6 +636,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDistance"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -668,6 +670,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxNumber"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -702,6 +705,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctFines"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -736,6 +740,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctWater"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -770,6 +775,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctURC"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -805,6 +811,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPlotDensity"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Set plot density 1/x where X = 1, 2, 4, or 8"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
@@ -840,6 +847,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctFA"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -952,6 +960,7 @@ Begin Form
                     TabIndex =12
                     BorderColor =10921638
                     Name ="chkNoCanopyVeg"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1140
@@ -986,6 +995,7 @@ Begin Form
                     TabIndex =13
                     BorderColor =10921638
                     Name ="chkNoRootedVeg"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1140
@@ -1020,6 +1030,7 @@ Begin Form
                     TabIndex =14
                     BorderColor =10921638
                     Name ="chkNoIndicatorSpecies"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3300
@@ -1054,6 +1065,7 @@ Begin Form
                     TabIndex =15
                     BorderColor =10921638
                     Name ="chkHasSocialTrails"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3300
@@ -1246,6 +1258,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnTaglines"
                     Caption ="Tagline"
+                    OnClick ="[Event Procedure]"
                     ControlTipText ="Add/Edit Tagline Measurements"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -1321,12 +1334,12 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Location
+' Form:         VegPlot
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, Location, functions & procedures for UI display
+' Description:  List form object related properties, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
@@ -1424,36 +1437,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Location form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:
@@ -1486,7 +1469,7 @@ On Error GoTo Err_Handler
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars("River"), "")
 
-    Title = "VegPlot (Sampling)"
+    Title = "VegPlot"
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."
     tbxIcon.Value = StringFromCodepoint(uBullet)
@@ -1496,7 +1479,6 @@ On Error GoTo Err_Handler
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblCover.Caption = "Cover" & vbCrLf & "Species"
     lblTagline.Caption = StringFromCodepoint(uRuler)
-    'Me.btnTaglines.Caption = StringFromCodepoint(uTag)
     
     'set hover
     btnComment.hoverColor = lngGreen
@@ -1596,7 +1578,37 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Location form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1617,7 +1629,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+'      If tbxID > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1625,28 +1637,29 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[Location form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_Change
-' Description:  Dropdown change actions
+' Sub:          tbxNumber_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_Change()
+Private Sub tbxNumber_AfterUpdate()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    If Len(tbxNumber.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1654,28 +1667,29 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_Change[Location form])"
+            "Error encountered (#" & Err.Number & " - tbxNumber_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_LostFocus
-' Description:  Dropdown change actions
+' Sub:          tbxDistance_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_LostFocus()
+Private Sub tbxDistance_AfterUpdate()
 On Error GoTo Err_Handler
 
-    'ReadyForSave
+    If Len(tbxDistance.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1683,7 +1697,307 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_LostFocus[Location form])"
+            "Error encountered (#" & Err.Number & " - tbxDistance_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxModalSedSize_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxModalSedSize_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxModalSedSize.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxModalSedSize_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctFines_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctFines_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctFines.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctFines_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctWater_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctWater_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctWater.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctWater_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctURC_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctURC_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctURC.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctURC_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctFA_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctFA_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctFA.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctFA_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPlotDensity_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPlotDensity_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPlotDensity.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPlotDensity_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          chkNoCanopyVeg_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub chkNoCanopyVeg_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(chkNoCanopyVeg.Value) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkNoCanopyVeg_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          chkNoRootedVeg_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub chkNoRootedVeg_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(chkNoRootedVeg.Value) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkNoRootedVeg_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          chkNoIndicatorSpecies_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub chkNoIndicatorSpecies_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(chkNoIndicatorSpecies.Value) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkNoIndicatorSpecies_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          chkHasSocialTrails_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub chkHasSocialTrails_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(chkHasSocialTrails.Value) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkHasSocialTrails_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1713,7 +2027,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnUndo_Click[Location form])"
+            "Error encountered (#" & Err.Number & " - btnUndo_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1803,7 +2117,37 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSave_Click[Location form])"
+            "Error encountered (#" & Err.Number & " - btnSave_Click[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnTaglines_Click
+' Description:  Tagline button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub btnTaglines_Click()
+On Error GoTo Err_Handler
+    
+    'open comment form
+    DoCmd.OpenForm "Tagline", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnTaglines_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1833,7 +2177,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnWCC_Click[Location form])"
+            "Error encountered (#" & Err.Number & " - btnWCC_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1863,7 +2207,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnURC_Click[Location form])"
+            "Error encountered (#" & Err.Number & " - btnURC_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1893,7 +2237,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnARC_Click[Location form])"
+            "Error encountered (#" & Err.Number & " - btnARC_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1915,7 +2259,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "location|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.Text
     
 Exit_Handler:
     Exit Sub
@@ -1923,7 +2267,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnComment_Click[Location form])"
+            "Error encountered (#" & Err.Number & " - btnComment_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1954,7 +2298,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[Location form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2020,7 +2364,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ReadyForSave[Location form])"
+            "Error encountered (#" & Err.Number & " - ReadyForSave[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
