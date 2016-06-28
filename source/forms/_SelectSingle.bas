@@ -16,10 +16,10 @@ Begin Form
     Width =4500
     DatasheetFontHeight =11
     ItemSuffix =5
-    Left =3150
-    Top =3105
-    Right =28545
-    Bottom =14895
+    Left =4875
+    Top =3390
+    Right =17295
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -249,7 +249,7 @@ Option Explicit
 ' =================================
 ' Form:         _SelectSingle
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  Select single form object related properties, events, functions & procedures for UI display
@@ -257,6 +257,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, April 20, 2016
 ' References:   -
 ' Revisions:    BLC - 4/20/2016 - 1.00 - initial version
+'               BLC - 6/28/2016 - 1.01 - revised s_site_list to s_site_list_active
 ' =================================
 
 '---------------------
@@ -394,6 +395,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
+'   BLC - 6/28/2016 - revised s_site_list to s_site_list_active
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -431,7 +433,7 @@ On Error GoTo Err_Handler
             Me.Directions = "Select the desired site."
             Me.ButtonCaption = "Next >"
                         
-            strSQL = Replace(GetTemplate("s_site_list"), "[ParkCode]", TempVars("ParkCode"))
+            strSQL = Replace(GetTemplate("s_site_list_active"), "[ParkCode]", TempVars("ParkCode"))
                         
             DropDownWidth = 2 * TWIPS_PER_INCH
         

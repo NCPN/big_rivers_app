@@ -29,6 +29,7 @@ Private m_Description As String
 Private m_Directions As String
 Private m_IsActiveForProtocol As Boolean
 Private m_Park As String
+Private m_River As String
 Private m_LocationID As Long 'Integer
 Private m_ObserverID As Long 'Integer
 Private m_RecorderID As Long 'Integer
@@ -41,6 +42,7 @@ Private m_Comment As String
 ' Events
 '---------------------
 Public Event InvalidPark(Value)
+Public Event InvalidRiver(Value)
 Public Event InvalidSiteName(Value)
 Public Event InvalidSiteCode(Value)
 
@@ -120,6 +122,8 @@ Public Property Let Park(Value As String)
     aryParks = Split(PARKS, ",")
     If IsInArray(Value, aryParks) Then
         m_Park = Value
+        
+        'set park id also
     Else
         RaiseEvent InvalidPark(Value)
     End If
@@ -127,6 +131,22 @@ End Property
 
 Public Property Get Park() As String
     Park = m_Park
+End Property
+
+Public Property Let River(Value As String)
+    Dim aryRivers() As String
+    aryRivers = Split(RIVERS, ",")
+    If IsInArray(Value, aryRivers) Then
+        m_River = Value
+        
+        'set River id also
+    Else
+        RaiseEvent InvalidRiver(Value)
+    End If
+End Property
+
+Public Property Get River() As String
+    River = m_River
 End Property
 
 Public Property Let LocationID(Value As Integer)

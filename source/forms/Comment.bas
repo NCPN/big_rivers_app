@@ -464,11 +464,11 @@ Public Property Let Title(Value As String)
     lblTitle.Caption = m_Title
 End Property
 
-Public Property Get context() As String
-    context = m_Context
+Public Property Get Context() As String
+    Context = m_Context
 End Property
 
-Public Property Let context(Value As String)
+Public Property Let Context(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "Context"
     If ValidateString(Value, "alphanumdashslashspace") Then
         m_Context = Value
@@ -835,7 +835,7 @@ On Error GoTo Err_Handler
     'set comment context
     ary = Split(Nz(Me.OpenArgs, ""), "|")
     If IsArray(ary) Then
-        Me.context = ary(0) & " - " & ary(1) '"Plot - 24"
+        Me.Context = ary(0) & " - " & ary(1) '"Plot - 24"
     Else
         GoTo Exit_Handler
     End If
@@ -849,7 +849,7 @@ On Error GoTo Err_Handler
    
     Me.AddAction = "add_"
     
-    Me.context = Me.OpenArgs
+    Me.Context = Me.OpenArgs
 
 Exit_Handler:
     Exit Sub

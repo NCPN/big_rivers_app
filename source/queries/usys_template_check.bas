@@ -1,6 +1,6 @@
-﻿dbMemo "SQL" ="SELECT Count(*) AS cnt, tsys_Db_Templates.TemplateName, Template, EffectiveDate\015"
-    "\012FROM tsys_Db_Templates\015\012GROUP BY TemplateName, Template, EffectiveDate"
-    ";\015\012"
+﻿dbMemo "SQL" ="SELECT Count(*) AS cnt, tsys_Db_Templates.TemplateName, Template, Params, Remark"
+    "s, EffectiveDate\015\012FROM tsys_Db_Templates\015\012GROUP BY TemplateName, Tem"
+    "plate, Params, Remarks, EffectiveDate;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -45,17 +45,7 @@ Begin
         End
     End
     Begin
-        dbText "Name" ="Expr1000"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="TemplateName"
-        dbInteger "ColumnWidth" ="3870"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr1"
+        dbText "Name" ="Params"
         dbLong "AggregateType" ="-1"
     End
 End

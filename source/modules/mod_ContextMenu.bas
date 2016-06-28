@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' Module:       ContextMenu
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Context menu object related properties, events, functions & procedures for UI display
 '
@@ -12,6 +12,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, 11/3/2015
 ' References:
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
+'               BLC - 6/28/2016 - 1.01 - revised s_site_list to s_site_list_active
 ' =================================
 
 '---------------------
@@ -49,14 +50,14 @@ Option Explicit
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Public Sub CreateMenu(context As String)
+Public Sub CreateMenu(Context As String)
 On Error GoTo Err_Handler
     
     Dim cbar As CommandBar
     Dim mnuItem As CommandBarControl
     Dim mnu As String
 
-    Select Case context
+    Select Case Context
         Case "park"
             mnu = "park"
         Case "river"
@@ -186,8 +187,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/22/2016 - initial version
+'   BLC - 6/28/2016 - revised s_site_list to s_site_list_active
 ' ---------------------------------
-Public Sub CreateDynamicMenu(context As String)
+Public Sub CreateDynamicMenu(Context As String)
 On Error GoTo Err_Handler
     
     Dim cbar As CommandBar
@@ -195,7 +197,7 @@ On Error GoTo Err_Handler
     Dim mnu As String, action As String
     Dim rs As DAO.Recordset
 
-    Select Case context
+    Select Case Context
         Case "park"
             mnu = "park"
         Case "river"
@@ -291,7 +293,7 @@ On Error GoTo Err_Handler
                 
             Case "site"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list_active", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                     
                     If Not (rs.BOF And rs.EOF) Then
                     
@@ -348,7 +350,7 @@ Err_Handler:
         'duplicate template -- tsys_Db_Templates finds more than one w/ same name
         'Best option is to notify them to contact database manager
         MsgBox "Application cannot find the template." & vbCrLf & vbCrLf & _
-            "Context: " & context & vbCrLf & vbCrLf & _
+            "Context: " & Context & vbCrLf & vbCrLf & _
             "Please contact your data manager to resolve this issue." & vbCrLf & vbCrLf & _
             "Error #" & Err.Number & " - CreateDynamicMenu[mod_ContextMenu]:" & vbCrLf & _
             Err.Description, vbExclamation, "Db Template for Creating ContextMenu Not Found!"

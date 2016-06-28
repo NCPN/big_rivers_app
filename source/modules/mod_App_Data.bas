@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.05
+' Version:      1.06
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -15,6 +15,7 @@ Option Explicit
 '               BLC - 6/3/2015  - 1.04 - added IsUsedTargetArea
 '               BLC - 5/5/2016  - 1.05 - added GetRiverSegments, GetProtocolVersion
 '                                        changed to Exit_Handler vs. Exit_Function
+'               BLC - 6/28/2016 - 1.06 - added ToggleIsActive()
 ' =================================
 
 ' ---------------------------------
@@ -724,3 +725,50 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' Sub:          ToggleIsActive
+' Description:  Toggle IsActive button click actions
+' Assumptions:  -
+' Parameters:   Context - form context for the action (string)
+'               ID - id of record to toggle (long)
+'               IsActive - state to change IsActiveFlag to (Byte), 0 - active, 1 - inactive
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/20/2016 - initial version
+'   BLC - 6/28/2016 - shifted from ContactList form to mod_App_Data
+' ---------------------------------
+Public Sub ToggleIsActive(Context As String, ID As Long, IsActive As Byte)
+On Error GoTo Err_Handler
+    
+    Dim strSQL As String
+    
+    Select Case Context
+        Case "Contact"
+            strSQL = GetTemplate("u_contact_isactive_flag", _
+                      "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
+                      "|ID" & PARAM_SEPARATOR & ID)
+        Case "Site"
+            strSQL = GetTemplate("u_site_isactive_flag", _
+                      "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
+                      "|ID" & PARAM_SEPARATOR & ID)
+    End Select
+
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL (strSQL)
+    DoCmd.SetWarnings True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ToggleIsActive[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub

@@ -608,7 +608,7 @@ End Sub
 ' Revisions:
 '   BLC - 11/3/2015 - initial version
 ' ---------------------------------
-Private Sub AddTask(context As String, recordID As Integer, Description As String, _
+Private Sub AddTask(Context As String, recordID As Integer, Description As String, _
                     Status As Integer, Priority As Integer, Requestor As Integer, _
                     Optional completor As Integer)
 On Error GoTo Err_Handler
@@ -617,7 +617,7 @@ On Error GoTo Err_Handler
     Dim oTask As New Task
     
     With oTask
-        .TaskType = context
+        .TaskType = Context
         .Task = Description
         .Status = Status
         .Priority = Priority

@@ -509,8 +509,12 @@ On Error GoTo Err_Handler
                 'strSQL = GetTemplate()
                 '.Controls("").ControlSource = ""
             Case "Site"
-                'strSQL = GetTemplate()
-                '.Controls("").ControlSource = ""
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxSiteCode").ControlSource = "SiteCode"
+                .Controls("tbxSiteName").ControlSource = "SiteName"
+                .Controls("tbxSiteDescription").ControlSource = "SiteDescription"
+                .Controls("tbxSiteDirections").ControlSource = "SiteDirections"
             Case "Tagline"
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource

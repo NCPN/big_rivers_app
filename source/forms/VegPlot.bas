@@ -22,8 +22,8 @@ Begin Form
     ItemSuffix =67
     Left =4875
     Top =3390
-    Right =12735
-    Bottom =12690
+    Right =13875
+    Bottom =14385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -2066,8 +2066,8 @@ On Error GoTo Err_Handler
         
         'form values
         
-        .EventID = cbxEvent.Column(0)
-        .FeatureID = cbxFeature.Column(0)
+'        .EventID = cbxEvent.Column(0)
+'        .FeatureID = cbxFeature.Column(0)
         
         .PlotNumber = tbxNumber.Value
         .PlotDistance = tbxDistance.Value

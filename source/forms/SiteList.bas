@@ -19,11 +19,9 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =26
-    Left =7425
-    Top =2130
-    Right =15060
-    Bottom =6495
+    ItemSuffix =28
+    Right =9000
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc2b74d8760c3e440
@@ -132,7 +130,6 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =1395
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -172,19 +169,19 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
+                    Left =1440
                     Top =1080
-                    Width =1245
+                    Width =960
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblStartDate"
-                    Caption ="Start Date"
+                    Name ="lblSiteCode"
+                    Caption ="Site Code"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1440
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =2400
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -208,10 +205,29 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin Label
+                    OverlapFlags =85
+                    Left =2520
+                    Top =1080
+                    Width =1440
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblSiteName"
+                    Caption ="Site Name"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2520
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =3960
+                    LayoutCachedHeight =1395
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin Section
-            Height =360
+            Height =480
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -221,6 +237,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     Left =6000
+                    Top =60
                     Width =720
                     ForeColor =4210752
                     Name ="btnEdit"
@@ -265,8 +282,9 @@ Begin Form
                     End
 
                     LayoutCachedLeft =6000
+                    LayoutCachedTop =60
                     LayoutCachedWidth =6720
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -285,7 +303,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =15
+                    Top =120
                     Width =720
                     Height =300
                     FontSize =9
@@ -296,9 +314,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =15
+                    LayoutCachedTop =120
                     LayoutCachedWidth =840
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =420
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -309,6 +327,7 @@ Begin Form
                     OverlapFlags =85
                     TextFontFamily =2
                     Left =6780
+                    Top =60
                     Width =720
                     FontSize =14
                     TabIndex =2
@@ -320,8 +339,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6780
+                    LayoutCachedTop =60
                     LayoutCachedWidth =7500
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =420
                     PictureCaptionArrangement =5
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -345,20 +365,20 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =1440
-                    Top =15
-                    Width =1560
-                    Height =300
+                    Top =105
+                    Width =660
+                    Height =315
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxStartDate"
-                    ControlSource ="StartDate"
+                    Name ="tbxSiteCode"
+                    ControlSource ="SiteCode"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1440
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =315
+                    LayoutCachedTop =105
+                    LayoutCachedWidth =2100
+                    LayoutCachedHeight =420
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -371,6 +391,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =900
+                    Top =105
                     Width =480
                     Height =315
                     TabIndex =4
@@ -381,8 +402,99 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =900
+                    LayoutCachedTop =105
                     LayoutCachedWidth =1380
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =420
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5220
+                    Top =60
+                    Width =720
+                    TabIndex =5
+                    ForeColor =4210752
+                    Name ="btnActivate"
+                    Caption ="í ½í·¸"
+                    ControlTipText ="Toggle IsActive flag"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5220
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =5940
+                    LayoutCachedHeight =420
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =4560
+                    Top =105
+                    Width =480
+                    Height =315
+                    TabIndex =6
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxIsActive"
+                    ControlSource ="=[IsActive]"
+                    ConditionalFormat = Begin
+                        0x010000006c000000020000000000000002000000000000000200000001000000 ,
+                        0x22b14c00ffffff000000000002000000030000000500000001000000ed1c2400 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x310000000000300000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4560
+                    LayoutCachedTop =105
+                    LayoutCachedWidth =5040
+                    LayoutCachedHeight =420
+                    ConditionalFormat14 = Begin
+                        0x01000200000000000000020000000100000022b14c00ffffff00010000003100 ,
+                        0x0000000000000000000000000000000000000000000000000002000000010000 ,
+                        0x00ed1c2400ffffff000100000030000000000000000000000000000000000000 ,
+                        0x00000000
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2400
+                    Top =105
+                    Width =2640
+                    Height =315
+                    TabIndex =7
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxSiteName"
+                    ControlSource ="SiteName"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2400
+                    LayoutCachedTop =105
+                    LayoutCachedWidth =5040
+                    LayoutCachedHeight =420
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
             End
         End
@@ -404,9 +516,9 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         EventsList
+' Form:         SiteList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -414,6 +526,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 6/28/2016 - 1.01 - revised to use ToggleIsActive (mod_App_Data)
 ' =================================
 
 '---------------------
@@ -505,37 +618,6 @@ End Property
 '---------------------
 ' Methods
 '---------------------
-
-' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[EventsList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
 ' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
@@ -558,12 +640,22 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.forecolor = lngDkGreen
     lblDirections.forecolor = lngLtBlue
+    
     'set hover
+    btnActivate.hoverColor = lngGreen
     btnEdit.hoverColor = lngGreen
     btnDelete.hoverColor = lngGreen
 
+    btnActivate.Caption = StringFromCodepoint(uCheckMark)
+    
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.forecolor = lngRed
+
+    'set data source
+    Me.RecordSource = GetTemplate("s_site_list_by_park_river", _
+                        "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+                        "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+    Me.Requery
 
 Exit_Handler:
     Exit Sub
@@ -571,7 +663,37 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[EventsList form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[SiteList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+'    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[SiteList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -598,7 +720,41 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[EventsList form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[SiteList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnActivate_Click
+' Description:  Activate button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/20/2016 - initial version
+'   BLC - 6/28/2016 - added context to ToggleIsActive()
+' ---------------------------------
+Private Sub btnActivate_Click()
+On Error GoTo Err_Handler
+    
+    'identify the record ID
+    ToggleIsActive "Site", tbxID, Abs(tbxIsActive - 1)
+    
+    'clear the Activated record
+    Me.Requery
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnActivate_Click[SiteList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -620,7 +776,7 @@ Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent, tbxID
 
 Exit_Handler:
     Exit Sub
@@ -628,7 +784,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[EventsList form])"
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[SiteList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -655,7 +811,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", ID
+    If result = vbYes Then DeleteRecord "Site", ID
     
     'clear the deleted record
     Me.Requery
@@ -666,7 +822,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[EventsList form])"
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[SiteList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -694,7 +850,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[EventsList form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[SiteList form])"
     End Select
     Resume Exit_Handler
 End Sub
