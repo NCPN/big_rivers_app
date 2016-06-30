@@ -1,5 +1,5 @@
-﻿dbMemo "SQL" ="PARAMETERS ContactID Long, AccessID Long;\015\012UPDATE Contact_Access SET Acces"
-    "s_ID = [AccessID]\015\012WHERE ID = [ContactID];\015\012"
+﻿dbMemo "SQL" ="SELECT COUNT(ID)\015\012FROM Site\015\012WHERE SiteCode = 'NE' AND Park_ID = 2 A"
+    "ND River_ID = 1;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

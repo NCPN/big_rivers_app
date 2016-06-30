@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =23
-    Left =4800
-    Top =2580
-    Right =13080
-    Bottom =10065
+    Left =2955
+    Top =3780
+    Right =16980
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -647,6 +647,8 @@ On Error GoTo Err_Handler
     'clear breadcrumb
     TempVars.Remove "ParkCode"
     TempVars.Remove "River"
+    TempVars.Remove "SiteCode"
+    TempVars.Remove "Feature"
     
 Exit_Handler:
     Exit Sub

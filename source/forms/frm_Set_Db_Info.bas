@@ -388,7 +388,7 @@ Private Sub Form_Open(Cancel As Integer)
         DoCmd.CancelEvent
     Else
         With Me
-            If TempVars.item("UserAccessLevel") = "admin" Then
+            If TempVars.Item("UserAccessLevel") = "admin" Then
                 .AllowEdits = True
                 .tbxWeb_address.visible = True
             Else
@@ -396,7 +396,7 @@ Private Sub Form_Open(Cancel As Integer)
                 .tbxWeb_address.visible = False
             End If
             
-            With Forms!frm_Switchboard!fsub_DBAdmin.Form
+            With Forms!frm_Switchboard!fsub_DbAdmin.Form
                 Me.tbxContactName = !tbxContact_Name
                 Me.tbxContactOrg = !tbxContact_Org
                 Me.tbxContactPhone = !tbxContact_Phone
@@ -483,7 +483,7 @@ Private Sub cmdReleaseHistory_Click()
     On Error GoTo Err_Handler
 
     ' View the release history form
-    If TempVars.item("UserAccessLevel") = "admin" Then
+    If TempVars.Item("UserAccessLevel") = "admin" Then
         DoCmd.OpenForm "frm_App_Releases"
     Else    ' read-only for all but admin users
         DoCmd.OpenForm "frm_App_Releases", , , , acFormReadOnly
@@ -536,7 +536,7 @@ Private Sub cmdOK_Click()
         GoTo Exit_Procedure
     End If
 
-    Set frm = [Forms]![frm_Switchboard]![fsub_DBAdmin].[Form]
+    Set frm = [Forms]![frm_Switchboard]![fsub_DbAdmin].[Form]
 
     ' Save changes to the switchboard
     If Me.cbxVersion <> frm.cbxVersion Then frm.cbxVersion = Me.cbxVersion

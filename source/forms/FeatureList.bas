@@ -582,7 +582,7 @@ On Error GoTo Err_Handler
     btnDelete.forecolor = lngRed
     
     'set data source
-    Me.RecordSource = GetTemplate("s_feature_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
+    Me.RecordSource = GetTemplate("s_feature_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.Item("ParkCode"))
     Me.Requery
 
 

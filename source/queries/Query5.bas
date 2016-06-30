@@ -17,26 +17,6 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
-        dbText "Name" ="e.ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="SiteCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="r.Segment"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.SiteCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="l.ID"
         dbLong "AggregateType" ="-1"
     End

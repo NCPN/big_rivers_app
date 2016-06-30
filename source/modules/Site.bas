@@ -320,8 +320,8 @@ On Error GoTo Err_Handler
             'check if record exists in site
             .SQL = GetTemplate("s_count_tbl", _
                     "field" & PARAM_SEPARATOR & "ID" & _
-                    "|tbl" & PARAM_SEPARATOR & "Site WHERE SiteCode = " & Me.Code & _
-                    "AND ParkID = " & Me.ParkID & " AND RiverID = " & Me.RiverID)
+                    "|tbl" & PARAM_SEPARATOR & "Site WHERE SiteCode = '" & Me.Code & _
+                    "' AND Park_ID = " & Me.ParkID & " AND River_ID = " & Me.RiverID)
             Set rs = .OpenRecordset
             If rs.Fields(0) > 0 Then iCount = rs.Fields(0)
         End With

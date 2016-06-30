@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_User
 ' Level:        Framework module
-' Version:      1.06
+' Version:      1.07
 ' Description:  Access related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, May 2014
@@ -17,6 +17,7 @@ Option Explicit
 '               BLC, 6/30/2015 - 1.05 - updated cmd button prefixes to btn
 '               BLC, 4/4/2016  - 1.06 - changed Exit_Handler/Exit_Procedure > Exit_Handler
 '               BLC, 4/20/2016 - 1.07 - added getADCommonName() to retrieve person's name
+'               BLC, 6/30/2016 - 1.08 - adjusted to use GetTemplate
 ' =================================
 
 ' ---------------------------------
@@ -46,6 +47,7 @@ Option Explicit
 '                                for apps w/o user access controls
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler, dbCurrent to CurrentDb
+'               BLC, 6/30/2016 - revised to use GetTemplate()
 ' ---------------------------------
 Public Function getDbUserAccess() As String
 On Error GoTo Err_Handler
@@ -58,18 +60,57 @@ Dim rs As DAO.Recordset
 
     If USER_ACCESS_CONTROL Then
     
-        strSQL = "SELECT User_role FROM tsys_User_Roles WHERE User_name = '" & Environ("Username") & "';"
-    
-        'fetch User role & set UserAccessLevel
-        'Set rs = dbCurrent.OpenRecordset(strSQL)
-        Set rs = CurrentDb.OpenRecordset(strSQL)
+'        strSQL = "SELECT User_role FROM tsys_User_Roles WHERE User_name = '" & Environ("Username") & "';"
+'Debug.Print strSQL
+'        'fetch User role & set UserAccessLevel
+'        'Set rs = dbCurrent.OpenRecordset(strSQL)
+'        Set rs = CurrentDb.OpenRecordset(strSQL)
+        
+        Dim db As DAO.Database
+        Dim qdf As DAO.QueryDef
+        
+        Set db = CurrentDb
+        
+        With db
+            Set qdf = .QueryDefs("usys_temp_qdf")
+                    
+            With qdf
+                .SQL = GetTemplate("s_user_access")
+                
+                '-- required parameters --
+                .Parameters("appuser") = Environ("Username")
+                
+                '-- optional parameters --
+                
+                Set rs = .OpenRecordset(dbOpenDynaset)
+                '.Execute dbFailOnError
+                
+        
         If Not rs.BOF And Not rs.EOF Then
             'db user role
-            TempVars("UserAccessLevel") = CStr(rs!User_role)
+            TempVars("UserAccessLevel") = CStr(rs!AccessLevel)
         Else
             'default
             TempVars("UserAccessLevel") = "read only"
         End If
+                
+                
+                'cleanup
+                .Close
+                Set rs = Nothing
+            End With
+            
+        End With
+        
+        
+'        If Not rs.BOF And Not rs.EOF Then
+'            'db user role
+'            TempVars("UserAccessLevel") = CStr(rs!User_role)
+'        Else
+'            'default
+'            TempVars("UserAccessLevel") = "read only"
+'        End If
+        
     Else
         'default for apps w/o user access controls
         TempVars("UserAccessLevel") = "admin"
@@ -105,6 +146,7 @@ End Function
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC, 4/4/2016  - changed Exit_Procedure > Exit_Handler
+'               BLC, 6/30/2016 - revised to use GetTemplate()
 ' ---------------------------------
 Public Sub setUserAccess(frm As Form, Optional flag As String)
 On Error GoTo Err_Handler
@@ -150,7 +192,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "frm_Switchboard"
                         'handle updates
                         If flag = "update" Then
-                            With !fsub_DBAdmin.Form
+                            With !fsub_DbAdmin.Form
                                 !btnEditLog.Enabled = True
                                 !btnSetRoles.Enabled = True
                                 !btnDbWindow.Enabled = True
@@ -167,7 +209,8 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                             CurrentDb.Properties("AllowShortcutMenus") = True
                             CurrentDb.Properties("AllowBuiltInToolbars") = True
                         End If
-                    Case "fsub_DbAdmin", "frm_Data_Gateway", "frm_Edit_Log", "frm_Lookups", "frm_QA_Tool", _
+                    Case "DbAdmin", _
+                         "fsub_DbAdmin", "frm_Data_Gateway", "frm_Edit_Log", "frm_Lookups", "frm_QA_Tool", _
                          "frm_Data_Browser"
                         'admin & power user settings are same
                         GoTo Admin_PowerUser:
@@ -193,7 +236,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "frm_Switchboard"
                         'handle updates
                         If flag = "update" Then
-                            With !fsub_DBAdmin.Form
+                            With !fsub_DbAdmin.Form
                                 !btnEditLog.Enabled = True
                                 !btnSetRoles.Enabled = True
                                 !btnDbWindow.Enabled = True
@@ -207,7 +250,8 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                             CurrentDb.Properties("AllowShortcutMenus") = True
                             CurrentDb.Properties("AllowBuiltInToolbars") = True
                         End If
-                    Case "fsub_DbAdmin", "frm_Data_Gateway", "frm_Edit_Log", "frm_Lookups", "frm_Data_Browser"
+                    Case "DbAdmin", _
+                        "fsub_DbAdmin", "frm_Data_Gateway", "frm_Edit_Log", "frm_Lookups", "frm_Data_Browser"
                         'admin & power user settings are same
                         GoTo Admin_PowerUser:
                     Case ""
@@ -236,7 +280,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         .pgSettings.Enabled = True
                         .btnChangeDbInfo.Enabled = False
                     Case "frm_Switchboard"
-                        With !fsub_DBAdmin.Form
+                        With !fsub_DbAdmin.Form
                             !btnEditLog.Enabled = False   ' automatically opens if certified data are edited
                             !btnSetRoles.Enabled = False
                             !btnDbWindow.Enabled = False
@@ -333,7 +377,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "frm_Switchboard"
                         ' Set default application mode to read only, and set up form accordingly in case of error
                         ' requires frm!fsub_DBAdmin.Form format or error #438 object doesn't support this property/method occurs
-                        With !fsub_DBAdmin.Form
+                        With !fsub_DbAdmin.Form
                             .btnSetRoles.Enabled = False
                             .btnDbWindow.Enabled = False
                             .pgSettings.Enabled = False
@@ -345,7 +389,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         
                         'handle updates
                         If flag = "update" Then
-                            !fsub_DBAdmin.Form!btnEditLog.Enabled = True
+                            !fsub_DbAdmin.Form!btnEditLog.Enabled = True
                             ' Turn off options (only apparent after the next time app is opened)
                             CurrentDb.Properties("AllowFullMenus") = False
                             CurrentDb.Properties("AllowShortcutMenus") = False
@@ -359,7 +403,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         .tbxProject.backstyle = 0
                         .tbxProject.SpecialEffect = 0
                         .btnNewUser.Enabled = False
-                    Case "fsub_DbAdmin"
+                    Case "DbAdmin", "fsub_DbAdmin"
                         .btnEditLog.Enabled = True
                         .btnSetRoles.Enabled = False
                         .btnDbWindow.Enabled = False
@@ -446,7 +490,7 @@ Admin_PowerUser:
 
     With frm
         Select Case .Name
-            Case "fsub_DbAdmin"
+            Case "DbAdmin", "fsub_DbAdmin"
                 .btnEditLog.Enabled = True
                 .btnSetRoles.Enabled = True
                 .btnDbWindow.Enabled = True
@@ -602,6 +646,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:    BLC, 8/8/2014 - initial version
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
+'               BLC, 6/30/2016 - revised to use SWITCHBOARD vs. frm_Switchboard and GetTemplate()
 ' ---------------------------------
 Public Sub logUserAction(frm As Form)
 On Error GoTo Err_Handler
@@ -613,20 +658,46 @@ Dim strSQL As String
     With frm
     
         Select Case .Name
-            Case "frm_Switchboard"
+            Case SWITCHBOARD
                 ' Log the user exit time if the back end is connected and the user has write privileges
                 If TempVars("Connected") And TempVars("WritePermission") Then
-                    strSQL = "INSERT INTO tsys_Logins ( User_name, Action_taken ) SELECT '" _
-                        & Environ("Username") & "' AS User, 'close' AS Action;"
+'                    strSQL = "INSERT INTO tsys_Logins ( User_name, Action_taken ) SELECT '" _
+'                        & Environ("Username") & "' AS User, 'close' AS Action;"
+'                    strSQL = GetTemplate("tsys_login_action")
+                    Dim db As DAO.Database
+                    Dim qdf As DAO.QueryDef
+                    
+                    Set db = CurrentDb
+                    
+                    With db
+                        Set qdf = .QueryDefs("usys_temp_qdf")
+                                
+                        With qdf
+                            .SQL = GetTemplate("tsys_login_action")
+                            
+                            '-- required parameters --
+                            .Parameters("environ_username") = Environ("Username")
+                            .Parameters("action") = "close"
+                            
+                            '-- optional parameters --
+                            
+                            .Execute dbFailOnError
+                            
+                            'cleanup
+                            .Close
+                        End With
+                        
+                    End With
+                
                 End If
         End Select
     End With
 
     'SQL check
-    If Len(strSQL) > 0 Then
-        DoCmd.SetWarnings False
-        DoCmd.RunSQL strSQL
-    End If
+'    If Len(strSQL) > 0 Then
+'        DoCmd.SetWarnings False
+'        DoCmd.RunSQL strSQL
+'    End If
 
 Exit_Handler:
     Exit Sub

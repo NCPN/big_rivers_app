@@ -20,16 +20,16 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =4665
-    Top =3315
-    Right =17460
-    Bottom =14310
+    Left =2955
+    Top =3780
+    Right =13440
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x741eede0d9c6e440
     End
-    Caption ="Transect"
-    OnCurrent ="[Event Procedure]"
+    RecordSource ="Contact"
+    Caption ="User"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
@@ -164,7 +164,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Transect"
+                    Caption ="User"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -182,7 +182,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the transect data.Ne"
+                    Caption ="Please confirm the user entering/viewing data."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -214,7 +214,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =1020
+            Height =720
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -222,6 +222,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -230,7 +231,7 @@ Begin Form
                     Name ="btnNext"
                     Caption ="Next"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Save Record"
+                    ControlTipText ="Continue"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
@@ -239,7 +240,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -262,7 +264,7 @@ Begin Form
                     FontSize =9
                     TabIndex =1
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -305,6 +307,7 @@ Begin Form
                 Begin ComboBox
                     OverlapFlags =85
                     IMESentenceMode =3
+                    ColumnCount =3
                     Left =1020
                     Top =60
                     Width =3420
@@ -322,6 +325,8 @@ Begin Form
                     End
                     Name ="cbxUser"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;2160;0"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1020
@@ -463,36 +468,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 155, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/15/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[User form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -522,7 +497,7 @@ On Error GoTo Err_Handler
     cbxUser.backcolor = lngYellow
   
     'set list of users
-    Me.cbxUser.RowSource = "SELECT ID, LastName, FirstName, '('+UserName+')' AS User FROM Contact;"
+    Me.cbxUser.RowSource = GetTemplate("s_app_user") '"SELECT ID, LastName +','+ FirstName + '('+UserName +')' AS User FROM Contact;"
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -539,37 +514,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          Form_Current
-' Description:  form current actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 15, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub Form_Current()
-On Error GoTo Err_Handler
-              
-      If tbxID > 0 Then btnNext.Enabled = True
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[User form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          cbxSampleDate_Change
-' Description:  Combobox change actions
+' Sub:          Form_Load
+' Description:  form loading actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -578,12 +524,46 @@ End Sub
 ' Source/date:  Bonnie Campbell, June 155, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/15/2016 - initial version
 ' ---------------------------------
-Private Sub cbxUser_Change()
+Private Sub Form_Load()
 On Error GoTo Err_Handler
 
+    'eliminate NULLs
+    'If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[User form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxUser_AfterUpdate
+' Description:  Combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 29, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/29/2016 - initial version
+' ---------------------------------
+Private Sub cbxUser_AfterUpdate()
+On Error GoTo Err_Handler
     
+    'set global values
+    TempVars.Add "AppUserID", CInt(cbxUser.Column(0))
+    TempVars.Add "UserAccessLevel", cbxUser.Column(2)
+    
+    ReadyToContinue
     
 Exit_Handler:
     Exit Sub
@@ -591,7 +571,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_Change[User form])"
+            "Error encountered (#" & Err.Number & " - cbxUser_AfterUpdate[User form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -613,8 +593,8 @@ Private Sub btnNext_Click()
 On Error GoTo Err_Handler
     
     'open Next form
-    DoCmd.OpenForm "Main", acNormal, , , , , "User|" & tbxID
-    
+    DoCmd.Close acForm, Me.Name
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -642,7 +622,7 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
+    DoCmd.OpenForm "Main", acNormal, , , , , "User|" & TempVars("AppUserID")
     
 Exit_Handler:
     Exit Sub
@@ -651,6 +631,50 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[User form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          ReadyToContinue
+' Description:  Check if form values are ready to save
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub ReadyToContinue()
+On Error GoTo Err_Handler
+
+    Dim isOK As Boolean
+
+    'default
+    isOK = False
+    
+    'set color of icon depending on if values are set
+    'requires: site code & name (directions & description optional)
+    If Len(Nz(cbxUser.Value, "")) > 0 Then
+        isOK = True
+    End If
+    
+    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    btnNext.Enabled = isOK
+    
+    'refresh form
+    Me.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ReadyToContinue[Site form])"
     End Select
     Resume Exit_Handler
 End Sub

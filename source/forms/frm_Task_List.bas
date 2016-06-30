@@ -795,7 +795,7 @@ Private Sub Form_Open(Cancel As Integer)
         fxnFilterRecords (True)
     Else
     ' Set the default form filter
-        Me.cmbParkFilter = TempVars.item("Park")
+        Me.cmbParkFilter = TempVars.Item("Park")
         Me.togFilterByPark = True
         Me.cmbStatusFilter = "Active"
         Me.togFilterByStatus = True
@@ -803,7 +803,7 @@ Private Sub Form_Open(Cancel As Integer)
     End If
 
     ' Disable new task button for read only application mode
-    If TempVars.item("UserAccessLevel") = "read only" Then _
+    If TempVars.Item("UserAccessLevel") = "read only" Then _
         Me.cmdNewTask.Enabled = False Else Me.cmdNewTask.Enabled = True
 
 Exit_Procedure:
@@ -1057,7 +1057,7 @@ Private Sub cmdTaskListRpt_Click()
 
     strFilter = ""
     bFilterOn = False
-    strTimeframe = TempVars.item("Timeframe")
+    strTimeframe = TempVars.Item("Timeframe")
 
     strMsg = "This will generate the task list report ..." & vbCrLf & vbCrLf & _
         "Would you like to limit task list output to " & vbCrLf & _
@@ -1424,11 +1424,11 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     Me.Form.OrderByOn = True
 
     ' Change the label format to indicate the sorted field
-    Me.Controls.item(strSortFieldLabel).FontItalic = False
-    Me.Controls.item(strSortFieldLabel).fontBold = False
+    Me.Controls.Item(strSortFieldLabel).FontItalic = False
+    Me.Controls.Item(strSortFieldLabel).fontBold = False
     strSortFieldLabel = "lab" & strFieldName
-    Me.Controls.item(strSortFieldLabel).FontItalic = True
-    Me.Controls.item(strSortFieldLabel).fontBold = True
+    Me.Controls.Item(strSortFieldLabel).FontItalic = True
+    Me.Controls.Item(strSortFieldLabel).fontBold = True
 
 Exit_Procedure:
     Exit Function

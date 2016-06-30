@@ -351,7 +351,7 @@ On Error GoTo Err_Handler
 
     Set vbCom = Application.VBE.ActiveVBProject.VBComponents
 
-    vbCom.Remove VBComponent:=vbCom.item(strModule)
+    vbCom.Remove VBComponent:=vbCom.Item(strModule)
 
 Exit_Handler:
     Exit Sub
@@ -906,7 +906,179 @@ Public Sub testme()
 'getting IDs
 
 '    Debug.Print GetParkID("BLCA")
-    Debug.Print GetRiverSegmentID("CBC")
+'    Debug.Print GetRiverSegmentID("CBC")
 '    Debug.Print GetSiteID("BLCA", "EP")
 
+'wia
+Dim Img 'As ImageFile
+Dim s 'As String
+Dim v 'As Vector
+
+Set Img = CreateObject("WIA.ImageFile")
+
+'Img.LoadFile "Z:\_____LIB\pics\IMAG5402.jpg"
+'XResolution(282) = 72
+'YResolution(283) = 72
+'ResolutionUnit(296) = 2
+'YCbCrPositioning(531) = 1
+'ExifISOSpeed(34855) = 580
+'ExifDTOrig (36867) =2016:01:03 14:20:16
+'ExifDTDigitized (36868) =2016:01:03 14:20:16
+'ExifFlash(37385) = 0
+'ExifFocalLength(37386) = 3.69
+'ExifColorSpace(40961) = 1
+'ExifPixXDim(40962) = 2592
+'ExifPixYDim(40963) = 1456
+'20545 (20545) =R98
+'GpsLatitudeRef(1) = N
+'GpsLongitudeRef(3) = W
+'GpsAltitudeRef(5) = 0
+'GpsAltitude(6) = 0
+'29 (29) =2016:01:03
+'ThumbnailCompression(20515) = 6
+'ThumbnailResolutionX(20525) = 72
+'ThumbnailResolutionY(20526) = 72
+'ThumbnailResolutionUnit(20528) = 2
+'JPEGInterFormat(513) = 854
+'JPEGInterLength(514) = 28534
+'Width = 2592
+'Height = 1456
+'Depth = 24
+'HorizontalResolution = 72
+'VerticalResolution = 72
+'FrameCount = 1
+'Img.LoadFile "C:\Users\Public\Pictures\internet\royaltyfree\MH900185150.JPG"
+
+'Img.LoadFile "Z:\_____LIB\pics\IMAG5402.jpg"
+'XXImg.LoadFile "Z:\_____LIB\pics\Zumba\2013-03-01_18-25-29_1.3gp"
+'Img.LoadFile "Z:\_____LIB\pics\MDY\523781_4249158158136_1966400092_n.jpg"
+'ExifUserComment (37510) =*
+'Width = 960
+'Height = 720
+'Depth = 24
+'HorizontalResolution = 96
+'VerticalResolution = 96
+'FrameCount = 1
+
+'Img.LoadFile "Z:\_____LIB\pics\MDY\003.JPG"
+'SoftwareUsed(305) = Picasa
+'ExifDTOrig (36867) =2012:09:26 17:02:26
+'ExifDTDigitized (36868) =2012:09:26 17:02:26
+'ExifDTOrigSS(37521) = 0
+'ExifDTDigSS(37522) = 0
+'ExifPixXDim(40962) = 1600
+'ExifPixYDim(40963) = 1200
+'ThumbnailCompression(20515) = 6
+'ThumbnailResolutionX(20525) = 72
+'ThumbnailResolutionY(20526) = 72
+'ThumbnailResolutionUnit(20528) = 2
+'JPEGInterFormat(513) = 4416
+'JPEGInterLength(514) = 4664
+'Width = 1600
+'Height = 1200
+'Depth = 24
+'HorizontalResolution = 96
+'VerticalResolution = 96
+'FrameCount = 1
+
+s = "Width = " & Img.Width & vbCrLf & _
+    "Height = " & Img.Height & vbCrLf & _
+    "Depth = " & Img.PixelDepth & vbCrLf & _
+    "HorizontalResolution = " & Img.HorizontalResolution & vbCrLf & _
+    "VerticalResolution = " & Img.VerticalResolution & vbCrLf & _
+    "FrameCount = " & Img.FrameCount & vbCrLf
+
+If Img.IsIndexedPixelFormat Then
+    s = s & "Pixel data contains palette indexes" & vbCrLf
+End If
+
+If Img.IsAlphaPixelFormat Then
+    s = s & "Pixel data has alpha information" & vbCrLf
+End If
+
+If Img.IsExtendedPixelFormat Then
+    s = s & "Pixel data has extended color information (16 bit/channel)" & vbCrLf
+End If
+
+If Img.IsAnimated Then
+    s = s & "Image is animated" & vbCrLf
+End If
+
+If Img.Properties.Exists("40091") Then
+    Set v = Img.Properties("40091").Value
+    s = s & "Title = " & v.String & vbCrLf
+End If
+
+If Img.Properties.Exists("40092") Then
+    Set v = Img.Properties("40092").Value
+    s = s & "Comment = " & v.String & vbCrLf
+End If
+
+If Img.Properties.Exists("40093") Then
+    Set v = Img.Properties("40093").Value
+    s = s & "Author = " & v.String & vbCrLf
+End If
+
+If Img.Properties.Exists("40094") Then
+    Set v = Img.Properties("40094").Value
+    s = s & "Keywords = " & v.String & vbCrLf
+End If
+
+If Img.Properties.Exists("40095") Then
+    Set v = Img.Properties("40095").Value
+    s = s & "Subject = " & v.String & vbCrLf
+End If
+
+Dim vecProperty As WIA.Vector
+Dim propEach As WIA.Property
+
+With Img
+    For Each propEach In .Properties
+            Select Case propEach.Name
+                Case "40091"
+                    Set vecProperty = propEach.Value
+                    Debug.Print "Title = " & vecProperty.String
+
+                Case "40092"
+                    Set vecProperty = propEach.Value
+                    Debug.Print "Comment = " & vecProperty.String
+
+                Case "40093"
+                    Set vecProperty = propEach.Value
+                    Debug.Print "Author = " & vecProperty.String
+
+                Case "40094"
+                    Set vecProperty = propEach.Value
+                    Debug.Print "Keywords = " & vecProperty.String
+
+                Case "40095"
+                    Set vecProperty = propEach.Value
+                    Debug.Print "Subject = " & vecProperty.String
+
+                Case Else
+                'Bob77, May 9, 2011
+                'http://stackoverflow.com/questions/5927828/extract-properties-from-the-image-file
+                    
+                    If Not (propEach.Name = "ChrominanceTable" Or _
+                            propEach.Name = "LuminanceTable") Then
+                    If Not varType(propEach.Value) = vbObject Then _
+                    Debug.Print propEach.Name & " (" & propEach.PropertyID & ") ="; CStr(propEach.Value)
+                    End If
+            End Select
+        Next
+End With
+
+Debug.Print s
+
+
 End Sub
+
+'Function b2d(bstr)
+''convert binary string to decimal number
+'    numbits = Len(bstr)
+'    asum = 0
+'    For i = 1 To numbits
+'        asum = asum + Mid(bstr, i, 1) * 2 ^ (numbits - i)
+'    Next
+'    b2d = asum
+'End Function

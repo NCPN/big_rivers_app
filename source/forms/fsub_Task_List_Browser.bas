@@ -472,7 +472,7 @@ Private Sub Form_Dirty(Cancel As Integer)
 
     ' Note: this event is ignored on inserting a new record if BeforeInsert code exists
 
-    If TempVars.item("UserAccessLevel") = "read only" Then
+    If TempVars.Item("UserAccessLevel") = "read only" Then
         ' Edits not allowed
         Cancel = True
         GoTo Exit_Procedure
@@ -502,8 +502,8 @@ End Sub
 Private Sub Form_Delete(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    If TempVars.item("UserAccessLevel") <> "admin" And _
-        TempVars.item("UserAccessLevel") <> "power user" Then
+    If TempVars.Item("UserAccessLevel") <> "admin" And _
+        TempVars.Item("UserAccessLevel") <> "power user" Then
         ' Edits not allowed
         Cancel = True
         GoTo Exit_Procedure

@@ -1480,7 +1480,7 @@ Private Sub Form_Open(Cancel As Integer)
     ' Initialize UI
     With Me
         ' Set form time frame to global time frame
-        .cmbTimeframe = TempVars.item("Timeframe")
+        .cmbTimeframe = TempVars.Item("Timeframe")
         
         .cmbDoneFilter = "False"
         .togFilterByDone = True
@@ -1547,11 +1547,11 @@ End Sub
 Private Sub cmbTimeframe_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If Me.cmbTimeframe <> TempVars.item("Timeframe") Then
+    If Me.cmbTimeframe <> TempVars.Item("Timeframe") Then
         Me.cmdRefresh.Enabled = False
         Me.optgMode.Enabled = False
     Else
-        Select Case TempVars.item("UserAccessLevel")
+        Select Case TempVars.Item("UserAccessLevel")
           Case "admin", "power user"
             Me.cmdRefresh.Enabled = True
             Me.optgMode.Enabled = True
@@ -2715,7 +2715,7 @@ Private Function fxnEnableAutoFix()
     Set ctlAutoFix = Forms!frm_QA_Tool.subQueryResults!varAutoFix
 
     ' If no error, the field is there ... enable the ctl if user has sufficient rights
-    Select Case TempVars.item("UserAccessLevel")
+    Select Case TempVars.Item("UserAccessLevel")
       Case "admin", "power user"
         Me.cmdAutoFix.Enabled = True
     End Select

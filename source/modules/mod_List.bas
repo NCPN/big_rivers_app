@@ -38,7 +38,7 @@ Public Sub lvwPopulateFromQuery(ctrl As MSComctlLib.ListView, strSQL As String, 
 On Error GoTo Err_Handler
     Dim dbs As Database
     Dim rs As Recordset
-    Dim item As ListItem
+    Dim Item As ListItem
     Dim i As Integer
     
     On Error Resume Next
@@ -51,13 +51,13 @@ On Error GoTo Err_Handler
     If rs.RecordCount > 0 Then
         rs.MoveFirst
         Do Until rs.EOF
-            Set item = ctrl.ListItems.Add(, , rs(aryFields(i)))
+            Set Item = ctrl.ListItems.Add(, , rs(aryFields(i)))
             For i = 1 To UBound(aryFields)
-              item.SubItems(i) = rs(aryFields(i))
+              Item.SubItems(i) = rs(aryFields(i))
             Next
             On Error Resume Next 'continue even in error
             rs.MoveNext
-            Set item = Nothing
+            Set Item = Nothing
         Loop
     End If
 
@@ -221,7 +221,7 @@ End Sub
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 '   BLC - 5/22/2015 - updated documentation
 ' ---------------------------------
-Public Function IsListDuplicate(lbx As ListBox, col As Integer, item As String) As Boolean
+Public Function IsListDuplicate(lbx As ListBox, col As Integer, Item As String) As Boolean
 On Error GoTo Err_Handler
     
     Dim isDupe As Boolean
@@ -233,7 +233,7 @@ On Error GoTo Err_Handler
     'iterate through listbox (use .Column(col,i) vs .ListIndex(i) which results in error 451 property let not defined, property get...)
     For i = 0 To lbx.ListCount
         'check if item exists in listbox
-        If lbx.Column(col, i) = item Then
+        If lbx.Column(col, i) = Item Then
             'duplicate, so exit
             isDupe = True
             GoTo Exit_Handler
@@ -283,7 +283,7 @@ On Error GoTo Err_Handler
   
   'skip first row if lbx has headers
   iHdr = 0
-  If Len(TempVars.item("lbxHdr")) > 0 Then
+  If Len(TempVars.Item("lbxHdr")) > 0 Then
     iHdr = 1
   End If
   
@@ -960,7 +960,7 @@ Public Sub MoveSelectedItems(frm As Form, strSourceControl As String, strTargetC
     
 On Error GoTo Err_Handler
     
-    Dim iRow As Integer, StartRow As Integer, i As Integer, X As Integer, iRemovedItems As Integer
+    Dim iRow As Integer, StartRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
     Dim strItem As String
@@ -985,7 +985,7 @@ On Error GoTo Err_Handler
     
     'add back the header if it doesn't exist
     If frm.Controls(strTargetControl).ColumnHeads = True And frm.Controls(strTargetControl).ListCount = 0 Then
-       strItem = TempVars.item("lbxHdr") & strItem
+       strItem = TempVars.Item("lbxHdr") & strItem
        frm.Controls(strTargetControl).AddItem strItem
     End If
     
@@ -1024,9 +1024,9 @@ On Error GoTo Err_Handler
     iRemovedItems = 0
     
     'iterate through selected items
-    For X = LBound(arySelectedItems) To UBound(arySelectedItems)
+    For x = LBound(arySelectedItems) To UBound(arySelectedItems)
                         
-        iRow = arySelectedItems(X) - iRemovedItems
+        iRow = arySelectedItems(x) - iRemovedItems
             
         'clear string
         strItem = ""
@@ -1047,7 +1047,7 @@ On Error GoTo Err_Handler
             iRemovedItems = iRemovedItems + 1
         End If
     
-    Next X
+    Next x
 
 Exit_Handler:
     Exit Sub

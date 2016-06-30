@@ -442,7 +442,7 @@ On Error GoTo Err_Handler
 Dim i As Integer
 
     For i = 0 To [TempVars].Count - 1
-        If [TempVars].item(i).Name = strItem Then
+        If [TempVars].Item(i).Name = strItem Then
             'fetch the index and exit
             GetTempVarIndex = i
             Exit Function
@@ -713,7 +713,7 @@ Debug.Print strTemplate
     'initialize AppTemplates if not populated
     If g_AppTemplates Is Nothing Then GetTemplates
 
-    template = g_AppTemplates(strTemplate).item("Template")
+    template = g_AppTemplates(strTemplate).Item("Template")
     
     If Len(params) > 0 Then
     
@@ -742,7 +742,7 @@ Debug.Print strTemplate
                 ary2 = Split(ary(i), ":")
             End If
             'compare datatype to aryParams value
-            If IsTypeMatch(ary2(1), g_AppTemplates(strTemplate).item("Params").item(ary2(0))) Then
+            If IsTypeMatch(ary2(1), g_AppTemplates(strTemplate).Item("Params").Item(ary2(0))) Then
                 
                 'prepare replaced value
                 swap = "[" & ary2(0) & "]"

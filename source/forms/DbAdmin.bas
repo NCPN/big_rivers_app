@@ -20,14 +20,15 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =5010
-    Top =3015
-    Right =12870
-    Bottom =9180
+    Left =2955
+    Top =3780
+    Right =13440
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x360db2e4edc6e440
     End
+    RecordSource ="tsys_App_Releases"
     Caption ="Location (Sampling Location)"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -208,7 +209,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Location (Sampling Location)"
+                    Caption ="title"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -226,7 +227,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the sampling location information and click save."
+                    Caption ="directions"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -1582,9 +1583,9 @@ Begin Form
                                     TabIndex =6
                                     ForeColor =-2147483607
                                     Name ="tbxAppMode"
-                                    StatusBarText ="Current user access level for the app"
+                                    StatusBarText ="Current user access level for this application"
                                     FontName ="Arial"
-                                    ControlTipText ="Current user access level for the application"
+                                    ControlTipText ="Current user access level for this application"
                                     AsianLineBreak =0
 
                                     LayoutCachedLeft =1800
@@ -1761,12 +1762,9 @@ Begin Form
                                     FontSize =8
                                     FontWeight =700
                                     ForeColor =-2147483607
-                                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"0\""
                                     Name ="cbxVersion"
                                     ControlSource ="ID"
                                     RowSourceType ="Table/Query"
-                                    RowSource ="SELECT tsys_App_Releases.ID, 'Version ' & [VersionNumber] & ' (' & [ReleaseDate]"
-                                        " & ')' AS Version FROM tsys_App_Releases; "
                                     ColumnWidths ="0;2880"
                                     FontName ="Arial"
                                     ControlTipText ="Version number of this application"
@@ -2480,12 +2478,6 @@ On Error GoTo Err_Handler
     'minimize Main
     ToggleForm "Main", -1
 
-'    If FormIsOpen("Main") Then
-'        Forms("Main").SetFocus
-'        DoCmd.Minimize
-''        Forms("DbAdmin").SetFocus
-'    End If
-
     Title = "Db Admin"
     Directions = "Choose the desired action below."
     lblDirections.forecolor = lngLtBlue
@@ -2518,12 +2510,15 @@ On Error GoTo Err_Handler
     btnUISetup.hoverColor = lngGreen
       
     'defaults
+    Me.RecordSource = "tsys_App_Defaults"
+    cbxVersion.RowSource = GetTemplate("s_app_releases")
+    cbxVersion.ControlSource = "ID"
     
     ' Update the DbAdmin switchboard settings according to application mode
-'    setUserAccess Me
+    setUserAccess Me
     
     'initialize app settings
-'    initApp
+    initApp
     
     ' If there is an Access back-end, open the always-open form (to maintain a connection
     '   to the back-end and avoid unnecessary create/delete/updates to its .ldb lock file)
@@ -2618,15 +2613,8 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-'    If FormIsOpen("Main") Then
-'        Forms("Main").Form.visible = True
-'        Forms("Main").SetFocus
-'        DoCmd.Restore
-'    End If
-
     'restore Main
     ToggleForm "Main", 0
-
     
 Exit_Handler:
     Exit Sub

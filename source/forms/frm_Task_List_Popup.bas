@@ -519,7 +519,7 @@ Private Sub Form_Open(Cancel As Integer)
     On Error GoTo Err_Handler
 
     If SwitchboardIsOpen Then
-        Select Case TempVars.item("UserAccessLevel")
+        Select Case TempVars.Item("UserAccessLevel")
           Case "read only"
             ' Disable edit controls for "read only" application status
             Me.AllowAdditions = False
@@ -530,7 +530,7 @@ Private Sub Form_Open(Cancel As Integer)
     If Me.OpenArgs <> "" Then
         Me.cmbPark = Me.OpenArgs
     ElseIf SwitchboardIsOpen Then
-        Me.cmbPark = TempVars.item("Park") '[Forms]![frm_Switchboard]![cPark]
+        Me.cmbPark = TempVars.Item("Park") '[Forms]![frm_Switchboard]![cPark]
     Else:
         Me.cmbPark.SetFocus
     End If

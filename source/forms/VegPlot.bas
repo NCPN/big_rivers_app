@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =4875
-    Top =3390
-    Right =13875
-    Bottom =14385
+    Left =2955
+    Top =3765
+    Right =12195
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -166,7 +166,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =60
                     Width =3480
@@ -286,11 +286,11 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =3
-                    Left =4920
+                    Left =3600
                     Top =60
-                    Width =2820
+                    Width =4140
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
@@ -298,7 +298,7 @@ Begin Form
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4920
+                    LayoutCachedLeft =3600
                     LayoutCachedTop =60
                     LayoutCachedWidth =7740
                     LayoutCachedHeight =375
@@ -399,7 +399,7 @@ Begin Form
                     Left =6660
                     Top =60
                     Width =720
-                    TabIndex =3
+                    TabIndex =16
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -505,7 +505,7 @@ Begin Form
                     Top =3420
                     Width =7650
                     Height =4380
-                    TabIndex =4
+                    TabIndex =17
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.VegPlotList"
@@ -522,7 +522,7 @@ Begin Form
                     Left =5760
                     Top =60
                     Width =720
-                    TabIndex =5
+                    TabIndex =18
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -610,7 +610,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =6
+                    TabIndex =19
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -700,7 +700,7 @@ Begin Form
                     Left =1020
                     Top =855
                     Height =315
-                    TabIndex =7
+                    TabIndex =3
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -735,7 +735,7 @@ Begin Form
                     Left =2580
                     Top =840
                     Height =315
-                    TabIndex =8
+                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -770,7 +770,7 @@ Begin Form
                     Left =1020
                     Top =1500
                     Height =315
-                    TabIndex =9
+                    TabIndex =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -806,7 +806,7 @@ Begin Form
                     Top =840
                     Width =960
                     Height =315
-                    TabIndex =10
+                    TabIndex =7
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -842,7 +842,7 @@ Begin Form
                     Left =2580
                     Top =1500
                     Height =315
-                    TabIndex =11
+                    TabIndex =6
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -957,7 +957,7 @@ Begin Form
                     Top =2280
                     Width =360
                     Height =360
-                    TabIndex =12
+                    TabIndex =8
                     BorderColor =10921638
                     Name ="chkNoCanopyVeg"
                     AfterUpdate ="[Event Procedure]"
@@ -992,7 +992,7 @@ Begin Form
                     Top =2700
                     Width =360
                     Height =360
-                    TabIndex =13
+                    TabIndex =9
                     BorderColor =10921638
                     Name ="chkNoRootedVeg"
                     AfterUpdate ="[Event Procedure]"
@@ -1027,7 +1027,7 @@ Begin Form
                     Top =2280
                     Width =360
                     Height =360
-                    TabIndex =14
+                    TabIndex =10
                     BorderColor =10921638
                     Name ="chkNoIndicatorSpecies"
                     AfterUpdate ="[Event Procedure]"
@@ -1062,7 +1062,7 @@ Begin Form
                     Top =2700
                     Width =360
                     Height =360
-                    TabIndex =15
+                    TabIndex =11
                     BorderColor =10921638
                     Name ="chkHasSocialTrails"
                     AfterUpdate ="[Event Procedure]"
@@ -1109,6 +1109,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin TextBox
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
                     BackStyle =0
@@ -1118,7 +1119,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =16
+                    TabIndex =20
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -1139,7 +1140,7 @@ Begin Form
                     Left =6840
                     Top =2100
                     Width =720
-                    TabIndex =17
+                    TabIndex =14
                     ForeColor =4210752
                     Name ="btnURC"
                     Caption ="URC"
@@ -1168,7 +1169,7 @@ Begin Form
                     Left =6840
                     Top =1560
                     Width =720
-                    TabIndex =18
+                    TabIndex =13
                     ForeColor =4210752
                     Name ="btnWCC"
                     Caption ="WCC"
@@ -1197,7 +1198,7 @@ Begin Form
                     Left =6840
                     Top =2640
                     Width =720
-                    TabIndex =19
+                    TabIndex =15
                     ForeColor =4210752
                     Name ="btnARC"
                     Caption ="ARC"
@@ -1254,7 +1255,7 @@ Begin Form
                     Top =630
                     Width =720
                     Height =480
-                    TabIndex =20
+                    TabIndex =12
                     ForeColor =4210752
                     Name ="btnTaglines"
                     Caption ="Tagline"
@@ -1467,8 +1468,10 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.forecolor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "")
-
+                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("Feature"), "")
+                 
     Title = "VegPlot"
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."

@@ -27,10 +27,10 @@ Begin Form
     Width =4320
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =4440
-    Top =3105
-    Right =23400
-    Bottom =14895
+    Left =2955
+    Top =3780
+    Right =13440
+    Bottom =14775
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x13562948b201e340
@@ -463,7 +463,7 @@ Private Sub Form_Open(Cancel As Integer)
     
     For i = idxShift To idxShift + 6 ' (w/o shift) -> control values, beyond this TempVars has other values
                                      ' so can 't use TempVars.Count - 1, 0-based so number - 1
-        With TempVars.item(i)
+        With TempVars.Item(i)
         
             If .Name = "Declination" Or _
                .Name = "Timeframe" Or _
@@ -473,9 +473,9 @@ Private Sub Form_Open(Cancel As Integer)
                 ctrlName = "cbx"
             End If
             
-            ctrlName = ctrlName & TempVars.item(i).Name
+            ctrlName = ctrlName & TempVars.Item(i).Name
             
-            Me.Controls(ctrlName) = TempVars.item(i).Value
+            Me.Controls(ctrlName) = TempVars.Item(i).Value
         End With
     Next
 
@@ -603,7 +603,7 @@ Private Sub cmdOK_Click()
     ' Make sure the information is valid before updating the record
     If varOpenArgs <> 0 Then
         '  Confirm that the critical data elements have been completed before saving
-        If IsNull(Me.cbxUser) And TempVars.item("UserAccessLevel") <> "admin" Then
+        If IsNull(Me.cbxUser) And TempVars.Item("UserAccessLevel") <> "admin" Then
             MsgBox "Please indicate the user name", vbOKOnly, "Validation error"
             Me.cbxUser.SetFocus
             GoTo Exit_Procedure
@@ -627,24 +627,24 @@ Private Sub cmdOK_Click()
     End If
 
     ' Save changes to the switchboard record
-    If Nz(Me.cbxUser) <> Nz(TempVars.item("User")) Then TempVars.item("User") = Me.cbxUser.Value
-    If Nz(Me.cbxGPS_model) <> Nz(TempVars.item("GPS_model")) Then TempVars.item("GPS_model") = Me.cbxGPS_model.Value
-    If Nz(Me.cbxPark) <> Nz(TempVars.item("Park")) Then TempVars.item("Park") = Me.cbxPark.Value
-    If Nz(Me.cbxDatum) <> Nz(TempVars.item("Datum")) Then TempVars.item("Datum") = Me.cbxDatum.Value
-    If Nz(Me.tbxDeclination) <> Nz(TempVars.item("Declination")) Then TempVars.item("Declination") = Me.tbxDeclination.Value
-    If Nz(Me.tbxTimeframe) <> Nz(TempVars.item("Timeframe")) Then TempVars.item("Timeframe") = Me.tbxTimeframe.Value
-    If Nz(Me.tbxProject) <> Nz(TempVars.item("Project")) Then TempVars.item("Project") = Me.tbxProject.Value
+    If Nz(Me.cbxUser) <> Nz(TempVars.Item("User")) Then TempVars.Item("User") = Me.cbxUser.Value
+    If Nz(Me.cbxGPS_model) <> Nz(TempVars.Item("GPS_model")) Then TempVars.Item("GPS_model") = Me.cbxGPS_model.Value
+    If Nz(Me.cbxPark) <> Nz(TempVars.Item("Park")) Then TempVars.Item("Park") = Me.cbxPark.Value
+    If Nz(Me.cbxDatum) <> Nz(TempVars.Item("Datum")) Then TempVars.Item("Datum") = Me.cbxDatum.Value
+    If Nz(Me.tbxDeclination) <> Nz(TempVars.Item("Declination")) Then TempVars.Item("Declination") = Me.tbxDeclination.Value
+    If Nz(Me.tbxTimeframe) <> Nz(TempVars.Item("Timeframe")) Then TempVars.Item("Timeframe") = Me.tbxTimeframe.Value
+    If Nz(Me.tbxProject) <> Nz(TempVars.Item("Project")) Then TempVars.Item("Project") = Me.tbxProject.Value
 
     strSQL = "UPDATE tsys_App_Defaults " _
-        & "SET GPS_model = '" & TempVars.item("GPS_model") & "', " _
-        & "Park = '" & TempVars.item("Park") & "', " _
-        & "Datum = '" & TempVars.item("Datum") & "', " _
-        & "Declination = '" & TempVars.item("Declination") & "', " _
-        & "Data_timeframe = " & TempVars.item("Timeframe") & ", " _
-        & "Project = '" & TempVars.item("Project") & "' " _
+        & "SET GPS_model = '" & TempVars.Item("GPS_model") & "', " _
+        & "Park = '" & TempVars.Item("Park") & "', " _
+        & "Datum = '" & TempVars.Item("Datum") & "', " _
+        & "Declination = '" & TempVars.Item("Declination") & "', " _
+        & "Data_timeframe = " & TempVars.Item("Timeframe") & ", " _
+        & "Project = '" & TempVars.Item("Project") & "' " _
         & "WHERE User_name IN (" _
         & " SELECT TOP 1 User_name FROM tsys_App_Defaults " _
-        & " WHERE User_name = '" & TempVars.item("User") & "' " _
+        & " WHERE User_name = '" & TempVars.Item("User") & "' " _
         & " ORDER BY User_name);"
     
     DoCmd.SetWarnings False
@@ -652,7 +652,7 @@ Private Sub cmdOK_Click()
     DoCmd.SetWarnings True
     
     'repaint fsub_DbAdmin to update values if switchboard is open
-    If SwitchboardIsOpen Then Forms!frm_Switchboard.fsub_DBAdmin.Form.Repaint
+    If SwitchboardIsOpen Then Forms!frm_Switchboard.fsub_DbAdmin.Form.Repaint
     
     'close form & return to calling form
     DoCmd.Close , , acSaveNo

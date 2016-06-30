@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =5010
-    Top =1575
-    Right =12870
-    Bottom =12060
+    Left =2955
+    Top =3780
+    Right =13560
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -792,8 +792,10 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.forecolor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "")
-
+                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("Feature"), "")
+                 
     Title = "Feature"
     Directions = "Enter the feature details."
     tbxIcon.Value = StringFromCodepoint(uBullet)
@@ -813,7 +815,7 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     tbxFeature.backcolor = lngYellow
   
-    cbxLocation.RowSource = GetTemplate("s_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
+    cbxLocation.RowSource = GetTemplate("s_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.Item("ParkCode"))
   
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0

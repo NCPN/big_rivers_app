@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =4875
-    Top =3390
-    Right =13875
-    Bottom =14385
+    Left =2955
+    Top =3765
+    Right =13560
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -156,7 +156,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =60
                     Width =3480
@@ -256,18 +256,19 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
-                    Left =5820
+                    OverlapFlags =215
+                    TextAlign =3
+                    Left =3600
                     Top =60
-                    Width =1920
+                    Width =4140
                     Height =315
-                    FontWeight =500
+                    FontWeight =600
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5820
+                    LayoutCachedLeft =3600
                     LayoutCachedTop =60
                     LayoutCachedWidth =7740
                     LayoutCachedHeight =375
@@ -516,8 +517,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSampleDate"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Enter sampling (visit) date."
                     ConditionalFormat = Begin
                         0x010000009a000000020000000100000000000000000000001600000001000000 ,
                         0x00000000fff200000000000003000000180000001b0000000100000000000000 ,
@@ -550,6 +551,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxNumber"
+                    ControlTipText ="Enter veg transect number"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
                         0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
@@ -714,9 +716,11 @@ On Error GoTo Err_Handler
     ToggleForm "DbAdmin", -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLtCyan
-    lblContext = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars.item("Segment"), "")
+    lblContext.forecolor = lngLime
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("Feature"), "")
 
     Title = "Transect"
     Directions = "Enter the transect information and click save."
@@ -811,8 +815,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSampleDate_Change
-' Description:  Dropdown change actions
+' Sub:          tbxSampleDate_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -823,7 +827,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSampleDate_Change()
+Private Sub tbxSampleDate_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -834,36 +838,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_Change[Transect form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxSampleDate_LostFocus
-' Description:  Dropdown change actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub tbxSampleDate_LostFocus()
-On Error GoTo Err_Handler
-
-    'ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_LostFocus[Transect form])"
+            "Error encountered (#" & Err.Number & " - tbxSampleDate_AfterUpdate[Transect form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -884,13 +859,7 @@ End Sub
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    'clear values
-    tbxNumber.Value = ""
-    tbxSampleDate.Value = ""
-    
-    btnSave.Enabled = False
-    
-    Me.Requery
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1009,8 +978,8 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore DbAdmin
-    ToggleForm "DbAdmin", 0
+    'restore Main
+    ToggleForm "Main", 0
     
 Exit_Handler:
     Exit Sub

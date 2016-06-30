@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =5100
-    Top =3630
-    Right =12960
-    Bottom =13995
+    Left =2955
+    Top =3780
+    Right =13440
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -155,7 +155,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =60
                     Width =3480
@@ -236,19 +236,19 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =3
-                    Left =5820
+                    Left =3600
                     Top =60
-                    Width =1920
+                    Width =4140
                     Height =315
-                    FontWeight =500
+                    FontWeight =600
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5820
+                    LayoutCachedLeft =3600
                     LayoutCachedTop =60
                     LayoutCachedWidth =7740
                     LayoutCachedHeight =375
@@ -290,7 +290,7 @@ Begin Form
                     Left =6660
                     Top =60
                     Width =720
-                    TabIndex =1
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -399,7 +399,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =6
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -420,7 +420,7 @@ Begin Form
                     Left =5760
                     Top =60
                     Width =720
-                    TabIndex =2
+                    TabIndex =5
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -487,7 +487,7 @@ Begin Form
                     Top =4440
                     Width =7650
                     Height =4380
-                    TabIndex =4
+                    TabIndex =7
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.SiteList"
@@ -526,7 +526,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =8
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -548,7 +548,7 @@ Begin Form
                     Top =60
                     Width =1860
                     Height =315
-                    TabIndex =6
+                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -584,7 +584,7 @@ Begin Form
                     Top =2730
                     Width =7140
                     Height =1500
-                    TabIndex =7
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
@@ -621,7 +621,7 @@ Begin Form
                     Top =900
                     Width =7140
                     Height =1320
-                    TabIndex =8
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSiteDirections"
@@ -794,9 +794,11 @@ On Error GoTo Err_Handler
     ToggleForm "Main", -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLtCyan
-    lblContext.Caption = Nz(TempVars.item("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars.item("River"), "")
+    lblContext.forecolor = lngLime
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("Feature"), "")
 
     Title = "Site"
     Directions = "Enter site details."
@@ -860,7 +862,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          Form_Current

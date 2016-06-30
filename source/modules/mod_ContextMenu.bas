@@ -270,7 +270,7 @@ On Error GoTo Err_Handler
                 
             Case "river"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.Item("ParkCode")), dbOpenDynaset)
                     
                     If Not (rs.BOF And rs.EOF) Then
                         
@@ -293,7 +293,7 @@ On Error GoTo Err_Handler
                 
             Case "site"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list_active", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list_active", "ParkCode" & PARAM_SEPARATOR & TempVars.Item("ParkCode")), dbOpenDynaset)
                     
                     If Not (rs.BOF And rs.EOF) Then
                     
@@ -315,7 +315,7 @@ On Error GoTo Err_Handler
                 End If
             Case "feature"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.Item("ParkCode")), dbOpenDynaset)
                     
                     If Not (rs.BOF And rs.EOF) Then
                     

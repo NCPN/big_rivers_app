@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =45
-    Left =4140
-    Top =3735
-    Right =11190
-    Bottom =14235
+    ItemSuffix =47
+    Left =2955
+    Top =3780
+    Right =17475
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -165,7 +165,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =60
                     Width =3480
@@ -286,6 +286,26 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin Label
+                    OverlapFlags =87
+                    TextAlign =3
+                    Left =3660
+                    Top =60
+                    Width =4140
+                    Height =315
+                    FontWeight =600
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblContext"
+                    Caption ="Context"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3660
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =7800
+                    LayoutCachedHeight =375
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin Section
@@ -302,7 +322,7 @@ Begin Form
                     Left =6780
                     Top =60
                     Width =720
-                    TabIndex =2
+                    TabIndex =10
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -373,7 +393,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =13
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -395,7 +415,7 @@ Begin Form
                     Left =6000
                     Top =60
                     Width =720
-                    TabIndex =4
+                    TabIndex =11
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -463,7 +483,7 @@ Begin Form
                     Top =3480
                     Width =7650
                     Height =4380
-                    TabIndex =5
+                    TabIndex =14
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.TransducerList"
@@ -502,7 +522,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =6
+                    TabIndex =12
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -549,7 +569,7 @@ Begin Form
                     OverlapFlags =93
                     Left =240
                     Top =1785
-                    Width =5340
+                    Width =5820
                     Height =1500
                     FontSize =36
                     LeftMargin =288
@@ -560,7 +580,7 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =240
                     LayoutCachedTop =1785
-                    LayoutCachedWidth =5580
+                    LayoutCachedWidth =6060
                     LayoutCachedHeight =3285
                     BackThemeColorIndex =8
                     BackTint =20.0
@@ -572,14 +592,16 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =2220
-                    Top =2220
+                    Left =2700
+                    Top =2205
                     Height =315
-                    TabIndex =7
+                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxRefToWaterline"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Ref Mark to Waterline"
                     ConditionalFormat = Begin
                         0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
@@ -589,42 +611,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2220
-                    LayoutCachedTop =2220
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =2535
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =215
-                    IMESentenceMode =3
-                    Left =3960
-                    Top =2205
-                    Height =315
-                    TabIndex =8
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxRefToEyebolt"
-                    ConditionalFormat = Begin
-                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3960
+                    LayoutCachedLeft =2700
                     LayoutCachedTop =2205
-                    LayoutCachedWidth =5400
+                    LayoutCachedWidth =4140
                     LayoutCachedHeight =2520
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -638,14 +627,16 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =2220
-                    Top =2865
+                    Left =4440
+                    Top =2190
                     Height =315
-                    TabIndex =9
+                    TabIndex =6
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="tbxEyeboltToWaterline"
+                    Name ="tbxRefToEyebolt"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Ref Mark to Eyebolt"
                     ConditionalFormat = Begin
                         0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
@@ -655,10 +646,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2220
-                    LayoutCachedTop =2865
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =3180
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =2190
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =2505
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
@@ -671,14 +662,16 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =3960
-                    Top =2865
+                    Left =2700
+                    Top =2850
                     Height =315
-                    TabIndex =10
+                    TabIndex =7
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="tbxEyeboltToScribeline"
+                    Name ="tbxEyeboltToWaterline"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Eyebolt to Waterline"
                     ConditionalFormat = Begin
                         0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
@@ -688,10 +681,45 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3960
-                    LayoutCachedTop =2865
-                    LayoutCachedWidth =5400
-                    LayoutCachedHeight =3180
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =2850
+                    LayoutCachedWidth =4140
+                    LayoutCachedHeight =3165
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =215
+                    IMESentenceMode =3
+                    Left =4440
+                    Top =2850
+                    Height =315
+                    TabIndex =8
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxEyeboltToScribeline"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Eyebolt to Scribeline"
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =2850
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =3165
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
@@ -703,8 +731,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =3960
-                    Top =2595
+                    Left =4440
+                    Top =2580
                     Width =1380
                     Height =240
                     BorderColor =8355711
@@ -712,15 +740,15 @@ Begin Form
                     Name ="lblScribeline"
                     Caption ="Scribeline"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3960
-                    LayoutCachedTop =2595
-                    LayoutCachedWidth =5340
-                    LayoutCachedHeight =2835
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =2580
+                    LayoutCachedWidth =5820
+                    LayoutCachedHeight =2820
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2220
-                    Top =1935
+                    Left =2700
+                    Top =1920
                     Width =1440
                     Height =240
                     BorderColor =8355711
@@ -728,15 +756,15 @@ Begin Form
                     Name ="lblRefToWaterline"
                     Caption ="Waterline"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2220
-                    LayoutCachedTop =1935
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =2175
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =1920
+                    LayoutCachedWidth =4140
+                    LayoutCachedHeight =2160
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =3960
-                    Top =1935
+                    Left =4440
+                    Top =1920
                     Width =1440
                     Height =240
                     BorderColor =8355711
@@ -744,15 +772,15 @@ Begin Form
                     Name ="lblRefToEyebolt"
                     Caption ="Eyebolt"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3960
-                    LayoutCachedTop =1935
-                    LayoutCachedWidth =5400
-                    LayoutCachedHeight =2175
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =1920
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =2160
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2220
-                    Top =2595
+                    Left =2700
+                    Top =2580
                     Width =1440
                     Height =240
                     BorderColor =8355711
@@ -760,10 +788,10 @@ Begin Form
                     Name ="lblEyeboltToWaterline"
                     Caption ="Waterline"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2220
-                    LayoutCachedTop =2595
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =2835
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =2580
+                    LayoutCachedWidth =4140
+                    LayoutCachedHeight =2820
                 End
                 Begin CheckBox
                     OverlapFlags =215
@@ -771,9 +799,10 @@ Begin Form
                     Top =1005
                     Width =360
                     Height =360
-                    TabIndex =12
+                    TabIndex =9
                     BorderColor =10921638
                     Name ="chkSurveyed"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6435
@@ -805,7 +834,7 @@ Begin Form
                     Left =2040
                     Top =60
                     Height =315
-                    TabIndex =11
+                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -843,7 +872,6 @@ Begin Form
                     Top =60
                     Width =900
                     Height =315
-                    TabIndex =13
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -881,7 +909,7 @@ Begin Form
                     Top =60
                     Width =1860
                     Height =315
-                    TabIndex =14
+                    TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -974,10 +1002,12 @@ Begin Form
                     Left =3900
                     Top =1200
                     Height =315
+                    TabIndex =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSampleTime"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
                         0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
@@ -1007,13 +1037,12 @@ Begin Form
                     Top =1200
                     Width =1290
                     Height =315
-                    TabIndex =1
+                    TabIndex =3
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSampleDate"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009a000000020000000100000000000000000000001600000001000000 ,
                         0x00000000fff200000000000003000000180000001b0000000100000000000000 ,
@@ -1038,8 +1067,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =600
-                    Top =2925
+                    Left =420
+                    Top =2940
                     Width =1440
                     Height =240
                     FontSize =9
@@ -1048,10 +1077,54 @@ Begin Form
                     Name ="lblDistHint"
                     Caption ="Distance (cm)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =600
-                    LayoutCachedTop =2925
-                    LayoutCachedWidth =2040
-                    LayoutCachedHeight =3165
+                    LayoutCachedLeft =420
+                    LayoutCachedTop =2940
+                    LayoutCachedWidth =1860
+                    LayoutCachedHeight =3180
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    TextAlign =3
+                    Left =1320
+                    Top =1950
+                    Width =1290
+                    Height =299
+                    FontSize =10
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblRef"
+                    Caption ="ref"
+                    ControlTipText ="Reference Mark to..."
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1320
+                    LayoutCachedTop =1950
+                    LayoutCachedWidth =2610
+                    LayoutCachedHeight =2249
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    TextAlign =3
+                    Left =1500
+                    Top =2610
+                    Width =1140
+                    Height =315
+                    FontSize =10
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblEyebolt"
+                    Caption ="eyebolt"
+                    ControlTipText ="Eyebolt to..."
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1500
+                    LayoutCachedTop =2610
+                    LayoutCachedWidth =2640
+                    LayoutCachedHeight =2925
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -1223,6 +1296,16 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    'minimize Main
+    ToggleForm "Main", -1
+    
+    'set context - based on TempVars
+    lblContext.forecolor = lngLime
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("Feature"), "")
+    
     Title = "Transducer"
     Directions = "Enter the Transducer information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
@@ -1232,6 +1315,10 @@ On Error GoTo Err_Handler
     lblDistance.Caption = StringFromCodepoint(uRuler)
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblSample.Caption = StringFromCodepoint(uTwoOClock)
+    
+    lblRef.Caption = "REF MARK TO >" 'StringFromCodepoint(uRTriangle) & "|" & StringFromCodepoint(uLTriangle)
+    lblEyebolt.Caption = "EYEBOLT TO >" 'StringFromCodepoint(uVertLineCircleAbv)
+    
     lblRefToEyebolt.Caption = "Eyebolt"
     lblRefToWaterline.Caption = "Waterline"
     lblEyeboltToWaterline.Caption = "Waterline"
@@ -1263,6 +1350,9 @@ On Error GoTo Err_Handler
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
   
+    'initialize values
+    ClearForm Me
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1304,19 +1394,19 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSampleDate_Change
-' Description:  Dropdown change actions
+' Sub:          tbxSampleDate_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSampleDate_Change()
+Private Sub tbxSampleDate_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1327,28 +1417,29 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_Change[Transducer form])"
+            "Error encountered (#" & Err.Number & " - tbxSampleDate_AfterUpdate[Transducer form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSampleDate_LostFocus
-' Description:  Dropdown change actions
+' Sub:          tbxSampleTime_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSampleDate_LostFocus()
+Private Sub tbxSampleTime_AfterUpdate()
 On Error GoTo Err_Handler
 
-    'ReadyForSave
+    If Len(tbxSampleTime.Text) > 0 Then _
+        ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1356,7 +1447,157 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSampleDate_LostFocus[Transducer form])"
+            "Error encountered (#" & Err.Number & " - tbxSampleTime_AfterUpdate[Transducer form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxRefToWaterline_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub tbxRefToWaterline_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxRefToWaterline.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxRefToWaterline_AfterUpdate[Transducer form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxEyeboltToWaterline_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub tbxEyeboltToWaterline_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxEyeboltToWaterline.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxEyeboltToWaterline_AfterUpdate[Transducer form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxRefToEyebolt_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub tbxRefToEyebolt_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxRefToEyebolt.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxRefToEyebolt_AfterUpdate[Transducer form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxEyeboltToScribeline_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub tbxEyeboltToScribeline_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxEyeboltToScribeline.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxEyeboltToScribeline_AfterUpdate[Transducer form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          chkSurveyed_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+' ---------------------------------
+Private Sub chkSurveyed_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If chkSurveyed.Value > -1 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkSurveyed_AfterUpdate[Transducer form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1373,25 +1614,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 6/28/2016 - revised to use ClearForm()
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    'clear values
-    cbxTransducer.SelText = ""
-    tbxSerialNo.Value = ""
-    tbxEyeboltToScribeline.Value = ""
-    tbxEyeboltToWaterline.Value = ""
-    tbxRefToEyebolt.Value = ""
-    tbxRefToWaterline.Value = ""
-    tbxSampleDate.Value = ""
-    tbxSampleTime.Value = ""
-    cbxTiming.SelText = ""
-    cbxTransducer.SelText = ""
-    
-    btnSave.Enabled = False
-    
-    Me.Requery
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub
@@ -1520,8 +1748,9 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
-    
+    'restore Main
+    ToggleForm "Main", 0
+        
 Exit_Handler:
     Exit Sub
 Err_Handler:
