@@ -242,7 +242,7 @@ End Property
 
 Public Property Let TitleFontColor(Value As Long)
     m_TitleFontColor = Value
-    lblTitle.forecolor = m_TitleFontColor
+    lblTitle.ForeColor = m_TitleFontColor
 End Property
 
 Public Property Get TitleFontColor() As Long
@@ -252,7 +252,7 @@ End Property
 Public Property Let PanelHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_PanelHeaderColor = Value
-    FormHeader.backcolor = m_PanelHeaderColor
+    FormHeader.BackColor = m_PanelHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen

@@ -715,11 +715,11 @@ Private Sub optgFormMode_AfterUpdate()
     If Me.optgFormMode = 0 Then
     ' View mode
         Me.subTaxa.Locked = True
-        Me.Detail.backcolor = 13025979 ' steel blue (default)
+        Me.Detail.BackColor = 13025979 ' steel blue (default)
     Else
     ' Edit mode
         Me.subTaxa.Locked = False
-        Me.Detail.backcolor = 12574431 ' haystack
+        Me.Detail.BackColor = 12574431 ' haystack
     End If
 
 Exit_Procedure:

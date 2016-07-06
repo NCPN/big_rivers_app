@@ -246,7 +246,7 @@ Private Sub Form_Open(Cancel As Integer)
     varOpenArgs = Me.OpenArgs
     ' Control who can make edits or deletions
     If SwitchboardIsOpen Then
-        Select Case TempVars.Item("UserAccessLevel")
+        Select Case TempVars.item("UserAccessLevel")
             Case "admin"
                 Me.AllowEdits = True
                 Me.AllowDeletions = True

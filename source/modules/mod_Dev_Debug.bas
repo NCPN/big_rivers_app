@@ -351,7 +351,7 @@ On Error GoTo Err_Handler
 
     Set vbCom = Application.VBE.ActiveVBProject.VBComponents
 
-    vbCom.Remove VBComponent:=vbCom.Item(strModule)
+    vbCom.Remove VBComponent:=vbCom.item(strModule)
 
 Exit_Handler:
     Exit Sub

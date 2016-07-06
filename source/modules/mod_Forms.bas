@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Forms
 ' Level:        Framework module
-' Version:      1.05
+' Version:      1.06
 ' Description:  generic form functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/19/2015
@@ -17,6 +17,7 @@ Option Explicit
 '               BLC - 6/1/2016  - 1.04 - added SetFormOpacity(), CaptureEscapeKey(), constants & functions
 '                                        from Uplands mod_App_UI
 '               BLC - 6/24/2016 - 1.05 - added ToggleForm(), replaced Exit_Function > Exit_Handler
+'               BLC - 7/1/2016  - 1.06 - added font weight constants
 ' =================================
 
 '=================================================================
@@ -49,6 +50,29 @@ Option Explicit
 ' ---------------------------------
 '  Transparent  0           Normal  1
 ' ---------------------------------
+
+' ---------------------------------
+'  Access FontWeight Property
+' ---------------------------------
+'   Thin    100         Extra Light         200
+'   Light   300         (Default) Normal    400
+'   Medium  500         Semi-Bold           600
+'   Bold    700         Extra Bold          800
+'   Heavy   900
+' ---------------------------------
+
+'=================================================================
+'  Constants
+'=================================================================
+Public Const wtThin = 100
+Public Const wtExtraLight = 200
+Public Const wtLight = 300
+Public Const wtNormal = 400
+Public Const wtMedium = 500
+Public Const wtSemiBold = 600
+Public Const wtBold = 700
+Public Const wtExtraBold = 800
+Public Const wtHeavy = 900
 
 '=================================================================
 '  Declarations
@@ -111,11 +135,11 @@ Public Function CloseFormsReports()
 On Error GoTo Err_Handler
 
     'Close all open forms
-    Do While Forms.Count > 0
+    Do While Forms.count > 0
         DoCmd.Close acForm, Forms(0).Name
     Loop
     
-    Do While Reports.Count > 0
+    Do While Reports.count > 0
         DoCmd.Close acReport, Reports(0).Name
     Loop
 

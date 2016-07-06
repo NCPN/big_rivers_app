@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =19920
-    Bottom =11790
+    Right =10485
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xf779ef0179c3e440
@@ -598,14 +598,14 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     'set hover
-    btnEdit.hoverColor = lngGreen
-    btnDelete.hoverColor = lngGreen
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
 Exit_Handler:
     Exit Sub
@@ -662,7 +662,7 @@ Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent, tbxID
 
 Exit_Handler:
     Exit Sub

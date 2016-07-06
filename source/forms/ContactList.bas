@@ -758,18 +758,18 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnActivate.hoverColor = lngGreen
-    btnEdit.hoverColor = lngGreen
-    btnDelete.hoverColor = lngGreen
+    btnActivate.HoverColor = lngGreen
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
 
     btnActivate.Caption = StringFromCodepoint(uCheckMark)
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
     'tbxIsActive = IIf([IsActive] = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
 

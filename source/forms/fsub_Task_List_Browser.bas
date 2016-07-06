@@ -432,16 +432,16 @@ Private Sub Form_Open(Cancel As Integer)
     ' Set the subform color depending on which form it belongs to
     Select Case Me.Parent.Name
       Case "frm_Data_Entry"
-        Me.Detail.backcolor = 13692912  ' light straw (main data entry form)
+        Me.Detail.BackColor = 13692912  ' light straw (main data entry form)
         Set ctlPark = Me.Parent!cmbPark
         Me.txtRequest_date.Enabled = False
       Case "frm_Data_Browser"
-        Me.Detail.backcolor = 13027014  ' steel blue
+        Me.Detail.BackColor = 13027014  ' steel blue
         Set ctlPark = Me.Parent!cmbPark_code
         Me.txtRequest_date.Enabled = True
         Me.txtRequest_date.DefaultValue = "=Date()"
       Case Else
-        Me.Detail.backcolor = 13027014  ' steel blue
+        Me.Detail.BackColor = 13027014  ' steel blue
         Set ctlPark = Me.Parent.Parent!cmbPark_code
         Me.txtRequest_date.Enabled = False
     End Select
@@ -472,7 +472,7 @@ Private Sub Form_Dirty(Cancel As Integer)
 
     ' Note: this event is ignored on inserting a new record if BeforeInsert code exists
 
-    If TempVars.Item("UserAccessLevel") = "read only" Then
+    If TempVars.item("UserAccessLevel") = "read only" Then
         ' Edits not allowed
         Cancel = True
         GoTo Exit_Procedure
@@ -502,8 +502,8 @@ End Sub
 Private Sub Form_Delete(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    If TempVars.Item("UserAccessLevel") <> "admin" And _
-        TempVars.Item("UserAccessLevel") <> "power user" Then
+    If TempVars.item("UserAccessLevel") <> "admin" And _
+        TempVars.item("UserAccessLevel") <> "power user" Then
         ' Edits not allowed
         Cancel = True
         GoTo Exit_Procedure

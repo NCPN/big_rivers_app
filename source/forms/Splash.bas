@@ -21,10 +21,10 @@ Begin Form
     Width =10080
     DatasheetFontHeight =11
     ItemSuffix =70
-    Left =2955
-    Top =3765
-    Right =13440
-    Bottom =14775
+    Left =3840
+    Top =2655
+    Right =13920
+    Bottom =11085
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x58bf7152d8c6e440
@@ -207,8 +207,8 @@ Begin Form
             Begin
                 Begin Label
                     OverlapFlags =93
-                    Left =2160
-                    Top =180
+                    Left =1980
+                    Top =120
                     Width =2925
                     Height =585
                     FontSize =22
@@ -217,10 +217,10 @@ Begin Form
                     Name ="lblTitle"
                     Caption ="NCPN Big Rivers"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2160
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =5085
-                    LayoutCachedHeight =765
+                    LayoutCachedLeft =1980
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =4905
+                    LayoutCachedHeight =705
                     ForeThemeColorIndex =1
                 End
                 Begin CommandButton
@@ -404,7 +404,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =14277081
                     Name ="lblSubTitle"
-                    Caption ="Providing park managers with science for decisionmaking"
+                    Caption ="Providing park managers with science for decision making."
                     GridlineColor =10921638
                     LayoutCachedLeft =2280
                     LayoutCachedTop =780
@@ -438,8 +438,8 @@ Begin Form
                     FontUnderline = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =247
-                    Left =2100
-                    Top =120
+                    Left =1800
+                    Top =60
                     Width =3126
                     Height =726
                     TabIndex =2
@@ -451,10 +451,10 @@ Begin Form
                     GridlineColor =10921638
 
                     CursorOnHover =1
-                    LayoutCachedLeft =2100
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =5226
-                    LayoutCachedHeight =846
+                    LayoutCachedLeft =1800
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =4926
+                    LayoutCachedHeight =786
                     ForeThemeColorIndex =10
                     ForeTint =100.0
                     BackColor =14136213
@@ -565,14 +565,14 @@ Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     lblTitle.Caption = "NCPN Big Rivers"
-    lblSubTitle.Caption = "Providing park managers with science for decisionmaking"
+    lblSubTitle.Caption = "Providing park managers with science for decision making."
     lblQuote.Caption = "A river is the report card for its watershed."
     lblAttrib.Caption = "— Alan Levere, Connecticut Department of Environmental Protection"
     
-    btnNext.forecolor = lngBlue
+    btnNext.ForeColor = lngBlue
     
     'set hover
-    btnNext.hoverColor = lngGreen
+    btnNext.HoverColor = lngGreen
             
 Exit_Handler:
     Exit Sub

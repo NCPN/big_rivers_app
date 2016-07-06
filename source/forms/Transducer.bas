@@ -1300,7 +1300,7 @@ On Error GoTo Err_Handler
     ToggleForm "Main", -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLime
+    lblContext.ForeColor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
@@ -1309,9 +1309,9 @@ On Error GoTo Err_Handler
     Title = "Transducer"
     Directions = "Enter the Transducer information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     lblDistance.Caption = StringFromCodepoint(uRuler)
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblSample.Caption = StringFromCodepoint(uTwoOClock)
@@ -1328,24 +1328,24 @@ On Error GoTo Err_Handler
     cbxTiming.RowSource = "BD;AD" 'before download, after download
     
     'set hover
-    btnComment.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
       
     'defaults
-    tbxIcon.forecolor = lngRed
+    tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    cbxTransducer.backcolor = lngYellow
-    tbxSerialNo.backcolor = lngYellow
-    tbxEyeboltToScribeline.backcolor = lngYellow
-    tbxEyeboltToWaterline.backcolor = lngYellow
-    tbxRefToEyebolt.backcolor = lngYellow
-    tbxRefToWaterline.backcolor = lngYellow
-    tbxSampleDate.backcolor = lngYellow
-    tbxSampleTime.backcolor = lngYellow
-    cbxTiming.backcolor = lngYellow
-    cbxTransducer.backcolor = lngYellow
+    cbxTransducer.BackColor = lngYellow
+    tbxSerialNo.BackColor = lngYellow
+    tbxEyeboltToScribeline.BackColor = lngYellow
+    tbxEyeboltToWaterline.BackColor = lngYellow
+    tbxRefToEyebolt.BackColor = lngYellow
+    tbxRefToWaterline.BackColor = lngYellow
+    tbxSampleDate.BackColor = lngYellow
+    tbxSampleTime.BackColor = lngYellow
+    cbxTiming.BackColor = lngYellow
+    cbxTransducer.BackColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1788,7 +1788,7 @@ On Error GoTo Err_Handler
         isOK = True
 '    End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

@@ -38,7 +38,7 @@ Public Sub lvwPopulateFromQuery(ctrl As MSComctlLib.ListView, strSQL As String, 
 On Error GoTo Err_Handler
     Dim dbs As Database
     Dim rs As Recordset
-    Dim Item As ListItem
+    Dim item As ListItem
     Dim i As Integer
     
     On Error Resume Next
@@ -51,13 +51,13 @@ On Error GoTo Err_Handler
     If rs.RecordCount > 0 Then
         rs.MoveFirst
         Do Until rs.EOF
-            Set Item = ctrl.ListItems.Add(, , rs(aryFields(i)))
+            Set item = ctrl.ListItems.Add(, , rs(aryFields(i)))
             For i = 1 To UBound(aryFields)
-              Item.SubItems(i) = rs(aryFields(i))
+              item.SubItems(i) = rs(aryFields(i))
             Next
             On Error Resume Next 'continue even in error
             rs.MoveNext
-            Set Item = Nothing
+            Set item = Nothing
         Loop
     End If
 
@@ -108,7 +108,7 @@ On Error GoTo Err_Handler
     Set frm = ctrl.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.Count
+    cols = rs.Fields.count
     
     If Nz(rows, 0) = 0 Then
         MsgBox "Sorry, no records found..."
@@ -179,11 +179,11 @@ On Error GoTo Err_Handler
         With ctrl
             If CStr(.Column(tgtCol, Counter)) = normVal Then
                 For col = 0 To .ColumnCount - 1
-                    .Column(col, Counter).forecolor = normColor
+                    .Column(col, Counter).ForeColor = normColor
                 Next col
             ElseIf CStr(.Column(tgtCol, Counter)) = altVal Then
                 For col = 0 To .ColumnCount - 1
-                    .Column(col, Counter).forecolor = altColor
+                    .Column(col, Counter).ForeColor = altColor
                 Next col
             End If
         End With
@@ -221,7 +221,7 @@ End Sub
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 '   BLC - 5/22/2015 - updated documentation
 ' ---------------------------------
-Public Function IsListDuplicate(lbx As ListBox, col As Integer, Item As String) As Boolean
+Public Function IsListDuplicate(lbx As ListBox, col As Integer, item As String) As Boolean
 On Error GoTo Err_Handler
     
     Dim isDupe As Boolean
@@ -233,7 +233,7 @@ On Error GoTo Err_Handler
     'iterate through listbox (use .Column(col,i) vs .ListIndex(i) which results in error 451 property let not defined, property get...)
     For i = 0 To lbx.ListCount
         'check if item exists in listbox
-        If lbx.Column(col, i) = Item Then
+        If lbx.Column(col, i) = item Then
             'duplicate, so exit
             isDupe = True
             GoTo Exit_Handler
@@ -283,7 +283,7 @@ On Error GoTo Err_Handler
   
   'skip first row if lbx has headers
   iHdr = 0
-  If Len(TempVars.Item("lbxHdr")) > 0 Then
+  If Len(TempVars.item("lbxHdr")) > 0 Then
     iHdr = 1
   End If
   
@@ -819,12 +819,12 @@ On Error GoTo Err_Handler
     End If
     
     'check for at *least* one selected item
-    If frm.Controls(strSourceControl).ItemsSelected.Count = 0 Then
+    If frm.Controls(strSourceControl).ItemsSelected.count = 0 Then
         MsgBox "Please select at least one item.", vbExclamation, "Oops!"
         GoTo Exit_Handler
     End If
     
-    If frm.Controls(strSourceControl).ItemsSelected.Count > 1 Then
+    If frm.Controls(strSourceControl).ItemsSelected.count > 1 Then
         MoveSelectedItems frm, strSourceControl, strTargetControl
         GoTo Exit_Handler
     End If
@@ -972,7 +972,7 @@ On Error GoTo Err_Handler
     End If
     
     'check for at *least* one selected item
-    If frm.Controls(strSourceControl).ItemsSelected.Count = 0 Then
+    If frm.Controls(strSourceControl).ItemsSelected.count = 0 Then
         MsgBox "Please select at least one item.", vbExclamation, "Oops!"
         GoTo Exit_Handler
     End If
@@ -985,7 +985,7 @@ On Error GoTo Err_Handler
     
     'add back the header if it doesn't exist
     If frm.Controls(strTargetControl).ColumnHeads = True And frm.Controls(strTargetControl).ListCount = 0 Then
-       strItem = TempVars.Item("lbxHdr") & strItem
+       strItem = TempVars.item("lbxHdr") & strItem
        frm.Controls(strTargetControl).AddItem strItem
     End If
     
@@ -1084,7 +1084,7 @@ On Error GoTo Err_Handler
     Dim strBuild As String
      
     With lbx
-      If .ItemsSelected.Count = 0 Then Exit Sub
+      If .ItemsSelected.count = 0 Then Exit Sub
      
       For intRow = 0 To .ListCount - 1
         If Not .Selected(intRow) Then
@@ -1135,20 +1135,20 @@ Public Sub RemoveListDupes(lbx As ListBox)
 
 On Error GoTo Err_Handler
 
-    Dim index As Integer, Count As Integer
+    Dim index As Integer, count As Integer
     Dim lastItem As String
     
     'sort listbox
  '   SortList lbx
     
-    Count = lbx.ListCount
+    count = lbx.ListCount
 
     'check sorted listbox for duplicates & remove
-    If Count > 1 Then
+    If count > 1 Then
     
-        lastItem = lbx.ItemData(Count - 1)
+        lastItem = lbx.ItemData(count - 1)
 
-        For index = Count - 2 To 0 Step -1
+        For index = count - 2 To 0 Step -1
             If lbx.ItemData(index) = lastItem And Len(lbx.ItemData(index)) > 0 Then
                 'duplicate
                 lbx.RemoveItem (index)

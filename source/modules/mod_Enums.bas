@@ -44,7 +44,7 @@ Option Explicit
 ' ---------------------------------
 Public Function CreateEnums(Optional EnumType As String)
 On Error GoTo Err_Handler
-    
+        
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
 
@@ -185,7 +185,10 @@ On Error GoTo Err_Handler
     
     'save & close module
     DoCmd.Close acModule, "mod_App_Enum", acSaveYes
-
+    
+    'hide the vbe
+    Application.VBE.MainWindow.visible = False
+    
 Exit_Handler:
     Exit Function
     

@@ -756,18 +756,18 @@ On Error GoTo Err_Handler
     Title = "Tagline Measurements"
     Directions = "Select the appropriate slope change cause & enter tagline distance & height."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
     cbxCause.RowSourceType = "Value List"
     cbxCause.RowSource = Replace(SLOPE_CHANGE_CAUSES, ",", ";")
   
     'defaults
-    tbxIcon.forecolor = lngRed
+    tbxIcon.ForeColor = lngRed
     btnSave.Enabled = False
-    cbxCause.backcolor = lngYellow
-    tbxDistance.backcolor = lngYellow
-    tbxHeight.backcolor = lngYellow
+    cbxCause.BackColor = lngYellow
+    tbxDistance.BackColor = lngYellow
+    tbxHeight.BackColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1066,7 +1066,7 @@ On Error GoTo Err_Handler
 '        End If
 '    End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

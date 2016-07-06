@@ -21,10 +21,10 @@ Begin Form
     Width =8100
     DatasheetFontHeight =10
     ItemSuffix =18
-    Left =4875
-    Top =3390
-    Right =17295
-    Bottom =14385
+    Left =2955
+    Top =3780
+    Right =13440
+    Bottom =14775
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x1719458615c5e440
@@ -335,12 +335,12 @@ Begin Form
                     Width =6480
                     ColumnWidth =2568
                     TabIndex =1
-                    ColumnInfo ="\"\";\"\";\"0\";\"0\""
+                    ColumnInfo ="\"\";\"\";\"10\";\"200\""
                     Name ="btnDatabaseTitle"
                     ControlSource ="DatabaseTitle"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tsys_App_Releases.Database_title FROM tsys_App_Releases GROUP BY tsys_App"
-                        "_Releases.Database_title ORDER BY tsys_App_Releases.Database_title; "
+                    RowSource ="SELECT tsys_App_Releases.DatabaseTitle FROM tsys_App_Releases GROUP BY tsys_App_"
+                        "Releases.DatabaseTitle ORDER BY tsys_App_Releases.DatabaseTitle; "
                     StatusBarText ="Title of the database"
                     FontName ="Arial"
 

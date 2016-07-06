@@ -20,15 +20,14 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =2955
-    Top =3780
+    Left =630
+    Top =3765
     Right =13440
     Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x360db2e4edc6e440
+        0xafbe80e1eec6e440
     End
-    RecordSource ="tsys_App_Releases"
     Caption ="Location (Sampling Location)"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -457,7 +456,6 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnUISetup"
                     Caption ="UI Setu&p"
-                    OnClick ="[Event Procedure]"
                     ControlTipText ="Update back-end database connections"
                     UnicodeAccessKey =112
                     GridlineColor =10921638
@@ -519,7 +517,7 @@ Begin Form
                     TabIndex =6
                     ForeColor =4210752
                     Name ="btnQAReport"
-                    Caption ="Quality review report"
+                    Caption ="Quality review rpt"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="View the quality review results as a report"
                     GridlineColor =10921638
@@ -1204,7 +1202,7 @@ Begin Form
                                     BackColor =-2147483629
                                     ForeColor =-2147483607
                                     Name ="tbxTimeframe"
-                                    ControlSource ="Data_timeframe"
+                                    ControlSource ="DataTimeframe"
                                     FontName ="Arial"
                                     AsianLineBreak =0
 
@@ -1763,7 +1761,7 @@ Begin Form
                                     FontWeight =700
                                     ForeColor =-2147483607
                                     Name ="cbxVersion"
-                                    ControlSource ="ID"
+                                    ControlSource ="Release_ID"
                                     RowSourceType ="Table/Query"
                                     ColumnWidths ="0;2880"
                                     FontName ="Arial"
@@ -1803,7 +1801,7 @@ Begin Form
                                     BackColor =11056034
                                     ForeColor =-2147483607
                                     Name ="tbxContact_Name"
-                                    ControlSource ="Contact_name"
+                                    ControlSource ="AppContactName"
                                     FontName ="Arial"
                                     AsianLineBreak =0
 
@@ -1839,7 +1837,7 @@ Begin Form
                                     BackColor =11056034
                                     ForeColor =-2147483607
                                     Name ="tbxContact_Org"
-                                    ControlSource ="Contact_org"
+                                    ControlSource ="AppContactOrg"
                                     FontName ="Arial"
                                     AsianLineBreak =0
 
@@ -1875,7 +1873,7 @@ Begin Form
                                     BackColor =11056034
                                     ForeColor =-2147483607
                                     Name ="tbxContact_Phone"
-                                    ControlSource ="Contact_phone"
+                                    ControlSource ="AppContactPhone"
                                     FontName ="Arial"
                                     AsianLineBreak =0
 
@@ -1913,7 +1911,7 @@ Begin Form
                                     BackColor =11056034
                                     ForeColor =-2147483607
                                     Name ="tbxContact_Email"
-                                    ControlSource ="Contact_email"
+                                    ControlSource ="AppContactEmail"
                                     FontName ="Arial"
                                     AsianLineBreak =0
 
@@ -1947,8 +1945,8 @@ Begin Form
                                     TabIndex =5
                                     BackColor =-2147483604
                                     ForeColor =16711680
-                                    Name ="tbxWeb_address"
-                                    ControlSource ="Web_address"
+                                    Name ="tbxWebURL"
+                                    ControlSource ="WebURL"
                                     StatusBarText ="Web address for application downloads"
                                     OnDblClick ="[Event Procedure]"
                                     FontName ="Arial"
@@ -2083,7 +2081,7 @@ Begin Form
                                     Left =165
                                     Top =945
                                     Name ="chkBackupOnStartup"
-                                    ControlSource ="xBackup_prompt_startup"
+                                    ControlSource ="BackupPromptOnStartup"
                                     StatusBarText ="Whether or not the application prompts for backups upon startup"
 
                                     LayoutCachedLeft =165
@@ -2129,7 +2127,7 @@ Begin Form
                                     Top =1305
                                     TabIndex =1
                                     Name ="chkBackupOnExit"
-                                    ControlSource ="xBackup_prompt_exit"
+                                    ControlSource ="BackupPromptOnExit"
                                     StatusBarText ="Whether or not the application prompts for backups upon exiting"
 
                                     LayoutCachedLeft =165
@@ -2175,7 +2173,7 @@ Begin Form
                                     Top =1667
                                     TabIndex =2
                                     Name ="chkCompactBEOnExit"
-                                    ControlSource ="Compact_be_exit"
+                                    ControlSource ="CompactBEOnExit"
                                     StatusBarText ="Whether or not the application compacts the back-end db upon exiting"
 
                                     LayoutCachedLeft =165
@@ -2221,7 +2219,7 @@ Begin Form
                                     Top =2027
                                     TabIndex =3
                                     Name ="chkVerifyOnStartup"
-                                    ControlSource ="Verify_links_startup"
+                                    ControlSource ="VerifyLinksOnStartup"
                                     StatusBarText ="Whether or not the application verifies table connections upon startup"
 
                                     LayoutCachedLeft =165
@@ -2480,37 +2478,37 @@ On Error GoTo Err_Handler
 
     Title = "Db Admin"
     Directions = "Choose the desired action below."
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     
     'set hovers
-    btnComment.hoverColor = lngGreen
-    btnBackup.hoverColor = lngGreen
-    btnBrowser.hoverColor = lngGreen
-    btnChangeDbInfo.hoverColor = lngGreen
-    btnChangeDefaults.hoverColor = lngGreen
-    btnDbWindow.hoverColor = lngGreen
-    btnEditLog.hoverColor = lngGreen
-    btnEnter.hoverColor = lngGreen
-    btnLookups.hoverColor = lngGreen
-    btnManageLinks.hoverColor = lngGreen
-    btnNavCoords.hoverColor = lngGreen
-    btnNavReport.hoverColor = lngGreen
-    btnQA.hoverColor = lngGreen
-    btnQAReport.hoverColor = lngGreen
-    btnReconnect.hoverColor = lngGreen
-    btnReleaseHistory.hoverColor = lngGreen
-    btnReportBug.hoverColor = lngGreen
-    btnSetRoles.hoverColor = lngGreen
-    btnSpeciesListRpt.hoverColor = lngGreen
-    btnSummaries.hoverColor = lngGreen
-    btnTaskList.hoverColor = lngGreen
-    btnTaskListRpt.hoverColor = lngGreen
-    btnUISetup.hoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnBackup.HoverColor = lngGreen
+    btnBrowser.HoverColor = lngGreen
+    btnChangeDbInfo.HoverColor = lngGreen
+    btnChangeDefaults.HoverColor = lngGreen
+    btnDbWindow.HoverColor = lngGreen
+    btnEditLog.HoverColor = lngGreen
+    btnEnter.HoverColor = lngGreen
+    btnLookups.HoverColor = lngGreen
+    btnManageLinks.HoverColor = lngGreen
+    btnNavCoords.HoverColor = lngGreen
+    btnNavReport.HoverColor = lngGreen
+    btnQA.HoverColor = lngGreen
+    btnQAReport.HoverColor = lngGreen
+    btnReconnect.HoverColor = lngGreen
+    btnReleaseHistory.HoverColor = lngGreen
+    btnReportBug.HoverColor = lngGreen
+    btnSetRoles.HoverColor = lngGreen
+    btnSpeciesListRpt.HoverColor = lngGreen
+    btnSummaries.HoverColor = lngGreen
+    btnTaskList.HoverColor = lngGreen
+    btnTaskListRpt.HoverColor = lngGreen
+    btnUISetup.HoverColor = lngGreen
       
     'defaults
-    Me.RecordSource = "tsys_App_Defaults"
+    Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
     cbxVersion.RowSource = GetTemplate("s_app_releases")
     cbxVersion.ControlSource = "ID"
     
@@ -2814,7 +2812,7 @@ Private Sub btnChangeDefaults_Click()
 
     ' Perform data validation
     If TempVars("Connected") Then
-        DoCmd.OpenForm "frm_Set_Defaults", , , , , , 4
+        DoCmd.OpenForm "SetDefaults", , , , , , 4
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -2839,7 +2837,7 @@ End Sub
 ' ---------------------------------
 
 ' ---------------------------------
-' SUB:          tbxWeb_address_DblClick
+' SUB:          tbxWebURL_DblClick
 ' Description:  Opens website address
 ' Parameters:   -
 ' Returns:      -
@@ -2851,12 +2849,12 @@ End Sub
 '               BLC - 8/25/2014 - renamed control tbx vs txt
 '               BLC - 6/12/2016 - adapted for big rivers
 ' ---------------------------------
-Private Sub tbxWeb_address_DblClick(Cancel As Integer)
+Private Sub tbxWebURL_DblClick(Cancel As Integer)
 On Error GoTo Err_Handler
 
     ' Upon clicking the project web address, open the website
     DoCmd.Hourglass True
-    Application.FollowHyperlink Me.tbxWeb_address, , True, False
+    Application.FollowHyperlink Me.tbxWebURL, , True, False
 
 Exit_Handler:
     DoCmd.Hourglass False
@@ -2865,7 +2863,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxWeb_address_DblClick[DbAdmin form])"
+            "Error encountered (#" & Err.Number & " - tbxWebURL_DblClick[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -3771,6 +3769,43 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnNavCoords_Click[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' =================================
+'  DbAdmin: User Interface
+' =================================
+
+' ---------------------------------
+' SUB:          btnUISetup_Click
+' Description:  Open the UI setup tool
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  John Boetsch - NCCN Landbirds db by DbAdmin control set
+' Adapted:      Bonnie Campbell, June 30, 2016 for NCPN big rivers tool
+' Revisions:    BLC - 6/30/2016 - initial version
+' ---------------------------------
+Private Sub btnUISetupt_Click()
+On Error GoTo Err_Handler
+
+    ' Open the UI setup tool
+    If TempVars("Connected") Then
+        DoCmd.OpenForm "SummaryTool"
+    Else
+        MsgBox "The back-end connections must be fixed first", vbOKOnly, _
+            "Not connected to back-end database"
+    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnUISetup_Click[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub

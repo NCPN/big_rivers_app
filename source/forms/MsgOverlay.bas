@@ -21,10 +21,10 @@ Begin Form
     Width =8884
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =4875
-    Top =3375
-    Right =17295
-    Bottom =14385
+    Left =2955
+    Top =3765
+    Right =17475
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6ab456d96fb4e440
@@ -306,15 +306,15 @@ On Error GoTo Err_Handler
                             Transp = lngRobinEgg 'RGB(153, 255, 51)
                             Opac = 0.9
                         Case "caution"
-                            lblMessage.forecolor = lngBlue
+                            lblMessage.ForeColor = lngBlue
                             Transp = lngYellow
                             Opac = 0.9
                         Case "alert"
-                            lblMessage.forecolor = lngYellow
+                            lblMessage.ForeColor = lngYellow
                             Transp = lngPink
                             Opac = 0.9
                         Case "done"
-                            lblMessage.forecolor = lngBlack
+                            lblMessage.ForeColor = lngBlack
                             Transp = lngYelLime
                             Opac = 0.9
                     End Select
@@ -323,12 +323,21 @@ On Error GoTo Err_Handler
      
     End If
     
-    Me.Detail.backcolor = Transp
+    Me.Detail.BackColor = Transp
      
     Me.Painting = False
     'set background opacity
     SetFormOpacity Me, Opac, Transp
     Me.Painting = True
+
+    'if message was open w/ pause setting, close it automatically after pause
+    If Nz(TempVars("MsgOverlayPause"), 0) > 0 Then
+
+            Pause TempVars("MsgOverlayPause")
+            
+'            Form_Click
+            
+    End If
 
 Exit_Handler:
     Exit Sub

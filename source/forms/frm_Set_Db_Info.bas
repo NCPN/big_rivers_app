@@ -388,7 +388,7 @@ Private Sub Form_Open(Cancel As Integer)
         DoCmd.CancelEvent
     Else
         With Me
-            If TempVars.Item("UserAccessLevel") = "admin" Then
+            If TempVars.item("UserAccessLevel") = "admin" Then
                 .AllowEdits = True
                 .tbxWeb_address.visible = True
             Else
@@ -483,7 +483,7 @@ Private Sub cmdReleaseHistory_Click()
     On Error GoTo Err_Handler
 
     ' View the release history form
-    If TempVars.Item("UserAccessLevel") = "admin" Then
+    If TempVars.item("UserAccessLevel") = "admin" Then
         DoCmd.OpenForm "frm_App_Releases"
     Else    ' read-only for all but admin users
         DoCmd.OpenForm "frm_App_Releases", , , , acFormReadOnly

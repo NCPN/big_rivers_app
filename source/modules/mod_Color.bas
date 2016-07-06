@@ -34,7 +34,7 @@ Option Explicit
 ' ---------------------------------
 Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
 Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
-Public Const lngLtGray2 As Long = 8355711   '?RGB(127,127,127) Text 1, Lighter 50%
+Public Const lngGray50 As Long = 8355711    '?RGB(127,127,127) Text 1, Lighter 50% #7F7F7F Gray50
 Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
 Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
 Public Const lngLtOrange As Long = 52479    '?RGB(255,204,0) #FFCC00
@@ -69,7 +69,12 @@ Public Const lngCream As Long = 11262179    '?RGB(227, 216, 171) #e3d8ab cream N
 Public Const lngNPSBrown As Long = 2634567  '?RGB(71, 51, 40) #473328 NPS signs
 Public Const lngVanilla As Long = 11265523  '?RGB(243, 229, 171) #F3E5AB
 Public Const lngGold As Long = 121087       '?RGB(255, 216, 1) #FFD801
-
+Public Const lngMimosa As Long = 16743326   '?RGB(158, 123, 255) #937BFF purple mimosa
+Public Const lngMimosaComp As Long = 8060892 '?RGB(220, 255, 122) #DCFF7A
+Public Const lngSageGreen As Long = 7965572 '?RGB(132, 139, 121) #848B79
+Public Const lngLtSalmon As Long = 10998527 '?RGB(255, 210, 167) #FFD2A7
+Public Const lngSalmon As Long = 7051001    '?RGB(249, 150, 107) #F9966B
+Public Const lngLtSienna As Long = 3497896  '?RGB(168, 95, 53) #A85F35
 ' ---------------------------------
 '  Subroutines & Functions
 ' ---------------------------------

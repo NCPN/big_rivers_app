@@ -21,7 +21,7 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =36
     Left =2955
-    Top =3780
+    Top =3765
     Right =13440
     Bottom =14775
     DatasheetGridlinesColor =14806254
@@ -222,11 +222,11 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
                     Width =720
+                    TabIndex =1
                     ForeColor =4210752
                     Name ="btnNext"
                     Caption ="Next"
@@ -262,9 +262,9 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =1
+                    TabIndex =2
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -289,7 +289,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =2
+                    TabIndex =3
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -312,10 +312,10 @@ Begin Form
                     Top =60
                     Width =3420
                     Height =315
-                    TabIndex =3
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"0\""
                     ConditionalFormat = Begin
                         0x0100000096000000020000000100000000000000000000001600000001000000 ,
                         0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
@@ -325,9 +325,16 @@ Begin Form
                     End
                     Name ="cbxUser"
                     RowSourceType ="Table/Query"
+                    RowSource ="SELECT c.ID, LastName +',  '+ FirstName + ' ('+ UserName +')' AS AppUser, Access"
+                        "Level FROM (Contact AS c INNER JOIN Contact_Access AS ca ON ca.Contact_ID = c.ID"
+                        ") INNER JOIN Access AS a ON a.ID = ca.Access_ID WHERE UserName <> \"\" AND IsAct"
+                        "ive = 1 ORDER BY LastName, FirstName, Username; "
                     ColumnWidths ="0;2160;0"
                     AfterUpdate ="[Event Procedure]"
+                    OnKeyDown ="[Event Procedure]"
+                    OnGotFocus ="[Event Procedure]"
                     GridlineColor =10921638
+                    AllowValueListEdits =0
 
                     LayoutCachedLeft =1020
                     LayoutCachedTop =60
@@ -375,6 +382,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, June 155, 2016
 ' References:   -
 ' Revisions:    BLC - 6/15/2016 - 1.00 - initial version
+'               BLC - 6/30/2016 - 1.01 - added cbxUser GotFocus() & KeyDown() actions
 ' =================================
 
 '---------------------
@@ -486,15 +494,15 @@ On Error GoTo Err_Handler
     Title = "User"
     Directions = "Please confirm the user entering/viewing data."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnNext.hoverColor = lngGreen
+    btnNext.HoverColor = lngGreen
       
     'defaults
-    tbxIcon.forecolor = lngRed
+    tbxIcon.ForeColor = lngRed
     btnNext.Enabled = False
-    cbxUser.backcolor = lngYellow
+    cbxUser.BackColor = lngYellow
   
     'set list of users
     Me.cbxUser.RowSource = GetTemplate("s_app_user") '"SELECT ID, LastName +','+ FirstName + '('+UserName +')' AS User FROM Contact;"
@@ -539,6 +547,104 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Load[User form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxUser_GotFocus
+' Description:  Drops down the combox on focus
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:
+'   missinglinq & ADezii, July 29, 2010
+'   https://bytes.com/topic/access/answers/892371-how-do-you-allow-arrow-keys-combo-box
+' Adapted:      Bonnie Campbell, June 30, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/30/2016 - initial version
+' ---------------------------------
+Private Sub cbxUser_GotFocus()
+On Error GoTo Err_Handler
+    
+    cbxUser.Dropdown
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxUser_GotFocus[User form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxUser_KeyDown
+' Description:  Combobox keystroke actions, handles up & down arrow keys
+' Assumptions:  -
+' Note:         .ItemData and .Value are used as setting .ListIndex directly triggers
+'               the AfterUpdate() event causing cbxUser to lose focus & results in
+'               error #7777 You've used the ListIndex property incorrectly.
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:
+'   missinglinq & ADezii, July 29, 2010
+'   https://bytes.com/topic/access/answers/892371-how-do-you-allow-arrow-keys-combo-box
+'   Dirk Goldgar, June 6, 2014
+'   https://social.msdn.microsoft.com/Forums/office/en-US/3932cc02-9d3f-4430-97bf-c8c95999d870/problem-using-listindex-in-access-2010?forum=accessdev
+' Adapted:      Bonnie Campbell, June 30, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 6/30/2016 - initial version
+' ---------------------------------
+Private Sub cbxUser_KeyDown(KeyCode As Integer, Shift As Integer)
+On Error GoTo Err_Handler
+    
+    With cbxUser
+'        Select Case KeyCode
+'            Case vbKeyDown
+'              If .ListIndex <> .ListCount - 1 Then
+'                .ListIndex = .ListIndex + 1
+'              Else
+'                .ListIndex = 0
+'              End If
+'           Case vbKeyUp
+'              If .ListIndex <> 0 Then
+'                .ListIndex = .ListIndex - 1
+'              Else
+'                .ListIndex = .ListCount - 1
+'              End If
+'        End Select
+    
+        Select Case KeyCode
+            Case vbKeyDown
+              If .ListIndex <> .ListCount - 1 Then
+                .Value = .ItemData(.ListIndex + 1)
+              Else
+                .Value = .ItemData(0)
+              End If
+           Case vbKeyUp
+              If .ListIndex <> 0 Then
+                .Value = .ItemData(.ListIndex - 1)
+              Else
+                .Value = .ItemData(.ListCount - 1)
+              End If
+        End Select
+    
+    End With
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxUser_KeyDown[User form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -592,8 +698,8 @@ End Sub
 Private Sub btnNext_Click()
 On Error GoTo Err_Handler
     
-    'open Next form
-    DoCmd.Close acForm, Me.Name
+    DoCmd.Close
+    DoCmd.OpenForm "Main", acNormal, , , , , "User|" & TempVars("AppUserID")
 
 Exit_Handler:
     Exit Sub
@@ -622,7 +728,6 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    DoCmd.OpenForm "Main", acNormal, , , , , "User|" & TempVars("AppUserID")
     
 Exit_Handler:
     Exit Sub
@@ -662,7 +767,7 @@ On Error GoTo Err_Handler
         isOK = True
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnNext.Enabled = isOK
     
     'refresh form

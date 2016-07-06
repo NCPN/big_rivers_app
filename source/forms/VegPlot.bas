@@ -1466,7 +1466,7 @@ On Error GoTo Err_Handler
     ToggleForm "Main", -1
 
     'set context - based on TempVars
-    lblContext.forecolor = lngLime
+    lblContext.ForeColor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
@@ -1476,33 +1476,33 @@ On Error GoTo Err_Handler
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblCover.Caption = "Cover" & vbCrLf & "Species"
     lblTagline.Caption = StringFromCodepoint(uRuler)
     
     'set hover
-    btnComment.hoverColor = lngGreen
-    btnTaglines.hoverColor = lngGreen
-    btnWCC.hoverColor = lngGreen
-    btnURC.hoverColor = lngGreen
-    btnARC.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnTaglines.HoverColor = lngGreen
+    btnWCC.HoverColor = lngGreen
+    btnURC.HoverColor = lngGreen
+    btnARC.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
       
     'defaults
-    tbxIcon.forecolor = lngRed
+    tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxNumber.backcolor = lngYellow
-    tbxDistance.backcolor = lngYellow
-    tbxModalSedSize.backcolor = lngYellow
-    tbxPctFines.backcolor = lngYellow
-    tbxPctWater.backcolor = lngYellow
-    tbxPctURC.backcolor = lngYellow
-    tbxPlotDensity.backcolor = lngYellow
+    tbxNumber.BackColor = lngYellow
+    tbxDistance.BackColor = lngYellow
+    tbxModalSedSize.BackColor = lngYellow
+    tbxPctFines.BackColor = lngYellow
+    tbxPctWater.BackColor = lngYellow
+    tbxPctURC.BackColor = lngYellow
+    tbxPlotDensity.BackColor = lngYellow
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -2354,7 +2354,7 @@ On Error GoTo Err_Handler
         
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

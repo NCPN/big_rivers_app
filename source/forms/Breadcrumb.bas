@@ -209,7 +209,7 @@ End Property
 
 Public Property Let CrumbFontColor(Value As Long)
     m_CrumbFontColor = Value
-    lblCrumb.forecolor = m_CrumbFontColor
+    lblCrumb.ForeColor = m_CrumbFontColor
 End Property
 
 Public Property Get CrumbFontColor() As Long
@@ -219,7 +219,7 @@ End Property
 Public Property Let BreadcrumbHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_BreadcrumbHeaderColor = Value
-    FormHeader.backcolor = m_BreadcrumbHeaderColor
+    FormHeader.BackColor = m_BreadcrumbHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen, vbCyan, vbWhite

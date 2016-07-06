@@ -13,6 +13,7 @@ Option Explicit
 '               BLC, 11/19/2015 - 1.02 - added CreateEnums call to initApp
 '               BLC, 4/26/2016  - 1.03 - added ClickAction() for handling various app actions
 '               BLC, 6/24/2016 - 1.04 - replaced Exit_Function > Exit_Handler
+'               BLC, 7/5/2016  - 1.05 - added ClearFields() to support Species Search
 ' =================================
 
 ' =================================
@@ -388,6 +389,10 @@ On Error GoTo Err_Handler
         Case "understory cover"
         Case "vegetation walk"
         Case "species"
+        Case "unknowns"
+            fName = "Unknown"
+        Case "species search"
+            fName = "SpeciesSearch"
         'Observations
         Case "photos"
             fName = "Tree"
@@ -404,6 +409,8 @@ On Error GoTo Err_Handler
         Case "photo"
             rName = "Photo"
             oArgs = ""
+        Case "sheet settings"
+            fName = "SetDatasheetDefaults"
         Case "transducer"
             rName = "Transducer"
         Case "tasks"
@@ -509,6 +516,11 @@ On Error GoTo Err_Handler
             Case "Location"
                 'strSQL = GetTemplate()
                 '.Controls("").ControlSource = ""
+            Case "SetDatasheetDefaults"
+                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "tsys_Datasheet_Defaults|id" & PARAM_SEPARATOR & ID)
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxSpecies").ControlSource = "SpeciesRows"
+                .Controls("tbxBlanks").ControlSource = "BlankRows"
             Case "Site"
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
                 .Controls("tbxID").ControlSource = "ID"
@@ -651,3 +663,44 @@ Public Function SetStartupOptions(propertyname As String, _
   Set dbs = Nothing
   Set prp = Nothing
 End Function
+
+' ---------------------------------
+' SUB:          ClearFields
+' Description:  initialize application values
+' Assumptions:  -
+' Parameters:   frm - Form whose fields should be cleared
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, February 20, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 2/20/2015  - initial version
+'   BLC - 5/18/2015  - fixed error documentation ClearFields vs. ITIS_Click, mod_Forms vs. frm_SpeciesSearch
+'   BLC - 6/30/2015  - moved to mod_App_UI
+'   BLC - 7/5/2016   - added from Invasives Reporting mod_App_UI to support Species Search
+' ---------------------------------
+Public Sub ClearFields(frm As Form)
+On Error GoTo Err_Handler
+
+    Select Case frm.Name
+    
+        Case "frm_Species_Search"
+            frm.Controls("cbxCO").DefaultValue = False
+            frm.Controls("cbxUT").DefaultValue = False
+            frm.Controls("cbxWY").DefaultValue = False
+            frm.Controls("cbxITIS").DefaultValue = False
+            frm.Controls("cbxCommon").DefaultValue = False
+            frm.Controls("tbxSearchFor").Value = ""
+    End Select
+    
+Exit_Sub:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ClearFields[form_Forms])"
+    End Select
+    Resume Exit_Sub
+End Sub

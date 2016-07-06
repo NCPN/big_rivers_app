@@ -348,7 +348,7 @@ Public Event InvalidColor(Value As Long)
 Public Property Let Level0Color(Value As Long)
     If Len(Value) > 0 Then
         m_Level0Color = Value
-        Me.btnLevel0.backcolor = Value
+        Me.btnLevel0.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -361,7 +361,7 @@ End Property
 Public Property Let Level1Color(Value As Long)
     If Len(Value) > 1 Then
         m_Level1Color = Value
-        Me.btnLevel1.backcolor = Value
+        Me.btnLevel1.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -374,7 +374,7 @@ End Property
 Public Property Let Level2Color(Value As Long)
     If Len(Value) > 2 Then
         m_Level2Color = Value
-        Me.btnLevel2.backcolor = Value
+        Me.btnLevel2.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -387,7 +387,7 @@ End Property
 Public Property Let Level3Color(Value As Long)
     If Len(Value) > 3 Then
         m_Level3Color = Value
-        Me.btnLevel3.backcolor = Value
+        Me.btnLevel3.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -400,7 +400,7 @@ End Property
 Public Property Let Level0BgdColor(Value As Long)
     If Len(Value) > 0 Then
         m_Level0BgdColor = Value
-        Me.btnLevel0.backcolor = Value
+        Me.btnLevel0.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -413,7 +413,7 @@ End Property
 Public Property Let Level1BgdColor(Value As Long)
     If Len(Value) > 1 Then
         m_Level1BgdColor = Value
-        Me.btnLevel1.backcolor = Value
+        Me.btnLevel1.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -426,7 +426,7 @@ End Property
 Public Property Let Level2BgdColor(Value As Long)
     If Len(Value) > 2 Then
         m_Level2BgdColor = Value
-        Me.btnLevel2.backcolor = Value
+        Me.btnLevel2.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -439,7 +439,7 @@ End Property
 Public Property Let Level3BgdColor(Value As Long)
     If Len(Value) > 3 Then
         m_Level3BgdColor = Value
-        Me.btnLevel3.backcolor = Value
+        Me.btnLevel3.BackColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -505,7 +505,7 @@ End Property
 Public Property Let Level0HoverBgdColor(Value As Long)
     If Len(Value) > 0 Then
         m_Level0HoverBgdColor = Value
-        Me.btnLevel0.hoverColor = Value
+        Me.btnLevel0.HoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -518,7 +518,7 @@ End Property
 Public Property Let Level1HoverBgdColor(Value As Long)
     If Len(Value) > 1 Then
         m_Level1HoverBgdColor = Value
-        Me.btnLevel1.hoverColor = Value
+        Me.btnLevel1.HoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -531,7 +531,7 @@ End Property
 Public Property Let Level2HoverBgdColor(Value As Long)
     If Len(Value) > 2 Then
         m_Level2HoverBgdColor = Value
-        Me.btnLevel2.hoverColor = Value
+        Me.btnLevel2.HoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If
@@ -544,7 +544,7 @@ End Property
 Public Property Let Level3HoverBgdColor(Value As Long)
     If Len(Value) > 3 Then
         m_Level3HoverBgdColor = Value
-        Me.btnLevel3.hoverColor = Value
+        Me.btnLevel3.HoverColor = Value
     Else
         RaiseEvent InvalidColor(Value)
     End If

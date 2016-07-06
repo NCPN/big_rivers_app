@@ -571,18 +571,18 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnEdit.hoverColor = lngGreen
-    btnDelete.hoverColor = lngGreen
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
     
     'set data source
-    Me.RecordSource = GetTemplate("s_feature_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.Item("ParkCode"))
+    Me.RecordSource = GetTemplate("s_feature_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
     Me.Requery
 
 

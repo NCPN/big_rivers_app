@@ -16,11 +16,11 @@ Begin Form
     GridY =24
     Width =8280
     DatasheetFontHeight =11
-    ItemSuffix =23
-    Left =2955
-    Top =3780
-    Right =16980
-    Bottom =14775
+    ItemSuffix =24
+    Left =5610
+    Top =2760
+    Right =13890
+    Bottom =10785
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -201,7 +201,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7080
+            Height =7620
             BackColor =2634567
             Name ="Detail"
             AlternateBackColor =2634567
@@ -212,7 +212,7 @@ Begin Form
                     Left =120
                     Top =540
                     Width =2592
-                    Height =3168
+                    Height =3456
                     BorderColor =10921638
                     Name ="LTile"
                     SourceObject ="Form.Tile"
@@ -221,14 +221,14 @@ Begin Form
                     LayoutCachedLeft =120
                     LayoutCachedTop =540
                     LayoutCachedWidth =2712
-                    LayoutCachedHeight =3708
+                    LayoutCachedHeight =3996
                 End
                 Begin Subform
                     OverlapFlags =85
                     Left =2850
                     Top =540
                     Width =2592
-                    Height =3168
+                    Height =3456
                     TabIndex =1
                     BorderColor =10921638
                     Name ="CTile"
@@ -238,14 +238,14 @@ Begin Form
                     LayoutCachedLeft =2850
                     LayoutCachedTop =540
                     LayoutCachedWidth =5442
-                    LayoutCachedHeight =3708
+                    LayoutCachedHeight =3996
                 End
                 Begin Subform
                     OverlapFlags =85
                     Left =5580
                     Top =540
                     Width =2592
-                    Height =3168
+                    Height =3456
                     TabIndex =2
                     BorderColor =10921638
                     Name ="RTile"
@@ -255,14 +255,14 @@ Begin Form
                     LayoutCachedLeft =5580
                     LayoutCachedTop =540
                     LayoutCachedWidth =8172
-                    LayoutCachedHeight =3708
+                    LayoutCachedHeight =3996
                 End
                 Begin Subform
                     OverlapFlags =85
                     Left =120
-                    Top =3840
+                    Top =4080
                     Width =2592
-                    Height =3168
+                    Height =3456
                     TabIndex =3
                     BorderColor =10921638
                     Name ="BLTile"
@@ -270,16 +270,16 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =3840
+                    LayoutCachedTop =4080
                     LayoutCachedWidth =2712
-                    LayoutCachedHeight =7008
+                    LayoutCachedHeight =7536
                 End
                 Begin Subform
                     OverlapFlags =85
                     Left =2850
-                    Top =3840
+                    Top =4080
                     Width =2592
-                    Height =3168
+                    Height =3456
                     TabIndex =4
                     BorderColor =10921638
                     Name ="BCTile"
@@ -287,16 +287,16 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2850
-                    LayoutCachedTop =3840
+                    LayoutCachedTop =4080
                     LayoutCachedWidth =5442
-                    LayoutCachedHeight =7008
+                    LayoutCachedHeight =7536
                 End
                 Begin Subform
                     OverlapFlags =85
                     Left =5580
-                    Top =3840
+                    Top =4080
                     Width =2592
-                    Height =3168
+                    Height =3456
                     TabIndex =5
                     BorderColor =10921638
                     Name ="BRTile"
@@ -304,9 +304,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5580
-                    LayoutCachedTop =3840
+                    LayoutCachedTop =4080
                     LayoutCachedWidth =8172
-                    LayoutCachedHeight =7008
+                    LayoutCachedHeight =7536
                 End
                 Begin Subform
                     OverlapFlags =215
@@ -358,6 +358,27 @@ Begin Form
                     LayoutCachedHeight =480
                     BackThemeColorIndex =3
                     BackShade =50.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =6030
+                    Top =60
+                    Width =2100
+                    Height =360
+                    FontSize =8
+                    ForeColor =15921906
+                    Name ="lblNotice"
+                    FontName ="Arial"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6030
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =8130
+                    LayoutCachedHeight =420
+                    ThemeFontIndex =-1
+                    BorderTint =100.0
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ForeShade =95.0
                 End
             End
         End
@@ -435,7 +456,7 @@ On Error GoTo Err_Handler
     Dim oBCTile As Form_Tile
     Dim oBRTile As Form_Tile
     
-    Me.Detail.backcolor = lngNPSBrown
+    Me.Detail.BackColor = lngNPSBrown
     Me.Detail.AlternateBackColor = lngNPSBrown
     
 '    Dim X1 As Single, X2 As Single, Y1 As Single, Y2 As Single
@@ -457,28 +478,36 @@ On Error GoTo Err_Handler
     'Main
     Me.lblTitle.Caption = "Data Entry"
     
+    lblNotice.Caption = StringFromCodepoint(uPointerBlkL) & " R click to set values"
+    lblNotice.FontSize = 9
+    lblNotice.FontWeight = wtBold
+    lblNotice.ForeColor = lngLtYellow
+    
     'Admin --> filter actions when form opens (disable form buttons based on TempVars("AccessLevel")
-    Me.btnAdmin.hoverColor = LINK_HIGHLIGHT_BKGD
+    Me.btnAdmin.HoverColor = LINK_HIGHLIGHT_BKGD
         
     ' ------ Top -------
     'Left
     Set oLTile = LTile.Form
     oLTile.Title = "Where?"
-    oLTile.BarColor = vbGreen
-    oLTile.TileHeaderColor = vbGreen
+    oLTile.BarColor = lngWhite
+    oLTile.TileHeaderColor = lngLtSienna
+    oLTile.TitleFontColor = lngWhite
     oLTile.Link1Caption = "Site"
     oLTile.Link2Caption = "Feature"
     oLTile.Link3Caption = "Transect"
     oLTile.Link4Caption = "Plot"
     oLTile.Link5Caption = ""
-    oLTile.Link6Caption = "Location"
     oLTile.Link5Visible = 0
+    oLTile.Link6Caption = "Location"
+    oLTile.Link7Visible = 0
+    oLTile.Link8Visible = 0
     
     'Center
     Set oCTile = CTile.Form
     oCTile.Title = "Sampling"
-    oCTile.BarColor = vbGreen
-    oCTile.TileHeaderColor = vbGreen
+    oCTile.BarColor = lngWhite
+    oCTile.TileHeaderColor = lngVanilla
     oCTile.Link1Caption = "Event"
     oCTile.Link2Caption = ""
     oCTile.Link2Visible = 0
@@ -486,70 +515,89 @@ On Error GoTo Err_Handler
     oCTile.Link4Visible = 0
     oCTile.Link5Caption = "Locations"
     oCTile.Link6Caption = "People"
+    oCTile.Link7Visible = 0
+    oCTile.Link8Visible = 0
 
     'Right
     Set oRTile = RTile.Form
     oRTile.Title = "Vegetation"
-    oRTile.BarColor = vbYellow
-    oRTile.TileHeaderColor = vbBlue
+    oRTile.BarColor = lngWhite
+    oRTile.TileHeaderColor = lngSageGreen
+    oRTile.TitleFontColor = lngWhite
     oRTile.Link1Caption = "Woody Canopy Cover"
     oRTile.Link2Caption = "Understory Cover"
     oRTile.Link3Caption = "Vegetation Walk"
     oRTile.Link4Visible = 0
     oRTile.Link5Visible = 0
     oRTile.Link6Caption = "Species"
+    oRTile.Link7Caption = "Unknowns"
+    oRTile.Link8Caption = "Species Search"
     
     ' ------ Bottom -------
     'Left
     Set oBLTile = BLTile.Form
     oBLTile.Title = "Observations"
     oBLTile.TileTag = "Obs-"
-    oBLTile.BarColor = vbGreen
-    oBLTile.TileHeaderColor = vbGreen
+    oBLTile.BarColor = lngWhite
+    oBLTile.TileHeaderColor = lngRobinEgg
     oBLTile.Link1Caption = "Photos"
     oBLTile.Link2Caption = "Transducers"
     oBLTile.Link3Visible = 0
     oBLTile.Link4Visible = 0
     oBLTile.Link5Visible = 0
     oBLTile.Link6Visible = 0
+    oBLTile.Link7Visible = 0
+    oBLTile.Link8Visible = 0
     
     'Center
     Set oBCTile = BCTile.Form
     oBCTile.Title = "Trip Prep"
     oBCTile.TileTag = "prep-"
-    oBCTile.BarColor = vbGreen
-    oBCTile.TileHeaderColor = vbGreen
+    oBCTile.BarColor = lngWhite
+    oBCTile.TileHeaderColor = lngLtSalmon
     oBCTile.Link1Caption = "VegPlot"
     oBCTile.Link2Caption = "VegWalk"
     oBCTile.Link3Caption = "Photo"
     oBCTile.Link4Caption = "Transducer"
     oBCTile.Link5Visible = 0
     oBCTile.Link6Caption = "Tasks"
+    oBCTile.Link7Visible = 0
+    oBCTile.Link8Caption = "Sheet Settings"
 
     'Right
     Set oBRTile = BRTile.Form
     oBRTile.Title = "Reports"
-    oBRTile.BarColor = vbYellow
-    oBRTile.TileHeaderColor = vbBlue
+    oBRTile.BarColor = lngWhite
+    oBRTile.TileHeaderColor = lngBlue 'lngMimosa
+    oBRTile.TitleFontColor = lngWhite
     oBRTile.Link1Caption = "rpt1"
     oBRTile.Link2Visible = 0
     oBRTile.Link3Visible = 0
     oBRTile.Link4Visible = 0
     oBRTile.Link5Visible = 0
     oBRTile.Link6Visible = 0
+    oBRTile.Link7Visible = 0
+    oBRTile.Link8Visible = 0
     oBRTile.Link2Caption = ""
     oBRTile.Link3Caption = ""
     oBRTile.Link4Caption = ""
     oBRTile.Link5Caption = ""
     oBRTile.Link6Caption = ""
+    oBRTile.Link7Caption = ""
+    oBRTile.Link8Caption = ""
     
     HighlightBreadcrumb
     
-    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
-            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-            "msg" & PARAM_SEPARATOR & "Please select a park (right click)." & _
-            "|Type" & PARAM_SEPARATOR & "caution"
-    End If
+'    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
+'
+'        'pause the display then dismiss overlay message
+'        TempVars.Add "MsgOverlayPause", 0
+'
+'        DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+'        "msg" & PARAM_SEPARATOR & "Please select a park (right click)." & _
+'        "|Type" & PARAM_SEPARATOR & "caution"
+'
+'    End If
 
     
 Exit_Handler:
@@ -680,6 +728,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/18/2016 - initial version
+'   BLC - 7/1/2016 -  update indicator color & visibility
 ' ---------------------------------
 Public Sub UpdateBreadcrumb(Optional ClearValues As Integer = 4)
 On Error GoTo Err_Handler
@@ -715,13 +764,47 @@ On Error GoTo Err_Handler
             
         'if park --> enable links
         If Len(Nz(TempVars("ParkCode"), "")) > 0 Then
-            'enable links
-            .Parent!LTile.Form.EnableLinks .Parent!LTile.Form.TileTag & ",1,2,3,4,5,6"
-            .Parent!CTile.Form.EnableLinks .Parent!CTile.Form.TileTag & ",1,2,3,4,5,6"
-            .Parent!RTile.Form.EnableLinks .Parent!RTile.Form.TileTag & ",1,2,3,4,5,6"
-            .Parent!BLTile.Form.EnableLinks .Parent!BLTile.Form.TileTag & ",1,2,3,4,5,6"
-            .Parent!BCTile.Form.EnableLinks .Parent!BCTile.Form.TileTag & ",1,2,3,4,5,6"
-            .Parent!BRTile.Form.EnableLinks .Parent!BRTile.Form.TileTag & ",1,2,3,4,5,6"
+            
+            'clear notice
+            lblNotice.Caption = ""
+        
+            Dim tiles() As Variant
+            Dim strTile As String
+            Dim strCtrl As String
+            Dim ctrl As Control
+            
+'            tiles = Array("L", "C", "R", "BL", "BC", "BR")
+'            For i = 0 To UBound(tiles)
+'                strTile = tiles(i) & "Tile"
+'                Debug.Print strTile
+'                ctl = ".Parent!" & strTile & ".Form"
+'                Debug.Print strCtrl '.Parent! & strTile&.Form.Name
+'            Next
+
+            'iterate through the tiles - enable links & update indicator
+            For Each ctrl In Me.Controls
+            
+                If Right(ctrl.Name, 4) = "Tile" Then
+                    With ctrl.Form
+                        .EnableLinks .TileTag & ",1,2,3,4,5,6,7,8"
+                        .IndicatorVisible = 1
+                        .IndicatorColor = lngGreen
+                    End With
+                End If
+            
+            Next
+            
+'            'set indicators
+'            .Parent!LTile.Form.IndicatorVisible = 1
+'            .Parent!LTile.Form.IndicatorColor = lngYelLime
+'
+'            'enable links
+'            .Parent!LTile.Form.EnableLinks .Parent!LTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
+'            .Parent!CTile.Form.EnableLinks .Parent!CTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
+'            .Parent!RTile.Form.EnableLinks .Parent!RTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
+'            .Parent!BLTile.Form.EnableLinks .Parent!BLTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
+'            .Parent!BCTile.Form.EnableLinks .Parent!BCTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
+'            .Parent!BRTile.Form.EnableLinks .Parent!BRTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
 
             'disable feature for non-feature parks
             If TempVars("ParkCode") <> "BLCA" Then
@@ -791,10 +874,10 @@ On Error GoTo Err_Handler
             bgcolor3 = lngWhite
         End If
 
-        .btnLevel0.backcolor = bgcolor0
-        .btnLevel1.backcolor = bgcolor1
-        .btnLevel2.backcolor = bgcolor2
-        .btnLevel3.backcolor = bgcolor3
+        .btnLevel0.BackColor = bgcolor0
+        .btnLevel1.BackColor = bgcolor1
+        .btnLevel2.BackColor = bgcolor2
+        .btnLevel3.BackColor = bgcolor3
 
     End With
     

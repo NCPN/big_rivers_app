@@ -1274,19 +1274,19 @@ On Error GoTo Err_Handler
     Title = "Contact"
     Directions = "Enter the contact information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     lblWork.Caption = "Work" & vbCrLf & "Info"
     
     'set hover
-    btnComment.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
       
     'defaults
-    lblWork.backcolor = lngCream
-    tbxIcon.forecolor = lngRed
+    lblWork.BackColor = lngCream
+    tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
 
@@ -1881,7 +1881,7 @@ On Error GoTo Err_Handler
         isOK = True
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

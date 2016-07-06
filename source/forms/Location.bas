@@ -814,21 +814,21 @@ On Error GoTo Err_Handler
     Title = "Location (Sampling Location)"
     Directions = "Enter the sampling location information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     
     'set hover
-    btnComment.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
       
     'defaults
-    tbxIcon.forecolor = lngRed
+    tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxDistance.backcolor = lngYellow
-    tbxBearing.backcolor = lngYellow
+    tbxDistance.BackColor = lngYellow
+    tbxBearing.BackColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1122,7 +1122,7 @@ On Error GoTo Err_Handler
         isOK = True
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

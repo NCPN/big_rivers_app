@@ -27,7 +27,8 @@ Option Explicit
 '---------------------
 Public Const uSpiral = &HAA5C               '-21924 (Cham Punctuation Spiral)
 Public Const uAmpersand = &H26              '38     doesn't work :(
-Public Const uOn = &H7C                     '124 Vertical Line
+Public Const uOn = &H7C                     '124    Vertical Line
+Public Const uDoubleLessThanLeft = &HAB     '171    left-pointing double angle quotation mark <<
 Public Const uDegree = &HB0                 '176    degree sign
 Public Const uLineHorizontal = &H332        '818    horizontal line (Combining Low LIne)
 Public Const uMu = &H3BC                    '956    microns
@@ -36,6 +37,8 @@ Public Const uRArrow = &H2192               '8594   right arrow c.f. https://en.
 Public Const uDArrow = &H2193               '8495   down arrow
 Public Const uLessThanOrEqual = &H2264      '8804
 Public Const uGreaterThanOrEqual = &H2265   '8805
+Public Const uDoubleTriangleBlkL = &H23EA   '9194   black left-pointing double triangle
+Public Const uMedTriangleBlkL = &H23F4      '9204   black medium left-pointing triangle
 ' --- new in June 2016 (unicode 9.0 release) ----
 Public Const uPowerOn = &H23FD              '9213 |
 Public Const uPowerToggle = &H23FC          '9212
@@ -44,6 +47,9 @@ Public Const uPower = &H23FB                '9211
 Public Const uCircle1 = &H2460              '9312
 Public Const uCircle2 = &H2461              '9313
 Public Const uCircle3 = &H2462              '9314
+Public Const uCircleR = &H24C7              '9415   circled Latin captial letter R
+Public Const uTriangleBlkL = &H25C0         '9664   black left-pointing triangle
+Public Const uPointerBlkL = &H25C4          '9668   black left-pointing pointer
 Public Const uBullet = &H25CF               '9679
 Public Const uUmbrella = &H2602             '9730
 Public Const uCheckboxEmpty = &H2610        '9744
@@ -71,6 +77,7 @@ Public Const uSpiral2 = &H169B9             '92601  Bamum Letter Phase-E Ngkaami
 '--- use StringFromCodepoint() from here ---
 Public Const uUser = &H1F464                '128100 bust in silhouette
 Public Const uUsers = &H1F465               '128101 busts in silhouette
+Public Const uCircledRNegative = &H1F161    '127329 negative circled Latin capital letter r
 Public Const uMtnSunrise = &H1F304          '127748 mountain sunrise
 Public Const uWave = &H1F30A                '127754
 Public Const uDropletBlack = &H1F322        '127778
@@ -137,6 +144,7 @@ Public Const uTenThirty = &H1F565           '128357
 Public Const uElevenThirty = &H1F566        '128358
 Public Const uTwelveThirty = &H1F567        '128359
 Public Const uPencil = &H1F589              '128393
+Public Const uFingerPointL = &H1F59C        '128412 black left pointing backhand
 Public Const uFolder = &H1F5C0              '128448
 Public Const uFolderOpen = &H1F5C1          '128449
 Public Const uNotepad = &H1F5CA             '128458
@@ -153,6 +161,7 @@ Public Const uCancel2 = &H1F5D9             '128473
 Public Const uHammerWrench = &H1F6E0        '128736 crossed hammer and wrench
 Public Const uRHArrow = &H1F846             '129094 heavy right arrow
 Public Const uLHArrow = &H1F844             '129092 heavy left arrow
+Public Const uLTriangleArrow = &H1F890      '129168 leftwards triangle arrowhead
 Public Const uLizard = &H1F98E              '129422
 
 ' =================================
@@ -340,16 +349,16 @@ End Function
 ' ---------------------------------
 Public Function CountInString(ByVal strInspect As String, ByVal strFind As String) As Integer
 On Error GoTo Err_Handler:
-     Dim Count As Integer
+     Dim count As Integer
 
     'default
-    Count = 0
+    count = 0
     
     If Len(strInspect) > 0 Then
-        Count = UBound(Split(strInspect, strFind))
+        count = UBound(Split(strInspect, strFind))
     End If
     
-    CountInString = Count
+    CountInString = count
 
 Exit_Handler:
     Exit Function

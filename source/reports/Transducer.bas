@@ -1295,7 +1295,7 @@ Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim ary() As String, strPark As String, strSegments As String
-    Dim strSQL As String, strWHERE As String, strOrderBy As String
+    Dim strSQL As String, strWhere As String, strOrderBy As String
     Dim strSQL2 As String
     Dim sopdata As Variant
     Dim arySegments() As Variant, aryProtocol() As Variant
@@ -1303,7 +1303,7 @@ On Error GoTo Err_Handler
     
     'defaults
     strPark = ""
-    strWHERE = ""
+    strWhere = ""
     strSegments = ""
     i = 0
     
@@ -1350,14 +1350,14 @@ On Error GoTo Err_Handler
     strSQL2 = Replace(strSQL, "BD", "AD")
     
     If Not IsNull(strPark) Then
-        strWHERE = "WHERE ParkCode = '" & strPark & "' "
+        strWhere = "WHERE ParkCode = '" & strPark & "' "
     End If
     
     strOrderBy = "ORDER BY ParkCode, Sequence ASC"
     
-    strSQL = strSQL & strWHERE & strOrderBy _
+    strSQL = strSQL & strWhere & strOrderBy _
                 & " UNION ALL " _
-                & strSQL2 & strWHERE & strOrderBy & ";"
+                & strSQL2 & strWhere & strOrderBy & ";"
     
     Me.RecordSource = strSQL
 

@@ -13,15 +13,5 @@ CREATE TABLE [tsys_App_Defaults] (
   [AppContactName] VARCHAR (50),
   [AppContactOrg] VARCHAR (50),
   [AppContactPhone] VARCHAR (50),
-  [AppContactEmail] VARCHAR (50),
-  [xBackup_prompt_startup] VARCHAR ,
-  [xBackup_prompt_exit] VARCHAR ,
-  [Compact_be_exit] VARCHAR ,
-  [Verify_links_startup] VARCHAR ,
-  [Web_address] VARCHAR (200),
-  [Contact_name] VARCHAR (50),
-  [Contact_org] VARCHAR (50),
-  [Contact_phone] VARCHAR (50),
-  [Contact_email] VARCHAR (50),
-  [xData_timeframe] VARCHAR (30)
+  [AppContactEmail] VARCHAR (50)
 )

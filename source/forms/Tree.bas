@@ -917,7 +917,7 @@ On Error GoTo Err_Handler
             
             nodeCurrent.Tag = "I|P|" & CStr(PhotoType) & "|" & Code & "|" & Code
             nodeCurrent.Bold = True
-            nodeCurrent.forecolor = vbBlue
+            nodeCurrent.ForeColor = vbBlue
         
             If Code = "O" Then
                 'add other nodes & format
@@ -929,7 +929,7 @@ On Error GoTo Err_Handler
                     Code = "O" & Left(CStr(chld), 1)
 
                     Set nodeX = .nodes.Add(nodeCurrent, tvwChild, Code, CStr(chld))
-                    nodeX.forecolor = vbBlue
+                    nodeX.ForeColor = vbBlue
                     nodeX.Bold = True
                     nodeX.Tag = "I|P|" & CStr(chld) & "|" & Code & "|" & Code
                 Next
@@ -1297,27 +1297,27 @@ On Error GoTo Err_Handler
     Dim colTreeNodes As Collection
     
     If blnNodeSelected Then
-        If node.backcolor = vbHighlight Then
-            If colTreeNodes.Count > 1 Then
-                node.backcolor = vbWindowBackground
-                node.forecolor = vbWindowText
+        If node.BackColor = vbHighlight Then
+            If colTreeNodes.count > 1 Then
+                node.BackColor = vbWindowBackground
+                node.ForeColor = vbWindowText
                 node.Selected = False
                 colTreeNodes.Remove node.key
             End If
             Exit Sub
         End If
     Else
-        For i = 0 To colTreeNodes.Count - 1
-            Set SelectedNode = colTreeNodes.Item(i) 'colTreeNodes.Remove(, 0)
-            SelectedNode.backcolor = vbWindowBackground
-            SelectedNode.forecolor = vbWindowText
+        For i = 0 To colTreeNodes.count - 1
+            Set SelectedNode = colTreeNodes.item(i) 'colTreeNodes.Remove(, 0)
+            SelectedNode.BackColor = vbWindowBackground
+            SelectedNode.ForeColor = vbWindowText
             colTreeNodes.Remove i
         Next i
     End If
     
     If Not node Is Nothing Then
-        node.backcolor = vbHighlight
-        node.forecolor = vbHighlightText
+        node.BackColor = vbHighlight
+        node.ForeColor = vbHighlightText
         colTreeNodes.Add node, node.key
     End If
     
@@ -1656,8 +1656,8 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
             
             'prepare error message
             lblError.Caption = strSkippedFiles & strDuplicates
-            lblError.backcolor = lngYellow
-            lblError.forecolor = vbRed
+            lblError.BackColor = lngYellow
+            lblError.ForeColor = vbRed
             lblError.visible = True
         Next
       Else
@@ -1972,7 +1972,7 @@ On Error GoTo Err_Handler
         End If
     Next node
     Me.tvwTree.SetFocus
-    Set Me.tvwTree.SelectedItem = Me.tvwTree.nodes.Item(idx)
+    Set Me.tvwTree.SelectedItem = Me.tvwTree.nodes.item(idx)
 
 Exit_Handler:
     Exit Sub
@@ -2005,7 +2005,7 @@ Private Sub ExpandBranch(ByVal node As MSComctlLib.node)
     Dim i As Integer
     
     For i = node.index To node.Next.index - 1
-        Me.tvwTree.nodes.Item(i).Expanded = True
+        Me.tvwTree.nodes.item(i).Expanded = True
 '        Debug.Print Me.xTree.Nodes.Item(i).Text
     Next i
     
@@ -2095,20 +2095,20 @@ Public Sub tvwTree_FindNode(strFind As String, strType As String, blnExpand As B
 On Error GoTo Err_Handler
 
     Dim tvwNode As node
-    Dim Item As Variant
+    Dim item As Variant
     
     For Each tvwNode In tvwTree.Object.nodes 'Me.TreeView.nodes
     
         Select Case strType
             Case "key"
-                Item = tvwNode.key
+                item = tvwNode.key
             Case "tag"
-                Item = tvwNode.Tag
+                item = tvwNode.Tag
             Case "text"
-                Item = tvwNode.Text
+                item = tvwNode.Text
         End Select
         
-        If Item = strFind Then
+        If item = strFind Then
            tvwNode.Selected = True
            tvwNode.EnsureVisible
            tvwNode.Expanded = blnExpand
@@ -2147,7 +2147,7 @@ Public Function IsDuplicateKey(strKey As String, tvw As MSComctlLib.TreeView) As
 On Error GoTo Err_Handler
 
     Dim tvwNode As node
-    Dim Item As Variant
+    Dim item As Variant
     Dim blnIsDupe As Boolean
     
     blnIsDupe = False
@@ -2191,16 +2191,16 @@ Public Function ParseString(str As String, idx As Integer, Optional delimiter As
 On Error GoTo Err_Handler
 
     Dim items() As String
-    Dim Item As String
+    Dim item As String
         
     items() = Split(str, delimiter)
     
     If UBound(items) + 1 > idx Then
-        Item = items(idx)
+        item = items(idx)
     End If
     
 Exit_Handler:
-    ParseString = Item
+    ParseString = item
     Exit Function
     
 Err_Handler:

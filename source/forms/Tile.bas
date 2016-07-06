@@ -18,11 +18,11 @@ Begin Form
     GridY =24
     Width =2592
     DatasheetFontHeight =11
-    ItemSuffix =9
-    Left =4545
-    Top =4950
-    Right =6870
-    Bottom =7845
+    ItemSuffix =13
+    Left =2955
+    Top =3780
+    Right =13440
+    Bottom =14775
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -126,7 +126,7 @@ Begin Form
                     ForeShade =95.0
                 End
                 Begin Line
-                    BorderWidth =2
+                    BorderWidth =4
                     OverlapFlags =85
                     Top =432
                     Width =2592
@@ -145,7 +145,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =2280
+            Height =2880
             Name ="Detail"
             OnMouseMove ="[Event Procedure]"
             AlternateBackColor =15921906
@@ -164,7 +164,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink1"
-                    Caption ="Site"
+                    Caption ="Link1"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -179,8 +179,8 @@ Begin Form
                 Begin CommandButton
                     Visible = NotDefault
                     OverlapFlags =93
-                    Left =900
-                    Top =1920
+                    Left =1320
+                    Top =2580
                     Width =1200
                     Height =240
                     ForeColor =4210752
@@ -188,10 +188,10 @@ Begin Form
                     Caption ="Next >>"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =900
-                    LayoutCachedTop =1920
-                    LayoutCachedWidth =2100
-                    LayoutCachedHeight =2160
+                    LayoutCachedLeft =1320
+                    LayoutCachedTop =2580
+                    LayoutCachedWidth =2520
+                    LayoutCachedHeight =2820
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -205,7 +205,6 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
-                    BackStyle =1
                     OverlapFlags =85
                     Left =180
                     Top =420
@@ -214,9 +213,9 @@ Begin Form
                     FontSize =9
                     BackColor =9699294
                     BorderColor =8355711
-                    ForeColor =16711680
+                    ForeColor =8355711
                     Name ="lblLink2"
-                    Caption ="Feature"
+                    Caption ="Link2"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -227,6 +226,7 @@ Begin Form
                     LayoutCachedHeight =660
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
@@ -239,7 +239,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink3"
-                    Caption ="Transect"
+                    Caption ="Link3"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -262,7 +262,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lblLink4"
-                    Caption ="Plot"
+                    Caption ="Link4"
                     OnClick ="[Event Procedure]"
                     OnMouseMove ="[Event Procedure]"
                     Tag ="DISABLED"
@@ -275,7 +275,6 @@ Begin Form
                     ForeThemeColorIndex =-1
                 End
                 Begin Label
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =1500
@@ -296,8 +295,7 @@ Begin Form
                     LayoutCachedHeight =1740
                 End
                 Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =85
                     Left =180
                     Top =1860
                     Width =2160
@@ -316,6 +314,49 @@ Begin Form
                     LayoutCachedTop =1860
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =2100
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =180
+                    Top =2220
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink7"
+                    Caption ="Link7"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =2220
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =2460
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =180
+                    Top =2580
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink8"
+                    Caption ="Link8"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =2580
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =2820
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                 End
@@ -354,6 +395,7 @@ Option Explicit
 '  https://books.google.com/books?id=z2aoFGg1HFAC&pg=SA3-PA30&dq=access+vba+creating+custom+form+controls&hl=en&sa=X&ved=0CDAQ6AEwAGoVChMI6KblxdHoyAIVBcdjCh3Okw9V#v=onepage&q=access%20vba%20creating%20custom%20form%20controls&f=false
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
 '               BLC - 4/26/2016  - 1.01 - added tile tag property
+'               BLC - 7/1/2016   - 1.02 - added 2 additional links (7 & 8) & indicator bar (lnIndicator)
 ' =================================
 
 '---------------------
@@ -367,7 +409,10 @@ Private m_Link3Caption As String
 Private m_Link4Caption As String
 Private m_Link5Caption As String
 Private m_Link6Caption As String
-Private m_BarColor As Variant
+Private m_Link7Caption As String
+Private m_Link8Caption As String
+Private m_BarColor As Long
+Private m_IndicatorColor As Long
 Private m_TileHeaderColor As Long
 Private m_TitleFontColor As Long
 Private m_Link1FontColor As Long
@@ -376,19 +421,26 @@ Private m_Link3FontColor As Long
 Private m_Link4FontColor As Long
 Private m_Link5FontColor As Long
 Private m_Link6FontColor As Long
+Private m_Link7FontColor As Long
+Private m_Link8FontColor As Long
 Private m_TileVisible As Byte
+Private m_IndicatorVisible As Byte
 Private m_Link1Visible As Byte
 Private m_Link2Visible As Byte
 Private m_Link3Visible As Byte
 Private m_Link4Visible As Byte
 Private m_Link5Visible As Byte
 Private m_Link6Visible As Byte
+Private m_Link7Visible As Byte
+Private m_Link8Visible As Byte
 Private m_Link1Action As String
 Private m_Link2Action As String
 Private m_Link3Action As String
 Private m_Link4Action As String
 Private m_Link5Action As String
 Private m_Link6Action As String
+Private m_Link7Action As String
+Private m_Link8Action As String
 
 '---------------------
 ' Events
@@ -483,6 +535,26 @@ Public Property Let Link6Caption(Value As String)
     lblLink6.Caption = m_Link6Caption
 End Property
 
+Public Property Get Link7Caption() As String
+    Link7Caption = m_Link7Caption
+End Property
+
+Public Property Let Link7Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link7"
+    m_Link7Caption = Value
+    lblLink7.Caption = m_Link7Caption
+End Property
+
+Public Property Get Link8Caption() As String
+    Link8Caption = m_Link8Caption
+End Property
+
+Public Property Let Link8Caption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link8"
+    m_Link8Caption = Value
+    lblLink8.Caption = m_Link8Caption
+End Property
+
 Public Property Get Link1Action() As String
     Link1Action = m_Link1Action
 End Property
@@ -537,9 +609,27 @@ Public Property Let Link6Action(Value As String)
     m_Link6Action = Value
 End Property
 
+Public Property Get Link7Action() As String
+    Link7Action = m_Link7Action
+End Property
+
+Public Property Let Link7Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link7"
+    m_Link7Action = Value
+End Property
+
+Public Property Get Link8Action() As String
+    Link8Action = m_Link8Action
+End Property
+
+Public Property Let Link8Action(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Link8"
+    m_Link8Action = Value
+End Property
+
 Public Property Let TitleFontColor(Value As Long)
     m_TitleFontColor = Value
-    lblTitle.forecolor = m_TitleFontColor
+    lblTitle.ForeColor = m_TitleFontColor
 End Property
 
 Public Property Get TitleFontColor() As Long
@@ -549,7 +639,7 @@ End Property
 Public Property Let TileHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_TileHeaderColor = Value
-    FormHeader.backcolor = m_TileHeaderColor
+    FormHeader.BackColor = m_TileHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen
@@ -570,6 +660,15 @@ End Property
 
 Public Property Get BarColor()
     BarColor = m_BarColor
+End Property
+
+Public Property Let IndicatorColor(Value As Variant)
+    m_IndicatorColor = Value
+    Me.lineIndicator.borderColor = m_IndicatorColor
+End Property
+
+Public Property Get IndicatorColor()
+    IndicatorColor = m_IndicatorColor
 End Property
 
 Public Property Get Link1FontColor() As Long
@@ -626,6 +725,24 @@ Public Property Let Link6FontColor(Value As Long)
     m_Link6FontColor = Value
 End Property
 
+Public Property Get Link7FontColor() As Long
+    Link7FontColor = m_Link7FontColor
+End Property
+
+Public Property Let Link7FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_Link7FontColor = Value
+End Property
+
+Public Property Get Link8FontColor() As Long
+    Link8FontColor = m_Link8FontColor
+End Property
+
+Public Property Let Link8FontColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_Link8FontColor = Value
+End Property
+
 Public Property Get TileVisible() As Byte
     TileVisible = m_TileVisible
 End Property
@@ -633,6 +750,15 @@ End Property
 Public Property Let TileVisible(Value As Byte)
     m_TileVisible = Value
     Me.visible = m_TileVisible
+End Property
+
+Public Property Get IndicatorVisible() As Byte
+    IndicatorVisible = m_IndicatorVisible
+End Property
+
+Public Property Let IndicatorVisible(Value As Byte)
+    m_IndicatorVisible = Value
+    Me.lineIndicator.visible = m_IndicatorVisible
 End Property
 
 Public Property Get Link1Visible() As Byte
@@ -689,6 +815,24 @@ Public Property Let Link6Visible(Value As Byte)
     Me.lblLink6.visible = m_Link6Visible
 End Property
 
+Public Property Get Link7Visible() As Byte
+    Link7Visible = m_Link7Visible
+End Property
+
+Public Property Let Link7Visible(Value As Byte)
+    m_Link7Visible = Value
+    Me.lblLink7.visible = m_Link7Visible
+End Property
+
+Public Property Get Link8Visible() As Byte
+    Link8Visible = m_Link8Visible
+End Property
+
+Public Property Let Link8Visible(Value As Byte)
+    m_Link8Visible = Value
+    Me.lblLink8.visible = m_Link8Visible
+End Property
+
 '---------------------
 ' Events
 '---------------------
@@ -717,6 +861,9 @@ On Error GoTo Err_Handler
     
     'initialize labels (fixes if form inadvertently saved in non-standard state)
     lblTitle.Caption = "Title"
+    
+    'hide indicator to start
+    Me.IndicatorVisible = 0
         
     For i = 1 To 6
         
@@ -727,6 +874,9 @@ On Error GoTo Err_Handler
             If ctrl.Name = strLink Then
                 ctrl.Caption = Replace(strLink, "lbl", "")
                 ctrl.visible = True
+                
+                'standard fontcolor
+                'ctrl.forecolor = lngGray50
                 
                 'disable clicks until value set
                 ctrl.Tag = "DISABLED"
@@ -961,6 +1111,76 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          lblLink7_Click
+' Description:  Link click event actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/1/2016 - initial version
+' ---------------------------------
+Private Sub lblLink7_Click()
+On Error GoTo Err_Handler
+    
+    If lblLink7.Tag = "DISABLED" Then GoTo Exit_Handler
+    
+    With Me.lblLink7
+        DoCmd.Minimize
+        ClickAction Me.TileTag & .Caption
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink7_Click[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLink8_Click
+' Description:  Link click event actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/1/2016 - initial version
+' ---------------------------------
+Private Sub lblLink8_Click()
+On Error GoTo Err_Handler
+    
+    If lblLink8.Tag = "DISABLED" Then GoTo Exit_Handler
+    
+    With Me.lblLink8
+        DoCmd.Minimize
+        ClickAction Me.TileTag & .Caption
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink8_Click[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          lblLink1_MouseMove
 ' Description:  Link mouse over event actions
 ' Assumptions:  Requires similar mousemove in detail to reset link color
@@ -1165,6 +1385,75 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          lblLink7_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/1/2016 - initial version
+' ---------------------------------
+Private Sub lblLink7_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink7
+        Me.LinkHighlight lblLink7
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink7_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' Sub:          lblLink8_MouseMove
+' Description:  Link mouse over event actions
+' Assumptions:  Requires similar mousemove in detail to reset link color
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Drew2010, Tony M, cheekybudda June 28, 2010
+'   http://www.utteraccess.com/forum/change-text-color-mouse-t1947540.html
+' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/1/2016 - initial version
+' ---------------------------------
+Private Sub lblLink8_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+On Error GoTo Err_Handler
+    
+    With Me.lblLink8
+        Me.LinkHighlight lblLink8
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLink8_MouseMove[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Detail_MouseMove
 ' Description:  Detail mouse over event actions
 ' Assumptions:  Similar mousemove events exist for links setting colors
@@ -1178,6 +1467,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/1/2016  - increased to 8 max links
 ' ---------------------------------
 Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 On Error GoTo Err_Handler
@@ -1186,7 +1476,7 @@ On Error GoTo Err_Handler
     Dim strLink As String
     Dim i As Integer
     
-    For i = 1 To 6
+    For i = 1 To 8
     
         strLink = "lblLink" & i
     
@@ -1196,7 +1486,7 @@ On Error GoTo Err_Handler
             
                 With ctrl
                     'avoid flicker w/ if statement
-                    If Not .forecolor = lngLtGray2 Then .forecolor = lngLtGray2
+                    If Not .ForeColor = lngGray50 Then .ForeColor = lngGray50
                     If Not .backstyle = acTransparent Then .backstyle = acTransparent
                 End With
             
@@ -1331,9 +1621,9 @@ On Error GoTo Err_Handler
     
     With ctrl
         'avoid flicker w/ if statement
-        If Not .forecolor = LINK_HIGHLIGHT_TEXT Then .forecolor = LINK_HIGHLIGHT_TEXT
+        If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
         If Not .backstyle = acNormalSolid Then .backstyle = acNormalSolid
-        If Not .backcolor = LINK_HIGHLIGHT_BKGD Then .backcolor = LINK_HIGHLIGHT_BKGD
+        If Not .BackColor = LINK_HIGHLIGHT_BKGD Then .BackColor = LINK_HIGHLIGHT_BKGD
     End With
 
 Exit_Handler:

@@ -117,7 +117,7 @@ On Error GoTo Err_Handler
     Set frm = ctrlSource.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.Count
+    cols = rs.Fields.count
     
     'address no records
     If Nz(rows, 0) = 0 Then
@@ -557,21 +557,21 @@ On Error GoTo Err_Handler
     
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
-    Dim strSQL As String, strWHERE As String
-    Dim Count As Integer
+    Dim strSQL As String, strWhere As String
+    Dim count As Integer
     Dim metadata() As Variant
    
     'handle only appropriate park codes
     If blnAllVersions Then
-        strWHERE = ""
+        strWhere = ""
     Else
-        strWHERE = "WHERE RetireDate IS NULL"
+        strWhere = "WHERE RetireDate IS NULL"
     End If
     
     'generate SQL
 '    strSQL = "SELECT ProtocolName, Version, EffectiveDate, RetireDate, LastModified FROM Protocol " _
 '                & strWHERE & ";"
-    strSQL = GetTemplate("s_protocol_info", "strWHERE" & PARAM_SEPARATOR & strWHERE)
+    strSQL = GetTemplate("s_protocol_info", "strWHERE" & PARAM_SEPARATOR & strWhere)
     
     'fetch data
     Set db = CurrentDb
@@ -582,9 +582,9 @@ On Error GoTo Err_Handler
     With rs
         .MoveLast
         .MoveFirst
-        Count = .RecordCount
+        count = .RecordCount
     
-        metadata = rs.GetRows(Count)
+        metadata = rs.GetRows(count)
  
         .Close
     End With
@@ -681,7 +681,7 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String
-    Dim Count As Integer
+    Dim count As Integer
     Dim segments() As Variant
    
     'handle only appropriate park codes
@@ -701,9 +701,9 @@ On Error GoTo Err_Handler
 
     rs.MoveLast
     rs.MoveFirst
-    Count = rs.RecordCount
+    count = rs.RecordCount
     
-    segments = rs.GetRows(Count)
+    segments = rs.GetRows(count)
  
     rs.Close
     
