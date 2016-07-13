@@ -32,23 +32,23 @@ Private Declare Function FindWindowEx Lib "user32" Alias _
 ByVal lpsz1 As String, ByVal lpsz2 As String) As Long
 
 Private Declare Function apiGetWindow Lib "user32" _
-Alias "GetWindow" (ByVal hWnd As Long, _
+Alias "GetWindow" (ByVal hwnd As Long, _
 ByVal wCmd As Long) As Long
 
 Private Declare Function apiGetClassName Lib "user32" _
-Alias "GetClassNameA" (ByVal hWnd As Long, ByVal lpClassName As String, _
+Alias "GetClassNameA" (ByVal hwnd As Long, ByVal lpClassName As String, _
 ByVal nMaxCount As Long) As Long
 
 Private Declare Function GetWindowRect Lib "user32" _
-(ByVal hWnd As Long, lpRect As RECT) As Long
+(ByVal hwnd As Long, lpRect As RECT) As Long
 
 Private Declare Function PostMessage Lib "user32" Alias _
-"PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, _
+"PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
 ByVal wParam As Long, lParam As Any) As Long
 
 Private Declare Function SetWindowPos Lib "user32" _
-(ByVal hWnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, _
-ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, _
+(ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, _
+ByVal y As Long, ByVal cx As Long, ByVal cy As Long, _
 ByVal wFlags As Long) As Long
 
 ' ---------------------------------

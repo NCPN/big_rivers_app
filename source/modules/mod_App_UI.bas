@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.05
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -14,6 +14,15 @@ Option Explicit
 '               BLC, 4/26/2016  - 1.03 - added ClickAction() for handling various app actions
 '               BLC, 6/24/2016 - 1.04 - replaced Exit_Function > Exit_Handler
 '               BLC, 7/5/2016  - 1.05 - added ClearFields() to support Species Search
+' =================================
+
+' =================================
+'   Functions
+' =================================
+
+
+' =================================
+'   Methods
 ' =================================
 
 ' =================================
@@ -393,6 +402,7 @@ On Error GoTo Err_Handler
             fName = "Unknown"
         Case "species search"
             fName = "SpeciesSearch"
+            oArgs = "DisableDoubleClick" 'disable double click events
         'Observations
         Case "photos"
             fName = "Tree"

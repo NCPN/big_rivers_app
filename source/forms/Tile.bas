@@ -1195,7 +1195,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink1
@@ -1229,7 +1229,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink2
@@ -1263,7 +1263,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink3
@@ -1297,7 +1297,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink4
@@ -1331,7 +1331,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink5
@@ -1365,7 +1365,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink6
@@ -1399,7 +1399,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink7_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink7_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink7
@@ -1434,7 +1434,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
 ' ---------------------------------
-Private Sub lblLink8_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lblLink8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink8
@@ -1469,7 +1469,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/1/2016  - increased to 8 max links
 ' ---------------------------------
-Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     Dim ctrl As Control

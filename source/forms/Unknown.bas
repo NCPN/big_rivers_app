@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =5820
-    Top =2370
-    Right =13680
-    Bottom =11535
+    Left =3825
+    Top =3750
+    Right =18345
+    Bottom =14745
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -981,7 +981,7 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim loc As New Unknown
+    Dim loc As New Location
     
     With loc
         'values passed into form
@@ -996,11 +996,11 @@ On Error GoTo Err_Handler
         '.SiteID = 1
         
         'form values
-        .UnknownName = tbxName.Value
-        .UnknownType = "" 'cbxUnknownType.SelText
-
-        .HeadtoOrientDistance = tbxDistance.Value
-        .HeadtoOrientBearing = tbxBearing.Value
+'        .UnknownName = tbxName.Value
+'        .UnknownType = "" 'cbxUnknownType.SelText
+'
+'        .HeadtoOrientDistance = tbxDistance.Value
+'        .HeadtoOrientBearing = tbxBearing.Value
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb

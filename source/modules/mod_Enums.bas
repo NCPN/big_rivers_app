@@ -4,12 +4,14 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Enums
 ' Level:        Application module
-' Version:      1.01
+' Version:      1.02
 ' Description:  enum functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 11/5/2015
 ' Revisions:    BLC - 11/5/2015  - 1.00 - initial version
 '               BLC - 6/24/2016  - 1.01 - replaced Exit_Function > Exit_Handler
+'               BLC - 7/6/2016   - 1.02 - added OpenAndHideVBE() and ShowAndCloseVBE() to
+'                                         CreateEnums()
 ' =================================
 
 '-----------------------------
@@ -41,6 +43,9 @@ Option Explicit
 ' Revisions:
 '   BLC - 11/5/2015  - initial version
 '   BLC - 4/12/2016  - revised to use vs. Modules("mod_App_Enum") which didn't find enum module
+'   BLC - 7/6/2016   - added calls to OpenAndHideVBE() and ShowAndCloseVBE()
+'                      before & after (respectively) modifying enums to prevent
+'                      VBE from displaying when enums are recreated
 ' ---------------------------------
 Public Function CreateEnums(Optional EnumType As String)
 On Error GoTo Err_Handler
@@ -55,6 +60,9 @@ On Error GoTo Err_Handler
     Dim m As Module
     Dim s As String, PrevEnumType As String, strEnumType As String
     Dim lastID As Long
+    
+    'call OpenAndHideVBE before modifying enums
+    'OpenAndHideVBE
     
     'module must be open to reference
     DoCmd.OpenModule ("mod_App_Enum")
@@ -185,6 +193,9 @@ On Error GoTo Err_Handler
     
     'save & close module
     DoCmd.Close acModule, "mod_App_Enum", acSaveYes
+    
+    'call to close the VBE after modifications
+    'ShowAndCloseVBE
     
     'hide the vbe
     Application.VBE.MainWindow.visible = False

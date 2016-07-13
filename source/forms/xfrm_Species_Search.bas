@@ -1014,7 +1014,7 @@ Option Explicit
 '   BLC - 2/23/2015  - initial version
 ' ---------------------------------
 Public Property Get Maximized() As Boolean
-     Maximized = IsZoomed(Me.hWnd) * 1
+     Maximized = IsZoomed(Me.hwnd) * 1
 End Property
 
 ' ---------------------------------
@@ -1033,7 +1033,7 @@ End Property
 '   BLC - 2/23/2015  - initial version
 ' ---------------------------------
 Public Property Get Minimized() As Boolean
-     Minimized = IsIconic(Me.hWnd) * 1
+     Minimized = IsIconic(Me.hwnd) * 1
 End Property
 
 ' ---------------------------------

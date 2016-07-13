@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_UI
 ' Level:        Framework module
-' Version:      1.06
+' Version:      1.07
 ' Description:  User interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -16,6 +16,8 @@ Option Explicit
 '               BLC, 5/13/2016 - 1.04 - adapted for Big Rivers
 '               BLC, 6/27/2016 - 1.05 - added acNormalSolid, acTransparent constants
 '               BLC, 6/24/2016 - 1.06 - replaced Exit_Function > Exit_Handler
+'               BLC, 7/6/2016  - 1.07 - added functions to hide VBE (shift off screen)
+'                                       while the enum module is being updated
 ' =================================
 
 ' ---------------------------------
@@ -28,6 +30,159 @@ Public Const acTransparent As Integer = 0
 '  Properties
 ' ---------------------------------
 
+
+' ---------------------------------
+'  VBE
+' ---------------------------------
+
+' ---------------------------------
+'   NOTES:
+'
+'
+'       Application.Echo False
+'       SetWindowPos FindWindow("wndclass_desked_gsk", _
+'           Application.VBE.MainWindow.Caption), 0&, 0&, 2000&, 1, 1, &H80 Or &H1
+'       <run your code that calls the VBE>
+'       Application.VBE.MainWindow.visible = False
+'       Application.Echo True
+'
+' ---------------------------------
+
+Declare Function SetWindowPos Lib "user32.dll" ( _
+    ByVal hwnd As Long, _
+    ByVal hWndInsertAfter As Long, _
+    ByVal x As Long, _
+    ByVal y As Long, _
+    ByVal cx As Long, _
+    ByVal cy As Long, _
+    ByVal wFlags As Long) As Long
+
+Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" ( _
+    ByVal ClassName As String, _
+    ByVal WindowName As String) As Long
+
+Const HWND_NOTOPMOST = -2
+Const SWP_HIDEWINDOW = &H80
+Const SWP_NOSIZE = &H1
+
+' ---------------------------------
+' Function:     OpenAndHideVBE
+' Description:  Opens then hides VBE
+' Notes:        Call OpenAndHideVBE before writing to the project
+'               and ShowAndCloseVBE when done.
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Peter Thornton, March 23, 2013
+'   https://social.msdn.microsoft.com/Forums/en-US/197a9f1d-96cb-49d6-b08c-0dcae1eafc08/vbe-flashes-while-programming-in-the-vbe?forum=isvvba
+'   AOB, September 5, 2013
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=252942
+' Source/date:  Bonnie Campbell, July 6, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/6/2016 - initial version
+' ---------------------------------
+Public Sub OpenAndHideVBE()
+On Error GoTo Err_Handler
+    
+    Dim hWndVBE As Long
+    Dim objVBE As VBE
+    
+    Set objVBE = Application.VBE
+    
+    hWndVBE = FindWindow("wndclass_desked_gsk", _
+                            Application.VBE.MainWindow.Caption)
+    
+    Call SetWindowPos(hWndVBE, 0&, 0&, 2000&, 1, 1, _
+                        SWP_HIDEWINDOW Or SWP_NOSIZE)
+    
+    Application.VBE.MainWindow.visible = True
+    'Application.Caption errors for Access w/ Method or data member not found
+    'use "already open form caption", false instead
+    'AppActivate Application.Caption
+    AppActivate SWITCHBOARD, False
+    DoCmd.OpenForm SWITCHBOARD, acNormal, , , , acDialog
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - OpenAndHideVBE[mod_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Function:     ShowAndCloseVBE
+' Description:  Displays VBE and closes it
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Peter Thornton, March 23, 2013
+'   https://social.msdn.microsoft.com/Forums/en-US/197a9f1d-96cb-49d6-b08c-0dcae1eafc08/vbe-flashes-while-programming-in-the-vbe?forum=isvvba
+'   AOB, September 5, 2013
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=252942
+' Source/date:  Bonnie Campbell, July 6, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/6/2016 - initial version
+' ---------------------------------
+Public Sub ShowAndCloseVBE()
+On Error GoTo Err_Handler
+    
+    Dim hWndVBE As Long
+    Dim cbt As CommandBarButton
+    Dim objVBE As VBIDE.VBE
+    Dim objWin As VBIDE.Window
+
+    Set objVBE = Application.VBE
+    ' optionally close all module windows,
+    ' or just the newly opened module Window
+    
+    For Each objWin In objVBE.Windows
+        If objWin.Type = vbext_wt_CodeWindow Then
+                objWin.Close
+        ElseIf objWin.Type = vbext_wt_Designer Then
+                objWin.Close
+        End If
+    Next
+    
+    objVBE.MainWindow.WindowState = vbext_ws_Minimize
+    objVBE.MainWindow.visible = False
+    
+    hWndVBE = FindWindow("wndclass_desked_gsk", _
+                            Application.VBE.MainWindow.Caption)
+    
+    Call SetWindowPos(hWndVBE, HWND_NOTOPMOST, 0, 0, 400, 300, 0)
+    
+    Set cbt = Application.VBE.CommandBars.FindControl(ID:=752)
+    
+    'Application.Caption errors for Access w/ Method or data member not found
+    'use "already open form caption", false instead
+    'AppActivate Application.Caption
+    AppActivate SWITCHBOARD, False
+    DoCmd.OpenForm SWITCHBOARD, acNormal, , , , acDialog
+    
+    cbt.Execute
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ShowAndCloseVBE[mod_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 '  Ribbon
@@ -58,6 +213,7 @@ On Error GoTo Err_Handler
     End If
     
     GetRibbonXML = strXML
+
 Exit_Handler:
     Exit Function
 

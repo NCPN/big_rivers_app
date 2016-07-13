@@ -16,8 +16,8 @@ Begin Form
     ItemSuffix =64
     Left =3825
     Top =3735
-    Right =17670
-    Bottom =9915
+    Right =17115
+    Bottom =11085
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x0a915c95ff94e440
@@ -1017,7 +1017,7 @@ Option Explicit
 '   BLC - 2/23/2015  - initial version
 ' ---------------------------------
 Public Property Get Maximized() As Boolean
-     Maximized = IsZoomed(Me.hWnd) * 1
+     Maximized = IsZoomed(Me.hwnd) * 1
 End Property
 
 ' ---------------------------------
@@ -1036,7 +1036,7 @@ End Property
 '   BLC - 2/23/2015  - initial version
 ' ---------------------------------
 Public Property Get Minimized() As Boolean
-     Minimized = IsIconic(Me.hWnd) * 1
+     Minimized = IsIconic(Me.hwnd) * 1
 End Property
 
 ' ---------------------------------

@@ -1243,14 +1243,14 @@ End Sub
 '   BLC - 7/27/2015 - initial version
 ' ---------------------------------
 Private Sub tvwTree_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, _
-                ByVal x As Long, ByVal Y As Long)
+                ByVal x As Long, ByVal y As Long)
 'Private Sub tvwTree_MouseDownX(Button As Integer, Shift As Integer, _
 '                                x As Single, y As Single)
 On Error GoTo Err_Handler
     Dim node As node
     Dim blnNodeSelected As Boolean
         
-    Set node = tvwTree.HitTest(x, Y)
+    Set node = tvwTree.HitTest(x, y)
     If node Is Nothing Or Shift <> 2 Then
         blnNodeSelected = False
 '        tvwNodeSelect
@@ -1418,7 +1418,7 @@ End Sub
 '   BLC - 7/10/2015 - initial version
 ' ---------------------------------
 Private Sub tvwTree_OLEDragOver(Data As Object, Effect As Long, _
-        Button As Integer, Shift As Integer, x As Single, Y As Single, _
+        Button As Integer, Shift As Integer, x As Single, y As Single, _
         State As Integer)
 
 On Error GoTo Err_Handler
@@ -1430,11 +1430,11 @@ On Error GoTo Err_Handler
 
     'If no node is selected, select the first node you dragged over.
     If oTree.SelectedItem Is Nothing Then
-        Set oTree.SelectedItem = oTree.HitTest(x, Y)
+        Set oTree.SelectedItem = oTree.HitTest(x, y)
     End If
 
     'Highlight the node being dragged over as a potential drop target.
-    Set oTree.DropHighlight = oTree.HitTest(x, Y)
+    Set oTree.DropHighlight = oTree.HitTest(x, y)
 
 Exit_Handler:
     Exit Sub
@@ -1475,7 +1475,7 @@ End Sub
 '   BLC - 7/10/2015 - initial version
 ' ---------------------------------
 Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
-        Button As Integer, Shift As Integer, x As Single, Y As Single)
+        Button As Integer, Shift As Integer, x As Single, y As Single)
     On Error GoTo Err_Handler
 
     Dim oTree As TreeView
