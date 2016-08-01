@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =2955
-    Top =3780
-    Right =13560
-    Bottom =14775
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -277,7 +277,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9060
+            Height =9240
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -479,7 +479,7 @@ Begin Form
                     CanShrink = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =4560
+                    Top =4740
                     Width =7650
                     Height =4380
                     TabIndex =4
@@ -489,25 +489,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =4560
+                    LayoutCachedTop =4740
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =8940
+                    LayoutCachedHeight =9120
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =4440
+                    Top =4620
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =4440
+                    LayoutCachedTop =4620
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =9060
+                    LayoutCachedHeight =9240
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -647,6 +647,52 @@ Begin Form
                             LayoutCachedHeight =885
                         End
                     End
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =4380
+                    Width =7860
+                    Height =315
+                    LeftMargin =360
+                    TopMargin =7
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    GridlineColor =10921638
+                    LayoutCachedTop =4380
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =4695
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =215
+                    TextAlign =2
+                    Top =4380
+                    Width =660
+                    Height =315
+                    TopMargin =7
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =4380
+                    LayoutCachedWidth =660
+                    LayoutCachedHeight =4695
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -792,9 +838,9 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("Feature"), "")
+                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("Feature"), "")
                  
     Title = "Feature"
     Directions = "Enter the feature details."
@@ -814,7 +860,9 @@ On Error GoTo Err_Handler
     btnComment.Enabled = False
     btnSave.Enabled = False
     tbxFeature.BackColor = lngYellow
-  
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
+    
     cbxLocation.RowSource = GetTemplate("s_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
   
     'ID default -> value used only for edits of existing table values
@@ -913,7 +961,6 @@ On Error GoTo Err_Handler
     If Len(tbxFeature.Text) > 0 Then _
         ReadyForSave
 
-    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1000,34 +1047,36 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim f As New Feature
+    UpsertRecord Me
     
-    With f
-        'values passed into form
-                
-        'form values
-        .LocationID = cbxLocation.Column(0)
-        .Name = tbxFeature.Value
-        
-        If Not IsNull(tbxFeatureDirections.Value) Then f.Directions = tbxFeatureDirections.Value
-        If Not IsNull(tbxDescription.Value) Then .Directions = tbxDescription.Value
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value after save/update
-        tbxID = .ID
-    End With
-    
-    'clear values & refresh display
-    
-    ReadyForSave
-    
-    PopulateForm Me, tbxID.Value
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+'    Dim f As New Feature
+'
+'    With f
+'        'values passed into form
+'
+'        'form values
+'        .LocationID = cbxLocation.Column(0)
+'        .Name = tbxFeature.Value
+'
+'        If Not IsNull(tbxFeatureDirections.Value) Then f.Directions = tbxFeatureDirections.Value
+'        If Not IsNull(tbxDescription.Value) Then .Directions = tbxDescription.Value
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'
+'        'set the tbxID.value after save/update
+'        tbxID = .ID
+'    End With
+'
+'    'clear values & refresh display
+'
+'    ReadyForSave
+'
+'    PopulateForm Me, tbxID.Value
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub

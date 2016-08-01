@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =2955
-    Top =3780
-    Right =13440
-    Bottom =14775
+    Left =2850
+    Top =3330
+    Right =16710
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -278,7 +278,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =8940
+            Height =9180
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -482,9 +482,9 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =105
-                    Top =4440
+                    Top =4680
                     Width =7650
                     Height =4380
                     TabIndex =7
@@ -494,25 +494,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =4440
+                    LayoutCachedTop =4680
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =8820
+                    LayoutCachedHeight =9060
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =4320
+                    Top =4560
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =4320
+                    LayoutCachedTop =4560
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =8940
+                    LayoutCachedHeight =9180
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -578,7 +578,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
                     Left =405
                     Top =2730
@@ -651,6 +651,56 @@ Begin Form
                             LayoutCachedHeight =795
                         End
                     End
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =4320
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =4320
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =4635
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =255
+                    TextAlign =2
+                    Left =4320
+                    Top =4140
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =4140
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =4740
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -796,9 +846,9 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("Feature"), "")
+                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("Feature"), "")
 
     Title = "Site"
     Directions = "Enter site details."
@@ -818,9 +868,14 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     tbxSiteCode.BackColor = lngYellow
     tbxSiteName.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
   
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
+  
+    'initialize values
+    ClearForm Me
   
 Exit_Handler:
     Exit Sub
@@ -1111,39 +1166,42 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim s As New Site
+    UpsertRecord Me
     
-    With s
-        'values passed into form
-        .Park = TempVars("ParkCode")
-        .River = TempVars("River")
-        
-        'form values
-        .Code = tbxSiteCode.Value
-        .Name = tbxSiteName.Value
-        .Directions = tbxSiteDirections.Value
-        .Description = tbxDescription.Value
-        
-        'assumed
-        .IsActiveForProtocol = 1 'all sites assumed active when added
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value
-        tbxID = .ID
-    End With
-    
-    'clear values & refresh display
-    
-    ReadyForSave
-    
-    PopulateForm Me, tbxID.Value
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+'    Dim s As New Site
+'
+'    With s
+'        'values passed into form
+'        .Park = TempVars("ParkCode")
+'        .River = TempVars("River")
+'
+'        'form values
+'        .Code = tbxSiteCode.Value
+'        .Name = tbxSiteName.Value
+'        .Directions = Nz(tbxSiteDirections.Value, "")
+'        .Description = Nz(tbxDescription.Value, "")
+'
+'        'assumed
+'        .IsActiveForProtocol = 1 'all sites assumed active when added
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'
+'        'set the tbxID.value
+'        'tbxID = .ID #can't assign value to object
+'
+'    End With
+'
+'    'clear values & refresh display
+'
+'    ReadyForSave
+'
+'    PopulateForm Me, tbxID.Value
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub
@@ -1249,7 +1307,7 @@ On Error GoTo Err_Handler
     
     'refresh form
     Me.Requery
-    
+        
 Exit_Handler:
     Exit Sub
 Err_Handler:

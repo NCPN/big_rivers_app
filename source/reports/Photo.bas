@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =156
-    Right =17985
-    Bottom =10995
+    Right =21330
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -268,7 +268,7 @@ Begin Report
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =8640
+                    Left =8400
                     Top =300
                     Width =1620
                     Height =300
@@ -276,15 +276,15 @@ Begin Report
                     Name ="lblEntryDate"
                     Caption ="____/____/_____"
                     GridlineColor =10921638
-                    LayoutCachedLeft =8640
+                    LayoutCachedLeft =8400
                     LayoutCachedTop =300
-                    LayoutCachedWidth =10260
+                    LayoutCachedWidth =10020
                     LayoutCachedHeight =600
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =12060
+                    Left =11760
                     Top =300
                     Width =1620
                     Height =300
@@ -292,9 +292,9 @@ Begin Report
                     Name ="lblVerifyDate"
                     Caption ="____/____/_____"
                     GridlineColor =10921638
-                    LayoutCachedLeft =12060
+                    LayoutCachedLeft =11760
                     LayoutCachedTop =300
-                    LayoutCachedWidth =13680
+                    LayoutCachedWidth =13380
                     LayoutCachedHeight =600
                     ForeThemeColorIndex =-1
                     ForeTint =100.0

@@ -147,7 +147,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 ' SUB:          SaveToDb
 ' Description:  -
-' Parameters:   -
+' Parameters:   IsUpdate - indicates if data is an update vs. an insert (boolean, optional)
 ' Returns:      -
 ' Throws:       -
 ' References:
@@ -158,34 +158,52 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 7/27/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+    'Dim strSQL As String
+    'Dim db As DAO.Database
+    'Dim rs As DAO.Recordset
+    Dim template As String
     
-    Set db = CurrentDb
+    template = "i_event"
+    
+'    Set db = CurrentDb
     
     'events must have: start date, site ID, location ID, protocol ID
 '    strSQL = "INSERT INTO Event(Protocol_ID, Site_ID, Location_ID, StartDate) VALUES " _
 '                & "(" & Me.ProtocolID & "," & Me.SiteID & "," _
 '                & Me.LocationID & "," & Me.StartDate & ");"
 
-    strSQL = GetTemplate("i_event_record", _
-                "ProtocolID" & PARAM_SEPARATOR & Me.ProtocolID & "|" _
-                & "SiteID" & PARAM_SEPARATOR & Me.SiteID & "|" _
-                & "LocationID" & PARAM_SEPARATOR & Me.LocationID & "|" _
-                & "StartDate" & PARAM_SEPARATOR & Format(Me.StartDate, "YYYY-mm-dd"))
+'    strSQL = GetTemplate("i_event_record", _
+'                "ProtocolID" & PARAM_SEPARATOR & Me.ProtocolID & "|" _
+'                & "SiteID" & PARAM_SEPARATOR & Me.SiteID & "|" _
+'                & "LocationID" & PARAM_SEPARATOR & Me.LocationID & "|" _
+'                & "StartDate" & PARAM_SEPARATOR & Format(Me.StartDate, "YYYY-mm-dd"))
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+
+    Dim params(0 To 4) As Variant
+
+    params(0) = Me.SiteID
+    params(1) = Me.LocationID
+    params(2) = Me.ProtocolID
+    params(3) = CDate(Format(Me.StartDate, "YYYY-mm-dd"))
     
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    If IsUpdate Then
+        template = "u_event"
+        params(4) = Me.ID
+    End If
+    
+    Me.ID = SetRecord(template, params)
 
     'add a record for created by
-    Dim act As New action
+    Dim act As New RecordAction
     With act
-        act.action = "R"
+        act.RefAction = "R"
         'act.ContactID =
         act.RefID = Me.ID
         act.RefTable = "Event"

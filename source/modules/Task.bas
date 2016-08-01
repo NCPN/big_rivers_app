@@ -216,7 +216,7 @@ On Error GoTo Err_Handler
         !LastUpdateBy = 1
         !LastUpdate = Now()
         
-        .Update
+        .update
         If IsNumeric(!ID) Then
             Me.ID = !ID
         End If

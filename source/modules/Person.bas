@@ -20,7 +20,7 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_ID As Integer
+Private m_ID As Long
 Private m_FirstName As String
 Private m_LastName As String
 Private m_MiddleInitial As String
@@ -28,8 +28,8 @@ Private m_Name As String
 Private m_Email As String
 Private m_Organization As String
 Private m_PosTitle As String
-Private m_WorkPhone As Long
-Private m_WorkExtension As Long
+Private m_WorkPhone As Integer
+Private m_WorkExtension As Integer
 Private m_Role As String
 Private m_AccessLevel As Integer
 Private m_AccessRole As String
@@ -120,7 +120,7 @@ Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
-Public Property Let WorkPhone(Value As Long)
+Public Property Let WorkPhone(Value As Integer)
     If IsPhone(CStr(Value)) Then
         m_WorkPhone = Value
     Else
@@ -128,7 +128,7 @@ Public Property Let WorkPhone(Value As Long)
     End If
 End Property
 
-Public Property Get WorkPhone() As Long
+Public Property Get WorkPhone() As Integer
     WorkPhone = m_WorkPhone
 End Property
 
@@ -360,7 +360,6 @@ On Error GoTo Err_Handler
             
 '            .Parameters("IsActive") = Me.IsActive
             .Parameters("IsActiveFlag") = Me.IsActive
-            
             
             .Execute dbFailOnError
             

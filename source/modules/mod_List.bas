@@ -588,7 +588,7 @@ Dim blnTableExists As Boolean
 
             Next
             
-            rsProcess.Update
+            rsProcess.update
                                 
         Next
         
@@ -713,7 +713,7 @@ Dim blnTableExists As Boolean
 '                iCol = iCol + 1
             Next
 
-            rsProcess.Update
+            rsProcess.update
             rsList.MoveNext
             'iRow = iRow + 1
         Next

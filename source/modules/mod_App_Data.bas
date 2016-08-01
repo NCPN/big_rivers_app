@@ -1011,3 +1011,570 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          ToggleSensitive
+' Description:  Toggle Sensitive button click actions
+' Assumptions:  -
+' Parameters:   Context - form context for the action (string)
+'               ID - id of record to toggle (long)
+'               Sensitive - state to change SensitiveFlag to (Byte), 0 - active, 1 - inactive
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 30, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/30/2016 - initial version
+' ---------------------------------
+Public Sub ToggleSensitive(Context As String, ID As Long, Sensitive As Byte)
+On Error GoTo Err_Handler
+    
+    Dim strSQL As String
+    
+    Select Case Context
+        Case "Location"
+            strSQL = GetTemplate("u_location_sensitive_flag", _
+                      "SensitiveFlag" & PARAM_SEPARATOR & Sensitive & _
+                      "|ID" & PARAM_SEPARATOR & ID)
+        Case "species"
+            strSQL = GetTemplate("u_species_sensitive_flag", _
+                      "SensitiveFlag" & PARAM_SEPARATOR & Sensitive & _
+                      "|ID" & PARAM_SEPARATOR & ID)
+    End Select
+
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL (strSQL)
+    DoCmd.SetWarnings True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ToggleSensitive[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' Sub:          GetRecords
+' Description:  Retrieve records based on template
+' Assumptions:  -
+' Parameters:   Template - SQL template name (string)
+' Returns:      rs - data retrieved (recordset)
+' Throws:       none
+' References:
+'   user1938742, October 17, 2014
+'   http://stackoverflow.com/questions/26422970/run-query-with-parameters-and-display-in-listbox-ms-access-2013
+' Source/date:  Bonnie Campbell, July 26, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/26/2016 - initial version
+' ---------------------------------
+Public Function GetRecords(template As String) As DAO.Recordset
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim qdf As DAO.QueryDef
+    Dim rs As DAO.Recordset
+    
+    Set db = CurrentDb
+    
+    With db
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+        
+            'check if record exists in site
+            .SQL = GetTemplate(template)
+        
+            Select Case template
+                
+                Case "s_event_by_park_river_w_location"
+                    
+                    '-- required parameters --
+                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                    
+                    '-- optional parameters --
+                    
+                Case "s_site_by_park_river"
+                
+                    '-- required parameters --
+                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                    
+                    '-- optional parameters --
+            
+                Case "s_location_by_park_river"
+                
+                    '-- required parameters --
+                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                    
+                    '-- optional parameters --
+            End Select
+            
+            Set rs = .OpenRecordset
+            
+        End With
+        
+    End With
+    
+    Set GetRecords = rs
+    
+Exit_Handler:
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetRecords[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' Function:     SetRecord
+' Description:  Insert/update/delete record based on template
+' Assumptions:  -
+' Parameters:   template - SQL template name (string)
+'               params - array of parameters for template (variant)
+' Returns:      id - ID of record inserted, updated, deleted (long integer)
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 26, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/26/2016 - initial version
+' ---------------------------------
+Public Function SetRecord(template As String, params As Variant) As Long
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim qdf As DAO.QueryDef
+    
+    'exit w/o values
+    If Not IsArray(params) Then GoTo Exit_Handler
+    
+    Set db = CurrentDb
+    
+    With db
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+        
+            'check if record exists in site
+            .SQL = GetTemplate(template)
+        
+            Select Case template
+                
+                Case "i_event"
+                                    
+                    '-- required parameters --
+                    .Parameters("SID") = params(0)
+                    .Parameters("LID") = params(1)
+                    .Parameters("PID") = params(2)
+                    .Parameters("Start") = params(3)
+                    
+                    '-- optional parameters --
+                    
+                Case "i_record_action"
+                                    
+                    '-- required parameters --
+                    .Parameters("RefTable") = params(0)
+                    .Parameters("RefID") = params(1)
+                    .Parameters("ID") = params(2)
+                    .Parameters("Activity") = params(3)
+                    .Parameters("ActionDate") = params(4)
+     
+                    '-- optional parameters --
+                    
+                Case "u_tsys_datasheet_defaults"
+
+                    '-- required parameters --
+                    .Parameters("id") = params(0)
+                    .Parameters("pid") = params(1)
+                    .Parameters("rid") = params(2)
+                    .Parameters("cover") = params(3)
+                    .Parameters("species") = params(4)
+                    .Parameters("blanks") = params(5)
+                    
+                    '-- optional parameters --
+                    
+            End Select
+            
+            .Execute dbFailOnError
+            
+            'cleanup
+            .Close
+        
+        End With
+        
+        'retrieve identity
+        SetRecord = .OpenRecordset("SELECT @@IDENTITY;")(0)
+          
+    End With
+    
+'    strSQL = GetTemplate("i_event_record", _
+'                "ProtocolID" & PARAM_SEPARATOR & Me.ProtocolID & "|" _
+'                & "SiteID" & PARAM_SEPARATOR & Me.SiteID & "|" _
+'                & "LocationID" & PARAM_SEPARATOR & Me.LocationID & "|" _
+'                & "StartDate" & PARAM_SEPARATOR & Format(Me.StartDate, "YYYY-mm-dd"))
+            
+Exit_Handler:
+    'cleanup
+    Set qdf = Nothing
+    Set db = Nothing
+
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetRecord[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' Function:     UpsertRecord
+' Description:  Handle insert/update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+'   gecko_1, February 10, 2005
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=81221
+'   Khinsu, August 19, 2013
+'   http://stackoverflow.com/questions/18317059/how-to-test-if-item-exists-in-recordset
+'   HansUp, April 4, 2013
+'   http://stackoverflow.com/questions/15823687/findfirst-vba-access2010-unbound-form-runtime-error
+' Source/date:  Bonnie Campbell, July 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/28/2016 - initial version
+' ---------------------------------
+Public Sub UpsertRecord(ByRef frm As Form)
+On Error GoTo Err_Handler
+    
+' ----------------------------------------------------------------------------------
+'    1) Click to edit
+'       a) populates form fields
+'       b) tbxID is set
+'
+'       c) change values --> i) compare against existing values
+'                           ii) no existing values match ==> update
+'                           iii) existing values match ==> message no change
+'
+'   2) Enter new values
+'       a) enables save button
+'       b) click save -->   i) compare against existing values
+'                           ii) no existing values match ==> insert
+'                           iii) existing values match ==> message no change
+' ----------------------------------------------------------------------------------
+    
+    Dim DoAction As String, strCriteria As String
+    Dim obj As Object
+    
+    'use generic object to handle multiple obj types
+    With obj
+    
+        Select Case frm.Name
+            Case "Contact"
+                Dim p As New Person
+    
+                With p
+                    'values passed into form
+                            
+                    'form values
+                    .LastName = frm!tbxLast.Value
+                    .FirstName = frm!tbxFirst.Value
+                    If Not IsNull(frm!tbxMI.Value) Then p.MiddleInitial = frm!tbxMI.Value  'FIX EMPTY STRING
+                    .Email = frm!tbxEmail.Value
+                    .Username = frm!tbxUsername.Value
+                    .Organization = frm!tbxOrganization.Value
+                    If Not IsNull(frm!tbxPosition.Value) Then .PosTitle = frm!tbxPosition.Value
+                    If Not IsNull(frm!tbxPhone.Value) Then
+                        .WorkPhone = RemoveChars(frm!tbxPhone.Value, True) 'remove non-numerics
+                    End If
+                    If Not IsNull(frm!tbxExtension.Value) Then
+                        .WorkExtension = RemoveChars(frm!tbxExtension.Value, True) 'remove non-numerics
+                    End If
+                    .AccessRole = frm!cbxUserRole.Column(1)
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                
+                    strCriteria = "[FirstName] = '" & .FirstName _
+                                    & "' AND [LastName] = '" & .LastName _
+                                    & "' AND [MiddleInitial] = '" & .MiddleInitial _
+                                    & "' AND [Email] = '" & .Email
+                    
+                    'set the generic object --> Contact
+                    Set obj = p
+                    
+                    'cleanup
+                    Set p = Nothing
+                End With
+
+            Case "Events"
+                Dim ev As New EventVisit
+                
+                With ev
+                    'values passed into form
+                    
+                    'form values
+                    .LocationID = frm!cbxLocation.Column(0)
+                    .ProtocolID = 1 ' assumes this is for big rivers protocol
+                    .SiteID = frm!cbxSite.Column(0)
+                    
+                    .StartDate = frm!tbxStartDate.Value
+                    
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    
+                    strCriteria = "[Site_ID] = " & .SiteID & " AND [Location_ID] = " & .LocationID & " AND [StartDate] " = Format(.StartDate, "YYYY-mm-dd")
+                    
+                    'set the generic object --> EventVisit
+                    Set obj = ev
+                    
+                    'cleanup
+                    Set ev = Nothing
+                End With
+            
+            Case "Feature"
+                    Dim f As New Feature
+    
+                    With f
+                        'values passed into form
+                                
+                        'form values
+                        .LocationID = frm!cbxLocation.Column(0)
+                        .Name = frm!tbxFeature.Value
+                        
+                        If Not IsNull(frm!tbxFeatureDirections.Value) Then f.Directions = frm!tbxFeatureDirections.Value
+                        If Not IsNull(frm!tbxDescription.Value) Then .Directions = frm!tbxDescription.Value
+                        .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    
+                        strCriteria = "[Location_ID] = " & .LocationID & " AND [Feature] = '" & .Name & "'"
+                        
+                        'set the generic object --> Feature
+                        Set obj = f
+                    
+                        'cleanup
+                        Set f = Nothing
+                    End With
+
+            Case "Location"
+                    Dim loc As New Location
+                    
+                    With loc
+                        'values passed into form
+                        .CollectionSourceName = "T"
+                        
+                        .CreateDate = ""
+                        .CreatedByID = 0
+                        .LastModified = ""
+                        .LastModifiedByID = 0
+                        
+                        '.ProtocolID = 1
+                        '.SiteID = 1
+                        
+                        'form values
+                        .LocationName = frm!tbxName.Value
+                        .LocationType = "" 'cbxLocationType.SelText
+                
+                        .HeadtoOrientDistance = frm!tbxDistance.Value
+                        .HeadtoOrientBearing = frm!tbxBearing.Value
+                        
+                        .ID = frm!tbxID.Value '0 if new, edit if > 0
+
+                        strCriteria = "[LocationName] = " & .LocationName _
+                                    & " AND [HeadtoOrientDistance] = " & .HeadtoOrientDistance _
+                                    & " AND [HeadtoOrientBearing] = " & .HeadtoOrientBearing
+                    
+                        'set the generic object --> Location
+                        Set obj = loc
+                        
+                        'cleanup
+                        Set loc = Nothing
+                    End With
+                                        
+            Case "UserRole"
+                Dim u As New Person
+                    
+                With u
+                    'values passed into form
+            '        .EventID = 1
+                            
+                    'form values
+            '        .UserRoleType = ""
+            '        .UserRoleNumber = cbxUserRole.SelText
+            '        .SerialNumber = tbxSerialNo.value
+            '        .IsSurveyed = chkSurveyed.value
+            '        .Timing = cbxTiming.SelText
+            '        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
+            '        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
+                    
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                
+                    'strCriteria = "[UserRoleNumber] = " & .UserRoleNumber
+                
+                    'set the generic object --> Location
+                    Set obj = u
+                    
+                    'cleanup
+                    Set u = Nothing
+                End With
+                                        
+            Case "Site"
+                Dim s As New Site
+                
+                With s
+                    'values passed into form
+                    .Park = TempVars("ParkCode")
+                    .River = TempVars("River")
+                    
+                    'form values
+                    .Code = frm!tbxSiteCode.Value
+                    .Name = frm!tbxSiteName.Value
+                    .Directions = Nz(frm!tbxSiteDirections.Value, "")
+                    .Description = Nz(frm!tbxDescription.Value, "")
+                    
+                    'assumed
+                    .IsActiveForProtocol = 1 'all sites assumed active when added
+        
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                
+                    strCriteria = "[SiteCode] = '" & .Code & "' AND [SiteName] = '" & .Name & "'"
+                
+                    'set the generic object --> Site
+                    Set obj = s
+                    
+                    'cleanup
+                    Set s = Nothing
+                End With
+                
+            Case "Transducer"
+                Dim t As New Transducer
+        
+                With t
+                    'values passed into form
+                    .EventID = 1
+                            
+                    'form values
+                    .TransducerType = ""
+                    .TransducerNumber = frm!cbxTransducer.SelText
+                    .SerialNumber = frm!tbxSerialNo.Value
+                    .IsSurveyed = frm!chkSurveyed.Value
+                    .Timing = frm!cbxTiming.SelText
+                    .ActionDate = Format(frm!tbxSampleDate.Value, "YYYY-mm-dd")
+                    .ActionTime = Format(frm!tbxSampleTime.Value, "hh:mm.ss")
+                    
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                
+                    strCriteria = "[TransducerNumber] = " & .TransducerNumber _
+                                & " AND [Timing] = '" & .Timing _
+                                & "' AND [SerialNumber] = '" & .SerialNumber _
+                                & "' AND [ActionDate] = " & .ActionDate
+                
+                    'set the generic object --> Transducer
+                    Set obj = t
+                    
+                    'cleanup
+                    Set t = Nothing
+                End With
+            
+            Case "Transect"
+                Dim vt As New VegTransect
+                
+                With vt
+                    'values passed into form
+                    .Park = TempVars("ParkCode")
+                    .LocationID = 1
+                    .EventID = 1
+                            
+                    'form values
+                    .TransectNumber = frm!tbxNumber.Value
+                    .SampleDate = Format(frm!tbxSampleDate.Value, "YYYY-mm-dd")
+                    
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    
+                    strCriteria = "[TransectNumber] = " & .TransectNumber _
+                                & "' AND [SampleDate] = " & .SampleDate
+                
+                    'set the generic object --> VegTransect
+                    Set obj = vt
+                    
+                    'cleanup
+                    Set vt = Nothing
+                End With
+            
+            Case Else
+                GoTo Exit_Handler
+        End Select
+        
+        'set insert/update based on whether its an edit or new entry
+        DoAction = IIf(frm!tbxID.Value > 0, "u", "i")
+        
+        'check if the record already exists by checking event list form records
+        'event list form pulls active records for park, river segment
+        Dim rs As DAO.Recordset
+        
+        Set rs = frm!list.Form.RecordsetClone
+        rs.FindFirst strCriteria
+        
+        If rs.NoMatch Then
+            ' --- INSERT ---
+            frm!lblMsg.ForeColor = lngLime
+            frm!lblMsgIcon.ForeColor = lngLime
+            frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+            frm!lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
+        Else
+            ' --- UPDATE ---
+            'record already exists for this site ID, location ID, & event date
+            'prevent duplicate entries
+            frm!lblMsg.ForeColor = lngYellow
+            frm!lblMsgIcon.ForeColor = lngYellow
+            frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+            frm!lblMsg.Caption = "Oops, record already exists."
+            GoTo Exit_Handler
+        End If
+        
+        'T/F refers to whether the record is an update (T) or insert (F)
+        obj.SaveToDb IIf(DoAction = "i", False, True)
+        
+        'set the tbxID.value
+        'tbxID = .ID
+        frm!tbxID.Value = obj.ID
+        
+    End With
+    
+    'clear values & refresh display
+    frm.ReadyForSave
+    
+    PopulateForm frm, frm!tbxID.Value
+    
+    'refresh list
+    frm!list.Requery
+    
+    frm.Requery
+    
+    'clear messages
+    frm!lblMsg.Caption = ""
+    
+Exit_Handler:
+    'cleanup
+    rs.Close
+    Set rs = Nothing
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - UpsertRecord[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub

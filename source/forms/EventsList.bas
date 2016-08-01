@@ -21,9 +21,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =30
     Left =450
-    Top =2880
+    Top =3120
     Right =7830
-    Bottom =6990
+    Bottom =7230
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc2b74d8760c3e440
@@ -44,6 +44,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -171,7 +173,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4380
+                    TextAlign =2
+                    Left =4740
                     Top =1080
                     Width =1245
                     Height =315
@@ -181,16 +184,16 @@ Begin Form
                     Name ="lblStartDate"
                     Caption ="Start Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4380
+                    LayoutCachedLeft =4740
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =5625
+                    LayoutCachedWidth =5985
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =960
+                    Left =1020
                     Top =1080
                     Width =270
                     Height =315
@@ -200,16 +203,17 @@ Begin Form
                     Name ="lblHdrID"
                     Caption ="ID"
                     GridlineColor =10921638
-                    LayoutCachedLeft =960
+                    LayoutCachedLeft =1020
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =1230
+                    LayoutCachedWidth =1290
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =3000
+                    TextAlign =2
+                    Left =3420
                     Top =1080
                     Width =1245
                     Height =315
@@ -219,18 +223,19 @@ Begin Form
                     Name ="lblLocation"
                     Caption ="Location"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3000
+                    LayoutCachedLeft =3420
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =4245
+                    LayoutCachedWidth =4665
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
+                    TextAlign =2
+                    Left =1440
                     Top =1080
-                    Width =1245
+                    Width =1800
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -238,9 +243,9 @@ Begin Form
                     Name ="lblSite"
                     Caption ="Site"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1440
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =3240
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -385,8 +390,9 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4380
+                    Left =4800
                     Top =15
+                    Width =1020
                     Height =300
                     TabIndex =3
                     BorderColor =10921638
@@ -395,7 +401,7 @@ Begin Form
                     ControlSource ="StartDate"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4380
+                    LayoutCachedLeft =4800
                     LayoutCachedTop =15
                     LayoutCachedWidth =5820
                     LayoutCachedHeight =315
@@ -433,18 +439,18 @@ Begin Form
                     IMESentenceMode =3
                     Left =1425
                     Top =15
-                    Width =1335
+                    Width =1815
                     Height =300
                     TabIndex =5
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxSite"
-                    ControlSource ="StartDate"
+                    ControlSource ="=[SiteName] & \" (\" & [SiteCode] & \")\""
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1425
                     LayoutCachedTop =15
-                    LayoutCachedWidth =2760
+                    LayoutCachedWidth =3240
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -457,7 +463,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2940
+                    Left =3360
                     Top =15
                     Width =1380
                     Height =300
@@ -465,12 +471,12 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxLocation"
-                    ControlSource ="StartDate"
+                    ControlSource ="LocationName"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2940
+                    LayoutCachedLeft =3360
                     LayoutCachedTop =15
-                    LayoutCachedWidth =4320
+                    LayoutCachedWidth =4740
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -498,7 +504,7 @@ Option Explicit
 ' =================================
 ' Form:         EventsList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -506,6 +512,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 7/26/2016 - 1.01 - add RunReadyForSave() check
 ' =================================
 
 '---------------------
@@ -658,9 +665,21 @@ On Error GoTo Err_Handler
     btnDelete.ForeColor = lngRed
     
     'set data source
-    Me.RecordSource = GetTemplate("s_events_list_by_park_river", _
-                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
-                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+'    Me.RecordSource = GetTemplate("s_events_list_by_park_river", _
+'                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+'                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+    Set Me.Recordset = GetRecords("s_event_by_park_river_w_location")
+    
+'    With CurrentDb.QueryDefs("")
+'
+'    Me.RecordSource = GetTemplate("s_event_by_park_river_w_location", _
+'                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+'                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+'    End With
+    
+    
+    'Me.tbxSite.ControlSource = SiteName & "(" & SiteCode & ")"
+    
     Me.Requery
 
 Exit_Handler:
@@ -708,17 +727,23 @@ End Sub
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   DJ. May 4, 2009
+'   http://stackoverflow.com/questions/821892/vba-form-update-after-values-set-in-code-instead-of-afterupdate
 ' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 7/26/2016 - added call to parent public sub RunReadyForSave to trigger check if data is ready to save
 ' ---------------------------------
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
     PopulateForm Me.Parent, tbxID
+    
+    'call the parent form's RunReadyForSave public event to trigger ReadyForSave()
+    Call Me.Parent.RunReadyForSave
 
 Exit_Handler:
     Exit Sub
@@ -750,12 +775,14 @@ On Error GoTo Err_Handler
     Dim result As Integer
     
     'identify the record ID
-     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
+    result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
     If result = vbYes Then DeleteRecord "Event", ID
     
     'clear the deleted record
+'    Me.Requery
+    Me.Refresh
     Me.Requery
 
 Exit_Handler:
@@ -785,7 +812,6 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    
 Exit_Handler:
     Exit Sub
 Err_Handler:

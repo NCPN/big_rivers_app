@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =47
-    Left =2955
-    Top =3780
-    Right =17475
-    Bottom =14775
+    ItemSuffix =53
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -76,6 +76,12 @@ Begin Form
             BackThemeColorIndex =1
             BorderThemeColorIndex =1
             BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Line
+            BorderLineStyle =0
+            BorderThemeColorIndex =0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -310,13 +316,39 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7980
+            Height =8280
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    OverlapFlags =93
+                    Left =240
+                    Top =1785
+                    Width =5820
+                    Height =1500
+                    FontSize =36
+                    LeftMargin =288
+                    TopMargin =144
+                    BackColor =16051931
+                    Name ="lblDIstance"
+                    Caption ="Ruler"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =240
+                    LayoutCachedTop =1785
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =3285
+                    BackThemeColorIndex =8
+                    BackTint =20.0
+                    BorderThemeColorIndex =-1
+                    BorderTint =100.0
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
                 Begin CommandButton
                     OverlapFlags =85
                     Left =6780
@@ -480,7 +512,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =3480
+                    Top =3780
                     Width =7650
                     Height =4380
                     TabIndex =14
@@ -490,25 +522,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3480
+                    LayoutCachedTop =3780
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =7860
+                    LayoutCachedHeight =8160
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3360
+                    Top =3660
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3360
+                    LayoutCachedTop =3660
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =7980
+                    LayoutCachedHeight =8280
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -558,32 +590,6 @@ Begin Form
                     LayoutCachedHeight =1560
                     BackThemeColorIndex =9
                     BackTint =40.0
-                    BorderThemeColorIndex =-1
-                    BorderTint =100.0
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    OverlapFlags =93
-                    Left =240
-                    Top =1785
-                    Width =5820
-                    Height =1500
-                    FontSize =36
-                    LeftMargin =288
-                    TopMargin =144
-                    BackColor =16051931
-                    Name ="lblDIstance"
-                    Caption ="Ruler"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =240
-                    LayoutCachedTop =1785
-                    LayoutCachedWidth =6060
-                    LayoutCachedHeight =3285
-                    BackThemeColorIndex =8
-                    BackTint =20.0
                     BorderThemeColorIndex =-1
                     BorderTint =100.0
                     ForeThemeColorIndex =-1
@@ -663,7 +669,7 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =2700
-                    Top =2850
+                    Top =2880
                     Height =315
                     TabIndex =7
                     BackColor =65535
@@ -682,9 +688,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2700
-                    LayoutCachedTop =2850
+                    LayoutCachedTop =2880
                     LayoutCachedWidth =4140
-                    LayoutCachedHeight =3165
+                    LayoutCachedHeight =3195
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
@@ -698,7 +704,7 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =4440
-                    Top =2850
+                    Top =2880
                     Height =315
                     TabIndex =8
                     BackColor =65535
@@ -717,9 +723,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4440
-                    LayoutCachedTop =2850
+                    LayoutCachedTop =2880
                     LayoutCachedWidth =5880
-                    LayoutCachedHeight =3165
+                    LayoutCachedHeight =3195
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
@@ -730,9 +736,9 @@ Begin Form
                     End
                 End
                 Begin Label
-                    OverlapFlags =215
+                    OverlapFlags =223
                     Left =4440
-                    Top =2580
+                    Top =2565
                     Width =1380
                     Height =240
                     BorderColor =8355711
@@ -741,14 +747,14 @@ Begin Form
                     Caption ="Scribeline"
                     GridlineColor =10921638
                     LayoutCachedLeft =4440
-                    LayoutCachedTop =2580
+                    LayoutCachedTop =2565
                     LayoutCachedWidth =5820
-                    LayoutCachedHeight =2820
+                    LayoutCachedHeight =2805
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =2700
-                    Top =1920
+                    Top =1860
                     Width =1440
                     Height =240
                     BorderColor =8355711
@@ -757,14 +763,14 @@ Begin Form
                     Caption ="Waterline"
                     GridlineColor =10921638
                     LayoutCachedLeft =2700
-                    LayoutCachedTop =1920
+                    LayoutCachedTop =1860
                     LayoutCachedWidth =4140
-                    LayoutCachedHeight =2160
+                    LayoutCachedHeight =2100
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =4440
-                    Top =1920
+                    Top =1860
                     Width =1440
                     Height =240
                     BorderColor =8355711
@@ -773,14 +779,14 @@ Begin Form
                     Caption ="Eyebolt"
                     GridlineColor =10921638
                     LayoutCachedLeft =4440
-                    LayoutCachedTop =1920
+                    LayoutCachedTop =1860
                     LayoutCachedWidth =5880
-                    LayoutCachedHeight =2160
+                    LayoutCachedHeight =2100
                 End
                 Begin Label
-                    OverlapFlags =215
+                    OverlapFlags =223
                     Left =2700
-                    Top =2580
+                    Top =2565
                     Width =1440
                     Height =240
                     BorderColor =8355711
@@ -789,9 +795,9 @@ Begin Form
                     Caption ="Waterline"
                     GridlineColor =10921638
                     LayoutCachedLeft =2700
-                    LayoutCachedTop =2580
+                    LayoutCachedTop =2565
                     LayoutCachedWidth =4140
-                    LayoutCachedHeight =2820
+                    LayoutCachedHeight =2805
                 End
                 Begin CheckBox
                     OverlapFlags =215
@@ -1085,10 +1091,10 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =3
                     Left =1320
-                    Top =1950
+                    Top =1890
                     Width =1290
                     Height =299
                     FontSize =10
@@ -1100,17 +1106,17 @@ Begin Form
                     ControlTipText ="Reference Mark to..."
                     GridlineColor =10921638
                     LayoutCachedLeft =1320
-                    LayoutCachedTop =1950
+                    LayoutCachedTop =1890
                     LayoutCachedWidth =2610
-                    LayoutCachedHeight =2249
+                    LayoutCachedHeight =2189
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =3
                     Left =1500
-                    Top =2610
+                    Top =2595
                     Width =1140
                     Height =315
                     FontSize =10
@@ -1122,11 +1128,97 @@ Begin Form
                     ControlTipText ="Eyebolt to..."
                     GridlineColor =10921638
                     LayoutCachedLeft =1500
-                    LayoutCachedTop =2610
+                    LayoutCachedTop =2595
                     LayoutCachedWidth =2640
-                    LayoutCachedHeight =2925
+                    LayoutCachedHeight =2910
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =3420
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =3420
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =3735
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =223
+                    TextAlign =2
+                    Left =4320
+                    Top =3240
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =3240
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =3840
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Line
+                    LineSlant = NotDefault
+                    OldBorderStyle =5
+                    BorderWidth =2
+                    OverlapFlags =87
+                    BorderLineStyle =4
+                    Left =1380
+                    Top =2145
+                    Width =4464
+                    BorderColor =16711680
+                    Name ="lnRefTo"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =2145
+                    LayoutCachedWidth =5844
+                    LayoutCachedHeight =2145
+                    BorderThemeColorIndex =-1
+                End
+                Begin Line
+                    LineSlant = NotDefault
+                    OldBorderStyle =5
+                    BorderWidth =2
+                    OverlapFlags =87
+                    BorderLineStyle =4
+                    Left =1560
+                    Top =2820
+                    Width =4320
+                    BorderColor =16711680
+                    Name ="lnEyeboltTo"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1560
+                    LayoutCachedTop =2820
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =2820
+                    BorderThemeColorIndex =-1
                 End
             End
         End
@@ -1150,7 +1242,7 @@ Option Explicit
 ' =================================
 ' Form:         Transducer
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, Transducer, functions & procedures for UI display
@@ -1158,6 +1250,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, June 3, 2016
 ' References:   -
 ' Revisions:    BLC - 6/3/2016 - 1.00 - initial version
+'               BLC - 7/29/2016 - 1.01 - revised to use UpsertRecord()
 ' =================================
 
 '---------------------
@@ -1251,36 +1344,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 3, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/3/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Transducer form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -1302,9 +1365,9 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("Feature"), "")
+                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("Feature"), "")
     
     Title = "Transducer"
     Directions = "Enter the Transducer information and click save."
@@ -1346,6 +1409,8 @@ On Error GoTo Err_Handler
     tbxSampleTime.BackColor = lngYellow
     cbxTiming.BackColor = lngYellow
     cbxTransducer.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1360,6 +1425,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Open[Transducer form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 3, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/3/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[Transducer form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1644,52 +1739,55 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/3/2016 - initial version
+'   BLC - 7/29/2016 - revised to use UpsertRecord()
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim t As New Transducer
-        
-    With t
-        'values passed into form
-        .EventID = 1
-                
-        'form values
-        .TransducerType = ""
-        .TransducerNumber = cbxTransducer.SelText
-        .SerialNumber = tbxSerialNo.Value
-        .IsSurveyed = chkSurveyed.Value
-        .Timing = cbxTiming.SelText
-        .ActionDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
-        .ActionTime = Format(tbxSampleTime.Value, "hh:mm.ss")
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-    End With
+    UpsertRecord Me
     
-    'clear values & refresh display
-    Me.RecordSource = ""
-    
-    cbxTransducer.ControlSource = ""
-    tbxSerialNo.ControlSource = ""
-    tbxEyeboltToScribeline.ControlSource = ""
-    tbxEyeboltToWaterline.ControlSource = ""
-    tbxRefToEyebolt.ControlSource = ""
-    tbxRefToWaterline.ControlSource = ""
-    tbxSampleDate.ControlSource = ""
-    tbxSampleTime.ControlSource = ""
-    cbxTiming.ControlSource = ""
-    cbxTransducer.ControlSource = ""
-    
-    tbxID.ControlSource = ""
-    tbxID.Value = 0
-    
-    ReadyForSave
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+'    Dim t As New Transducer
+'
+'    With t
+'        'values passed into form
+'        .EventID = 1
+'
+'        'form values
+'        .TransducerType = ""
+'        .TransducerNumber = cbxTransducer.SelText
+'        .SerialNumber = tbxSerialNo.Value
+'        .IsSurveyed = chkSurveyed.Value
+'        .Timing = cbxTiming.SelText
+'        .ActionDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
+'        .ActionTime = Format(tbxSampleTime.Value, "hh:mm.ss")
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'    End With
+'
+'    'clear values & refresh display
+'    Me.RecordSource = ""
+'
+'    cbxTransducer.ControlSource = ""
+'    tbxSerialNo.ControlSource = ""
+'    tbxEyeboltToScribeline.ControlSource = ""
+'    tbxEyeboltToWaterline.ControlSource = ""
+'    tbxRefToEyebolt.ControlSource = ""
+'    tbxRefToWaterline.ControlSource = ""
+'    tbxSampleDate.ControlSource = ""
+'    tbxSampleTime.ControlSource = ""
+'    cbxTiming.ControlSource = ""
+'    cbxTransducer.ControlSource = ""
+'
+'    tbxID.ControlSource = ""
+'    tbxID.Value = 0
+'
+'    ReadyForSave
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub

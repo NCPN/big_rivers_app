@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =630
-    Top =3765
-    Right =13440
-    Bottom =14775
+    Left =4110
+    Top =3360
+    Right =13590
+    Bottom =14355
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -1743,7 +1743,6 @@ Begin Form
                             Begin
                                 Begin ComboBox
                                     LimitToList = NotDefault
-                                    Enabled = NotDefault
                                     Locked = NotDefault
                                     TabStop = NotDefault
                                     AllowAutoCorrect = NotDefault
@@ -1760,6 +1759,7 @@ Begin Form
                                     FontSize =8
                                     FontWeight =700
                                     ForeColor =-2147483607
+                                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"0\""
                                     Name ="cbxVersion"
                                     ControlSource ="Release_ID"
                                     RowSourceType ="Table/Query"

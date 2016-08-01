@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =24
-    Left =5610
-    Top =2760
-    Right =13890
-    Bottom =10785
+    Left =5940
+    Top =2595
+    Right =14220
+    Bottom =10620
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -421,6 +421,15 @@ Option Explicit
 Private WithEvents oTile As Form_Tile
 Attribute oTile.VB_VarHelpID = -1
 
+'declare tile form objects
+Dim oLTile As Form_Tile
+Dim oCTile As Form_Tile
+Dim oRTile As Form_Tile
+Dim oBLTile As Form_Tile
+Dim oBCTile As Form_Tile
+Dim oBRTile As Form_Tile
+
+
 '---------------------
 ' Properties
 '---------------------
@@ -449,12 +458,12 @@ On Error GoTo Err_Handler
     Initialize
     
     'prepare interface
-    Dim oLTile As Form_Tile
-    Dim oCTile As Form_Tile
-    Dim oRTile As Form_Tile
-    Dim oBLTile As Form_Tile
-    Dim oBCTile As Form_Tile
-    Dim oBRTile As Form_Tile
+'    Dim oLTile As Form_Tile
+'    Dim oCTile As Form_Tile
+'    Dim oRTile As Form_Tile
+'    Dim oBLTile As Form_Tile
+'    Dim oBCTile As Form_Tile
+'    Dim oBRTile As Form_Tile
     
     Me.Detail.BackColor = lngNPSBrown
     Me.Detail.AlternateBackColor = lngNPSBrown
@@ -532,7 +541,7 @@ On Error GoTo Err_Handler
     oRTile.Link6Caption = "Species"
     oRTile.Link7Caption = "Unknowns"
     oRTile.Link8Caption = "Species Search"
-    
+
     ' ------ Bottom -------
     'Left
     Set oBLTile = BLTile.Form
@@ -562,7 +571,10 @@ On Error GoTo Err_Handler
     oBCTile.Link5Visible = 0
     oBCTile.Link6Caption = "Tasks"
     oBCTile.Link7Visible = 0
-    oBCTile.Link8Caption = "Sheet Settings"
+    oBCTile.lblIcon8L.Caption = StringFromCodepoint(uMapLighthouse)
+    oBCTile.lblIcon8L.ForeColor = lngBlue
+    oBCTile.lblIcon8L.FontWeight = wtMedium
+    oBCTile.Link8Caption = Space(4) & "Sheet Settings"
 
     'Right
     Set oBRTile = BRTile.Form
@@ -570,21 +582,46 @@ On Error GoTo Err_Handler
     oBRTile.BarColor = lngWhite
     oBRTile.TileHeaderColor = lngBlue 'lngMimosa
     oBRTile.TitleFontColor = lngWhite
-    oBRTile.Link1Caption = "rpt1"
-    oBRTile.Link2Visible = 0
-    oBRTile.Link3Visible = 0
-    oBRTile.Link4Visible = 0
-    oBRTile.Link5Visible = 0
+    oBRTile.Link1Caption = Space(4) & "# Plots"
+    oBRTile.Link2Caption = Space(4) & "VegPlot - Species"
+    oBRTile.Link3Caption = Space(4) & "VegPlot - Species #s"
+    oBRTile.Link4Caption = Space(4) & "VegWalk - Species"
+    oBRTile.Link5Caption = Space(4) & "VegWalk - Species #s"
     oBRTile.Link6Visible = 0
     oBRTile.Link7Visible = 0
-    oBRTile.Link8Visible = 0
-    oBRTile.Link2Caption = ""
-    oBRTile.Link3Caption = ""
-    oBRTile.Link4Caption = ""
-    oBRTile.Link5Caption = ""
     oBRTile.Link6Caption = ""
     oBRTile.Link7Caption = ""
-    oBRTile.Link8Caption = ""
+    oBRTile.Link8Caption = "More..."
+    
+    Dim i As Integer
+    Dim strControl As String
+    
+    For i = 1 To 5
+        strControl = "lblIcon" & i & "L"
+        With oBRTile.Controls(strControl)
+            .Caption = StringFromCodepoint(uDocumentEmpty)
+            .FontWeight = wtNormal
+            .FontSize = 12
+            .ForeColor = lngBlue
+        End With
+    Next
+'    oBRTile.lblIcon1L.Caption = StringFromCodepoint(uDocumentEmpty)
+'    oBRTile.lblIcon1L.FontWeight = wtNormal
+'    oBRTile.lblIcon1L.FontSize = 14
+'    oBRTile.lblIcon2L.Caption = StringFromCodepoint(uDocumentEmpty)
+'    oBRTile.lblIcon2L.FontWeight = wtNormal
+'    oBRTile.lblIcon1L.FontSize = 14
+'    oBRTile.lblIcon3L.Caption = StringFromCodepoint(uDocumentEmpty)
+'    oBRTile.lblIcon3L.FontWeight = wtNormal
+'    oBRTile.lblIcon1L.FontSize = 14
+'    oBRTile.lblIcon4L.Caption = StringFromCodepoint(uDocumentEmpty)
+'    oBRTile.lblIcon4L.FontWeight = wtNormal
+'    oBRTile.lblIcon1L.FontSize = 14
+'    oBRTile.lblIcon5L.Caption = StringFromCodepoint(uDocumentEmpty)
+'    oBRTile.lblIcon5L.FontWeight = wtNormal
+'    oBRTile.lblIcon1L.FontSize = 14
+    oBRTile.lblLink8.TextAlign = aRight
+    oBRTile.lblLink8.FontItalic = True
     
     HighlightBreadcrumb
     
@@ -624,13 +661,31 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/18/2016 - initial version
+'   BLC - 7/13/2016 - add exceptions for certain links (active w/o park selected)
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
 
-    'if no park --> deactivate links
+    'use set to allow use of tile methods
+    Set oLTile = LTile.Form
+    Set oCTile = CTile.Form
+    Set oRTile = RTile.Form
+    Set oBLTile = BLTile.Form
+    Set oBCTile = BCTile.Form
+    Set oBRTile = BRTile.Form
+    
+    'if no park --> all links deactivated, EXCEPT these
     If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
-'        MsgBox "current" 'oBCTile.DisableLinks "1,2" '"1,2,3,4,5,6"
+
+        'handle exceptions
+        'oLTile.EnableLinks ""               'N/A
+        oCTile.EnableLinks "6"              'People
+        oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
+        'oBLTile.EnableLinks ""              'N/A
+        'oBCTile.EnableLinks ""              'N/A
+        'oBRTile.EnableLinks ""               'N/A
+        
+'        oBCTile.DisableLinks "1,2" '"1,2,3,4,5,6"
     End If
     
 Exit_Handler:

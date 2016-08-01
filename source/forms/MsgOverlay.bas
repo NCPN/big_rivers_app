@@ -21,10 +21,10 @@ Begin Form
     Width =8884
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =2955
-    Top =3765
-    Right =17475
-    Bottom =14775
+    Left =4110
+    Top =3345
+    Right =13590
+    Bottom =14355
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6ab456d96fb4e440
@@ -278,10 +278,10 @@ On Error GoTo Err_Handler
         
         For i = 0 To UBound(ary)
             ary2 = Split(ary(i), PARAM_SEPARATOR)
-            Select Case i
+            Select Case LCase(i)
                 Case 0 'message info
                     Select Case LCase(ary2(0))
-                        Case "contact"
+                        Case "contact", "event"
                             'set table
                             Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
                             'set ID #

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Forms
 ' Level:        Framework module
-' Version:      1.06
+' Version:      1.07
 ' Description:  generic form functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/19/2015
@@ -18,6 +18,7 @@ Option Explicit
 '                                        from Uplands mod_App_UI
 '               BLC - 6/24/2016 - 1.05 - added ToggleForm(), replaced Exit_Function > Exit_Handler
 '               BLC - 7/1/2016  - 1.06 - added font weight constants
+'               BLC - 7/28/2016 - 1.07 - added clearing lblMsg caption for ClearForm()
 ' =================================
 
 '=================================================================
@@ -64,6 +65,8 @@ Option Explicit
 '=================================================================
 '  Constants
 '=================================================================
+
+' -- font weight constants --
 Public Const wtThin = 100
 Public Const wtExtraLight = 200
 Public Const wtLight = 300
@@ -73,6 +76,13 @@ Public Const wtSemiBold = 600
 Public Const wtBold = 700
 Public Const wtExtraBold = 800
 Public Const wtHeavy = 900
+
+'-- text align constants --
+Public Const aGeneral = 0
+Public Const aLeft = 1
+Public Const aCenter = 2
+Public Const aRight = 3
+Public Const aDistribute = 4
 
 '=================================================================
 '  Declarations
@@ -575,6 +585,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/23/2016 - initial version
 '   BLC - 6/27/2016 - shifted to mod_Forms from big rivers forms
+'   BLC - 7/28/2016 - added clearing lblMsg caption
 ' ---------------------------------
 Public Sub ClearForm(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -592,12 +603,22 @@ On Error GoTo Err_Handler
             Select Case ctrl.ControlType
                 Case acTextBox
                     ctrl.ControlSource = ""
-                Case acComboBox
                     ctrl.Value = ""
+                Case acComboBox
+                    'ctrl.Value = "" '<< error: 2448 can't assign value to object
+                    'ctrl.Value = Null '<< error: 2448 can't assign value to object
+                    'ctrl.ItemData (0)
+                    ' Johanness, October 12, 2012
+                    ' http://stackoverflow.com/questions/12697427/vba-clear-selections-of-a-combobox
             End Select
         Next
         
+        .Controls("tbxIcon") = StringFromCodepoint(uBullet)
+        .Controls("tbxIcon").ForeColor = lngRed
         .Controls("tbxID") = 0
+        .Controls("lblMsgIcon").Caption = ""
+        .Controls("lblMsg").Caption = ""
+        .Controls("lblMsgIcon").ForeColor = lngRobinEgg
         
         .Controls("btnSave").Enabled = False
         

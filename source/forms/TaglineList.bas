@@ -20,10 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =26
-    Left =7425
-    Top =2130
-    Right =14805
-    Bottom =6495
+    Right =9480
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xa5fae2b260c3e440
@@ -212,7 +210,7 @@ Begin Form
                     OverlapFlags =85
                     Left =1560
                     Top =1080
-                    Width =1245
+                    Width =1320
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -222,7 +220,7 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =1560
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =2880
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -650,6 +648,8 @@ On Error GoTo Err_Handler
 
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
 
+    'set data source
+'    Set Me.Recordset = GetRecords("s_tagline")
 
 Exit_Handler:
     Exit Sub

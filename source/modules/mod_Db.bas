@@ -100,7 +100,7 @@ Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
                     .Edit
                     ![RunDate] = Now()
                     ![IsDone] = True
-                    .Update
+                    .update
                 End With
             End If
             rs.MoveNext
@@ -195,7 +195,7 @@ On Error GoTo Err_Handler
         For iCount = 0 To rsB.Fields.count - 1
             rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
         Next
-        rsOut.Update
+        rsOut.update
         rsB.MoveNext
     Loop
     
@@ -839,7 +839,7 @@ On Error GoTo Err_Handler
                 For i = 1 To iCount
                     .AddNew
                     .Fields("RecCount") = i
-                    .Update
+                    .update
                 Next
                 
                 .index = "RecCount"
@@ -1034,7 +1034,7 @@ On Error GoTo Err_Handler
 
         rs.AddNew
         rs.Fields(0) = i 'number integer field
-        rs.Update
+        rs.update
     Next
     
        

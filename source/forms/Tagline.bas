@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =28
-    Left =4875
-    Top =3390
-    Right =13875
-    Bottom =14385
+    ItemSuffix =29
+    Left =4110
+    Top =3360
+    Right =17970
+    Bottom =14355
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x417df2aa6fc3e440
@@ -232,9 +232,9 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1200
+                    Left =840
                     Top =1080
-                    Width =1245
+                    Width =1935
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -242,9 +242,9 @@ Begin Form
                     Name ="lblCause"
                     Caption ="Slope Change Cause"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1200
+                    LayoutCachedLeft =840
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2445
+                    LayoutCachedWidth =2775
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -253,7 +253,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5100
+            Height =5400
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -402,7 +402,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
                     Left =4260
                     Top =60
@@ -532,9 +532,9 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =105
-                    Top =600
+                    Top =900
                     Width =7650
                     Height =4380
                     TabIndex =6
@@ -544,25 +544,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =600
+                    LayoutCachedTop =900
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =4980
+                    LayoutCachedHeight =5280
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =480
+                    Top =780
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =480
+                    LayoutCachedTop =780
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5100
+                    LayoutCachedHeight =5400
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -591,6 +591,53 @@ Begin Form
                     BorderTint =50.0
                     BorderShade =100.0
                     ForeTint =50.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =540
+                    Width =7860
+                    Height =315
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    GridlineColor =10921638
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =855
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =255
+                    TextAlign =2
+                    Left =4260
+                    Top =360
+                    Width =825
+                    Height =607
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4260
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =5085
+                    LayoutCachedHeight =967
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -735,7 +782,8 @@ On Error GoTo Err_Handler
     'ensure required arguments passed:
     '   line distance source | source ID
     '   line distance source options: F(eature), T(ransect), P(lot)
-    If Not InStr(Me.OpenArgs, "|") And Len(Me.OpenArgs) > 3 Then _
+    If Not InStr(Me.OpenArgs, "|") And Len(Me.OpenArgs) > 3 _
+        Or IsNull(Me.OpenArgs) Then _
             GoTo Exit_Handler
     
     ary = Split(Me.OpenArgs, "|")
@@ -744,7 +792,9 @@ On Error GoTo Err_Handler
     ToggleForm "VegPlot", -1
 
     Title = "Tagline Measurements"
-    Directions = "Select the appropriate slope change cause & enter tagline distance & height."
+    Directions = "Select the appropriate slope change cause " _
+                    & StringFromCodepoint(uAmpersand) _
+                    & " enter tagline distance & height."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     
@@ -758,6 +808,8 @@ On Error GoTo Err_Handler
     cbxCause.BackColor = lngYellow
     tbxDistance.BackColor = lngYellow
     tbxHeight.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
     
     'tagline slope change causes: Veg, Grd, Water, Rock, Debris
     cbxCause.RowSourceType = "Value List"

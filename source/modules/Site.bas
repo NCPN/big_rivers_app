@@ -344,9 +344,9 @@ On Error GoTo Err_Handler
             .Parameters("flag") = Me.IsActiveForProtocol
             
             '-- optional parameters --
-            If Not IsNull(Me.Directions) Then _
+            If Not IsNull(Me.Directions) And Not Len(Me.Directions) = 0 Then _
                 .Parameters("dir") = Me.Directions
-            If Not IsNull(Me.Description) Then _
+            If Not IsNull(Me.Description) And Not Len(Me.Description) = 0 Then _
                 .Parameters("descr") = Me.Description
             
             .Execute dbFailOnError
@@ -368,18 +368,18 @@ On Error GoTo Err_Handler
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
     'handle record actions
-    Dim act As New action
+    Dim act As New RecordAction
     With act
     
     'Recorder
-        .action = "R"
+        .RefAction = "R"
         .ContactID = Me.RecorderID
         .RefID = Me.ID
         .RefTable = "Site"
         .SaveToDb
         
     'Observer
-        .action = "O"
+        .RefAction = "O"
         .ContactID = Me.ObserverID
         .RefID = Me.ID
         .RefTable = "Site"

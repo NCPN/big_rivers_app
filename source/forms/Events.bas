@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =34
-    Left =4875
-    Top =3390
-    Right =12735
-    Bottom =9870
+    ItemSuffix =35
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -193,7 +193,8 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =3840
+                    TextAlign =2
+                    Left =4260
                     Top =1080
                     Width =1245
                     Height =315
@@ -203,9 +204,9 @@ Begin Form
                     Name ="lblStartDate"
                     Caption ="Start Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3840
+                    LayoutCachedLeft =4260
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =5085
+                    LayoutCachedWidth =5505
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -259,9 +260,10 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
+                    TextAlign =2
                     Left =1080
                     Top =1080
-                    Width =1245
+                    Width =1680
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -271,16 +273,17 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =1080
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2325
+                    LayoutCachedWidth =2760
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2520
+                    TextAlign =2
+                    Left =2820
                     Top =1080
-                    Width =1245
+                    Width =1380
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -288,9 +291,9 @@ Begin Form
                     Name ="lblLocation"
                     Caption ="Location"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2520
+                    LayoutCachedLeft =2820
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =3765
+                    LayoutCachedWidth =4200
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -299,7 +302,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5100
+            Height =5340
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -372,11 +375,12 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
+                    TextAlign =2
                     IMESentenceMode =3
-                    Left =3780
+                    Left =4320
                     Top =60
-                    Width =1860
+                    Width =1020
                     Height =315
                     BackColor =65535
                     BorderColor =10921638
@@ -393,9 +397,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3780
+                    LayoutCachedLeft =4320
                     LayoutCachedTop =60
-                    LayoutCachedWidth =5640
+                    LayoutCachedWidth =5340
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -500,9 +504,9 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =105
-                    Top =600
+                    Top =840
                     Width =7650
                     Height =4380
                     TabIndex =4
@@ -512,25 +516,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =600
+                    LayoutCachedTop =840
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =4980
+                    LayoutCachedHeight =5220
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =480
+                    Top =720
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =480
+                    LayoutCachedTop =720
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5100
+                    LayoutCachedHeight =5340
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -560,10 +564,14 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin ComboBox
+                    LimitToList = NotDefault
                     OverlapFlags =85
+                    TextAlign =2
                     IMESentenceMode =3
+                    ColumnCount =4
                     Left =1080
                     Top =60
+                    Width =1740
                     Height =315
                     FontSize =8
                     TabIndex =5
@@ -579,12 +587,14 @@ Begin Form
                     End
                     Name ="cbxSite"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;0;1440"
                     ControlTipText ="Select site of this sampling visit"
                     GridlineColor =10921638
+                    AllowValueListEdits =0
 
                     LayoutCachedLeft =1080
                     LayoutCachedTop =60
-                    LayoutCachedWidth =2520
+                    LayoutCachedWidth =2820
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -599,11 +609,14 @@ Begin Form
                     End
                 End
                 Begin ComboBox
+                    LimitToList = NotDefault
                     OverlapFlags =85
+                    TextAlign =2
                     IMESentenceMode =3
-                    Left =2580
+                    ColumnCount =4
+                    Left =2880
                     Top =60
-                    Width =1080
+                    Width =1320
                     Height =315
                     FontSize =8
                     TabIndex =7
@@ -619,12 +632,14 @@ Begin Form
                     End
                     Name ="cbxLocation"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1440;0;0"
                     ControlTipText ="Select location of this sampling visit"
                     GridlineColor =10921638
+                    AllowValueListEdits =0
 
-                    LayoutCachedLeft =2580
+                    LayoutCachedLeft =2880
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3660
+                    LayoutCachedWidth =4200
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -637,6 +652,56 @@ Begin Form
                         0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
                         0x000000000000000000000000000000000000
                     End
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =215
+                    TextAlign =3
+                    Top =525
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =525
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =840
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =247
+                    TextAlign =2
+                    Left =4320
+                    Top =345
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =345
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =945
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -660,7 +725,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -668,6 +733,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 7/26/2016 - 1.01 - added GetRecords() calls
 ' =================================
 
 '---------------------
@@ -773,6 +839,7 @@ End Property
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 6/27/2016 - updated to use ToggleForm() & ClearForm()
+'   BLC - 7/26/2016 - added GetRecords() for cbxSite, cbxLocation recordsets
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -802,9 +869,18 @@ On Error GoTo Err_Handler
     btnComment.Enabled = False
     btnSave.Enabled = False
     tbxStartDate.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
   
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
+    
+    'set data sources
+    Set cbxSite.Recordset = GetRecords("s_site_by_park_river")
+    'Set cbxSite.ControlSource = GetRecords("s_site_by_park_river")
+    'Set cbxSite.RowSource = GetRecords("s_site_by_park_river")
+    'cbxSite.ControlSource = GetRecords("s_site_by_park_river")
+    Set cbxLocation.Recordset = GetRecords("s_location_by_park_river")
     
     'initialize values
     ClearForm Me
@@ -867,6 +943,8 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
               
 '      If tbxID > 0 Then btnComment.Enabled = True
+    'MsgBox tbxID, vbCritical, "Current"
+    'If tbxID > 0 Then ReadyForSave
 
 Exit_Handler:
     Exit Sub
@@ -953,38 +1031,108 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim ev As New EventVisit
+    UpsertRecord Me
     
-    With ev
-        'values passed into form
-        
-        'form values
-        .LocationID = cbxLocation.Column(0)
-        .ProtocolID = 1 ' assumes this is for big rivers protocol
-        .SiteID = cbxSite.Column(0)
-        
-        .StartDate = tbxStartDate.Value
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value
-        tbxID = .ID
-        
-    End With
-    
-    'clear values & refresh display
-    
-    ReadyForSave
-    
-    PopulateForm Me, tbxID.Value
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+''    1) Click to edit
+''       a) populates form fields
+''       b) tbxID is set
+''
+''       c) change values --> i) compare against existing values
+''                           ii) no existing values match ==> update
+''                           iii) existing values match ==> message no change
+''
+''   2) Enter new values
+''       a) enables save button
+''       b) click save -->   i) compare against existing values
+''                           ii) no existing values match ==> insert
+''                           iii) existing values match ==> message no change
+'
+'    Dim DoAction As String
+'    Dim ev As New EventVisit
+'
+'    With ev
+'        'values passed into form
+'
+'        'form values
+'        .LocationID = cbxLocation.Column(0)
+'        .ProtocolID = 1 ' assumes this is for big rivers protocol
+'        .SiteID = cbxSite.Column(0)
+'
+'        .StartDate = tbxStartDate.Value
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'
+'        'set insert/update based on whether its an edit or new entry
+'        DoAction = IIf(tbxID.Value > 0, "u", "i")
+'
+'        'check if the record already exists by checking event list form records
+'        'event list form pulls active records for park, river segment
+'
+'        'gecko_1, February 10, 2005
+'        'http://www.access-programmers.co.uk/forums/showthread.php?t=81221
+'
+'        Dim rs As DAO.Recordset
+'        Dim i As Integer
+'        Dim ary() As Variant
+'
+'        Set rs = Me!list.Form.RecordsetClone
+'
+'        'Khinsu, August 19, 2013
+'        'http://stackoverflow.com/questions/18317059/how-to-test-if-item-exists-in-recordset
+'
+'        rs.FindFirst "[Site_ID] = " & .SiteID & " AND [Location_ID] = " & .LocationID & " AND [StartDate] " = Format(.StartDate, "YYYY-mm-dd")
+'
+'        If rs.NoMatch Then
+''            MsgBox "i", vbCritical, "INSERT"
+'            lblMsg.ForeColor = lngLime
+'            lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
+'        Else
+''            MsgBox "u", vbCritical, "UDPATE"
+'            'record already exists for this site ID, location ID, & event date
+'            'prevent duplicate entries
+'            lblMsg.ForeColor = lngYellow
+'            lblMsg.Caption = "Oops, record already exists."
+'            GoTo Exit_Handler
+'        End If
+'
+''        While Not rs.EOF
+''            ary(i, 1) = rs.Fields("Site")
+''            ary(i, 2) = rs.Fields("Location")
+''            ary(i, 3) = rs.Fields("StartDate")
+''
+''            rs.MoveNext
+''            i = i + 1
+''        Wend
+'
+'        'check
+'
+'        'T/F refers to whether the record is an update (T) or insert (F)
+'        .SaveToDb IIf(DoAction = "i", False, True)
+'
+'        'set the tbxID.value
+'        'tbxID = .ID
+'        Me.tbxID.Value = .ID
+'
+'    End With
+'
+'    'clear values & refresh display
+'
+'    ReadyForSave
+'
+'    PopulateForm Me, tbxID.Value
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
+'
+'    'clear messages
+'    lblMsg.Caption = ""
     
 Exit_Handler:
+'    'cleanup
+'    rs.Close
+'    Set rs = Nothing
     Exit Sub
 Err_Handler:
     Select Case Err.Number
@@ -1146,6 +1294,35 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ReadyForSave[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          RunReadyForSave
+' Description:  Run ready for save check from another form (public method)
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 26, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/26/2016 - initial version
+' ---------------------------------
+Public Sub RunReadyForSave()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RunReadyForSave[Events form])"
     End Select
     Resume Exit_Handler
 End Sub

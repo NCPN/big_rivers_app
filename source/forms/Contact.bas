@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =4875
-    Top =3390
-    Right =13875
-    Bottom =14385
+    Left =2850
+    Top =3330
+    Right =11070
+    Bottom =12765
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xef9c2c5010c6e440
@@ -311,7 +311,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7800
+            Height =8010
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -507,7 +507,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =3300
+                    Top =3510
                     Width =7995
                     Height =4380
                     TabIndex =12
@@ -517,25 +517,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3300
+                    LayoutCachedTop =3510
                     LayoutCachedWidth =8100
-                    LayoutCachedHeight =7680
+                    LayoutCachedHeight =7890
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3180
+                    Top =3390
                     Width =8220
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3180
+                    LayoutCachedTop =3390
                     LayoutCachedWidth =8220
-                    LayoutCachedHeight =7800
+                    LayoutCachedHeight =8010
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -1126,6 +1126,56 @@ Begin Form
                     LayoutCachedWidth =2505
                     LayoutCachedHeight =795
                 End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =3165
+                    Width =8220
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =3165
+                    LayoutCachedWidth =8220
+                    LayoutCachedHeight =3480
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =223
+                    TextAlign =2
+                    Left =4320
+                    Top =2985
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =2985
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =3585
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin FormFooter
@@ -1289,6 +1339,8 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
 
     cbxUserRole.RowSource = GetTemplate("s_access")
   
@@ -1684,43 +1736,45 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim p As New Person
+    UpsertRecord Me
     
-    With p
-        'values passed into form
-                
-        'form values
-        .LastName = tbxLast.Value
-        .FirstName = tbxFirst.Value
-        If Not IsNull(tbxMI.Value) Then p.MiddleInitial = tbxMI.Value
-        .Email = tbxEmail.Value
-        .Username = tbxUsername.Value
-        .Organization = tbxOrganization.Value
-        If Not IsNull(tbxPosition.Value) Then .PosTitle = tbxPosition.Value
-        If Not IsNull(tbxPhone.Value) Then
-            .WorkPhone = RemoveChars(tbxPhone.Value, True) 'remove non-numerics
-        End If
-        If Not IsNull(tbxExtension.Value) Then
-            .WorkExtension = RemoveChars(tbxExtension.Value, True) 'remove non-numerics
-        End If
-        .AccessRole = cbxUserRole.Column(1)
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value
-        tbxID = .ID
-    End With
-    
-    'clear values & refresh display
-    
-    ReadyForSave
-    
-    PopulateForm Me, tbxID.Value
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+'    Dim p As New Person
+'
+'    With p
+'        'values passed into form
+'
+'        'form values
+'        .LastName = tbxLast.Value
+'        .FirstName = tbxFirst.Value
+'        If Not IsNull(tbxMI.Value) Then p.MiddleInitial = tbxMI.Value
+'        .Email = tbxEmail.Value
+'        .Username = tbxUsername.Value
+'        .Organization = tbxOrganization.Value
+'        If Not IsNull(tbxPosition.Value) Then .PosTitle = tbxPosition.Value
+'        If Not IsNull(tbxPhone.Value) Then
+'            .WorkPhone = RemoveChars(tbxPhone.Value, True) 'remove non-numerics
+'        End If
+'        If Not IsNull(tbxExtension.Value) Then
+'            .WorkExtension = RemoveChars(tbxExtension.Value, True) 'remove non-numerics
+'        End If
+'        .AccessRole = cbxUserRole.Column(1)
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'
+'        'set the tbxID.value
+'        tbxID = .ID
+'    End With
+'
+'    'clear values & refresh display
+'
+'    ReadyForSave
+'
+'    PopulateForm Me, tbxID.Value
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub

@@ -366,7 +366,7 @@ On Error GoTo Err_Handler
     rName = ""
     oArgs = ""
     
-    Select Case action
+    Select Case Trim(action)
         'Where?
         Case "site"
             fName = "Site"
@@ -426,8 +426,18 @@ On Error GoTo Err_Handler
         Case "tasks"
             fName = "Task"
         'Reports
-        Case "link1"
-            rName = "rptNew"
+        Case "# Plots"
+            rName = "NumPlots"
+        Case "VegPlot - Species #s"
+            rName = "NumSpecies"
+        Case "VegPlot - Species"
+            rName = "SpeciesCommon"
+        Case "VegWalk - Species #s"
+            rName = "NumSpeciesCommon"
+        Case "VegWalk - Species"
+            rName = "SpeciesUnique"
+        Case "More..."
+            fName = "AppReport"
     End Select
 
     If Len(fName) > 0 Then
@@ -518,7 +528,10 @@ On Error GoTo Err_Handler
             Case "Events"
                 strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
                 .Controls("tbxID").ControlSource = "ID"
+                .Controls("cbxSite").ControlSource = "Site_ID"
+                .Controls("cbxLocation").ControlSource = "Location_ID"
                 .Controls("tbxStartDate").ControlSource = "StartDate"
+                .Controls("lblMsg").Caption = ""
             Case "Feature"
                 'strSQL = GetTemplate()
                 .Controls("tbxFeature").ControlSource = "Feature"
@@ -611,25 +624,6 @@ On Error GoTo Err_Handler
     Dim strSQL As String
 
     'find the form & populate its controls from the ID
-'    Select Case tbl
-'        Case "Contact"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
-'        Case "Event"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
-'        Case "Feature"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Feature|id" & PARAM_SEPARATOR & ID)
-'        Case "Location"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Location|id" & PARAM_SEPARATOR & ID)
-'        Case "Site"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
-'        Case "Tagline"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
-'        Case "VegPlot"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "VegPlot|id" & PARAM_SEPARATOR & ID)
-'        Case "VegTransect"
-'            strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & "VegTransect|id" & PARAM_SEPARATOR & ID)
-'    End Select
-    
     strSQL = GetTemplate("d_form_record", "tbl" & PARAM_SEPARATOR & tbl & "|id" & PARAM_SEPARATOR & ID)
     
     If IsNull(strSQL) Or Len(strSQL) = 0 Then GoTo Exit_Handler

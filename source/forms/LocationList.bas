@@ -17,11 +17,11 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7560
+    Width =8100
     DatasheetFontHeight =11
-    ItemSuffix =30
-    Right =20535
-    Bottom =11805
+    ItemSuffix =31
+    Right =9480
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x9af8902d71c3e440
@@ -256,12 +256,13 @@ Begin Form
             Begin
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6000
+                    Left =6540
                     Width =720
                     ForeColor =4210752
                     Name ="btnEdit"
                     Caption ="Edit"
                     OnClick ="[Event Procedure]"
+                    ControlTipText ="Edit record"
                     GridlineColor =10921638
                     ImageData = Begin
                         0x2800000010000000100000000100200000000000000000000000000000000000 ,
@@ -300,12 +301,13 @@ Begin Form
                         0x9090b0ff00000000
                     End
 
-                    LayoutCachedLeft =6000
-                    LayoutCachedWidth =6720
+                    LayoutCachedLeft =6540
+                    LayoutCachedWidth =7260
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -344,7 +346,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     TextFontFamily =2
-                    Left =6780
+                    Left =7320
                     Width =720
                     FontSize =14
                     TabIndex =2
@@ -353,17 +355,19 @@ Begin Form
                     Caption ="í ½í·´"
                     OnClick ="[Event Procedure]"
                     FontName ="Academy Engraved LET"
+                    ControlTipText ="Delete record"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6780
-                    LayoutCachedWidth =7500
+                    LayoutCachedLeft =7320
+                    LayoutCachedWidth =8040
                     LayoutCachedHeight =360
                     PictureCaptionArrangement =5
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -422,7 +426,7 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =247
+                    OverlapFlags =255
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
@@ -464,6 +468,34 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5760
+                    Width =720
+                    FontSize =16
+                    TabIndex =7
+                    ForeColor =4210752
+                    Name ="btnSensitive"
+                    Caption ="Sensitive"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Toggle sensitive location"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5760
+                    LayoutCachedWidth =6480
+                    LayoutCachedHeight =360
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
             End
         End
@@ -588,6 +620,51 @@ End Property
 '---------------------
 
 ' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    lblTitle.Caption = ""
+    lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
+                            & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
+    tbxIcon.Value = StringFromCodepoint(uLocked)
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
+    
+    'set hover
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnSensitive.HoverColor = lngGreen
+    
+    btnDelete.Caption = StringFromCodepoint(uDelete)
+    btnDelete.ForeColor = lngRed
+
+    btnSensitive.Caption = StringFromCodepoint(uEye)
+    btnSensitive.ForeColor = lngRed
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[LocationList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Form_Load
 ' Description:  form loading actions
 ' Assumptions:  -
@@ -618,46 +695,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          Form_Open
-' Description:  form opening actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    lblTitle.Caption = ""
-    lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
-                            & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
-    tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.ForeColor = lngDkGreen
-    lblDirections.ForeColor = lngLtBlue
-    'set hover
-    btnEdit.HoverColor = lngGreen
-    btnDelete.HoverColor = lngGreen
-
-    btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.ForeColor = lngRed
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[LocationList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Current
 ' Description:  form current actions
 ' Assumptions:  -
@@ -680,6 +717,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[LocationList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnSensitive_Click
+' Description:  Sensitive button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub btnSensitive_Click()
+On Error GoTo Err_Handler
+    
+    'toggle sensitive location
+    'ToggleSensitive Me.Parent, ID
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSensitive_Click[LocationList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -736,7 +803,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", ID
+    If result = vbYes Then DeleteRecord "Location", ID
     
     'clear the deleted record
     Me.Requery

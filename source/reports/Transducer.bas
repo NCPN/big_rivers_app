@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =77
-    Right =21285
-    Bottom =9630
+    Right =9480
+    Bottom =8835
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -168,7 +168,7 @@ Begin Report
                 End
                 Begin Label
                     Left =12840
-                    Top =960
+                    Top =990
                     Width =2220
                     Height =300
                     FontWeight =700
@@ -177,9 +177,9 @@ Begin Report
                     Caption ="Date: ____/____/_____"
                     GridlineColor =10921638
                     LayoutCachedLeft =12840
-                    LayoutCachedTop =960
+                    LayoutCachedTop =990
                     LayoutCachedWidth =15060
-                    LayoutCachedHeight =1260
+                    LayoutCachedHeight =1290
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -823,27 +823,9 @@ Begin Report
                     BackThemeColorIndex =0
                     BackTint =50.0
                 End
-                Begin Rectangle
-                    BackStyle =0
-                    BorderWidth =2
-                    Left =2040
-                    Top =144
-                    Width =4620
-                    Height =420
-                    BackColor =13020235
-                    Name ="rctObserverRecorder"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2040
-                    LayoutCachedTop =144
-                    LayoutCachedWidth =6660
-                    LayoutCachedHeight =564
-                    BackThemeColorIndex =8
-                    BorderThemeColorIndex =-1
-                    BorderShade =100.0
-                End
                 Begin Label
-                    Left =2100
-                    Top =216
+                    Left =4320
+                    Top =990
                     Width =912
                     Height =276
                     FontWeight =700
@@ -851,16 +833,16 @@ Begin Report
                     Name ="lblObserver"
                     Caption ="Observer:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2100
-                    LayoutCachedTop =216
-                    LayoutCachedWidth =3012
-                    LayoutCachedHeight =492
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =990
+                    LayoutCachedWidth =5232
+                    LayoutCachedHeight =1266
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =4440
-                    Top =216
+                    Left =8040
+                    Top =990
                     Width =912
                     Height =276
                     FontWeight =700
@@ -868,15 +850,15 @@ Begin Report
                     Name ="lblRecorder"
                     Caption ="Recorder:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =216
-                    LayoutCachedWidth =5352
-                    LayoutCachedHeight =492
+                    LayoutCachedLeft =8040
+                    LayoutCachedTop =990
+                    LayoutCachedWidth =8952
+                    LayoutCachedHeight =1266
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =6720
+                    Left =3540
                     Top =60
                     Width =1620
                     Height =540
@@ -884,15 +866,15 @@ Begin Report
                     Name ="lblEntry"
                     Caption ="Data entered by: Date entered:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =6720
+                    LayoutCachedLeft =3540
                     LayoutCachedTop =60
-                    LayoutCachedWidth =8340
+                    LayoutCachedWidth =5160
                     LayoutCachedHeight =600
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =10140
+                    Left =8640
                     Top =60
                     Width =1620
                     Height =540
@@ -900,15 +882,15 @@ Begin Report
                     Name ="lblVerify"
                     Caption ="Data verified by: Date verified:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =10140
+                    LayoutCachedLeft =8640
                     LayoutCachedTop =60
-                    LayoutCachedWidth =11760
+                    LayoutCachedWidth =10260
                     LayoutCachedHeight =600
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =8640
+                    Left =5460
                     Top =300
                     Width =1620
                     Height =300
@@ -916,15 +898,15 @@ Begin Report
                     Name ="lblEntryDate"
                     Caption ="____/____/_____"
                     GridlineColor =10921638
-                    LayoutCachedLeft =8640
+                    LayoutCachedLeft =5460
                     LayoutCachedTop =300
-                    LayoutCachedWidth =10260
+                    LayoutCachedWidth =7080
                     LayoutCachedHeight =600
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =12060
+                    Left =10560
                     Top =300
                     Width =1620
                     Height =300
@@ -932,9 +914,9 @@ Begin Report
                     Name ="lblVerifyDate"
                     Caption ="____/____/_____"
                     GridlineColor =10921638
-                    LayoutCachedLeft =12060
+                    LayoutCachedLeft =10560
                     LayoutCachedTop =300
-                    LayoutCachedWidth =13680
+                    LayoutCachedWidth =12180
                     LayoutCachedHeight =600
                     ForeThemeColorIndex =-1
                     ForeTint =100.0

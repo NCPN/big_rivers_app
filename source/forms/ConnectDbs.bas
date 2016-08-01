@@ -1578,7 +1578,7 @@ Private Sub btnUpdateLinks_Click()
             !NewPath = Null
             !NewServer = Null
             '!Is_Network_Db = IsNetworkFile(rs.Fields("New_path").Value) ' <<<<< ERROR 94 TRIGGERED HERE
-            .Update
+            .update
             .Bookmark = .LastModified
         End With
         
@@ -1685,7 +1685,7 @@ Private Sub btnClose_Click()
             !NewDb = Null
             !NewPath = Null
             !NewServer = Null
-            .Update
+            .update
             .Bookmark = .LastModified
         End With
         rs.MoveNext

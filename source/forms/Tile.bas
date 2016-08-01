@@ -18,11 +18,11 @@ Begin Form
     GridY =24
     Width =2592
     DatasheetFontHeight =11
-    ItemSuffix =13
-    Left =2955
-    Top =3780
-    Right =13440
-    Bottom =14775
+    ItemSuffix =29
+    Left =4485
+    Top =3570
+    Right =13965
+    Bottom =14580
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -145,7 +145,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =2880
+            Height =3000
             Name ="Detail"
             OnMouseMove ="[Event Procedure]"
             AlternateBackColor =15921906
@@ -154,193 +154,9 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin Label
-                    OverlapFlags =85
-                    Left =180
-                    Top =60
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BackColor =9699294
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink1"
-                    Caption ="Link1"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =300
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                End
-                Begin CommandButton
-                    Visible = NotDefault
                     OverlapFlags =93
-                    Left =1320
-                    Top =2580
-                    Width =1200
-                    Height =240
-                    ForeColor =4210752
-                    Name ="btnClick"
-                    Caption ="Next >>"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1320
-                    LayoutCachedTop =2580
-                    LayoutCachedWidth =2520
-                    LayoutCachedHeight =2820
-                    BackColor =14136213
-                    BorderColor =14136213
-                    HoverColor =15060409
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin Label
-                    OverlapFlags =85
                     Left =180
-                    Top =420
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BackColor =9699294
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink2"
-                    Caption ="Link2"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =420
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =660
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =180
-                    Top =780
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BackColor =9699294
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink3"
-                    Caption ="Link3"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =780
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =1020
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =180
-                    Top =1140
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BackColor =9699294
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink4"
-                    Caption ="Link4"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =1140
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =1380
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =180
-                    Top =1500
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink5"
-                    Caption ="Link5"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =1500
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =1740
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =180
-                    Top =1860
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BackColor =9699294
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink6"
-                    Caption ="Link6"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =1860
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =2100
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =180
-                    Top =2220
-                    Width =2160
-                    Height =240
-                    FontSize =9
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblLink7"
-                    Caption ="Link7"
-                    OnClick ="[Event Procedure]"
-                    OnMouseMove ="[Event Procedure]"
-                    Tag ="DISABLED"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =2220
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =2460
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =180
-                    Top =2580
+                    Top =2640
                     Width =2160
                     Height =240
                     FontSize =9
@@ -354,9 +170,543 @@ Begin Form
                     Tag ="DISABLED"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
-                    LayoutCachedTop =2580
+                    LayoutCachedTop =2640
                     LayoutCachedWidth =2340
-                    LayoutCachedHeight =2820
+                    LayoutCachedHeight =2880
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =2280
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink7"
+                    Caption ="Link7"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =2280
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =2520
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =1920
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink6"
+                    Caption ="Link6"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =1920
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =2160
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =1560
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink5"
+                    Caption ="Link5"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =1560
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =1800
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =1200
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink4"
+                    Caption ="Link4"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =1440
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =840
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink3"
+                    Caption ="Link3"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =1080
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =480
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink2"
+                    Caption ="Link2"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =180
+                    Top =120
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLink1"
+                    Caption ="Link1"
+                    OnClick ="[Event Procedure]"
+                    OnMouseMove ="[Event Procedure]"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =360
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin CommandButton
+                    Visible = NotDefault
+                    OverlapFlags =223
+                    Left =1320
+                    Top =2640
+                    Width =1200
+                    Height =240
+                    ForeColor =4210752
+                    Name ="btnClick"
+                    Caption ="Next >>"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1320
+                    LayoutCachedTop =2640
+                    LayoutCachedWidth =2520
+                    LayoutCachedHeight =2880
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =2565
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon8L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =2565
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =2882
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =45
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon1L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =362
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =405
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon2L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =405
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =722
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =765
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon3L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =765
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =1082
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =1125
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon4L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =1125
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =1442
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =2205
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon7L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =2205
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =2522
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =1485
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon5L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =1485
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =1802
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =75
+                    Top =1845
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon6L"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =75
+                    LayoutCachedTop =1845
+                    LayoutCachedWidth =435
+                    LayoutCachedHeight =2162
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =2520
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon8R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =2520
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =2837
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon1R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =317
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =360
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon2R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =677
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =720
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon3R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =1037
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =1080
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon4R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =1397
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =2160
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon7R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =2160
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =2477
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =1440
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon5R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =1440
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =1757
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2100
+                    Top =1800
+                    Width =360
+                    Height =317
+                    FontSize =12
+                    BackColor =9699294
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIcon6R"
+                    FontName ="Segoe UI"
+                    Tag ="DISABLED"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =1800
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =2117
+                    ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                 End
@@ -1194,12 +1544,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink1
-        Me.LinkHighlight lblLink1
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink1
     End With
 
 Exit_Handler:
@@ -1228,12 +1579,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink2
-        Me.LinkHighlight lblLink2
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink2
     End With
 
 Exit_Handler:
@@ -1262,12 +1614,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink3
-        Me.LinkHighlight lblLink3
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink3
     End With
 
 Exit_Handler:
@@ -1296,12 +1649,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink4
-        Me.LinkHighlight lblLink4
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink4
     End With
 
 Exit_Handler:
@@ -1330,12 +1684,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink5
-        Me.LinkHighlight lblLink5
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink5
     End With
 
 Exit_Handler:
@@ -1364,12 +1719,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink6
-        Me.LinkHighlight lblLink6
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink6
     End With
 
 Exit_Handler:
@@ -1398,12 +1754,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink7_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink7
-        Me.LinkHighlight lblLink7
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink7
     End With
 
 Exit_Handler:
@@ -1417,7 +1774,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          lblLink8_MouseMove
@@ -1433,12 +1789,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub lblLink8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink8
-        Me.LinkHighlight lblLink8
+        If .Tag <> "DISABLED" Then Me.LinkHighlight lblLink8
     End With
 
 Exit_Handler:
@@ -1468,6 +1825,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/1/2016  - increased to 8 max links
+'   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
 Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
@@ -1482,7 +1840,7 @@ On Error GoTo Err_Handler
     
         For Each ctrl In Me.Controls
             
-            If ctrl.Name = strLink Then
+            If ctrl.Name = strLink And ctrl.Tag <> "DISABLED" Then
             
                 With ctrl
                     'avoid flicker w/ if statement
@@ -1528,7 +1886,7 @@ End Sub
 Private Sub Class_Initialize()
 On Error GoTo Err_Handler
 
-    MsgBox "Initializing...", vbOKOnly
+    'MsgBox "Initializing...", vbOKOnly
     
 Exit_Handler:
     Exit Sub
@@ -1558,7 +1916,7 @@ End Sub
 Private Sub Class_Terminate()
 On Error GoTo Err_Handler
     
-    MsgBox "Terminating...", vbOKOnly
+    'MsgBox "Terminating...", vbOKOnly
     
 Exit_Handler:
     Exit Sub
@@ -1710,14 +2068,15 @@ On Error GoTo Err_Handler
     
     strTileTag = ary(0)
     
-    For i = 1 To UBound(ary)
+    For i = 0 To UBound(ary)
         strLink = "lblLink" & ary(i)
     
         For Each ctrl In Me.Controls
             
-            'set tag to overall tile tag
+            'set tag to overall tile tag & change font weight slightly
             If ctrl.Name = strLink Then
                 ctrl.Tag = strTileTag
+                ctrl.FontWeight = wtMedium
             End If
         Next
         

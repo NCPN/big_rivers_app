@@ -458,7 +458,7 @@ Private Sub ButtonDetails_Click()
         If blnIsValid Then
           InputTable.Edit
             InputTable!Top = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -500,7 +500,7 @@ Private Sub ButtonDetails_Click()
             SColumn = "LCS" & intIndexSave
             InputTable.Edit
               InputTable(SColumn) = Me!Replace_By
-            InputTable.Update
+            InputTable.update
             intRecordCount = intRecordCount + 1
           End If
           Exit Do
@@ -518,7 +518,7 @@ Private Sub ButtonDetails_Click()
       If InputTable!Surface = Me!Unknown_Code Then
           InputTable.Edit
             InputTable!Surface = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
       End If
     InputTable.MoveNext
@@ -535,7 +535,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -553,7 +553,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -571,7 +571,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -589,7 +589,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -607,7 +607,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -622,7 +622,7 @@ Private Sub ButtonDetails_Click()
       If InputTable!Species = Me!Unknown_Code Then
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
       End If
     InputTable.MoveNext
@@ -636,7 +636,7 @@ Private Sub ButtonDetails_Click()
       If InputTable!Species = Me!Unknown_Code Then
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
       End If
     InputTable.MoveNext
@@ -653,7 +653,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -671,7 +671,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If
@@ -689,7 +689,7 @@ Private Sub ButtonDetails_Click()
         Else
           InputTable.Edit
             InputTable!Species = Me!Replace_By
-          InputTable.Update
+          InputTable.update
           intRecordCount = intRecordCount + 1
         End If
       End If

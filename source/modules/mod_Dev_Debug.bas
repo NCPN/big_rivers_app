@@ -853,7 +853,20 @@ Public Sub doit()
 
 '    GetADCommonName
 
-GetTemplates
+'GetTemplates
+
+'Dim strSQL As String
+'
+'
+'strSQL = GetTemplate("s_event_by_park_river_w_location", _
+'                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+'                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+
+'Debug.Print strSQL
+
+'GetTemplate "i_event"
+
+GetTemplate ("s_app_releases")
 
 End Sub
 

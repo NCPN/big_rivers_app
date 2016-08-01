@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =3825
-    Top =3750
-    Right =18345
-    Bottom =14745
+    Left =4110
+    Top =3360
+    Right =17970
+    Bottom =14355
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -277,7 +277,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7800
+            Height =7980
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -483,7 +483,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =3300
+                    Top =3480
                     Width =7650
                     Height =4380
                     TabIndex =7
@@ -493,25 +493,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3300
+                    LayoutCachedTop =3480
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =7680
+                    LayoutCachedHeight =7860
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3180
+                    Top =3360
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3180
+                    LayoutCachedTop =3360
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =7800
+                    LayoutCachedHeight =7980
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -641,6 +641,52 @@ Begin Form
                         0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
                         0x0000000000000000000000000000
                     End
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =3120
+                    Width =7860
+                    Height =315
+                    LeftMargin =360
+                    TopMargin =7
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    GridlineColor =10921638
+                    LayoutCachedTop =3120
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =3435
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =215
+                    TextAlign =2
+                    Top =3120
+                    Width =660
+                    Height =315
+                    TopMargin =7
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =3120
+                    LayoutCachedWidth =660
+                    LayoutCachedHeight =3435
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End

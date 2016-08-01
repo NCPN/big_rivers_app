@@ -49,7 +49,7 @@ On Error GoTo Err_Handler
         strCaption = rpt.Name
     End If
     
-    DoCmd.CancelEvent
+'    DoCmd.CancelEvent
     MsgBox "There are no records to include in report """ & _
         strCaption & """.", vbInformation, "No Data..."
 

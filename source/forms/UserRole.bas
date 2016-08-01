@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =45
-    Left =4440
-    Top =3105
-    Right =23400
-    Bottom =14895
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x508d972ecac5e440
@@ -271,7 +271,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5100
+            Height =5310
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -438,9 +438,9 @@ Begin Form
                 Begin Subform
                     CanShrink = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =105
-                    Top =600
+                    Top =810
                     Width =7650
                     Height =4380
                     TabIndex =3
@@ -450,25 +450,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =600
+                    LayoutCachedTop =810
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =4980
+                    LayoutCachedHeight =5190
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =480
+                    Top =690
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =480
+                    LayoutCachedTop =690
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5100
+                    LayoutCachedHeight =5310
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -499,7 +499,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
                     ColumnCount =2
                     Left =3720
@@ -577,6 +577,56 @@ Begin Form
                         0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
                         0x0000000000000000000000000000
                     End
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =215
+                    TextAlign =3
+                    Top =510
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =510
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =825
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =247
+                    TextAlign =2
+                    Left =4320
+                    Top =330
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =330
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =930
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -701,6 +751,63 @@ End Property
 '---------------------
 
 ' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 21, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/21/2016 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    'minimize Main
+    ToggleForm "Main", -1
+
+    Title = "UserRole"
+    Directions = "Enter the UserRole information and click save."
+    tbxIcon.Value = StringFromCodepoint(uBullet)
+    lblDirections.ForeColor = lngLtBlue
+    btnComment.Caption = StringFromCodepoint(uComment)
+    btnComment.ForeColor = lngBlue
+        
+    'set hover
+    btnComment.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
+      
+    'defaults
+    tbxIcon.ForeColor = lngRed
+    btnComment.Enabled = False
+    btnSave.Enabled = False
+    cbxUsername.BackColor = lngYellow
+    cbxAccessLevel.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
+  
+    'ID default -> value used only for edits of existing table values
+    tbxID.Value = 0
+  
+    'initialize values
+    ClearForm Me
+  
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[UserRole form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Form_Load
 ' Description:  form loading actions
 ' Assumptions:  -
@@ -726,55 +833,6 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Load[UserRole form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Form_Open
-' Description:  form opening actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 21, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/21/2016 - initial version
-' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    Title = "UserRole"
-    Directions = "Enter the UserRole information and click save."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.ForeColor = lngLtBlue
-    btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
-        
-    'set hover
-    btnComment.HoverColor = lngGreen
-    btnSave.HoverColor = lngGreen
-    btnUndo.HoverColor = lngGreen
-      
-    'defaults
-    tbxIcon.ForeColor = lngRed
-    btnComment.Enabled = False
-    btnSave.Enabled = False
-    cbxUsername.BackColor = lngYellow
-    cbxAccessLevel.BackColor = lngYellow
-  
-    'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
-  
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[UserRole form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -882,13 +940,16 @@ End Sub
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
-    'clear values
-    cbxUsername.Value = ""
-    cbxAccessLevel.Value = ""
+    'initialize values
+    ClearForm Me
     
-    btnSave.Enabled = False
-    
-    Me.Requery
+'    'clear values
+'    cbxUsername.Value = ""
+'    cbxAccessLevel.Value = ""
+'
+'    btnSave.Enabled = False
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub
@@ -917,37 +978,37 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim t As New Person
-        
-    With t
-        'values passed into form
-'        .EventID = 1
-                
-        'form values
-'        .UserRoleType = ""
-'        .UserRoleNumber = cbxUserRole.SelText
-'        .SerialNumber = tbxSerialNo.value
-'        .IsSurveyed = chkSurveyed.value
-'        .Timing = cbxTiming.SelText
-'        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
-'        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-    End With
-    
-    'clear values & refresh display
-    Me.RecordSource = ""
-    
-'    cbxUserRole.ControlSource = ""
-    cbxAccessLevel.ControlSource = ""
-        
-    ReadyForSave
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+'    Dim t As New Person
+'
+'    With t
+'        'values passed into form
+''        .EventID = 1
+'
+'        'form values
+''        .UserRoleType = ""
+''        .UserRoleNumber = cbxUserRole.SelText
+''        .SerialNumber = tbxSerialNo.value
+''        .IsSurveyed = chkSurveyed.value
+''        .Timing = cbxTiming.SelText
+''        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
+''        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'    End With
+'
+'    'clear values & refresh display
+'    Me.RecordSource = ""
+'
+''    cbxUserRole.ControlSource = ""
+'    cbxAccessLevel.ControlSource = ""
+'
+'    ReadyForSave
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub
@@ -1006,7 +1067,9 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Forms("Main").Form.visible = True
+'    Forms("Main").Form.visible = True
+    'restore Main
+    ToggleForm "Main", 0
     
 Exit_Handler:
     Exit Sub

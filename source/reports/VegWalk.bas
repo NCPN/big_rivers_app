@@ -19,8 +19,8 @@ Begin Report
     Width =11532
     DatasheetFontHeight =11
     ItemSuffix =120
-    Right =7650
-    Bottom =8835
+    Right =21330
+    Bottom =9645
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -147,7 +147,7 @@ Begin Report
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    Top =960
+                    Top =961
                     Width =492
                     Height =290
                     FontSize =9
@@ -158,16 +158,16 @@ Begin Report
                     Caption ="River:"
                     FontName ="Arial Narrow"
                     GridlineColor =10921638
-                    LayoutCachedTop =960
+                    LayoutCachedTop =961
                     LayoutCachedWidth =492
-                    LayoutCachedHeight =1250
+                    LayoutCachedHeight =1251
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =4440
-                    Top =972
+                    Left =9240
+                    Top =1020
                     Width =2220
                     Height =300
                     FontSize =10
@@ -176,10 +176,10 @@ Begin Report
                     Name ="lblSamplingDate"
                     Caption ="Date: ____/____/_____"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =972
-                    LayoutCachedWidth =6660
-                    LayoutCachedHeight =1272
+                    LayoutCachedLeft =9240
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =11460
+                    LayoutCachedHeight =1320
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -239,8 +239,8 @@ Begin Report
                     BackTint =50.0
                 End
                 Begin Label
-                    Left =6780
-                    Top =960
+                    Left =4560
+                    Top =975
                     Width =912
                     Height =276
                     FontSize =10
@@ -249,16 +249,16 @@ Begin Report
                     Name ="lblObserver"
                     Caption ="Observer:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =6780
-                    LayoutCachedTop =960
-                    LayoutCachedWidth =7692
-                    LayoutCachedHeight =1236
+                    LayoutCachedLeft =4560
+                    LayoutCachedTop =975
+                    LayoutCachedWidth =5472
+                    LayoutCachedHeight =1251
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    Left =9120
-                    Top =960
+                    Left =6900
+                    Top =975
                     Width =912
                     Height =276
                     FontSize =10
@@ -267,10 +267,10 @@ Begin Report
                     Name ="lblRecorder"
                     Caption ="Recorder:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =9120
-                    LayoutCachedTop =960
-                    LayoutCachedWidth =10032
-                    LayoutCachedHeight =1236
+                    LayoutCachedLeft =6900
+                    LayoutCachedTop =975
+                    LayoutCachedWidth =7812
+                    LayoutCachedHeight =1251
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End

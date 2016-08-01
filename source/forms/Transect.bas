@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =2955
-    Top =3765
-    Right =13560
-    Bottom =14775
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -279,7 +279,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5160
+            Height =5340
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -449,7 +449,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =660
+                    Top =840
                     Width =7650
                     Height =4380
                     TabIndex =5
@@ -459,25 +459,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =660
+                    LayoutCachedTop =840
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =5040
+                    LayoutCachedHeight =5220
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =540
+                    Top =720
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =540
+                    LayoutCachedTop =720
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5160
+                    LayoutCachedHeight =5340
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -573,6 +573,56 @@ Begin Form
                         0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
                         0x0000000000000000000000000000
                     End
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =495
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =495
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =810
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =223
+                    TextAlign =2
+                    Left =4320
+                    Top =315
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =315
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =915
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -740,9 +790,14 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     tbxNumber.BackColor = lngYellow
     tbxSampleDate.BackColor = lngYellow
-  
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
+    
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
+    
+    'initialize values
+    ClearForm Me
   
 Exit_Handler:
     Exit Sub
@@ -888,37 +943,39 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim vt As New VegTransect
-    
-    With vt
-        'values passed into form
-        .Park = TempVars("ParkCode")
-        .LocationID = 1
-        .EventID = 1
-                
-        'form values
-        .TransectNumber = tbxNumber.Value
-        .SampleDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-    End With
-    
-    'clear values & refresh display
-    Me.RecordSource = ""
-    
-    tbxNumber.ControlSource = ""
-    tbxSampleDate.ControlSource = ""
-    
-    tbxID.ControlSource = ""
-    tbxID.Value = 0
-    
-    ReadyForSave
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+    UpsertRecord Me
+
+'    Dim vt As New VegTransect
+'
+'    With vt
+'        'values passed into form
+'        .Park = TempVars("ParkCode")
+'        .LocationID = 1
+'        .EventID = 1
+'
+'        'form values
+'        .TransectNumber = tbxNumber.Value
+'        .SampleDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'    End With
+'
+'    'clear values & refresh display
+'    Me.RecordSource = ""
+'
+'    tbxNumber.ControlSource = ""
+'    tbxSampleDate.ControlSource = ""
+'
+'    tbxID.ControlSource = ""
+'    tbxID.Value = 0
+'
+'    ReadyForSave
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub

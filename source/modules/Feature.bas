@@ -34,7 +34,7 @@ Public Event InvalidID()
 Public Event InvalidName(Name As String)
 Public Event InvalidDescription(Description As String)
 Public Event InvalidDirections(Directions As String)
-Public Event InvalidSequence(sequence As Integer)
+Public Event InvalidSequence(Sequence As Integer)
 
 '---------------------
 ' Properties
@@ -89,7 +89,7 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let sequence(Value As Integer)
+Public Property Let Sequence(Value As Integer)
     If Value > -1 Then
         m_Sequence = Value
     Else
@@ -97,8 +97,8 @@ Public Property Let sequence(Value As Integer)
     End If
 End Property
 
-Public Property Get sequence() As Integer
-    sequence = m_Sequence
+Public Property Get Sequence() As Integer
+    Sequence = m_Sequence
 End Property
 
 '---------------------

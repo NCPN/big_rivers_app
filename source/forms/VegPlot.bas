@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =67
-    Left =2955
-    Top =3765
-    Right =12195
-    Bottom =14775
+    ItemSuffix =68
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -203,7 +203,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4020
+                    Left =3480
                     Top =1080
                     Width =2025
                     Height =315
@@ -213,9 +213,9 @@ Begin Form
                     Name ="lblModalSedSize"
                     Caption ="Modal Sediment Size"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4020
+                    LayoutCachedLeft =3480
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =6045
+                    LayoutCachedWidth =5505
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -249,7 +249,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2580
+                    Left =1920
                     Top =1080
                     Width =1245
                     Height =315
@@ -259,9 +259,9 @@ Begin Form
                     Name ="lblDistance"
                     Caption ="Distance (m)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2580
+                    LayoutCachedLeft =1920
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =3825
+                    LayoutCachedWidth =3165
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -270,7 +270,7 @@ Begin Form
                     OverlapFlags =85
                     Left =1080
                     Top =1080
-                    Width =1245
+                    Width =600
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -280,7 +280,7 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =1080
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =2325
+                    LayoutCachedWidth =1680
                     LayoutCachedHeight =1395
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -309,7 +309,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =7920
+            Height =8160
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -459,50 +459,12 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
-                Begin TextBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =4140
-                    Top =60
-                    Height =315
-                    TabIndex =2
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxModalSedSize"
-                    AfterUpdate ="[Event Procedure]"
-                    OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
-                    ControlTipText ="Size class"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4140
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =5580
-                    LayoutCachedHeight =375
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
                 Begin Subform
                     CanShrink = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =3420
+                    Top =3660
                     Width =7650
                     Height =4380
                     TabIndex =17
@@ -512,9 +474,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3420
+                    LayoutCachedTop =3660
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =7800
+                    LayoutCachedHeight =8040
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -587,16 +549,16 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3300
+                    Top =3540
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3300
+                    LayoutCachedTop =3540
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =7920
+                    LayoutCachedHeight =8160
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -628,8 +590,9 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =2580
+                    Left =2160
                     Top =60
+                    Width =720
                     Height =315
                     TabIndex =1
                     BackColor =65535
@@ -647,9 +610,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2580
+                    LayoutCachedLeft =2160
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4020
+                    LayoutCachedWidth =2880
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -665,6 +628,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =1020
                     Top =60
+                    Width =720
                     Height =315
                     BackColor =65535
                     BorderColor =10921638
@@ -683,7 +647,7 @@ Begin Form
 
                     LayoutCachedLeft =1020
                     LayoutCachedTop =60
-                    LayoutCachedWidth =2460
+                    LayoutCachedWidth =1740
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -735,7 +699,7 @@ Begin Form
                     Left =2580
                     Top =840
                     Height =315
-                    TabIndex =5
+                    TabIndex =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -770,7 +734,7 @@ Begin Form
                     Left =1020
                     Top =1500
                     Height =315
-                    TabIndex =4
+                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -1315,6 +1279,116 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =3300
+                    Top =60
+                    Width =2304
+                    Height =315
+                    TabIndex =2
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxModalSedSize"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Size class"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =3300
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =5604
+                    LayoutCachedHeight =375
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =300
+                    Top =1440
+                    Width =600
+                    Height =420
+                    FontSize =8
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblHintPct"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =300
+                    LayoutCachedTop =1440
+                    LayoutCachedWidth =900
+                    LayoutCachedHeight =1860
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =215
+                    TextAlign =3
+                    Top =3300
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =3300
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =3615
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    TextAlign =2
+                    Left =4320
+                    Top =3120
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =3120
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =3720
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin FormFooter
@@ -1458,6 +1532,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 7/13/2016 - added validation, hints
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1483,6 +1558,24 @@ On Error GoTo Err_Handler
     lblCover.Caption = "Cover" & vbCrLf & "Species"
     lblTagline.Caption = StringFromCodepoint(uRuler)
     
+    'hints
+    lblHintPct.Caption = "Nearest 1% or T"
+    lblHintPct.ForeColor = lngBlue
+    
+    'validation
+    Dim strPctValidation As String, strValidationText As String
+    strPctValidation = "Is Null Or ""T"" Or Between 0 and 101"
+    tbxPctFines.ValidationRule = "Not Like ""[0-9]*.[0-9]*"""
+    tbxPctWater.ValidationRule = strPctValidation
+    tbxPctURC.ValidationRule = strPctValidation
+    tbxPctFA.ValidationRule = strPctValidation
+    
+    strValidationText = "Values may be whole percentages (0-100), 0.5, or T"
+    tbxPctFines.ValidationText = strValidationText
+    tbxPctWater.ValidationText = strValidationText
+    tbxPctURC.ValidationText = strValidationText
+    tbxPctFA.ValidationText = strValidationText
+    
     'set hover
     btnComment.HoverColor = lngGreen
     btnTaglines.HoverColor = lngGreen
@@ -1498,11 +1591,22 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     tbxNumber.BackColor = lngYellow
     tbxDistance.BackColor = lngYellow
-    tbxModalSedSize.BackColor = lngYellow
+    cbxModalSedSize.BackColor = lngYellow
     tbxPctFines.BackColor = lngYellow
     tbxPctWater.BackColor = lngYellow
     tbxPctURC.BackColor = lngYellow
     tbxPlotDensity.BackColor = lngYellow
+    
+    'populate modal sediment size
+    ' -------------------------------------------------------------------------------------
+    ' NOTE: s_enums_for_type *MUST* include "DISTINCT" for the combobox autoexpand to work!(Access bug)
+    '       Dan Some, August 7, 2011
+    '       http://answers.microsoft.com/en-us/office/forum/office_2007-access/combo-box-property-auto-expand-yes-doesnt-seem-to/05fa61af-853e-4c9d-a3e3-2f51aa094668
+    ' -------------------------------------------------------------------------------------
+    cbxModalSedSize.RowSource = GetTemplate("s_enums_for_type", "etype" & PARAM_SEPARATOR & "ModWentworthClassSize")
+    cbxModalSedSize.BoundColumn = 1 'bind to label (not ID)
+    cbxModalSedSize.ColumnCount = 4
+    cbxModalSedSize.ColumnWidths = "0,0,0,1.5" 'display the display column (combines label - summary)
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1706,8 +1810,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxModalSedSize_AfterUpdate
-' Description:  Textbox after update actions
+' Sub:          cbxModalSedSize_AfterUpdate
+' Description:  Combobox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1717,11 +1821,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
+'   BLC - 7/13/2016 - revised to combobox
 ' ---------------------------------
-Private Sub tbxModalSedSize_AfterUpdate()
+Private Sub cbxModalSedSize_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxModalSedSize.Text) > 0 Then _
+    If Len(cbxModalSedSize.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1730,7 +1835,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxModalSedSize_AfterUpdate[VegPlot form])"
+            "Error encountered (#" & Err.Number & " - cbxModalSedSize_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2074,7 +2179,7 @@ On Error GoTo Err_Handler
         
         .PlotNumber = tbxNumber.Value
         .PlotDistance = tbxDistance.Value
-        .ModalSedimentSize = tbxModalSedSize.Value
+        .ModalSedimentSize = cbxModalSedSize.Value
         
         .PlotDensity = tbxPlotDensity.Value
         
@@ -2333,7 +2438,7 @@ On Error GoTo Err_Handler
     '           NoCanopyVeg, NoRootedVeg, HasSocialTrail, FA
     '           BLCA only: NoIndicatorSpecies
     If Nz(tbxDistance.Value, "") > 0 _
-        And Nz(tbxModalSedSize.Value, "") > -1 _
+        And Nz(cbxModalSedSize.Value, "") > -1 _
         And Nz(tbxPctFines.Value, "") > -1 _
         And Nz(tbxPctWater.Value, "") > -1 _
         And Nz(tbxPctURC.Value, "") > -1 _

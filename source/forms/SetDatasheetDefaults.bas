@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =41
-    Left =2955
-    Top =3780
-    Right =13440
-    Bottom =14775
+    Left =2850
+    Top =3330
+    Right =12330
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -351,7 +351,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5115
+            Height =5400
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -519,9 +519,9 @@ Begin Form
                 Begin Subform
                     CanShrink = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =105
-                    Top =615
+                    Top =900
                     Width =7650
                     Height =4380
                     TabIndex =6
@@ -531,25 +531,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =615
+                    LayoutCachedTop =900
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =4995
+                    LayoutCachedHeight =5280
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =495
+                    Top =780
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =495
+                    LayoutCachedTop =780
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5115
+                    LayoutCachedHeight =5400
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -579,7 +579,7 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =2
                     IMESentenceMode =3
                     Left =4500
@@ -616,7 +616,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =2
                     IMESentenceMode =3
                     Left =3660
@@ -742,6 +742,56 @@ Begin Form
                     BorderTint =100.0
                     BorderShade =65.0
                     ForeTint =75.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =223
+                    TextAlign =3
+                    Top =525
+                    Width =7860
+                    Height =315
+                    FontSize =9
+                    LeftMargin =360
+                    TopMargin =36
+                    RightMargin =360
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsg"
+                    Caption ="message"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedTop =525
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =840
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =255
+                    TextAlign =2
+                    Left =4320
+                    Top =345
+                    Width =825
+                    Height =600
+                    FontSize =20
+                    BackColor =4144959
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblMsgIcon"
+                    Caption ="icon"
+                    FontName ="Segoe UI"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =345
+                    LayoutCachedWidth =5145
+                    LayoutCachedHeight =945
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -914,9 +964,15 @@ On Error GoTo Err_Handler
     lblRiverSegment.ForeColor = lngBlue
     tbxTotalRows.ForeColor = lngBlue
   
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
+  
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
     tbxTotalRows.Value = CInt(Nz(tbxSpecies.Value, 0)) + CInt(Nz(tbxBlanks.Value, 0))
+      
+    'initialize values
+    ClearForm Me
   
 Exit_Handler:
     Exit Sub
@@ -1092,49 +1148,64 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
         
-    Dim db As DAO.Database
-    Dim qdf As DAO.QueryDef
+    Dim template As String
     
-    Set db = CurrentDb
-    With db
-        Set qdf = .QueryDefs("usys_temp_qdf")
-        With qdf
-            .SQL = GetTemplate("u_tsys_datasheet_defaults")
-            '-- required --
-            .Parameters("id") = tbxID.Value
-            .Parameters("pid") = TempVars("ParkID")
-            .Parameters("rid") = TempVars("RiverID")
-            .Parameters("cover") = cbxCoverType.Column(0)
-            .Parameters("species") = tbxSpecies.Value
-            .Parameters("blanks") = tbxBlanks.Value
-            '-- optional --
-            
-            .Execute dbFailOnError
-            
-            .Close
-        End With
-    End With
+    template = "u_tsys_datasheet_defaults"
         
-    'clear values & refresh display
-    Me.RecordSource = ""
-    
-    tbxSpecies.ControlSource = ""
-    tbxBlanks.ControlSource = ""
-    
-    tbxID.ControlSource = ""
-    tbxID.Value = 0
-    
-    ReadyForSave
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+    Dim params(0 To 5) As Variant
+
+    params(0) = tbxID.Value
+    params(1) = TempVars("ParkID")
+    params(2) = TempVars("RiverID")
+    params(3) = cbxCoverType.Column(0)
+    params(4) = tbxSpecies.Value
+    params(5) = tbxBlanks.Value
+        
+    SetRecord template, params
+        
+'    Dim db As DAO.Database
+'    Dim qdf As DAO.QueryDef
+'
+'    Set db = CurrentDb
+'    With db
+'        Set qdf = .QueryDefs("usys_temp_qdf")
+'        With qdf
+'            .SQL = GetTemplate("u_tsys_datasheet_defaults")
+'            '-- required --
+'            .Parameters("id") = tbxID.Value
+'            .Parameters("pid") = TempVars("ParkID")
+'            .Parameters("rid") = TempVars("RiverID")
+'            .Parameters("cover") = cbxCoverType.Column(0)
+'            .Parameters("species") = tbxSpecies.Value
+'            .Parameters("blanks") = tbxBlanks.Value
+'            '-- optional --
+'
+'            .Execute dbFailOnError
+'
+'            .Close
+'        End With
+'    End With
+'
+'    'clear values & refresh display
+'    Me.RecordSource = ""
+'
+'    tbxSpecies.ControlSource = ""
+'    tbxBlanks.ControlSource = ""
+'
+'    tbxID.ControlSource = ""
+'    tbxID.Value = 0
+'
+'    ReadyForSave
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
-    'cleanup
-    Set qdf = Nothing
-    Set db = Nothing
+'    'cleanup
+'    Set qdf = Nothing
+'    Set db = Nothing
     
     Exit Sub
 Err_Handler:

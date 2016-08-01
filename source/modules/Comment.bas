@@ -135,7 +135,7 @@ On Error GoTo Err_Handler
         !CreatedBy = Me.CommentorID
         !CreateDate = Now()
         
-        .Update
+        .update
         If IsNumeric(!ID) Then
             Me.ID = !ID
         End If

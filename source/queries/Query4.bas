@@ -106,10 +106,6 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.HeadtoOrientDistance"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="l.HeadtoOrientBearing"
         dbLong "AggregateType" ="-1"
     End
@@ -135,6 +131,14 @@ Begin
     End
     Begin
         dbText "Name" ="sf.Site_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.HeadtoOrientDistance"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.HeadtoOrientDistance_m"
         dbLong "AggregateType" ="-1"
     End
 End
