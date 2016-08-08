@@ -117,7 +117,7 @@ On Error GoTo Err_Handler
     Set frm = ctrlSource.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.count
+    cols = rs.Fields.Count
     
     'address no records
     If Nz(rows, 0) = 0 Then
@@ -558,7 +558,7 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String, strWhere As String
-    Dim count As Integer
+    Dim Count As Integer
     Dim metadata() As Variant
    
     'handle only appropriate park codes
@@ -582,9 +582,9 @@ On Error GoTo Err_Handler
     With rs
         .MoveLast
         .MoveFirst
-        count = .RecordCount
+        Count = .RecordCount
     
-        metadata = rs.GetRows(count)
+        metadata = rs.GetRows(Count)
  
         .Close
     End With
@@ -681,7 +681,7 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String
-    Dim count As Integer
+    Dim Count As Integer
     Dim segments() As Variant
    
     'handle only appropriate park codes
@@ -701,9 +701,9 @@ On Error GoTo Err_Handler
 
     rs.MoveLast
     rs.MoveFirst
-    count = rs.RecordCount
+    Count = rs.RecordCount
     
-    segments = rs.GetRows(count)
+    segments = rs.GetRows(Count)
  
     rs.Close
     
@@ -1099,23 +1099,36 @@ On Error GoTo Err_Handler
                     .Parameters("ParkCode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                     
-                    '-- optional parameters --
+                Case "s_events_by_park_river"
                     
-                Case "s_site_by_park_river"
-                
                     '-- required parameters --
                     .Parameters("ParkCode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_feature_list"
                     
-                    '-- optional parameters --
-            
+                    '-- required parameters --
+                    .Parameters("ParkCode") = TempVars("ParkCode")
+                                        
                 Case "s_location_by_park_river"
                 
                     '-- required parameters --
                     .Parameters("ParkCode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_site_by_park_river"
+                
+                    '-- required parameters --
+                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+            
+                Case "s_species_by_park"
+                
+                    '-- required parameters --
+                    .Parameters("ParkCode") = TempVars("ParkCode")
                     
                     '-- optional parameters --
+                                
             End Select
             
             Set rs = .OpenRecordset

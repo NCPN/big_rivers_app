@@ -313,9 +313,11 @@ On Error GoTo Err_Handler
                     
                     End If
                 End If
+                
             Case "feature"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    'Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = GetRecords("s_feature_list")
                     
                     If Not (rs.BOF And rs.EOF) Then
                     

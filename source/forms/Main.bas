@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =24
-    Left =5940
-    Top =2595
-    Right =14220
-    Bottom =10620
+    Left =4815
+    Top =2655
+    Right =13095
+    Bottom =10680
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -458,29 +458,8 @@ On Error GoTo Err_Handler
     Initialize
     
     'prepare interface
-'    Dim oLTile As Form_Tile
-'    Dim oCTile As Form_Tile
-'    Dim oRTile As Form_Tile
-'    Dim oBLTile As Form_Tile
-'    Dim oBCTile As Form_Tile
-'    Dim oBRTile As Form_Tile
-    
     Me.Detail.BackColor = lngNPSBrown
     Me.Detail.AlternateBackColor = lngNPSBrown
-    
-'    Dim X1 As Single, X2 As Single, Y1 As Single, Y2 As Single
-'    Dim Offset As Single
-'    ' Define an offset of 1/8 inch from the text box to the rectangle.
-'    Offset = 1440 / 8
-'
-'    X1 = Me.LTile.Left - Offset
-'    Y1 = Me.LTile.top - Offset
-'    X2 = Me.rctTop.Width
-'    Y2 = Me.BCTile.top + Me.BCTile.Height + Offset
-'    Me.DrawWidth = 3
-'    Me.Line (X1, Y1)-(X2, Y2), lngSedona, B
-'Debug.Print rctTop.Width
-'Debug.Print Me.Width
 
     Me.rctTop.Width = Me.Width
     
@@ -592,6 +571,8 @@ On Error GoTo Err_Handler
     oBRTile.Link6Caption = ""
     oBRTile.Link7Caption = ""
     oBRTile.Link8Caption = "More..."
+    oBRTile.lblLink8.TextAlign = aRight
+    oBRTile.lblLink8.FontItalic = True
     
     Dim i As Integer
     Dim strControl As String
@@ -605,37 +586,8 @@ On Error GoTo Err_Handler
             .ForeColor = lngBlue
         End With
     Next
-'    oBRTile.lblIcon1L.Caption = StringFromCodepoint(uDocumentEmpty)
-'    oBRTile.lblIcon1L.FontWeight = wtNormal
-'    oBRTile.lblIcon1L.FontSize = 14
-'    oBRTile.lblIcon2L.Caption = StringFromCodepoint(uDocumentEmpty)
-'    oBRTile.lblIcon2L.FontWeight = wtNormal
-'    oBRTile.lblIcon1L.FontSize = 14
-'    oBRTile.lblIcon3L.Caption = StringFromCodepoint(uDocumentEmpty)
-'    oBRTile.lblIcon3L.FontWeight = wtNormal
-'    oBRTile.lblIcon1L.FontSize = 14
-'    oBRTile.lblIcon4L.Caption = StringFromCodepoint(uDocumentEmpty)
-'    oBRTile.lblIcon4L.FontWeight = wtNormal
-'    oBRTile.lblIcon1L.FontSize = 14
-'    oBRTile.lblIcon5L.Caption = StringFromCodepoint(uDocumentEmpty)
-'    oBRTile.lblIcon5L.FontWeight = wtNormal
-'    oBRTile.lblIcon1L.FontSize = 14
-    oBRTile.lblLink8.TextAlign = aRight
-    oBRTile.lblLink8.FontItalic = True
     
     HighlightBreadcrumb
-    
-'    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
-'
-'        'pause the display then dismiss overlay message
-'        TempVars.Add "MsgOverlayPause", 0
-'
-'        DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-'        "msg" & PARAM_SEPARATOR & "Please select a park (right click)." & _
-'        "|Type" & PARAM_SEPARATOR & "caution"
-'
-'    End If
-
     
 Exit_Handler:
     Exit Sub
@@ -815,6 +767,21 @@ On Error GoTo Err_Handler
             strLevel = "btnLevel" & i
             .Controls(strLevel).Caption = strHierarchy(i) & strMore
         
+            Select Case i
+                Case 0 'park
+                    TempVars.Remove "ParkCode"
+                    
+                Case 1 'river
+                    TempVars.Remove "River"
+                
+                Case 2 'site
+                    TempVars.Remove "SiteCode"
+                
+                Case 3 'feature
+                    TempVars.Remove "Feature"
+            
+            End Select
+        
         Next
             
         'if park --> enable links
@@ -823,44 +790,41 @@ On Error GoTo Err_Handler
             'clear notice
             lblNotice.Caption = ""
         
-            Dim tiles() As Variant
-            Dim strTile As String
-            Dim strCtrl As String
             Dim ctrl As Control
             
-'            tiles = Array("L", "C", "R", "BL", "BC", "BR")
-'            For i = 0 To UBound(tiles)
-'                strTile = tiles(i) & "Tile"
-'                Debug.Print strTile
-'                ctl = ".Parent!" & strTile & ".Form"
-'                Debug.Print strCtrl '.Parent! & strTile&.Form.Name
-'            Next
-
             'iterate through the tiles - enable links & update indicator
             For Each ctrl In Me.Controls
             
                 If Right(ctrl.Name, 4) = "Tile" Then
+                    Dim strLinksToEnable As String
+                    
                     With ctrl.Form
-                        .EnableLinks .TileTag & ",1,2,3,4,5,6,7,8"
+                        Select Case .lblTitle.Caption '.Title doesn't seem to hold for tile
+                            Case "Where?"
+                                'enable vegplots if site is set
+                                strLinksToEnable = IIf(Len(Nz(TempVars("SiteCode"), "")) > 0, _
+                                                        ",1,2,3,4,5,6,7,8", ",1,2,3,5,6,7,8")
+                            Case "Sampling"
+                                'enable vegplots if site is set
+                                strLinksToEnable = IIf(Len(Nz(TempVars("SiteCode"), "")) > 0, _
+                                                        ",1,2,3,4,5,6,7,8", ",1,2,4,5,6,7,8")
+                            Case "Vegetation"
+                                'enable vegplots if site is set
+                                strLinksToEnable = IIf(Len(Nz(TempVars("SiteCode"), "")) > 0, _
+                                                        ",1,2,3,4,5,6,7,8", ",4,5,6,7,8")
+                            Case Else
+                                strLinksToEnable = ",1,2,3,4,5,6,7,8"
+                        End Select
+                        
+                        .EnableLinks .TileTag & strLinksToEnable
                         .IndicatorVisible = 1
                         .IndicatorColor = lngGreen
+                        
                     End With
                 End If
             
             Next
             
-'            'set indicators
-'            .Parent!LTile.Form.IndicatorVisible = 1
-'            .Parent!LTile.Form.IndicatorColor = lngYelLime
-'
-'            'enable links
-'            .Parent!LTile.Form.EnableLinks .Parent!LTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
-'            .Parent!CTile.Form.EnableLinks .Parent!CTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
-'            .Parent!RTile.Form.EnableLinks .Parent!RTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
-'            .Parent!BLTile.Form.EnableLinks .Parent!BLTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
-'            .Parent!BCTile.Form.EnableLinks .Parent!BCTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
-'            .Parent!BRTile.Form.EnableLinks .Parent!BRTile.Form.TileTag & ",1,2,3,4,5,6,7,8"
-
             'disable feature for non-feature parks
             If TempVars("ParkCode") <> "BLCA" Then
                 .btnLevel2.Caption = Replace(.btnLevel2.Caption, ">", "")

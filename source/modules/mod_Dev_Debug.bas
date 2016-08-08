@@ -1095,3 +1095,11 @@ End Sub
 '    Next
 '    b2d = asum
 'End Function
+
+Public Sub DoItAgain()
+
+    Dim a As New ExtArray
+    
+    a.Name = "my new array"
+
+End Sub

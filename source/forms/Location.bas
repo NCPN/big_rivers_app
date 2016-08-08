@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =2850
-    Top =3330
-    Right =12330
-    Bottom =14325
+    Left =3360
+    Top =3630
+    Right =12840
+    Bottom =14640
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -301,7 +301,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =8040
+            Height =7860
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -509,9 +509,9 @@ Begin Form
                 Begin Subform
                     CanShrink = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =247
+                    OverlapFlags =215
                     Left =105
-                    Top =3540
+                    Top =3360
                     Width =7650
                     Height =4380
                     TabIndex =7
@@ -521,25 +521,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3540
+                    LayoutCachedTop =3360
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =7920
+                    LayoutCachedHeight =7740
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3420
+                    Top =3240
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3420
+                    LayoutCachedTop =3240
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =8040
+                    LayoutCachedHeight =7860
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -606,7 +606,7 @@ Begin Form
                     OverlapFlags =93
                     IMESentenceMode =3
                     Left =360
-                    Top =1140
+                    Top =900
                     Width =7140
                     Height =1860
                     TabIndex =3
@@ -617,14 +617,14 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =360
-                    LayoutCachedTop =1140
+                    LayoutCachedTop =900
                     LayoutCachedWidth =7500
-                    LayoutCachedHeight =3000
+                    LayoutCachedHeight =2760
                     Begin
                         Begin Label
                             OverlapFlags =85
                             Left =180
-                            Top =720
+                            Top =480
                             Width =690
                             Height =315
                             BorderColor =8355711
@@ -633,9 +633,9 @@ Begin Form
                             Caption ="Notes:"
                             GridlineColor =10921638
                             LayoutCachedLeft =180
-                            LayoutCachedTop =720
+                            LayoutCachedTop =480
                             LayoutCachedWidth =870
-                            LayoutCachedHeight =1035
+                            LayoutCachedHeight =795
                         End
                     End
                 End
@@ -676,7 +676,7 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =3120
+                    Top =2940
                     Width =7860
                     Height =315
                     FontSize =9
@@ -689,19 +689,19 @@ Begin Form
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =3120
+                    LayoutCachedTop =2940
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =3435
+                    LayoutCachedHeight =3255
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =255
+                    OverlapFlags =223
                     TextAlign =2
                     Left =4320
-                    Top =2940
+                    Top =2760
                     Width =825
                     Height =600
                     FontSize =20
@@ -712,9 +712,9 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
-                    LayoutCachedTop =2940
+                    LayoutCachedTop =2760
                     LayoutCachedWidth =5145
-                    LayoutCachedHeight =3540
+                    LayoutCachedHeight =3360
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1

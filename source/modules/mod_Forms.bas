@@ -145,11 +145,11 @@ Public Function CloseFormsReports()
 On Error GoTo Err_Handler
 
     'Close all open forms
-    Do While Forms.count > 0
+    Do While Forms.Count > 0
         DoCmd.Close acForm, Forms(0).Name
     Loop
     
-    Do While Reports.count > 0
+    Do While Reports.Count > 0
         DoCmd.Close acReport, Reports(0).Name
     Loop
 

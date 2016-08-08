@@ -1679,10 +1679,10 @@ On Error GoTo Err_Handler
     ShowControls Me, True, "*", True
         
     ' determine record count
-    Dim count As Integer
+    Dim Count As Integer
     If Not rs.EOF Then
         rs.MoveLast
-        count = rs.RecordCount
+        Count = rs.RecordCount
         rs.MoveFirst
         
         'hide no records
@@ -1692,13 +1692,13 @@ On Error GoTo Err_Handler
     End If
         
     'set # species found
-    lblSpeciesFound.Caption = count & " species found"
+    lblSpeciesFound.Caption = Count & " species found"
         
     'set search for caption
     lblSearchForValue.Caption = """" & strSearch & """"
     
     'extend form if species count > 0
-    If count > 0 Then
+    If Count > 0 Then
         SetWindowSize Me, 8000, Me.Width
     End If
     

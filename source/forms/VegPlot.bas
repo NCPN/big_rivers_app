@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =68
-    Left =2850
-    Top =3330
-    Right =12330
-    Bottom =14325
+    Left =3060
+    Top =3405
+    Right =12540
+    Bottom =14400
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1341,7 +1341,7 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =3
                     Top =3300
                     Width =7860
@@ -1366,7 +1366,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =2
                     Left =4320
                     Top =3120
@@ -2246,7 +2246,7 @@ End Sub
 Private Sub btnTaglines_Click()
 On Error GoTo Err_Handler
     
-    'open comment form
+    'open form
     DoCmd.OpenForm "Tagline", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
     
 Exit_Handler:
@@ -2276,7 +2276,7 @@ End Sub
 Private Sub btnWCC_Click()
 On Error GoTo Err_Handler
     
-    'open comment form
+    'open form
     DoCmd.OpenForm "VegWalk", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
     
 Exit_Handler:
@@ -2306,7 +2306,7 @@ End Sub
 Private Sub btnURC_Click()
 On Error GoTo Err_Handler
     
-    'open comment form
+    'open form
     DoCmd.OpenForm "VegWalk", acNormal, , , , , "UnderstoryRootedSpecies|" & tbxID
     
 Exit_Handler:
@@ -2336,7 +2336,7 @@ End Sub
 Private Sub btnARC_Click()
 On Error GoTo Err_Handler
     
-    'open comment form
+    'open form
     DoCmd.OpenForm "VegWalk", acNormal, , , , , "AllRootedSpecies|" & tbxID
     
 Exit_Handler:

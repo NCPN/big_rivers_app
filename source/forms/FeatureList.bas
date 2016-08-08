@@ -20,10 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =28
-    Left =450
-    Top =6885
-    Right =7830
-    Bottom =10995
+    Left =1815
+    Top =4710
+    Right =9450
+    Bottom =9075
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x388afb2190c6e440
@@ -582,9 +582,9 @@ On Error GoTo Err_Handler
     btnDelete.ForeColor = lngRed
     
     'set data source
-    Me.RecordSource = GetTemplate("s_feature_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
+    'Me.RecordSource = GetTemplate("s_feature_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
+    Set Me.Recordset = GetRecords("s_feature_list")
     Me.Requery
-
 
 Exit_Handler:
     Exit Sub

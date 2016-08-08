@@ -17,11 +17,11 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =8100
+    Width =7680
     DatasheetFontHeight =11
-    ItemSuffix =31
-    Right =9480
-    Bottom =10995
+    ItemSuffix =33
+    Right =14115
+    Bottom =11250
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x9af8902d71c3e440
@@ -65,6 +65,12 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Line
+            BorderLineStyle =0
+            BorderThemeColorIndex =0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -130,7 +136,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =1380
+            Height =1515
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -153,8 +159,8 @@ Begin Form
                     OverlapFlags =215
                     Left =180
                     Top =120
-                    Width =7260
-                    Height =840
+                    Width =5880
+                    Height =585
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
@@ -163,15 +169,16 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =120
-                    LayoutCachedWidth =7440
-                    LayoutCachedHeight =960
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =705
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
-                    Top =1020
+                    TextAlign =2
+                    Left =1350
+                    Top =1200
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -180,17 +187,17 @@ Begin Form
                     Name ="lblStartDate"
                     Caption ="Location"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =2805
-                    LayoutCachedHeight =1335
+                    LayoutCachedLeft =1350
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =2595
+                    LayoutCachedHeight =1515
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =960
-                    Top =1020
+                    Top =1200
                     Width =270
                     Height =315
                     FontWeight =500
@@ -200,54 +207,92 @@ Begin Form
                     Caption ="ID"
                     GridlineColor =10921638
                     LayoutCachedLeft =960
-                    LayoutCachedTop =1020
+                    LayoutCachedTop =1200
                     LayoutCachedWidth =1230
-                    LayoutCachedHeight =1335
+                    LayoutCachedHeight =1515
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
-                    Left =2940
-                    Top =1020
-                    Width =1245
+                    OverlapFlags =93
+                    TextAlign =2
+                    Left =2700
+                    Top =1200
+                    Width =1380
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblDistance"
-                    Caption ="Distance"
+                    Caption ="Distance (m)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2940
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =4185
-                    LayoutCachedHeight =1335
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =4080
+                    LayoutCachedHeight =1515
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
-                    Left =4320
-                    Top =1020
-                    Width =1245
+                    OverlapFlags =87
+                    TextAlign =2
+                    Left =4080
+                    Top =1200
+                    Width =1140
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblBearing"
-                    Caption ="Location"
+                    Caption ="Bearing"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4320
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =5565
-                    LayoutCachedHeight =1335
+                    LayoutCachedLeft =4080
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =5220
+                    LayoutCachedHeight =1515
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =93
+                    TextAlign =2
+                    Left =2700
+                    Top =840
+                    Width =2520
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblHeadtoOrient"
+                    Caption ="Head to Orient"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =5220
+                    LayoutCachedHeight =1155
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Line
+                    LineSlant = NotDefault
+                    BorderWidth =1
+                    OverlapFlags =87
+                    Left =2699
+                    Top =1140
+                    Width =2519
+                    BorderColor =16777215
+                    Name ="lnHeadtoOrient"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2699
+                    LayoutCachedTop =1140
+                    LayoutCachedWidth =5218
+                    LayoutCachedHeight =1140
+                    BorderThemeColorIndex =-1
                 End
             End
         End
         Begin Section
-            Height =420
+            Height =360
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -256,7 +301,7 @@ Begin Form
             Begin
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6540
+                    Left =6120
                     Width =720
                     ForeColor =4210752
                     Name ="btnEdit"
@@ -301,8 +346,8 @@ Begin Form
                         0x9090b0ff00000000
                     End
 
-                    LayoutCachedLeft =6540
-                    LayoutCachedWidth =7260
+                    LayoutCachedLeft =6120
+                    LayoutCachedWidth =6840
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
@@ -323,7 +368,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =15
+                    Top =45
                     Width =720
                     Height =300
                     FontSize =9
@@ -334,9 +379,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =15
+                    LayoutCachedTop =45
                     LayoutCachedWidth =840
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =345
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -346,7 +391,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     TextFontFamily =2
-                    Left =7320
+                    Left =6900
                     Width =720
                     FontSize =14
                     TabIndex =2
@@ -358,8 +403,8 @@ Begin Form
                     ControlTipText ="Delete record"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7320
-                    LayoutCachedWidth =8040
+                    LayoutCachedLeft =6900
+                    LayoutCachedWidth =7620
                     LayoutCachedHeight =360
                     PictureCaptionArrangement =5
                     ForeThemeColorIndex =-1
@@ -380,24 +425,25 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =93
+                    OverlapFlags =85
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1440
-                    Top =15
-                    Width =1560
+                    Left =1320
+                    Top =45
+                    Width =1260
                     Height =300
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxName"
+                    ControlSource ="LocationName"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1440
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =1320
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =2580
+                    LayoutCachedHeight =345
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -410,7 +456,8 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =900
-                    Width =480
+                    Top =30
+                    Width =360
                     Height =315
                     TabIndex =4
                     BorderColor =10921638
@@ -420,28 +467,32 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =900
-                    LayoutCachedWidth =1380
-                    LayoutCachedHeight =315
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =1260
+                    LayoutCachedHeight =345
                 End
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =255
+                    OverlapFlags =85
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2820
-                    Width =1560
+                    Left =2880
+                    Top =45
+                    Width =1020
                     Height =300
                     TabIndex =5
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxDistance"
+                    ControlSource ="HeadtoOrientDistance_m"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2820
-                    LayoutCachedWidth =4380
-                    LayoutCachedHeight =300
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =345
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -449,29 +500,32 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =247
+                    OverlapFlags =85
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4080
-                    Width =1560
+                    Left =4200
+                    Top =45
+                    Width =900
                     Height =300
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxBearing"
+                    ControlSource ="=CStr([HeadtoOrientBearing])"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4080
-                    LayoutCachedWidth =5640
-                    LayoutCachedHeight =300
+                    LayoutCachedLeft =4200
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =5100
+                    LayoutCachedHeight =345
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5760
+                    Left =5340
                     Width =720
                     FontSize =16
                     TabIndex =7
@@ -482,8 +536,8 @@ Begin Form
                     ControlTipText ="Toggle sensitive location"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5760
-                    LayoutCachedWidth =6480
+                    LayoutCachedLeft =5340
+                    LayoutCachedWidth =6060
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
@@ -642,6 +696,8 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
     
+    lblBearing.Caption = "Bearing (" & StringFromCodepoint(uDegree) & ")"
+    
     'set hover
     btnEdit.HoverColor = lngGreen
     btnDelete.HoverColor = lngGreen
@@ -652,6 +708,9 @@ On Error GoTo Err_Handler
 
     btnSensitive.Caption = StringFromCodepoint(uEye)
     btnSensitive.ForeColor = lngRed
+
+    'set data source
+    Me.RecordSource = "Location"
 
 Exit_Handler:
     Exit Sub

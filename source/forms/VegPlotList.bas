@@ -20,8 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =9375
-    Bottom =10515
+    Left =450
+    Top =5940
+    Right =7830
+    Bottom =10050
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xe8a9c07c72c3e440
@@ -485,7 +487,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         LocationList
+' Form:         VegPlotList
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -612,7 +614,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[LocationList form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -652,7 +654,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[LocationList form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -679,7 +681,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[LocationList form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -709,7 +711,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[LocationList form])"
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -747,7 +749,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[LocationList form])"
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -775,7 +777,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[LocationList form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub

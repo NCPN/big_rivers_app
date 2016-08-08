@@ -27,6 +27,8 @@ Option Explicit
 '---------------------
 Public Const uSpiral = &HAA5C               '-21924 (Cham Punctuation Spiral)
 Public Const uAmpersand = &H26              '38     doesn't work :(
+Public Const uPlusSign = &H2B               '43     plus sign
+Public Const uQuestionMark = &H3F           '63     Basic Latin Question Mark
 Public Const uOn = &H7C                     '124    Vertical Line
 Public Const uDoubleLessThanLeft = &HAB     '171    left-pointing double angle quotation mark <<
 Public Const uDegree = &HB0                 '176    degree sign
@@ -51,6 +53,7 @@ Public Const uCircle3 = &H2462              '9314
 Public Const uCircleR = &H24C7              '9415   circled Latin captial letter R
 Public Const uTriangleBlkL = &H25C0         '9664   black left-pointing triangle
 Public Const uPointerBlkL = &H25C4          '9668   black left-pointing pointer
+Public Const uCircleDotted = &H25CC         '9676   dotted circle
 Public Const uBullet = &H25CF               '9679
 Public Const uUmbrella = &H2602             '9730
 Public Const uCheckboxEmpty = &H2610        '9744
@@ -63,6 +66,9 @@ Public Const uCheck = &H2714                '10004
 Public Const uCircleFilled1 = &H278A        '10122
 Public Const uCircleFilled2 = &H278B        '10123
 Public Const uCircleFilled3 = &H278C        '10124
+Public Const uPlusSignHeavy = &H2795        '10133  Heavy plus sign
+Public Const uSpokedAsteriskHeavy = &H273D  '10045  heavy teardrop spoked asterisk (Dingbats)
+Public Const uFloretteWhite = &H2740        '10048  white florette (Dingbats)
 Public Const uCircleBulletWhite = &H29BE    '10686  circled white bullet
 Public Const uCircleBullet = &H29BF         '10687  circled bullet
 Public Const uVertLineCircleAbv = &H2AEF    '10991  vertical line with circle above
@@ -78,8 +84,6 @@ Public Const uSheepHead = &H14485           '83077  simple sheep head (Anatolian
 Public Const uSpiral2 = &H169B9             '92601  Bamum Letter Phase-E Ngkaami
 
 '--- use StringFromCodepoint() from here ---
-Public Const uUser = &H1F464                '128100 bust in silhouette
-Public Const uUsers = &H1F465               '128101 busts in silhouette
 Public Const uCircledRNegative = &H1F161    '127329 negative circled Latin capital letter r
 Public Const uMtnSunrise = &H1F304          '127748 mountain sunrise
 Public Const uWave = &H1F30A                '127754
@@ -87,6 +91,8 @@ Public Const uDropletBlack = &H1F322        '127778
 Public Const uLightningCloud = &H1F329      '127785
 Public Const uGrass = &H1F33E               '127806 grass(ear of rice)
 Public Const uHerb = &H1F33F                '127807
+Public Const uLeafFallen = &H1F342          '127810 fallen leaf
+Public Const uLeafFluttering = &H1F343      '127811 leaf fluttering in wind
 Public Const uCamping = &H1F3D5             '127957
 Public Const uNatlPark = &H1F3DE            '127966 path & tree
 Public Const uDesert = &H1F3DC              '127964 cactus & sun
@@ -98,6 +104,11 @@ Public Const uCow = &H1F404                 '128004
 Public Const uSnail = &H1F40C               '128012
 Public Const uPawPrints = &H1F43E           '128062
 Public Const uEye = &H1F441                 '128065
+Public Const uThumbsUp = &H1F44D            '128077 thumbs up
+Public Const uThumbsDown = &H1F44E          '128078 thumbs donw
+
+Public Const uUser = &H1F464                '128100 bust in silhouette
+Public Const uUsers = &H1F465               '128101 busts in silhouette
 Public Const uDroplet = &H1F4A7             '128167
 Public Const uPageTriCorner = &H1F4C4       '128196 page facing up
 Public Const uCalendarTearOff = &H1F4C6     '128198
@@ -112,6 +123,7 @@ Public Const uRuler = &H1F4CF               '128207 straight ruler
 Public Const uRulerTriangle = &H1F4D0       '128208 roofing triangle
 Public Const uBooks = &H1F4DA               '128218
 Public Const uMemo = &H1F4DD                '128221
+Public Const uInbox = &H1F4E5               '128229 inbox tray
 Public Const uMagnifierLeft = &H1F50D       '128269
 Public Const uMagnifierRight = &H1F50E      '128270
 Public Const uCamera = &H1F4F7              '128247 camera icon
@@ -148,6 +160,8 @@ Public Const uTenThirty = &H1F565           '128357
 Public Const uElevenThirty = &H1F566        '128358
 Public Const uTwelveThirty = &H1F567        '128359
 Public Const uPencil = &H1F589              '128393
+Public Const uThumbsUpRev = &H1F592         '128402 reversed thumbs up
+Public Const uThumbsDownRev = &H1F593       '128403 reversed thumbs donw
 Public Const uFingerPointL = &H1F59C        '128412 black left pointing backhand
 Public Const uFolder = &H1F5C0              '128448
 Public Const uFolderOpen = &H1F5C1          '128449
@@ -177,6 +191,7 @@ Public Const uIsocelesTriBlkR = &H1F782     '128898 black right pointing isocele
 Public Const uRHArrow = &H1F846             '129094 heavy right arrow
 Public Const uLHArrow = &H1F844             '129092 heavy left arrow
 Public Const uLTriangleArrow = &H1F890      '129168 leftwards triangle arrowhead
+Public Const uHandshake = &H1F91D           '129309
 Public Const uLizard = &H1F98E              '129422
 
 ' =================================
@@ -364,16 +379,16 @@ End Function
 ' ---------------------------------
 Public Function CountInString(ByVal strInspect As String, ByVal strFind As String) As Integer
 On Error GoTo Err_Handler:
-     Dim count As Integer
+     Dim Count As Integer
 
     'default
-    count = 0
+    Count = 0
     
     If Len(strInspect) > 0 Then
-        count = UBound(Split(strInspect, strFind))
+        Count = UBound(Split(strInspect, strFind))
     End If
     
-    CountInString = count
+    CountInString = Count
 
 Exit_Handler:
     Exit Function

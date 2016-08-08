@@ -192,7 +192,7 @@ On Error GoTo Err_Handler
     Do Until rsB.EOF
         'add rsB values as new rsOut records
         rsOut.AddNew
-        For iCount = 0 To rsB.Fields.count - 1
+        For iCount = 0 To rsB.Fields.Count - 1
             rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
         Next
         rsOut.update
@@ -441,7 +441,7 @@ On Error GoTo Err_Handler
 
 Dim i As Integer
 
-    For i = 0 To [TempVars].count - 1
+    For i = 0 To [TempVars].Count - 1
         If [TempVars].item(i).Name = strItem Then
             'fetch the index and exit
             GetTempVarIndex = i
@@ -759,7 +759,7 @@ Debug.Print strTemplate
     
     End If
     
-    Debug.Print template
+Debug.Print template
     
     GetTemplate = template
     

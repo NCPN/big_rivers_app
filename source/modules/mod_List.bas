@@ -108,7 +108,7 @@ On Error GoTo Err_Handler
     Set frm = ctrl.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.count
+    cols = rs.Fields.Count
     
     If Nz(rows, 0) = 0 Then
         MsgBox "Sorry, no records found..."
@@ -819,12 +819,12 @@ On Error GoTo Err_Handler
     End If
     
     'check for at *least* one selected item
-    If frm.Controls(strSourceControl).ItemsSelected.count = 0 Then
+    If frm.Controls(strSourceControl).ItemsSelected.Count = 0 Then
         MsgBox "Please select at least one item.", vbExclamation, "Oops!"
         GoTo Exit_Handler
     End If
     
-    If frm.Controls(strSourceControl).ItemsSelected.count > 1 Then
+    If frm.Controls(strSourceControl).ItemsSelected.Count > 1 Then
         MoveSelectedItems frm, strSourceControl, strTargetControl
         GoTo Exit_Handler
     End If
@@ -972,7 +972,7 @@ On Error GoTo Err_Handler
     End If
     
     'check for at *least* one selected item
-    If frm.Controls(strSourceControl).ItemsSelected.count = 0 Then
+    If frm.Controls(strSourceControl).ItemsSelected.Count = 0 Then
         MsgBox "Please select at least one item.", vbExclamation, "Oops!"
         GoTo Exit_Handler
     End If
@@ -1084,7 +1084,7 @@ On Error GoTo Err_Handler
     Dim strBuild As String
      
     With lbx
-      If .ItemsSelected.count = 0 Then Exit Sub
+      If .ItemsSelected.Count = 0 Then Exit Sub
      
       For intRow = 0 To .ListCount - 1
         If Not .Selected(intRow) Then
@@ -1135,20 +1135,20 @@ Public Sub RemoveListDupes(lbx As ListBox)
 
 On Error GoTo Err_Handler
 
-    Dim index As Integer, count As Integer
+    Dim index As Integer, Count As Integer
     Dim lastItem As String
     
     'sort listbox
  '   SortList lbx
     
-    count = lbx.ListCount
+    Count = lbx.ListCount
 
     'check sorted listbox for duplicates & remove
-    If count > 1 Then
+    If Count > 1 Then
     
-        lastItem = lbx.ItemData(count - 1)
+        lastItem = lbx.ItemData(Count - 1)
 
-        For index = count - 2 To 0 Step -1
+        For index = Count - 2 To 0 Step -1
             If lbx.ItemData(index) = lastItem And Len(lbx.ItemData(index)) > 0 Then
                 'duplicate
                 lbx.RemoveItem (index)

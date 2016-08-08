@@ -190,3 +190,17 @@ Public Const COLLECTION_TYPES As String = "S,F"
 '                         URC - understory rooted cover (BLCA & CANY),
 '                         ARS - all rooted species (DINO)
 Public Const COVER_TYPES As String = "WCC,URC,ARS"
+
+'Veg unknowns
+Public Const PLANT_TYPES As String = "herb,shrub,tree,grass,sedge,other"  'TEXT(50) --> TEXT(15)
+Public Const LEAF_TYPES As String = "compound/simple, arrangement" 'TEXT(50) --> TEXT(25)
+Public Const FORB_GRASS_TYPES As String = "Annual,Perennial" 'TEXT(10)
+Public Const PERENNIAL_GRASS_TYPES As String = "Bunchgrass, Rhizomatous" 'TEXT(15)
+'Salient feature TEXT(255)
+'Leaf margin TEXT(50)
+'Other leaf characteristics:  pubescence, sap, stipules TEXT(50)
+'Stem characteristics: shape, pubescence, bud TEXT(50)
+'Flower characteristics: color location floral formula TEXT(50)
+'General and microhabitat characteristics TEXT(50)
+'Perennial grass type: Bunchgrass or Rhizomatous TEXT(15)
+'Collection method TEXT(50)

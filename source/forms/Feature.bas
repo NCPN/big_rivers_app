@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =2850
-    Top =3330
-    Right =12330
-    Bottom =14325
+    Left =3360
+    Top =3645
+    Right =12840
+    Bottom =14640
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -556,6 +556,7 @@ Begin Form
                     End
                     Name ="cbxLocation"
                     RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1020
@@ -585,6 +586,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter feature description as needed."
                     GridlineColor =10921638
 
@@ -622,6 +624,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxFeatureDirections"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter directions to the feature."
                     GridlineColor =10921638
 
@@ -837,8 +840,10 @@ On Error GoTo Err_Handler
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
+    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & _
+                 IIf(Len(Nz(TempVars("River"), "")) > 0, ">" & Space(2) & _
+                 TempVars("River"), "")
+                 ' & Space(2) & ">" & Space(2) & _
                  'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
                  'Nz(TempVars("Feature"), "")
                  
@@ -863,7 +868,15 @@ On Error GoTo Err_Handler
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
     
-    cbxLocation.RowSource = GetTemplate("s_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
+    'get locations for park or river segment depending upon if river segment is set
+    With cbxLocation
+        .RowSource = IIf(Len(Nz(TempVars("River"), "")) > 0, GetTemplate("s_location_by_park_river"), GetTemplate("s_location_by_park"))
+        .ColumnCount = 2
+        .BoundColumn = 1
+        .ColumnWidths = "0;1in"
+    End With
+    
+    'cbxLocation.RowSource = GetTemplate("s_location_by_park", "parkcode" & PARAM_SEPARATOR & TempVars.item("ParkCode"))
   
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
@@ -943,8 +956,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxLocation_AfterUpdate
-' Description:  Dropdown after update actions
+' Sub:          tbxFeature_AfterUpdate
+' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -1049,35 +1062,6 @@ On Error GoTo Err_Handler
     
     UpsertRecord Me
     
-'    Dim f As New Feature
-'
-'    With f
-'        'values passed into form
-'
-'        'form values
-'        .LocationID = cbxLocation.Column(0)
-'        .Name = tbxFeature.Value
-'
-'        If Not IsNull(tbxFeatureDirections.Value) Then f.Directions = tbxFeatureDirections.Value
-'        If Not IsNull(tbxDescription.Value) Then .Directions = tbxDescription.Value
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'        .SaveToDb
-'
-'        'set the tbxID.value after save/update
-'        tbxID = .ID
-'    End With
-'
-'    'clear values & refresh display
-'
-'    ReadyForSave
-'
-'    PopulateForm Me, tbxID.Value
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
-    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1148,57 +1132,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-'' ---------------------------------
-'' Sub:          ClearForm
-'' Description:  Clear form fields
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/27/2016 - initial version
-'' ---------------------------------
-'Private Sub ClearForm()
-'On Error GoTo Err_Handler
-'
-'    'clear recordsource
-'    Me.RecordSource = ""
-'
-'    'clear values so they no longer look for original control sources
-'    Dim ctrl As Control
-'
-'    'clear the control sources to clear the textboxes
-'    For Each ctrl In Me.Controls
-'        Select Case ctrl.ControlType
-'            Case acTextBox
-'                ctrl.ControlSource = ""
-'            Case acComboBox
-'                ctrl.Value = ""
-'        End Select
-'    Next
-'
-'    tbxID = 0
-'
-'    btnSave.Enabled = False
-'
-'    Me.list.Requery
-'
-'    Me.Requery
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - ClearForm[Feature form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
 
 ' ---------------------------------
 ' Sub:          ReadyForSave

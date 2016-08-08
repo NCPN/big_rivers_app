@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =2850
-    Top =3330
-    Right =12330
-    Bottom =14325
+    Left =3360
+    Top =3645
+    Right =12840
+    Bottom =14640
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -588,6 +588,7 @@ Begin Form
                     Name ="cbxSite"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;0;1440"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Select site of this sampling visit"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -633,6 +634,7 @@ Begin Form
                     Name ="cbxLocation"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1440;0;0"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Select location of this sampling visit"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -655,7 +657,7 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =3
                     Top =525
                     Width =7860
@@ -680,7 +682,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =247
+                    OverlapFlags =255
                     TextAlign =2
                     Left =4320
                     Top =345
@@ -725,7 +727,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -734,6 +736,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 7/26/2016 - 1.01 - added GetRecords() calls
+'               BLC - 8/2/2016  - 1.02 - use Me.CallingForm
 ' =================================
 
 '---------------------
@@ -748,6 +751,7 @@ Private m_Directions As String
 Private m_ButtonCaption
 Private m_SelectedID As Integer
 Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
@@ -756,6 +760,7 @@ Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidLabel(Value As String)
 Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -822,6 +827,18 @@ Public Property Get SelectedValue() As String
     SelectedValue = m_SelectedValue
 End Property
 
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
+    Else
+        RaiseEvent InvalidCallingForm(Value)
+    End If
+End Property
+
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -829,7 +846,7 @@ End Property
 ' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
-' Assumptions:  -
+' Assumptions:  OpenArgs passes only the calling form name
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -840,12 +857,18 @@ End Property
 '   BLC - 5/31/2016 - initial version
 '   BLC - 6/27/2016 - updated to use ToggleForm() & ClearForm()
 '   BLC - 7/26/2016 - added GetRecords() for cbxSite, cbxLocation recordsets
+'   BLC - 8/2/2016 - use Me.CallingForm
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+
     'minimize Main
-    ToggleForm "Main", -1
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
@@ -1185,12 +1208,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 8/2/2016 - use Me.CallingForm
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub

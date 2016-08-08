@@ -20,7 +20,7 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =10485
+    Right =9480
     Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -170,17 +170,17 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
+                    Left =1380
                     Top =1020
-                    Width =1245
+                    Width =1425
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblStartDate"
-                    Caption ="Location"
+                    Name ="lblUnknownCode"
+                    Caption ="Unknown Code"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1380
                     LayoutCachedTop =1020
                     LayoutCachedWidth =2805
                     LayoutCachedHeight =1335
@@ -210,36 +210,36 @@ Begin Form
                     OverlapFlags =85
                     Left =2940
                     Top =1020
-                    Width =1245
+                    Width =1590
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblDistance"
-                    Caption ="Distance"
+                    Name ="lblConfirmedCode"
+                    Caption ="Confirmed Code"
                     GridlineColor =10921638
                     LayoutCachedLeft =2940
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =4185
+                    LayoutCachedWidth =4530
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4320
+                    Left =4635
                     Top =1020
-                    Width =1245
+                    Width =1485
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblBearing"
-                    Caption ="Location"
+                    Name ="lblDate"
+                    Caption ="Date Identified"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4320
+                    LayoutCachedLeft =4635
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =5565
+                    LayoutCachedWidth =6120
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -380,19 +380,19 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1440
+                    Left =1425
                     Top =15
                     Width =1560
                     Height =300
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxName"
+                    Name ="tbxUnknownCode"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1440
+                    LayoutCachedLeft =1425
                     LayoutCachedTop =15
-                    LayoutCachedWidth =3000
+                    LayoutCachedWidth =2985
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -422,21 +422,21 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =255
+                    OverlapFlags =87
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2820
+                    Left =2985
                     Width =1560
                     Height =300
                     TabIndex =5
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxDistance"
+                    Name ="tbxConfirmedCode"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2820
-                    LayoutCachedWidth =4380
+                    LayoutCachedLeft =2985
+                    LayoutCachedWidth =4545
                     LayoutCachedHeight =300
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -445,21 +445,21 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =247
+                    OverlapFlags =85
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4080
-                    Width =1560
+                    Left =4800
+                    Width =1020
                     Height =300
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxBearing"
+                    Name ="tbxIDDate"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4080
-                    LayoutCachedWidth =5640
+                    LayoutCachedLeft =4800
+                    LayoutCachedWidth =5820
                     LayoutCachedHeight =300
                     ForeThemeColorIndex =2
                     ForeTint =100.0

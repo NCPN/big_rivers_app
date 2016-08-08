@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Enums
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.03
 ' Description:  enum functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 11/5/2015
@@ -12,6 +12,7 @@ Option Explicit
 '               BLC - 6/24/2016  - 1.01 - replaced Exit_Function > Exit_Handler
 '               BLC - 7/6/2016   - 1.02 - added OpenAndHideVBE() and ShowAndCloseVBE() to
 '                                         CreateEnums()
+'               BLC - 8/4/2016   - 1.03 - revised table name to AppEnum to avoid reserved word
 ' =================================
 
 '-----------------------------
@@ -46,6 +47,7 @@ Option Explicit
 '   BLC - 7/6/2016   - added calls to OpenAndHideVBE() and ShowAndCloseVBE()
 '                      before & after (respectively) modifying enums to prevent
 '                      VBE from displaying when enums are recreated
+'   BLC - 8/4/2016   - revised table name to AppEnum to avoid reserved word
 ' ---------------------------------
 Public Function CreateEnums(Optional EnumType As String)
 On Error GoTo Err_Handler
@@ -55,7 +57,7 @@ On Error GoTo Err_Handler
 
     Set db = CurrentDb
     'Set rs = db.OpenRecordset("Enum", dbOpenSnapshot) <-- replace w/ SQL to get sort by enumtype
-    Set rs = db.OpenRecordset("SELECT * FROM Enum ORDER BY EnumType, ID, Label", dbOpenSnapshot)
+    Set rs = db.OpenRecordset("SELECT * FROM AppEnum ORDER BY EnumType, ID, Label", dbOpenSnapshot)
 
     Dim m As Module
     Dim s As String, PrevEnumType As String, strEnumType As String

@@ -14,10 +14,10 @@ Begin Form
     Width =11400
     DatasheetFontHeight =11
     ItemSuffix =27
-    Left =2955
-    Top =3780
-    Right =14610
-    Bottom =13125
+    Left =4830
+    Top =4230
+    Right =16485
+    Bottom =13575
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -900,6 +900,9 @@ On Error GoTo Err_Handler
     'set standard types (use split to retain as strings vs. variants)
     aryPhotoTypes = Split(PHOTO_TYPES_MAIN, ",")
     
+    'add unclassified type
+    aryPhotoTypes(UBound(aryPhotoTypes) + 1) = "Unclassified"
+    
     With tvwTree
     
         'clear tree
@@ -1298,7 +1301,7 @@ On Error GoTo Err_Handler
     
     If blnNodeSelected Then
         If node.BackColor = vbHighlight Then
-            If colTreeNodes.count > 1 Then
+            If colTreeNodes.Count > 1 Then
                 node.BackColor = vbWindowBackground
                 node.ForeColor = vbWindowText
                 node.Selected = False
@@ -1307,7 +1310,7 @@ On Error GoTo Err_Handler
             Exit Sub
         End If
     Else
-        For i = 0 To colTreeNodes.count - 1
+        For i = 0 To colTreeNodes.Count - 1
             Set SelectedNode = colTreeNodes.item(i) 'colTreeNodes.Remove(, 0)
             SelectedNode.BackColor = vbWindowBackground
             SelectedNode.ForeColor = vbWindowText

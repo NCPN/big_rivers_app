@@ -1,11 +1,10 @@
 CREATE TABLE [UnknownSpecies] (
   [ID] AUTOINCREMENT,
-  [Unknown_ID] VARCHAR (50),
   [UnknownCode] VARCHAR (15) CONSTRAINT [UnknownCode] UNIQUE ,
-  [CollectedBy_ID] SHORT ,
+  [CollectedBy_ID] LONG ,
   [Method] VARCHAR (50),
-  [Transect_Number] SHORT ,
-  [PlantType] VARCHAR (50),
+  [Location_ID] LONG ,
+  [PlantType] VARCHAR (15),
   [PlantDescription] LONGTEXT ,
   [SalientFeature] VARCHAR (255),
   [LeafType] VARCHAR (50),
@@ -20,7 +19,7 @@ CREATE TABLE [UnknownSpecies] (
   [HasPhotos] BYTE ,
   [ForbGrassType] VARCHAR (10),
   [PerennialGrasses] VARCHAR (15),
-  [IdentifiedBy_ID] SHORT ,
+  [IdentifiedBy_ID] LONG ,
   [IdentifiedDate] DATETIME ,
   [Position] SHORT 
 )

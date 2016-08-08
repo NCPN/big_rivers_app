@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 8/1/2016  - 1.02 - latest enum update from db
-'                                         last updated: 8/1/2016 7:00:33 AM
+'               app - 8/8/2016  - 1.02 - latest enum update from db
+'                                         last updated: 8/8/2016 9:58:12 AM
 ' =================================
 
 '-----------------------------
@@ -100,8 +100,22 @@ Public Enum PhotoType
     Disturbance = 9
     Weather = 10
     Fieldwork = 11
-    Other = 12
+    other = 12
     [_Last] = 12
+End Enum
+
+'-----------------------------
+'  PlantTypes
+'-----------------------------
+Public Enum PlantType
+    [_First] = 90
+    herb = 90
+    shrub = 91
+    tree = 92
+    grass = 93
+    sedge = 94
+    other = 95
+    [_Last] = 95
 End Enum
 
 '-----------------------------

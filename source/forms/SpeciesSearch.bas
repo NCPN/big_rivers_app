@@ -14,10 +14,10 @@ Begin Form
     Width =13584
     DatasheetFontHeight =11
     ItemSuffix =64
-    Left =3825
-    Top =3735
-    Right =17115
-    Bottom =11085
+    Left =3060
+    Top =3405
+    Right =16920
+    Bottom =14400
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x0a915c95ff94e440
@@ -986,17 +986,33 @@ Option Explicit
 ' =================================
 ' MODULE:       Form_SpeciesSearch
 ' Description:  Species search functions & procedures
-'
+' Version:      1.05
 ' Source/date:  Bonnie Campbell, 2/9/2015
-' Revisions:    BLC - 2/9/2015 - initial version
-'               BLC - 6/26/2015 - added LU_Code to search
-'               BLC - 6/30/2015 - removed unused subroutines
-'                                 btnSearch_Enter() and SpeciesSearch()
-'                                 both handled by btnSearch_Click()
-'               BLC - 7/22/2015 - fixed search header highlighting
-'               BLC - 7/5/2016  - adapted for big rivers, renamed SpeciesSearch & changed
-'                                 Exit_Sub to Exit_Handler, added Form_Close()
+' Revisions:    BLC - 2/9/2015  - 1.00 - initial version
+'               BLC - 6/26/2015 - 1.01 - added LU_Code to search
+'               BLC - 6/30/2015 - 1.02 - removed unused subroutines
+'                                        btnSearch_Enter() and SpeciesSearch()
+'                                        both handled by btnSearch_Click()
+'               BLC - 7/22/2015 - 1.03 - fixed search header highlighting
+'               BLC - 7/5/2016  - 1.04 - adapted for big rivers, renamed SpeciesSearch & changed
+'                                        Exit_Sub to Exit_Handler, added Form_Close()
+'               BLC - 8/2/2016  - 1.05 - use Me.CallingForm, update documentation
 ' =================================
+
+'---------------------
+' Simulated Inheritance
+'---------------------
+
+'---------------------
+' Declarations
+'---------------------
+Private m_CallingForm As String
+
+'---------------------
+' Event Declarations
+'---------------------
+Public Event InvalidCallingForm(Value As String)
+
 
 '=================================================================
 '  Properties
@@ -1093,6 +1109,21 @@ Public Property Let Minimized(IsMin As Boolean)
      End If
 End Property
 
+'---------------------
+' Properties
+'---------------------
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
+    Else
+        RaiseEvent InvalidCallingForm(Value)
+    End If
+End Property
+
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
+End Property
+
 '=================================================================
 '  Subroutines & Functions
 '=================================================================
@@ -1115,6 +1146,15 @@ End Property
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
+    
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
+    
     
     'set form caller
     TempVars("originForm") = Forms!SpeciesSearch.OpenArgs
@@ -1683,10 +1723,10 @@ On Error GoTo Err_Handler
     ShowControls Me, True, "*", True
         
     ' determine record count
-    Dim count As Integer
+    Dim Count As Integer
     If Not rs.EOF Then
         rs.MoveLast
-        count = rs.RecordCount
+        Count = rs.RecordCount
         rs.MoveFirst
         
         'hide no records
@@ -1696,13 +1736,13 @@ On Error GoTo Err_Handler
     End If
         
     'set # species found
-    lblSpeciesFound.Caption = count & " species found"
+    lblSpeciesFound.Caption = Count & " species found"
         
     'set search for caption
     lblSearchForValue.Caption = """" & strSearch & """"
     
     'extend form if species count > 0
-    If count > 0 Then
+    If Count > 0 Then
         SetWindowSize Me, 8000, Me.Width
     End If
     
@@ -1741,12 +1781,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/5/2016 - initial version
+'   BLC - 8/2/2016 - use Me.CallingForm
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub

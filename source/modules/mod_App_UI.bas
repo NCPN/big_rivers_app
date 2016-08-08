@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.05
+' Version:      1.06
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -14,6 +14,7 @@ Option Explicit
 '               BLC, 4/26/2016  - 1.03 - added ClickAction() for handling various app actions
 '               BLC, 6/24/2016 - 1.04 - replaced Exit_Function > Exit_Handler
 '               BLC, 7/5/2016  - 1.05 - added ClearFields() to support Species Search
+'               BLC, 8/8/2016 - 1.06 - revised to use default table name in PopulateForm()
 ' =================================
 
 ' =================================
@@ -397,6 +398,7 @@ On Error GoTo Err_Handler
             oArgs = "1|2016|WCC"
         Case "understory cover"
         Case "vegetation walk"
+            fName = "VegWalk"
         Case "species"
         Case "unknowns"
             fName = "Unknown"
@@ -504,17 +506,21 @@ End Function
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 6/2/2016 - moved from forms (EventsList, TaglineList)
+'   BLC - 8/8/2016 - revised to use default table name
 ' ---------------------------------
 Public Sub PopulateForm(frm As Form, ID As Long)
 On Error GoTo Err_Handler
-    Dim strSQL As String
+    Dim strSQL As String, strTable As String
 
     With frm
+        'default
+        strTable = .Name
         
         'find the form & populate its controls from the ID
         Select Case .Name
             Case "Contact"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
+                'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxFirst").ControlSource = "FirstName"
                 .Controls("tbxMI").ControlSource = "MiddleInitial"
@@ -526,7 +532,9 @@ On Error GoTo Err_Handler
                 .Controls("tbxPosition").ControlSource = "PositionTitle"
                 .Controls("tbxExtension").ControlSource = "WorkExtension"
             Case "Events"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
+                strTable = "Event"
+                'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxSite").ControlSource = "Site_ID"
                 .Controls("cbxLocation").ControlSource = "Location_ID"
@@ -534,32 +542,42 @@ On Error GoTo Err_Handler
                 .Controls("lblMsg").Caption = ""
             Case "Feature"
                 'strSQL = GetTemplate()
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxFeature").ControlSource = "Feature"
                 '.Controls("cbxLocation").ControlSource = ""
             Case "Location"
-                'strSQL = GetTemplate()
-                '.Controls("").ControlSource = ""
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Location|id" & PARAM_SEPARATOR & ID)
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxLocation").ControlSource = "CollectionSourceName"
+                .Controls("tbxDistance").ControlSource = "HeadToOrientDistance"
+                .Controls("tbxBearing").ControlSource = "HeadToOrientBearing"
+                
             Case "SetDatasheetDefaults"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "tsys_Datasheet_Defaults|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "tsys_Datasheet_Defaults|id" & PARAM_SEPARATOR & ID)
+                strTable = "tsys_Datasheet_Defaults"
+                'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxSpecies").ControlSource = "SpeciesRows"
                 .Controls("tbxBlanks").ControlSource = "BlankRows"
             Case "Site"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
+                'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxSiteCode").ControlSource = "SiteCode"
                 .Controls("tbxSiteName").ControlSource = "SiteName"
                 .Controls("tbxDescription").ControlSource = "SiteDescription"
                 .Controls("tbxSiteDirections").ControlSource = "SiteDirections"
             Case "Tagline"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxCause").ControlSource = "HeightType"
                 .Controls("tbxDistance").ControlSource = "LineDistance_m"
                 .Controls("tbxHeight").ControlSource = "Height_cm"
             Case "Transducer"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Transducer|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Transducer|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxTiming").ControlSource = "Timing"
@@ -569,7 +587,7 @@ On Error GoTo Err_Handler
                 .Controls("tbxSampleTime").ControlSource = "ActionTime"
                 .Controls("chkSurveyed").ControlSource = "IsSurveyed"
             Case "VegPlot"
-                strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "VegPlot|id" & PARAM_SEPARATOR & ID)
+                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "VegPlot|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxNumber").ControlSource = "PlotNumber"
@@ -585,10 +603,12 @@ On Error GoTo Err_Handler
                 .Controls("chkHasSocialTrails").ControlSource = "HasSocialTrails"
             Case "VegTransect"
                 'strSQL = GetTemplate()
+                'set form fields to record fields as datasource
                 '.Controls("").ControlSource = ""
             
         End Select
     
+        strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & strTable & "|id" & PARAM_SEPARATOR & ID)
         .RecordSource = strSQL
         
     End With
