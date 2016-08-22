@@ -550,10 +550,10 @@ On Error GoTo Err_Handler
                 'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Location|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
-                .Controls("tbxLocation").ControlSource = "CollectionSourceName"
-                .Controls("tbxDistance").ControlSource = "HeadToOrientDistance"
+                .Controls("tbxName").ControlSource = "CollectionSourceName"
+                .Controls("tbxDistance").ControlSource = "HeadToOrientDistance_m"
                 .Controls("tbxBearing").ControlSource = "HeadToOrientBearing"
-                
+                .Controls("tbxNotes").ControlSource = "LocationNotes"
             Case "SetDatasheetDefaults"
                 'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "tsys_Datasheet_Defaults|id" & PARAM_SEPARATOR & ID)
                 strTable = "tsys_Datasheet_Defaults"
@@ -607,6 +607,10 @@ On Error GoTo Err_Handler
                 '.Controls("").ControlSource = ""
             
         End Select
+    
+        'save record changes from form first to avoid "Write Conflict" errors
+        'where form & SQL are attempting to save record
+'        frm.Dirty = False
     
         strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & strTable & "|id" & PARAM_SEPARATOR & ID)
         .RecordSource = strSQL

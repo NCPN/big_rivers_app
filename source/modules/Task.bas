@@ -174,6 +174,66 @@ End Property
 '---------------------
 ' Methods
 '---------------------
+
+'======== Standard Methods ===========
+
+' ---------------------------------
+' SUB:          Class_Initialize
+' Description:  Initialize the class
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  -
+' Adapted:      Bonnie Campbell, April 4, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 4/4/2016 - initial version
+' ---------------------------------
+Private Sub Class_Initialize()
+On Error GoTo Err_Handler
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Error #" & Err.Description, vbCritical, _
+                "Error encounter (#" & Err.Number & " - Class_Initialize[cls_Task])"
+    End Select
+    Resume Exit_Handler
+
+End Sub
+
+'---------------------------------------------------------------------------------------
+' SUB:          Class_Terminate
+' Description:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/Date:  Bonnie Campbell
+' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
+' Revisions:
+'   BLC, 4/4/2016 - initial version
+'---------------------------------------------------------------------------------------
+Private Sub Class_Terminate()
+On Error GoTo Err_Handler
+
+    'Set m_ID = 0
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Error #" & Err.Description, vbCritical, _
+                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Task])"
+    End Select
+    Resume Exit_Handler
+End Sub
 ' ---------------------------------
 ' Sub:          AddTask
 ' Description:  Add new task item
@@ -192,36 +252,37 @@ End Property
 Public Sub AddTask()
 On Error GoTo Err_Handler
 
-'context As String, recordID As Integer, description As String, _
-                    status As Integer, priority As Integer, requestor As Integer, _
-                    Optional completor As Integer
-
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    Dim strSQL As String
+''context As String, recordID As Integer, description As String, _
+'                    status As Integer, priority As Integer, requestor As Integer, _
+'                    Optional completor As Integer
+'
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'    Dim strSQL As String
+'
+'    Set db = CurrentDb
+'    Set rs = db.OpenRecordset("Task")
+'
+'    With rs
+'        .AddNew
+'        !TaskType = Me.TaskType
+'        !Task = Me.Task
+'        !Status = Me.Status
+'        !Priority = Me.Priority
+'        !RequestedBy = Me.RequestedByID
+'        !RequestDate = Me.RequestDate
+'        !CompletedBy = Me.CompletedByID
+'        !CompleteDate = Me.CompleteDate
+'        !LastUpdateBy = 1
+'        !LastUpdate = Now()
+'
+'        .update
+'        If IsNumeric(!ID) Then
+'            Me.ID = !ID
+'        End If
+'    End With
     
-    Set db = CurrentDb
-    Set rs = db.OpenRecordset("Task")
-    
-    With rs
-        .AddNew
-        !TaskType = Me.TaskType
-        !Task = Me.Task
-        !Status = Me.Status
-        !Priority = Me.Priority
-        !RequestedBy = Me.RequestedByID
-        !RequestDate = Me.RequestDate
-        !CompletedBy = Me.CompletedByID
-        !CompleteDate = Me.CompleteDate
-        !LastUpdateBy = 1
-        !LastUpdate = Now()
-        
-        .update
-        If IsNumeric(!ID) Then
-            Me.ID = !ID
-        End If
-    End With
-    
+    Me.SaveToDb False
 
 Exit_Handler:
     Exit Sub
@@ -230,6 +291,63 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - AddTask[Task class])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+'---------------------------------------------------------------------------------------
+' SUB:          SaveToDb
+' Description:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:
+'   Fionnuala, February 2, 2009
+'   David W. Fenton, October 27, 2009
+'   http://stackoverflow.com/questions/595132/how-to-get-id-of-newly-inserted-record-using-excel-vba
+' Source/Date:  Bonnie Campbell
+' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
+' Revisions:
+'   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
+'---------------------------------------------------------------------------------------
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
+On Error GoTo Err_Handler
+    
+    Dim template As String
+    
+    template = "i_task"
+    
+    Dim params(0 To 13) As Variant
+    
+    With Me
+        params(0) = "Task"
+        params(1) = .Task
+        params(2) = .Status
+        params(3) = .Priority
+        params(4) = .RequestedByID
+        params(5) = CDate(Format(.RequestDate, "YYYY-mm-dd"))
+        params(6) = .CompletedByID
+        params(7) = CDate(Format(.CompleteDate, "YYYY-mm-dd"))
+        
+        'params 8-11 --> createdate, lastmodified
+        
+        If IsUpdate Then
+            template = "u_task"
+            params(12) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Error #" & Err.Description, vbCritical, _
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Task])"
     End Select
     Resume Exit_Handler
 End Sub

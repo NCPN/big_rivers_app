@@ -8,13 +8,15 @@ Option Explicit
 ' =================================
 ' CLASS:        VegTransect
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  VegTransect object related properties, events, functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 10/28/2015
 ' References:   -
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
+'               BLC - 8/8/2016   - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -225,24 +227,57 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'record VegPlots must have:
-    strSQL = "INSERT INTO VegTransect(Location_ID, Event_ID, " _
-                & "TransectNumber, SampleDate) VALUES " _
-                & "(" & Me.LocationID & "," & Me.EventID & "," _
-                & Me.TransectNumber & ",#" & Me.SampleDate & "#);"
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'record VegPlots must have:
+'    strSQL = "INSERT INTO VegTransect(Location_ID, Event_ID, " _
+'                & "TransectNumber, SampleDate) VALUES " _
+'                & "(" & Me.LocationID & "," & Me.EventID & "," _
+'                & Me.TransectNumber & ",#" & Me.SampleDate & "#);"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_vegtransect"
+    
+    Dim params(0 To 6) As Variant
+
+    With Me
+        params(0) = "VegTransect"
+        params(1) = .LocationID
+        params(2) = .EventID
+        params(3) = .TransectNumber
+        params(4) = .SampleDate
+        
+        If IsUpdate Then
+            template = "u_vegtransect"
+            params(5) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
+    
+'    'add a record for created by
+'    Dim act As New RecordAction
+'
+'    With act
+'        .RefAction = "R"
+'        .ContactID = TempVars("UserID")
+'        .RefID = Me.ID
+'        .RefTable = "VegTransect"
+'        .SaveToDb
+'    End With
 
 Exit_Handler:
     Exit Sub

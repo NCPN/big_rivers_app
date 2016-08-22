@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Tagline
 ' Level:        Framework class
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Record Tagline object related properties, events, functions & procedures
 '
@@ -16,6 +16,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 6/1/2016  - 1.01 - updated to use GetTemplate() in SaveToDb()
+'               BLC - 8/8/2016  - 1.02 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -195,39 +197,75 @@ End Sub
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
 '   BLC, 6/1/2016 - updated to use GetTemplate()
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    If Me.ID > 0 Then
+'        'update tagline:
+'        strSQL = GetTemplate("u_tagline_record", _
+'                    "LineDistSource" & PARAM_SEPARATOR & Me.LineDistSource _
+'                    & "|LineDistSourceID" & PARAM_SEPARATOR & Me.LineDistSourceID _
+'                    & "|LineDistType" & PARAM_SEPARATOR & Me.LineDistType _
+'                    & "|LineDistance" & PARAM_SEPARATOR & Me.LineDistance _
+'                    & "|HeightType" & PARAM_SEPARATOR & Me.HeightType _
+'                    & "|Height" & PARAM_SEPARATOR & Me.Height _
+'                    & "|ID" & PARAM_SEPARATOR & Me.ID)
+'    Else
+'        'insert tagline
+'        strSQL = GetTemplate("i_tagline_record", _
+'                    "LineDistSource" & PARAM_SEPARATOR & Me.LineDistSource _
+'                    & "|LineDistSourceID" & PARAM_SEPARATOR & Me.LineDistSourceID _
+'                    & "|LineDistType" & PARAM_SEPARATOR & Me.LineDistType _
+'                    & "|LineDistance" & PARAM_SEPARATOR & Me.LineDistance _
+'                    & "|HeightType" & PARAM_SEPARATOR & Me.HeightType _
+'                    & "|Height" & PARAM_SEPARATOR & Me.Height)
+'    End If
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+
+'----
+    Dim template As String
     
-    Set db = CurrentDb
+    template = "i_tagline"
     
-    If Me.ID > 0 Then
-        'update tagline:
-        strSQL = GetTemplate("u_tagline_record", _
-                    "LineDistSource" & PARAM_SEPARATOR & Me.LineDistSource _
-                    & "|LineDistSourceID" & PARAM_SEPARATOR & Me.LineDistSourceID _
-                    & "|LineDistType" & PARAM_SEPARATOR & Me.LineDistType _
-                    & "|LineDistance" & PARAM_SEPARATOR & Me.LineDistance _
-                    & "|HeightType" & PARAM_SEPARATOR & Me.HeightType _
-                    & "|Height" & PARAM_SEPARATOR & Me.Height _
-                    & "|ID" & PARAM_SEPARATOR & Me.ID)
-    Else
-        'insert tagline
-        strSQL = GetTemplate("i_tagline_record", _
-                    "LineDistSource" & PARAM_SEPARATOR & Me.LineDistSource _
-                    & "|LineDistSourceID" & PARAM_SEPARATOR & Me.LineDistSourceID _
-                    & "|LineDistType" & PARAM_SEPARATOR & Me.LineDistType _
-                    & "|LineDistance" & PARAM_SEPARATOR & Me.LineDistance _
-                    & "|HeightType" & PARAM_SEPARATOR & Me.HeightType _
-                    & "|Height" & PARAM_SEPARATOR & Me.Height)
-    End If
+    Dim params(0 To 8) As Variant
+
+    With Me
+        params(0) = "Tagline"
+        params(1) = .LineDistSource
+        params(2) = .LineDistSourceID
+        params(3) = .LineDistType
+        params(4) = .LineDistance
+        params(5) = .HeightType
+        params(6) = .Height
+        
+        If IsUpdate Then
+            template = "u_tagline"
+            params(7) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
     
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+'    'add a record for created by
+'    Dim act As New RecordAction
+'
+'    With act
+'        .RefAction = "R"
+'        .ContactID = TempVars("UserID")
+'        .RefID = Me.ID
+'        .RefTable = "Tagline"
+'        .SaveToDb
+'    End With
 
 Exit_Handler:
     Exit Sub
@@ -236,7 +274,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Tagline])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Tagline])"
     End Select
     Resume Exit_Handler
 End Sub

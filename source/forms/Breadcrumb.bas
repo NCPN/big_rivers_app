@@ -18,8 +18,8 @@ Begin Form
     Width =2220
     DatasheetFontHeight =11
     ItemSuffix =10
-    Right =20208
-    Bottom =9408
+    Right =13860
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -365,7 +365,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Breadcrumb form])"
+            "Error encountered (#" & Err.Number & " - SetHeaderColor[Breadcrumb form])"
     End Select
     Resume Exit_Handler
 End Sub

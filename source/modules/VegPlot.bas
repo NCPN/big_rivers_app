@@ -8,13 +8,15 @@ Option Explicit
 ' =================================
 ' CLASS:        VegPlot
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  VegPlot object related properties, events, functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 10/28/2015
 ' References:   -
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
+'               BLC - 8/8/2016   - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -289,34 +291,68 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'record VegPlots must have:
-    strSQL = "INSERT INTO VegPlot(Event_ID, Site_ID, Feature_ID, " _
-                & "VegTransect_ID, PlotNumber, PlotDistance_m, " _
-                & "ModalSedimentSize, PercentFine, PercentWater, " _
-                & "UnderstoryRootedPctCover, PlotDensity, NoCanopyVeg, " _
-                & "NoRootedVeg, HasSocialTrail, FilamentousAlgae, " _
-                & "NoIndicatorSpecies) VALUES " _
-                & "(" & Me.EventID & "," & Me.SiteID & "," _
-                & Me.FeatureID & "," & Me.VegTransectID & "," _
-                & Me.PlotNumber & "," & Me.PlotDistance & ",'" _
-                & Me.ModalSedimentSize & "'," & Me.PercentFines & "," _
-                & Me.PercentWater & "," & Me.UnderstoryRootedPctCover & "," _
-                & Me.PlotDensity & "," & Me.NoCanopyVeg & "," _
-                & Me.NoRootedVeg & "," & Me.HasSocialTrail & "," _
-                & Me.FilamentousAlgae & "," & Me.NoIndicatorSpecies & ");"
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'record VegPlots must have:
+'    strSQL = "INSERT INTO VegPlot(Event_ID, Site_ID, Feature_ID, " _
+'                & "VegTransect_ID, PlotNumber, PlotDistance_m, " _
+'                & "ModalSedimentSize, PercentFine, PercentWater, " _
+'                & "UnderstoryRootedPctCover, PlotDensity, NoCanopyVeg, " _
+'                & "NoRootedVeg, HasSocialTrail, FilamentousAlgae, " _
+'                & "NoIndicatorSpecies) VALUES " _
+'                & "(" & Me.EventID & "," & Me.SiteID & "," _
+'                & Me.FeatureID & "," & Me.VegTransectID & "," _
+'                & Me.PlotNumber & "," & Me.PlotDistance & ",'" _
+'                & Me.ModalSedimentSize & "'," & Me.PercentFines & "," _
+'                & Me.PercentWater & "," & Me.UnderstoryRootedPctCover & "," _
+'                & Me.PlotDensity & "," & Me.NoCanopyVeg & "," _
+'                & Me.NoRootedVeg & "," & Me.HasSocialTrail & "," _
+'                & Me.FilamentousAlgae & "," & Me.NoIndicatorSpecies & ");"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_vegplot"
+    
+    Dim params(0 To 18) As Variant
+
+    With Me
+        params(0) = "VegPlot"
+        params(1) = .EventID
+        params(2) = .SiteID
+        params(3) = .FeatureID
+        params(4) = .VegTransectID
+        params(5) = .PlotNumber
+        params(6) = .PlotDistance
+        params(7) = .ModalSedimentSize
+        params(8) = .PercentFines
+        params(9) = .PercentWater
+        params(10) = .UnderstoryRootedPctCover
+        params(11) = .PlotDensity
+        params(12) = .NoCanopyVeg
+        params(13) = .NoRootedVeg
+        params(14) = .HasSocialTrail
+        params(15) = .FilamentousAlgae
+        params(16) = .NoIndicatorSpecies
+        
+        If IsUpdate Then
+            template = "u_vegplot"
+            params(17) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
 
 Exit_Handler:
     Exit Sub

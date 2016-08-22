@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        RecordAction
 ' Level:        Framework class
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Record action object related properties, events, functions & procedures
 '
@@ -16,6 +16,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 7/26/2016 - 1.01 - revised Action to RefAction to avoid conflict (Jet reserved word)
+'               BLC - 8/8/2016  - 1.02 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -205,8 +207,9 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
 '    Dim strSQL As String
@@ -252,7 +255,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Action])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Action])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -228,28 +228,51 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'events must have: collection source
-    strSQL = "INSERT INTO Location(CollectionSourceName, LocationType, LocationName, " _
-                & "HeadtoOrientDistance_m, HeadtoOrientBearing, CreateDate, " _
-                & "CreatedBy_ID, LastModified, LastModifiedBy_ID) VALUES " _
-                & "('" & Me.CollectionSourceName & "','" & Me.LocationType & "','" _
-                & Me.LocationName & "'," & Me.HeadtoOrientDistance _
-                & "," & Me.HeadtoOrientBearing & ", Now()," _
-                & Me.CreatedByID & ", Now()," _
-                & Me.CreatedByID & ");"
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'events must have: collection source
+'    strSQL = "INSERT INTO Location(CollectionSourceName, LocationType, LocationName, " _
+'                & "HeadtoOrientDistance_m, HeadtoOrientBearing, CreateDate, " _
+'                & "CreatedBy_ID, LastModified, LastModifiedBy_ID) VALUES " _
+'                & "('" & Me.CollectionSourceName & "','" & Me.LocationType & "','" _
+'                & Me.LocationName & "'," & Me.HeadtoOrientDistance _
+'                & "," & Me.HeadtoOrientBearing & ", Now()," _
+'                & Me.CreatedByID & ", Now()," _
+'                & Me.CreatedByID & ");"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_location"
+    
+    Dim params(0 To 10) As Variant
+
+    With Me
+        params(0) = .CollectionSourceName
+        params(1) = .LocationType
+        params(2) = .LocationName
+        params(3) = .HeadtoOrientDistance
+        params(4) = .HeadtoOrientBearing
+        'params 5-8 are create, last modified
+        
+        If IsUpdate Then
+            template = "u_location"
+            params(9) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
 
 Exit_Handler:
     Exit Sub
@@ -258,7 +281,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Location])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Location])"
     End Select
     Resume Exit_Handler
 

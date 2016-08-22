@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Transducer
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Transducer object related properties, events, functions & procedures
 '
@@ -21,6 +21,8 @@ Option Explicit
 '   Michael user3480989, January 14, 2016
 '   http://stackoverflow.com/questions/34783997/inserting-date-from-access-db-into-sql-server-2008r2
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
+'               BLC - 8/8/2016  - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -231,37 +233,76 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String, params As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'record Transducers must have:
-'    strSQL = "INSERT INTO Transducer(Event_ID, TransducerType, TransducerNumber, " _
-'                & "SerialNumber, IsSurveyed, Timing, ActionDate, ActionTime) VALUES " _
-'                & "(" & Me.EventID & ",'" & Me.TransducerType & "','" _
-'                & Me.TransducerNumber & "','" & Me.SerialNumber & "'," _
-'                & Me.IsSurveyed & ",'" & Me.Timing & "',#" _
-'                & CDate(Me.ActionDate) & "#,#" & Format(Me.ActionTime, "hh:mm:ss") & "#);"
+'    Dim strSQL As String, params As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'record Transducers must have:
+''    strSQL = "INSERT INTO Transducer(Event_ID, TransducerType, TransducerNumber, " _
+''                & "SerialNumber, IsSurveyed, Timing, ActionDate, ActionTime) VALUES " _
+''                & "(" & Me.EventID & ",'" & Me.TransducerType & "','" _
+''                & Me.TransducerNumber & "','" & Me.SerialNumber & "'," _
+''                & Me.IsSurveyed & ",'" & Me.Timing & "',#" _
+''                & CDate(Me.ActionDate) & "#,#" & Format(Me.ActionTime, "hh:mm:ss") & "#);"
+'
+'    params = "EventID" & PARAM_SEPARATOR & Me.EventID & _
+'            "|TransducerType" & PARAM_SEPARATOR & Me.TransducerType & _
+'            "|TransducerNumber" & PARAM_SEPARATOR & Me.TransducerNumber & _
+'            "|SerialNumber" & PARAM_SEPARATOR & Me.SerialNumber & _
+'            "|IsSurveyed" & PARAM_SEPARATOR & Me.IsSurveyed & _
+'            "|Timing" & PARAM_SEPARATOR & Me.Timing & _
+'            "|ActionDate" & PARAM_SEPARATOR & CDate(Me.ActionDate) & _
+'            "|ActionTime" & PARAM_SEPARATOR & Format(Me.ActionTime, "hh::mm::ss")
+'
+'    strSQL = GetTemplate("i_transducer", params)
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    params = "EventID" & PARAM_SEPARATOR & Me.EventID & _
-            "|TransducerType" & PARAM_SEPARATOR & Me.TransducerType & _
-            "|TransducerNumber" & PARAM_SEPARATOR & Me.TransducerNumber & _
-            "|SerialNumber" & PARAM_SEPARATOR & Me.SerialNumber & _
-            "|IsSurveyed" & PARAM_SEPARATOR & Me.IsSurveyed & _
-            "|Timing" & PARAM_SEPARATOR & Me.Timing & _
-            "|ActionDate" & PARAM_SEPARATOR & CDate(Me.ActionDate) & _
-            "|ActionTime" & PARAM_SEPARATOR & Format(Me.ActionTime, "hh::mm::ss")
 
-    strSQL = GetTemplate("i_transducer", params)
+    Dim template As String
     
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    template = "i_transducer"
+    
+    Dim params(0 To 10) As Variant
+
+    With Me
+        params(0) = "Transducer"
+        params(1) = .EventID
+        params(2) = .TransducerType
+        params(3) = .TransducerNumber
+        params(4) = .SerialNumber
+        params(5) = .IsSurveyed
+        params(6) = .Timing
+        params(7) = .ActionDate
+        params(8) = .ActionTime
+    
+        If IsUpdate Then
+            template = "u_transducer"
+            params(9) = .ID
+        End If
+
+        .ID = SetRecord(template, params)
+    End With
+    
+'    'add a record for created by
+'    Dim act As New RecordAction
+'
+'    With act
+'        .RefAction = "R"
+'        .ContactID = TempVars("UserID")
+'        .RefID = Me.ID
+'        .RefTable = "VegTransect"
+'        .SaveToDb
+'    End With
+
 
 Exit_Handler:
     Exit Sub

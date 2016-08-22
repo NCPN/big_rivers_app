@@ -8,13 +8,15 @@ Option Explicit
 ' =================================
 ' CLASS:        Feature
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Feature object related properties, events, functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 10/28/2015
 ' References:   -
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
+'               BLC - 8/8/2016   - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -181,23 +183,46 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'events must have: start date, site ID, location ID, protocol ID
-    strSQL = "INSERT INTO Feature(Location_ID, Feature, FeatureDescription, FeatureDirections) VALUES " _
-                & "(" & Me.LocationID & ",'" & Me.Name & "','" _
-                & Me.Description & "','" & Me.Directions & "');"
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'events must have: start date, site ID, location ID, protocol ID
+'    strSQL = "INSERT INTO Feature(Location_ID, Feature, FeatureDescription, FeatureDirections) VALUES " _
+'                & "(" & Me.LocationID & ",'" & Me.Name & "','" _
+'                & Me.Description & "','" & Me.Directions & "');"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_feature"
+    
+    Dim params(0 To 6) As Variant
+    
+    With Me
+        params(0) = "Feature"
+        params(1) = .LocationID
+        params(2) = .Name
+        params(3) = .Description
+        params(4) = .Directions
+        
+        If IsUpdate Then
+            template = "u_feature"
+            params(5) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
+
 
 Exit_Handler:
     Exit Sub
@@ -206,8 +231,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Feature])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Feature])"
     End Select
     Resume Exit_Handler
-
 End Sub

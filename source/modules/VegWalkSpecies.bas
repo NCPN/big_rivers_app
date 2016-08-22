@@ -8,13 +8,15 @@ Option Explicit
 ' =================================
 ' CLASS:        VegWalkSpecies
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  VegWalk species object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 4/19/2016
 ' References:   -
 ' Revisions:    BLC - 4/19/2016 - 1.00 - initial version
+'               BLC - 8/8/2016  - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -423,23 +425,55 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/19/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/19/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'record actions must have:
+'    strSQL = "INSERT INTO VegWalkSpecies(VegWalk_ID, Master_PLANT_Code, IsSeedling) VALUES " _
+'                & "(" & Me.VegWalkID & ",'" & Me.MasterPlantCode & "'," _
+'                & Me.IsSeedling & ");"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
     
-    Set db = CurrentDb
+    Dim template As String
     
-    'record actions must have:
-    strSQL = "INSERT INTO VegWalkSpecies(VegWalk_ID, Master_PLANT_Code, IsSeedling) VALUES " _
-                & "(" & Me.VegWalkID & ",'" & Me.MasterPlantCode & "'," _
-                & Me.IsSeedling & ");"
-
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    template = "i_vegwalk_species"
+    
+    Dim params(0 To 5) As Variant
+    
+    With Me
+        params(0) = "VegWalkSpecies"
+        params(1) = .VegWalkID
+        params(2) = .MasterPlantCode
+        params(3) = .IsSeedling
+        
+        If IsUpdate Then
+            template = "u_vegwalk_species"
+            params(4) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
+    
+'    'add a record for created by
+'    Dim act As New RecordAction
+'
+'    With act
+'        .RefAction = "R"
+'        .ContactID = TempVars("UserID")
+'        .RefID = Me.ID
+'        .RefTable = "VegWalkSpecies"
+'        .SaveToDb
+'    End With
 
 
 Exit_Handler:

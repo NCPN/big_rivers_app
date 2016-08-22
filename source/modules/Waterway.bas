@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Waterway
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:   Waterway (River) object related properties, events, functions & procedures
 ' Note:          The term Waterway is used instead of River to avoid collision with the
@@ -17,6 +17,8 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, 4/6/2015
 ' References:   -
 ' Revisions:    BLC - 4/6/2015 - 1.00 - initial version
+'               BLC - 8/8/2016 - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -158,23 +160,44 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    ' Waterways must have:
-    strSQL = "INSERT INTO River(Park_ID, River, Segment) VALUES " _
-                & "(" & Me.ParkID & ",'" & Me.Name & "','" _
-                & Me.segment & "');"
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    ' Waterways must have:
+'    strSQL = "INSERT INTO River(Park_ID, River, Segment) VALUES " _
+'                & "(" & Me.ParkID & ",'" & Me.Name & "','" _
+'                & Me.segment & "');"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_waterway"
+    
+    Dim params(0 To 5) As Variant
+
+    With Me
+        params(0) = "River"
+        params(1) = .ParkID
+        params(2) = .Name
+        params(3) = .segment
+        
+        If IsUpdate Then
+            template = "u_waterway"
+            params(4) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
 
 Exit_Handler:
     Exit Sub
@@ -183,7 +206,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Waterway])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Waterway])"
     End Select
     Resume Exit_Handler
 End Sub

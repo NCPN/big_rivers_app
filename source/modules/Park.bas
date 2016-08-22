@@ -8,13 +8,15 @@ Option Explicit
 ' =================================
 ' CLASS:        Park
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Record Park object related properties, events, functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 11/3/2015
 ' References:   -
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
+'               BLC - 8/8/2016  - 1.01 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -169,23 +171,45 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'record Parks must have:
-    strSQL = "INSERT INTO Park(ParkCode, ParkName, ParkState, ActiveForProtocol) VALUES " _
-                & "('" & Me.Code & "','" & Me.Name & "','" _
-                & Me.State & "'," & Me.IsActiveForProtocol & ");"
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'record Parks must have:
+'    strSQL = "INSERT INTO Park(ParkCode, ParkName, ParkState, ActiveForProtocol) VALUES " _
+'                & "('" & Me.Code & "','" & Me.Name & "','" _
+'                & Me.State & "'," & Me.IsActiveForProtocol & ");"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_park"
+    
+    Dim params(0 To 6) As Variant
+    
+    With Me
+        params(0) = "Park"
+        params(1) = .Code
+        params(2) = .Name
+        params(3) = .State
+        params(4) = .IsActiveForProtocol
+        
+        If IsUpdate Then
+            template = "u_park"
+            params(5) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
 
 Exit_Handler:
     Exit Sub
@@ -194,7 +218,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Park])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Park])"
     End Select
     Resume Exit_Handler
 End Sub

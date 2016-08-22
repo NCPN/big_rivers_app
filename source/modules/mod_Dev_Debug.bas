@@ -1098,8 +1098,29 @@ End Sub
 
 Public Sub DoItAgain()
 
-    Dim a As New ExtArray
+'    Dim a As New ExtArray
+'
+'    a.Name = "my new array"
+
+    TempVars("ContactID") = 1
+    Dim c As New Location 'Person 'AppComment
     
-    a.Name = "my new array"
+    With c
+''        .Comment = "test comment from dev_debug"
+''        .CommentorID = 1
+''        .CommentType = "test"
+'        .FirstName = "Tsmeer"
+'        .LastName = "Mytest"
+'        .Email = "abcd@def.com"
+'        .Organization = "NCPN"
+'        .Username = "mylogin"
+'        .IsActive = 1
+'        .AccessLevel = 2
+        .LocationType = "P"
+        .LocationName = "X"
+        .HeadtoOrientDistance = 3
+        .HeadtoOrientBearing = 22
+        .SaveToDb False
+    End With
 
 End Sub

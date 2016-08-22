@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =4110
-    Top =3360
-    Right =17970
-    Bottom =14355
+    Left =4455
+    Top =3150
+    Right =21885
+    Bottom =14160
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x741eede0d9c6e440
@@ -668,7 +668,7 @@ On Error GoTo Err_Handler
     'set global values
     TempVars.Add "AppUserID", CInt(cbxUser.Column(0))
     TempVars.Add "UserAccessLevel", cbxUser.Column(2)
-    
+
     ReadyToContinue
     
 Exit_Handler:

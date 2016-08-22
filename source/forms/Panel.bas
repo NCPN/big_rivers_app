@@ -18,8 +18,8 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =9
-    Right =15552
-    Bottom =9408
+    Right =13860
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -97,7 +97,7 @@ Begin Form
             PressedForeTint =75.0
         End
         Begin FormHeader
-            Height =444
+            Height =447
             BackColor =65280
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -426,7 +426,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Panel form])"
+            "Error encountered (#" & Err.Number & " - SetHeaderColor[Panel form])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -20,6 +20,8 @@ Begin
         dbBinary "GUID" = Begin
             0x95e2b9916d0efe49978831528b5ae2f1
         End
+        dbInteger "ColumnWidth" ="660"
+        dbBoolean "ColumnHidden" ="0"
     End
     Begin
         dbText "Name" ="tsys_Db_Templates.TemplateName"

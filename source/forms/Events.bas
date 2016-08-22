@@ -20,14 +20,15 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =3360
-    Top =3645
-    Right =12840
-    Bottom =14640
+    Left =7905
+    Top =2610
+    Right =15765
+    Bottom =9330
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x3fd3389195cde440
     End
+    RecordSource ="SELECT * FROM Event WHERE ID = 30; "
     Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -182,7 +183,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Choose the site & location, then enter the sampling start date."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -212,13 +213,14 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =900
                     Width =720
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="Ì†ΩÌ∑©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -226,9 +228,11 @@ Begin Form
                     LayoutCachedTop =900
                     LayoutCachedWidth =7380
                     LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -247,9 +251,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777184
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="DINO  >  Yampa"
                     GridlineColor =10921638
                     LayoutCachedLeft =5820
                     LayoutCachedTop =60
@@ -364,7 +368,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -386,6 +391,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxStartDate"
+                    ControlSource ="StartDate"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter the date of this sampling visit started"
                     ConditionalFormat = Begin
@@ -492,7 +498,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -552,6 +559,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    ControlSource ="ID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -586,6 +595,7 @@ Begin Form
                         0x61006c00750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxSite"
+                    ControlSource ="Site_ID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;0;1440"
                     AfterUpdate ="[Event Procedure]"
@@ -632,6 +642,7 @@ Begin Form
                         0x61006c00750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxLocation"
+                    ControlSource ="Location_ID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1440;0;0"
                     AfterUpdate ="[Event Procedure]"
@@ -668,9 +679,9 @@ Begin Form
                     RightMargin =360
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =6750105
                     Name ="lblMsg"
-                    Caption ="message"
+                    Caption ="Updating record..."
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =525
@@ -691,9 +702,9 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =6750105
                     Name ="lblMsgIcon"
-                    Caption ="icon"
+                    Caption ="‚è©"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -727,7 +738,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -737,6 +748,7 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 7/26/2016 - 1.01 - added GetRecords() calls
 '               BLC - 8/2/2016  - 1.02 - use Me.CallingForm
+'               BLC - 8/22/2016 - 1.03 - added m_SaveOK, Form_BeforeUpdate()
 ' =================================
 
 '---------------------
@@ -752,6 +764,8 @@ Private m_ButtonCaption
 Private m_SelectedID As Integer
 Private m_SelectedValue As String
 Private m_CallingForm As String
+
+Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
 '---------------------
 ' Event Declarations
@@ -876,7 +890,7 @@ On Error GoTo Err_Handler
                  Nz(TempVars("River"), "")
 
     Title = "Events (Sampling Visits)"
-    Directions = "Choose the site & location, then enter the sampling start date."
+    Directions = "Choose the site " & StringFromCodepoint(uAmpersand) & " location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -981,6 +995,37 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          Form_BeforeUpdate
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, August 22, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 8/22/2016 - initial version
+' ---------------------------------
+Private Sub zForm_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+              
+    If Not m_SaveOK Then
+        Cancel = True
+    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          tbxStartDate_AfterUpdate
 ' Description:  Dropdown after update actions
 ' Assumptions:  -
@@ -1054,7 +1099,13 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
+    'set enable btnSave_Click save
+    m_SaveOK = True
+    
     UpsertRecord Me
+    
+    'revert to disable non-btnSave_Click save
+    m_SaveOK = False
     
 ''    1) Click to edit
 ''       a) populates form fields
@@ -1291,7 +1342,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 ' ---------------------------------
-Private Sub ReadyForSave()
+Public Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     Dim isOK As Boolean
@@ -1309,7 +1360,7 @@ On Error GoTo Err_Handler
     btnSave.Enabled = isOK
     
     'refresh form
-    Me.Requery
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub

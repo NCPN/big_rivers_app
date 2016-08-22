@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        WoodyCanopySpecies
 ' Level:        Framework class
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Woody Canopy cover species object related properties, events, functions & procedures for UI display
 '
@@ -16,7 +16,9 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 4/19/2016 - 1.00 - initial version
 '               BLC - 6/10/2016 - 1.01 - revised booleans to byte (values 0 & 1 vs. 0 & -1)
-'               BLC - 6/11/2016 - 1.01 - updated to use GetTemplate()
+'               BLC - 6/11/2016 - 1.02 - updated to use GetTemplate()
+'               BLC - 8/8/2016  - 1.03 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -440,28 +442,49 @@ End Sub
 ' Revisions:
 '   BLC, 4/19/2016 - initial version
 '   BLC, 6/11/2016 - revised to GetTemplate()
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    'record actions must have:
-'    strSQL = "INSERT INTO WoodyCanopySpecies(VegPlot_ID, Master_PLANT_Code, PercentCover) VALUES " _
-'                & "(" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
-'                & Me.PercentCover & ");"
-    strSQL = GetTemplate("i_cover_species", _
-                "tbl" & PARAM_SEPARATOR & "WoodyCanopySpecies" & _
-                "vegplotID" & PARAM_SEPARATOR & Me.VegPlotID & _
-                "|masterplantcode" & PARAM_SEPARATOR & Me.MasterPlantCode & _
-                "|pctcover" & PARAM_SEPARATOR & Me.PercentCover)
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    'record actions must have:
+''    strSQL = "INSERT INTO WoodyCanopySpecies(VegPlot_ID, Master_PLANT_Code, PercentCover) VALUES " _
+''                & "(" & Me.VegPlotID & ",'" & Me.MasterPlantCode & "'," _
+''                & Me.PercentCover & ");"
+'    strSQL = GetTemplate("i_cover_species", _
+'                "tbl" & PARAM_SEPARATOR & "WoodyCanopySpecies" & _
+'                "vegplotID" & PARAM_SEPARATOR & Me.VegPlotID & _
+'                "|masterplantcode" & PARAM_SEPARATOR & Me.MasterPlantCode & _
+'                "|pctcover" & PARAM_SEPARATOR & Me.PercentCover)
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_cover_species"
+    
+    Dim params(0 To 5) As Variant
+
+    With Me
+        params(0) = "WoodyCanopySpecies"
+        params(1) = .VegPlotID
+        params(2) = .MasterPlantCode
+        params(3) = .PercentCover
+        
+        If IsUpdate Then
+            template = "u_cover_species"
+            params(4) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
 
 Exit_Handler:
     Exit Sub

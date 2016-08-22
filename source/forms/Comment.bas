@@ -16,10 +16,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =3195
-    Top =3105
-    Right =23115
-    Bottom =14895
+    Left =2790
+    Top =3615
+    Right =16650
+    Bottom =14610
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -381,21 +381,22 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Comment
+' Form:         AppComment
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Comment form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 11/3/2015
 ' References:
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
+'               BLC - 8/9/2016  - 1.01 - revised Comment to AppComment (comment reserved word)
 ' =================================
 
 '---------------------
 ' Declarations
 '---------------------
-Private m_oComment As Comment
+Private m_oComment As AppComment
 
 Private m_Title As String
 Private m_Context As String
@@ -938,11 +939,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 11/12/2015 - initial version
+'   BLC - 8/9/2016   - revised Comment > AppComment (comment reserved word)
 ' ---------------------------------
 Private Sub btnAdd_Click()
 On Error GoTo Err_Handler
     
-    Dim oComment As New Comment
+    Dim oComment As New AppComment
     
     With oComment
         .CommentType = lblContext.Caption
@@ -1088,7 +1090,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Comment form])"
+            "Error encountered (#" & Err.Number & " - SetHeaderColor[Comment form])"
     End Select
     Resume Exit_Handler
 End Sub

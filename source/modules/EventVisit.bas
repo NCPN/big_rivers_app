@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        EventVisit
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.02
 '
 ' Description:  Event object related properties, events, functions & procedures
 '
@@ -16,6 +16,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
 '               BLC - 4/4/2016   - 1.01 - renamed to "EventVisit" to avoid collision w/ "Event" vba term
+'               BLC - 8/8/2016   - 1.02 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert
 ' =================================
 
 '---------------------
@@ -163,52 +165,37 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    'Dim strSQL As String
-    'Dim db As DAO.Database
-    'Dim rs As DAO.Recordset
     Dim template As String
     
     template = "i_event"
     
-'    Set db = CurrentDb
+    Dim params(0 To 6) As Variant
     
-    'events must have: start date, site ID, location ID, protocol ID
-'    strSQL = "INSERT INTO Event(Protocol_ID, Site_ID, Location_ID, StartDate) VALUES " _
-'                & "(" & Me.ProtocolID & "," & Me.SiteID & "," _
-'                & Me.LocationID & "," & Me.StartDate & ");"
-
-'    strSQL = GetTemplate("i_event_record", _
-'                "ProtocolID" & PARAM_SEPARATOR & Me.ProtocolID & "|" _
-'                & "SiteID" & PARAM_SEPARATOR & Me.SiteID & "|" _
-'                & "LocationID" & PARAM_SEPARATOR & Me.LocationID & "|" _
-'                & "StartDate" & PARAM_SEPARATOR & Format(Me.StartDate, "YYYY-mm-dd"))
-'
-'    db.Execute strSQL, dbFailOnError
-'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
-
-    Dim params(0 To 4) As Variant
-
-    params(0) = Me.SiteID
-    params(1) = Me.LocationID
-    params(2) = Me.ProtocolID
-    params(3) = CDate(Format(Me.StartDate, "YYYY-mm-dd"))
-    
-    If IsUpdate Then
-        template = "u_event"
-        params(4) = Me.ID
-    End If
-    
-    Me.ID = SetRecord(template, params)
-
-    'add a record for created by
-    Dim act As New RecordAction
-    With act
-        act.RefAction = "R"
-        'act.ContactID =
-        act.RefID = Me.ID
-        act.RefTable = "Event"
-        act.SaveToDb
+    With Me
+        params(0) = "Event"
+        params(1) = .SiteID
+        params(2) = .LocationID
+        params(3) = .ProtocolID
+        params(4) = CDate(Format(.StartDate, "YYYY-mm-dd"))
+        
+        If IsUpdate Then
+            template = "u_event"
+            params(5) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
     End With
+    
+'    'add a record for created by
+'    Dim act As New RecordAction
+'
+'    With act
+'        .RefAction = "R"
+'        .ContactID = TempVars("UserID")
+'        .RefID = Me.ID
+'        .RefTable = "Event"
+'        .SaveToDb
+'    End With
 
 Exit_Handler:
     Exit Sub
@@ -217,7 +204,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Event])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Event])"
     End Select
     Resume Exit_Handler
 End Sub

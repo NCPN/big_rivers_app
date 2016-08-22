@@ -19,10 +19,10 @@ Begin Form
     Width =8040
     DatasheetFontHeight =11
     ItemSuffix =21
-    Left =2520
-    Top =2400
-    Right =18348
-    Bottom =11808
+    Left =2790
+    Top =3615
+    Right =16650
+    Bottom =14610
     DatasheetGridlinesColor =14806254
     ShortcutMenuBar ="dataentry"
     RecSrcDt = Begin
@@ -904,7 +904,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Tile form])"
+            "Error encountered (#" & Err.Number & " - SetHeaderColor[Tile form])"
     End Select
     Resume Exit_Handler
 End Sub

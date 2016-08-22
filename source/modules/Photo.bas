@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Photo
 ' Level:        Framework class
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Photo object related properties, events, functions & procedures
 '
@@ -17,6 +17,8 @@ Option Explicit
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
 '               BLC - 4/7/2016   - 1.01 - added events & properties, updated schema documentation
 '               BLC - 4/19/2016  - 1.02 - adjusted to mirror data sheets
+'               BLC - 8/8/2016   - 1.03 - SaveToDb() added update parameter to identify if
+'                                        this is an update vs. an insert, revised Comment to AppComment
 ' =================================
 
 '    [ID] [smallint] IDENTITY(1,1) NOT NULL,
@@ -66,7 +68,7 @@ Private m_CreatedByID As Long
 Private m_LastModified As Date
 Private m_LastModifiedByID As Long
 
-Private m_Comments As Comment
+Private m_Comments As AppComment
 
 'Private m_PhotoType As String
 'Private m_Filename As String
@@ -371,51 +373,84 @@ End Sub
 ' Adapted:      Bonnie Campbell, 4/4/2016 - for NCPN tools
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
+'   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '---------------------------------------------------------------------------------------
-Public Sub SaveToDb()
+Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
-    Dim db As DAO.Database
-    Dim rs As DAO.Recordset
-    
-    Set db = CurrentDb
-    
-    '& "PhotogLocationDesc, PhotogOrientation, SurveyPoint_ID, " _
-    '& Me.PhotogLocationDescr & "','" _
-
-    'photos must have:
+'    Dim strSQL As String
+'    Dim db As DAO.Database
+'    Dim rs As DAO.Recordset
+'
+'    Set db = CurrentDb
+'
+'    '& "PhotogLocationDesc, PhotogOrientation, SurveyPoint_ID, " _
+'    '& Me.PhotogLocationDescr & "','" _
+'
+'    'photos must have:
+''    strSQL = "INSERT INTO Photo(PhotoDate, PhotoType, Photographer_ID, " _
+''                & "DigitalFilename, NCPNImageID, PhotogFacing, PhotogLocation, " _
+''                & "PhotogOrientation, SurveyPoint_ID, " _
+''                & "IsCloseup, InActive, IsSkipped, IsReplacement, " _
+''                & "LastPhotoUpdate, CreateDate, CreatedBy_ID, " _
+''                & "LastModified, LastModifiedBy_ID) VALUES " _
+''                & "(#" & Me.PhotoDate & "#,'" & Me.PhotoType & "'," _
+''                & Me.PhotographerID & ",'" & Me.Filename & "','" _
+''                & Me.NCPNImageID & "','" & Me.DirectionFacing & "','" _
+''                & Me.PhotogLocation & "','" _
+''                & Me.PhotogOrientation & "'," & Me.SurveyPtID & "," _
+''                & Me.IsCloseup & "," & Me.IsInActive & "," & Me.IsSkipped & "," _
+''                & Me.IsReplacement & ",#" & Me.LastPhotoUpdate & "#,# Now()#," _
+''                & Me.CreatedByID & ",# Now()#, " & Me.LastModifiedByID & ");"
+'
 '    strSQL = "INSERT INTO Photo(PhotoDate, PhotoType, Photographer_ID, " _
 '                & "DigitalFilename, NCPNImageID, PhotogFacing, PhotogLocation, " _
-'                & "PhotogOrientation, SurveyPoint_ID, " _
+'                & "" _
 '                & "IsCloseup, InActive, IsSkipped, IsReplacement, " _
 '                & "LastPhotoUpdate, CreateDate, CreatedBy_ID, " _
 '                & "LastModified, LastModifiedBy_ID) VALUES " _
 '                & "(#" & Me.PhotoDate & "#,'" & Me.PhotoType & "'," _
-'                & Me.PhotographerID & ",'" & Me.Filename & "','" _
+'                & Me.PhotographerID & ",'" & Me.FileName & "','" _
 '                & Me.NCPNImageID & "','" & Me.DirectionFacing & "','" _
 '                & Me.PhotogLocation & "','" _
-'                & Me.PhotogOrientation & "'," & Me.SurveyPtID & "," _
 '                & Me.IsCloseup & "," & Me.IsInActive & "," & Me.IsSkipped & "," _
 '                & Me.IsReplacement & ",#" & Me.LastPhotoUpdate & "#,# Now()#," _
 '                & Me.CreatedByID & ",# Now()#, " & Me.LastModifiedByID & ");"
-    
-    strSQL = "INSERT INTO Photo(PhotoDate, PhotoType, Photographer_ID, " _
-                & "DigitalFilename, NCPNImageID, PhotogFacing, PhotogLocation, " _
-                & "" _
-                & "IsCloseup, InActive, IsSkipped, IsReplacement, " _
-                & "LastPhotoUpdate, CreateDate, CreatedBy_ID, " _
-                & "LastModified, LastModifiedBy_ID) VALUES " _
-                & "(#" & Me.PhotoDate & "#,'" & Me.PhotoType & "'," _
-                & Me.PhotographerID & ",'" & Me.FileName & "','" _
-                & Me.NCPNImageID & "','" & Me.DirectionFacing & "','" _
-                & Me.PhotogLocation & "','" _
-                & Me.IsCloseup & "," & Me.IsInActive & "," & Me.IsSkipped & "," _
-                & Me.IsReplacement & ",#" & Me.LastPhotoUpdate & "#,# Now()#," _
-                & Me.CreatedByID & ",# Now()#, " & Me.LastModifiedByID & ");"
+'
+'    db.Execute strSQL, dbFailOnError
+'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    db.Execute strSQL, dbFailOnError
-    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
+    Dim template As String
+    
+    template = "i_photo"
+    
+    Dim params(0 To 14) As Variant
+    
+    With Me
+        params(0) = "Photo"
+        params(1) = .PhotoDate
+        params(2) = .PhotoType
+        params(3) = .PhotographerID
+        params(4) = .FileName
+        params(5) = .NCPNImageID
+        params(6) = .DirectionFacing
+        params(7) = .PhotogLocation
+        params(8) = .IsCloseup
+        params(9) = .IsInActive
+        params(10) = .IsSkipped
+        params(11) = .IsReplacement
+        params(12) = .LastPhotoUpdate
+              
+        If IsUpdate Then
+            template = "u_photo"
+            params(13) = .ID
+        End If
+        
+        .ID = SetRecord(template, params)
+    End With
+
+    'set observer/recorder
+    SetObserverRecorder Me, "Photo"
 
 Exit_Handler:
     Exit Sub
@@ -424,7 +459,7 @@ Err_Handler:
     Select Case Err.Number
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
-                "Error encounter (#" & Err.Number & " - Class_Terminate[cls_Photo])"
+                "Error encounter (#" & Err.Number & " - SaveToDb[cls_Photo])"
     End Select
     Resume Exit_Handler
 End Sub
