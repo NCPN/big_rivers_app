@@ -1124,3 +1124,13 @@ Public Sub DoItAgain()
     End With
 
 End Sub
+
+Public Sub ExecuteIt()
+
+    'getDbUserAccess
+    Debug.Print DisplayIcons("uDocument|uPDF", "|")
+
+
+    
+
+End Sub

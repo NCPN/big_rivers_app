@@ -20,15 +20,14 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =7905
-    Top =2610
-    Right =15765
-    Bottom =9330
+    Left =4455
+    Top =3150
+    Right =17340
+    Bottom =14160
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x3fd3389195cde440
+        0x45dde061d6cde440
     End
-    RecordSource ="SELECT * FROM Event WHERE ID = 30; "
     Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -681,7 +680,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblMsg"
-                    Caption ="Updating record..."
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =525
@@ -704,7 +702,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblMsgIcon"
-                    Caption ="⏩"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -738,10 +735,10 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, events, functions & procedures for UI display
+' Description:  Events form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
@@ -749,6 +746,8 @@ Option Explicit
 '               BLC - 7/26/2016 - 1.01 - added GetRecords() calls
 '               BLC - 8/2/2016  - 1.02 - use Me.CallingForm
 '               BLC - 8/22/2016 - 1.03 - added m_SaveOK, Form_BeforeUpdate()
+'               BLC - 8/23/2016 - 1.04 - changed ReadyForSave() to public for
+'                                        mod_App_Data Upsert/SetRecord()
 ' =================================
 
 '---------------------
@@ -912,6 +911,9 @@ On Error GoTo Err_Handler
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
     
+    'clear form datasource in case it was saved (to keep unbound)
+    Me.RecordSource = ""
+    
     'set data sources
     Set cbxSite.Recordset = GetRecords("s_site_by_park_river")
     'Set cbxSite.ControlSource = GetRecords("s_site_by_park_river")
@@ -1013,6 +1015,7 @@ On Error GoTo Err_Handler
     If Not m_SaveOK Then
         Cancel = True
     End If
+    'Cancel = True
 
 Exit_Handler:
     Exit Sub
@@ -1102,7 +1105,12 @@ On Error GoTo Err_Handler
     'set enable btnSave_Click save
     m_SaveOK = True
     
+'    'pre-save form
+'    Me![list].Form.Dirty = False
+    
     UpsertRecord Me
+    
+    Me![list].Form.Requery
     
     'revert to disable non-btnSave_Click save
     m_SaveOK = False
@@ -1341,6 +1349,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler

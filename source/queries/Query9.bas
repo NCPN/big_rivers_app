@@ -1,13 +1,7 @@
-﻿dbMemo "SQL" ="PARAMETERS park Text ( 4 );\015\012SELECT p.Master_Family, p.Master_Species, p.L"
-    "U_Code, vw.Master_PLANT_Code, vw.IsSeedling, 0 AS SEQ  \015\012FROM (((((VegWalk"
-    "Species vw\015\012INNER JOIN tlu_NCPN_Plants p ON p.Master_PLANT_Code = vw.Maste"
-    "r_PLANT_Code)\015\012INNER JOIN VegWalk v ON v.ID = vw.VegWalk_ID)\015\012INNER "
-    "JOIN Event e ON e.ID = v.Event_ID)\015\012INNER JOIN Site s ON s.ID = e.Site_ID)"
-    "\015\012INNER JOIN Park pk ON pk.ID = s.Park_ID)\015\012WHERE \015\012p.LU_Code "
-    "IS NOT NULL \015\012AND YEAR(e.StartDate) = YEAR(Date())-1\015\012AND pk.ParkCod"
-    "e = [park]\015\012UNION ALL SELECT TOP 8 NULL AS Master_Family, NULL AS Master_S"
-    "pecies, NULL AS LU_Code, NULL AS Master_PLANT_Code, NULL as IsSeedling, 1 AS SEQ"
-    " \015\012FROM usys_temp_table\015\012ORDER BY SEQ, LU_Code;\015\012"
+﻿dbMemo "SQL" ="PARAMETERS appuser Text ( 50 );\015\012SELECT c.ID, LastName +',  '+ FirstName +"
+    " ' ('+ Username +')' AS AppUser, AccessLevel, IsActive\015\012FROM (Contact AS c"
+    " INNER JOIN Contact_Access AS ca ON ca.Contact_ID = c.ID) INNER JOIN Access AS a"
+    " ON a.ID = ca.Access_ID\015\012WHERE Username = [appuser];\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -44,6 +38,27 @@ Begin
     End
     Begin
         dbText "Name" ="SEQ"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="AppUser"
+        dbInteger "ColumnWidth" ="2400"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xad90ecfc3034f34dafbd0d3cc0ad184a
+        End
+    End
+    Begin
+        dbText "Name" ="c.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="AccessLevel"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="IsActive"
         dbLong "AggregateType" ="-1"
     End
 End

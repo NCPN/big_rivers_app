@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =2850
-    Top =3330
-    Right =11070
-    Bottom =12765
+    Left =5550
+    Top =4680
+    Right =13770
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xef9c2c5010c6e440
@@ -1198,10 +1198,10 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, Contact, functions & procedures for UI display
+' Description:  Contact form object related properties, Contact, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, June 20, 2016
 ' References:   -
@@ -1209,6 +1209,8 @@ Option Explicit
 '               BLC - 6/24/2016 - 1.01 - replaced Exit_Function > Exit_Handler
 '               BLC - 6/27/2016 - 1.02 - adjusted for ToggleForm(),
 '                                        shifted ClearForm() to mod_Forms
+'               BLC - 8/23/2016 - 1.03 - changed ReadyForSave() to public for
+'                                        mod_App_Data Upsert/SetRecord()
 ' =================================
 
 '---------------------
@@ -1916,8 +1918,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
+'   BLC - 8/23/2016 - changed to public for mod_App_Data UpsertRecord
 ' ---------------------------------
-Private Sub ReadyForSave()
+Public Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     Dim isOK As Boolean

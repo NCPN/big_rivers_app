@@ -21,7 +21,7 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =36
     Left =4455
-    Top =3150
+    Top =3165
     Right =21885
     Bottom =14160
     DatasheetGridlinesColor =14806254
@@ -667,7 +667,9 @@ On Error GoTo Err_Handler
     
     'set global values
     TempVars.Add "AppUserID", CInt(cbxUser.Column(0))
+    TempVars.Add "AppUser", cbxUser.Column(1)
     TempVars.Add "UserAccessLevel", cbxUser.Column(2)
+    TempVars.Add "AppUsername", ExtractString(TempVars("AppUser"), "(", ")")
 
     ReadyToContinue
     
@@ -697,6 +699,15 @@ End Sub
 ' ---------------------------------
 Private Sub btnNext_Click()
 On Error GoTo Err_Handler
+    
+    'log user login
+    Dim u As New AppUser
+    
+    With u
+        .Username = TempVars("AppUsername")
+        .Activity = "Application login"
+        .SaveToDb False
+    End With
     
     DoCmd.Close
     DoCmd.OpenForm "Main", acNormal, , , , , "User|" & TempVars("AppUserID")

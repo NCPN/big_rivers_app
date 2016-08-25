@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.05
+' Version:      1.06
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -15,6 +15,7 @@ Option Explicit
 '               BLC, 6/10/2016 - 1.04 - added SplitInt()
 '               BLC, 6/24/2016 - 1.05 - added RemoveChars(),
 '                                       replaced Exit_Function > Exit_Handler
+'               BLC, 8/23/2016 - 1.06 - added ExtractString()
 ' =================================
 
 '---------------------
@@ -161,7 +162,7 @@ Public Const uElevenThirty = &H1F566        '128358
 Public Const uTwelveThirty = &H1F567        '128359
 Public Const uPencil = &H1F589              '128393
 Public Const uThumbsUpRev = &H1F592         '128402 reversed thumbs up
-Public Const uThumbsDownRev = &H1F593       '128403 reversed thumbs donw
+Public Const uThumbsDownRev = &H1F593       '128403 reversed thumbs down
 Public Const uFingerPointL = &H1F59C        '128412 black left pointing backhand
 Public Const uFolder = &H1F5C0              '128448
 Public Const uFolderOpen = &H1F5C1          '128449
@@ -543,6 +544,46 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - RemoveNonNumerics[mod_Strings])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+
+' ---------------------------------
+' FUNCTION:     ExtractString
+' Description:  Extracts string from within a string
+' Assumptions:  -
+' Parameters:   strInspect - string to extract from
+'               strDelimiterA - string that is before the string to extract (1 charcter)
+'               strDelimiterB - string that is after the string to extract (1 character)
+' Returns:      string - portion of string between delimiters A & B
+' Throws:       none
+' References:
+'   EIV, October 6, 2015
+'   http://stackoverflow.com/questions/7293461/excel-vba-extract-text-between-2-characters
+' Source/date:  Bonnie Campbell, August 23, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC, 8/23/2016 - initial version
+' ---------------------------------
+Public Function ExtractString(ByVal strInspect As String, strDelimiterA As String, strDelimiterB As String) As String
+On Error GoTo Err_Handler:
+    
+    Dim posA As Integer, posB As Integer
+    
+    posA = InStrRev(strInspect, strDelimiterA)
+    posB = InStrRev(strInspect, strDelimiterB)
+    
+    ExtractString = Mid(strInspect, posA + 1, posB - posA - 1)
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ExtractString[mod_Strings])"
     End Select
     Resume Exit_Handler
 End Function

@@ -16,11 +16,11 @@ Begin Form
     GridY =24
     Width =8280
     DatasheetFontHeight =11
-    ItemSuffix =24
-    Left =4815
-    Top =2655
-    Right =13095
-    Bottom =10680
+    ItemSuffix =25
+    Left =4455
+    Top =3165
+    Right =17340
+    Bottom =14160
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -136,14 +136,14 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =420
+            Height =360
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =60
                     Top =60
                     Width =1980
@@ -151,6 +151,7 @@ Begin Form
                     ForeColor =15921906
                     Name ="lblTitle"
                     Caption ="Data Entry"
+                    ControlTipText ="Application role for logged in user."
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -196,6 +197,28 @@ Begin Form
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
                     Overlaps =1
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =215
+                    Left =1380
+                    Top =120
+                    Width =915
+                    Height =180
+                    FontSize =9
+                    ForeColor =15921906
+                    Name ="lblAppUser"
+                    Caption ="(app user)"
+                    ControlTipText ="Logged in user"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =2295
+                    LayoutCachedHeight =300
+                    BorderTint =100.0
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ForeShade =95.0
                 End
             End
         End
@@ -464,12 +487,20 @@ On Error GoTo Err_Handler
     Me.rctTop.Width = Me.Width
     
     'Main
-    Me.lblTitle.Caption = "Data Entry"
+    Me.lblTitle.Caption = IIf(TempVars("UserAccessLevel") = "admin", _
+                            "Administrator", _
+                            Nz(StrConv(TempVars("UserAccessLevel"), vbProperCase), _
+                            "Data Entry"))
+    lblTitle.ForeColor = lngWhite
     
     lblNotice.Caption = StringFromCodepoint(uPointerBlkL) & " R click to set values"
     lblNotice.FontSize = 9
     lblNotice.FontWeight = wtBold
     lblNotice.ForeColor = lngLtYellow
+    
+    'set app user
+    lblAppUser.Caption = "(" & TempVars("AppUsername") & ")"
+    lblAppUser.ForeColor = lngLtBlue
     
     'Admin --> filter actions when form opens (disable form buttons based on TempVars("AccessLevel")
     Me.btnAdmin.HoverColor = LINK_HIGHLIGHT_BKGD

@@ -539,6 +539,7 @@ On Error GoTo Err_Handler
                 .Controls("cbxSite").ControlSource = "Site_ID"
                 .Controls("cbxLocation").ControlSource = "Location_ID"
                 .Controls("tbxStartDate").ControlSource = "StartDate"
+                .Controls("lblMsgIcon").Caption = ""
                 .Controls("lblMsg").Caption = ""
             Case "Feature"
                 'strSQL = GetTemplate()
@@ -608,10 +609,17 @@ On Error GoTo Err_Handler
             
         End Select
     
-        'save record changes from form first to avoid "Write Conflict" errors
-        'where form & SQL are attempting to save record
-'        frm.Dirty = False
-    
+'        'save record changes from form first to avoid "Write Conflict" errors
+'        'where form & SQL are attempting to save record
+'        'frm.Dirty = False
+'
+'        If frm.Dirty Then
+'            MsgBox frm.Name & " DIRTY"
+'            frm.Dirty = False
+'        Else
+'            MsgBox frm.Name & " CLEAN"
+'        End If
+        
         strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & strTable & "|id" & PARAM_SEPARATOR & ID)
         .RecordSource = strSQL
         
@@ -672,26 +680,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Public Function SetStartupOptions(propertyname As String, _
-    propertytype As Variant, propertyvalue As Variant) _
-    As Boolean
-  Dim dbs As Object
-  Dim prp As Object
-  Set dbs = Application.CurrentDb
-  On Error Resume Next
-  dbs.Properties(propertyname) = propertyvalue
-  If Err.Number = 3270 Then
-    Set prp = dbs.CreateProperty(propertyname, _
-        propertytype, propertyvalue)
-    dbs.Properties.Append prp
-    Application.RefreshTitleBar
-  Else
-    SetStartupOptions = False
-  End If
-  Set dbs = Nothing
-  Set prp = Nothing
-End Function
-
 ' ---------------------------------
 ' SUB:          ClearFields
 ' Description:  initialize application values
@@ -728,7 +716,59 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ClearFields[form_Forms])"
+            "Error encountered (#" & Err.Number & " - ClearFields[mod_App_UI])"
     End Select
     Resume Exit_Sub
 End Sub
+
+' ---------------------------------
+' SUB:          DisplayIcons
+' Description:  Prepare icon set for reports
+' Assumptions:  -
+' Parameters:   icons - icons to display (delimited string)
+'               delimiter - character splitting icons (string)
+' Returns:      icon display translating icons field delimited string to display (string)
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, August 24, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 8/24/2016  - initial version
+' ---------------------------------
+Public Function DisplayIcons(icons As String, delimiter As String)
+On Error GoTo Err_Handler
+
+    Dim dDocIcons As Dictionary
+    Dim ary() As String
+    Dim strIcons As String
+    Dim i As Integer
+    
+    Set dDocIcons = CreateObject("scripting.dictionary")
+    
+    'setup dictionary
+    dDocIcons.Add "uDocument", uDocument
+    dDocIcons.Add "uPDF", uNotepad ' uPDF
+    
+    'default
+    strIcons = ""
+    
+    ary = Split(icons, delimiter)
+    
+    For i = LBound(ary) To UBound(ary)
+    
+        strIcons = strIcons & StringFromCodepoint(dDocIcons(ary(i))) & Space(2)
+    
+    Next
+    
+    DisplayIcons = strIcons
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DisplayIcons[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Function

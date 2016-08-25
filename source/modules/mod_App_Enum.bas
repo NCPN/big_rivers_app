@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 8/22/2016  - 1.02 - latest enum update from db
-'                                         last updated: 8/22/2016 4:16:19 PM
+'               app - 8/25/2016  - 1.02 - latest enum update from db
+'                                         last updated: 8/25/2016 8:30:11 AM
 ' =================================
 
 '-----------------------------

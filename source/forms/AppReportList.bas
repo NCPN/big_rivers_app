@@ -20,7 +20,7 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =31
-    Right =9480
+    Right =17430
     Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -259,7 +259,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxFormats"
-                    ControlSource ="FormatIcon"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4800
@@ -295,7 +294,7 @@ Begin Form
                     Enabled = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
-                    TextAlign =2
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
                     Left =1425
@@ -449,10 +448,10 @@ On Error GoTo Err_Handler
     lblDirections.Caption = ""
     tbxIcon.Value = StringFromCodepoint(uDocument)
     tbxIcon.ForeColor = lngDkGreen
+    tbxIcon.FontSize = 14
     lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    
     
     'set data source
 '    Set Me.Recordset = GetRecords("s_app_report")

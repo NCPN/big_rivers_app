@@ -25,13 +25,13 @@ Option Explicit
 Private m_ID As Long
 Private m_FirstName As String
 Private m_LastName As String
-Private m_MiddleInitial As String
+Private m_MiddleInitial As Variant 'String
 Private m_Name As String
 Private m_Email As String
 Private m_Organization As String
 Private m_PosTitle As String
-Private m_WorkPhone As Integer
-Private m_WorkExtension As Integer
+Private m_WorkPhone As Variant 'Integer
+Private m_WorkExtension As Variant 'Integer
 Private m_Role As String
 Private m_AccessLevel As Integer
 Private m_AccessRole As String
@@ -82,15 +82,16 @@ Public Property Get LastName() As String
     LastName = m_LastName
 End Property
 
-Public Property Let MiddleInitial(Value As String)
-    If IsAlpha(Value) And Len(Value) = 1 Then
+Public Property Let MiddleInitial(Value As Variant) 'String)
+    If IsAlpha(CStr(Value)) And Len(Value) = 1 Then
         m_MiddleInitial = Value
     Else
-        RaiseEvent InvalidInitial(Value)
+        m_MiddleInitial = Null
+'        RaiseEvent InvalidInitial(Value)
     End If
 End Property
 
-Public Property Get MiddleInitial() As String
+Public Property Get MiddleInitial() As Variant 'String
     MiddleInitial = m_MiddleInitial
 End Property
 
@@ -122,23 +123,28 @@ Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
-Public Property Let WorkPhone(Value As Integer)
-    If IsPhone(CStr(Value)) Then
-        m_WorkPhone = Value
+Public Property Let WorkPhone(Value As Variant) 'Integer)
+    If Not IsNull(Value) Then
+        If IsPhone(CStr(Value)) Then
+            m_WorkPhone = Value
+        Else
+           RaiseEvent InvalidPhone(Value)
+        End If
     Else
-        RaiseEvent InvalidPhone(Value)
+        m_WorkPhone = Null
+        'RaiseEvent InvalidPhone(Value)
     End If
 End Property
 
-Public Property Get WorkPhone() As Integer
+Public Property Get WorkPhone() As Variant 'Integer
     WorkPhone = m_WorkPhone
 End Property
 
-Public Property Let WorkExtension(Value As Long)
+Public Property Let WorkExtension(Value As Variant) 'Long)
     m_WorkExtension = Value
 End Property
 
-Public Property Get WorkExtension() As Long
+Public Property Get WorkExtension() As Variant 'Long
     WorkExtension = m_WorkExtension
 End Property
 
@@ -440,7 +446,7 @@ On Error GoTo Err_Handler
         params(7) = IIf(Len(.PosTitle) > 0, .PosTitle, Null)
         params(8) = IIf(.WorkPhone = 0, Null, .WorkPhone)
         params(9) = IIf(.WorkExtension = 0, Null, .WorkExtension)
-        params(10) = IIf(.IsActive > 0, .IsActive, Null)
+        params(10) = IIf(.IsActive > 0, .IsActive, 0) 'Null)
         
         If IsUpdate Then
             template = "u_contact"

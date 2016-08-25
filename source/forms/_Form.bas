@@ -18,10 +18,10 @@ Begin Form
     Width =10800
     DatasheetFontHeight =11
     ItemSuffix =26
-    Left =4635
-    Top =3630
-    Right =14835
-    Bottom =14130
+    Left =4455
+    Top =3165
+    Right =21885
+    Bottom =14160
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc6cec65556c3e440
@@ -552,16 +552,18 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         _List
+' Form:         _Form
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, events, functions & procedures for UI display
+' Description:  Form form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
+'                                        mod_App_Data Upsert/SetRecord()
 ' =================================
 
 '---------------------
@@ -969,8 +971,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
 ' ---------------------------------
-Private Sub ReadyForSave()
+Public Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     'set color of icon depending on if values are set

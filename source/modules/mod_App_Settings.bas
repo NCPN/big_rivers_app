@@ -49,7 +49,7 @@ Public gSubReportCount As Integer                  'global counter for subreport
 '               BLC, 4/4/2016  - added LOCATION_TYPES to allow specific types only, RECORD_ACTIONS, CONTACT_ROLES, PARKS
 '               BLC, 6/7/2016  - added ACCESS_ROLES to set user application permissions
 ' ---------------------------------
-Public Const USER_ACCESS_CONTROL As Boolean = False             'Boolean flag -> db includes user access control or not
+Public Const USER_ACCESS_CONTROL As Boolean = True             'Boolean flag -> db includes user access control or not
 Public Const DB_ADMIN_CONTROL As Boolean = False                'Boolean flag -> db does not include DbAdmin subform & controls
 Public Const FIX_LINKED_DBS As Boolean = False                  'Boolean flag -> db requires tbl_Dbs to be updated via FixLinkedDb (usually when DbAdmin is not fully implemented)
 Public Const MAIN_APP_FORM As String = "Main"                   'String -> main tabbed form (frm_Switchboard, etc.)

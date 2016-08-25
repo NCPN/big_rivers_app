@@ -20,11 +20,13 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =17430
-    Bottom =10995
+    Left =450
+    Top =3120
+    Right =7830
+    Bottom =7230
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x878e806395cde440
+        0x9f21e161d6cde440
     End
     Caption ="_List"
     OnCurrent ="[Event Procedure]"

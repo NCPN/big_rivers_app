@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =3360
-    Top =3645
-    Right =12840
-    Bottom =14640
+    Left =4455
+    Top =3165
+    Right =21885
+    Bottom =14160
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -719,14 +719,16 @@ Option Explicit
 ' =================================
 ' Form:         Feature
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, Feature, functions & procedures for UI display
+' Description:  Feature form object related properties, Feature, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, June 27, 2016
 ' References:   -
 ' Revisions:    BLC - 6/27/2016 - 1.00 - initial version
+'               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
+'                                        mod_App_Data Upsert/SetRecord()
 ' =================================
 
 '---------------------
@@ -1145,8 +1147,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
+'   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
 ' ---------------------------------
-Private Sub ReadyForSave()
+Public Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     Dim isOK As Boolean

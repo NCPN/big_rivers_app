@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =45
-    Left =2850
-    Top =3330
-    Right =12330
-    Bottom =14325
+    Left =4455
+    Top =3165
+    Right =21885
+    Bottom =14160
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x508d972ecac5e440
@@ -580,7 +580,7 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =3
                     Top =510
                     Width =7860
@@ -605,7 +605,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =247
+                    OverlapFlags =255
                     TextAlign =2
                     Left =4320
                     Top =330
@@ -650,14 +650,16 @@ Option Explicit
 ' =================================
 ' Form:         UserRole
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
-' Description:  List form object related properties, UserRole, functions & procedures for UI display
+' Description:  User role form object related properties, UserRole, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, June 21, 2016
 ' References:   -
 ' Revisions:    BLC - 6/21/2016 - 1.00 - initial version
+'               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
+'                                        mod_App_Data Upsert/SetRecord()
 ' =================================
 
 '---------------------
@@ -1094,8 +1096,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/21/2016 - initial version
+'   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
 ' ---------------------------------
-Private Sub ReadyForSave()
+Public Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     Dim isOK As Boolean

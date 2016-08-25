@@ -1312,9 +1312,9 @@ On Error GoTo Err_Handler
                     .Parameters("Login") = params(4)
                     .Parameters("Org") = params(5)
                     .Parameters("MI") = params(6)
-                    .Parameters("Phone") = params(7)
-                    .Parameters("Ext") = params(8)
-                    .Parameters("Position") = params(9)
+                    .Parameters("Position") = params(7)
+                    .Parameters("Phone") = params(8)
+                    .Parameters("Ext") = params(9)
                     .Parameters("IsActiveFlag") = params(10)
                     
                 Case "i_contact_access"
@@ -1376,6 +1376,14 @@ On Error GoTo Err_Handler
                     .Parameters("LastModified") = Now()
                     .Parameters("LastModifiedByID") = TempVars("ContactID")
                                                         
+                Case "i_login"
+                
+                    '-- required parameters --
+                    .Parameters("username") = params(1)
+                    .Parameters("activity") = params(2)
+                
+                    SkipRecordAction = True
+                    
                 Case "i_park"
         
                     '-- required parameters --
@@ -1851,11 +1859,15 @@ On Error GoTo Err_Handler
                     .Username = frm!tbxUsername.Value
                     .Organization = frm!tbxOrganization.Value
                     If Not IsNull(frm!tbxPosition.Value) Then .PosTitle = frm!tbxPosition.Value
-                    If Not IsNull(frm!tbxPhone.Value) Then
+                    If Not IsNull(frm!tbxPhone.Value) And Len(frm!tbxPhone.Value) > 0 Then
                         .WorkPhone = RemoveChars(frm!tbxPhone.Value, True) 'remove non-numerics
+                    Else
+                        .WorkPhone = Null
                     End If
-                    If Not IsNull(frm!tbxExtension.Value) Then
+                    If Not IsNull(frm!tbxExtension.Value) And Len(frm!tbxExtension.Value) > 0 Then
                         .WorkExtension = RemoveChars(frm!tbxExtension.Value, True) 'remove non-numerics
+                    Else
+                        .WorkExtension = Null
                     End If
                     .AccessRole = frm!cbxUserRole.Column(1)
                     .ID = frm!tbxID.Value '0 if new, edit if > 0
@@ -1863,7 +1875,7 @@ On Error GoTo Err_Handler
                     strCriteria = "[FirstName] = '" & .FirstName _
                                     & "' AND [LastName] = '" & .LastName _
                                     & "' AND [MiddleInitial] = '" & .MiddleInitial _
-                                    & "' AND [Email] = '" & .Email
+                                    & "' AND [Email] = '" & .Email & "'"
                     
                     'set the generic object --> Contact
                     Set obj = p
@@ -2122,9 +2134,22 @@ On Error GoTo Err_Handler
     End With
     
     'clear values & refresh display
-    frm.ReadyForSave 'Application defined error
+    frm.ReadyForSave 'Application defined error <-- ensure ReadyForSave is Public Sub
     'Forms!frm.ReadyForSave
     
+    'handle situations where Access is saving same record
+    
+    'save record changes from form first to avoid "Write Conflict" errors
+    'where form & SQL are attempting to save record
+    'frm.Dirty = False
+    
+    If frm.Dirty Then
+        MsgBox frm.Name & " DIRTY"
+        'frm.Dirty = False
+    Else
+        MsgBox frm.Name & " CLEAN"
+    End If
+        
     PopulateForm frm, frm!tbxID.Value
     
     'refresh list
@@ -2138,8 +2163,10 @@ On Error GoTo Err_Handler
     
 Exit_Handler:
     'cleanup
-    rs.Close
-    Set rs = Nothing
+    If Not rs Is Nothing Then
+        rs.Close
+        Set rs = Nothing
+    End If
     Exit Sub
 Err_Handler:
     Select Case Err.Number
