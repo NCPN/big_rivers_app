@@ -1,6 +1,6 @@
 ﻿Operation =1
 Option =0
-Having ="(((Count(tsys_Db_Templates.TemplateName))>1))"
+Having ="(((Count(tsys_Db_Templates.[TemplateName]))>1))"
 Begin InputTables
     Name ="tsys_Db_Templates"
 End
@@ -44,12 +44,12 @@ Begin
     State =0
     Left =0
     Top =0
-    Right =502
+    Right =1179
     Bottom =750
     Left =-1
     Top =-1
-    Right =486
-    Bottom =220
+    Right =1163
+    Bottom =203
     Left =0
     Top =0
     ColumnsShown =543

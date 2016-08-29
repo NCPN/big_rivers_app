@@ -1,14 +1,14 @@
 CREATE TABLE [Task] (
   [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
   [TaskType] VARCHAR (255),
-  [TypeID] LONG ,
+  [TaskType_ID] LONG ,
   [Task] VARCHAR (255),
-  [Status] LONG ,
-  [Priority] LONG ,
-  [RequestedBy] LONG ,
+  [Status_ID] LONG ,
+  [Priority_ID] LONG ,
+  [RequestedBy_ID] LONG ,
   [RequestDate] DATETIME ,
-  [CompletedBy] LONG ,
+  [CompletedBy_ID] LONG ,
   [CompleteDate] DATETIME ,
-  [LastUpdateBy] LONG ,
-  [LastUpdate] DATETIME 
+  [LastModifiedBy_ID] LONG ,
+  [LastModified] DATETIME 
 )
