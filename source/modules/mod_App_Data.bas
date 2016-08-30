@@ -1554,6 +1554,29 @@ On Error GoTo Err_Handler
                     .Parameters("CreatedByID") = TempVars("ContactID")
                     .Parameters("LastModified") = Now()
                     .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    
+                Case "u_contact"
+                    
+                    '-- required parameters --
+                    .Parameters("First") = params(1)
+                    .Parameters("Last") = params(2)
+                    .Parameters("EmailAddress") = params(3)
+                    .Parameters("Login") = params(4)
+                    .Parameters("Org") = params(5)
+                    .Parameters("MI") = params(6)
+                    .Parameters("Position") = params(7)
+                    .Parameters("Phone") = params(8)
+                    .Parameters("Ext") = params(9)
+                    .Parameters("IsActiveFlag") = params(10)
+                    .Parameters("ContactID") = params(11)
+                    ID = params(11)
+                
+                Case "u_contact_access"
+                    
+                    '-- required parameters --
+                    .Parameters("ContactID") = params(1)
+                    .Parameters("AccessID") = params(2)
+                    ID = params(1)
                 
                 Case "u_cover_species"
                                     
@@ -2104,13 +2127,24 @@ On Error GoTo Err_Handler
             frm!lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
         Else
             ' --- UPDATE ---
-            'record already exists
-            'prevent duplicate entries
-            frm!lblMsg.ForeColor = lngYellow
-            frm!lblMsgIcon.ForeColor = lngYellow
-            frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
-            frm!lblMsg.Caption = "Oops, record already exists."
-            GoTo Exit_Handler
+            'record already exists & ID > 0
+            
+            'retrieve ID
+            If frm!tbxID.Value = rs("Contact.ID") Then
+                'IDs are equivalent, just change the data
+                frm!lblMsg.ForeColor = lngLime
+                frm!lblMsgIcon.ForeColor = lngLime
+                frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+                frm!lblMsg.Caption = "Updating record..."
+            Else
+                'prevent duplicate record entries
+                frm!lblMsg.ForeColor = lngYellow
+                frm!lblMsgIcon.ForeColor = lngYellow
+                frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+                frm!lblMsg.Caption = "Oops, record already exists."
+                GoTo Exit_Handler
+            End If
+            
         End If
         
         'T/F refers to whether the record is an update (T) or insert (F)
@@ -2144,13 +2178,20 @@ On Error GoTo Err_Handler
     'frm.Dirty = False
     
     If frm.Dirty Then
-        MsgBox frm.Name & " DIRTY"
+        Debug.Print frm.Name & " DIRTY"
         'frm.Dirty = False
+        
+        frm!lblMsg.ForeColor = lngYellow
+        frm!lblMsgIcon.ForeColor = lngYellow
+        frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+        frm!lblMsg.Caption = "** UNSAVED CHANGES! **"
+        
     Else
-        MsgBox frm.Name & " CLEAN"
+        Debug.Print "UpsertRecord " & frm.Name & " CLEAN"
     End If
         
-    PopulateForm frm, frm!tbxID.Value
+' CHECK IF POPULATING FORM IS THE ISSUE...
+'    PopulateForm frm, frm!tbxID.Value
     
     'refresh list
     frm!list.Requery
@@ -2160,6 +2201,9 @@ On Error GoTo Err_Handler
     'clear messages & icon
     frm!lblMsgIcon.Caption = ""
     frm!lblMsg.Caption = ""
+    
+    'refresh list
+    frm!list.Requery
     
 Exit_Handler:
     'cleanup

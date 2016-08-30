@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =4680
+    Top =3360
+    Right =21450
+    Bottom =14355
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -1025,7 +1025,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          tbxBearing_AfterUpdate

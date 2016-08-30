@@ -20,17 +20,18 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =5550
-    Top =4680
-    Right =13770
-    Bottom =14115
+    Left =4680
+    Top =3345
+    Right =12900
+    Bottom =12780
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xef9c2c5010c6e440
+        0x20f1f0c46fcee440
     End
-    RecordSource ="SELECT * FROM Contact WHERE ID = 6; "
     Caption ="Contact"
     OnCurrent ="[Event Procedure]"
+    BeforeUpdate ="[Event Procedure]"
+    AfterUpdate ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
@@ -342,7 +343,6 @@ Begin Form
                     BackThemeColorIndex =-1
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -421,7 +421,7 @@ Begin Form
                     FontSize =9
                     TabIndex =13
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -553,7 +553,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
-                    ControlSource ="ID"
+                    ControlSource ="Contact.ID"
                     DefaultValue ="0"
                     GridlineColor =10921638
 
@@ -1086,6 +1086,7 @@ Begin Form
                         0x750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxUserRole"
+                    ControlSource ="Access_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT * FROM Access; "
                     ColumnWidths ="0;1440"
@@ -1139,9 +1140,9 @@ Begin Form
                     RightMargin =360
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =6750105
                     Name ="lblMsg"
-                    Caption ="message"
+                    Caption ="msg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =3165
@@ -1162,9 +1163,9 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =6750105
                     Name ="lblMsgIcon"
-                    Caption ="icon"
+                    Caption ="Icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -1198,7 +1199,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  Contact form object related properties, Contact, functions & procedures for UI display
@@ -1211,6 +1212,7 @@ Option Explicit
 '                                        shifted ClearForm() to mod_Forms
 '               BLC - 8/23/2016 - 1.03 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 8/29/2016 - 1.04 - code cleanup btnSave_Click() uses UpsertRecord()
 ' =================================
 
 '---------------------
@@ -1225,6 +1227,9 @@ Private m_Directions As String
 Private m_ButtonCaption
 Private m_SelectedID As Integer
 Private m_SelectedValue As String
+
+Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
+Private m_ContinueSave As Boolean 'ok to proceed saving (prevent Property Not Found error?)
 
 '---------------------
 ' Event Declarations
@@ -1411,6 +1416,8 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
               
       'If Nz(tbxID, 0) > 0 Then btnComment.Enabled = True
+    Debug.Print Me.Name & " Form_Current Me.Dirty IS " & Me.Dirty
+    Debug.Print Me.Name & " Form_Current Me.list.Form.Dirty IS " & Me.list.Form.Dirty
 
 Exit_Handler:
     Exit Sub
@@ -1419,6 +1426,91 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, August 29, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 8/29/2016 - initial version
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Debug.Print Me.Name & " Form_BeforeUpdate SaveOK = " & m_SaveOK
+
+    Debug.Print Me.Name & " Form_BeforeUpdate Me.Dirty IS " & Me.Dirty
+    Debug.Print Me.Name & " Form_BeforeUpdate Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+
+'
+    If m_SaveOK <> True Then
+        Cancel = True
+        'm_ContinueSave = False
+    Else
+        Cancel = True
+        'm_ContinueSave = True
+    End If
+
+    Debug.Print Me.Name & " Form_BeforeUpdate after cnx Me.Dirty IS " & Me.Dirty
+    Debug.Print Me.Name & " Form_BeforeUpdate after cnx Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_AfterUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Unknown, unknown
+'   http://msaccesstipsandtricks.blogspot.com/2013/04/solution-for-property-not-found-error.html
+' Source/date:  Bonnie Campbell, August 29, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 8/29/2016 - initial version
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Debug.Print Me.Name & " Form_AfterUpdate Me.Dirty IS " & Me.Dirty
+    Debug.Print Me.Name & " Form_AfterUpdate Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+
+'    Debug.Print "ContinueSave = " & m_ContinueSave
+'
+'    If m_ContinueSave <> True Then
+'        'undo the save only if the record is
+'        Debug.Print Me.Name & " Form_AfterUpdate UNDOING..."
+'        Me.list.Form.Undo
+'    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterUpdate[Contact form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1619,7 +1711,8 @@ End Sub
 Private Sub tbxPhone_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPhone.Text) > 0 Then _
+    'If Len(tbxPhone.Text) > 0 Then _
+
         ReadyForSave
     
 Exit_Handler:
@@ -1649,7 +1742,8 @@ End Sub
 Private Sub tbxExtension_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxExtension.Text) > 0 Then _
+    'If Len(tbxExtension.Text) > 0 Then _
+
         ReadyForSave
     
 Exit_Handler:
@@ -1734,50 +1828,25 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
+'   BLC - 8/23/2016 - use UpsertRecord()
+'   BLC - 8/29/2016 - code cleanup
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
+    'set enable btnSave_Click save
+    m_SaveOK = True
+    
     UpsertRecord Me
     
-'    Dim p As New Person
-'
-'    With p
-'        'values passed into form
-'
-'        'form values
-'        .LastName = tbxLast.Value
-'        .FirstName = tbxFirst.Value
-'        If Not IsNull(tbxMI.Value) Then p.MiddleInitial = tbxMI.Value
-'        .Email = tbxEmail.Value
-'        .Username = tbxUsername.Value
-'        .Organization = tbxOrganization.Value
-'        If Not IsNull(tbxPosition.Value) Then .PosTitle = tbxPosition.Value
-'        If Not IsNull(tbxPhone.Value) Then
-'            .WorkPhone = RemoveChars(tbxPhone.Value, True) 'remove non-numerics
-'        End If
-'        If Not IsNull(tbxExtension.Value) Then
-'            .WorkExtension = RemoveChars(tbxExtension.Value, True) 'remove non-numerics
-'        End If
-'        .AccessRole = cbxUserRole.Column(1)
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'        .SaveToDb
-'
-'        'set the tbxID.value
-'        tbxID = .ID
-'    End With
-'
-'    'clear values & refresh display
-'
-'    ReadyForSave
-'
-'    PopulateForm Me, tbxID.Value
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
+    'revert to disable non-btnSave_Click save
+    m_SaveOK = False
     
+    'refresh the list to avoid Name #Type!
+    'Me.list.Requery
+
+    Me.Requery
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1924,6 +1993,10 @@ Public Sub ReadyForSave()
 On Error GoTo Err_Handler
 
     Dim isOK As Boolean
+    
+    Debug.Print Me.Name & " Form_Current Me.Dirty IS " & Me.Dirty
+    Debug.Print Me.Name & " Form_Current Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+
 
     'default
     isOK = False
@@ -1943,6 +2016,22 @@ On Error GoTo Err_Handler
     
     'refresh form
     Me.Requery
+    
+    'check for unsaved changes
+    If Me.Dirty Then
+        lblMsg.ForeColor = lngYellow
+        lblMsgIcon.ForeColor = lngYellow
+        lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+        lblMsg.Caption = "** UNSAVED CHANGES! **"
+        
+        Debug.Print "ReadyForSave " & Me.Name & " DIRTY"
+
+    Else
+        Debug.Print "ReadyForSave " & Me.Name & " CLEAN"
+    
+        lblMsgIcon.Caption = ""
+        lblMsg.Caption = ""
+    End If
     
 Exit_Handler:
     Exit Sub

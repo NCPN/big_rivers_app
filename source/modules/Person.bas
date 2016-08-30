@@ -427,7 +427,7 @@ On Error GoTo Err_Handler
 
     Dim template As String
     
-    template = "i_contact_new" '"i_contact_new"
+    template = "i_contact" '"i_contact_new"
     
     Dim params() As Variant
     
@@ -456,8 +456,8 @@ On Error GoTo Err_Handler
         .ID = SetRecord(template, params)
     End With
 
-    'set the person's role
-    template = "i_contact_access"
+    'set the person's role (update if contact template was update)
+    template = IIf(Left(template, 1) = "u", "u_contact_access", "i_contact_access")
     
     'dimension for role
     ReDim params(0 To 3) As Variant

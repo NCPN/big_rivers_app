@@ -6,6 +6,7 @@ Begin Form
     MinButton = NotDefault
     ControlBox = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     CloseButton = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
@@ -20,11 +21,13 @@ Begin Form
     Width =7500
     DatasheetFontHeight =11
     ItemSuffix =44
-    Right =9000
-    Bottom =10995
+    Left =2760
+    Top =3870
+    Right =10485
+    Bottom =8235
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xd5c810548dc6e440
+        0x2e57b5586dcee440
     End
     RecordSource ="SELECT * FROM (Contact INNER JOIN Contact_Access ON Contact_Access.Contact_ID = "
         "Contact.ID) INNER JOIN Access ON Access.ID = Contact_Access.Access_ID; "
@@ -836,6 +839,10 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
 
+'    Me.tbxName.ControlSource = [FirstName] & " " & _
+'                                IIf(Len([MiddleInitial]) > 0, [MiddleInitial] & " ", "") & _
+'                                [LastName]
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -865,7 +872,7 @@ On Error GoTo Err_Handler
     
     'populate the parent form
     PopulateForm Me.Parent, tbxID
-
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:

@@ -1,6 +1,4 @@
-﻿dbMemo "SQL" ="PARAMETERS sfid Long, sptid Long;\015\012INSERT INTO SurveyDataSourceFile_Survey"
-    "Point ( SurveyDataSourceFile_ID, SurveyPoint_ID )\015\012VALUES ([sfid], [sptid]"
-    ");\015\012"
+﻿dbMemo "SQL" ="SELECT *\015\012FROM usys_temp_qdf\015\012WHERE Contact.ID = 5;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -58,6 +56,66 @@ Begin
     End
     Begin
         dbText "Name" ="IsActive"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.IsActive"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.Username"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact_Access.Contact_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact_Access.Access_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Access.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Access.AccessLevel"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.LastName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.FirstName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.MiddleInitial"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.Organization"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.PositionTitle"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.Email"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.WorkPhone"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="usys_temp_qdf.Contact.WorkExtension"
         dbLong "AggregateType" ="-1"
     End
 End

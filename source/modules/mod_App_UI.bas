@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.06
+' Version:      1.07
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -15,6 +15,8 @@ Option Explicit
 '               BLC, 6/24/2016 - 1.04 - replaced Exit_Function > Exit_Handler
 '               BLC, 7/5/2016  - 1.05 - added ClearFields() to support Species Search
 '               BLC, 8/8/2016 - 1.06 - revised to use default table name in PopulateForm()
+'               BLC, 8/29/2016 - 1.07 - revised to use usys_temp_qdf & Contact_ID in PopulateForm()
+'                                       for Contact form
 ' =================================
 
 ' =================================
@@ -507,6 +509,8 @@ End Function
 '   BLC - 6/1/2016 - initial version
 '   BLC - 6/2/2016 - moved from forms (EventsList, TaglineList)
 '   BLC - 8/8/2016 - revised to use default table name
+'   BLC - 8/29/2016 - adjusted for Contact form (requires both Contact, Contact_Access data)
+'                     using usys_temp_qdf & adjusting ID to Contact_ID in final SQL
 ' ---------------------------------
 Public Sub PopulateForm(frm As Form, ID As Long)
 On Error GoTo Err_Handler
@@ -520,7 +524,13 @@ On Error GoTo Err_Handler
         Select Case .Name
             Case "Contact"
                 'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
+                'requires Contact & Contact_Access data
+                Dim qdf As DAO.QueryDef
+                CurrentDb.QueryDefs("usys_temp_qdf").SQL = GetTemplate("s_contact_access")
+                
+                strTable = "usys_temp_qdf"
                 'set form fields to record fields as datasource
+                'contact data
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxFirst").ControlSource = "FirstName"
                 .Controls("tbxMI").ControlSource = "MiddleInitial"
@@ -531,6 +541,8 @@ On Error GoTo Err_Handler
                 .Controls("tbxPhone").ControlSource = "WorkPhone"
                 .Controls("tbxPosition").ControlSource = "PositionTitle"
                 .Controls("tbxExtension").ControlSource = "WorkExtension"
+                'contact_access data
+                .Controls("cbxUserRole").ControlSource = "Access_ID"
             Case "Events"
                 'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
                 strTable = "Event"
@@ -621,6 +633,13 @@ On Error GoTo Err_Handler
 '        End If
         
         strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & strTable & "|id" & PARAM_SEPARATOR & ID)
+        
+        'alter to retrieve proper ID
+        Select Case .Name
+            Case "Contact"
+                strSQL = Replace(strSQL, " ID = ", " Contact.ID = ")
+        End Select
+        
         .RecordSource = strSQL
         
     End With
