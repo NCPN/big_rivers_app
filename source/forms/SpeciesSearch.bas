@@ -16,8 +16,8 @@ Begin Form
     ItemSuffix =64
     Left =3060
     Top =3405
-    Right =16920
-    Bottom =14400
+    Right =16905
+    Bottom =9585
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x0a915c95ff94e440
@@ -1150,7 +1150,7 @@ On Error GoTo Err_Handler
     'default
     Me.CallingForm = "Main"
     
-    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+    'If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
 
     'minimize calling form
     ToggleForm Me.CallingForm, -1

@@ -17,7 +17,7 @@ Option Explicit
 ' =================================
 
 ' ---------------------------------
-'  Properties
+'  Declarations
 ' ---------------------------------
 ' http://cloford.com/resources/colours/500col.htm
 ' vbGrayText            &H80000011  Grayed (disabled) text

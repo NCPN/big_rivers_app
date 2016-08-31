@@ -70,7 +70,7 @@ On Error GoTo Err_Handler
         fName = FolderName & "\" & fName
     End If
     
-    If Dir(fName, vbNormal + vbHidden + vbSystem) <> vbNullString Then
+    If dir(fName, vbNormal + vbHidden + vbSystem) <> vbNullString Then
         If OverwriteExisting = True Then
             Kill fName
         Else
@@ -255,14 +255,14 @@ Public Sub RecreateDatabase()
 On Error GoTo Err_Handler
     Dim myFile As Object '??
     Dim folder As Object '??
-    Dim FSO As Object '??
+    Dim fso As Object '??
     Dim objecttype As String, objectname As String
     Dim WScript As Object '??
     Dim oApplication As Object '??
     
     For Each myFile In folder.Files
-        objecttype = FSO.GetExtensionName(myFile.Name)
-        objectname = FSO.GetBaseName(myFile.Name)
+        objecttype = fso.GetExtensionName(myFile.Name)
+        objectname = fso.GetBaseName(myFile.Name)
         WScript.Echo "  " & objectname & " (" & objecttype & ")"
     
         If (objecttype = "form") Then

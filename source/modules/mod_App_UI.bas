@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.07
+' Version:      1.08
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -17,6 +17,7 @@ Option Explicit
 '               BLC, 8/8/2016 - 1.06 - revised to use default table name in PopulateForm()
 '               BLC, 8/29/2016 - 1.07 - revised to use usys_temp_qdf & Contact_ID in PopulateForm()
 '                                       for Contact form
+'               BLC, 8/30/2016 - 1.08 - added Batch Upload Photos to ClickAction()
 ' =================================
 
 ' =================================
@@ -356,6 +357,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, February 6, 2015 - for NCPN tools
 ' Revisions:
 '   BLC - 4/26/2016  - initial version
+'   BLC - 8/30/2016  - added Batch Upload Photos
 ' ---------------------------------
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
@@ -413,6 +415,28 @@ On Error GoTo Err_Handler
         Case "transducers"
             fName = "Transducer"
             oArgs = ""
+        Case "batch upload photos"
+            fName = ""
+            oArgs = ""
+            
+            'handle upload
+            Dim StartFolder As String, strPics As String, strPath As String
+
+            StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
+            
+            strPath = BrowseFolder("Select directory with photos to upload", "Confirm Directory", StartFolder)
+            
+            If Len(strPath) > 0 Then
+                'ingest photos as "U" - unclassified
+                IngestPhotos strPath, "U"
+'            Else
+'                MsgBox "Oops. Missed the directory the photos are in. " _
+'                        & "Please re-select it.", vbOKOnly, "Missing Directory"
+            End If
+        
+            'restore Main
+            ToggleForm "Main", 0
+        
         'Trip Prep
         Case "vegplot"
             rName = "VegPlot"

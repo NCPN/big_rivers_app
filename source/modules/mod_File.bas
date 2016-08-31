@@ -4,14 +4,76 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_File
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  File and directory related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
 ' Revisions:    BLC, 4/30/2015 - 1.00 - initial version
 '               BLC, 6/13/2016 - 1.01 - adapted ParseFileName() for big rivers
 '               BLC, 6/24/2016 - 1.02 - replaced Exit_Function > Exit_Handler
+'               BLC, 8/30/2016 - 1.03 - add BrowseFolder(), GetSpecialFolderPath()
 ' =================================
+
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+'   Peter Thornton, March 4, 2009
+'   http://dailydoseofexcel.com/archives/2009/02/26/get-the-path-to-my-documents-in-vba/#comment-38217
+'   https://msdn.microsoft.com/en-us/library/windows/desktop/bb762494%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396
+'   Public Const CSIDL_PERSONAL As Long = &H5 'my documents
+'   was CSIDL constants, now KNOWNFOLDERIDs
+'   https://msdn.microsoft.com/en-us/library/windows/desktop/dd378457(v=vs.85).aspx
+'
+'   KNOWNFOLDERIDs
+'       FOLDERID_AccountPictures        FOLDERID_AppsFolder     FOLDERID_ChangeRemovePrograms
+'       FOLDERID_AddNewPrograms         FOLDERID_AppUpdates     FOLDERID_CommonAdminTools
+'       FOLDERID_AdminTools             FOLDERID_CameraRoll     FOLDERID_CommonOEMLinks
+'       FOLDERID_ApplicationShortcuts   FOLDERID_CDBurning      FOLDERID_CommonPrograms
+'       FOLDERID_CommonStartMenu        FOLDERID_ComputerFolder FOLDERID_CommonTemplates
+'       FOLDERID_CommonStartup          FOLDERID_ConflictFolder FOLDERID_ConnectionsFolder
+'       FOLDERID_Contacts               FOLDERID_Cookies        FOLDERID_ControlPanelFolder
+'       FOLDERID_Desktop                FOLDERID_Documents      FOLDERID_DeviceMetadataStore
+'       FOLDERID_DocumentsLibrary       FOLDERID_Downloads      FOLDERID_Favorites
+'       FOLDERID_Fonts                  FOLDERID_Games          FOLDERID_GameTasks
+'       FOLDERID_History                FOLDERID_HomeGroup      FOLDERID_HomeGroupCurrentUser
+'       FOLDERID_ImplicitAppShortcuts   FOLDERID_InternetCache  FOLDERID_InternetFolder
+'       FOLDERID_Libraries              FOLDERID_Links          FOLDERID_LocalAppData
+'       FOLDERID_LocalAppDataLow        FOLDERID_Music          FOLDERID_LocalizedResourcesDir
+'       FOLDERID_MusicLibrary           FOLDERID_NetHood        FOLDERID_NetworkFolder
+'       FOLDERID_OriginalImages         FOLDERID_PhotoAlbums    FOLDERID_PicturesLibrary
+'       FOLDERID_Pictures               FOLDERID_Playlists      FOLDERID_PrintersFolder
+'       FOLDERID_PrintHood              FOLDERID_Profile        FOLDERID_ProgramData
+'       FOLDERID_ProgramFiles           FOLDERID_Programs       FOLDERID_PublicDocuments
+'       FOLDERID_ProgramFilesX86        FOLDERID_Public         FOLDERID_PublicDownloads
+'       FOLDERID_ProgramFilesX64        FOLDERID_PublicDesktop  FOLDERID_PublicGameTasks
+'       FOLDERID_ProgramFilesCommon     FOLDERID_PublicMusic    FOLDERID_PublicLibraries
+'       FOLDERID_ProgramFilesCommonX64  FOLDERID_PublicPictures FOLDERID_PublicRingtones
+'       FOLDERID_ProgramFilesCommonX86  FOLDERID_PublicVideos   FOLDERID_PublicUserTiles
+'       FOLDERID_QuickLaunch            FOLDERID_Recent         FOLDERID_RecordedTV
+'       FOLDERID_RecordedTVLibrary      FOLDERID_ResourceDir    FOLDERID_RecycleBinFolder
+'       FOLDERID_Ringtones              FOLDERID_RoamingAppData FOLDERID_RoamedTileImages
+'       FOLDERID_RoamingTiles           FOLDERID_SampleMusic    FOLDERID_SamplePictures
+'       FOLDERID_SamplePlaylists        FOLDERID_SampleVideos   FOLDERID_SavedGames
+'       FOLDERID_SavedPictures          FOLDERID_SavedSearches  FOLDERID_SavedPicturesLibrary
+'       FOLDERID_Screenshots            FOLDERID_SearchCSC      FOLDERID_SearchHistory
+'       FOLDERID_SearchHome             FOLDERID_SEARCH_MAPI    FOLDERID_SearchTemplates
+'       FOLDERID_SendTo                 FOLDERID_SidebarParts   FOLDERID_SidebarDefaultParts
+'       FOLDERID_SkyDrivePictures       FOLDERID_SkyDrive       FOLDERID_SkyDriveDocuments
+'       FOLDERID_SkyDriveCameraRoll     FOLDERID_StartMenu      FOLDERID_SyncManagerFolder
+'       FOLDERID_SyncResultsFolder      FOLDERID_Startup        FOLDERID_SyncSetupFolder
+'       FOLDERID_System                 FOLDERID_SystemX86      FOLDERID_Templates
+'       FOLDERID_TreeProperties         FOLDERID_UserPinned     FOLDERID_UserProfiles
+'       FOLDERID_UserProgramFiles       FOLDERID_UsersFiles     FOLDERID_Videos
+'       FOLDERID_UserProgramFilesCommon FOLDERID_UsersLibraries FOLDERID_VideosLibrary
+'       FOLDERID_Windows
+'
+'   WshScript Special Folders
+'        AllUsersDesktop        Desktop         NetHood        SendTo
+'        AllUsersStartMenu      Favorites       PrintHood      StartMenu
+'        AllUsersPrograms       Fonts           Programs       Startup
+'        AllUsersStartup        MyDocuments     Recent         Templates
+
 
 ' ---------------------------------
 '  DIRECTORY RELATED
@@ -91,6 +153,174 @@ Err_Handler:
     Resume Exit_Handler
 End Function
 
+' ---------------------------------
+' FUNCTION:     BrowseFolder
+' Description:  file dialog browsing actions
+' Assumptions:  -
+' Parameters:   Title - display name of the file dialog (string)
+'               ButtonTitle - name of OK button (string)
+'               InitialFolder - folder to begin display (string)
+'               InitialView - desired file dialog view (string, MsoFileDialogView options)
+'               DialogType - desired dialog type (string, MsoFileDialogType options)
+'               AllowMultiples - allows multiple directories to be selected (boolean)
+' Returns:      fully-qualified folder name selected by the user
+'               or an empty string if the user cancelled the dialog (string)
+' Throws:       none
+' References:
+'   Chip Pearson, July 5, 2007
+'   http://www.cpearson.com/excel/browsefolder.aspx
+' Source/date:
+' Adapted:      Bonnie Campbell, August 30, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 8/30/2016 - initial version
+' ---------------------------------
+Public Function BrowseFolder(Title As String, _
+        Optional ButtonTitle As String = "Confirm", _
+        Optional InitialFolder As String = vbNullString, _
+        Optional InitialView As Office.MsoFileDialogView = msoFileDialogViewList, _
+        Optional DialogType As MsoFileDialogType = msoFileDialogFolderPicker, _
+        Optional AllowMultiples As Boolean = False) As String
+'----------------------
+' Dialog Options:
+'   (MsoFileDialogType Constants)
+'   msoFileDialogFilePicker     Allows user to select a file.
+'   msoFileDialogFolderPicker   Allows user to select a folder.
+'   msoFileDialogOpen           Allows user to open a file.
+'   msoFileDialogSaveAs         Allows user to save a file.
+'
+' View Options:
+'   msoFileDialogViewDetails    2   Files displayed in a list with detail information.
+'   msoFileDialogViewLargeIcons 6   Files displayed as large icons.
+'   msoFileDialogViewList       1   Files displayed in a list without details.
+'   msoFileDialogViewPreview    4   Files displayed in a list with a preview pane showing
+'                                   the selected file.
+'   msoFileDialogViewProperties 3   Files displayed in a list with a pane showing the
+'                                   selected file's properties.
+'   msoFileDialogViewSmallIcons 7   Files displayed as small icons.
+'   msoFileDialogViewThumbnail  5   Files displayed as thumbnails.
+'   msoFileDialogViewTiles      9   Files displayed as tiled icons.
+'   msoFileDialogViewWebView    8   Files displayed in Web view.
+'----------------------
+    
+On Error GoTo Err_Handler
+    
+    'Dim V As Variant
+    Dim InitFolder As String
+    Dim SelectedFolder As String
+    
+    'prepare file dialog box
+    With Application.FileDialog(DialogType)
+        .Title = Title
+        .ButtonName = ButtonTitle
+        .InitialView = InitialView
+
+        If Len(InitialFolder) > 0 Then
+            
+            If dir(InitialFolder, vbDirectory) <> vbNullString Then
+                InitFolder = InitialFolder
+                If Right(InitFolder, 1) <> "\" Then
+                    InitFolder = InitFolder & "\"
+                End If
+                .InitialFileName = InitFolder
+            End If
+            
+        End If
+        '.Show
+        
+        'set directory if OK clicked
+        If .Show = True Then
+            SelectedFolder = .SelectedItems(1)
+        End If
+        
+'        On Error Resume Next
+'        Err.Clear
+'
+'        V = .SelectedItems(1)
+'        If Err.Number <> 0 Then
+'            V = vbNullString
+'        End If
+    End With
+    
+    BrowseFolder = SelectedFolder 'CStr(V)
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - BrowseFolder[mod_File])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetSpecialFolderPath
+' Description:  retrieve full path of specified special folder
+' Assumptions:  -
+' Notes:
+'   WshScript special folders include
+'        AllUsersDesktop        Desktop         NetHood        SendTo
+'        AllUsersStartMenu      Favorites       PrintHood      StartMenu
+'        AllUsersPrograms       Fonts           Programs       Startup
+'        AllUsersStartup        MyDocuments     Recent         Templates
+'
+' Parameters:   SpecialFolder - special folder name (string)
+' Returns:      fully-qualified folder name or desired special folder (string)
+' Throws:       none
+' References:
+'   Mike Alexander, February 27, 2009
+'   http://dailydoseofexcel.com/archives/2009/02/26/get-the-path-to-my-documents-in-vba/
+'   bradxlsure, March 17, 2008
+'   http://www.pcreview.co.uk/threads/re-wscript-object-not-found.947405/
+' Source/date:
+' Adapted:      Bonnie Campbell, August 30, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 8/30/2016 - initial version
+' ---------------------------------
+Function GetSpecialFolderPath(SpecialFolder As String)
+On Error GoTo Err_Handler
+
+    Dim arySpecials() As String, strPath As String
+    
+    arySpecials = Split("desktop,allusersdesktop,sendto,startmenu,recent,favorites,mydocuments" _
+                    & "" _
+                        , ",")
+    
+    
+    'default
+    strPath = ""
+        
+ '   If IsInArray(SpecialFolder, arySpecials) Then
+    
+        Dim oWshShell As Object
+        Dim oFolders As Object
+        
+        Set oWshShell = CreateObject("WScript.Shell")
+        
+        Set oFolders = oWshShell.SpecialFolders
+    
+
+        strPath = oFolders(SpecialFolder)
+    
+  '  End If
+    
+    GetSpecialFolderPath = strPath
+
+Exit_Handler:
+    Set oWshShell = Nothing
+    Set oFolders = Nothing
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetSpecialFolderPath[mod_File])"
+    End Select
+    Resume Exit_Handler
+End Function
 
 ' ---------------------------------
 '  FILE RELATED

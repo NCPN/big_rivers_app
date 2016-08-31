@@ -452,7 +452,7 @@ On Error GoTo Err_Handler
 
     Dim ModuleFilePath As String, ModuleFile As String
    
-    ModuleFile = Dir(strPath, vbNormal)
+    ModuleFile = dir(strPath, vbNormal)
     
     While ModuleFile <> ""
     
@@ -464,7 +464,7 @@ On Error GoTo Err_Handler
         End If
         
         'call Dir without params to get the next file in strPath
-        ModuleFile = Dir
+        ModuleFile = dir
     Wend
 
 Exit_Handler:
@@ -923,11 +923,11 @@ Public Sub testme()
 '    Debug.Print GetSiteID("BLCA", "EP")
 
 'wia
-Dim Img 'As ImageFile
+Dim img 'As ImageFile
 Dim s 'As String
-Dim v 'As Vector
+Dim V 'As Vector
 
-Set Img = CreateObject("WIA.ImageFile")
+Set img = CreateObject("WIA.ImageFile")
 
 'Img.LoadFile "Z:\_____LIB\pics\IMAG5402.jpg"
 'XResolution(282) = 72
@@ -994,58 +994,58 @@ Set Img = CreateObject("WIA.ImageFile")
 'VerticalResolution = 96
 'FrameCount = 1
 
-s = "Width = " & Img.Width & vbCrLf & _
-    "Height = " & Img.Height & vbCrLf & _
-    "Depth = " & Img.PixelDepth & vbCrLf & _
-    "HorizontalResolution = " & Img.HorizontalResolution & vbCrLf & _
-    "VerticalResolution = " & Img.VerticalResolution & vbCrLf & _
-    "FrameCount = " & Img.FrameCount & vbCrLf
+s = "Width = " & img.Width & vbCrLf & _
+    "Height = " & img.Height & vbCrLf & _
+    "Depth = " & img.PixelDepth & vbCrLf & _
+    "HorizontalResolution = " & img.HorizontalResolution & vbCrLf & _
+    "VerticalResolution = " & img.VerticalResolution & vbCrLf & _
+    "FrameCount = " & img.FrameCount & vbCrLf
 
-If Img.IsIndexedPixelFormat Then
+If img.IsIndexedPixelFormat Then
     s = s & "Pixel data contains palette indexes" & vbCrLf
 End If
 
-If Img.IsAlphaPixelFormat Then
+If img.IsAlphaPixelFormat Then
     s = s & "Pixel data has alpha information" & vbCrLf
 End If
 
-If Img.IsExtendedPixelFormat Then
+If img.IsExtendedPixelFormat Then
     s = s & "Pixel data has extended color information (16 bit/channel)" & vbCrLf
 End If
 
-If Img.IsAnimated Then
+If img.IsAnimated Then
     s = s & "Image is animated" & vbCrLf
 End If
 
-If Img.Properties.Exists("40091") Then
-    Set v = Img.Properties("40091").Value
-    s = s & "Title = " & v.String & vbCrLf
+If img.Properties.Exists("40091") Then
+    Set V = img.Properties("40091").Value
+    s = s & "Title = " & V.String & vbCrLf
 End If
 
-If Img.Properties.Exists("40092") Then
-    Set v = Img.Properties("40092").Value
-    s = s & "Comment = " & v.String & vbCrLf
+If img.Properties.Exists("40092") Then
+    Set V = img.Properties("40092").Value
+    s = s & "Comment = " & V.String & vbCrLf
 End If
 
-If Img.Properties.Exists("40093") Then
-    Set v = Img.Properties("40093").Value
-    s = s & "Author = " & v.String & vbCrLf
+If img.Properties.Exists("40093") Then
+    Set V = img.Properties("40093").Value
+    s = s & "Author = " & V.String & vbCrLf
 End If
 
-If Img.Properties.Exists("40094") Then
-    Set v = Img.Properties("40094").Value
-    s = s & "Keywords = " & v.String & vbCrLf
+If img.Properties.Exists("40094") Then
+    Set V = img.Properties("40094").Value
+    s = s & "Keywords = " & V.String & vbCrLf
 End If
 
-If Img.Properties.Exists("40095") Then
-    Set v = Img.Properties("40095").Value
-    s = s & "Subject = " & v.String & vbCrLf
+If img.Properties.Exists("40095") Then
+    Set V = img.Properties("40095").Value
+    s = s & "Subject = " & V.String & vbCrLf
 End If
 
 Dim vecProperty As WIA.Vector
 Dim propEach As WIA.Property
 
-With Img
+With img
     For Each propEach In .Properties
             Select Case propEach.Name
                 Case "40091"
@@ -1128,9 +1128,37 @@ End Sub
 Public Sub ExecuteIt()
 
     'getDbUserAccess
-    Debug.Print DisplayIcons("uDocument|uPDF", "|")
-
-
+    'Debug.Print DisplayIcons("uDocument|uPDF", "|")
     
+'    Dim StartFolder As String, strPics As String, strPath As String
+'
+'    StartFolder = GetSpecialFolderPath("FOLDERID_Pictures")  '"desktop"
+'
+'    strPath = BrowseFolder("Photo Directory Selection", StartFolder)
+'
+'    IngestPhotos strPath, "U"
+
+
+''---------------------
+'' Declarations
+''---------------------
+'Private m_show As Long
+''---------------------
+'' Event Declarations
+''---------------------
+'
+''---------------------
+'' Properties
+''---------------------
+'Public Property Let Show(Value As Long)
+'    m_show = Value
+'End Property
+'
+'Public Property Get Show() As Long
+'    Show = m_show
+'End Property
+'Dim p As New Person
+'
+'p.Show = 1
 
 End Sub

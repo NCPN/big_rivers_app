@@ -90,12 +90,12 @@ Public Function ZipFiles(strSourceFiles As String, strZipFileName As String, _
         GoTo Exit_Handler
     End If
 
-    If (AppendToZip = False) Or (Len(Dir(strZipFileName)) = 0) Then
+    If (AppendToZip = False) Or (Len(dir(strZipFileName)) = 0) Then
         Call NewZip(strZipFileName)
     End If
 
     'Check Source Files
-    If (Len(Dir(strSourceFiles)) = 0) Then
+    If (Len(dir(strSourceFiles)) = 0) Then
         MsgBox "The source file(s): " & vbNewLine & strSourceFiles & vbNewLine & _
         "Are missing...", vbCritical, strProcName & " Error"
         ZipFiles = False
@@ -138,7 +138,7 @@ Public Function NewZip(sPath)
     Dim strProcName As String
     strProcName = "NewZip"
 
-    If Len(Dir(sPath)) > 0 Then Kill sPath
+    If Len(dir(sPath)) > 0 Then Kill sPath
     Open sPath For Output As #1
     Print #1, Chr$(80) & Chr$(75) & Chr$(5) & Chr$(6) & String(18, 0)
     Close #1

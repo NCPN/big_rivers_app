@@ -47,6 +47,7 @@ Public Event InvalidEmail(Value)
 Public Event InvalidRole(Value)
 Public Event InvalidPhone(Value)
 Public Event InvalidAccessRole(Value)
+
 '---------------------
 ' Properties
 '---------------------

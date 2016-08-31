@@ -2409,7 +2409,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/13/2016 - initial version
 ' ---------------------------------
-Public Sub ToggleRow(row As String, show As Boolean)
+Public Sub ToggleRow(row As String, Show As Boolean)
 On Error GoTo Err_Handler
 
     Dim strLabel As String
@@ -2417,26 +2417,26 @@ On Error GoTo Err_Handler
     
     Select Case row
         Case "titlekey"  'key on title row
-            lblLeftKey.visible = show
-            lblRightKey.visible = show
+            lblLeftKey.visible = Show
+            lblRightKey.visible = Show
         Case "key"  'key row below title
-            Me.GroupHeader1.visible = show
-            lblKey.visible = show
+            Me.GroupHeader1.visible = Show
+            lblKey.visible = Show
             
         Case "total"    'total plot % cover
-            Me.GroupHeader2.visible = show
-            lblTotalCover.visible = show
+            Me.GroupHeader2.visible = Show
+            lblTotalCover.visible = Show
             
             'show/hide columns
             For i = 1 To 16
                 strLabel = "lblColT" & i
-                Me.Controls(strLabel).visible = show
+                Me.Controls(strLabel).visible = Show
             Next
                     
         Case "subtitle" 'subtitle row above checkboxes
-            Me.GroupHeader3.visible = show
-            lblSubTitle.visible = show
-            lblRightKeySub.visible = show
+            Me.GroupHeader3.visible = Show
+            lblSubTitle.visible = Show
+            lblRightKeySub.visible = Show
             
     End Select
         

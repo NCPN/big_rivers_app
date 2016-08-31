@@ -118,6 +118,8 @@ Private Declare Function SetLayeredWindowAttributes Lib "user32" _
    ByVal bAlpha As Byte, _
    ByVal dwFlags As Long) As Long
 
+Public RefSub As String 'referring subroutine
+
 '=================================================================
 '  Properties
 '=================================================================
@@ -586,9 +588,13 @@ End Sub
 '   BLC - 6/23/2016 - initial version
 '   BLC - 6/27/2016 - shifted to mod_Forms from big rivers forms
 '   BLC - 7/28/2016 - added clearing lblMsg caption
+'   BLC - 8/30/2016 - added RefSub to identify form subs called by ClearForm
 ' ---------------------------------
 Public Sub ClearForm(ByRef frm As Form)
 On Error GoTo Err_Handler
+    
+    'set global
+    RefSub = "ClearForm"
     
     With frm
     
@@ -629,6 +635,7 @@ On Error GoTo Err_Handler
     End With
     
 Exit_Handler:
+    RefSub = ""
     Exit Sub
 Err_Handler:
     Select Case Err.Number

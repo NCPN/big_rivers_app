@@ -35,7 +35,7 @@ Option Explicit
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
 '               app - 8/30/2016  - 1.02 - latest enum update from db
-'                                         last updated: 8/30/2016 6:55:55 AM
+'                                         last updated: 8/30/2016 5:58:34 PM
 ' =================================
 
 '-----------------------------
@@ -178,7 +178,7 @@ Public Enum TaglineType
     H = 82
     WRS = 83
     rs = 84
-    v = 85
+    V = 85
     G = 86
     W = 87
     R = 88

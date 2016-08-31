@@ -1290,6 +1290,9 @@ On Error GoTo Err_Handler
             '-------------------------------------------------------------------------
             Select Case template
             
+        '-----------------------
+        '  INSERTS
+        '-----------------------
                 Case "i_comment"
                 
                     '-- required parameters --
@@ -1542,6 +1545,18 @@ On Error GoTo Err_Handler
                     .Parameters("Name") = params(2)
                     .Parameters("Segment") = params(3)
                     
+                    
+                Case "i_usys_temp_photo"
+                
+                    '-- required parameters --
+                    .Parameters("ppath") = params(1)
+                    .Parameters("pfile") = params(2)
+                    .Parameters("pdate") = params(3)
+                    .Parameters("ptype") = params(4)
+                
+        '-----------------------
+        '  UPDATES
+        '-----------------------
                 Case "u_comment"
                 
                     '-- required parameters --
@@ -1707,6 +1722,12 @@ On Error GoTo Err_Handler
                     
                     '-- optional parameters --
                 
+                Case "u_usys_temp_photo"
+                
+                    '-- required parameters --
+                    .Parameters("iid") = params(1)
+                    .Parameters("ptype") = params(4)
+                
                 Case "u_vegtransect"
         
                     '-- required parameters --
@@ -1753,10 +1774,7 @@ On Error GoTo Err_Handler
             End Select
             
             .Execute dbFailOnError
-            
-'            'cleanup
-'            .Close
-    
+                
     ' -------------------
     '  Record Action
     ' -------------------
@@ -1777,18 +1795,7 @@ On Error GoTo Err_Handler
             .Parameters("ID") = TempVars("AppUserID") 'TempVars("ContactID")
             .Parameters("Activity") = "DE"
             .Parameters("ActionDate") = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
-            
-'    'add a record for created by
-'    Dim act As New RecordAction
-'
-'    With act
-'        .RefAction = "R"
-'        .ContactID = TempVars("ContactID")
-'        .RefID = Me.ID
-'        .RefTable = "VegWalkSpecies"
-'        .SaveToDb
-'    End With
-                    
+                                
             .Execute dbFailOnError
             
             'cleanup
@@ -1798,13 +1805,7 @@ On Error GoTo Err_Handler
 
         SetRecord = ID
     End With
-    
-'    strSQL = GetTemplate("i_event_record", _
-'                "ProtocolID" & PARAM_SEPARATOR & Me.ProtocolID & "|" _
-'                & "SiteID" & PARAM_SEPARATOR & Me.SiteID & "|" _
-'                & "LocationID" & PARAM_SEPARATOR & Me.LocationID & "|" _
-'                & "StartDate" & PARAM_SEPARATOR & Format(Me.StartDate, "YYYY-mm-dd"))
-            
+                
 Exit_Handler:
     'cleanup
     Set qdf = Nothing
@@ -2151,15 +2152,6 @@ On Error GoTo Err_Handler
         obj.SaveToDb IIf(DoAction = "i", False, True)
         
         'add the action record --> DONE via SaveToDb (thru SetRecord)
-'        Dim act As New RecordAction
-'
-'        With act
-'            .RefAction = "R"
-'            .ContactID = TempVars("AppUserID") 'TempVars("UserID")
-'            .RefID = obj.ID
-'            .RefTable = strTable
-'            .SaveToDb
-'        End With
         
         'set the tbxID.value ==> tbxID is a bound control, can't set it this way
         'tbxID = .ID
@@ -2178,13 +2170,13 @@ On Error GoTo Err_Handler
     'frm.Dirty = False
     
     If frm.Dirty Then
-        Debug.Print frm.Name & " DIRTY"
+        Debug.Print "UpsertRecord " & frm.Name & " DIRTY"
         'frm.Dirty = False
         
         frm!lblMsg.ForeColor = lngYellow
         frm!lblMsgIcon.ForeColor = lngYellow
         frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
-        frm!lblMsg.Caption = "** UNSAVED CHANGES! **"
+        frm!lblMsg.Caption = "** DIRTY **" 'UNSAVED CHANGES! **"
         
     Else
         Debug.Print "UpsertRecord " & frm.Name & " CLEAN"
@@ -2193,8 +2185,8 @@ On Error GoTo Err_Handler
 ' CHECK IF POPULATING FORM IS THE ISSUE...
 '    PopulateForm frm, frm!tbxID.Value
     
-    'refresh list
-    frm!list.Requery
+'    'refresh list
+'    frm!list.Requery
     
     frm.Requery
     

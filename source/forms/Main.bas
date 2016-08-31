@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =4455
-    Top =3165
-    Right =17340
-    Bottom =14160
+    Left =6615
+    Top =2580
+    Right =14895
+    Bottom =10545
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -566,7 +566,10 @@ On Error GoTo Err_Handler
     oBLTile.Link5Visible = 0
     oBLTile.Link6Visible = 0
     oBLTile.Link7Visible = 0
-    oBLTile.Link8Visible = 0
+    oBLTile.lblIcon8L.Caption = StringFromCodepoint(uPicFramed)
+    oBLTile.lblIcon8L.ForeColor = lngBlue
+    oBLTile.lblIcon8L.FontWeight = wtMedium
+    oBLTile.Link8Caption = Space(4) & "Batch Upload Photos"
     
     'Center
     Set oBCTile = BCTile.Form
@@ -664,7 +667,7 @@ On Error GoTo Err_Handler
         'oLTile.EnableLinks ""               'N/A
         oCTile.EnableLinks "6"              'People
         oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
-        'oBLTile.EnableLinks ""              'N/A
+        oBLTile.EnableLinks "8"              'Batch Upload Photos
         'oBCTile.EnableLinks ""              'N/A
         'oBRTile.EnableLinks ""               'N/A
         

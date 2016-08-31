@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =4680
-    Top =3345
-    Right =12900
-    Bottom =12780
+    Left =4035
+    Top =3540
+    Right =16260
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -1349,8 +1349,10 @@ On Error GoTo Err_Handler
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
 
+    'unbind the control from Access_ID to allow selections (cleans up prior uses)
+    cbxUserRole.ControlSource = ""
     cbxUserRole.RowSource = GetTemplate("s_access")
-  
+    
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
     
@@ -1451,6 +1453,8 @@ On Error GoTo Err_Handler
     Debug.Print Me.Name & " Form_BeforeUpdate Me.Dirty IS " & Me.Dirty
     Debug.Print Me.Name & " Form_BeforeUpdate Me.list.Form.Dirty IS " & Me.list.Form.Dirty
 
+    'avoid actions when clearing form
+    If RefSub = "ClearForm" Then GoTo Exit_Handler
 '
     If m_SaveOK <> True Then
         Cancel = True
@@ -1847,6 +1851,12 @@ On Error GoTo Err_Handler
 
     Me.Requery
 
+    'clear the dirt
+    'Me.Dirty = False
+    
+    'clear the form
+    ClearForm Me
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1924,57 +1934,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-'' ---------------------------------
-'' Sub:          ClearForm
-'' Description:  Clear form fields
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/23/2016 - initial version
-'' ---------------------------------
-'Private Sub xClearForm()
-'On Error GoTo Err_Handler
-'
-'    'clear recordsource
-'    Me.RecordSource = ""
-'
-'    'clear values so they no longer look for original control sources
-'    Dim ctrl As Control
-'
-'    'clear the control sources to clear the textboxes
-'    For Each ctrl In Me.Controls
-'        Select Case ctrl.ControlType
-'            Case acTextBox
-'                ctrl.ControlSource = ""
-'            Case acComboBox
-'                ctrl.Value = ""
-'        End Select
-'    Next
-'
-'    tbxID = 0
-'
-'    btnSave.Enabled = False
-'
-'    Me.list.Requery
-'
-'    Me.Requery
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - ClearForm[Contact form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-
 ' ---------------------------------
 ' Sub:          ReadyForSave
 ' Description:  Check if form values are ready to save
@@ -1996,7 +1955,6 @@ On Error GoTo Err_Handler
     
     Debug.Print Me.Name & " Form_Current Me.Dirty IS " & Me.Dirty
     Debug.Print Me.Name & " Form_Current Me.list.Form.Dirty IS " & Me.list.Form.Dirty
-
 
     'default
     isOK = False

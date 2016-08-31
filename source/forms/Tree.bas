@@ -14,10 +14,10 @@ Begin Form
     Width =11400
     DatasheetFontHeight =11
     ItemSuffix =27
-    Left =4830
-    Top =4230
-    Right =16485
-    Bottom =13575
+    Left =1065
+    Top =3540
+    Right =20805
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -857,14 +857,37 @@ Option Explicit
 ' MODULE:       Tree form
 ' Description:  Treeview functions & procedures
 ' Level:        Framework form
-' Version:      1.03
+' Version:      1.04
 '
 ' Source/date:  Bonnie Campbell, 7/10/2015
 ' Revisions:    BLC - 7/10/2015 - 1.00 - initial version
 '               BLC - 6/13/2016 - 1.01 - adapted to big rivers
 '               BLC - 6/24/2016 - 1.02 - replaced Exit_Function > Exit_Handler
 '               BLC - 6/29/2016 - 1.03 - added header captions
+'               BLC - 8/30/2016 - 1.04 - moved ParseStrings() to mod_Strings,
+'                                        LoadTree(), AddChildren(), IsDuplicateKey(),
+'                                        FindSpecificNode(), tvwNodeSelect() to mod_Tree
 ' =================================
+
+'---------------------
+' Simulated Inheritance
+'---------------------
+
+'---------------------
+' Declarations
+'---------------------
+
+'---------------------
+' Event Declarations
+'---------------------
+
+'---------------------
+' Properties
+'---------------------
+
+'---------------------
+' Methods
+'---------------------
 
 ' ---------------------------------
 ' SUB:          Form_Load
@@ -874,8 +897,10 @@ Option Explicit
 ' Returns:      -
 ' Throws:       none
 ' References:
-' Eldar Agalarov, October 14, 2013
-' http://stackoverflow.com/questions/19369132/declare-and-initialize-string-array-in-vba
+'   Eldar Agalarov, October 14, 2013
+'   http://stackoverflow.com/questions/19369132/declare-and-initialize-string-array-in-vba
+'   miketr, June 6, 2002
+'   http://vbcity.com/forums/t/3805.aspx
 ' Source/date:
 ' Adapted:      Bonnie Campbell, July 10, 2015 - for NCPN tools
 ' Revisions:
@@ -901,12 +926,13 @@ On Error GoTo Err_Handler
     aryPhotoTypes = Split(PHOTO_TYPES_MAIN, ",")
     
     'add unclassified type
-    aryPhotoTypes(UBound(aryPhotoTypes) + 1) = "Unclassified"
+    ReDim Preserve aryPhotoTypes(UBound(aryPhotoTypes) + 1)
+    aryPhotoTypes(UBound(aryPhotoTypes)) = "Unclassified"
     
     With tvwTree
     
         'clear tree
-        .nodes.Clear
+        .Nodes.Clear
         
         'add static nodes & format
         For Each PhotoType In aryPhotoTypes
@@ -916,7 +942,7 @@ On Error GoTo Err_Handler
                 Code = "V"
             End If
             
-            Set nodeCurrent = .nodes.Add(, , Code, CStr(PhotoType))
+            Set nodeCurrent = .Nodes.Add(, , Code, CStr(PhotoType))
             
             nodeCurrent.Tag = "I|P|" & CStr(PhotoType) & "|" & Code & "|" & Code
             nodeCurrent.Bold = True
@@ -931,7 +957,7 @@ On Error GoTo Err_Handler
                     
                     Code = "O" & Left(CStr(chld), 1)
 
-                    Set nodeX = .nodes.Add(nodeCurrent, tvwChild, Code, CStr(chld))
+                    Set nodeX = .Nodes.Add(nodeCurrent, tvwChild, Code, CStr(chld))
                     nodeX.ForeColor = vbBlue
                     nodeX.Bold = True
                     nodeX.Tag = "I|P|" & CStr(chld) & "|" & Code & "|" & Code
@@ -953,6 +979,18 @@ On Error GoTo Err_Handler
     'expand "Other" node on open
     tvwTree_FindNode "O", "key", True
 '    FindSpecificNode Me.tvwTree.Object, "OT"
+
+    '---------------------
+    ' Unclassified Node
+    '---------------------
+    'place unclassified @ top --> re-setting to current parent inserts the node at the top
+    '                             of the tree with its children
+    '                             w/o adding/deleting nodes & rebuilding the tree
+    
+  '  Set tvwTree.Nodes("Unclassified").Parent = Me.tvwTree.Nodes("Root")
+    
+    'highlight
+  '  tvwTree.Nodes("Unclassified").ForeColor = lngRed
        
     'set subform
     PopulateSubForm
@@ -1062,84 +1100,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:          LoadTree
-' Description:  treeview loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-' Adapted:      Bonnie Campbell, July 10, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/10/2015 - initial version
-' ---------------------------------
-Private Sub LoadTree()
-
-On Error GoTo Err_Handler
-
-'LoadTree tvwTree '(tvw)
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - LoadTree[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          AddChildren
-' Description:  add children to treeview node
-' Assumptions:  -
-' Parameters:   tvw - treeview control
-'               nodeParent - parent node for children (node)
-'               aryKids - comma separated list of children (string)
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-' Adapted:      Bonnie Campbell, July 10, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/10/2015 - initial version
-'   BLC - 6/15/2016 - adapted for big rivers app
-' ---------------------------------
-Private Sub AddChildren(tvw As TreeView, nodeParent As node, aryKids As String)
-'Private Sub AddChildren(tvw As TreeView, nodeParent As String, aryChildren As String)
-
-On Error GoTo Err_Handler
-    
-    Dim nodeX As node
-    Dim aryChildren() As String
-    Dim child As Variant
-    
-    'set the array
-    aryChildren = Split(aryKids, ",")
-    
-    For Each child In aryChildren
-        'Set nodeX = tvw.Nodes.Add(nodeParent, tvwChild, , CStr(child))
-        Set nodeX = tvw.nodes.Add(nodeParent, tvwChild, , CStr(child))
-        'recursively add children
-        AddChildren tvw, nodeX, CStr(child) 'was tvw, nodeX, child
-    Next
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - AddChildren[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' SUB:          lblPhotoFilename_DblClick
 ' Description:  Launches and finds photo in explorer on double click
 ' Assumptions:  -
@@ -1187,48 +1147,9 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' SUB:          PopulateSubForm
-' Description:  populate the subform control based on the phototype
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-' Adapted:      Bonnie Campbell, July 10, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/10/2015 - initial version
-' ---------------------------------
-Public Sub PopulateSubForm()
-On Error GoTo Err_Handler
-
-    Dim strForm As String
-
-    Select Case TempVars("phototype")
-        Case "R", "T", "F", "V"
-            strForm = "PhotoFTORDetails"
-        Case Else
-            strForm = "PhotoOtherDetails"
-    End Select
-
-    'set subform to display
-    Me!fsub.SourceObject = strForm
-
-    'set hints
-    SetHints Me.Form, strForm
-
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
+'================================
+' Treeview Events
+'================================
 
 ' ---------------------------------
 ' SUB:          tvwTree_MouseDown
@@ -1279,64 +1200,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:          tvwNodeSelect
-' Description:  set view as if nodes are selected
-' Assumptions:  -
-' Parameters:   Node being selected (node object)
-' Returns:      -
-' Throws:       none
-' References:
-'  asp1n, March 6, 2004
-'  http://www.xtremevbtalk.com/showthread.php?t=133762
-' Source/date:  Bonnie Campbell, July 10, 2015 - for NCPN tools
-' Adapted:
-' Revisions:
-'   BLC - 7/27/2015 - initial version
-' ---------------------------------
-Private Sub tvwNodeSelect(Optional node As node, Optional blnNodeSelected As Boolean)
-On Error GoTo Err_Handler
-    Dim i As Long
-    Dim SelectedNode As node
-    Dim colTreeNodes As Collection
-    
-    If blnNodeSelected Then
-        If node.BackColor = vbHighlight Then
-            If colTreeNodes.Count > 1 Then
-                node.BackColor = vbWindowBackground
-                node.ForeColor = vbWindowText
-                node.Selected = False
-                colTreeNodes.Remove node.key
-            End If
-            Exit Sub
-        End If
-    Else
-        For i = 0 To colTreeNodes.Count - 1
-            Set SelectedNode = colTreeNodes.item(i) 'colTreeNodes.Remove(, 0)
-            SelectedNode.BackColor = vbWindowBackground
-            SelectedNode.ForeColor = vbWindowText
-            colTreeNodes.Remove i
-        Next i
-    End If
-    
-    If Not node Is Nothing Then
-        node.BackColor = vbHighlight
-        node.ForeColor = vbHighlightText
-        colTreeNodes.Add node, node.key
-    End If
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tvwNodeSelect[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' SUB:          tvwTree_NodeClick
 ' Description:  treeview node click actions
 ' Assumptions:  -
@@ -1351,7 +1214,6 @@ End Sub
 ' Revisions:
 '   BLC - 7/10/2015 - initial version
 ' ---------------------------------
-
 'Private Sub tvwTree_NodeClick(ByVal Node As MSComctlLib.Node) 'Object)
 Private Sub tvwTree_NodeClick(ByVal node As Object)
 On Error GoTo Err_Handler
@@ -1396,6 +1258,10 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+'================================
+' Treeview Drag & Drop Events
+'================================
+
 '====================================================================
 'Use the OLEDragOver event of the TreeView control to select the
 'node to drag, and to highlight the target nodes where the drop will
@@ -1426,7 +1292,7 @@ Private Sub tvwTree_OLEDragOver(Data As Object, Effect As Long, _
 
 On Error GoTo Err_Handler
 
-    Dim oTree As TreeView
+    Dim oTree As Treeview
 
     'Create a reference to the TreeView control.
     Set oTree = Me!tvwTree.Object
@@ -1481,7 +1347,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
         Button As Integer, Shift As Integer, x As Single, y As Single)
     On Error GoTo Err_Handler
 
-    Dim oTree As TreeView
+    Dim oTree As Treeview
     Dim strKey As String, strText As String
     Dim nodeNew As node, nodeDragged As node
 '    Dim db As Database
@@ -1530,10 +1396,10 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
              If Not ImmovableNode(nodeDragged) Then
                
                 'delete current node
-                oTree.nodes.Remove nodeDragged.index
+                oTree.Nodes.Remove nodeDragged.index
         
                 'add as a root node
-                Set nodeNew = oTree.nodes.Add(, , strKey, strText)
+                Set nodeNew = oTree.Nodes.Add(, , strKey, strText)
                 nodeNew.Tag = "M|C|" & strKey & "|" & strText & "| "
                 
                 Me.lblPhotoTypeValue.Caption = ""
@@ -1567,10 +1433,10 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
 
             If Not ImmovableNode(nodeDragged) Then
                 'Delete the current node for the photo
-                oTree.nodes.Remove nodeDragged.index
+                oTree.Nodes.Remove nodeDragged.index
     
                 'Add to new location
-                Set nodeNew = oTree.nodes.Add(oTree.DropHighlight, tvwChild, strKey, strText)
+                Set nodeNew = oTree.Nodes.Add(oTree.DropHighlight, tvwChild, strKey, strText)
                 nodeNew.Tag = "M|C|" & strKey & "|" & strText & "|" & oTree.DropHighlight.key
 
                 'update photo type
@@ -1631,7 +1497,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
                     End If
                         
                     'add node & tag
-                    Set nodeX = oTree.nodes.Add(nodeParent, tvwChild, strKey, strDisplayName)
+                    Set nodeX = oTree.Nodes.Add(nodeParent, tvwChild, strKey, strDisplayName)
                     nodeX.Tag = "M|C|" & strKey & "|" & strDisplayName & "|" & strPhotoType 'oTree.SelectedItem.key 'strDisplayName
                     
                     'select the relocated node
@@ -1700,6 +1566,209 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+'================================
+' Treeview Pseudo-Events
+'================================
+
+' ---------------------------------
+' SUB:          tvwTree_FindNode
+' Description:  find a node based on it's node name, tag, or key
+' Assumptions:  -
+' Parameters:   tvw - treeview control (treeview object)
+'               strFind - item to find (string)
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' daharon, January 19, 2009
+' http://stackoverflow.com/questions/459589/select-a-node-in-a-treeview-with-vba
+' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/29/2015 - initial version
+' ---------------------------------
+Public Sub tvwTree_FindNode(strFind As String, strType As String, blnExpand As Boolean)
+On Error GoTo Err_Handler
+
+    Dim tvwNode As node
+    Dim item As Variant
+    
+    For Each tvwNode In tvwTree.Object.Nodes 'Me.TreeView.nodes
+    
+        Select Case strType
+            Case "key"
+                item = tvwNode.key
+            Case "tag"
+                item = tvwNode.Tag
+            Case "text"
+                item = tvwNode.Text
+        End Select
+        
+        If item = strFind Then
+           tvwNode.Selected = True
+           tvwNode.EnsureVisible
+           tvwNode.Expanded = blnExpand
+           Exit For
+        End If
+    
+    Next
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - tvwTree_FindNode[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          ExpandCurrentBranch_Click
+' Description:  expand the current treeview branch
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+'  shannonds, April 10, 2014
+'  http://www.experts-exchange.com/Database/MS_Access/Q_28409093.html
+' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/29/2015 - initial version
+' ---------------------------------
+Private Sub ExpandCurrentBranch_Click()
+Dim node As MSComctlLib.node
+Dim idx As Integer
+
+On Error GoTo Err_Handler
+
+    ' loop through all nodes
+    For Each node In Me.tvwTree.Nodes
+        If node.Selected = True Then
+            idx = node.index
+            'Expand branch from selected node on
+            ExpandBranch node
+            Exit For
+        End If
+    Next node
+    Me.tvwTree.SetFocus
+    Set Me.tvwTree.SelectedItem = Me.tvwTree.Nodes.item(idx)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - ExpandCurrentBranch_Click[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          ExpandBranch_Click
+' Description:  expand treeview branch for a given node
+' Assumptions:  -
+' Parameters:   node - treeview node to expand (node object)
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+'  shannonds, April 10, 2014
+'  http://www.experts-exchange.com/Database/MS_Access/Q_28409093.html
+' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/29/2015 - initial version
+' ---------------------------------
+Private Sub ExpandBranch(ByVal node As MSComctlLib.node)
+    Dim i As Integer
+    
+    For i = node.index To node.Next.index - 1
+        Me.tvwTree.Nodes.item(i).Expanded = True
+'        Debug.Print Me.xTree.Nodes.Item(i).Text
+    Next i
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - ExpandBranch_Click[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' datAdrenaline, June 4, 2007
+' http://www.utteraccess.com/forum/index.php?showtopic=1428240
+Private Sub SelectNode()
+On Error Resume Next
+    
+'    Me.xTree.Object.nodes(YourKeyConstant & Me.txtTag).Selected = True
+'    If Err <> 0 Then
+'        MsgBox "The node key you specified could not be found!"
+'        Err.Clear
+'    End If
+End Sub
+
+
+
+'================================
+' Subform Methods
+'================================
+
+' ---------------------------------
+' SUB:          PopulateSubForm
+' Description:  populate the subform control based on the phototype
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, July 10, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/10/2015 - initial version
+' ---------------------------------
+Public Sub PopulateSubForm()
+On Error GoTo Err_Handler
+
+    Dim strForm As String
+
+    Select Case TempVars("phototype")
+        Case "R", "T", "F", "V"
+            strForm = "PhotoFTORDetails"
+        Case Else
+            strForm = "PhotoOtherDetails"
+    End Select
+
+    'set subform to display
+    Me!fsub.SourceObject = strForm
+
+    'set hints
+    SetHints Me.Form, strForm
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+'--------------- CONSIDER MOVING ---------------
+
 ' ---------------------------------
 ' SUB:          PrepareImageList
 ' Description:  load an image list
@@ -1739,6 +1808,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 
 ' ---------------------------------
 ' FUNCTION:     ImmovableNode
@@ -1940,277 +2010,6 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (" & Err.Number & " - DeletePhotoRecord[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Function
-
-' ---------------------------------
-' SUB:          ExpandCurrentBranch_Click
-' Description:  expand the current treeview branch
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-'  shannonds, April 10, 2014
-'  http://www.experts-exchange.com/Database/MS_Access/Q_28409093.html
-' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/29/2015 - initial version
-' ---------------------------------
-Private Sub ExpandCurrentBranch_Click()
-Dim node As MSComctlLib.node
-Dim idx As Integer
-
-On Error GoTo Err_Handler
-
-    ' loop through all nodes
-    For Each node In Me.tvwTree.nodes
-        If node.Selected = True Then
-            idx = node.index
-            'Expand branch from selected node on
-            ExpandBranch node
-            Exit For
-        End If
-    Next node
-    Me.tvwTree.SetFocus
-    Set Me.tvwTree.SelectedItem = Me.tvwTree.nodes.item(idx)
-
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - ExpandCurrentBranch_Click[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          ExpandBranch_Click
-' Description:  expand treeview branch for a given node
-' Assumptions:  -
-' Parameters:   node - treeview node to expand (node object)
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-'  shannonds, April 10, 2014
-'  http://www.experts-exchange.com/Database/MS_Access/Q_28409093.html
-' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/29/2015 - initial version
-' ---------------------------------
-Private Sub ExpandBranch(ByVal node As MSComctlLib.node)
-    Dim i As Integer
-    
-    For i = node.index To node.Next.index - 1
-        Me.tvwTree.nodes.item(i).Expanded = True
-'        Debug.Print Me.xTree.Nodes.Item(i).Text
-    Next i
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - ExpandBranch_Click[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          FindSpecificNode
-' Description:  find a node based on it's
-' Assumptions:  -
-' Parameters:   tvw - treeview control (treeview object)
-'               strFind - item to find (string)
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-'  das974, May 6, 2008
-'  http://www.vbforums.com/showthread.php?509289-2008-Select-Treeview-node-by-name-or-key
-' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/29/2015 - initial version
-' ---------------------------------
-Private Sub FindSpecificNode(ByVal tvw As MSComctlLib.TreeView, strFind As String)
-'    Dim i As Integer
-'    'Dim nodes As TreeNode, node As TreeNode
-'    Dim nodes As Variant
-'    Dim node As mscomctllib.node
-'
-'    Set nodes = tvw.nodes.Find(strFind, True) '"<selected word>",True)
-'
-'    'iterate through nodes
-'    For Each node In nodes
-'        tvw.Focus
-'        tvw.SelectedNode = node
-'    Next
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - FindSpecificNode[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' datAdrenaline, June 4, 2007
-' http://www.utteraccess.com/forum/index.php?showtopic=1428240
-Private Sub SelectNode()
-On Error Resume Next
-    
-'    Me.xTree.Object.nodes(YourKeyConstant & Me.txtTag).Selected = True
-'    If Err <> 0 Then
-'        MsgBox "The node key you specified could not be found!"
-'        Err.Clear
-'    End If
-End Sub
-
-' ---------------------------------
-' SUB:          tvwTree_FindNode
-' Description:  find a node based on it's
-' Assumptions:  -
-' Parameters:   tvw - treeview control (treeview object)
-'               strFind - item to find (string)
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-' daharon, January 19, 2009
-' http://stackoverflow.com/questions/459589/select-a-node-in-a-treeview-with-vba
-' Adapted:      Bonnie Campbell, July 29, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/29/2015 - initial version
-' ---------------------------------
-Public Sub tvwTree_FindNode(strFind As String, strType As String, blnExpand As Boolean)
-On Error GoTo Err_Handler
-
-    Dim tvwNode As node
-    Dim item As Variant
-    
-    For Each tvwNode In tvwTree.Object.nodes 'Me.TreeView.nodes
-    
-        Select Case strType
-            Case "key"
-                item = tvwNode.key
-            Case "tag"
-                item = tvwNode.Tag
-            Case "text"
-                item = tvwNode.Text
-        End Select
-        
-        If item = strFind Then
-           tvwNode.Selected = True
-           tvwNode.EnsureVisible
-           tvwNode.Expanded = blnExpand
-           Exit For
-        End If
-    
-    Next
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - tvwTree_FindNode[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' FUNCTION:     IsDuplicateKey
-' Description:  determine if a node already exists for a given key
-' Assumptions:  -
-' Parameters:   strKey - key to check (string)
-'               tvw - treeview control (treeview object)
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:  Bonnie Campbell, July 29, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 7/29/2015 - initial version
-' ---------------------------------
-Public Function IsDuplicateKey(strKey As String, tvw As MSComctlLib.TreeView) As Boolean
-On Error GoTo Err_Handler
-
-    Dim tvwNode As node
-    Dim item As Variant
-    Dim blnIsDupe As Boolean
-    
-    blnIsDupe = False
-    
-    For Each tvwNode In tvwTree.Object.nodes 'Me.TreeView.nodes
-            
-        If tvwNode.key = strKey Then
-           blnIsDupe = True
-           Exit For
-        End If
-    
-    Next
-    
-Exit_Handler:
-    IsDuplicateKey = blnIsDupe
-    Exit Function
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - IsDuplicateKey[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Function
-
-' ---------------------------------
-' FUNCTION:     ParseString
-' Description:  retrieve the item from string
-' Assumptions:  -
-' Parameters:   strTag - tag to check (string)
-' Returns:      item (string)
-' Throws:       none
-' References:   none
-' Source/date:  Bonnie Campbell, July 29, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 7/29/2015 - initial version
-' ---------------------------------
-Public Function ParseString(str As String, idx As Integer, Optional delimiter As String = "|") As String
-On Error GoTo Err_Handler
-
-    Dim items() As String
-    Dim item As String
-        
-    items() = Split(str, delimiter)
-    
-    If UBound(items) + 1 > idx Then
-        item = items(idx)
-    End If
-    
-Exit_Handler:
-    ParseString = item
-    Exit Function
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - ParseString[mod_Strings])"
     End Select
     Resume Exit_Handler
 End Function

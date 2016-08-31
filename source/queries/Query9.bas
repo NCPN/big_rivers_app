@@ -1,4 +1,5 @@
-﻿dbMemo "SQL" ="SELECT *\015\012FROM usys_temp_qdf\015\012WHERE Contact.ID = 5;\015\012"
+﻿dbMemo "SQL" ="PARAMETERS iid Long, ptype Text ( 1 );\015\012UPDATE usys_temp_photo SET PhotoTy"
+    "pe = [ptype]\015\012WHERE ID = [iid];\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

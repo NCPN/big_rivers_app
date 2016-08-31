@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.06
+' Version:      1.07
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -16,6 +16,7 @@ Option Explicit
 '               BLC, 6/24/2016 - 1.05 - added RemoveChars(),
 '                                       replaced Exit_Function > Exit_Handler
 '               BLC, 8/23/2016 - 1.06 - added ExtractString()
+'               BLC, 8/30/2016 - 1.07 - added ParseString()
 ' =================================
 
 '---------------------
@@ -164,6 +165,7 @@ Public Const uPencil = &H1F589              '128393
 Public Const uThumbsUpRev = &H1F592         '128402 reversed thumbs up
 Public Const uThumbsDownRev = &H1F593       '128403 reversed thumbs down
 Public Const uFingerPointL = &H1F59C        '128412 black left pointing backhand
+Public Const uPicFramed = &H1F5BB           '128444 picture w/ frame
 Public Const uFolder = &H1F5C0              '128448
 Public Const uFolderOpen = &H1F5C1          '128449
 Public Const uNoteEmpty = &H1F5C5           '128453
@@ -584,6 +586,45 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ExtractString[mod_Strings])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     ParseString
+' Description:  retrieve the item from string
+' Assumptions:  -
+' Parameters:   strTag - tag to check (string)
+' Returns:      item (string)
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, July 29, 2015 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/29/2015 - initial version
+'   BLC - 8/30/2016 - moved from Tree form
+' ---------------------------------
+Public Function ParseString(str As String, idx As Integer, Optional delimiter As String = "|") As String
+On Error GoTo Err_Handler
+
+    Dim items() As String
+    Dim item As String
+        
+    items() = Split(str, delimiter)
+    
+    If UBound(items) + 1 > idx Then
+        item = items(idx)
+    End If
+    
+Exit_Handler:
+    ParseString = item
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - ParseString[mod_Strings])"
     End Select
     Resume Exit_Handler
 End Function
