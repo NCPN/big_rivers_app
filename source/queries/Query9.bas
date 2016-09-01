@@ -1,5 +1,13 @@
-﻿dbMemo "SQL" ="PARAMETERS iid Long, ptype Text ( 1 );\015\012UPDATE usys_temp_photo SET PhotoTy"
-    "pe = [ptype]\015\012WHERE ID = [iid];\015\012"
+﻿dbMemo "SQL" ="PARAMETERS pk Text ( 4 );\015\012SELECT p.ID AS PhotoID, p.PhotoType, p.PhotoDat"
+    "e, p.Photographer_ID, p.PhotogFacing, p.PhotogLocation, p.PhotogOrientation, p.S"
+    "ubjectLocation, p.IsCloseup, p.IsReplacement, p.IsSkipped, e.StartDate, e.ID AS "
+    "EventID, c.FirstName, c.LastName, c.FirstName & ' ' & c.LastName AS PhotogName, "
+    "c.Email, s.SiteCode, s.ID AS SiteID, s.Park_ID, s.River_ID, pk.ParkCode, r.River"
+    ", r.Segment\015\012FROM (((((Photo AS p INNER JOIN Event_Photo AS ep ON ep.Photo"
+    "_ID = p.ID) INNER JOIN Event AS e ON e.ID = ep.Event_ID) INNER JOIN Contact AS c"
+    " ON c.ID = p.Photographer_ID) INNER JOIN Site AS s ON s.ID = e.Site_ID) INNER JO"
+    "IN River AS r ON r.ID = s.River_ID) INNER JOIN Park AS pk ON pk.ID = s.Park_ID\015"
+    "\012WHERE pk.ParkCode = [pk] Or [pk] IS NULL;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -15,108 +23,111 @@ dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="p.Master_Family"
+        dbText "Name" ="p.PhotogLocation"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="p.Master_Species"
+        dbText "Name" ="p.SubjectLocation"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="p.LU_Code"
+        dbText "Name" ="c.Email"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vw.Master_PLANT_Code"
+        dbText "Name" ="p.PhotogFacing"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vw.IsSeedling"
+        dbText "Name" ="s.SiteCode"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="SEQ"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="AppUser"
-        dbInteger "ColumnWidth" ="2400"
-        dbBoolean "ColumnHidden" ="0"
+        dbText "Name" ="SiteID"
         dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin
-            0xad90ecfc3034f34dafbd0d3cc0ad184a
+            0x1de503425a769f45907d1cd82e31e461
         End
     End
     Begin
-        dbText "Name" ="c.ID"
+        dbText "Name" ="s.Park_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="AccessLevel"
+        dbText "Name" ="s.River_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="IsActive"
+        dbText "Name" ="pk.ParkCode"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.IsActive"
+        dbText "Name" ="r.River"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.Username"
+        dbText "Name" ="p.IsSkipped"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact_Access.Contact_ID"
+        dbText "Name" ="e.StartDate"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact_Access.Access_ID"
+        dbText "Name" ="EventID"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xbb20bf1dbfc02a48bed2326b772b32c9
+        End
+    End
+    Begin
+        dbText "Name" ="c.FirstName"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Access.ID"
+        dbText "Name" ="c.LastName"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Access.AccessLevel"
+        dbText "Name" ="PhotogName"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xf741c30a65c5ec469d1598fb70fa921d
+        End
+    End
+    Begin
+        dbText "Name" ="p.PhotogOrientation"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.ID"
+        dbText "Name" ="p.IsCloseup"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.LastName"
+        dbText "Name" ="p.IsReplacement"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.FirstName"
+        dbText "Name" ="r.Segment"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.MiddleInitial"
+        dbText "Name" ="PhotoID"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xcdab31023e6a87419f190fd7dc7df3f7
+        End
+    End
+    Begin
+        dbText "Name" ="p.PhotoType"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.Organization"
+        dbText "Name" ="p.PhotoDate"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="usys_temp_qdf.Contact.PositionTitle"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="usys_temp_qdf.Contact.Email"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="usys_temp_qdf.Contact.WorkPhone"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="usys_temp_qdf.Contact.WorkExtension"
+        dbText "Name" ="p.Photographer_ID"
         dbLong "AggregateType" ="-1"
     End
 End

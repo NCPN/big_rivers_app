@@ -14,7 +14,6 @@ Option Explicit
 '               BLC, 8/30/2016 - 1.03 - add BrowseFolder(), GetSpecialFolderPath()
 ' =================================
 
-
 ' ---------------------------------
 '  Declarations
 ' ---------------------------------

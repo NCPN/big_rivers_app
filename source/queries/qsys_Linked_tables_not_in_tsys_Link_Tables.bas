@@ -50,7 +50,7 @@ Begin
     End
     Begin
         dbText "Name" ="CurrTable"
-        dbInteger "ColumnWidth" ="2505"
+        dbInteger "ColumnWidth" ="2760"
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
         dbBinary "GUID" = Begin

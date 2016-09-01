@@ -1161,4 +1161,28 @@ Public Sub ExecuteIt()
 '
 'p.Show = 1
 
+''---------------------
+'' Properties
+''---------------------
+'Private m_node As Long
+'Public Property Let Node(Value As Long)
+'    m_node = Value
+'End Property
+'
+'Public Property Get Node() As Long
+'    Node = m_node
+'End Property
+'
+'
+'Dim p As New Person
+'p.Node = 1
+'
+Dim frm As Form
+Dim params(0 To 1) As Variant
+
+params(0) = "s_photo_data"
+
+Set frm = Forms("Tree")
+LoadTree frm, frm.Controls("tvwTree").Object, "s_photo_data", params
+
 End Sub

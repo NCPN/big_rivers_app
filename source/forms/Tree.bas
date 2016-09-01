@@ -14,7 +14,7 @@ Begin Form
     Width =11400
     DatasheetFontHeight =11
     ItemSuffix =27
-    Left =1065
+    Left =4035
     Top =3540
     Right =20805
     Bottom =14550
@@ -912,7 +912,7 @@ On Error GoTo Err_Handler
     
     Dim aryPhotoTypes() As String, Code As String
     Dim PhotoType As Variant
-    Dim nodeCurrent As node, nodeRoot As node, SelectedNode As node
+    Dim nodeCurrent As Node, nodeRoot As Node, SelectedNode As Node
     
     'minimize Main
     ToggleForm "Main", -1
@@ -953,7 +953,7 @@ On Error GoTo Err_Handler
                 
                 Dim chld As Variant
                 For Each chld In Split(PHOTO_TYPES_OTHER, ",")
-                    Dim nodeX As node
+                    Dim nodeX As Node
                     
                     Code = "O" & Left(CStr(chld), 1)
 
@@ -1171,20 +1171,20 @@ Private Sub tvwTree_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, _
 'Private Sub tvwTree_MouseDownX(Button As Integer, Shift As Integer, _
 '                                x As Single, y As Single)
 On Error GoTo Err_Handler
-    Dim node As node
+    Dim Node As Node
     Dim blnNodeSelected As Boolean
         
-    Set node = tvwTree.HitTest(x, y)
-    If node Is Nothing Or Shift <> 2 Then
+    Set Node = tvwTree.HitTest(x, y)
+    If Node Is Nothing Or Shift <> 2 Then
         blnNodeSelected = False
 '        tvwNodeSelect
     ElseIf Shift = 2 Then
         blnNodeSelected = True
     End If
     
-    If Not node Is Nothing Then
+    If Not Node Is Nothing Then
         'show popup menu on right click of image nodes
-        If Button = acRightButton And Not ImmovableNode(node) Then CreatePopUpMenu node
+        If Button = acRightButton And Not ImmovableNode(Node) Then CreatePopUpMenu Node
     End If
     
 Exit_Handler:
@@ -1215,25 +1215,25 @@ End Sub
 '   BLC - 7/10/2015 - initial version
 ' ---------------------------------
 'Private Sub tvwTree_NodeClick(ByVal Node As MSComctlLib.Node) 'Object)
-Private Sub tvwTree_NodeClick(ByVal node As Object)
+Private Sub tvwTree_NodeClick(ByVal Node As Object)
 On Error GoTo Err_Handler
 
-    TempVars("phototype") = IIf(Len(node.Tag) > 0, ParseString(node.Tag, 4), "")
+    TempVars("phototype") = IIf(Len(Node.Tag) > 0, ParseString(Node.Tag, 4), "")
     
     'set headers based on node
-    Me.lblPhotoFilename.Caption = node
-    If Not node.Parent Is Nothing Then 'IsNothing(node.Parent) Then
-        Me.lblPhotoTypeValue.Caption = node.Parent
+    Me.lblPhotoFilename.Caption = Node
+    If Not Node.Parent Is Nothing Then 'IsNothing(node.Parent) Then
+        Me.lblPhotoTypeValue.Caption = Node.Parent
         'set phototype to key of parent
         'TempVars("phototype") = node.Parent
     Else
-        Me.lblPhotoTypeValue.Caption = node
+        Me.lblPhotoTypeValue.Caption = Node
     End If
     
     'set image based on node
-    If FileExists(node.key) Then
-        Me.imgPhoto.Picture = node.key
-        TempVars("FullPhotoPath") = node.key
+    If FileExists(Node.key) Then
+        Me.imgPhoto.Picture = Node.key
+        TempVars("FullPhotoPath") = Node.key
         
     Else
         Me.imgPhoto.Picture = ""
@@ -1349,7 +1349,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
 
     Dim oTree As Treeview
     Dim strKey As String, strText As String
-    Dim nodeNew As node, nodeDragged As node
+    Dim nodeNew As Node, nodeDragged As Node
 '    Dim db As Database
 '    Dim rs As Recordset
 '    Set db = CurrentDb
@@ -1458,7 +1458,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
     End If
 
     'determine file(s) dragged
-    Dim nodeX As node, nodeParent As node
+    Dim nodeX As Node, nodeParent As Node
     Dim varFileName As Variant
     'Dim strKey As String
     Dim strDisplayName As String, strSkippedFiles As String
@@ -1589,7 +1589,7 @@ End Sub
 Public Sub tvwTree_FindNode(strFind As String, strType As String, blnExpand As Boolean)
 On Error GoTo Err_Handler
 
-    Dim tvwNode As node
+    Dim tvwNode As Node
     Dim item As Variant
     
     For Each tvwNode In tvwTree.Object.Nodes 'Me.TreeView.nodes
@@ -1640,20 +1640,20 @@ End Sub
 '   BLC - 7/29/2015 - initial version
 ' ---------------------------------
 Private Sub ExpandCurrentBranch_Click()
-Dim node As MSComctlLib.node
+Dim Node As MSComctlLib.Node
 Dim idx As Integer
 
 On Error GoTo Err_Handler
 
     ' loop through all nodes
-    For Each node In Me.tvwTree.Nodes
-        If node.Selected = True Then
-            idx = node.index
+    For Each Node In Me.tvwTree.Nodes
+        If Node.Selected = True Then
+            idx = Node.index
             'Expand branch from selected node on
-            ExpandBranch node
+            ExpandBranch Node
             Exit For
         End If
-    Next node
+    Next Node
     Me.tvwTree.SetFocus
     Set Me.tvwTree.SelectedItem = Me.tvwTree.Nodes.item(idx)
 
@@ -1684,10 +1684,10 @@ End Sub
 ' Revisions:
 '   BLC - 7/29/2015 - initial version
 ' ---------------------------------
-Private Sub ExpandBranch(ByVal node As MSComctlLib.node)
+Private Sub ExpandBranch(ByVal Node As MSComctlLib.Node)
     Dim i As Integer
     
-    For i = node.index To node.Next.index - 1
+    For i = Node.index To Node.Next.index - 1
         Me.tvwTree.Nodes.item(i).Expanded = True
 '        Debug.Print Me.xTree.Nodes.Item(i).Text
     Next i
@@ -1703,21 +1703,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-
-' datAdrenaline, June 4, 2007
-' http://www.utteraccess.com/forum/index.php?showtopic=1428240
-Private Sub SelectNode()
-On Error Resume Next
-    
-'    Me.xTree.Object.nodes(YourKeyConstant & Me.txtTag).Selected = True
-'    If Err <> 0 Then
-'        MsgBox "The node key you specified could not be found!"
-'        Err.Clear
-'    End If
-End Sub
-
-
 
 '================================
 ' Subform Methods
@@ -1810,42 +1795,7 @@ Err_Handler:
 End Sub
 
 
-' ---------------------------------
-' FUNCTION:     ImmovableNode
-' Description:  indicate if a node can or cannot be moved
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   none
-' Source/date:
-' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
-' Revisions:
-'   BLC - 7/27/2015 - initial version
-' ---------------------------------
-Public Function ImmovableNode(node As node) As Boolean
 
-On Error GoTo Err_Handler
-    
-        'default
-        ImmovableNode = False
-        
-        If CountInString(PHOTO_TYPES_MAIN, node) + CountInString(PHOTO_TYPES_OTHER, node) > 0 Then
-'            Debug.Print node
-            ImmovableNode = True
-        End If
-
-Exit_Handler:
-    Exit Function
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ImmovableNode[Tree form])"
-    End Select
-    Resume Exit_Handler
-End Function
 
 ' ---------------------------------
 ' SUB:          CreatePopUpMenu
@@ -1862,7 +1812,7 @@ End Function
 ' Revisions:
 '   BLC - 7/27/2015 - initial version
 ' ---------------------------------
-Public Sub CreatePopUpMenu(Optional node As node)
+Public Sub CreatePopUpMenu(Optional Node As Node)
 
 On Error GoTo Err_Handler
 
@@ -1892,7 +1842,7 @@ On Error GoTo Err_Handler
         ' ------- Photo Record -------
             Set oCommandBarButton = .Controls.Add(msoControlButton)
             With oCommandBarButton
-                .Caption = node.Text
+                .Caption = Node.Text
                 '.FaceId = 3
                 .Style = msoButtonWrapCaption
                 .OnAction = "=MsgBox(""You clicked node.text"")"
@@ -1904,13 +1854,13 @@ On Error GoTo Err_Handler
             If DEV_MODE Then
                 Set oCommandBarButton = .Controls.Add(msoControlButton)
                 With oCommandBarButton
-                    .Caption = "Key:" & node.key
+                    .Caption = "Key:" & Node.key
                     .Style = msoButtonWrapCaption
                 End With
                 
                 Set oCommandBarButton = .Controls.Add(msoControlButton)
                 With oCommandBarButton
-                    .Caption = "Tag:" & node.Tag
+                    .Caption = "Tag:" & Node.Tag
                     .Style = msoButtonWrapCaption
                 End With
             End If
@@ -1996,11 +1946,11 @@ End Sub
 ' Revisions:
 '   BLC - 7/28/2015 - initial version
 ' ---------------------------------
-Public Function DeletePhotoRecord(node As node) As Boolean
+Public Function DeletePhotoRecord(Node As Node) As Boolean
 
 On Error GoTo Err_Handler
 
-Debug.Print "DeletePhotoRecord" & node.Text
+Debug.Print "DeletePhotoRecord" & Node.Text
 
 Exit_Handler:
     Exit Function
@@ -2013,3 +1963,15 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' datAdrenaline, June 4, 2007
+' http://www.utteraccess.com/forum/index.php?showtopic=1428240
+Private Sub SelectNode()
+On Error Resume Next
+    
+'    Me.xTree.Object.nodes(YourKeyConstant & Me.txtTag).Selected = True
+'    If Err <> 0 Then
+'        MsgBox "The node key you specified could not be found!"
+'        Err.Clear
+'    End If
+End Sub

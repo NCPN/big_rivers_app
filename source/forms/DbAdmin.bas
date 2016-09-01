@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =4455
-    Top =3165
-    Right =17340
-    Bottom =14160
+    Left =4035
+    Top =3555
+    Right =16260
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -2346,7 +2346,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2355,6 +2355,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 6/12/2016 - 1.01 - adapted to framework & big rivers
+'               BLC - 8/31/2016 - 1.02 - added user access level controls
 ' =================================
 
 '---------------------
@@ -3003,6 +3004,41 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          btnManageLinks_Click
+' Description:  Opens form for managing linked databases
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  John Boetsch - NCCN Landbirds db by DbAdmin control set
+' Adapted:      Bonnie Campbell, May 2014 for NCPN WQ Utilities tool
+' Revisions:    BLC - 6/19/2014 - Replaced Me.cAppMode with TempVars.Item("UserAccessLevel")
+'               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
+'               BLC, 6/30/2015 - updated cmd button prefixes to btn
+'               BLC - 6/12/2016 - adapted for big rivers
+' ---------------------------------
+Private Sub btnManageLinks_Click()
+On Error GoTo Err_Handler
+
+    ' Update database version and contact info
+    If TempVars("UserAccessLevel") = "admin" Then
+        DoCmd.OpenForm "ConnectDbs"
+    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnManageLinks_Click[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
 
 ' =================================
 '   DbAdmin: Data entry and edit functions
