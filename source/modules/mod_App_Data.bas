@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.06
+' Version:      1.11
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -20,6 +20,7 @@ Option Explicit
 '               BLC - 7/28/2016 - 1.08 - added UpsertRecord()
 '               BLC - 7/30/2016 - 1.09 - added ToggleSensitive()
 '               BLC - 8/8/2016  - 1.10 - updated UpsertRecord() for additional forms
+'               BLC - 9/1/2016  - 1.11 - added UploadSurveyFile(), updated UpsertRecord()
 ' =================================
 
 ' ---------------------------------
@@ -1839,6 +1840,7 @@ End Function
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/28/2016 - initial version
+'   BLC - 9/1/2016  - added vegwalk, photo
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -1995,31 +1997,19 @@ On Error GoTo Err_Handler
                         Set loc = Nothing
                     End With
                                         
-            Case "UserRole"
-                Dim u As New Person
-                    
-                With u
+            Case "Photo"
+                Dim ph As New Photo
+                
+                With ph
                     'values passed into form
-            '        .EventID = 1
-                            
-                    'form values
-            '        .UserRoleType = ""
-            '        .UserRoleNumber = cbxUserRole.SelText
-            '        .SerialNumber = tbxSerialNo.value
-            '        .IsSurveyed = chkSurveyed.value
-            '        .Timing = cbxTiming.SelText
-            '        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
-            '        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
-                    
+                
                     .ID = frm!tbxID.Value '0 if new, edit if > 0
-                
-                    'strCriteria = "[UserRoleNumber] = " & .UserRoleNumber
-                
+                                
                     'set the generic object --> Location
-                    Set obj = u
+                    Set obj = p
                     
                     'cleanup
-                    Set u = Nothing
+                    Set ph = Nothing
                 End With
                                         
             Case "Site"
@@ -2048,6 +2038,24 @@ On Error GoTo Err_Handler
                     
                     'cleanup
                     Set s = Nothing
+                End With
+            
+            Case "Task"
+                Dim tk As New Task
+                
+                With tk
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                
+'                    strCriteria = "[TransducerNumber] = " & .TransducerNumber _
+'                                & " AND [Timing] = '" & .Timing _
+'                                & "' AND [SerialNumber] = '" & .SerialNumber _
+'                                & "' AND [ActionDate] = " & .ActionDate
+                
+                    'set the generic object --> Transducer
+                    Set obj = tk
+                    
+                    'cleanup
+                    Set tk = Nothing
                 End With
                 
             Case "Transducer"
@@ -2106,6 +2114,48 @@ On Error GoTo Err_Handler
                     Set vt = Nothing
                 End With
             
+            Case "UserRole"
+                Dim u As New Person
+                    
+                With u
+                    'values passed into form
+            '        .EventID = 1
+                            
+                    'form values
+            '        .UserRoleType = ""
+            '        .UserRoleNumber = cbxUserRole.SelText
+            '        .SerialNumber = tbxSerialNo.value
+            '        .IsSurveyed = chkSurveyed.value
+            '        .Timing = cbxTiming.SelText
+            '        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
+            '        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
+                    
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                
+                    'strCriteria = "[UserRoleNumber] = " & .UserRoleNumber
+                
+                    'set the generic object --> Location
+                    Set obj = u
+                    
+                    'cleanup
+                    Set u = Nothing
+                End With
+
+            Case "VegWalk"
+                Dim vw As New VegWalk
+                
+                With vw
+                    'values passed into form
+                
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                                
+                    'set the generic object --> Location
+                    Set obj = vw
+                    
+                    'cleanup
+                    Set vw = Nothing
+                End With
+
             Case Else
                 GoTo Exit_Handler
         End Select
@@ -2160,7 +2210,7 @@ On Error GoTo Err_Handler
     End With
     
     'clear values & refresh display
-    frm.ReadyForSave 'Application defined error <-- ensure ReadyForSave is Public Sub
+    frm.ReadyForSave 'Application defined error? --> ensure ReadyForSave is Public Sub
     'Forms!frm.ReadyForSave
     
     'handle situations where Access is saving same record
@@ -2257,6 +2307,34 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SetObserverRecorder[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          UploadSurveyFile
+' Description:  Uploads survey data into database from CSV survey file
+' Assumptions:  -
+' Parameters:   strFilename - name of survey file being uploaded (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, September 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/1/2016 - initial version
+' ---------------------------------
+Public Sub UploadSurveyFile(strFilename As String)
+On Error GoTo Err_Handler
+    
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - UploadSurveyFile[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Sub

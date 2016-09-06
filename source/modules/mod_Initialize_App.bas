@@ -182,6 +182,8 @@ End Sub
 '               BLC, 5/28/2015 - added MAIN_APP_FORM open check to prevent Error #2450 where
 '                                frm_Tgt_List_Tool is not found on exit from frm_Connect_Dbs
 '               BLC, 6/5/2016 - removed underscores from field names
+'               BLC, 9/1/2016 - accommodated tbxWebURL as well as tbxWeb_address,
+'                               new tsys_App_Releases structure via iIsSupported
 ' =================================
 Public Function AppSetup()
     On Error GoTo Err_Handler
@@ -189,6 +191,7 @@ Public Function AppSetup()
     Dim frm As Form
     Dim strSysTable As String, strAddress As String, strUser As String, strRelease As String
     Dim strSQL As String, strCaption As String, strReleaseID As String
+    Dim iIsSupported As Integer
 
     If Not FormIsOpen(DB_ADMIN_FORM) Then
         DoCmd.OpenForm DB_ADMIN_FORM, acNormal, , , , acHidden
@@ -201,16 +204,31 @@ Public Function AppSetup()
         strReleaseID = APP_RELEASE_ID
         strAddress = APP_URL
     Else
-        strReleaseID = frm.Controls("cbxVersion").Column(1) 'ID
-        strAddress = frm.Controls("tbxWeb_address") 'frm!Web_address
+        strReleaseID = IIf(ControlExists("cbxVersion", frm), frm.Controls("cbxVersion").Column(1), "") 'ID
+'        strAddress = IIf(ControlExists("tbxWebURL", frm), frm.Controls("tbxWebURL"), _
+'                    IIf(ControlExists("tbxWeb_Address", frm), frm.Controls("tbxWeb_address"), ""))
+        If ControlExists("tbxWebURL", frm) Then
+            'new versions
+            strAddress = frm.Controls("tbxWebURL")
+            iIsSupported = DLookup("IsSupported", "tsys_App_Releases", _
+                                "[VersionNumber] = """ & _
+                                Replace(Left(strReleaseID, InStr(strReleaseID, "(") - 2), "Version ", "") _
+                                & """")
+        Else
+            'old versions
+            strAddress = frm.Controls("tbxWeb_address")
+            iIsSupported = DLookup("IsSupported", "tsys_App_Releases", _
+                                "[ID] = """ & strReleaseID & """")
+        End If
     End If
     
     ' Check for required system tables
     If SysTablesExist("app") = False Then GoTo Exit_Procedure
 
     ' Confirm that the application version is supported
-    Select Case DLookup("IsSupported", "tsys_App_Releases", _
-            "[ID] = """ & strReleaseID & """")
+'    Select Case DLookup("IsSupported", "tsys_App_Releases", _
+'            "[ID] = """ & strReleaseID & """")
+     Select Case iIsSupported
       Case 0    ' Application not supported
         If MsgBox("This version of the front-end application is out of date ... " _
             & vbCrLf & " ... a more recent version is available!" _
@@ -248,6 +266,9 @@ Public Function AppSetup()
     ' Determine the application mode (user access level) according to the user role
     setUserAccess frm, "update"
 
+'**********************************************
+' FIX: adding login data to tsys_Logins
+'**********************************************
     ' Log the user, login time, release number, and application mode in the systems table
     strRelease = Left(strReleaseID, 8) & " / " & TempVars.item("UserAccessLevel")
     If IsODBC("tsys_Logins") Then
@@ -268,10 +289,18 @@ Public Function AppSetup()
         TempVars.item("WritePermission") = True
 '        strSQL = "INSERT INTO tsys_Logins ( UserName, ActionTaken ) SELECT '" _
 '            & strUser & "' AS User, """ & strRelease & """ AS Action;"
-        strSQL = GetTemplate("i_tsys_logins", "username" & PARAM_SEPARATOR & strUser & "|action" & PARAM_SEPARATOR & strRelease)
-        DoCmd.SetWarnings False
-        DoCmd.RunSQL strSQL     ' Will throw a trapped error if no write permissions
-        DoCmd.SetWarnings True
+'        strSQL = GetTemplate("i_tsys_logins", "username" & PARAM_SEPARATOR & strUser & "|action" & PARAM_SEPARATOR & strRelease)
+        Dim params(0 To 3) As Variant
+        params(0) = "i_login"
+        params(1) = strUser
+        params(2) = "Application login"
+        params(3) = strRelease
+        
+'        strSQL = GetTemplate("i_login") 'GetTemplate("i_login", params)
+        SetRecord "i_login", params
+'        DoCmd.SetWarnings False
+'        DoCmd.RunSQL strSQL     ' Will throw a trapped error if no write permissions
+'        DoCmd.SetWarnings True
     End If
 
     ' If the current front-end release is not listed in the back-end file, run fxn to update
@@ -379,7 +408,7 @@ Dim missingTable As String
             ' Confirm certain system tables exist --> if not, close the application
             '-----------------------------------------------------------------------
             '   tsys_App_Defaults -> default application settings
-            '   tsys_BE_Updates   -> updates to post to remot back-end copies
+            '   tsys_BE_Updates   -> updates to post to remote back-end copies
             '   tsys_Link_Dbs     -> info about linked back-end dbs
             '   tsys_Link_Tables  -> info about linked tables
             '-----------------------------------------------------------------------

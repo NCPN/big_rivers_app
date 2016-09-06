@@ -234,6 +234,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 ' ---------------------------------
 ' Sub:          AddTask
 ' Description:  Add new task item

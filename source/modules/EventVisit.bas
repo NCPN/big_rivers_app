@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        EventVisit
 ' Level:        Framework class
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Event object related properties, events, functions & procedures
 '
@@ -18,6 +18,7 @@ Option Explicit
 '               BLC - 4/4/2016   - 1.01 - renamed to "EventVisit" to avoid collision w/ "Event" vba term
 '               BLC - 8/8/2016   - 1.02 - SaveToDb() added update parameter to identify if
 '                                        this is an update vs. an insert
+'               BLC - 9/1/2016   - 1.03 - SaveToDb() code cleanup
 ' =================================
 
 '---------------------
@@ -161,6 +162,7 @@ End Sub
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
 '   BLC, 7/27/2016 - added update parameter to identify if this is an update vs. an insert
+'   BLC, 9/1/2016  - commented code cleanup
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
@@ -186,17 +188,6 @@ On Error GoTo Err_Handler
         .ID = SetRecord(template, params)
     End With
     
-'    'add a record for created by
-'    Dim act As New RecordAction
-'
-'    With act
-'        .RefAction = "R"
-'        .ContactID = TempVars("UserID")
-'        .RefID = Me.ID
-'        .RefTable = "Event"
-'        .SaveToDb
-'    End With
-
 Exit_Handler:
     Exit Sub
 

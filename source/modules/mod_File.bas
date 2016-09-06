@@ -155,12 +155,18 @@ End Function
 ' ---------------------------------
 ' FUNCTION:     BrowseFolder
 ' Description:  file dialog browsing actions
-' Assumptions:  -
+' Assumptions:
+'
+'   FileFilters are passed in by delimiting separate filters by a pipe (|)
+'       and the filter description and extension by a dash (-)
+'       EX:     "All files-*|CSV files-CSV"
+'
 ' Parameters:   Title - display name of the file dialog (string)
 '               ButtonTitle - name of OK button (string)
 '               InitialFolder - folder to begin display (string)
 '               InitialView - desired file dialog view (string, MsoFileDialogView options)
 '               DialogType - desired dialog type (string, MsoFileDialogType options)
+'               FileFilters - file type filters (string)
 '               AllowMultiples - allows multiple directories to be selected (boolean)
 ' Returns:      fully-qualified folder name selected by the user
 '               or an empty string if the user cancelled the dialog (string)
@@ -172,12 +178,14 @@ End Function
 ' Adapted:      Bonnie Campbell, August 30, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 8/30/2016 - initial version
+'   BLC - 9/1/2016  - added FileFilters optional parameter
 ' ---------------------------------
 Public Function BrowseFolder(Title As String, _
         Optional ButtonTitle As String = "Confirm", _
         Optional InitialFolder As String = vbNullString, _
         Optional InitialView As Office.MsoFileDialogView = msoFileDialogViewList, _
         Optional DialogType As MsoFileDialogType = msoFileDialogFolderPicker, _
+        Optional FileFilters As String = "", _
         Optional AllowMultiples As Boolean = False) As String
 '----------------------
 ' Dialog Options:
@@ -212,6 +220,27 @@ On Error GoTo Err_Handler
         .Title = Title
         .ButtonName = ButtonTitle
         .InitialView = InitialView
+        .AllowMultiSelect = AllowMultiples
+
+        If Len(FileFilters) > 0 Then
+            Dim aryFilters() As String
+            Dim filter As Variant
+            Dim filterData() As String
+            
+            .Filters.Clear
+            
+            'prepare filter description & file types
+            aryFilters = Split(FileFilters, "|")
+            
+            For Each filter In aryFilters
+                'filter description - extension
+                filterData = Split(CStr(filter), "-")
+                            
+                .Filters.Add filterData(0), "*." & filterData(1)
+            
+            Next
+        
+        End If
 
         If Len(InitialFolder) > 0 Then
             
@@ -359,7 +388,7 @@ Public Function GetFile(Optional ByVal strInitialDir As String, _
     GetFile = adhCommonFileOpenSave( _
         InitialDir:=strInitialDir, _
         OpenFile:=True, _
-        Filter:=strFilter, _
+        filter:=strFilter, _
         flags:=lngFlags, _
         DialogTitle:=strTitle)
 
@@ -406,7 +435,7 @@ Public Function SaveFile(ByVal strFilename As String, ByVal strFileType As Strin
 
     SaveFile = adhCommonFileOpenSave( _
         OpenFile:=False, _
-        Filter:=strFilter, _
+        filter:=strFilter, _
         flags:=lngFlags, _
         DialogTitle:=strTitle, _
         FileName:=strFilename)

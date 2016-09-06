@@ -731,7 +731,7 @@ If Me!ConfirmedFilter = "Not Confirmed" Then
 ElseIf Me!ConfirmedFilter = "Confirmed" Then
         DoCmd.ApplyFilter "", " NOT IsNull(confirmed_code)"
 Else
-  Forms!frm_admin_Unknowns.Filter = ""
+  Forms!frm_admin_Unknowns.filter = ""
 End If
 End Sub
 Private Sub ButtonEdit_Click()

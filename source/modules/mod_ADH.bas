@@ -108,7 +108,7 @@ Public Const adhOFN_LONGNAMES = &H200000
 Function adhCommonFileOpenSave( _
     Optional ByRef flags As Variant, _
     Optional ByVal InitialDir As Variant, _
-    Optional ByVal Filter As Variant, _
+    Optional ByVal filter As Variant, _
     Optional ByVal FilterIndex As Variant, _
     Optional ByVal DefaultExt As Variant, _
     Optional ByVal FileName As Variant, _
@@ -123,7 +123,7 @@ Function adhCommonFileOpenSave( _
     Dim fResult As Boolean
 
     If IsMissing(InitialDir) Then InitialDir = ""
-    If IsMissing(Filter) Then Filter = ""
+    If IsMissing(filter) Then filter = ""
     If IsMissing(FilterIndex) Then FilterIndex = 1
     If IsMissing(flags) Then flags = 0&
     If IsMissing(DefaultExt) Then DefaultExt = ""
@@ -139,7 +139,7 @@ Function adhCommonFileOpenSave( _
     With ofn
         .lStructSize = Len(ofn)
         .hwndOwner = Application.hWndAccessApp
-        .strFilter = Filter
+        .strFilter = filter
         .nFilterIndex = FilterIndex
         .strFile = strFilename
         .nMaxFile = Len(strFilename)

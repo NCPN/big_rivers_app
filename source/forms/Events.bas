@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4455
-    Top =3150
-    Right =17340
-    Bottom =14160
+    Left =4035
+    Top =3540
+    Right =16335
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x45dde061d6cde440
@@ -702,6 +702,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblMsgIcon"
+                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -748,6 +749,7 @@ Option Explicit
 '               BLC - 8/22/2016 - 1.03 - added m_SaveOK, Form_BeforeUpdate()
 '               BLC - 8/23/2016 - 1.04 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 9/1/2016  - 1.05 - btnSave_Click code cleanup, remove ClearForm()
 ' =================================
 
 '---------------------
@@ -1098,6 +1100,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 9/1/2016  - cleanup commented code
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
@@ -1114,107 +1117,8 @@ On Error GoTo Err_Handler
     
     'revert to disable non-btnSave_Click save
     m_SaveOK = False
-    
-''    1) Click to edit
-''       a) populates form fields
-''       b) tbxID is set
-''
-''       c) change values --> i) compare against existing values
-''                           ii) no existing values match ==> update
-''                           iii) existing values match ==> message no change
-''
-''   2) Enter new values
-''       a) enables save button
-''       b) click save -->   i) compare against existing values
-''                           ii) no existing values match ==> insert
-''                           iii) existing values match ==> message no change
-'
-'    Dim DoAction As String
-'    Dim ev As New EventVisit
-'
-'    With ev
-'        'values passed into form
-'
-'        'form values
-'        .LocationID = cbxLocation.Column(0)
-'        .ProtocolID = 1 ' assumes this is for big rivers protocol
-'        .SiteID = cbxSite.Column(0)
-'
-'        .StartDate = tbxStartDate.Value
-'
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'
-'        'set insert/update based on whether its an edit or new entry
-'        DoAction = IIf(tbxID.Value > 0, "u", "i")
-'
-'        'check if the record already exists by checking event list form records
-'        'event list form pulls active records for park, river segment
-'
-'        'gecko_1, February 10, 2005
-'        'http://www.access-programmers.co.uk/forums/showthread.php?t=81221
-'
-'        Dim rs As DAO.Recordset
-'        Dim i As Integer
-'        Dim ary() As Variant
-'
-'        Set rs = Me!list.Form.RecordsetClone
-'
-'        'Khinsu, August 19, 2013
-'        'http://stackoverflow.com/questions/18317059/how-to-test-if-item-exists-in-recordset
-'
-'        rs.FindFirst "[Site_ID] = " & .SiteID & " AND [Location_ID] = " & .LocationID & " AND [StartDate] " = Format(.StartDate, "YYYY-mm-dd")
-'
-'        If rs.NoMatch Then
-''            MsgBox "i", vbCritical, "INSERT"
-'            lblMsg.ForeColor = lngLime
-'            lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
-'        Else
-''            MsgBox "u", vbCritical, "UDPATE"
-'            'record already exists for this site ID, location ID, & event date
-'            'prevent duplicate entries
-'            lblMsg.ForeColor = lngYellow
-'            lblMsg.Caption = "Oops, record already exists."
-'            GoTo Exit_Handler
-'        End If
-'
-''        While Not rs.EOF
-''            ary(i, 1) = rs.Fields("Site")
-''            ary(i, 2) = rs.Fields("Location")
-''            ary(i, 3) = rs.Fields("StartDate")
-''
-''            rs.MoveNext
-''            i = i + 1
-''        Wend
-'
-'        'check
-'
-'        'T/F refers to whether the record is an update (T) or insert (F)
-'        .SaveToDb IIf(DoAction = "i", False, True)
-'
-'        'set the tbxID.value
-'        'tbxID = .ID
-'        Me.tbxID.Value = .ID
-'
-'    End With
-'
-'    'clear values & refresh display
-'
-'    ReadyForSave
-'
-'    PopulateForm Me, tbxID.Value
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
-'
-'    'clear messages
-'    lblMsg.Caption = ""
-    
+        
 Exit_Handler:
-'    'cleanup
-'    rs.Close
-'    Set rs = Nothing
     Exit Sub
 Err_Handler:
     Select Case Err.Number
@@ -1285,57 +1189,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-'' ---------------------------------
-'' Sub:          ClearForm
-'' Description:  Clear form fields
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 23, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/23/2016 - initial version
-'' ---------------------------------
-'Private Sub ClearForm()
-'On Error GoTo Err_Handler
-'
-'    'clear recordsource
-'    Me.RecordSource = ""
-'
-'    'clear values so they no longer look for original control sources
-'    Dim ctrl As Control
-'
-'    'clear the control sources to clear the textboxes
-'    For Each ctrl In Me.Controls
-'        Select Case ctrl.ControlType
-'            Case acTextBox
-'                ctrl.ControlSource = ""
-'            Case acComboBox
-'                ctrl.Value = ""
-'        End Select
-'    Next
-'
-'    tbxID = 0
-'
-'    btnSave.Enabled = False
-'
-'    Me.list.Requery
-'
-'    Me.Requery
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - ClearForm[Event form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
 
 ' ---------------------------------
 ' Sub:          ReadyForSave

@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Person
 ' Level:        Framework class
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Person object related properties, events, functions & procedures
 '
@@ -17,6 +17,7 @@ Option Explicit
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
 '               BLC - 8/8/2016   - 1.01 - SaveToDb() added update parameter to identify if
 '                                        this is an update vs. an insert
+'               BLC - 9/1/2016   - 1.02 - SaveToDb() code cleanup
 ' =================================
 
 '---------------------
@@ -291,141 +292,11 @@ End Sub
 '   BLC, 4/4/2016 - initial version
 '   BLC, 6/22/2016 - revised to use parameterized qdf
 '   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
+'   BLC, 9/1/2016 - commented code cleanup
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-'    Dim strSQL As String
-'    Dim db As DAO.Database
-'    Dim rs As DAO.Recordset
-'    Dim iCount As Integer
-'
-'    '---------------------
-'    ' CurrentDb returns a different dao.database reference every time it is called
-'    ' So set a reference to make sure CurrentDb isn't called multiple times
-'    ' This ensures @@Identity will contain the proper ID #
-'    '---------------------
-'    Set db = CurrentDb
-'
-'    'default
-'    iCount = 0
-'
-'    'persons must have: first & last name, email, organization
-'    'optional: middleinitial, username, workphone, workextension, positiontitle
-''    strSQL = "INSERT INTO Contact(FirstName, LastName, Email, Organization," _
-''                & "MiddleInitial, Username, WorkPhone, WorkExtension, PositionTitle) VALUES " _
-''                & "('" & Me.FirstName & "','" & Me.LastName & "','" _
-''                & Me.Email & "','" & Me.Organization & "','" _
-''                & Me.MiddleInitial & "','" & Me.Username & "','" _
-''                & Me.WorkPhone & "','" & Me.WorkExtension & "','" _
-''                & Me.PositionTitle & "');"
-''    strSQL = GetTemplate("i_contact", _
-''                "FirstName" & PARAM_SEPARATOR & Me.FirstName & "|" & _
-''                "LastName" & PARAM_SEPARATOR & Me.LastName & "|" & _
-''                "email" & PARAM_SEPARATOR & Me.Email & "|" & _
-''                "org" & PARAM_SEPARATOR & Me.Organization & "|" & _
-''                "MI" & PARAM_SEPARATOR & IIf(IsZLS(Me.MiddleInitial), DbNull, Me.MiddleInitial) & "|" & _
-''                "username" & PARAM_SEPARATOR & Me.Username & "|" & _
-''                "WorkPhone" & PARAM_SEPARATOR & IIf(IsZero(Me.WorkPhone), DbNull, Me.WorkPhone) & "|" & _
-''                "WorkExt" & PARAM_SEPARATOR & IIf(IsZero(Me.WorkExtension), DbNull, Me.WorkExtension) & "|" & _
-''                "position" & PARAM_SEPARATOR & IIf(IsZLS(Me.PosTitle), DbNull, Me.PosTitle) & "|" & _
-''                "IsActive" & PARAM_SEPARATOR & Me.IsActive)
-'
-'    Dim qdf As DAO.QueryDef
-'
-'    With db
-'        Set qdf = .QueryDefs("usys_temp_qdf")
-'
-'        With qdf
-'            If Me.ID > 0 Then
-'                .SQL = GetTemplate("u_contact")
-'                .Parameters("ContactID") = Me.ID
-'            Else
-'                .SQL = GetTemplate("i_contact_new")
-'            End If
-'            '-- required parameters --
-''            .Parameters("FirstName") = Me.FirstName
-''            .Parameters("LastName") = Me.LastName
-''            .Parameters("Email") = Me.Email
-''            .Parameters("Username") = Me.Username
-'            .Parameters("First") = Me.FirstName
-'            .Parameters("Last") = Me.LastName
-'            .Parameters("EmailAddress") = Me.Email
-'            .Parameters("Login") = Me.Username
-'            .Parameters("Org") = Me.Organization
-'
-'            '-- optional parameters --
-' '           If Not IsZLS(Me.MiddleInitial) Then _
-'                .Parameters("MiddleInitial") = Me.MiddleInitial
-'                .Parameters("MI") = Me.MiddleInitial
-'
-''            If Not IsZLS(Me.PosTitle) Then '_
-'                .Parameters("Position") = Me.PosTitle
-'
-''            If Not IsZero(Me.WorkPhone) Then '_
-'                .Parameters("Phone") = Me.WorkPhone
-'
-''            If Not IsZero(Me.WorkExtension) Then '_
-'                .Parameters("Ext") = Me.WorkExtension
-'
-''            .Parameters("IsActive") = Me.IsActive
-'            .Parameters("IsActiveFlag") = Me.IsActive
-'
-'            .Execute dbFailOnError
-'
-'            'cleanup
-'            .Close
-'        End With
-'
-''    db.Execute strSQL, dbFailOnError
-'        If Not Me.ID > 0 Then _
-'            Me.ID = .OpenRecordset("SELECT @@IDENTITY")(0)
-'
-'    'set the person's role
-'
-''    strSQL = "INSERT INTO Contact_Access(Contact_ID, Access_ID)" _
-''                & "VALUES (" & Me.ID & "," &  & ");"
-'
-''    strSQL = GetTemplate("i_contact_access", _
-''                "contactID" & PARAM_SEPARATOR & Me.ID & "|" & _
-''                "accessID" & PARAM_SEPARATOR & Me.AccessLevel)
-''
-''    db.Execute strSQL, dbFailOnError
-'
-'        Set qdf = .QueryDefs("usys_temp_qdf")
-'
-'        With qdf
-'            'check if value exists in contact_access
-'            .SQL = GetTemplate("s_count_tbl", _
-'                    "field" & PARAM_SEPARATOR & "Contact_ID" & _
-'                    "|tbl" & PARAM_SEPARATOR & "Contact_Access WHERE Contact_ID = " & Me.ID)
-'            Set rs = .OpenRecordset
-'            If rs.Fields(0) > 0 Then iCount = rs.Fields(0)
-'        End With
-'
-'        Set qdf = .QueryDefs("usys_temp_qdf")
-'
-'        With qdf
-'            'update if contact is in contact_access, otherwise insert new record
-'            If iCount > 0 Then 'Me.AccessLevel
-'                .SQL = GetTemplate("u_contact_access")
-'            Else
-'                .SQL = GetTemplate("i_contact_access")
-'            End If
-'
-'            '-- required parameters --
-'            .Parameters("ContactID") = Me.ID
-'            .Parameters("AccessID") = Me.AccessLevel
-'
-'            '-- optional parameters --
-'
-'            .Execute dbFailOnError
-'
-'            'cleanup
-'            .Close
-'        End With
-'    End With
-
     Dim template As String
     
     template = "i_contact" '"i_contact_new"

@@ -17,9 +17,9 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =6615
+    Left =6660
     Top =2580
-    Right =14895
+    Right =14940
     Bottom =10545
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -562,10 +562,13 @@ On Error GoTo Err_Handler
     oBLTile.Link1Caption = "Photos"
     oBLTile.Link2Caption = "Transducers"
     oBLTile.Link3Visible = 0
-    oBLTile.Link4Visible = 0
+    oBLTile.Link4Caption = "Survey Files"
     oBLTile.Link5Visible = 0
     oBLTile.Link6Visible = 0
-    oBLTile.Link7Visible = 0
+    oBLTile.Link7Caption = Space(4) & "Upload Survey File"
+    oBLTile.lblIcon7L.Caption = StringFromCodepoint(uSquareFoot)
+    oBLTile.lblIcon7L.ForeColor = lngBlue
+    oBLTile.lblIcon7L.FontWeight = wtMedium
     oBLTile.lblIcon8L.Caption = StringFromCodepoint(uPicFramed)
     oBLTile.lblIcon8L.ForeColor = lngBlue
     oBLTile.lblIcon8L.FontWeight = wtMedium
@@ -667,7 +670,7 @@ On Error GoTo Err_Handler
         'oLTile.EnableLinks ""               'N/A
         oCTile.EnableLinks "6"              'People
         oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
-        oBLTile.EnableLinks "8"              'Batch Upload Photos
+        oBLTile.EnableLinks "7,8"              'Batch Upload Photos
         'oBCTile.EnableLinks ""              'N/A
         'oBRTile.EnableLinks ""               'N/A
         

@@ -15,9 +15,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =27
     Left =4035
-    Top =3540
-    Right =20805
-    Bottom =14550
+    Top =3555
+    Right =15690
+    Bottom =12900
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -857,7 +857,7 @@ Option Explicit
 ' MODULE:       Tree form
 ' Description:  Treeview functions & procedures
 ' Level:        Framework form
-' Version:      1.04
+' Version:      1.05
 '
 ' Source/date:  Bonnie Campbell, 7/10/2015
 ' Revisions:    BLC - 7/10/2015 - 1.00 - initial version
@@ -867,6 +867,8 @@ Option Explicit
 '               BLC - 8/30/2016 - 1.04 - moved ParseStrings() to mod_Strings,
 '                                        LoadTree(), AddChildren(), IsDuplicateKey(),
 '                                        FindSpecificNode(), tvwNodeSelect() to mod_Tree
+'               BLC - 9/1/2016  - 1.05 - add LoadTree() calls on form open to populate tree images
+'                                        from usys_temp_photo & Photo tables
 ' =================================
 
 '---------------------
@@ -990,8 +992,22 @@ On Error GoTo Err_Handler
   '  Set tvwTree.Nodes("Unclassified").Parent = Me.tvwTree.Nodes("Root")
     
     'highlight
-  '  tvwTree.Nodes("Unclassified").ForeColor = lngRed
+    'tvwTree.Nodes("Unclassified").ForeColor = lngRed
        
+    '---------------------
+    ' Load Images
+    '---------------------
+    Dim datasource(0 To 1) As String
+    Dim params() As Variant
+    Dim i As Integer
+
+    datasource(0) = "s_photo_data"
+    datasource(1) = "s_usys_temp_photo_data"
+
+    For i = 0 To UBound(datasource)
+        LoadTree Me.Form, tvwTree.Object, datasource(i), params
+    Next
+
     'set subform
     PopulateSubForm
 
@@ -1720,15 +1736,22 @@ End Sub
 ' Adapted:      Bonnie Campbell, July 10, 2015 - for NCPN tools
 ' Revisions:
 '   BLC - 7/10/2015 - initial version
+'   BLC - 9/1/2016 - accommmodated "Unclassified" photos
 ' ---------------------------------
 Public Sub PopulateSubForm()
 On Error GoTo Err_Handler
 
     Dim strForm As String
 
+    'default
+    lblPhotoTypeValue.ForeColor = lngGray50
+    
     Select Case TempVars("phototype")
         Case "R", "T", "F", "V"
             strForm = "PhotoFTORDetails"
+        Case "U"
+            strForm = "PhotoOtherDetails"
+            lblPhotoTypeValue.ForeColor = lngRed
         Case Else
             strForm = "PhotoOtherDetails"
     End Select

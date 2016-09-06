@@ -1513,7 +1513,7 @@ Private Sub Form_Load()
     ' Requery the results subform to reflect updates if the user chose to run upon opening
     If blnRunQueries Then Me.subResults.Requery
     ' Turn off the form filter and move to a blank record so that no query record is visible
-    Me.Filter = ""
+    Me.filter = ""
     DoCmd.GoToRecord , , acNewRec
 
 Exit_Procedure:
@@ -1870,7 +1870,7 @@ Private Sub cmdRefresh_Click()
     ' Save the current record, reset the form filter and query selector, reset the form
     '   to allow additions, and move to a blank record
     If Me.Dirty Then DoCmd.RunCommand acCmdSaveRecord
-    Me.Filter = ""
+    Me.filter = ""
     Me.FilterOn = False
     Me.selObject = Null
     Me.subQueryResults.SourceObject = ""
@@ -2045,7 +2045,7 @@ Private Sub selObject_AfterUpdate()
         varReturn = UpdateQAResults(False, Me.selObject, True)
     End If
     ' Set the form to the selected record
-    Me.Form.Filter = strCriteria
+    Me.Form.filter = strCriteria
     Me.Form.FilterOn = True
 
     ' Call the function to update the query flag
@@ -2625,7 +2625,7 @@ Private Function fxnFilterRecords()
     ' Apply the filter
     'Me.Filter = strFilter
     'Me.FilterOn = bFilterOn
-    Me.subResults.Form.Filter = strFilter
+    Me.subResults.Form.filter = strFilter
     Me.subResults.Form.FilterOn = bFilterOn
 
     ' Make the labels bold or not depending on filter settings

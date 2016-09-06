@@ -363,6 +363,7 @@ Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
 
     Dim fName As String, rName As String, oArgs As String
+    Dim StartFolder As String, strPics As String, strPath As String
     
     action = LCase(Nz(Trim(action), ""))
     
@@ -415,16 +416,38 @@ On Error GoTo Err_Handler
         Case "transducers"
             fName = "Transducer"
             oArgs = ""
+        Case "Survey Files"
+            fName = "SurveyFile"
+            oArgs = ""
+        Case "Upload Survey File"
+            fName = ""
+            oArgs = ""
+            
+            'handle upload
+            StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
+            
+            strPath = BrowseFolder("Select survey file to upload", "Confirm File", _
+                                    StartFolder, , msoFileDialogFilePicker, "Survey files-CSV")
+            
+            If Len(strPath) > 0 Then
+                'upload survey file
+                UploadSurveyFile strPath
+            
+            End If
+        
+            'restore Main
+            ToggleForm "Main", 0
+            
         Case "batch upload photos"
             fName = ""
             oArgs = ""
             
             'handle upload
-            Dim StartFolder As String, strPics As String, strPath As String
-
+            
             StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
             
-            strPath = BrowseFolder("Select directory with photos to upload", "Confirm Directory", StartFolder)
+            strPath = BrowseFolder("Select directory with photos to upload", "Confirm Directory", _
+                                    StartFolder)
             
             If Len(strPath) > 0 Then
                 'ingest photos as "U" - unclassified
@@ -436,7 +459,6 @@ On Error GoTo Err_Handler
         
             'restore Main
             ToggleForm "Main", 0
-        
         'Trip Prep
         Case "vegplot"
             rName = "VegPlot"

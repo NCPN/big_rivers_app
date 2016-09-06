@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =4680
-    Top =3360
-    Right =21450
-    Bottom =14355
+    Left =4035
+    Top =3540
+    Right =16335
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -742,7 +742,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -753,6 +753,7 @@ Option Explicit
 '               BLC - 7/29/2016 - 1.01 - revised to use UpsertRecord()
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 9/1/2016  - 1.03 - btnSave_Click, btnUndo_Click code cleanup
 ' =================================
 
 '---------------------
@@ -1125,22 +1126,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 9/1/2016 - commented code cleanup
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     ClearForm Me
     
-'    'clear values
-'    tbxName.Value = ""
-'    tbxDistance.Value = ""
-'    tbxBearing.Value = ""
-'    tbxNotes.Value = ""
-'
-'    btnSave.Enabled = False
-'
-'    Me.Requery
-'
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1165,53 +1157,12 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 7/29/2016 - revised to use UpsertRecord()
+'   BLC - 9/1/2016  - commented code cleanup
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     UpsertRecord Me
-
-'    Dim loc As New Location
-'
-'    With loc
-'        'values passed into form
-'        .CollectionSourceName = "T"
-'
-'        .CreateDate = ""
-'        .CreatedByID = 0
-'        .LastModified = ""
-'        .LastModifiedByID = 0
-'
-'        '.ProtocolID = 1
-'        '.SiteID = 1
-'
-'        'form values
-'        .LocationName = tbxName.Value
-'        .LocationType = "" 'cbxLocationType.SelText
-'
-'        .HeadtoOrientDistance = tbxDistance.Value
-'        .HeadtoOrientBearing = tbxBearing.Value
-'
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'        .SaveToDb
-'    End With
-'
-'    'clear values & refresh display
-'    Me.RecordSource = ""
-'
-'    tbxDistance.ControlSource = ""
-'    tbxBearing.ControlSource = ""
-'    tbxNotes.ControlSource = ""
-'
-'    tbxID.ControlSource = ""
-'    tbxID.Value = 0
-'
-'    ReadyForSave
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
     
 Exit_Handler:
     Exit Sub

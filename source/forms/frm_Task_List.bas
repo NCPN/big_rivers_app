@@ -1488,7 +1488,7 @@ Private Function fxnFilterRecords(Optional ByVal bOpenFilterOn As Boolean)
         strFilter = strFilter & "[Request_year] = """ & Me.cmbYearFilter & """"
     End If
 
-    Me.Filter = strFilter
+    Me.filter = strFilter
     Me.FilterOn = bFilterOn
 
 Reformat_controls:

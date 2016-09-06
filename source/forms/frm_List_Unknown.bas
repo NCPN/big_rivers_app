@@ -367,7 +367,7 @@ If Me!ConfirmedFilter = "Not Confirmed" Then
 ElseIf Me!ConfirmedFilter = "Confirmed" Then
         DoCmd.ApplyFilter "", " NOT IsNull(confirmed_code)"
 Else
-  Forms!frm_List_Unknown.Filter = ""
+  Forms!frm_List_Unknown.filter = ""
 End If
 End Sub
 

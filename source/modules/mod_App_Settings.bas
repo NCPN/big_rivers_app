@@ -4,14 +4,15 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Settings
 ' Level:        Application module
-' Version:      1.03
+' Version:      1.04
 ' Description:  Application-wide related values, functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
-' Revisions:    BLC, 4/30/2015 -  1.00 - initial version
+' Revisions:    BLC, 4/30/2015  - 1.00 - initial version
 '               BLC, 11/20/2015 - 1.01 - added priority & status icons
-'               BLC, 6/7/2016 -   1.02 - updated documentation & added ACCESS_ROLES (Big Rivers App)
-'               BLC, 6/20/2016 -  1.03 - added DB_ADMIN_FORM and documentation
+'               BLC, 6/7/2016   - 1.02 - updated documentation & added ACCESS_ROLES (Big Rivers App)
+'               BLC, 6/20/2016  - 1.03 - added DB_ADMIN_FORM and documentation
+'               BLC, 9/1/2016   - 1.04 - updated APP_SYS_TABLES
 ' =================================
 
 ' ---------------------------------
@@ -86,12 +87,12 @@ Public Const BACKEND_TYPE As String = "ACCESS"
 '   tsys_App_Releases -> list of application releases
 '   tsys_Bug_Reports  -> tracking for known issues
 '   tsys_Logins       -> system use monitoring
-'   tsys_User_Roles   -> assign user access priviledges
+'   tsys_User_Roles   -> assign user access priviledges  [deprecated to Contact_Access]
 '-----------------------------------------------------------------------
 ' SEE ALSO >>>> SysTablesExist() function
 '-----------------------------------------------------------------------
 Public Const DB_SYS_TABLES As String = "App_Defaults, Link_Files, Link_Tables"
-Public Const APP_SYS_TABLES As String = ""
+Public Const APP_SYS_TABLES As String = "App_Releases, Bug_Reports, Logins"
 
 '-----------------------------------------------------------------------
 ' User Interface Colors

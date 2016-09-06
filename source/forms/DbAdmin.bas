@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =63
-    Left =4035
-    Top =3555
-    Right =16260
-    Bottom =14550
+    Left =6825
+    Top =3180
+    Right =14685
+    Bottom =9345
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -2483,7 +2483,7 @@ On Error GoTo Err_Handler
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
     cbxVersion.RowSource = GetTemplate("s_app_releases")
-    cbxVersion.ControlSource = "ID"
+    cbxVersion.ControlSource = "Release_ID" '"ID"
     
     ' Update the DbAdmin switchboard settings according to application mode
     setUserAccess Me

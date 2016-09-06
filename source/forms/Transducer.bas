@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =53
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =4035
+    Top =3540
+    Right =16335
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1242,7 +1242,7 @@ Option Explicit
 ' =================================
 ' Form:         Transducer
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Transducer form object related properties, Transducer, functions & procedures for UI display
@@ -1253,6 +1253,7 @@ Option Explicit
 '               BLC - 7/29/2016 - 1.01 - revised to use UpsertRecord()
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 9/1/2016  - 1.03 - btnSave_Click code cleanup
 ' =================================
 
 '---------------------
@@ -1381,8 +1382,8 @@ On Error GoTo Err_Handler
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblSample.Caption = StringFromCodepoint(uTwoOClock)
     
-    lblRef.Caption = "REF MARK TO >" 'StringFromCodepoint(uRTriangle) & "|" & StringFromCodepoint(uLTriangle)
-    lblEyebolt.Caption = "EYEBOLT TO >" 'StringFromCodepoint(uVertLineCircleAbv)
+    lblRef.Caption = "REF MARK TO >"
+    lblEyebolt.Caption = "EYEBOLT TO >"
     
     lblRefToEyebolt.Caption = "Eyebolt"
     lblRefToWaterline.Caption = "Waterline"
@@ -1742,54 +1743,12 @@ End Sub
 ' Revisions:
 '   BLC - 6/3/2016 - initial version
 '   BLC - 7/29/2016 - revised to use UpsertRecord()
+'   BLC - 9/1/2016  - commented code cleanup
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     UpsertRecord Me
-    
-'    Dim t As New Transducer
-'
-'    With t
-'        'values passed into form
-'        .EventID = 1
-'
-'        'form values
-'        .TransducerType = ""
-'        .TransducerNumber = cbxTransducer.SelText
-'        .SerialNumber = tbxSerialNo.Value
-'        .IsSurveyed = chkSurveyed.Value
-'        .Timing = cbxTiming.SelText
-'        .ActionDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
-'        .ActionTime = Format(tbxSampleTime.Value, "hh:mm.ss")
-'
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'        .SaveToDb
-'    End With
-'
-'    'clear values & refresh display
-'    Me.RecordSource = ""
-'
-'    cbxTransducer.ControlSource = ""
-'    tbxSerialNo.ControlSource = ""
-'    tbxEyeboltToScribeline.ControlSource = ""
-'    tbxEyeboltToWaterline.ControlSource = ""
-'    tbxRefToEyebolt.ControlSource = ""
-'    tbxRefToWaterline.ControlSource = ""
-'    tbxSampleDate.ControlSource = ""
-'    tbxSampleTime.ControlSource = ""
-'    cbxTiming.ControlSource = ""
-'    cbxTransducer.ControlSource = ""
-'
-'    tbxID.ControlSource = ""
-'    tbxID.Value = 0
-'
-'    ReadyForSave
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
     
 Exit_Handler:
     Exit Sub

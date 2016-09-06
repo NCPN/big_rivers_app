@@ -708,7 +708,7 @@ End Function
 Function IsInArray(strFind As String, aryLookIn As Variant) As Boolean
 On Error GoTo Err_Handler
 
-  IsInArray = (UBound(Filter(aryLookIn, strFind)) > -1)
+  IsInArray = (UBound(filter(aryLookIn, strFind)) > -1)
     
 Exit_Handler:
     Exit Function

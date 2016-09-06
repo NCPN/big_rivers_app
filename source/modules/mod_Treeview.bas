@@ -30,6 +30,9 @@ Option Explicit
 '                   W-field work    S-scenic        W-weather
 '                   O-other         U-unclassified
 '
+'   s_photo_data -> complete photo data w/ appropriate form data supplied & submitted
+'   s_tsys_temp_photo_data -> incomplete, but imported photo files
+'
 ' Parameters:   frm - treeview control's parent form (form)
 '               tvw - treeview control to load (treeview)
 '               template - query template to load from (string)
@@ -175,7 +178,6 @@ On Error GoTo Err_Handler
                             strKey = IIf(Len(strPhotoPath) = 0, rs!PhotoPath & "\" & rs!PhotoFilename, _
                                         strPhotoPath & rs!PhotoFilename & ".jpg")
                             
-                            
                             strDisplayName = Replace(rs!PhotoFilename, ".jpg", "")
                                         
                             'Save key & text to use when node re-added
@@ -197,6 +199,12 @@ On Error GoTo Err_Handler
                                 'add node & tag
                                 Set nodeX = oTree.Nodes.Add(nodeParent, tvwChild, strKey, strDisplayName)
                                 nodeX.Tag = "M|C|" & strKey & "|" & strDisplayName & "|" & strPhotoType 'oTree.SelectedItem.key 'strDisplayName
+                                
+                                'adjust node font weight/color for incomplete data
+                                If template = "s_usys_temp_photo_data" Then
+                                    nodeX.ForeColor = lngRed
+                                    nodeX.Bold = True
+                                End If
                                 
                                 'select the relocated node
                                 'oTree.SelectedItem = nodX
@@ -456,6 +464,7 @@ End Function
 ' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
 ' Revisions:
 '   BLC - 7/27/2015 - initial version
+'   BLC - 9/1/2016  - added unclassified photo type
 ' ---------------------------------
 Public Function ImmovableNode(Node As Node) As Boolean
 
@@ -464,7 +473,8 @@ On Error GoTo Err_Handler
         'default
         ImmovableNode = False
         
-        If CountInString(PHOTO_TYPES_MAIN, Node) + CountInString(PHOTO_TYPES_OTHER, Node) > 0 Then
+        If CountInString(PHOTO_TYPES_MAIN, Node) + CountInString(PHOTO_TYPES_OTHER, Node) _
+           + CountInString("Unclassified", Node) > 0 Then
 '            Debug.Print node
             ImmovableNode = True
         End If

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_UI
 ' Level:        Framework module
-' Version:      1.07
+' Version:      1.08
 ' Description:  User interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -18,6 +18,7 @@ Option Explicit
 '               BLC, 6/24/2016 - 1.06 - replaced Exit_Function > Exit_Handler
 '               BLC, 7/6/2016  - 1.07 - added functions to hide VBE (shift off screen)
 '                                       while the enum module is being updated
+'               BLC, 9/1/2016  - 1.08 - updated ControlExists()
 ' =================================
 
 ' ---------------------------------
@@ -733,9 +734,14 @@ End Function
 ' Returns:      boolean - true if control exists, false if not
 ' Throws:       none
 ' References:   none
-' Source/date:  Adapted from http://www.tek-tips.com/viewthread.cfm?qid=1029435
-'               by VBslammer, 3/22/2005.
+' Source/date:
+'   VBslammer, March 22, 2005
+'   http://www.tek-tips.com/viewthread.cfm?qid=1029435
+'   Mike Lyons September 21, 2007
+'   http://www.utteraccess.com/forum/Control-Exist-Form-t1505884.html
+' Adapted:      Bonnie Campbell, May 15, 2015 - for NCPN tools
 ' Revisions:    BLC, 5/12/2015 - initial version
+'               BLC, 9/1/2016  - added false path, updated documentation
 ' =================================
 Function ControlExists(ByRef ctlName As String, ByRef frm As Form) As Boolean
 On Error GoTo Err_Handler
@@ -744,10 +750,12 @@ On Error GoTo Err_Handler
   For Each ctl In frm.Controls
     If ctl.Name = ctlName Then
       ControlExists = True
-      Exit For
+      GoTo Exit_Handler
     End If
   Next ctl
   
+  'doesn't exist
+  ControlExists = False
 Exit_Handler:
     Exit Function
 

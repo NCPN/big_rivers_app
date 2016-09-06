@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =4035
+    Top =3540
+    Right =16335
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -646,7 +646,7 @@ Option Explicit
 ' =================================
 ' Form:         Transect
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Transect form object related properties, Transect, functions & procedures for UI display
@@ -656,6 +656,7 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert / SetRecord()
+'               BLC - 9/1/2016  - 1.02 - btnSave_Click code cleanup
 ' =================================
 
 '---------------------
@@ -941,43 +942,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 9/1/2016  - commented code cleanup
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     UpsertRecord Me
-
-'    Dim vt As New VegTransect
-'
-'    With vt
-'        'values passed into form
-'        .Park = TempVars("ParkCode")
-'        .LocationID = 1
-'        .EventID = 1
-'
-'        'form values
-'        .TransectNumber = tbxNumber.Value
-'        .SampleDate = Format(tbxSampleDate.Value, "YYYY-mm-dd")
-'
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'        .SaveToDb
-'    End With
-'
-'    'clear values & refresh display
-'    Me.RecordSource = ""
-'
-'    tbxNumber.ControlSource = ""
-'    tbxSampleDate.ControlSource = ""
-'
-'    tbxID.ControlSource = ""
-'    tbxID.Value = 0
-'
-'    ReadyForSave
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
     
 Exit_Handler:
     Exit Sub
