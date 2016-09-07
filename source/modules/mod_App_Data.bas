@@ -1125,6 +1125,12 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("ParkCode") = TempVars("ParkCode")
                                         
+                Case "s_feature_list_by_site"
+                    
+                    '-- required parameters --
+                    .Parameters("pcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+                                        
                 Case "s_location_by_park_river"
                 
                     '-- required parameters --

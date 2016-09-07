@@ -651,7 +651,7 @@ On Error GoTo Err_Handler
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxNumber").ControlSource = "PlotNumber"
                 .Controls("tbxDistance").ControlSource = "Distance"
-                .Controls("tbxModalSedSize").ControlSource = "ModalSedSize"
+                .Controls("cbxModalSedSize").ControlSource = "ModalSedSize"
                 .Controls("tbxPctFines").ControlSource = "PctFines"
                 .Controls("tbxPctWater").ControlSource = "PctWater"
                 .Controls("tbxPctURC").ControlSource = "PctURC"

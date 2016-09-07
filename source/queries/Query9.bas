@@ -1,4 +1,9 @@
-﻿dbMemo "SQL" ="SELECT *\015\012FROM task;\015\012"
+﻿dbMemo "SQL" ="PARAMETERS pcode Text ( 4 ), scode Text ( 2 );\015\012SELECT f.ID, f.Feature, lo"
+    "c.LocationName, f.Location_ID\015\012FROM (((Feature AS f LEFT JOIN Location AS "
+    "loc ON loc.ID = f.Location_ID) LEFT JOIN Site_Feature AS sf ON sf.Feature_ID = f"
+    ".ID) LEFT JOIN Site AS s ON s.ID = sf.Site_ID) LEFT JOIN Park AS p ON p.ID = s.P"
+    "ark_ID\015\012WHERE p.ParkCode = [pcode]\015\012AND s.SiteCode = [scode]\015\012"
+    "AND s.IsActiveForProtocol = 1\015\012ORDER BY f.Feature;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -119,6 +124,22 @@ Begin
     End
     Begin
         dbText "Name" ="p.Photographer_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="f.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="f.Feature"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="loc.LocationName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="f.Location_ID"
         dbLong "AggregateType" ="-1"
     End
 End

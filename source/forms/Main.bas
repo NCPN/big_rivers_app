@@ -17,9 +17,9 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =6660
+    Left =4065
     Top =2580
-    Right =14940
+    Right =12345
     Bottom =10545
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -436,6 +436,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 4/20/2016 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - added Form_Close event to clear breadcrumb
+'               BLC - 9/6/2016  - 1.02 - added PrepareLinks() and updated UpdateBreadcrumb
 ' =================================
 
 '---------------------
@@ -655,27 +656,165 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
 
-    'use set to allow use of tile methods
-    Set oLTile = LTile.Form
-    Set oCTile = CTile.Form
-    Set oRTile = RTile.Form
-    Set oBLTile = BLTile.Form
-    Set oBCTile = BCTile.Form
-    Set oBRTile = BRTile.Form
+'    'T=top, B=bottom, L=left, C=center, R=right (TC=top center tile)
+'    Dim TL As String, TC As String, TR As String
+'    Dim BL As String, BC As String, BR As String
+'
+'    'use set to allow use of tile methods
+'    Set oLTile = LTile.Form
+'    Set oCTile = CTile.Form
+'    Set oRTile = RTile.Form
+'    Set oBLTile = BLTile.Form
+'    Set oBCTile = BCTile.Form
+'    Set oBRTile = BRTile.Form
+'
+'    'default sets
+'    TL = ""             'N/A
+'    TC = "6"            'People
+'    TR = "6,7,8"        'Species, Unknowns, Species Search
+'    BL = ""             'N/A
+'    BC = ""             'N/A
+'    BR = ""             'N/A
+'
+'    'if no park --> all links deactivated, EXCEPT these
+'    If Len(Nz(TempVars("ParkCode"), "")) > 0 Then
+'
+'        'default sets
+'        TL = ""             'N/A
+'        TC = "6"            'People
+'        TR = "6,7,8"        'Species, Unknowns, Species Search
+'        BL = "4,7"          'Batch Upload Photos
+'        BC = "1,2,3,4,6,8"  'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+'        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+'
+'        'prepare park specific sets
+'        Select Case TempVars("ParkCode")
+'
+'            Case "BLCA"
+'                If Len(Nz(TempVars("River"), "")) > 0 Then
+'
+'                    TL = "1"    'Site
+'
+'                    If Len(Nz(TempVars("Site"), "")) > 0 Then
+'
+'                        TL = "1,2,4,6"  'Site, Feature, Plot, Location
+'                        TC = "1,5,6"    'Event, Locations, People
+'                        BR = "8"        'More
+'
+'                        If Len(Nz(TempVars("Feature"), "")) > 0 Then
+'                            TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+'                            BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species, More
+'                        End If
+'
+'                    End If
+'
+'                End If
+'            Case "CANY"
+'                If Len(Nz(TempVars("River"), "")) > 0 Then
+'
+'                    TL = "1"    'Site
+'
+'                    If Len(Nz(TempVars("Site"), "")) > 0 Then
+'                        TL = "1,3,4,6"      'Site, Transect, Plot, Location
+'                        TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+'                        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species, More
+'                    End If
+'
+'                End If
+'            Case "DINO"
+'                If Len(Nz(TempVars("River"), "")) > 0 Then
+'
+'                    TL = "1"    'Site
+'
+'                    If Len(Nz(TempVars("Site"), "")) > 0 Then
+'                        TL = "1,3,4,6"      'Site, Transect, Plot, Location
+'                        TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+'                        TR = "3,6,7,8"      'VegWalk, Species, Unknowns, Species Search
+'                        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species, More
+'                    End If
+'
+'                End If
+'        End Select
+'
+'        'handle exceptions
+''        oLTile.EnableLinks "1"              'Site
+''        oCTile.EnableLinks "6"              'People
+''        oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
+''        oBLTile.EnableLinks "4,7"           'Batch Upload Photos
+''        oBCTile.EnableLinks "1,2,3,4,6,8"   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+''        oBRTile.EnableLinks "1,2,3,4,5,8"   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+''        oLTile.EnableLinks TL              'Site
+''        oCTile.EnableLinks TC              'People
+''        oRTile.EnableLinks TR          'Species, Unknowns, Species Search
+''        oBLTile.EnableLinks BL           'Batch Upload Photos
+''        oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+''        oBRTile.EnableLinks BR   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+'
+'
+''        'handle exceptions
+''        'oLTile.EnableLinks ""              'N/A
+''        oCTile.EnableLinks "6"              'People
+''        oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
+''        oBLTile.EnableLinks "7,8"           'Batch Upload Photos
+''        'oBCTile.EnableLinks ""             'N/A
+''        'oBRTile.EnableLinks ""             'N/A
+''
+'''        oBCTile.DisableLinks "1,2" '"1,2,3,4,5,6"
+''
+''        'if no river --> all links deactivated, EXCEPT these
+''        If Len(Nz(TempVars("River"), "")) = 0 Then
+''
+''            'handle exceptions
+''            oLTile.EnableLinks "1"              'Site
+''            oCTile.EnableLinks "6"              'People
+''            oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
+''            oBLTile.EnableLinks "4,7"           'Batch Upload Photos
+''            oBCTile.EnableLinks "1,2,3,4,6,8"   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+''            oBRTile.EnableLinks "1,2,3,4,5,8"   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+''
+''
+''            'if no site --> all links deactivated, EXCEPT these
+''            If Len(Nz(TempVars("Site"), "")) = 0 Then
+''
+''                'handle exceptions
+''                oLTile.EnableLinks "1,2,3,4"        'Site, Feature, Transect, Plot
+''                oCTile.EnableLinks "6"              'People
+''                oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
+''                oBLTile.EnableLinks "4,7"           'Batch Upload Photos
+''                oBCTile.EnableLinks "1,2,3,4,6,8"   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+''                oBRTile.EnableLinks "1,2,3,4,5,8"   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+''
+''
+''                'if no river --> all links deactivated, EXCEPT these
+''                If Len(Nz(TempVars("Feature"), "")) = 0 Then
+''
+''                    'handle exceptions
+''                    'oLTile.EnableLinks ""               'N/A
+''                    oCTile.EnableLinks "6"              'People
+''                    oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
+''                    oBLTile.EnableLinks "7,8"              'Batch Upload Photos
+''                    'oBCTile.EnableLinks ""              'N/A
+''                    'oBRTile.EnableLinks ""               'N/A
+''
+''
+''                End If
+''
+''
+''            End If
+''
+''
+''        End If
+'
+'    End If
+'
+'    oLTile.EnableLinks TL    'Site
+'    oCTile.EnableLinks TC    'People
+'    oRTile.EnableLinks TR    'Species, Unknowns, Species Search
+'    oBLTile.EnableLinks BL   'Batch Upload Photos
+'    oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+'    oBRTile.EnableLinks BR   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
     
-    'if no park --> all links deactivated, EXCEPT these
-    If Len(Nz(TempVars("ParkCode"), "")) = 0 Then
-
-        'handle exceptions
-        'oLTile.EnableLinks ""               'N/A
-        oCTile.EnableLinks "6"              'People
-        oRTile.EnableLinks "6,7,8"          'Species, Unknowns, Species Search
-        oBLTile.EnableLinks "7,8"              'Batch Upload Photos
-        'oBCTile.EnableLinks ""              'N/A
-        'oBRTile.EnableLinks ""               'N/A
-        
-'        oBCTile.DisableLinks "1,2" '"1,2,3,4,5,6"
-    End If
+    PrepareLinks
     
 Exit_Handler:
     Exit Sub
@@ -764,7 +903,8 @@ End Sub
 ' Description:  Update captions w/in breadcrumb
 ' Assumptions:
 ' Parameters:   ClearValues - breadcrumb values to clear? (integer)
-'                             0,1,2,3-highest level to clear, levels below this level are cleared (captions set to "Missing XX >")
+'                             0,1,2,3-highest level to clear, levels below this level are cleared
+'                             (captions set to "Missing XX >")
 ' Returns:      -
 ' Throws:       none
 ' References:   -
@@ -773,6 +913,9 @@ End Sub
 ' Revisions:
 '   BLC - 5/18/2016 - initial version
 '   BLC - 7/1/2016 -  update indicator color & visibility
+'   BLC - 9/6/2016 - added PrepareLinks() call to update links,
+'                    shifted setting captions until AFTER TempVars clearing,
+'                    fixed issue preventing Feature from clearing
 ' ---------------------------------
 Public Sub UpdateBreadcrumb(Optional ClearValues As Integer = 4)
 On Error GoTo Err_Handler
@@ -786,16 +929,17 @@ On Error GoTo Err_Handler
     Set frm = Me!fsubBreadcrumb.Form
     
     With frm
-        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park") & Space(4) & ">"
-        .btnLevel1.Caption = Nz(TempVars("River"), "River") & Space(4) & ">"
-        .btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site") & Space(4) & ">"
-        .btnLevel3.Caption = Nz(TempVars("Feature"), "Feature")
+'        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park") & Space(4) & ">"
+'        .btnLevel1.Caption = Nz(TempVars("River"), "River") & Space(4) & ">"
+'        .btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site") & Space(4) & ">"
+'        .btnLevel3.Caption = Nz(TempVars("Feature"), "Feature")
 
         'clear
         strHierarchy() = Array("Park", "River", "Site", "Feature")
         
-        For i = ClearValues + 1 To 3 - ClearValues
-            
+'        For i = ClearValues + 1 To 3 - ClearValues
+        For i = ClearValues To 3
+        
             'default
             strMore = ""
             
@@ -806,20 +950,28 @@ On Error GoTo Err_Handler
         
             Select Case i
                 Case 0 'park
-                    TempVars.Remove "ParkCode"
+'                    TempVars.Remove "ParkCode" --> only removed when Main form closed
+                    TempVars.Remove "River"
                     
                 Case 1 'river
-                    TempVars.Remove "River"
-                
-                Case 2 'site
                     TempVars.Remove "SiteCode"
+                    
+                Case 2 'site
+                   TempVars.Remove "Feature"
                 
                 Case 3 'feature
-                    TempVars.Remove "Feature"
+                   'nothing to remove
             
             End Select
         
         Next
+        
+        'update captions *AFTER* removing tempvars
+        .btnLevel0.Caption = Nz(TempVars("ParkCode"), "Park") & Space(4) & ">"
+        .btnLevel1.Caption = Nz(TempVars("River"), "River") & Space(4) & ">"
+        .btnLevel2.Caption = Nz(TempVars("SiteCode"), "Site") & Space(4) & ">"
+        .btnLevel3.Caption = Nz(TempVars("Feature"), "Feature")
+            
             
         'if park --> enable links
         If Len(Nz(TempVars("ParkCode"), "")) > 0 Then
@@ -853,7 +1005,7 @@ On Error GoTo Err_Handler
                                 strLinksToEnable = ",1,2,3,4,5,6,7,8"
                         End Select
                         
-                        .EnableLinks .TileTag & strLinksToEnable
+'                        .EnableLinks .TileTag & strLinksToEnable
                         .IndicatorVisible = 1
                         .IndicatorColor = lngGreen
                         
@@ -873,6 +1025,9 @@ On Error GoTo Err_Handler
 
     End With
     
+    'revisit links to re-adjust based on TempVar/breadcrumb settings
+    PrepareLinks
+    
 Exit_Handler:
     Exit Sub
     
@@ -886,8 +1041,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          UpdateBreadcrumb
-' Description:  Update captions w/in breadcrumb
+' Sub:          HighlightUpdateBreadcrumb
+' Description:  Highlight captions w/in breadcrumb
 ' Assumptions:
 ' Parameters:   ClearValues - breadcrumb values to clear? (integer)
 '                             0,1,2,3-highest level to clear, levels below this level are cleared (captions set to "Missing XX >")
@@ -945,6 +1100,185 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - HighlightBreadcrumb[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          PrepareLinks
+' Description:  Identifies appropriate links to enable depending on breadcrumb settings
+'               (via TempVars for ParkCode, River, Site, Feature)
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, September 6, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/6/2016 - initial version
+' ---------------------------------
+Private Sub PrepareLinks()
+On Error GoTo Err_Handler
+
+    'T=top, B=bottom, L=left, C=center, R=right (TC=top center tile)
+    Dim TL As String, TC As String, TR As String
+    Dim BL As String, BC As String, BR As String
+
+    'use set to allow use of tile methods
+    Set oLTile = LTile.Form
+    Set oCTile = CTile.Form
+    Set oRTile = RTile.Form
+    Set oBLTile = BLTile.Form
+    Set oBCTile = BCTile.Form
+    Set oBRTile = BRTile.Form
+    
+    'default sets
+    TL = ""             'N/A
+    TC = "6"            'People
+    TR = "6,7,8"        'Species, Unknowns, Species Search
+    BL = ""             'N/A
+    BC = ""             'N/A
+    BR = ""             'N/A
+    
+    'if no park --> all links deactivated, EXCEPT these
+    If Len(Nz(TempVars("ParkCode"), "")) > 0 Then
+        
+        'default sets
+        TL = ""             'N/A
+        TC = "6"            'People
+        TR = "6,7,8"        'Species, Unknowns, Species Search
+        BL = "4,7"          'Survey Files, Upload Survey File
+        BC = "1,2,3,4,6,8"  'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+        
+        'prepare park specific sets
+        Select Case TempVars("ParkCode")
+
+            Case "BLCA"
+                If Len(Nz(TempVars("River"), "")) > 0 Then
+                    
+                    TL = "1"    'Site
+                    
+                    If Len(Nz(TempVars("SiteCode"), "")) > 0 Then
+                        
+                        TL = "1,2,6"     'Site, Feature, Location
+                        TC = "1,5,6"     'Event, Locations, People
+                        BL = "1,2,4,7,8" 'Photos, Transducers, Survey Files, Upload Survey File,
+                                         ' Batch Upload Photos
+                        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
+                                            ' VegWalk-Species, VegWalk-#Species, More
+                        
+                        If Len(Nz(TempVars("Feature"), "")) > 0 Then
+                            TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+                            BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
+                                                ' VegWalk-Species, VegWalk-#Species, More
+                        End If
+                    
+                    End If
+                
+                End If
+            Case "CANY"
+                If Len(Nz(TempVars("River"), "")) > 0 Then
+                    
+                    TL = "1"    'Site
+                    
+                    If Len(Nz(TempVars("SiteCode"), "")) > 0 Then
+                        TL = "1,3,4,6"      'Site, Transect, Plot, Location
+                        TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+                        BL = "1,2,4,7,8"    'Photos, Transducers, Survey Files, Upload Survey File,
+                                            ' Batch Upload Photos
+                        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
+                                            ' VegWalk-Species, VegWalk-#Species, More
+                    End If
+                
+                End If
+            Case "DINO"
+                If Len(Nz(TempVars("River"), "")) > 0 Then
+                    
+                    TL = "1"    'Site
+                    
+                    If Len(Nz(TempVars("SiteCode"), "")) > 0 Then
+                        TL = "1,3,4,6"      'Site, Transect, Plot, Location
+                        TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+                        TR = "3,6,7,8"      'VegWalk, Species, Unknowns, Species Search
+                        BL = "1,2,4,7,8"    'Photos, Transducers, Survey Files, Upload Survey File,
+                                            ' Batch Upload Photos
+                        BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
+                                            ' VegWalk-Species, VegWalk-#Species, More
+                    End If
+                
+                End If
+        End Select
+
+    End If
+    
+'                Dim ctrl As Control
+'
+'            'iterate through the tiles - enable links & update indicator
+'            For Each ctrl In Me.Controls
+'
+'                If Right(ctrl.Name, 4) = "Tile" Then
+'                    Dim strLinksToEnable As String
+'
+'                    With ctrl.Form
+'                        Select Case .lblTitle.Caption '.Title doesn't seem to hold for tile
+'                            Case "Where?"
+'                                'enable vegplots if site is set
+'                                strLinksToEnable = IIf(Len(Nz(TempVars("SiteCode"), "")) > 0, _
+'                                                        ",1,2,3,4,5,6,7,8", ",1,2,3,5,6,7,8")
+'                            Case "Sampling"
+'                                'enable vegplots if site is set
+'                                strLinksToEnable = IIf(Len(Nz(TempVars("SiteCode"), "")) > 0, _
+'                                                        ",1,2,3,4,5,6,7,8", ",1,2,4,5,6,7,8")
+'                            Case "Vegetation"
+'                                'enable vegplots if site is set
+'                                strLinksToEnable = IIf(Len(Nz(TempVars("SiteCode"), "")) > 0, _
+'                                                        ",1,2,3,4,5,6,7,8", ",4,5,6,7,8")
+'                            Case Else
+'                                strLinksToEnable = ",1,2,3,4,5,6,7,8"
+'                        End Select
+'
+'                        .EnableLinks .TileTag & strLinksToEnable
+'                        .IndicatorVisible = 1
+'                        .IndicatorColor = lngGreen
+'
+'                    End With
+'                End If
+'
+'            Next
+
+
+    'disable before selective re-enabling
+    Dim ctrl As Control
+
+    'iterate through the tiles - disable links
+    For Each ctrl In Me.Controls
+
+        If Right(ctrl.Name, 4) = "Tile" Then
+    
+            ctrl.Form.DisableLinks
+    
+        End If
+        
+    Next
+    
+    'selectively re-enable links
+    oLTile.EnableLinks TL    'Site
+    oCTile.EnableLinks TC    'People
+    oRTile.EnableLinks TR    'Species, Unknowns, Species Search
+    oBLTile.EnableLinks BL   'Batch Upload Photos
+    oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+    oBRTile.EnableLinks BR   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PrepareLinks[Main form])"
     End Select
     Resume Exit_Handler
 End Sub

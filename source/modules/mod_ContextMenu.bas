@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' Module:       ContextMenu
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Context menu object related properties, events, functions & procedures for UI display
 '
@@ -13,6 +13,7 @@ Option Explicit
 ' References:
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - revised s_site_list to s_site_list_active
+'               BLC - 9/7/2016  - 1.02 - revised s_feature_list to s_feature_list_by_site
 ' =================================
 
 '---------------------
@@ -188,6 +189,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/22/2016 - initial version
 '   BLC - 6/28/2016 - revised s_site_list to s_site_list_active
+'   BLC - 9/7/2016  - revised s_feature_list to s_feature_list_by_site
 ' ---------------------------------
 Public Sub CreateDynamicMenu(Context As String)
 On Error GoTo Err_Handler
@@ -315,9 +317,9 @@ On Error GoTo Err_Handler
                 End If
                 
             Case "feature"
-                If Not IsNull(TempVars("ParkCode")) Then
+                If Not IsNull(TempVars("ParkCode")) And Not IsNull(TempVars("SiteCode")) Then
                     'Set rs = CurrentDb.OpenRecordset(GetTemplate("s_feature_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
-                    Set rs = GetRecords("s_feature_list")
+                    Set rs = GetRecords("s_feature_list_by_site")
                     
                     If Not (rs.BOF And rs.EOF) Then
                     

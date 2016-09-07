@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Settings
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.05
 ' Description:  Application-wide related values, functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -13,6 +13,7 @@ Option Explicit
 '               BLC, 6/7/2016   - 1.02 - updated documentation & added ACCESS_ROLES (Big Rivers App)
 '               BLC, 6/20/2016  - 1.03 - added DB_ADMIN_FORM and documentation
 '               BLC, 9/1/2016   - 1.04 - updated APP_SYS_TABLES
+'               BLC, 9/7/2016   - 1.05 - added LINK_NORMAL_TEXT for disabling links
 ' =================================
 
 ' ---------------------------------
@@ -49,6 +50,7 @@ Public gSubReportCount As Integer                  'global counter for subreport
 '               BLC, 5/28/2015 - added MAIN_APP_MENU to handle applications w/ main menu forms (not tabbed switchboards)
 '               BLC, 4/4/2016  - added LOCATION_TYPES to allow specific types only, RECORD_ACTIONS, CONTACT_ROLES, PARKS
 '               BLC, 6/7/2016  - added ACCESS_ROLES to set user application permissions
+'               BLC, 9/7/2016  - added LINK_NORMAL_TEXT & _BKGD for disabling tile links
 ' ---------------------------------
 Public Const USER_ACCESS_CONTROL As Boolean = True             'Boolean flag -> db includes user access control or not
 Public Const DB_ADMIN_CONTROL As Boolean = False                'Boolean flag -> db does not include DbAdmin subform & controls
@@ -108,6 +110,7 @@ Public Const TEXT_DISABLED As Long = lngGray
 Public Const LINK_HIGHLIGHT_TEXT As Long = lngBlue
 Public Const LINK_HIGHLIGHT_BKGD As Long = lngYelLime
 Public Const HIGHLIGHT_MISSING_VALUE As Long = lngYellow
+Public Const LINK_NORMAL_TEXT As Long = lngGray50
 
 Public Const PROGRESS_BAR As Long = lngLime
 

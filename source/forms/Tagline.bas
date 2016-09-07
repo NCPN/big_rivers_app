@@ -1030,9 +1030,9 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim tl As New tagline
+    Dim TL As New tagline
     
-    With tl
+    With TL
         'values passed into form
         .LineDistSource = ary(0) '"T"
         .LineDistSourceID = CInt(ary(1)) '14

@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =29
-    Left =4485
-    Top =3570
-    Right =13965
-    Bottom =14580
+    Left =9690
+    Top =7410
+    Right =12270
+    Bottom =10845
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -732,7 +732,7 @@ Option Explicit
 ' =================================
 ' Form:         Tile
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.03
 '
 ' Description:  Tile form object related properties, events, functions & procedures for UI display
 '
@@ -746,6 +746,9 @@ Option Explicit
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
 '               BLC - 4/26/2016  - 1.01 - added tile tag property
 '               BLC - 7/1/2016   - 1.02 - added 2 additional links (7 & 8) & indicator bar (lnIndicator)
+'               BLC - 9/7/2016   - 1.03 - updated DisableLinks() to allow ALL & SELECTIVE disabling,
+'                                         added LinkNormal(), updated Detail_MouseMove() to use
+'                                         LINK_TEXT_NORMAL vs. lngGray50 (current LINK_TEXT_NORMAL setting)
 ' =================================
 
 '---------------------
@@ -1826,6 +1829,8 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/1/2016  - increased to 8 max links
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
+'   BLC - 9/7/2016  - revised .ForeColor to LINK_NORMAL_TEXT vs lngGray50
+'                     (lngGray50 is current value for LINK_NORMAL_TEXT)
 ' ---------------------------------
 Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 On Error GoTo Err_Handler
@@ -1844,7 +1849,7 @@ On Error GoTo Err_Handler
             
                 With ctrl
                     'avoid flicker w/ if statement
-                    If Not .ForeColor = lngGray50 Then .ForeColor = lngGray50
+                    If Not .ForeColor = LINK_NORMAL_TEXT Then .ForeColor = LINK_NORMAL_TEXT
                     If Not .backstyle = acTransparent Then .backstyle = acTransparent
                 End With
             
@@ -1997,6 +2002,40 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          LinkNormal
+' Description:  Actions to revert links to normal (disabled) within a tile
+' Assumptions:  ctrl has .Fore & .Back colors as well as .BackStyle
+' Parameters:   ctrl - control to highlight (control)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, September 7, 2016 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/7/2016 - initial version
+' ---------------------------------
+Public Sub LinkNormal(ctrl As Control)
+On Error GoTo Err_Handler
+    
+    With ctrl
+        'avoid flicker w/ if statement
+        If Not .ForeColor = LINK_NORMAL_TEXT Then .ForeColor = LINK_NORMAL_TEXT
+        If Not .backstyle = acTransparent Then .backstyle = acTransparent
+    End With
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - LinkNormal[Tile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          DisableLinks
 ' Description:  Actions to disable links within a tile
 ' Assumptions:  -
@@ -2008,8 +2047,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 9/7/2016  - update to disable all if desired
 ' ---------------------------------
-Public Sub DisableLinks(links As String)
+Public Sub DisableLinks(Optional links As String = "")
 On Error GoTo Err_Handler
 
     Dim ctrl As Control
@@ -2017,6 +2057,25 @@ On Error GoTo Err_Handler
     Dim strLink As String
     Dim i As Integer
     
+    '-------------------------
+    ' Disable ALL links
+    '-------------------------
+    If Len(links) = 0 Then
+        For Each ctrl In Me.Controls
+            If Left(ctrl.Name, 7) = "lblLink" Then
+                ctrl.Tag = "DISABLED"
+                ctrl.ForeColor = LINK_NORMAL_TEXT
+                ctrl.backstyle = acTransparent
+            End If
+        Next
+        
+        'exit when done
+        GoTo Exit_Handler
+    End If
+    
+    '-------------------------
+    ' Disable SELECTIVE links
+    '-------------------------
     ary = Split(links, ",")
     
     For i = 0 To UBound(ary)
@@ -2025,7 +2084,9 @@ On Error GoTo Err_Handler
         For Each ctrl In Me.Controls
             
             If ctrl.Name = strLink Then
-                'ctrl.Tag = "Disabled"
+                ctrl.Tag = "DISABLED"
+                ctrl.ForeColor = LINK_NORMAL_TEXT
+                ctrl.backstyle = acTransparent
             End If
         Next
         
@@ -2063,6 +2124,9 @@ On Error GoTo Err_Handler
     Dim ary() As String
     Dim strLink As String, strTileTag As String
     Dim i As Integer
+    
+    'handle only populated strings
+    If Len(links) = 0 Then GoTo Exit_Handler
     
     ary = Split(links, ",")
     

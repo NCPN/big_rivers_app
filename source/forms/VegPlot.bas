@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =68
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =3600
+    Top =3555
+    Right =16125
+    Bottom =14550
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1666,6 +1666,7 @@ On Error GoTo Err_Handler
             chkHasSocialTrails.visible = True
             lblHasSocialTrails.visible = True
             btnWCC.visible = True
+            btnURC.visible = True
             
         Case "DINO"
             lblWater.visible = True

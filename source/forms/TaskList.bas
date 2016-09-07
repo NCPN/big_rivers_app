@@ -302,7 +302,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =8355711
                     Name ="tbxPriority"
-                    ControlSource ="Priority"
+                    ControlSource ="Priority_ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5100
@@ -324,7 +324,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =8355711
                     Name ="tbxStatus"
-                    ControlSource ="Status"
+                    ControlSource ="Status_ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6060
@@ -341,7 +341,7 @@ Begin Form
                     BorderColor =10921638
                     Name ="imgStatus"
                     GridlineColor =10921638
-                    ControlSource ="Status"
+                    ControlSource ="Status_ID"
 
                     LayoutCachedLeft =7080
                     LayoutCachedTop =60
@@ -358,7 +358,7 @@ Begin Form
                     BorderColor =10921638
                     Name ="imgPriority"
                     GridlineColor =10921638
-                    ControlSource ="Priority"
+                    ControlSource ="Priority_ID"
 
                     LayoutCachedLeft =7440
                     LayoutCachedTop =60
