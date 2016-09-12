@@ -29,10 +29,10 @@ Private m_TransectNumber As Integer
 Private m_SampleDate As Date
 
 Private m_Park As String
-'Private m_ObserverID As Integer
-'Private m_RecorderID As Integer
-'Private m_Observer As String
-'Private m_Recorder As String
+Private m_ObserverID As Integer
+Private m_RecorderID As Integer
+Private m_Observer As String
+Private m_Recorder As String
 
 '---------------------
 ' Events
@@ -116,37 +116,37 @@ Public Property Get Park() As String
     Park = m_Park
 End Property
 
-'Public Property Let ObserverID(Value As Integer)
-'    m_ObserverID = Value
-'End Property
-'
-'Public Property Get ObserverID() As Integer
-'    ObserverID = m_ObserverID
-'End Property
-'
-'Public Property Let Observer(Value As String)
-'    m_Observer = Value
-'End Property
-'
-'Public Property Get Observer() As String
-'    Observer = m_Observer
-'End Property
-'
-'Public Property Let RecorderID(Value As Integer)
-'    m_RecorderID = Value
-'End Property
-'
-'Public Property Get RecorderID() As Integer
-'    RecorderID = m_RecorderID
-'End Property
+Public Property Let ObserverID(Value As Integer)
+    m_ObserverID = Value
+End Property
 
-'Public Property Let Recorder(Value As String)
-'    m_Recorder = Value
-'End Property
-'
-'Public Property Get Recorder() As String
-'    Recorder = m_Recorder
-'End Property
+Public Property Get ObserverID() As Integer
+    ObserverID = m_ObserverID
+End Property
+
+Public Property Let Observer(Value As String)
+    m_Observer = Value
+End Property
+
+Public Property Get Observer() As String
+    Observer = m_Observer
+End Property
+
+Public Property Let RecorderID(Value As Integer)
+    m_RecorderID = Value
+End Property
+
+Public Property Get RecorderID() As Integer
+    RecorderID = m_RecorderID
+End Property
+
+Public Property Let Recorder(Value As String)
+    m_Recorder = Value
+End Property
+
+Public Property Get Recorder() As String
+    Recorder = m_Recorder
+End Property
 
 
 '---------------------
@@ -228,25 +228,11 @@ End Sub
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
 '   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
+'   BLC, 9/8/2016 - code cleanup
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-'    Dim strSQL As String
-'    Dim db As DAO.Database
-'    Dim rs As DAO.Recordset
-'
-'    Set db = CurrentDb
-'
-'    'record VegPlots must have:
-'    strSQL = "INSERT INTO VegTransect(Location_ID, Event_ID, " _
-'                & "TransectNumber, SampleDate) VALUES " _
-'                & "(" & Me.LocationID & "," & Me.EventID & "," _
-'                & Me.TransectNumber & ",#" & Me.SampleDate & "#);"
-'
-'    db.Execute strSQL, dbFailOnError
-'    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
-
     Dim template As String
     
     template = "i_vegtransect"
@@ -268,16 +254,7 @@ On Error GoTo Err_Handler
         .ID = SetRecord(template, params)
     End With
     
-'    'add a record for created by
-'    Dim act As New RecordAction
-'
-'    With act
-'        .RefAction = "R"
-'        .ContactID = TempVars("UserID")
-'        .RefID = Me.ID
-'        .RefTable = "VegTransect"
-'        .SaveToDb
-'    End With
+    SetObserverRecorder Me, "VegTransect"
 
 Exit_Handler:
     Exit Sub

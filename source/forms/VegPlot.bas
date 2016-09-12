@@ -19,16 +19,16 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =68
-    Left =3600
-    Top =3555
-    Right =16125
-    Bottom =14550
+    ItemSuffix =69
+    Left =4185
+    Top =1995
+    Right =12045
+    Bottom =11535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x9116deeeb5cfe440
     End
-    Caption ="VegPlot Sampling"
+    Caption ="VegPlot"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -192,7 +192,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Enter the plot information and click save.\015\012Add cover species via buttons "
+                        "at right."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -221,13 +222,14 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =900
                     Width =720
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="í ½í·©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -235,9 +237,11 @@ Begin Form
                     LayoutCachedTop =900
                     LayoutCachedWidth =7380
                     LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -294,9 +298,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777184
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="CANY  >  Green  >  HC  >  "
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -304,6 +308,35 @@ Begin Form
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5820
+                    Top =900
+                    Width =720
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="btnSetObserverRecorder"
+                    Caption ="í ½í±¥"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5820
+                    LayoutCachedTop =900
+                    LayoutCachedWidth =6540
+                    LayoutCachedHeight =1260
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
@@ -329,7 +362,7 @@ Begin Form
                     TopMargin =144
                     BackColor =12444887
                     Name ="lblCover"
-                    Caption ="cover"
+                    Caption ="Cover\015\012Species"
                     GridlineColor =10921638
                     LayoutCachedLeft =5820
                     LayoutCachedTop =1320
@@ -355,7 +388,7 @@ Begin Form
                     TopMargin =288
                     BackColor =11916796
                     Name ="lblChkboxes"
-                    Caption ="chk"
+                    Caption ="âœ”"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =2040
@@ -395,6 +428,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -449,7 +483,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -534,7 +569,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -576,6 +612,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -669,6 +706,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctFines"
+                    ValidationRule ="Not Like \"[0-9]*.[0-9]*\""
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
@@ -704,6 +743,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctWater"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
@@ -739,6 +780,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctURC"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
@@ -811,6 +854,8 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctFA"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
@@ -986,6 +1031,7 @@ Begin Form
                     End
                 End
                 Begin CheckBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =3300
                     Top =2280
@@ -1003,6 +1049,7 @@ Begin Form
                     LayoutCachedHeight =2640
                     Begin
                         Begin Label
+                            Visible = NotDefault
                             OverlapFlags =247
                             Left =3540
                             Top =2220
@@ -1085,7 +1132,7 @@ Begin Form
                     FontSize =9
                     TabIndex =20
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -1118,7 +1165,8 @@ Begin Form
                     LayoutCachedHeight =2460
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -1147,7 +1195,8 @@ Begin Form
                     LayoutCachedHeight =1920
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -1158,6 +1207,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =6840
                     Top =2640
@@ -1176,7 +1226,8 @@ Begin Form
                     LayoutCachedHeight =3000
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -1199,7 +1250,7 @@ Begin Form
                     TopMargin =72
                     BackColor =12835293
                     Name ="lblTagline"
-                    Caption ="tag"
+                    Caption ="í ½í³"
                     ControlTipText ="Add/Edit Tagline Measurements"
                     GridlineColor =10921638
                     LayoutCachedLeft =5820
@@ -1269,7 +1320,8 @@ Begin Form
                     LayoutCachedHeight =1110
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -1283,6 +1335,7 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
+                    ColumnCount =4
                     Left =3300
                     Top =60
                     Width =2304
@@ -1291,6 +1344,7 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"0\""
                     ConditionalFormat = Begin
                         0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
@@ -1300,6 +1354,10 @@ Begin Form
                     End
                     Name ="cbxModalSedSize"
                     RowSourceType ="Table/Query"
+                    RowSource ="PARAMETERS etype Text ( 255 ); SELECT DISTINCT id, label, summary, label & ' - '"
+                        " & summary AS display, Sequence FROM AppEnum WHERE EnumType = ModWentworthClassS"
+                        "ize ORDER BY Sequence; "
+                    ColumnWidths ="0;0;0;2"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Size class"
                     GridlineColor =10921638
@@ -1331,6 +1389,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16711680
                     Name ="lblHintPct"
+                    Caption ="Nearest 1% or T"
                     GridlineColor =10921638
                     LayoutCachedLeft =300
                     LayoutCachedTop =1440
@@ -1354,7 +1413,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =3300
@@ -1375,9 +1433,8 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -1411,7 +1468,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -1421,6 +1478,7 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 9/8/2016  - 1.02 - added SetObserverRecorder button
 ' =================================
 
 '---------------------
@@ -1535,6 +1593,7 @@ End Property
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 7/13/2016 - added validation, hints
+'   BLC - 9/8/2016  - added SetObserverRecorder button
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1559,6 +1618,8 @@ On Error GoTo Err_Handler
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblCover.Caption = "Cover" & vbCrLf & "Species"
     lblTagline.Caption = StringFromCodepoint(uRuler)
+    btnSetObserverRecorder.Caption = StringFromCodepoint(uUsers)
+    btnSetObserverRecorder.ControlTipText = "Set the selected veg plot's observer & recorder"
     
     'hints
     lblHintPct.Caption = "Nearest 1% or T"
@@ -1579,6 +1640,7 @@ On Error GoTo Err_Handler
     tbxPctFA.ValidationText = strValidationText
     
     'set hover
+    btnSetObserverRecorder.HoverColor = lngGreen
     btnComment.HoverColor = lngGreen
     btnTaglines.HoverColor = lngGreen
     btnWCC.HoverColor = lngGreen
@@ -1598,6 +1660,7 @@ On Error GoTo Err_Handler
     tbxPctWater.BackColor = lngYellow
     tbxPctURC.BackColor = lngYellow
     tbxPlotDensity.BackColor = lngYellow
+    btnSetObserverRecorder.Enabled = False
     
     'populate modal sediment size
     ' -------------------------------------------------------------------------------------
@@ -1740,6 +1803,7 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
               
 '      If tbxID > 0 Then btnComment.Enabled = True
+    btnSetObserverRecorder.Enabled = IIf(tbxID.Value > 0, True, False)
 
 Exit_Handler:
     Exit Sub
@@ -2217,6 +2281,13 @@ On Error GoTo Err_Handler
     
     PopulateForm Me, tbxID.Value
     
+    If tbxID.Value > 0 Then
+        'highlight SetObserverRecorder button
+        btnSetObserverRecorder.borderColor = lngRed
+        lblMsg.ForeColor = lngYellow
+        lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+        lblMsg.Caption = "Don't forget to set observer & recorder!"
+    End If
     'refresh list
     Me.list.Requery
     
@@ -2229,6 +2300,35 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnSave_Click[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnSetObserverRecorder_Click
+' Description:  Set observer recorder button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, September 8, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/8/2016 - initial version
+' ---------------------------------
+Private Sub btnSetObserverRecorder_Click()
+On Error GoTo Err_Handler
+    
+    DoCmd.OpenForm "SetObserverRecorder", acNormal, , , , , "VegPlot|" & Me.tbxID
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSetObserverRecorder_Click[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2465,6 +2565,8 @@ On Error GoTo Err_Handler
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
+    
+    btnSetObserverRecorder.Enabled = IIf(tbxID.Value > 0, True, False)
     
     'refresh form
     Me.Requery

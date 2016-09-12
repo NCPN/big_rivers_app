@@ -2018,6 +2018,32 @@ On Error GoTo Err_Handler
                     Set ph = Nothing
                 End With
                                         
+            Case "SetObserverRecorder"
+                Dim ra As New RecordAction
+                
+                With ra
+                    'values passed into form
+                    .RefTable = frm.RefTable
+                    .RefID = frm.RefID
+                    .ContactID = frm.RAContactID
+                    .RefAction = frm.RAAction
+                    '.ActionType = frm.RAAction
+                    .ActionDate = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
+                
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                                
+                    strCriteria = "[Contact_ID] = " & .ContactID _
+                                & " AND [Activity] = '" & .RefAction _
+                                & "'"
+
+                    'set the generic object --> Location
+                    Set obj = ra
+                    
+                    'cleanup
+                    Set ra = Nothing
+                End With
+            
+            
             Case "Site"
                 Dim s As New Site
                 

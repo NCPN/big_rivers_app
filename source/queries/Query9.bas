@@ -1,9 +1,10 @@
-﻿dbMemo "SQL" ="PARAMETERS pcode Text ( 4 ), scode Text ( 2 );\015\012SELECT f.ID, f.Feature, lo"
-    "c.LocationName, f.Location_ID\015\012FROM (((Feature AS f LEFT JOIN Location AS "
-    "loc ON loc.ID = f.Location_ID) LEFT JOIN Site_Feature AS sf ON sf.Feature_ID = f"
-    ".ID) LEFT JOIN Site AS s ON s.ID = sf.Site_ID) LEFT JOIN Park AS p ON p.ID = s.P"
-    "ark_ID\015\012WHERE p.ParkCode = [pcode]\015\012AND s.SiteCode = [scode]\015\012"
-    "AND s.IsActiveForProtocol = 1\015\012ORDER BY f.Feature;\015\012"
+﻿dbMemo "SQL" ="PARAMETERS pkcode Text ( 4 ), scode Text ( 2 );\015\012SELECT l.CollectionSource"
+    "Name, l.LocationType, l.LocationName, l.HeadtoOrientDistance_m, l.HeadtoOrientBe"
+    "aring, l.LocationNotes, s.SiteName, r.River, r.Segment\015\012FROM ((Location AS"
+    " l LEFT JOIN Site AS s ON s.Location_ID = l.ID) LEFT JOIN River AS r ON r.ID = s"
+    ".River_ID) LEFT JOIN Park AS pk ON pk.ID = s.Park_ID\015\012WHERE pk.ParkCode = "
+    "[pkcode]\015\012AND\015\012s.SiteCode = [scode]\015\012ORDER BY l.LocationName;\015"
+    "\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -140,6 +141,54 @@ Begin
     End
     Begin
         dbText "Name" ="f.Location_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.LocationNotes"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ra.Contact_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ContactName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ra.Activity"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ra.ActionDate"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.CollectionSourceName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.LocationType"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.LocationName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.HeadtoOrientDistance_m"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.HeadtoOrientBearing"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="s.SiteName"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ra.ID"
         dbLong "AggregateType" ="-1"
     End
 End
