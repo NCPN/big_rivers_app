@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.11
+' Version:      1.12
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -21,6 +21,7 @@ Option Explicit
 '               BLC - 7/30/2016 - 1.09 - added ToggleSensitive()
 '               BLC - 8/8/2016  - 1.10 - updated UpsertRecord() for additional forms
 '               BLC - 9/1/2016  - 1.11 - added UploadSurveyFile(), updated UpsertRecord()
+'               BLC - 9/13/2016 - 1.12 - added FetchAddlData()
 ' =================================
 
 ' ---------------------------------
@@ -122,7 +123,7 @@ On Error GoTo Err_Handler
     Set frm = ctrlSource.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.Count
+    cols = rs.fields.Count
     
     'address no records
     If Nz(rows, 0) = 0 Then
@@ -188,7 +189,7 @@ On Error GoTo Err_Handler
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        strItem = strItem & rs.Fields(j).Value & ";"
+                        strItem = strItem & rs.fields(j).Value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
                         matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
@@ -321,7 +322,7 @@ On Error GoTo Err_Handler
     
     'assume only 1 record returned
     If rs.RecordCount > 0 Then
-        State = rs.Fields("ParkState").Value
+        State = rs.fields("ParkState").Value
     End If
    
     'return value
@@ -767,7 +768,7 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     
     If Not (rs.BOF And rs.EOF) Then
-        ID = rs.Fields("ID")
+        ID = rs.fields("ID")
     End If
     
     rs.Close
@@ -826,7 +827,7 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     
     If Not (rs.BOF And rs.EOF) Then
-        ID = rs.Fields("ID")
+        ID = rs.fields("ID")
     End If
     
     rs.Close
@@ -888,7 +889,7 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     
     If Not (rs.BOF And rs.EOF) Then
-        ID = rs.Fields("ID")
+        ID = rs.fields("ID")
     End If
     
     rs.Close
@@ -1078,7 +1079,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/26/2016 - initial version
 ' ---------------------------------
-Public Function GetRecords(template As String) As DAO.Recordset
+Public Function GetRecords(Template As String) As DAO.Recordset
 On Error GoTo Err_Handler
     
     Dim db As DAO.Database
@@ -1093,9 +1094,9 @@ On Error GoTo Err_Handler
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(template)
+            .SQL = GetTemplate(Template)
         
-            Select Case template
+            Select Case Template
                 
                 Case "s_datasheet_defaults_by_park"
                     
@@ -1259,7 +1260,7 @@ End Function
 ' Revisions:
 '   BLC - 7/26/2016 - initial version
 ' ---------------------------------
-Public Function SetRecord(template As String, params As Variant) As Long
+Public Function SetRecord(Template As String, Params As Variant) As Long
 On Error GoTo Err_Handler
     
     Dim db As DAO.Database
@@ -1268,7 +1269,7 @@ On Error GoTo Err_Handler
     Dim ID As Long
     
     'exit w/o values
-    If Not IsArray(params) Then GoTo Exit_Handler
+    If Not IsArray(Params) Then GoTo Exit_Handler
     
     'default
     SkipRecordAction = False
@@ -1284,7 +1285,7 @@ On Error GoTo Err_Handler
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(template)
+            .SQL = GetTemplate(Template)
             
             '-------------------
             ' set SQL parameters --> .Parameters("") = params()
@@ -1295,7 +1296,7 @@ On Error GoTo Err_Handler
             '   param(0) --> reserved for record action RefTable (ReferenceType)
             '   last param(x) --> used as record ID for updates
             '-------------------------------------------------------------------------
-            Select Case template
+            Select Case Template
             
         '-----------------------
         '  INSERTS
@@ -1303,10 +1304,10 @@ On Error GoTo Err_Handler
                 Case "i_comment"
                 
                     '-- required parameters --
-                    .Parameters("CommentType") = params(1) 'table
-                    .Parameters("TypeID") = params(2)
-                    .Parameters("Comment") = params(3)
-                    .Parameters("CommentorID") = params(4)
+                    .Parameters("CommentType") = Params(1) 'table
+                    .Parameters("TypeID") = Params(2)
+                    .Parameters("Comment") = Params(3)
+                    .Parameters("CommentorID") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1316,22 +1317,22 @@ On Error GoTo Err_Handler
                 Case "i_contact", "i_contact_new"
                     
                     '-- required parameters --
-                    .Parameters("First") = params(1)
-                    .Parameters("Last") = params(2)
-                    .Parameters("EmailAddress") = params(3)
-                    .Parameters("Login") = params(4)
-                    .Parameters("Org") = params(5)
-                    .Parameters("MI") = params(6)
-                    .Parameters("Position") = params(7)
-                    .Parameters("Phone") = params(8)
-                    .Parameters("Ext") = params(9)
-                    .Parameters("IsActiveFlag") = params(10)
+                    .Parameters("First") = Params(1)
+                    .Parameters("Last") = Params(2)
+                    .Parameters("EmailAddress") = Params(3)
+                    .Parameters("Login") = Params(4)
+                    .Parameters("Org") = Params(5)
+                    .Parameters("MI") = Params(6)
+                    .Parameters("Position") = Params(7)
+                    .Parameters("Phone") = Params(8)
+                    .Parameters("Ext") = Params(9)
+                    .Parameters("IsActiveFlag") = Params(10)
                     
                 Case "i_contact_access"
                     
                     '-- required parameters --
-                    .Parameters("ContactID") = params(1)
-                    .Parameters("AccessID") = params(2)
+                    .Parameters("ContactID") = Params(1)
+                    .Parameters("AccessID") = Params(2)
                 
                     'don't record the action or return ID
                     SkipRecordAction = True
@@ -1339,12 +1340,12 @@ On Error GoTo Err_Handler
                 Case "i_cover_species"
                                     
                     'set the table name in the template --> handles WCC, URC, ARC species
-                    .SQL = Replace(.SQL, "FROM tbl ", "FROM " & params(0) & " ")
+                    .SQL = Replace(.SQL, "FROM tbl ", "FROM " & Params(0) & " ")
                                     
                     '-- required parameters --
-                    .Parameters("VegPlot_ID") = params(1)
-                    .Parameters("Master_PLANT_Code") = params(2)
-                    .Parameters("PctCover") = params(3)
+                    .Parameters("VegPlot_ID") = Params(1)
+                    .Parameters("Master_PLANT_Code") = Params(2)
+                    .Parameters("PctCover") = Params(3)
                         
 '        params(0) = "WoodyCanopySpecies"
 '        params(1) = .VegPlotID
@@ -1359,27 +1360,27 @@ On Error GoTo Err_Handler
                 Case "i_event"
                                     
                     '-- required parameters --
-                    .Parameters("SID") = params(1)
-                    .Parameters("LID") = params(2)
-                    .Parameters("PID") = params(3)
-                    .Parameters("Start") = params(4)
+                    .Parameters("SID") = Params(1)
+                    .Parameters("LID") = Params(2)
+                    .Parameters("PID") = Params(3)
+                    .Parameters("Start") = Params(4)
                                         
                 Case "i_feature"
                 
                     '-- required parameters --
-                    .Parameters("LocationID") = params(1)
-                    .Parameters("LocationName") = params(2)
-                    .Parameters("Description") = params(3)
-                    .Parameters("Directions") = params(4)
+                    .Parameters("LocationID") = Params(1)
+                    .Parameters("LocationName") = Params(2)
+                    .Parameters("Description") = Params(3)
+                    .Parameters("Directions") = Params(4)
                     
                 Case "i_location"
                     
                     '-- required parameters --
-                    .Parameters("CollectionSourceName") = params(1)
-                    .Parameters("LocationType") = params(2)
-                    .Parameters("LocationName") = params(3)
-                    .Parameters("HeadtoOrientDistance") = params(4)
-                    .Parameters("HeadtoOrientBearing") = params(5)
+                    .Parameters("CollectionSourceName") = Params(1)
+                    .Parameters("LocationType") = Params(2)
+                    .Parameters("LocationName") = Params(3)
+                    .Parameters("HeadtoOrientDistance") = Params(4)
+                    .Parameters("HeadtoOrientBearing") = Params(5)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1389,34 +1390,34 @@ On Error GoTo Err_Handler
                 Case "i_login"
                 
                     '-- required parameters --
-                    .Parameters("username") = params(1)
-                    .Parameters("activity") = params(2)
+                    .Parameters("username") = Params(1)
+                    .Parameters("activity") = Params(2)
                 
                     SkipRecordAction = True
                     
                 Case "i_park"
         
                     '-- required parameters --
-                    .Parameters("ParkCode") = params(1)
-                    .Parameters("ParkName") = params(2)
-                    .Parameters("ParkState") = params(3)
-                    .Parameters("IsActiveForProtocol") = params(4)
+                    .Parameters("ParkCode") = Params(1)
+                    .Parameters("ParkName") = Params(2)
+                    .Parameters("ParkState") = Params(3)
+                    .Parameters("IsActiveForProtocol") = Params(4)
                                                         
                 Case "i_photo"
                 
                     '-- required parameters --
-                    .Parameters("PhotoDate") = params(1)
-                    .Parameters("PhotoType") = params(2)
-                    .Parameters("PhotographerID") = params(3)
-                    .Parameters("FileName") = params(4)
-                    .Parameters("NCPNImageID") = params(5)
-                    .Parameters("DirectionFacing") = params(6)
-                    .Parameters("PhotogLocation") = params(7)
-                    .Parameters("IsCloseup") = params(8)
-                    .Parameters("IsInActive") = params(9)
-                    .Parameters("IsSkipped") = params(10)
-                    .Parameters("IsReplacement") = params(11)
-                    .Parameters("LastPhotoUpdate") = params(12)
+                    .Parameters("PhotoDate") = Params(1)
+                    .Parameters("PhotoType") = Params(2)
+                    .Parameters("PhotographerID") = Params(3)
+                    .Parameters("FileName") = Params(4)
+                    .Parameters("NCPNImageID") = Params(5)
+                    .Parameters("DirectionFacing") = Params(6)
+                    .Parameters("PhotogLocation") = Params(7)
+                    .Parameters("IsCloseup") = Params(8)
+                    .Parameters("IsInActive") = Params(9)
+                    .Parameters("IsSkipped") = Params(10)
+                    .Parameters("IsReplacement") = Params(11)
+                    .Parameters("LastPhotoUpdate") = Params(12)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1426,46 +1427,46 @@ On Error GoTo Err_Handler
                 Case "i_record_action"
                                     
                     '-- required parameters --
-                    .Parameters("RefTable") = params(0)
-                    .Parameters("RefID") = params(1)
-                    .Parameters("ID") = params(2)
-                    .Parameters("Activity") = params(3)
-                    .Parameters("ActionDate") = params(4)
+                    .Parameters("RefTable") = Params(0)
+                    .Parameters("RefID") = Params(1)
+                    .Parameters("ID") = Params(2)
+                    .Parameters("Activity") = Params(3)
+                    .Parameters("ActionDate") = Params(4)
                     
                     SkipRecordAction = True
                 
                 Case "i_site"
                     
                     '-- required parameters --
-                    .Parameters("ParkID") = params(1)
-                    .Parameters("RiverID") = params(2)
-                    .Parameters("Code") = params(3)
-                    .Parameters("Name") = params(4)
-                    .Parameters("IsActiveForProtocol") = params(5)
+                    .Parameters("ParkID") = Params(1)
+                    .Parameters("RiverID") = Params(2)
+                    .Parameters("Code") = Params(3)
+                    .Parameters("Name") = Params(4)
+                    .Parameters("IsActiveForProtocol") = Params(5)
                     
                     '-- optional parameters --
-                    .Parameters("Directions") = params(6)
-                    .Parameters("Description") = params(7)
+                    .Parameters("Directions") = Params(6)
+                    .Parameters("Description") = Params(7)
                 
                 Case "i_tagline"
                 
                     '-- required parameters --
-                    .Parameters("LineDistSource") = params(1)
-                    .Parameters("LineDistSourceID") = params(2)
-                    .Parameters("LineDistType") = params(3)
-                    .Parameters("LineDistance") = params(4)
-                    .Parameters("HeightType") = params(5)
-                    .Parameters("Height") = params(6)
+                    .Parameters("LineDistSource") = Params(1)
+                    .Parameters("LineDistSourceID") = Params(2)
+                    .Parameters("LineDistType") = Params(3)
+                    .Parameters("LineDistance") = Params(4)
+                    .Parameters("HeightType") = Params(5)
+                    .Parameters("Height") = Params(6)
                 
                 Case "i_task"
                 
                     '-- required parameters --
-                    .Parameters("Task") = params(1)
-                    .Parameters("Status") = params(2)
-                    .Parameters("RequestedByID") = params(3)
-                    .Parameters("RequestDate") = params(4)
-                    .Parameters("CompletedByID") = params(5)
-                    .Parameters("CompleteDate") = params(6)
+                    .Parameters("Task") = Params(1)
+                    .Parameters("Status") = Params(2)
+                    .Parameters("RequestedByID") = Params(3)
+                    .Parameters("RequestDate") = Params(4)
+                    .Parameters("CompletedByID") = Params(5)
+                    .Parameters("CompleteDate") = Params(6)
                 
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1475,42 +1476,42 @@ On Error GoTo Err_Handler
                 Case "i_transducer"
                 
                     '-- required parameters --
-                    .Parameters("EventID") = params(1)
-                    .Parameters("TransducerType") = params(2)
-                    .Parameters("TransducerNumber") = params(3)
-                    .Parameters("SerialNumber") = params(4)
-                    .Parameters("IsSurveyed") = params(5)
-                    .Parameters("Timing") = params(6)
-                    .Parameters("ActionDate") = params(7)
-                    .Parameters("ActionTime") = params(8)
+                    .Parameters("EventID") = Params(1)
+                    .Parameters("TransducerType") = Params(2)
+                    .Parameters("TransducerNumber") = Params(3)
+                    .Parameters("SerialNumber") = Params(4)
+                    .Parameters("IsSurveyed") = Params(5)
+                    .Parameters("Timing") = Params(6)
+                    .Parameters("ActionDate") = Params(7)
+                    .Parameters("ActionTime") = Params(8)
                 
                 Case "i_understory_species"
 
                     '-- required parameters --
-                    .Parameters("VegPlotID") = params(1)
-                    .Parameters("MasterPlantCode") = params(2)
-                    .Parameters("PercentCover") = params(3)
-                    .Parameters("IsSeedling") = params(4)
+                    .Parameters("VegPlotID") = Params(1)
+                    .Parameters("MasterPlantCode") = Params(2)
+                    .Parameters("PercentCover") = Params(3)
+                    .Parameters("IsSeedling") = Params(4)
                      
                 Case "i_vegplot"
                 
                     '-- required parameters --
-                    .Parameters("EventID") = params(1)
-                    .Parameters("SiteID") = params(2)
-                    .Parameters("FeatureID") = params(3)
-                    .Parameters("VegTransectID") = params(4)
-                    .Parameters("PlotNumber") = params(5)
-                    .Parameters("PlotDistance") = params(6)
-                    .Parameters("ModalSedimentSize") = params(7)
-                    .Parameters("PercentFines") = params(8)
-                    .Parameters("PercentWater") = params(9)
-                    .Parameters("UnderstoryRootedPctCover") = params(10)
-                    .Parameters("PlotDensity") = params(11)
-                    .Parameters("NoCanopyVeg") = params(12)
-                    .Parameters("NoRootedVeg") = params(13)
-                    .Parameters("HasSocialTrail") = params(14)
-                    .Parameters("FilamentousAlgae") = params(15)
-                    .Parameters("NoIndicatorSpecies") = params(16)
+                    .Parameters("EventID") = Params(1)
+                    .Parameters("SiteID") = Params(2)
+                    .Parameters("FeatureID") = Params(3)
+                    .Parameters("VegTransectID") = Params(4)
+                    .Parameters("PlotNumber") = Params(5)
+                    .Parameters("PlotDistance") = Params(6)
+                    .Parameters("ModalSedimentSize") = Params(7)
+                    .Parameters("PercentFines") = Params(8)
+                    .Parameters("PercentWater") = Params(9)
+                    .Parameters("UnderstoryRootedPctCover") = Params(10)
+                    .Parameters("PlotDensity") = Params(11)
+                    .Parameters("NoCanopyVeg") = Params(12)
+                    .Parameters("NoRootedVeg") = Params(13)
+                    .Parameters("HasSocialTrail") = Params(14)
+                    .Parameters("FilamentousAlgae") = Params(15)
+                    .Parameters("NoIndicatorSpecies") = Params(16)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1520,18 +1521,18 @@ On Error GoTo Err_Handler
                 Case "i_vegtransect"
         
                     '-- required parameters --
-                    .Parameters("LocationID") = params(1)
-                    .Parameters("EventID") = params(2)
-                    .Parameters("TransectNumber") = params(3)
-                    .Parameters("SampleDate") = params(4)
+                    .Parameters("LocationID") = Params(1)
+                    .Parameters("EventID") = Params(2)
+                    .Parameters("TransectNumber") = Params(3)
+                    .Parameters("SampleDate") = Params(4)
         
                 Case "i_vegwalk"
                     
                     '-- required parameters --
-                    .Parameters("EventID") = params(1)
-                    .Parameters("CollectionPlaceID") = params(2)
-                    .Parameters("CollectionType") = params(3)
-                    .Parameters("StartDate") = params(4)
+                    .Parameters("EventID") = Params(1)
+                    .Parameters("CollectionPlaceID") = Params(2)
+                    .Parameters("CollectionType") = Params(3)
+                    .Parameters("StartDate") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1541,25 +1542,25 @@ On Error GoTo Err_Handler
                 Case "i_vegwalk_species"
                     
                     '-- required parameters --
-                    .Parameters("VegWalkID") = params(1)
-                    .Parameters("MasterPlantCode") = params(2)
-                    .Parameters("IsSeedling") = params(3)
+                    .Parameters("VegWalkID") = Params(1)
+                    .Parameters("MasterPlantCode") = Params(2)
+                    .Parameters("IsSeedling") = Params(3)
                     
                 Case "i_waterway"
                     
                     '-- required parameters --
-                    .Parameters("ParkID") = params(1)
-                    .Parameters("Name") = params(2)
-                    .Parameters("Segment") = params(3)
+                    .Parameters("ParkID") = Params(1)
+                    .Parameters("Name") = Params(2)
+                    .Parameters("Segment") = Params(3)
                     
                     
                 Case "i_usys_temp_photo"
                 
                     '-- required parameters --
-                    .Parameters("ppath") = params(1)
-                    .Parameters("pfile") = params(2)
-                    .Parameters("pdate") = params(3)
-                    .Parameters("ptype") = params(4)
+                    .Parameters("ppath") = Params(1)
+                    .Parameters("pfile") = Params(2)
+                    .Parameters("pdate") = Params(3)
+                    .Parameters("ptype") = Params(4)
                 
         '-----------------------
         '  UPDATES
@@ -1567,10 +1568,10 @@ On Error GoTo Err_Handler
                 Case "u_comment"
                 
                     '-- required parameters --
-                    .Parameters("CommentType") = params(1)
-                    .Parameters("TypeID") = params(2)
-                    .Parameters("Comment") = params(3)
-                    .Parameters("CommentorID") = params(4)
+                    .Parameters("CommentType") = Params(1)
+                    .Parameters("TypeID") = Params(2)
+                    .Parameters("Comment") = Params(3)
+                    .Parameters("CommentorID") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1580,62 +1581,62 @@ On Error GoTo Err_Handler
                 Case "u_contact"
                     
                     '-- required parameters --
-                    .Parameters("First") = params(1)
-                    .Parameters("Last") = params(2)
-                    .Parameters("EmailAddress") = params(3)
-                    .Parameters("Login") = params(4)
-                    .Parameters("Org") = params(5)
-                    .Parameters("MI") = params(6)
-                    .Parameters("Position") = params(7)
-                    .Parameters("Phone") = params(8)
-                    .Parameters("Ext") = params(9)
-                    .Parameters("IsActiveFlag") = params(10)
-                    .Parameters("ContactID") = params(11)
-                    ID = params(11)
+                    .Parameters("First") = Params(1)
+                    .Parameters("Last") = Params(2)
+                    .Parameters("EmailAddress") = Params(3)
+                    .Parameters("Login") = Params(4)
+                    .Parameters("Org") = Params(5)
+                    .Parameters("MI") = Params(6)
+                    .Parameters("Position") = Params(7)
+                    .Parameters("Phone") = Params(8)
+                    .Parameters("Ext") = Params(9)
+                    .Parameters("IsActiveFlag") = Params(10)
+                    .Parameters("ContactID") = Params(11)
+                    ID = Params(11)
                 
                 Case "u_contact_access"
                     
                     '-- required parameters --
-                    .Parameters("ContactID") = params(1)
-                    .Parameters("AccessID") = params(2)
-                    ID = params(1)
+                    .Parameters("ContactID") = Params(1)
+                    .Parameters("AccessID") = Params(2)
+                    ID = Params(1)
                 
                 Case "u_cover_species"
                                     
                     'set the table name in the template --> handles WCC, URC, ARC species
-                    .SQL = Replace(.SQL, " tbl ", " " & params(0) & " ")
+                    .SQL = Replace(.SQL, " tbl ", " " & Params(0) & " ")
                                     
                     '-- required parameters --
-                    .Parameters("VegPlot_ID") = params(1)
-                    .Parameters("Master_PLANT_Code") = params(2)
-                    .Parameters("PctCover") = params(3)
+                    .Parameters("VegPlot_ID") = Params(1)
+                    .Parameters("Master_PLANT_Code") = Params(2)
+                    .Parameters("PctCover") = Params(3)
                 
                 Case "u_event"
                                     
                     '-- required parameters --
-                    .Parameters("SID") = params(1)
-                    .Parameters("LID") = params(2)
-                    .Parameters("PID") = params(3)
-                    .Parameters("Start") = params(4)
-                    .Parameters("EID") = params(5)
-                    ID = params(5)
+                    .Parameters("SID") = Params(1)
+                    .Parameters("LID") = Params(2)
+                    .Parameters("PID") = Params(3)
+                    .Parameters("Start") = Params(4)
+                    .Parameters("EID") = Params(5)
+                    ID = Params(5)
                     
                 Case "u_feature"
                 
                     '-- required parameters --
-                    .Parameters("LocationID") = params(1)
-                    .Parameters("LocationName") = params(2)
-                    .Parameters("Description") = params(3)
-                    .Parameters("Directions") = params(4)
+                    .Parameters("LocationID") = Params(1)
+                    .Parameters("LocationName") = Params(2)
+                    .Parameters("Description") = Params(3)
+                    .Parameters("Directions") = Params(4)
                     
                 Case "u_location"
                     
                     '-- required parameters --
-                    .Parameters("CollectionSourceName") = params(1)
-                    .Parameters("LocationType") = params(2)
-                    .Parameters("LocationName") = params(3)
-                    .Parameters("HeadtoOrientDistance") = params(4)
-                    .Parameters("HeadtoOrientBearing") = params(5)
+                    .Parameters("CollectionSourceName") = Params(1)
+                    .Parameters("LocationType") = Params(2)
+                    .Parameters("LocationName") = Params(3)
+                    .Parameters("HeadtoOrientDistance") = Params(4)
+                    .Parameters("HeadtoOrientBearing") = Params(5)
                     
                     .Parameters("LastModified") = Now()
                     .Parameters("LastModifiedByID") = TempVars("ContactID")
@@ -1643,26 +1644,26 @@ On Error GoTo Err_Handler
                 Case "u_park"
         
                     '-- required parameters --
-                    .Parameters("ParkCode") = params(1)
-                    .Parameters("ParkName") = params(2)
-                    .Parameters("ParkState") = params(3)
-                    .Parameters("IsActiveForProtocol") = params(4)
+                    .Parameters("ParkCode") = Params(1)
+                    .Parameters("ParkName") = Params(2)
+                    .Parameters("ParkState") = Params(3)
+                    .Parameters("IsActiveForProtocol") = Params(4)
                         
                 Case "u_photo"
                 
                     '-- required parameters --
-                    .Parameters("PhotoDate") = params(1)
-                    .Parameters("PhotoType") = params(2)
-                    .Parameters("PhotographerID") = params(3)
-                    .Parameters("FileName") = params(4)
-                    .Parameters("NCPNImageID") = params(5)
-                    .Parameters("DirectionFacing") = params(6)
-                    .Parameters("PhotogLocation") = params(7)
-                    .Parameters("IsCloseup") = params(8)
-                    .Parameters("IsInActive") = params(9)
-                    .Parameters("IsSkipped") = params(10)
-                    .Parameters("IsReplacement") = params(11)
-                    .Parameters("LastPhotoUpdate") = params(12)
+                    .Parameters("PhotoDate") = Params(1)
+                    .Parameters("PhotoType") = Params(2)
+                    .Parameters("PhotographerID") = Params(3)
+                    .Parameters("FileName") = Params(4)
+                    .Parameters("NCPNImageID") = Params(5)
+                    .Parameters("DirectionFacing") = Params(6)
+                    .Parameters("PhotogLocation") = Params(7)
+                    .Parameters("IsCloseup") = Params(8)
+                    .Parameters("IsInActive") = Params(9)
+                    .Parameters("IsSkipped") = Params(10)
+                    .Parameters("IsReplacement") = Params(11)
+                    .Parameters("LastPhotoUpdate") = Params(12)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1672,35 +1673,35 @@ On Error GoTo Err_Handler
                 Case "u_site"
                     
                     '-- required parameters --
-                    .Parameters("ParkID") = params(1)
-                    .Parameters("RiverID") = params(2)
-                    .Parameters("Code") = params(3)
-                    .Parameters("Name") = params(4)
-                    .Parameters("IsActiveForProtocol") = params(5)
+                    .Parameters("ParkID") = Params(1)
+                    .Parameters("RiverID") = Params(2)
+                    .Parameters("Code") = Params(3)
+                    .Parameters("Name") = Params(4)
+                    .Parameters("IsActiveForProtocol") = Params(5)
                     
                     '-- optional parameters --
-                    .Parameters("Directions") = params(6)
-                    .Parameters("Description") = params(7)
+                    .Parameters("Directions") = Params(6)
+                    .Parameters("Description") = Params(7)
                 
                 Case "u_tagline"
                 
                     '-- required parameters --
-                    .Parameters("LineDistSource") = params(1)
-                    .Parameters("LineDistSourceID") = params(2)
-                    .Parameters("LineDistType") = params(3)
-                    .Parameters("LineDistance") = params(4)
-                    .Parameters("HeightType") = params(5)
-                    .Parameters("Height") = params(6)
+                    .Parameters("LineDistSource") = Params(1)
+                    .Parameters("LineDistSourceID") = Params(2)
+                    .Parameters("LineDistType") = Params(3)
+                    .Parameters("LineDistance") = Params(4)
+                    .Parameters("HeightType") = Params(5)
+                    .Parameters("Height") = Params(6)
                 
                 Case "u_task"
                 
                     '-- required parameters --
-                    .Parameters("Task") = params(1)
-                    .Parameters("Status") = params(2)
-                    .Parameters("RequestedByID") = params(3)
-                    .Parameters("RequestDate") = params(4)
-                    .Parameters("CompletedByID") = params(5)
-                    .Parameters("CompleteDate") = params(6)
+                    .Parameters("Task") = Params(1)
+                    .Parameters("Status") = Params(2)
+                    .Parameters("RequestedByID") = Params(3)
+                    .Parameters("RequestDate") = Params(4)
+                    .Parameters("CompletedByID") = Params(5)
+                    .Parameters("CompleteDate") = Params(6)
                 
                     .Parameters("LastModified") = Now()
                     .Parameters("LastModifiedByID") = TempVars("ContactID")
@@ -1708,48 +1709,48 @@ On Error GoTo Err_Handler
                 Case "u_transducer"
                 
                     '-- required parameters --
-                    .Parameters("EventID") = params(1)
-                    .Parameters("TransducerType") = params(2)
-                    .Parameters("TransducerNumber") = params(3)
-                    .Parameters("SerialNumber") = params(4)
-                    .Parameters("IsSurveyed") = params(5)
-                    .Parameters("Timing") = params(6)
-                    .Parameters("ActionDate") = params(7)
-                    .Parameters("ActionTime") = params(8)
+                    .Parameters("EventID") = Params(1)
+                    .Parameters("TransducerType") = Params(2)
+                    .Parameters("TransducerNumber") = Params(3)
+                    .Parameters("SerialNumber") = Params(4)
+                    .Parameters("IsSurveyed") = Params(5)
+                    .Parameters("Timing") = Params(6)
+                    .Parameters("ActionDate") = Params(7)
+                    .Parameters("ActionTime") = Params(8)
                 
                 Case "u_tsys_datasheet_defaults"
 
                     '-- required parameters --
-                    .Parameters("id") = params(1)
-                    .Parameters("pid") = params(2)
-                    .Parameters("rid") = params(3)
-                    .Parameters("cover") = params(4)
-                    .Parameters("species") = params(5)
-                    .Parameters("blanks") = params(6)
+                    .Parameters("id") = Params(1)
+                    .Parameters("pid") = Params(2)
+                    .Parameters("rid") = Params(3)
+                    .Parameters("cover") = Params(4)
+                    .Parameters("species") = Params(5)
+                    .Parameters("blanks") = Params(6)
                     
                     '-- optional parameters --
                 
                 Case "u_usys_temp_photo"
                 
                     '-- required parameters --
-                    .Parameters("iid") = params(1)
-                    .Parameters("ptype") = params(4)
+                    .Parameters("iid") = Params(1)
+                    .Parameters("ptype") = Params(4)
                 
                 Case "u_vegtransect"
         
                     '-- required parameters --
-                    .Parameters("LocationID") = params(1)
-                    .Parameters("EventID") = params(2)
-                    .Parameters("TransectNumber") = params(3)
-                    .Parameters("SampleDate") = params(4)
+                    .Parameters("LocationID") = Params(1)
+                    .Parameters("EventID") = Params(2)
+                    .Parameters("TransectNumber") = Params(3)
+                    .Parameters("SampleDate") = Params(4)
                 
                 Case "u_vegwalk"
                 
                     '-- required parameters --
-                    .Parameters("EventID") = params(1)
-                    .Parameters("CollectionPlaceID") = params(2)
-                    .Parameters("CollectionType") = params(3)
-                    .Parameters("StartDate") = params(4)
+                    .Parameters("EventID") = Params(1)
+                    .Parameters("CollectionPlaceID") = Params(2)
+                    .Parameters("CollectionType") = Params(3)
+                    .Parameters("StartDate") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
                     .Parameters("CreatedByID") = TempVars("ContactID")
@@ -1759,24 +1760,24 @@ On Error GoTo Err_Handler
                 Case "u_vegwalk_species"
                     
                     '-- required parameters --
-                    .Parameters("VegWalkID") = params(1)
-                    .Parameters("MasterPlantCode") = params(2)
-                    .Parameters("IsSeedling") = params(3)
+                    .Parameters("VegWalkID") = Params(1)
+                    .Parameters("MasterPlantCode") = Params(2)
+                    .Parameters("IsSeedling") = Params(3)
                     
                 Case "u_understory_species"
                 
                     '-- required parameters --
-                    .Parameters("VegPlotID") = params(1)
-                    .Parameters("MasterPlantCode") = params(2)
-                    .Parameters("PercentCover") = params(3)
-                    .Parameters("IsSeedling") = params(4)
+                    .Parameters("VegPlotID") = Params(1)
+                    .Parameters("MasterPlantCode") = Params(2)
+                    .Parameters("PercentCover") = Params(3)
+                    .Parameters("IsSeedling") = Params(4)
                 
                 Case "u_waterway"
                     
                     '-- required parameters --
-                    .Parameters("ParkID") = params(1)
-                    .Parameters("Name") = params(2)
-                    .Parameters("Segment") = params(3)
+                    .Parameters("ParkID") = Params(1)
+                    .Parameters("Name") = Params(2)
+                    .Parameters("Segment") = Params(3)
                 
             End Select
             
@@ -1797,7 +1798,7 @@ On Error GoTo Err_Handler
             .SQL = GetTemplate("i_record_action")
                                             
             '-- required parameters --
-            .Parameters("RefTable") = params(0)
+            .Parameters("RefTable") = Params(0)
             .Parameters("RefID") = ID
             .Parameters("ID") = TempVars("AppUserID") 'TempVars("ContactID")
             .Parameters("Activity") = "DE"
@@ -2370,3 +2371,94 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+
+' ---------------------------------
+' Function:          FetchAddlData
+' Description:  Retrieves additional data field(s)
+' Assumptions:
+'               fields are delimited w/ a pipe (|)
+' Parameters:   tbl - name of table to retrieve from (string)
+'               field(s) - name of field to retrieve (string)
+'               id - record to retrieve's ID (long)
+' Returns:      field value(s) for record (DAO.Recordset)
+' Throws:       none
+' References:
+'   Steven Thomas, November 28, 2011
+'   https://blogs.office.com/2011/11/28/display-real-time-information-with-the-controltip-property/
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/13/2016 - initial version
+' ---------------------------------
+Public Function FetchAddlData(tbl As String, fields As String, ID As Long) As DAO.Recordset
+On Error GoTo Err_Handler
+    
+    'values are required --> exit if not
+    If Len(tbl) = 0 Or Len(fields) = 0 Or Not (ID > 0) Then GoTo Exit_Handler
+    
+    'begin retrieval
+    Dim field As String
+    Dim strFields As String
+    Dim strSQL As String
+    Dim db As DAO.Database
+    Dim qdf As DAO.QueryDef
+    
+    Set db = CurrentDb
+    
+    With db
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+            
+            'check for multiple fields
+            If InStr(fields, "|") > 0 Then
+                Dim aryFlds() As String
+                Dim i As Integer
+                
+                aryFlds = Split(fields, "|")
+                
+                For i = 0 To UBound(aryFlds)
+                    strFields = aryFlds(i) & ","
+                Next
+                
+                'remove extra comma
+                strFields = IIf(Right(strFields, 1) = ",", RTrim(strFields), strFields)
+            
+            Else
+                
+                strFields = fields
+            End If
+            
+            'base
+            strSQL = "SELECT " & strFields & " FROM " & tbl & " WHERE ID = " & ID & ";"
+            
+            'update the query SQL
+            .SQL = strSQL
+            
+            Dim rs As DAO.Recordset
+
+            Set rs = .OpenRecordset
+                        
+            'send results
+            Set FetchAddlData = rs
+            
+            'cleanup
+            Set rs = Nothing
+            Set qdf = Nothing
+            Set db = Nothing
+
+        End With
+    End With
+    
+
+Exit_Handler:
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FetchAddlData[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function

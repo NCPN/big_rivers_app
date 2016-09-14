@@ -233,25 +233,25 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim template As String
+    Dim Template As String
     
-    template = "i_vegtransect"
+    Template = "i_vegtransect"
     
-    Dim params(0 To 6) As Variant
+    Dim Params(0 To 6) As Variant
 
     With Me
-        params(0) = "VegTransect"
-        params(1) = .LocationID
-        params(2) = .EventID
-        params(3) = .TransectNumber
-        params(4) = .SampleDate
+        Params(0) = "VegTransect"
+        Params(1) = .LocationID
+        Params(2) = .EventID
+        Params(3) = .TransectNumber
+        Params(4) = .SampleDate
         
         If IsUpdate Then
-            template = "u_vegtransect"
-            params(5) = .ID
+            Template = "u_vegtransect"
+            Params(5) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
     
     SetObserverRecorder Me, "VegTransect"

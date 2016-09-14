@@ -20,7 +20,7 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =38
-    Right =12300
+    Right =9240
     Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -779,8 +779,17 @@ End Sub
 Private Sub tbxFilename_Click()
 On Error GoTo Err_Handler
 
-    'open file
+    Dim strFileFullPath As String
+
+    'filepath
+    strFileFullPath = Me.tbxFilePath.Value & Me.tbxFileName.Value
     
+    'open file
+    If FileExists(strFileFullPath) Then
+    
+        OpenExcelFile strFileFullPath
+    
+    End If
     
 Exit_Handler:
     Exit Sub

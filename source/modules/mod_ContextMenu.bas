@@ -256,10 +256,10 @@ On Error GoTo Err_Handler
                     
                     Do Until rs.EOF
                         Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="park")
-                        mnuItem.Caption = rs.Fields("ParkCode") '"Set &Park"
+                        mnuItem.Caption = rs.fields("ParkCode") '"Set &Park"
                         
                         action = "mnuSetPark"
-                        mnuItem.Parameter = rs.Fields("ParkCode")
+                        mnuItem.Parameter = rs.fields("ParkCode")
                         mnuItem.OnAction = "mnuSetPark"
                         
                         rs.MoveNext
@@ -280,8 +280,8 @@ On Error GoTo Err_Handler
                         
                         Do Until rs.EOF
                             Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="river")
-                            mnuItem.Caption = rs.Fields("Segment")
-                            mnuItem.Parameter = rs.Fields("Segment")
+                            mnuItem.Caption = rs.fields("Segment")
+                            mnuItem.Parameter = rs.fields("Segment")
                             mnuItem.OnAction = "mnuSetRiver"
                             
                             rs.MoveNext
@@ -303,8 +303,8 @@ On Error GoTo Err_Handler
                         
                         Do Until rs.EOF
                             Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="site")
-                            mnuItem.Caption = rs.Fields("Site")
-                            mnuItem.Parameter = Left(Right(rs.Fields("Site"), 3), 2)
+                            mnuItem.Caption = rs.fields("Site")
+                            mnuItem.Parameter = Left(Right(rs.fields("Site"), 3), 2)
                             mnuItem.OnAction = "mnuSetSite"
                             
                             rs.MoveNext
@@ -327,8 +327,8 @@ On Error GoTo Err_Handler
                         
                         Do Until rs.EOF
                             Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="feature")
-                            mnuItem.Caption = rs.Fields("Feature")
-                            mnuItem.Parameter = rs.Fields("Feature")
+                            mnuItem.Caption = rs.fields("Feature")
+                            mnuItem.Parameter = rs.fields("Feature")
                             mnuItem.OnAction = "mnuSetFeature"
                             
                             rs.MoveNext

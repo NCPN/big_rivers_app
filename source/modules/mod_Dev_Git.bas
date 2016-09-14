@@ -440,14 +440,14 @@ On Error GoTo TableInfoErr
    ' Argument:  Name of a table in the current database.
    Dim db As DAO.Database
    Dim tdf As DAO.TableDef
-   Dim fld As DAO.Field
+   Dim fld As DAO.field
    
    Set db = CurrentDb()
    Set tdf = db.tabledefs(strTableName)
    Debug.Print "FIELD NAME", "FIELD TYPE", "SIZE", "DESCRIPTION"
    Debug.Print "==========", "==========", "====", "==========="
 
-   For Each fld In tdf.Fields
+   For Each fld In tdf.fields
       Debug.Print fld.Name,
       Debug.Print FieldTypeName(fld),
       Debug.Print fld.Size,
@@ -505,7 +505,7 @@ End Function
 '   BLC - 2/13/2015 - initial version
 '   BLC - 6/30/2015 - added error handling
 ' ---------------------------------
-Function FieldTypeName(fld As DAO.Field) As String
+Function FieldTypeName(fld As DAO.field) As String
 On Err GoTo Err_Handler
 
     Dim strReturn As String    'Name to return

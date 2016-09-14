@@ -202,25 +202,25 @@ On Error GoTo Err_Handler
 '    db.Execute strSQL, dbFailOnError
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    Dim template As String
+    Dim Template As String
     
-    template = "i_feature"
+    Template = "i_feature"
     
-    Dim params(0 To 6) As Variant
+    Dim Params(0 To 6) As Variant
     
     With Me
-        params(0) = "Feature"
-        params(1) = .LocationID
-        params(2) = .Name
-        params(3) = .Description
-        params(4) = .Directions
+        Params(0) = "Feature"
+        Params(1) = .LocationID
+        Params(2) = .Name
+        Params(3) = .Description
+        Params(4) = .Directions
         
         If IsUpdate Then
-            template = "u_feature"
-            params(5) = .ID
+            Template = "u_feature"
+            Params(5) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
 

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_File
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  File and directory related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -12,6 +12,7 @@ Option Explicit
 '               BLC, 6/13/2016 - 1.01 - adapted ParseFileName() for big rivers
 '               BLC, 6/24/2016 - 1.02 - replaced Exit_Function > Exit_Handler
 '               BLC, 8/30/2016 - 1.03 - add BrowseFolder(), GetSpecialFolderPath()
+'               BLC, 9/12/2016 - 1.04 - added IsAppInstalled()
 ' =================================
 
 ' ---------------------------------
@@ -692,6 +693,48 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ParsePath[mod_File])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' =================================
+' FUNCTION:     AppIsInstalled
+' Description:  Determine if an office application is installed
+' Assumptions:  app uses the appropriate application name
+'                  Outlook.Application      Excel.Application
+'                  Word.Application         Access.Application
+' Parameters:   app - application name (string)
+' Returns:      true - if application is installed (boolean)
+'               false - if application is not found (boolean)
+' Throws:       none
+' References:
+'   RobDog888, August 26, 2005
+'   http://www.vbforums.com/showthread.php?357311-How-to-check-if-word-excel-access-or-any-office-application-is-Installed
+' Source/date:  Bonnie Campbell, 9/12/2016 for NCPN tools
+' Revisions:    BLC, 9/12/2016 - initial version
+' =================================
+Public Function AppIsInstalled(ByVal app As String) As Boolean
+    On Error GoTo Exit_Handler
+
+    Dim blnInstalled As Boolean
+    Dim oApp As Object
+
+    blnInstalled = False
+            
+    Set oApp = CreateObject(app)
+            
+    blnInstalled = True
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    MsgBox "Office Application not installed!", vbExclamation, "Office App Installation Info"
+    
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - AppIsInstalled[mod_File])"
     End Select
     Resume Exit_Handler
 End Function

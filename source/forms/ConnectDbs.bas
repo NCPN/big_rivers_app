@@ -1484,21 +1484,21 @@ Private Sub btnUpdateLinks_Click()
 
 ' --- multiple back-end files loop ---
     Do Until rs.EOF
-        strDbName = rs.Fields("LinkDb")
-        strDbType = rs.Fields("LinkType")
+        strDbName = rs.fields("LinkDb")
+        strDbType = rs.fields("LinkType")
 
     '---------------------
     ' ODBC Connected Back-ends
     '---------------------
-        If rs.Fields("IsODBC") = True Then
+        If rs.fields("IsODBC") = True Then
             
             ' Server or db name are blank? --> Move to next back-end
-            If IsNull(rs.Fields("NewServer")) Or IsNull(rs.Fields("NewDb")) Then _
+            If IsNull(rs.fields("NewServer")) Or IsNull(rs.fields("NewDb")) Then _
                 GoTo NextBackEnd
             
-            strNewDb = rs.Fields("New_db")
-            strServer = rs.Fields("Server")
-            strNewServer = rs.Fields("New_server")
+            strNewDb = rs.fields("New_db")
+            strServer = rs.fields("Server")
+            strNewServer = rs.fields("New_server")
             
             ' Check for associated tables (must be @ least 1 for this back-end)
             If DCount("*", "tsys_Link_Tables", "[LinkDb]=""" & strDbName & """") = 0 Then
@@ -1535,12 +1535,12 @@ Private Sub btnUpdateLinks_Click()
 
             ' Same database? --> refresh links to current linked file
             ' -----------------------------
-            If IsNull(rs.Fields("NewPath")) Then
-                strNewPath = rs.Fields("FilePath")
-                strNewDb = rs.Fields("LinkDb")
+            If IsNull(rs.fields("NewPath")) Then
+                strNewPath = rs.fields("FilePath")
+                strNewDb = rs.fields("LinkDb")
             Else
-                strNewPath = rs.Fields("NewPath")
-                strNewDb = rs.Fields("NewDb")
+                strNewPath = rs.fields("NewPath")
+                strNewDb = rs.fields("NewDb")
             End If
             strNewConnStr = ";DATABASE=" & strNewPath
 
@@ -1562,7 +1562,7 @@ Private Sub btnUpdateLinks_Click()
         End If
 
         ' Move to next back end without updating the record if no new info was entered
-        If IsNull(rs.Fields("NewDb")) Then GoTo NextBackEnd
+        If IsNull(rs.fields("NewDb")) Then GoTo NextBackEnd
 '-------------------------
         'No Linking Errors on this back end & new file path --> update current path and file
 '--- ADD? ----------------
@@ -1571,9 +1571,9 @@ Private Sub btnUpdateLinks_Click()
 
         With rs
             .Edit
-            !LinkDb = rs.Fields("NewDb").Value
-            !FilePath = rs.Fields("NewPath").Value
-            !Server = rs.Fields("NewServer").Value
+            !LinkDb = rs.fields("NewDb").Value
+            !FilePath = rs.fields("NewPath").Value
+            !Server = rs.fields("NewServer").Value
             !NewDb = Null
             !NewPath = Null
             !NewServer = Null

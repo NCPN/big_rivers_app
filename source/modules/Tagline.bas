@@ -233,27 +233,27 @@ On Error GoTo Err_Handler
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
 '----
-    Dim template As String
+    Dim Template As String
     
-    template = "i_tagline"
+    Template = "i_tagline"
     
-    Dim params(0 To 8) As Variant
+    Dim Params(0 To 8) As Variant
 
     With Me
-        params(0) = "Tagline"
-        params(1) = .LineDistSource
-        params(2) = .LineDistSourceID
-        params(3) = .LineDistType
-        params(4) = .LineDistance
-        params(5) = .HeightType
-        params(6) = .Height
+        Params(0) = "Tagline"
+        Params(1) = .LineDistSource
+        Params(2) = .LineDistSourceID
+        Params(3) = .LineDistType
+        Params(4) = .LineDistance
+        Params(5) = .HeightType
+        Params(6) = .Height
         
         If IsUpdate Then
-            template = "u_tagline"
-            params(7) = .ID
+            Template = "u_tagline"
+            Params(7) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
     
 '    'add a record for created by

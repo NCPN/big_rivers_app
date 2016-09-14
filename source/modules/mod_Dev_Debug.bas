@@ -1178,13 +1178,13 @@ Public Sub ExecuteIt()
 'p.Node = 1
 '
 Dim frm As Form
-Dim params(0 To 1) As Variant
+Dim Params(0 To 1) As Variant
 
 'params(0) = "s_photo_data"
-params(0) = "s_tsys_temp_photo_data"
+Params(0) = "s_tsys_temp_photo_data"
 
 Set frm = Forms("Tree")
 'LoadTree frm, frm.Controls("tvwTree").Object, "s_photo_data", params
-LoadTree frm, frm.Controls("tvwTree").Object, "s_usys_temp_photo_data", params
+LoadTree frm, frm.Controls("tvwTree").Object, "s_usys_temp_photo_data", Params
 
 End Sub

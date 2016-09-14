@@ -1,10 +1,5 @@
-﻿dbMemo "SQL" ="PARAMETERS pkcode Text ( 4 ), scode Text ( 2 );\015\012SELECT l.CollectionSource"
-    "Name, l.LocationType, l.LocationName, l.HeadtoOrientDistance_m, l.HeadtoOrientBe"
-    "aring, l.LocationNotes, s.SiteName, r.River, r.Segment\015\012FROM ((Location AS"
-    " l LEFT JOIN Site AS s ON s.Location_ID = l.ID) LEFT JOIN River AS r ON r.ID = s"
-    ".River_ID) LEFT JOIN Park AS pk ON pk.ID = s.Park_ID\015\012WHERE pk.ParkCode = "
-    "[pkcode]\015\012AND\015\012s.SiteCode = [scode]\015\012ORDER BY l.LocationName;\015"
-    "\012"
+﻿dbMemo "SQL" ="PARAMETERS tbl Text ( 255 ), flds Text ( 255 ), ident Long;\015\012SELECT [flds]"
+    "\015\012FROM tbl\015\012WHERE ID = [ident];\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -20,50 +15,7 @@ dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="p.PhotogLocation"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.SubjectLocation"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="c.Email"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.PhotogFacing"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="s.SiteCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="SiteID"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x1de503425a769f45907d1cd82e31e461
-        End
-    End
-    Begin
-        dbText "Name" ="s.Park_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.River_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="pk.ParkCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="r.River"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.IsSkipped"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -71,64 +23,7 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="EventID"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xbb20bf1dbfc02a48bed2326b772b32c9
-        End
-    End
-    Begin
-        dbText "Name" ="c.FirstName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="c.LastName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="PhotogName"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xf741c30a65c5ec469d1598fb70fa921d
-        End
-    End
-    Begin
-        dbText "Name" ="p.PhotogOrientation"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.IsCloseup"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.IsReplacement"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="r.Segment"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="PhotoID"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xcdab31023e6a87419f190fd7dc7df3f7
-        End
-    End
-    Begin
-        dbText "Name" ="p.PhotoType"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.PhotoDate"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="p.Photographer_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="f.ID"
+        dbText "Name" ="p.ParkCode"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -136,59 +31,59 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="loc.LocationName"
+        dbText "Name" ="vp.FilamentousAlgae"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="f.Location_ID"
+        dbText "Name" ="vp.PlotNumber"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.LocationNotes"
+        dbText "Name" ="vp.PlotDistance_m"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="ra.Contact_ID"
+        dbText "Name" ="vp.ModalSedimentSize"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="ContactName"
+        dbText "Name" ="vp.PercentFine"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="ra.Activity"
+        dbText "Name" ="vp.PlotDensity"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="ra.ActionDate"
+        dbText "Name" ="vp.NoCanopyVeg"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.CollectionSourceName"
+        dbText "Name" ="vp.NoRootedVeg"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.LocationType"
+        dbText "Name" ="vp.HasSocialTrail"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.LocationName"
+        dbText "Name" ="vp.NoIndicatorSpecies"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.HeadtoOrientDistance_m"
+        dbText "Name" ="vt.TransectNumber"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="l.HeadtoOrientBearing"
+        dbText "Name" ="vt.SampleDate"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="s.SiteName"
+        dbText "Name" ="vp.PercentWater"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="ra.ID"
+        dbText "Name" ="vp.UnderstoryRootedPctCover"
         dbLong "AggregateType" ="-1"
     End
 End

@@ -297,50 +297,50 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim template As String
+    Dim Template As String
     
-    template = "i_contact" '"i_contact_new"
+    Template = "i_contact" '"i_contact_new"
     
-    Dim params() As Variant
+    Dim Params() As Variant
     
     'dimension for contact
-    ReDim params(0 To 12) As Variant
+    ReDim Params(0 To 12) As Variant
 
     With Me
-        params(0) = "Contact"
-        params(1) = .FirstName
-        params(2) = .LastName
-        params(3) = .Email
-        params(4) = .Username
-        params(5) = .Organization
+        Params(0) = "Contact"
+        Params(1) = .FirstName
+        Params(2) = .LastName
+        Params(3) = .Email
+        Params(4) = .Username
+        Params(5) = .Organization
         
-        params(6) = IIf(Len(.MiddleInitial) > 0, .MiddleInitial, Null)
-        params(7) = IIf(Len(.PosTitle) > 0, .PosTitle, Null)
-        params(8) = IIf(.WorkPhone = 0, Null, .WorkPhone)
-        params(9) = IIf(.WorkExtension = 0, Null, .WorkExtension)
-        params(10) = IIf(.IsActive > 0, .IsActive, 0) 'Null)
+        Params(6) = IIf(Len(.MiddleInitial) > 0, .MiddleInitial, Null)
+        Params(7) = IIf(Len(.PosTitle) > 0, .PosTitle, Null)
+        Params(8) = IIf(.WorkPhone = 0, Null, .WorkPhone)
+        Params(9) = IIf(.WorkExtension = 0, Null, .WorkExtension)
+        Params(10) = IIf(.IsActive > 0, .IsActive, 0) 'Null)
         
         If IsUpdate Then
-            template = "u_contact"
-            params(11) = .ID
+            Template = "u_contact"
+            Params(11) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
     'set the person's role (update if contact template was update)
-    template = IIf(Left(template, 1) = "u", "u_contact_access", "i_contact_access")
+    Template = IIf(Left(Template, 1) = "u", "u_contact_access", "i_contact_access")
     
     'dimension for role
-    ReDim params(0 To 3) As Variant
+    ReDim Params(0 To 3) As Variant
 
     With Me
-        params(0) = "Contact_Access"
-        params(1) = .ID
-        params(2) = .AccessLevel
+        Params(0) = "Contact_Access"
+        Params(1) = .ID
+        Params(2) = .AccessLevel
         
         'ID not generated here
-        SetRecord template, params
+        SetRecord Template, Params
     End With
     
 

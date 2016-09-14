@@ -819,7 +819,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLevel0_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -851,7 +851,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLevel1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -883,7 +883,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLevel2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -915,7 +915,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLevel3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then
@@ -949,7 +949,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/20/2016 - initial version
 ' ---------------------------------
-Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
 
     If Button = acRightButton Then

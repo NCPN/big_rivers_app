@@ -108,7 +108,7 @@ On Error GoTo Err_Handler
     Set frm = ctrl.Parent
     
     rows = rs.RecordCount
-    cols = rs.Fields.Count
+    cols = rs.fields.Count
     
     If Nz(rows, 0) = 0 Then
         MsgBox "Sorry, no records found..."
@@ -123,7 +123,7 @@ On Error GoTo Err_Handler
         strColHeads = ""
         For i = 0 To cols - 1
             If CInt(aryColWidths(i)) > 0 Then
-                strColHeads = strColHeads & rs.Fields(i).Name & ";"
+                strColHeads = strColHeads & rs.fields(i).Name & ";"
             End If
         Next i
         ctrl.AddItem strColHeads
@@ -559,7 +559,7 @@ Dim blnTableExists As Boolean
             For iRow = 0 To UBound(aryFieldNames)
                 With tdf
                     'add table fields
-                    .Fields.Append .CreateField(aryFieldNames(iRow), aryFieldTypes(iRow)) 'GetFieldTypeName(CInt(aryFieldTypes(iRow))))
+                    .fields.Append .CreateField(aryFieldNames(iRow), aryFieldTypes(iRow)) 'GetFieldTypeName(CInt(aryFieldTypes(iRow))))
                 
                     'create table & fetch recordset
                     If iRow = UBound(aryFieldNames) Then '- 1 Then
@@ -682,7 +682,7 @@ Dim blnTableExists As Boolean
             For iRow = 0 To UBound(aryFieldNames)
                 With tdf
                     'add table fields
-                    .Fields.Append .CreateField(aryFieldNames(iRow), aryFieldTypes(iRow))
+                    .fields.Append .CreateField(aryFieldNames(iRow), aryFieldTypes(iRow))
                 
                     'create table & fetch recordset
                     If iRow = UBound(aryFieldNames) - 1 Then
@@ -960,7 +960,7 @@ Public Sub MoveSelectedItems(frm As Form, strSourceControl As String, strTargetC
     
 On Error GoTo Err_Handler
     
-    Dim iRow As Integer, StartRow As Integer, i As Integer, x As Integer, iRemovedItems As Integer
+    Dim iRow As Integer, StartRow As Integer, i As Integer, X As Integer, iRemovedItems As Integer
     Dim arySelectedItems() As Integer
     Dim blnDimensioned As Boolean
     Dim strItem As String
@@ -1024,9 +1024,9 @@ On Error GoTo Err_Handler
     iRemovedItems = 0
     
     'iterate through selected items
-    For x = LBound(arySelectedItems) To UBound(arySelectedItems)
+    For X = LBound(arySelectedItems) To UBound(arySelectedItems)
                         
-        iRow = arySelectedItems(x) - iRemovedItems
+        iRow = arySelectedItems(X) - iRemovedItems
             
         'clear string
         strItem = ""
@@ -1047,7 +1047,7 @@ On Error GoTo Err_Handler
             iRemovedItems = iRemovedItems + 1
         End If
     
-    Next x
+    Next X
 
 Exit_Handler:
     Exit Sub

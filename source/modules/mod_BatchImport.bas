@@ -43,7 +43,7 @@ Public Sub BatchImportImagesToDb(DirPath As String)
 On Error GoTo Err_Handler
     
     Dim FileName As String
-    Dim x As String
+    Dim X As String
     
     FileName = dir(DirPath)
 

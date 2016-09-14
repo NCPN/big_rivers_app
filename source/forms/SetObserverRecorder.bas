@@ -22,7 +22,7 @@ Begin Form
     ItemSuffix =37
     Left =3090
     Top =3495
-    Right =15645
+    Right =12330
     Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -480,7 +480,7 @@ Begin Form
                     TabIndex =3
                     BorderColor =10921638
                     Name ="list"
-                    SourceObject ="Form.EventsList"
+                    SourceObject ="Form.SetObserverRecorderList"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105

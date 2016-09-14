@@ -74,8 +74,8 @@ Public Function VerifyConnections()
     Set rs = db.OpenRecordset(strSysTable, dbOpenTable, dbReadOnly)
 
     Do Until rs.EOF
-        strDbName = rs.Fields("LinkDb")
-        If rs.Fields("IsODBC") = True Then
+        strDbName = rs.fields("LinkDb")
+        If rs.fields("IsODBC") = True Then
             ' ODBC connection
             If Not IsNull(rs![Server]) Then
                 strServer = rs![Server]
@@ -461,7 +461,7 @@ Public Function CheckLink(strTableName As String) As Boolean
     On Error Resume Next
     ' Check for failure.  If can't determine the name of
     ' the first field in the table, the link must be bad.
-    varRet = CurrentDb.tabledefs(strTableName).Fields(0).Name
+    varRet = CurrentDb.tabledefs(strTableName).fields(0).Name
     If Err <> 0 Then
         CheckLink = False
     Else
@@ -688,7 +688,7 @@ Public Function RefreshLinks(strDbName As String, ByVal strNewConnStr As String,
             frm.Repaint
             strTable = rs![LinkTable]
             Debug.Print strTable
-            varReturn = dbGet.tabledefs(strTable).Fields(0).Name
+            varReturn = dbGet.tabledefs(strTable).fields(0).Name
             rs.MoveNext
         Loop
 

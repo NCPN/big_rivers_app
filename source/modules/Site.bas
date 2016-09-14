@@ -364,29 +364,29 @@ On Error GoTo Err_Handler
 '    End With
 
 
-    Dim template As String
+    Dim Template As String
     
-    template = "i_site"
+    Template = "i_site"
     
-    Dim params(0 To 9) As Variant
+    Dim Params(0 To 9) As Variant
     
     With Me
-        params(0) = "Site"
-        params(1) = .ParkID
-        params(2) = .RiverID
-        params(3) = .Code
-        params(4) = .Name
-        params(5) = .IsActiveForProtocol
+        Params(0) = "Site"
+        Params(1) = .ParkID
+        Params(2) = .RiverID
+        Params(3) = .Code
+        Params(4) = .Name
+        Params(5) = .IsActiveForProtocol
         
-        params(6) = .Directions
-        params(7) = .Description
+        Params(6) = .Directions
+        Params(7) = .Description
         
         If IsUpdate Then
-            template = "u_site"
-            params(8) = .ID
+            Template = "u_site"
+            Params(8) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
 

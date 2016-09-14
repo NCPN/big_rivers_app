@@ -1549,7 +1549,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink1
@@ -1584,7 +1584,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink2
@@ -1619,7 +1619,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink3
@@ -1654,7 +1654,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink4
@@ -1689,7 +1689,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink5
@@ -1724,7 +1724,7 @@ End Sub
 '   BLC - 5/27/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink6
@@ -1759,7 +1759,7 @@ End Sub
 '   BLC - 7/1/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink7_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink7_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink7
@@ -1794,7 +1794,7 @@ End Sub
 '   BLC - 7/1/2016 - initial version
 '   BLC - 7/12/2016 - adjust to only change if tag is not "DISABLED"
 ' ---------------------------------
-Private Sub lblLink8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lblLink8_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.lblLink8
@@ -1832,7 +1832,7 @@ End Sub
 '   BLC - 9/7/2016  - revised .ForeColor to LINK_NORMAL_TEXT vs lngGray50
 '                     (lngGray50 is current value for LINK_NORMAL_TEXT)
 ' ---------------------------------
-Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     Dim ctrl As Control

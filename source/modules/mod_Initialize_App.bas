@@ -290,14 +290,14 @@ Public Function AppSetup()
 '        strSQL = "INSERT INTO tsys_Logins ( UserName, ActionTaken ) SELECT '" _
 '            & strUser & "' AS User, """ & strRelease & """ AS Action;"
 '        strSQL = GetTemplate("i_tsys_logins", "username" & PARAM_SEPARATOR & strUser & "|action" & PARAM_SEPARATOR & strRelease)
-        Dim params(0 To 3) As Variant
-        params(0) = "i_login"
-        params(1) = strUser
-        params(2) = "Application login"
-        params(3) = strRelease
+        Dim Params(0 To 3) As Variant
+        Params(0) = "i_login"
+        Params(1) = strUser
+        Params(2) = "Application login"
+        Params(3) = strRelease
         
 '        strSQL = GetTemplate("i_login") 'GetTemplate("i_login", params)
-        SetRecord "i_login", params
+        SetRecord "i_login", Params
 '        DoCmd.SetWarnings False
 '        DoCmd.RunSQL strSQL     ' Will throw a trapped error if no write permissions
 '        DoCmd.SetWarnings True

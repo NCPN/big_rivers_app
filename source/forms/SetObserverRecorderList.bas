@@ -20,10 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =2145
-    Top =1950
-    Right =9525
-    Bottom =6315
+    Right =9240
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7ce3e0e10ec7e440
@@ -157,7 +155,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =223
+                    OverlapFlags =215
                     Left =180
                     Top =120
                     Width =7260
@@ -176,20 +174,20 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =93
-                    Left =3240
+                    OverlapFlags =85
+                    Left =4680
                     Top =1020
-                    Width =780
+                    Width =1155
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblSpeciesRows"
-                    Caption ="Species"
+                    Name ="lblActionDate"
+                    Caption ="Action Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3240
+                    LayoutCachedLeft =4680
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =4020
+                    LayoutCachedWidth =5835
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -214,113 +212,40 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =223
-                    Left =2400
-                    Top =780
+                    OverlapFlags =85
+                    Left =3660
+                    Top =1020
                     Width =750
-                    Height =555
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblCoverType"
-                    Caption ="Cover Type"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2400
-                    LayoutCachedTop =780
-                    LayoutCachedWidth =3150
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =93
-                    Left =4140
-                    Top =1020
-                    Width =825
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="Label30"
-                    Caption ="Blanks"
+                    Name ="lblActivity"
+                    Caption ="Activity"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4140
+                    LayoutCachedLeft =3660
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =4965
+                    LayoutCachedWidth =4410
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =223
-                    TextAlign =2
-                    Left =2760
-                    Top =720
-                    Width =3000
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblRows"
-                    Caption ="# of Rows"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2760
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =1035
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =215
-                    TextAlign =2
-                    Left =4920
-                    Top =1020
-                    Width =825
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblTotal"
-                    Caption ="Total"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4920
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =5745
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Line
-                    LineSlant = NotDefault
-                    OverlapFlags =87
-                    Left =3225
-                    Top =990
-                    Width =2520
-                    BorderColor =16777215
-                    Name ="lnRows"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =3225
-                    LayoutCachedTop =990
-                    LayoutCachedWidth =5745
-                    LayoutCachedHeight =990
-                    BorderThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =85
+                    TextAlign =2
                     Left =1320
                     Top =1020
-                    Width =555
+                    Width =2220
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblRiver"
-                    Caption ="River"
+                    Name ="lblPerson"
+                    Caption ="Personnel"
                     GridlineColor =10921638
                     LayoutCachedLeft =1320
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =1875
+                    LayoutCachedWidth =3540
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -461,7 +386,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2400
+                    Left =3660
                     Top =45
                     Width =735
                     Height =300
@@ -469,12 +394,12 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxCoverType"
-                    ControlSource ="CoverType"
+                    ControlSource ="Activity"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2400
+                    LayoutCachedLeft =3660
                     LayoutCachedTop =45
-                    LayoutCachedWidth =3135
+                    LayoutCachedWidth =4395
                     LayoutCachedHeight =345
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -510,73 +435,21 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =3285
-                    Top =45
-                    Width =720
+                    Left =4620
+                    Top =60
+                    Width =1140
                     Height =300
                     TabIndex =5
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxSpecies"
-                    ControlSource ="SpeciesRows"
+                    ControlSource ="ActionDate"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3285
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =4005
-                    LayoutCachedHeight =345
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4140
-                    Top =45
-                    Width =720
-                    Height =300
-                    TabIndex =6
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxBlanks"
-                    ControlSource ="BlankRows"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4140
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =4860
-                    LayoutCachedHeight =345
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4980
-                    Top =45
-                    Width =720
-                    Height =300
-                    TabIndex =7
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxTotal"
-                    ControlSource ="=[SpeciesRows]+[BlankRows]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4980
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =5700
-                    LayoutCachedHeight =345
+                    LayoutCachedLeft =4620
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =5760
+                    LayoutCachedHeight =360
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -590,18 +463,18 @@ Begin Form
                     IMESentenceMode =3
                     Left =1260
                     Top =60
-                    Width =1080
+                    Width =2280
                     Height =300
-                    TabIndex =8
+                    TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRiver"
-                    ControlSource ="Segment"
+                    ControlSource ="ContactName"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1260
                     LayoutCachedTop =60
-                    LayoutCachedWidth =2340
+                    LayoutCachedWidth =3540
                     LayoutCachedHeight =360
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -627,7 +500,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         DatasheetList
+' Form:         SetObserverRecorderList
 ' Level:        Application form
 ' Version:      1.00
 ' Basis:        Dropdown form
@@ -730,36 +603,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 7/1/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[DatasheetList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -792,8 +635,7 @@ On Error GoTo Err_Handler
     'hide delete!
     btnDelete.visible = False
 
-    Me.RecordSource = GetTemplate("s_tsys_datasheet_defaults", _
-                        "ParkID" & PARAM_SEPARATOR & TempVars("ParkID"))
+    Me.RecordSource = GetTemplate("s_record_action_by_refID")
 
 Exit_Handler:
     Exit Sub
@@ -801,7 +643,37 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[DatasheetList form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[SetObserverRecorderList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/1/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[SetObserverRecorderList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -828,7 +700,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[DatasheetList form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[SetObserverRecorderList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -851,9 +723,9 @@ On Error GoTo Err_Handler
     
     'update values
     With Me.Parent
-        .Controls("lblRiverSegment").Caption = tbxRiver.Value
-        .Controls("cbxCoverType").Value = tbxCoverType.Value
-        .Controls("tbxTotalrows").Value = CInt(Nz(tbxSpecies.Value, 0)) + CInt(Nz(tbxBlanks.Value, 0))
+'        .Controls("lblRiverSegment").Caption = tbxRiver.Value
+'        .Controls("cbxCoverType").Value = tbxCoverType.Value
+'        .Controls("tbxTotalrows").Value = CInt(Nz(tbxSpecies.Value, 0)) + CInt(Nz(tbxBlanks.Value, 0))
     End With
     
     'populate the parent form
@@ -865,7 +737,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[DatasheetList form])"
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[SetObserverRecorderList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -903,7 +775,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[DatasheetList form])"
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[SetObserverRecorderList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -931,7 +803,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[DatasheetList form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[SetObserverRecorderList form])"
     End Select
     Resume Exit_Handler
 End Sub

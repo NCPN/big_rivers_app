@@ -85,13 +85,13 @@ On Error GoTo Err_Handler
                 If InStr(1, iFile, aryExtensions(i), vbTextCompare) > 1 Then
                         
                     'prepare for insert
-                    Dim params(0 To 4) As Variant
+                    Dim Params(0 To 4) As Variant
                     
-                    params(0) = "i_usys_temp_photo"
-                    params(1) = strPath
-                    params(2) = iFile.Name 'filename
-                    params(3) = iFile.DateCreated 'file date
-                    params(4) = "U"
+                    Params(0) = "i_usys_temp_photo"
+                    Params(1) = strPath
+                    Params(2) = iFile.Name 'filename
+                    Params(3) = iFile.DateCreated 'file date
+                    Params(4) = "U"
 'Debug.Print "-----------"
 'Debug.Print iFile.Name
 'Debug.Print iFile.DateCreated
@@ -100,7 +100,7 @@ On Error GoTo Err_Handler
 'Debug.Print iFile.Type
 
                     'insert photos
-                    SetRecord "i_usys_temp_photo", params
+                    SetRecord "i_usys_temp_photo", Params
                         
                     'update system progress bar
                     iProg = iProg + 1

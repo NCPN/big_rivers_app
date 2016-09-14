@@ -46,11 +46,11 @@ Option Explicit
 '   BLC - 7/10/2015 - initial version
 '   BLC - 8/31/2016 - load from query or table
 ' ---------------------------------
-Public Sub LoadTree(frm As Form, tvw As Treeview, template As String, params As Variant)
+Public Sub LoadTree(frm As Form, tvw As Treeview, Template As String, Params As Variant)
 On Error GoTo Err_Handler
     
     'exit w/o values
-    If Not IsArray(params) Then GoTo Exit_Handler
+    If Not IsArray(Params) Then GoTo Exit_Handler
     
     'variables
     Dim db As DAO.Database
@@ -70,7 +70,7 @@ On Error GoTo Err_Handler
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(template)
+            .SQL = GetTemplate(Template)
             
             '-------------------
             ' set SQL parameters --> .Parameters("") = params()
@@ -81,7 +81,7 @@ On Error GoTo Err_Handler
             '   param(0) --> reserved for record action RefTable (ReferenceType)
             '   last param(x) --> used as record ID for updates
             '-------------------------------------------------------------------------
-            Select Case template
+            Select Case Template
             
         '-----------------------
         '  SELECT
@@ -201,7 +201,7 @@ On Error GoTo Err_Handler
                                 nodeX.Tag = "M|C|" & strKey & "|" & strDisplayName & "|" & strPhotoType 'oTree.SelectedItem.key 'strDisplayName
                                 
                                 'adjust node font weight/color for incomplete data
-                                If template = "s_usys_temp_photo_data" Then
+                                If Template = "s_usys_temp_photo_data" Then
                                     nodeX.ForeColor = lngRed
                                     nodeX.Bold = True
                                 End If

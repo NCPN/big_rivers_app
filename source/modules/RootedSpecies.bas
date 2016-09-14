@@ -466,24 +466,24 @@ On Error GoTo Err_Handler
 '    db.Execute strSQL, dbFailOnError
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    Dim template As String
+    Dim Template As String
     
-    template = "i_cover_species"
+    Template = "i_cover_species"
     
-    Dim params(0 To 4) As Variant
+    Dim Params(0 To 4) As Variant
     
     With Me
-        params(0) = "RootedSpecies"
-        params(1) = .VegPlotID
-        params(2) = .MasterPlantCode
-        params(3) = .PercentCover
+        Params(0) = "RootedSpecies"
+        Params(1) = .VegPlotID
+        Params(2) = .MasterPlantCode
+        Params(3) = .PercentCover
         
         If IsUpdate Then
-            template = "u_cover_species"
-            params(4) = .ID
+            Template = "u_cover_species"
+            Params(4) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
 

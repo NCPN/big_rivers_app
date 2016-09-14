@@ -321,37 +321,37 @@ On Error GoTo Err_Handler
 '    db.Execute strSQL, dbFailOnError
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    Dim template As String
+    Dim Template As String
     
-    template = "i_vegplot"
+    Template = "i_vegplot"
     
-    Dim params(0 To 18) As Variant
+    Dim Params(0 To 18) As Variant
 
     With Me
-        params(0) = "VegPlot"
-        params(1) = .EventID
-        params(2) = .SiteID
-        params(3) = .FeatureID
-        params(4) = .VegTransectID
-        params(5) = .PlotNumber
-        params(6) = .PlotDistance
-        params(7) = .ModalSedimentSize
-        params(8) = .PercentFines
-        params(9) = .PercentWater
-        params(10) = .UnderstoryRootedPctCover
-        params(11) = .PlotDensity
-        params(12) = .NoCanopyVeg
-        params(13) = .NoRootedVeg
-        params(14) = .HasSocialTrail
-        params(15) = .FilamentousAlgae
-        params(16) = .NoIndicatorSpecies
+        Params(0) = "VegPlot"
+        Params(1) = .EventID
+        Params(2) = .SiteID
+        Params(3) = .FeatureID
+        Params(4) = .VegTransectID
+        Params(5) = .PlotNumber
+        Params(6) = .PlotDistance
+        Params(7) = .ModalSedimentSize
+        Params(8) = .PercentFines
+        Params(9) = .PercentWater
+        Params(10) = .UnderstoryRootedPctCover
+        Params(11) = .PlotDensity
+        Params(12) = .NoCanopyVeg
+        Params(13) = .NoRootedVeg
+        Params(14) = .HasSocialTrail
+        Params(15) = .FilamentousAlgae
+        Params(16) = .NoIndicatorSpecies
         
         If IsUpdate Then
-            template = "u_vegplot"
-            params(17) = .ID
+            Template = "u_vegplot"
+            Params(17) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
 Exit_Handler:

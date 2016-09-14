@@ -167,25 +167,25 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim template As String
+    Dim Template As String
     
-    template = "i_event"
+    Template = "i_event"
     
-    Dim params(0 To 6) As Variant
+    Dim Params(0 To 6) As Variant
     
     With Me
-        params(0) = "Event"
-        params(1) = .SiteID
-        params(2) = .LocationID
-        params(3) = .ProtocolID
-        params(4) = CDate(Format(.StartDate, "YYYY-mm-dd"))
+        Params(0) = "Event"
+        Params(1) = .SiteID
+        Params(2) = .LocationID
+        Params(3) = .ProtocolID
+        Params(4) = CDate(Format(.StartDate, "YYYY-mm-dd"))
         
         If IsUpdate Then
-            template = "u_event"
-            params(5) = .ID
+            Template = "u_event"
+            Params(5) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
     
 Exit_Handler:

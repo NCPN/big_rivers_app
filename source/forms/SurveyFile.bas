@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =57
-    Left =4035
-    Top =3555
-    Right =16335
-    Bottom =14550
+    Left =3090
+    Top =3495
+    Right =12330
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -302,8 +302,8 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblSourceOrg"
-                    Caption ="Source Org"
+                    Name ="lblSource"
+                    Caption ="Source"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
                     LayoutCachedTop =1020
@@ -829,6 +829,27 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                 End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =85
+                    Left =4320
+                    Top =420
+                    Width =1560
+                    Height =360
+                    FontSize =8
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16737792
+                    Name ="lblSourceHint"
+                    Caption ="Source hint"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =780
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin FormFooter
@@ -989,6 +1010,8 @@ On Error GoTo Err_Handler
             
     cbxSurveyType.RowSourceType = "Value List"
     cbxSurveyType.RowSource = "RTK(R);Total Station(T)"
+    
+    lblSourceHint.Caption = "RTK, TS, USGS, etc."
     
     'set hover
     btnComment.HoverColor = lngGreen

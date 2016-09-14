@@ -315,30 +315,30 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim template As String
+    Dim Template As String
     
-    template = "i_task"
+    Template = "i_task"
     
-    Dim params(0 To 13) As Variant
+    Dim Params(0 To 13) As Variant
     
     With Me
-        params(0) = "Task"
-        params(1) = .Task
-        params(2) = .Status
-        params(3) = .Priority
-        params(4) = .RequestedByID
-        params(5) = CDate(Format(.RequestDate, "YYYY-mm-dd"))
-        params(6) = .CompletedByID
-        params(7) = CDate(Format(.CompleteDate, "YYYY-mm-dd"))
+        Params(0) = "Task"
+        Params(1) = .Task
+        Params(2) = .Status
+        Params(3) = .Priority
+        Params(4) = .RequestedByID
+        Params(5) = CDate(Format(.RequestDate, "YYYY-mm-dd"))
+        Params(6) = .CompletedByID
+        Params(7) = CDate(Format(.CompleteDate, "YYYY-mm-dd"))
         
         'params 8-11 --> createdate, lastmodified
         
         If IsUpdate Then
-            template = "u_task"
-            params(12) = .ID
+            Template = "u_task"
+            Params(12) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
 Exit_Handler:

@@ -1,4 +1,5 @@
-﻿dbMemo "SQL" ="SELECT DISTINCT ID, FirstName + ' ' + LastName AS Name\015\012FROM Contact;\015\012"
+﻿dbMemo "SQL" ="PARAMETERS username Text ( 50 ), activity Text ( 50 );\015\012INSERT INTO tsys_L"
+    "ogins ( UserName, ActionTaken )\015\012VALUES ([username], [activity]);\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

@@ -267,29 +267,29 @@ On Error GoTo Err_Handler
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
 
-    Dim template As String
+    Dim Template As String
     
-    template = "i_transducer"
+    Template = "i_transducer"
     
-    Dim params(0 To 10) As Variant
+    Dim Params(0 To 10) As Variant
 
     With Me
-        params(0) = "Transducer"
-        params(1) = .EventID
-        params(2) = .TransducerType
-        params(3) = .TransducerNumber
-        params(4) = .SerialNumber
-        params(5) = .IsSurveyed
-        params(6) = .Timing
-        params(7) = .ActionDate
-        params(8) = .ActionTime
+        Params(0) = "Transducer"
+        Params(1) = .EventID
+        Params(2) = .TransducerType
+        Params(3) = .TransducerNumber
+        Params(4) = .SerialNumber
+        Params(5) = .IsSurveyed
+        Params(6) = .Timing
+        Params(7) = .ActionDate
+        Params(8) = .ActionTime
     
         If IsUpdate Then
-            template = "u_transducer"
-            params(9) = .ID
+            Template = "u_transducer"
+            Params(9) = .ID
         End If
 
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
     
 '    'add a record for created by

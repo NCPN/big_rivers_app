@@ -147,19 +147,19 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim template As String
+    Dim Template As String
     
-    template = "i_login"
+    Template = "i_login"
     
-    Dim params() As Variant
+    Dim Params() As Variant
     
     'dimension for contact
-    ReDim params(0 To 2) As Variant
+    ReDim Params(0 To 2) As Variant
 
     With Me
-        params(0) = "i_login" '"tsys_Db_Templates"
-        params(1) = .Username
-        params(2) = .Activity
+        Params(0) = "i_login" '"tsys_Db_Templates"
+        Params(1) = .Username
+        Params(2) = .Activity
         
 '        If IsUpdate Then
 '            template = "u_contact"
@@ -167,7 +167,7 @@ On Error GoTo Err_Handler
 '        End If
         
 '        .ID = SetRecord(template, params)
-        SetRecord template, params
+        SetRecord Template, Params
     End With
 
 

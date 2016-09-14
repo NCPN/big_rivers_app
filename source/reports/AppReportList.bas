@@ -504,7 +504,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/30/2016 - initial version
 ' ---------------------------------
-Private Sub tbxReportName_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub tbxReportName_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     With Me.tbxReportName
@@ -544,7 +544,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/30/2016 - initial version
 ' ---------------------------------
-Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
     Dim ctrl As Control

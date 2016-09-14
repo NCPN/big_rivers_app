@@ -192,8 +192,8 @@ On Error GoTo Err_Handler
     Do Until rsB.EOF
         'add rsB values as new rsOut records
         rsOut.AddNew
-        For iCount = 0 To rsB.Fields.Count - 1
-            rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
+        For iCount = 0 To rsB.fields.Count - 1
+            rsOut.fields(iCount).Value = rsB.fields(iCount).Value
         Next
         rsOut.update
         rsB.MoveNext
@@ -529,7 +529,7 @@ End Function
 '               BLC, 6/5/2016  - revised to set strSyntax to "T-SQL" to avoid error due to multiple items of same name in dict
 '               BLC, 6/6/2016  - added error handling for duplicate templates, renamed global to g_AppTemplates
 ' ---------------------------------
-Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As String = "")
+Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As String = "")
 
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
@@ -593,7 +593,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As St
 'Debug.Print rs.Fields(ary(i))
 
                 'separate parameters
-                ary2 = Split(Nz(rs.Fields(ary(i)), ":"), "|")
+                ary2 = Split(Nz(rs.fields(ary(i)), ":"), "|")
                 
                 'prepare sets of param name & data type --> split(ary2(i), ":") yields name & data type
                 For j = 0 To UBound(ary2)
@@ -610,7 +610,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional params As St
                 Set Value = dictParam
 
             Else
-                Value = Nz(rs.Fields(ary(i)), "")
+                Value = Nz(rs.fields(ary(i)), "")
             End If
             
             'add key if it isn't already there
@@ -700,30 +700,30 @@ End Sub
 ' Revisions:    BLC, 5/19/2016 - initial version
 '               BLC, 6/6/2016  - added error handling for duplicate templates, renamed global to g_AppTemplates
 ' ---------------------------------
-Public Function GetTemplate(strTemplate As String, Optional params As String = "") As String
+Public Function GetTemplate(strTemplate As String, Optional Params As String = "") As String
 On Error GoTo Err_Handler
 
     Dim aryParams() As Variant
     Dim ary() As String, ary2() As String
     Dim i As Integer
-    Dim template As String, swap As String, param As String
+    Dim Template As String, swap As String, param As String
 
 Debug.Print strTemplate
 
     'initialize AppTemplates if not populated
     If g_AppTemplates Is Nothing Then GetTemplates
 
-    template = g_AppTemplates(strTemplate).item("Template")
+    Template = g_AppTemplates(strTemplate).item("Template")
     
-    If Len(params) > 0 Then
+    If Len(Params) > 0 Then
     
         'prepare passed in param array --> array contains param:value pairs
         'ary = Split(params, "|")
-        If InStr(params, "|") Then
-            ary = Split(params, "|")
+        If InStr(Params, "|") Then
+            ary = Split(Params, "|")
         Else
             ReDim Preserve ary(0) 'avoid Error #9 subscript out of range
-            ary(0) = params
+            ary(0) = Params
             'ary = Split(params, PARAM_SEPARATOR)
         End If
         
@@ -751,7 +751,7 @@ Debug.Print strTemplate
                 param = SQLencode(ary2(1))
 'Debug.Print param
                 'swap out the placeholder in the template
-                template = Replace(template, swap, ary2(1))
+                Template = Replace(Template, swap, ary2(1))
                 
             End If
             
@@ -759,9 +759,9 @@ Debug.Print strTemplate
     
     End If
     
-Debug.Print template
+Debug.Print Template
     
-    GetTemplate = template
+    GetTemplate = Template
     
 Exit_Handler:
     Exit Function
@@ -838,7 +838,7 @@ On Error GoTo Err_Handler
             With rs
                 For i = 1 To iCount
                     .AddNew
-                    .Fields("RecCount") = i
+                    .fields("RecCount") = i
                     .update
                 Next
                 
@@ -1033,7 +1033,7 @@ On Error GoTo Err_Handler
     For i = 1 To iCount
 
         rs.AddNew
-        rs.Fields(0) = i 'number integer field
+        rs.fields(0) = i 'number integer field
         rs.update
     Next
     

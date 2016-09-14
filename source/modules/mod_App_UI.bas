@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.08
+' Version:      1.09
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -18,6 +18,7 @@ Option Explicit
 '               BLC, 8/29/2016 - 1.07 - revised to use usys_temp_qdf & Contact_ID in PopulateForm()
 '                                       for Contact form
 '               BLC, 8/30/2016 - 1.08 - added Batch Upload Photos to ClickAction()
+'               BLC, 9/13/2016 - 1.09 - added SortList()
 ' =================================
 
 ' =================================
@@ -837,3 +838,124 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' Sub:          SortListForm
+' Description:  form label sort on click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/13/2016 - initial version
+' ---------------------------------
+Public Sub SortListForm(frm As Form, ctrl As Control)
+On Error GoTo Err_Handler
+
+    Dim strSort As String
+    
+    'default
+    strSort = ""
+    
+    'set sort field
+    Select Case Replace(ctrl.Name, "lbl", "")
+        Case "HdrID"
+            strSort = "ID"
+        Case "Version"
+            strSort = "Version"
+        Case "Template"
+            strSort = "Template"
+        Case "Remarks"
+            strSort = "Remarks"
+        Case "EffectiveDate"
+            strSort = "EffectiveDate"
+        Case ""
+    End Select
+
+    'set the sort
+    If InStr(frm.OrderBy, strSort) = 0 Then
+        frm.OrderBy = strSort
+    ElseIf Right(frm.OrderBy, 4) = "Desc" Then
+        frm.OrderBy = strSort
+    Else
+        frm.OrderBy = strSort & " Desc"
+    End If
+    
+    frm.OrderByOn = True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SortListForm[mod_App_UI form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' Sub:          FilterListForm
+' Description:  form filter click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Filter-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 9/13/2016 - initial version
+' ---------------------------------
+Public Sub FilterListForm(frm As Form, ctrl As Control)
+On Error GoTo Err_Handler
+
+    Dim strFilter As String
+    
+    'default
+    strFilter = ""
+    
+    'set Filter field
+    Select Case Replace(ctrl.Name, "lbl", "")
+        Case "HdrID"
+            strFilter = "ID"
+        Case "Version"
+            strFilter = "Version"
+        Case "Template"
+            strFilter = "Template"
+        Case "Remarks"
+            strFilter = "Remarks"
+        Case "EffectiveDate"
+            strFilter = "EffectiveDate"
+        Case ""
+    End Select
+
+    'set the Filter
+    If InStr(frm.OrderBy, strFilter) = 0 Then
+        frm.OrderBy = strFilter
+    ElseIf Right(frm.OrderBy, 4) = "Desc" Then
+        frm.OrderBy = strFilter
+    Else
+        frm.OrderBy = strFilter & " Desc"
+    End If
+    
+    frm.OrderByOn = True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FilterListForm[mod_App_UI form])"
+    End Select
+    Resume Exit_Handler
+End Sub

@@ -234,25 +234,25 @@ End Sub
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
     
-    Dim template As String
+    Dim Template As String
     
-    template = "i_comment"
+    Template = "i_comment"
     
-    Dim params(0 To 6) As Variant
+    Dim Params(0 To 6) As Variant
     
     With Me
-        params(0) = "Comment"
-        params(1) = .CommentType
-        params(2) = .TypeID
-        params(3) = .Comment
-        params(4) = .CommentorID
+        Params(0) = "Comment"
+        Params(1) = .CommentType
+        Params(2) = .TypeID
+        Params(3) = .Comment
+        Params(4) = .CommentorID
         
         If IsUpdate Then
-            template = "u_comment"
-            params(5) = .ID
+            Template = "u_comment"
+            Params(5) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
     
 Exit_Handler:

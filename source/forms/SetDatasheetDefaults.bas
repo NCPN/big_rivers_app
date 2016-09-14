@@ -1151,20 +1151,20 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
         
-    Dim template As String
+    Dim Template As String
     
-    template = "u_tsys_datasheet_defaults"
+    Template = "u_tsys_datasheet_defaults"
         
-    Dim params(0 To 5) As Variant
+    Dim Params(0 To 5) As Variant
 
-    params(0) = tbxID.Value
-    params(1) = TempVars("ParkID")
-    params(2) = TempVars("RiverID")
-    params(3) = cbxCoverType.Column(0)
-    params(4) = tbxSpecies.Value
-    params(5) = tbxBlanks.Value
+    Params(0) = tbxID.Value
+    Params(1) = TempVars("ParkID")
+    Params(2) = TempVars("RiverID")
+    Params(3) = cbxCoverType.Column(0)
+    Params(4) = tbxSpecies.Value
+    Params(5) = tbxBlanks.Value
         
-    SetRecord template, params
+    SetRecord Template, Params
         
 '    Dim db As DAO.Database
 '    Dim qdf As DAO.QueryDef

@@ -223,29 +223,29 @@ On Error GoTo Err_Handler
 '    db.Execute strSQL, dbFailOnError
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    Dim template As String
+    Dim Template As String
     
-    template = "i_vegwalk"
+    Template = "i_vegwalk"
     
-    Dim params(0 To 10) As Variant
+    Dim Params(0 To 10) As Variant
     
     With Me
-        params(0) = "VegWalk"
-        params(1) = .EventID
-        params(2) = .CollectionPlaceID
-        params(3) = .CollectionType
-        params(4) = .StartDate
+        Params(0) = "VegWalk"
+        Params(1) = .EventID
+        Params(2) = .CollectionPlaceID
+        Params(3) = .CollectionType
+        Params(4) = .StartDate
 '        params(5) = .CreateDate
 '        params(6) = .CreatedByID
 '        params(7) = .LastModified
 '        params(8) = .LastModifiedByID
         
         If IsUpdate Then
-            template = "u_vegwalk"
-            params(9) = .ID
+            Template = "u_vegwalk"
+            Params(9) = .ID
         End If
         
-        .ID = SetRecord(template, params)
+        .ID = SetRecord(Template, Params)
     End With
 
 

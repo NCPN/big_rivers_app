@@ -238,15 +238,15 @@ On Error GoTo Err_Handler
 '    db.Execute strSQL, dbFailOnError
 '    Me.ID = db.OpenRecordset("SELECT @@IDENTITY")(0)
 
-    Dim params(0 To 4) As Variant
+    Dim Params(0 To 4) As Variant
 
-    params(0) = Me.RefTable
-    params(1) = Me.RefID
-    params(2) = Me.ID
-    params(3) = Me.RefAction
-    params(4) = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
+    Params(0) = Me.RefTable
+    Params(1) = Me.RefID
+    Params(2) = Me.ID
+    Params(3) = Me.RefAction
+    Params(4) = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
     
-    Me.ID = SetRecord("i_record_action", params)
+    Me.ID = SetRecord("i_record_action", Params)
 
 Exit_Handler:
     Exit Sub
