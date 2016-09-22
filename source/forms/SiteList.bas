@@ -20,10 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =28
-    Left =285
-    Top =4470
-    Right =7920
-    Bottom =8835
+    Right =10785
+    Bottom =11250
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xc2b74d8760c3e440
@@ -555,7 +553,7 @@ Option Explicit
 ' =================================
 ' Form:         SiteList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -564,6 +562,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - revised to use ToggleIsActive (mod_App_Data)
+'               BLC - 9/22/2016 - 1.02 - switche to use GetRecords()
 ' =================================
 
 '---------------------
@@ -667,6 +666,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 9/22/2016 - switched from GetTemplate() to GetRecords()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -689,9 +689,13 @@ On Error GoTo Err_Handler
     btnDelete.ForeColor = lngRed
 
     'set data source
-    Me.RecordSource = GetTemplate("s_site_list_by_park_river", _
-                        "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
-                        "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+'    Me.RecordSource = GetTemplate("s_site_list_by_park_river", _
+'                        "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
+'                        "|waterway" & PARAM_SEPARATOR & TempVars("River"))
+    'Me.Recordset = GetRecords("s_site_list_by_park_river")
+    
+    Set Me.Recordset = GetRecords("s_site_list_by_park_river")
+        
     Me.Requery
 
 Exit_Handler:

@@ -99,7 +99,7 @@ On Error GoTo Err_Handler
     Call SetWindowPos(hWndVBE, 0&, 0&, 2000&, 1, 1, _
                         SWP_HIDEWINDOW Or SWP_NOSIZE)
     
-    Application.VBE.MainWindow.visible = True
+    Application.VBE.MainWindow.Visible = True
     'Application.Caption errors for Access w/ Method or data member not found
     'use "already open form caption", false instead
     'AppActivate Application.Caption
@@ -156,7 +156,7 @@ On Error GoTo Err_Handler
     Next
     
     objVBE.MainWindow.WindowState = vbext_ws_Minimize
-    objVBE.MainWindow.visible = False
+    objVBE.MainWindow.Visible = False
     
     hWndVBE = FindWindow("wndclass_desked_gsk", _
                             Application.VBE.MainWindow.Caption)
@@ -269,15 +269,15 @@ End Sub
 '               by Mark K., 4/26/2013.
 ' Revisions:    BLC, 5/10/2015 - initial version
 ' =================================
-Public Sub GetRibbonVisibility(ctrl As Office.IRibbonControl, ByRef visible)
+Public Sub GetRibbonVisibility(ctrl As Office.IRibbonControl, ByRef Visible)
 On Error GoTo Err_Handler
 
     Select Case ctrl.ID
         Case "tabExportOptions"
-            visible = True
+            Visible = True
             TempVars.Add "ribbon", True
         Case Else
-            visible = False
+            Visible = False
             TempVars.Add "ribbon", False
     End Select
     
@@ -572,7 +572,7 @@ Dim ctrl As Control
 
             'check tag
             If ctrl.Tag = ctrlTag Then
-                ctrl.visible = visibility
+                ctrl.Visible = visibility
             End If
 
         Next
@@ -581,7 +581,7 @@ Dim ctrl As Control
 
         'check tag
         If oCtrl.Tag = ctrlTag Then
-                oCtrl.visible = visibility
+                oCtrl.Visible = visibility
         End If
 
     End If
@@ -670,10 +670,10 @@ On Error GoTo Err_Handler
     For Each pg In ctrl.Pages
         If pg.Name = strTabName Then
             If Not blnHideOnly = True Then
-                ctrl.Pages(pg.Name).visible = True
+                ctrl.Pages(pg.Name).Visible = True
             End If
         Else
-            ctrl.Pages(pg.Name).visible = False
+            ctrl.Pages(pg.Name).Visible = False
         End If
     Next pg
     
@@ -1155,7 +1155,7 @@ Public Sub PrepareCrumbs(frm As SubForm, aryCrumbs As Variant, Optional separato
           With frm.Controls(strCtrlSeparator)
             .Left = intLastCtrlPosition + intLastCtrlWidth + 10
             .Caption = separator
-            .visible = True
+            .Visible = True
             
             'determine position of next control
             intLastCtrlPosition = .Left + .Width + 10

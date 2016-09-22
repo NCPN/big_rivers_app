@@ -1344,7 +1344,7 @@ On Error GoTo Err_Handler
     Me.RecordSource = strSQL
 
     'hide modal Main form
-    Forms("Main").visible = False
+    Forms("Main").Visible = False
 
 Exit_Handler:
     Exit Sub
@@ -1375,7 +1375,7 @@ Private Sub Report_Close()
 On Error GoTo Err_Handler
 
     'unhide modal Main form
-    Forms("Main").visible = True
+    Forms("Main").Visible = True
     
 Exit_Handler:
     Exit Sub

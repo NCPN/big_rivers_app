@@ -290,7 +290,7 @@ End Property
 
 Public Property Let PanelVisible(Value As Byte)
     m_PanelVisible = Value
-    Me.visible = m_PanelVisible
+    Me.Visible = m_PanelVisible
 End Property
 
 Public Property Get MessageVisible() As Byte
@@ -299,7 +299,7 @@ End Property
 
 Public Property Let MessageVisible(Value As Byte)
     m_MessageVisible = Value
-    Me.lblMessage.visible = m_MessageVisible
+    Me.lblMessage.Visible = m_MessageVisible
 End Property
 
 '---------------------

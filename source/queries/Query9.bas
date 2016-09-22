@@ -1,5 +1,8 @@
-﻿dbMemo "SQL" ="PARAMETERS tbl Text ( 255 ), flds Text ( 255 ), ident Long;\015\012SELECT [flds]"
-    "\015\012FROM tbl\015\012WHERE ID = [ident];\015\012"
+﻿dbMemo "SQL" ="PARAMETERS pkcode Text ( 4 ), waterway Text ( 25 );\015\012SELECT s.ID, SiteCode"
+    ", SiteName, SiteDescription, SiteDirections, s.IsActiveForProtocol\015\012FROM ("
+    "Site AS s INNER JOIN Park AS p ON p.ID = s.Park_ID) INNER JOIN River AS r ON r.I"
+    "D = s.River_ID\015\012WHERE p.ParkCode = [pkcode]\015\012AND r.River = [waterway"
+    "];\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -15,75 +18,54 @@ dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="s.SiteCode"
+        dbText "Name" ="s.ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="e.StartDate"
+        dbText "Name" ="Site"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x4c5e233e1de98045a4bfd0f54e84bf02
+        End
+    End
+    Begin
+        dbText "Name" ="Expr1000"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="p.ParkCode"
+        dbText "Name" ="SiteCode"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="f.Feature"
+        dbText "Name" ="SiteName"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.FilamentousAlgae"
+        dbText "Name" ="SiteDescription"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.PlotNumber"
+        dbText "Name" ="SiteDirections"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.PlotDistance_m"
+        dbText "Name" ="s.IsActiveForProtocol"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.ModalSedimentSize"
+        dbText "Name" ="l.ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.PercentFine"
+        dbText "Name" ="l.LocationName"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.PlotDensity"
+        dbText "Name" ="l.CollectionSourceName"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="vp.NoCanopyVeg"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vp.NoRootedVeg"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vp.HasSocialTrail"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vp.NoIndicatorSpecies"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vt.TransectNumber"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vt.SampleDate"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vp.PercentWater"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="vp.UnderstoryRootedPctCover"
+        dbText "Name" ="l.LocationType"
         dbLong "AggregateType" ="-1"
     End
 End

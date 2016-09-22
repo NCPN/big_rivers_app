@@ -633,7 +633,7 @@ On Error GoTo Err_Handler
     btnDelete.ForeColor = lngRed
     
     'hide delete!
-    btnDelete.visible = False
+    btnDelete.Visible = False
 
     Me.RecordSource = GetTemplate("s_record_action_by_refID")
 

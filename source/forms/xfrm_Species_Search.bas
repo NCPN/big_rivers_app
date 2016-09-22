@@ -1686,9 +1686,9 @@ On Error GoTo Err_Handler
         rs.MoveFirst
         
         'hide no records
-        lblNoRecords.visible = False
+        lblNoRecords.Visible = False
     Else
-        lblNoRecords.visible = True
+        lblNoRecords.Visible = True
     End If
         
     'set # species found

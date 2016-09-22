@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' Module:       ContextMenu
 ' Level:        Framework form
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Context menu object related properties, events, functions & procedures for UI display
 '
@@ -14,6 +14,8 @@ Option Explicit
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - revised s_site_list to s_site_list_active
 '               BLC - 9/7/2016  - 1.02 - revised s_feature_list to s_feature_list_by_site
+'               BLC - 9/22/2016 - 1.03 - revised CreateDynamicMenu to use GetRecords()
+'                                        vs. GetTemplate()
 ' =================================
 
 '---------------------
@@ -190,6 +192,7 @@ End Sub
 '   BLC - 5/22/2016 - initial version
 '   BLC - 6/28/2016 - revised s_site_list to s_site_list_active
 '   BLC - 9/7/2016  - revised s_feature_list to s_feature_list_by_site
+'   BLC - 9/22/2016 - revised to use GetRecords vs. GetTemplate() for context lists
 ' ---------------------------------
 Public Sub CreateDynamicMenu(Context As String)
 On Error GoTo Err_Handler
@@ -248,7 +251,8 @@ On Error GoTo Err_Handler
         Select Case mnu
             
             Case "park"
-                Set rs = CurrentDb.OpenRecordset(GetTemplate("s_get_parks"), dbOpenDynaset)
+                Set rs = GetRecords("s_get_parks")
+                'CurrentDb.OpenRecordset(GetTemplate("s_get_parks"), dbOpenDynaset)
                 
                 If Not (rs.BOF And rs.EOF) Then
                 
@@ -272,7 +276,8 @@ On Error GoTo Err_Handler
                 
             Case "river"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = GetRecords("s_river_list")
+                    'CurrentDb.OpenRecordset(GetTemplate("s_river_list", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                     
                     If Not (rs.BOF And rs.EOF) Then
                         
@@ -295,7 +300,8 @@ On Error GoTo Err_Handler
                 
             Case "site"
                 If Not IsNull(TempVars("ParkCode")) Then
-                    Set rs = CurrentDb.OpenRecordset(GetTemplate("s_site_list_active", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
+                    Set rs = GetRecords("s_site_list_active")
+                    'CurrentDb.OpenRecordset(GetTemplate("s_site_list_active", "ParkCode" & PARAM_SEPARATOR & TempVars.item("ParkCode")), dbOpenDynaset)
                     
                     If Not (rs.BOF And rs.EOF) Then
                     

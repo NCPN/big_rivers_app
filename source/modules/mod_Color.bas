@@ -75,6 +75,7 @@ Public Const lngSageGreen As Long = 7965572 '?RGB(132, 139, 121) #848B79
 Public Const lngLtSalmon As Long = 10998527 '?RGB(255, 210, 167) #FFD2A7
 Public Const lngSalmon As Long = 7051001    '?RGB(249, 150, 107) #F9966B
 Public Const lngLtSienna As Long = 3497896  '?RGB(168, 95, 53) #A85F35
+Public Const lngSpringGreen As Long = 32768 '?RGB(0,128,0) #008000
 ' ---------------------------------
 '  Subroutines & Functions
 ' ---------------------------------

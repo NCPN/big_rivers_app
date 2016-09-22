@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.12
+' Version:      1.13
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -22,6 +22,8 @@ Option Explicit
 '               BLC - 8/8/2016  - 1.10 - updated UpsertRecord() for additional forms
 '               BLC - 9/1/2016  - 1.11 - added UploadSurveyFile(), updated UpsertRecord()
 '               BLC - 9/13/2016 - 1.12 - added FetchAddlData()
+'               BLC - 9/21/2016 - 1.13 - updated SetRecord() i_login parameters
+'               BLC - 9/22/2016 - 1.14 - added templates
 ' =================================
 
 ' ---------------------------------
@@ -1078,6 +1080,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/26/2016 - initial version
+'   BLC - 9/22/2016 - added templates
 ' ---------------------------------
 Public Function GetRecords(Template As String) As DAO.Recordset
 On Error GoTo Err_Handler
@@ -1106,19 +1109,25 @@ On Error GoTo Err_Handler
                 Case "s_datasheet_defaults_by_river"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_event_by_park_river_w_location"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                     
                 Case "s_events_by_park_river"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                
+                Case "s_events_list_by_park_river"
+                    
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_feature_list"
@@ -1132,27 +1141,66 @@ On Error GoTo Err_Handler
                     .Parameters("pcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
                                         
+                Case "s_get_parks"
+                
+                    '-- required parameters --
+                
                 Case "s_location_by_park_river"
                 
                     '-- required parameters --
                     .Parameters("ParkCode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
+                Case "s_location_list_by_park_river"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                
+                Case "s_river_list"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                
                 Case "s_site_by_park_river"
                 
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_site_by_park_river_segment"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                
+                Case "s_site_list_by_park_river"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                
+                Case "s_site_list_by_park_river_segment"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("waterway") = TempVars("River")
+                
+                Case "s_site_list_active"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("seg") = TempVars("River")
             
                 Case "s_species_by_park"
                 
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     
                 Case "s_top_rooted_species_last_year_by_park"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
@@ -1161,7 +1209,7 @@ On Error GoTo Err_Handler
                 Case "s_top_rooted_species_last_year_by_river"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
@@ -1171,7 +1219,7 @@ On Error GoTo Err_Handler
                 Case "s_top_understory_species_last_year_by_park"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
@@ -1180,7 +1228,7 @@ On Error GoTo Err_Handler
                 Case "s_top_understory_species_last_year_by_river"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
@@ -1190,7 +1238,7 @@ On Error GoTo Err_Handler
                 Case "s_top_woody_species_last_year_by_park"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
@@ -1199,7 +1247,7 @@ On Error GoTo Err_Handler
                 Case "s_top_woody_species_last_year_by_river"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
@@ -1209,7 +1257,7 @@ On Error GoTo Err_Handler
                 Case "s_veg_walk_species_last_year_by_park"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     
                     'revise TOP X --> 8 is replaced by # blanks to return (from # rows remaining)
                     .SQL = Replace(.SQL, 8, TempVars("Blanks"))
@@ -1217,17 +1265,22 @@ On Error GoTo Err_Handler
                 Case "s_veg_walk_species_last_year_by_river"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                     
                     'revise TOP X --> 8 is replaced by # blanks to return (from # rows remaining)
                     .SQL = Replace(.SQL, 8, TempVars("Blanks"))
                     
                     '-- optional parameters --
-                                
+                
+                Case "s_tsys_datasheet_defaults"
+    
+                    '-- required parameters --
+                    .Parameters("parkID") = TempVars("ParkID")
+                
             End Select
             
-            Set rs = .OpenRecordset
+            Set rs = .OpenRecordset(dbOpenDynaset)
             
         End With
         
@@ -1259,6 +1312,7 @@ End Function
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/26/2016 - initial version
+'   BLC - 9/21/2016 - updated i_login parameters
 ' ---------------------------------
 Public Function SetRecord(Template As String, Params As Variant) As Long
 On Error GoTo Err_Handler
@@ -1392,6 +1446,8 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("username") = Params(1)
                     .Parameters("activity") = Params(2)
+                    .Parameters("version") = Params(3)
+                    .Parameters("accesslvl") = Params(4)
                 
                     SkipRecordAction = True
                     

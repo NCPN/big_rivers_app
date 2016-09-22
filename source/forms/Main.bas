@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =4065
-    Top =2580
-    Right =12345
-    Bottom =10545
+    Left =4635
+    Top =4125
+    Right =12915
+    Bottom =12090
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -427,7 +427,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -438,6 +438,8 @@ Option Explicit
 '               BLC - 6/28/2016 - 1.01 - added Form_Close event to clear breadcrumb
 '               BLC - 9/6/2016  - 1.02 - added PrepareLinks() and updated UpdateBreadcrumb()
 '               BLC - 9/8/2016  - 1.03 - code cleanup
+'               BLC - 9/21/2016 - 1.04 - update PrepareLinks so BLCA & CANY enable transect links,
+'                                        DINO does not
 ' =================================
 
 '---------------------
@@ -939,7 +941,8 @@ End Sub
 ' Source/date:  Bonnie Campbell, September 6, 2016 for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 9/6/2016 - initial version
+'   BLC - 9/6/2016  - initial version
+'   BLC - 9/21/2016 - update so BLCA & CANY enable transect links, DINO does not
 ' ---------------------------------
 Private Sub PrepareLinks()
 On Error GoTo Err_Handler
@@ -993,6 +996,7 @@ On Error GoTo Err_Handler
                                             ' VegWalk-Species, VegWalk-#Species, More
                         
                         If Len(Nz(TempVars("Feature"), "")) > 0 Then
+                            TL = "1,2,3,4,6"    'Site, Feature, Transect, Plot, Location
                             TC = "1,3,5,6"      'Event, VegPlots, Locations, People
                             BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
                                                 ' VegWalk-Species, VegWalk-#Species, More
@@ -1022,7 +1026,7 @@ On Error GoTo Err_Handler
                     TL = "1"    'Site
                     
                     If Len(Nz(TempVars("SiteCode"), "")) > 0 Then
-                        TL = "1,4,6"        'Site, Transect, Plot, Location
+                        TL = "1,4,6"        'Site, Plot, Location
                         TC = "1,3,5,6"      'Event, VegPlots, Locations, People
                         TR = "3,6,7,8"      'VegWalk, Species, Unknowns, Species Search
                         BL = "1,2,4,7,8"    'Photos, Transducers, Survey Files, Upload Survey File,

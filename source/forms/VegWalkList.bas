@@ -20,8 +20,8 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Right =9480
-    Bottom =11010
+    Right =19230
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x5614fef60dcbe440
@@ -550,36 +550,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[VegWalkList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -615,6 +585,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Open[VegWalkList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[VegWalkList form])"
     End Select
     Resume Exit_Handler
 End Sub

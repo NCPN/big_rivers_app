@@ -1102,7 +1102,7 @@ End Property
 
 Public Property Let TileVisible(Value As Byte)
     m_TileVisible = Value
-    Me.visible = m_TileVisible
+    Me.Visible = m_TileVisible
 End Property
 
 Public Property Get IndicatorVisible() As Byte
@@ -1111,7 +1111,7 @@ End Property
 
 Public Property Let IndicatorVisible(Value As Byte)
     m_IndicatorVisible = Value
-    Me.lineIndicator.visible = m_IndicatorVisible
+    Me.lineIndicator.Visible = m_IndicatorVisible
 End Property
 
 Public Property Get Link1Visible() As Byte
@@ -1120,7 +1120,7 @@ End Property
 
 Public Property Let Link1Visible(Value As Byte)
     m_Link1Visible = Value
-    Me.lblLink1.visible = m_Link1Visible
+    Me.lblLink1.Visible = m_Link1Visible
 End Property
 
 Public Property Get Link2Visible() As Byte
@@ -1129,7 +1129,7 @@ End Property
 
 Public Property Let Link2Visible(Value As Byte)
     m_Link2Visible = Value
-    Me.lblLink2.visible = m_Link2Visible
+    Me.lblLink2.Visible = m_Link2Visible
 End Property
 
 Public Property Get Link3Visible() As Byte
@@ -1138,7 +1138,7 @@ End Property
 
 Public Property Let Link3Visible(Value As Byte)
     m_Link3Visible = Value
-    Me.lblLink3.visible = m_Link3Visible
+    Me.lblLink3.Visible = m_Link3Visible
 End Property
 
 Public Property Get Link4Visible() As Byte
@@ -1147,7 +1147,7 @@ End Property
 
 Public Property Let Link4Visible(Value As Byte)
     m_Link4Visible = Value
-    Me.lblLink4.visible = m_Link4Visible
+    Me.lblLink4.Visible = m_Link4Visible
 End Property
 
 Public Property Get Link5Visible() As Byte
@@ -1156,7 +1156,7 @@ End Property
 
 Public Property Let Link5Visible(Value As Byte)
     m_Link5Visible = Value
-    Me.lblLink5.visible = m_Link5Visible
+    Me.lblLink5.Visible = m_Link5Visible
 End Property
 
 Public Property Get Link6Visible() As Byte
@@ -1165,7 +1165,7 @@ End Property
 
 Public Property Let Link6Visible(Value As Byte)
     m_Link6Visible = Value
-    Me.lblLink6.visible = m_Link6Visible
+    Me.lblLink6.Visible = m_Link6Visible
 End Property
 
 Public Property Get Link7Visible() As Byte
@@ -1174,7 +1174,7 @@ End Property
 
 Public Property Let Link7Visible(Value As Byte)
     m_Link7Visible = Value
-    Me.lblLink7.visible = m_Link7Visible
+    Me.lblLink7.Visible = m_Link7Visible
 End Property
 
 Public Property Get Link8Visible() As Byte
@@ -1183,7 +1183,7 @@ End Property
 
 Public Property Let Link8Visible(Value As Byte)
     m_Link8Visible = Value
-    Me.lblLink8.visible = m_Link8Visible
+    Me.lblLink8.Visible = m_Link8Visible
 End Property
 
 '---------------------
@@ -1226,7 +1226,7 @@ On Error GoTo Err_Handler
         
             If ctrl.Name = strLink Then
                 ctrl.Caption = Replace(strLink, "lbl", "")
-                ctrl.visible = True
+                ctrl.Visible = True
                 
                 'standard fontcolor
                 'ctrl.forecolor = lngGray50

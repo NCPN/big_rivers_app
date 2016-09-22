@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =63
-    Left =6825
-    Top =3180
-    Right =14685
-    Bottom =9345
+    ItemSuffix =72
+    Left =3240
+    Top =3525
+    Right =12480
+    Bottom =14520
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -236,6 +236,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =6960
                     Top =180
@@ -282,7 +283,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5340
+            Height =5820
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -295,13 +296,13 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     Width =7860
-                    Height =5340
+                    Height =5820
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5340
+                    LayoutCachedHeight =5820
                     BackThemeColorIndex =-1
                 End
                 Begin Line
@@ -2324,6 +2325,121 @@ Begin Form
                         End
                     End
                 End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    Left =5880
+                    Top =5280
+                    Width =1800
+                    Height =405
+                    TabIndex =19
+                    ForeColor =4210752
+                    Name ="btn4"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5880
+                    LayoutCachedTop =5280
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =5685
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    Left =3960
+                    Top =5280
+                    Width =1800
+                    Height =405
+                    TabIndex =20
+                    ForeColor =4210752
+                    Name ="btn3"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3960
+                    LayoutCachedTop =5280
+                    LayoutCachedWidth =5760
+                    LayoutCachedHeight =5685
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    Left =2040
+                    Top =5280
+                    Width =1800
+                    Height =405
+                    TabIndex =21
+                    ForeColor =4210752
+                    Name ="btn2"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2040
+                    LayoutCachedTop =5280
+                    LayoutCachedWidth =3840
+                    LayoutCachedHeight =5685
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    Left =120
+                    Top =5280
+                    Width =1800
+                    Height =405
+                    TabIndex =22
+                    ForeColor =4210752
+                    Name ="btnViewTemplates"
+                    Caption ="View Templates"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Open the list of SQL & other templates"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =5280
+                    LayoutCachedWidth =1920
+                    LayoutCachedHeight =5685
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
             End
         End
         Begin FormFooter
@@ -2346,7 +2462,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2356,6 +2472,8 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 6/12/2016 - 1.01 - adapted to framework & big rivers
 '               BLC - 8/31/2016 - 1.02 - added user access level controls
+'               BLC - 9/14/2016 - 1.03 - added btnViewTemplates & additional blanks
+'                                        for Management Tools
 ' =================================
 
 '---------------------
@@ -2479,6 +2597,7 @@ On Error GoTo Err_Handler
     btnTaskList.HoverColor = lngGreen
     btnTaskListRpt.HoverColor = lngGreen
     btnUISetup.HoverColor = lngGreen
+    btnViewTemplates.HoverColor = lngGreen
       
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
@@ -2496,7 +2615,7 @@ On Error GoTo Err_Handler
     If Nz(TempVars("HasAccessBE"), False) Then DoCmd.OpenForm "LockBE", , , , , acHidden
 
     ' If there is an Access back-end, make the backups button visible
-    Me!btnBackup.visible = Nz(TempVars("HasAccessBE"), False)
+    Me!btnBackup.Visible = Nz(TempVars("HasAccessBE"), False)
     
 Exit_Handler:
     Exit Sub
@@ -3038,8 +3157,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
-
 ' =================================
 '   DbAdmin: Data entry and edit functions
 ' =================================
@@ -3270,6 +3387,40 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          btnViewTemplates_Click
+' Description:  Open form for browsing templates
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  Bonnie Campbell, September 14 2014 for NCPN tools
+' Adapted:      -
+' Revisions:    BLC - 9/14/2016 - initial version
+' ---------------------------------
+Private Sub btnViewTemplates_Click()
+On Error GoTo Err_Handler
+
+    ' Open the template list
+    If TempVars("Connected") Then
+        DoCmd.OpenForm "TemplateList", , , , , , 2
+    Else
+        MsgBox "The back-end connections must be fixed first", vbOKOnly, _
+            "Not connected to back-end database"
+    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnViewTemplates_Click[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 ' =================================
 '  DbAdmin: Summaries and db output

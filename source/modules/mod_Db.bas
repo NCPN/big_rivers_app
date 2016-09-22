@@ -302,6 +302,58 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
+' FUNCTION:     DbTableExists
+' Description:  determine if a table exists w/in a database
+' Assumptions:  used for retrieving table field data for mapping fields, etc.
+' Parameters:   tbl - name of database table (string)
+'               tdfRefresh - whether to refresh table defs or not (boolean, optional)
+'               db - database to reference (DAO.database object)
+' Returns:      whether or not table exists (boolean)
+' Throws:       none
+' References:
+'   David W. Fenton, June 7, 2010
+'   http://stackoverflow.com/questions/2985513/check-if-access-table-exists
+'   Based on testing, when passed an existing db variable, this function is fastest
+'   Tony Toews, unknown
+'   http://www.granite.ab.ca/access/temptables.htm
+'   David Fenton's functino originally based on Tony Toew's function in TempTables.MDB
+' Source/date:  Bonnie Campbell, June 2016
+' Revisions:    BLC, 6/8/2016 - initial version
+' ---------------------------------
+Public Function DbTableExists(tbl As String, Optional tdfRefresh As Boolean, _
+                                Optional db As DAO.Database) As Boolean
+On Error GoTo Err_Handler
+  
+  Dim tdf As DAO.TableDef
+
+  'set db if passed
+  If db Is Nothing Then Set db = CurrentDb()
+  
+  'refresh tables
+  If tdfRefresh Then db.tabledefs.Refresh
+  
+  Set tdf = db(tbl)
+  
+  DbTableExists = True
+
+Exit_Handler:
+    'cleanup
+    Set tdf = Nothing
+    Set db = Nothing
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+        Case 3265
+            DbTableExists = False
+        Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DbTableExists[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
 ' FUNCTION:     QueryExists
 ' Description:  Determine if a query exists in a database
 ' Parameters:   strQueryName - query name(string)
@@ -419,6 +471,353 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - getAccessObjectType[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetDescription
+' Description:  retrieves object description property
+' Assumptions:  object has a description property
+' Parameters:   obj - item to check (object)
+' Returns:      description text for object (string)
+' Throws:       none
+' References:
+'   Allen Browne, April, 2010
+'   http://allenbrowne.com/func-06.html
+' Source/date:  Bonnie Campbell, September 2016 for NCPN tools
+' Revisions:    BLC, 9/16/2016 - initial version
+' ---------------------------------
+Public Function GetDescription(obj As Object) As String
+On Error GoTo Err_Handler
+
+    GetDescription = obj.Properties("Description")
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetDescription[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' https://support.office.com/en-us/article/VarType-Function-1e08636c-1892-40c2-aff3-2b894389e82d?ui=en-US&rs=en-US&ad=US&fromAR=1
+'   vbEmpty         0   Empty (uninitialized)
+'   vbNull          1   Null (no valid data)
+'   vbInteger       2   Integer
+'   vbLong          3   Long integer
+'   vbSingle        4   Single-precision floating-point number
+'   vbDouble        5   Double-precision floating-point number
+'   vbCurrency      6   Currency value
+'   vbDate          7   Date Value
+'   vbString        8   String
+'   vbObject        9   Object
+'   vbError         10  Error Value
+'   vbBoolean       11  Boolean value
+'   vbVariant       12  Variant (used only with arrays of variants)
+'   vbDataObject    13  A data access object
+'   vbDecimal       14  Decimal value
+'   vbByte          17  Byte value
+'   vbUserDefinedType 36    Variants that contain user-defined types
+'   vbArray         8192    Array
+
+' ---------------------------------
+' FUNCTION:     FieldTypeName
+' Description:  retrieves field type property name from the numeric field type
+' Assumptions:  -
+' Parameters:   fld - field to retrieve type for (DAO.field)
+' Returns:      name for the field type (string)
+' Throws:       none
+' References:
+'   Allen Browne, April, 2010
+'   http://allenbrowne.com/func-06.html
+'   TofuBug     May 28, 2015
+'   http://stackoverflow.com/questions/30511987/why-does-vartype-always-return-8204-for-arrays
+' Source/date:  Bonnie Campbell, September 2016 for NCPN tools
+' Revisions:    BLC, 9/16/2016 - initial version
+' ---------------------------------
+Public Function FieldTypeName(fld As DAO.field) As String
+On Error GoTo Err_Handler
+    
+    Dim strReturn As String    'Name to return
+
+    Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
+        Case dbBoolean: strReturn = "Yes/No"            ' 1
+        Case dbByte: strReturn = "Byte"                 ' 2
+        Case dbInteger: strReturn = "Integer"           ' 3
+        Case dbLong                                     ' 4
+            If (fld.Attributes And dbAutoIncrField) = 0& Then
+                strReturn = "Long Integer"
+            Else
+                strReturn = "AutoNumber"
+            End If
+        Case dbCurrency: strReturn = "Currency"         ' 5
+        Case dbSingle: strReturn = "Single"             ' 6
+        Case dbDouble: strReturn = "Double"             ' 7
+        Case dbDate: strReturn = "Date/Time"            ' 8
+        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
+        Case dbText                                     '10
+            If (fld.Attributes And dbFixedField) = 0& Then
+                strReturn = "Text"
+            Else
+                strReturn = "Text (fixed width)"        '(no interface)
+            End If
+        Case dbLongBinary: strReturn = "OLE Object"     '11
+        Case dbMemo                                     '12
+            If (fld.Attributes And dbHyperlinkField) = 0& Then
+                strReturn = "Memo"
+            Else
+                strReturn = "Hyperlink"
+            End If
+        Case dbGUID: strReturn = "GUID"                 '15
+
+        'Attached tables only: cannot create these in JET.
+        Case dbBigInt: strReturn = "Big Integer"        '16
+        Case dbVarBinary: strReturn = "VarBinary"       '17
+        Case dbChar: strReturn = "Char"                 '18
+        Case dbNumeric: strReturn = "Numeric"           '19
+        Case dbDecimal: strReturn = "Decimal"           '20
+        Case dbFloat: strReturn = "Float"               '21
+        Case dbTime: strReturn = "Time"                 '22
+        Case dbTimeStamp: strReturn = "Time Stamp"      '23
+
+        'Constants for complex types don't work prior to Access 2007 and later.
+        Case 101&: strReturn = "Attachment"         'dbAttachment
+        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
+        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
+        Case 104&: strReturn = "Complex Long"       'dbComplexLong
+        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
+        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
+        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
+        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
+        Case 109&: strReturn = "Complex Text"       'dbComplexText
+        
+'        'Arrays
+'        Case vbArray:
+'            strReturn = "Array"                     '8192
+'
+'        Case Is > 8192
+'            Select Case (fld.Type - 8192)
+'                Case vbString                       '8 --> Overall 8200 = 8192+8
+'                    strReturn = "String Array"
+'                Case vbVariant                      '12 --> Overall 8204 = 8192+12
+'                    strReturn = "Variant Array"
+'                Case Else
+'                    strReturn = "Field type " & fld.Type & " unknown"
+'            End Select
+        Case Else: strReturn = "Field type " & fld.Type & " unknown"
+    End Select
+
+    FieldTypeName = strReturn
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FieldTypeName[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     VarTypeName
+' Description:  retrieves var type name from the numeric variable type
+' Assumptions:  -
+' Parameters:   vType - numeric type (integer)
+' Returns:      name for the type (string)
+' Throws:       none
+' References:
+'   Allen Browne, April, 2010
+'   http://allenbrowne.com/func-06.html
+'   TofuBug     May 28, 2015
+'   http://stackoverflow.com/questions/30511987/why-does-vartype-always-return-8204-for-arrays
+' Source/date:  Bonnie Campbell, September 2016 for NCPN tools
+' Revisions:    BLC, 9/16/2016 - initial version
+' ---------------------------------
+Public Function VarTypeName(vType As Integer) As String
+On Error GoTo Err_Handler
+    
+    Dim strReturn As String    'Name to return
+
+    Select Case CLng(vType) ' vType is Integer, but constants are Long.
+        Case dbBoolean: strReturn = "Yes/No"            ' 1
+        Case dbByte: strReturn = "Byte"                 ' 2
+        Case dbInteger: strReturn = "Integer"           ' 3
+        Case dbLong                                     ' 4
+'            If (fld.Attributes And dbAutoIncrField) = 0& Then
+                strReturn = "Long Integer"
+'            Else
+'                strReturn = "AutoNumber"
+'            End If
+        Case dbCurrency: strReturn = "Currency"         ' 5
+        Case dbSingle: strReturn = "Single"             ' 6
+        Case dbDouble: strReturn = "Double"             ' 7
+        Case dbDate: strReturn = "Date/Time"            ' 8
+        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
+        Case dbText                                     '10
+'            If (fld.Attributes And dbFixedField) = 0& Then
+                strReturn = "Text"
+'            Else
+'                strReturn = "Text (fixed width)"        '(no interface)
+'            End If
+        Case dbLongBinary: strReturn = "OLE Object"     '11
+        Case dbMemo                                     '12
+'            If (fld.Attributes And dbHyperlinkField) = 0& Then
+                strReturn = "Memo"
+'            Else
+'                strReturn = "Hyperlink"
+'            End If
+        Case dbGUID: strReturn = "GUID"                 '15
+
+        'Attached tables only: cannot create these in JET.
+        Case dbBigInt: strReturn = "Big Integer"        '16
+        Case dbVarBinary: strReturn = "VarBinary"       '17
+        Case dbChar: strReturn = "Char"                 '18
+        Case dbNumeric: strReturn = "Numeric"           '19
+        Case dbDecimal: strReturn = "Decimal"           '20
+        Case dbFloat: strReturn = "Float"               '21
+        Case dbTime: strReturn = "Time"                 '22
+        Case dbTimeStamp: strReturn = "Time Stamp"      '23
+
+        'Constants for complex types don't work prior to Access 2007 and later.
+        Case 101&: strReturn = "Attachment"         'dbAttachment
+        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
+        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
+        Case 104&: strReturn = "Complex Long"       'dbComplexLong
+        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
+        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
+        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
+        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
+        Case 109&: strReturn = "Complex Text"       'dbComplexText
+        
+        'Arrays
+        Case vbArray:
+            strReturn = "Array"                     '8192
+
+        Case Is > 8192
+            Select Case (vType - 8192)
+                Case vbString                       '8 --> Overall 8200 = 8192+8
+                    strReturn = "String Array"
+                Case vbVariant                      '12 --> Overall 8204 = 8192+12
+                    strReturn = "Variant Array"
+                Case Else
+                    strReturn = "Field type " & vType & " unknown"
+            End Select
+        Case Else: strReturn = "Field type " & vType & " unknown"
+    End Select
+
+    VarTypeName = strReturn
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - VarTypeName[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     FetchDbTableFieldInfo
+' Description:  retrieves field information from a database table
+' Parameters:   tbl - name of database table (string)
+' Returns:      rs - recordset containing # of records = iCount (DAO.recordset)
+' Assumptions:  used for retrieving table field data for mapping fields, etc.
+' Throws:       none
+' References:
+'   David W. Fenton, July 27, 2010
+'   http://stackoverflow.com/questions/3343922/get-column-names
+'   HansUp, October 18, 2013
+'   http://stackoverflow.com/questions/19452952/how-to-count-number-of-fields-in-a-table
+' Source/date:  Bonnie Campbell, June 2016
+' Revisions:    BLC, 6/8/2016 - initial version
+' ---------------------------------
+Public Function FetchDbTableFieldInfo(tbl As String) As Variant 'DAO.Recordset
+On Error GoTo Err_Handler
+
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset ', rsFields As ADODB.Recordset
+    Dim fld As DAO.field
+    Dim aryFieldInfo() As Variant
+    Dim iCols As Integer, iCol As Integer
+    Dim strTypeName As String
+    
+    Set db = CurrentDb()
+    
+    'determine if table is in database
+    If Not DbTableExists(tbl) Then GoTo Err_Handler
+    
+    Set rs = db.OpenRecordset(tbl)
+    
+'    Set rsFields = New ADODB.Recordset
+    
+    'get accurate count
+    rs.MoveLast
+    rs.MoveFirst
+    iCols = rs.fields.Count
+    iCol = 0
+    
+    ReDim Preserve aryFieldInfo(0 To iCols - 1)
+    
+    'iterate through fields
+    For Each fld In rs.fields
+'        Debug.Print fld.Name
+'        Debug.Print fld.Attributes
+'        Debug.Print fld.Size
+'        Debug.Print fld.Properties
+'        Debug.Print fld.Required
+'        Debug.Print fld.Type
+'        Debug.Print fld.ValidationRule
+'        With rsFields
+'            .Append
+'        End With
+        
+'        Debug.Print (fld)
+        
+        'fetch name for type
+'        GetFieldTypeName fld
+        strTypeName = VarTypeName(fld.Type)
+
+        With fld
+                
+            'prepare array of info
+            aryFieldInfo(iCol) = .Name & "|" & _
+                            .Type & "|" & _
+                            .Size & "|" & _
+                            .Required & "|" & _
+                            .AllowZeroLength & "|" & _
+                            strTypeName
+
+        End With
+        
+        iCol = iCol + 1
+    Next
+
+    FetchDbTableFieldInfo = aryFieldInfo
+
+    'cleanup
+    'Set fld = Nothing
+'    Set rs = Nothing
+'    Set db = Nothing
+    
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FetchDbTableFieldInfo[mod_Db])"
     End Select
     Resume Exit_Handler
 End Function
@@ -1101,6 +1500,187 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CreateTempRecords[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          CreateTempTable
+' Description:  creates a temp table from an array containing table field definitions
+' Assumptions:  field array is 1-dimensional
+'               fields are represented with name|type|length/size|required|allowZLS
+'               only name|type are required (except for dbText where length/size is also reqd)
+'               ex: "col1|CStr(dbText)|2|True|False"
+'               data array includes same # of columns as fields array
+' Parameters:   tblName - table name (string)
+'               aryFields - array containing field definitions (variant)
+' Returns:
+' References:
+' Source/date:  Bonnie Campbell, September 20 2016
+' Revisions:    BLC, 9/20/2016 - initial version
+' ---------------------------------
+Public Sub CreateTempTable(tblName As String, aryFields() As Variant)
+On Error GoTo Err_Handler
+
+    'check for blank table name or no fields
+    If Not IsArray(aryFields) Or Len(tblName) = 0 Then GoTo Exit_Handler
+    
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.field
+    Dim item As Variant, fldDef As Variant
+    Dim i As Integer
+
+    Set db = CurrentDb()
+    
+    'delete it if it already exists
+    If TableExists(tblName) Then RemoveTempTable (tblName)
+    
+    Set tdf = db.CreateTableDef(tblName)
+    
+    'prepare array
+    For Each item In aryFields
+    
+        'fldDef(0) = name, fldDef(1) = type, fldDef(2) = length (as applicable)
+        fldDef = Split(item, "|")
+        
+        'establish field w/ name & type
+        Set fld = tdf.CreateField(fldDef(0), CLng(fldDef(1)))
+        
+        'add attributes - size (if applicable), required & allow ZLS
+        For i = LBound(fldDef) To UBound(fldDef)
+            Select Case i
+                Case 0  'column name
+                Case 1  'column type
+                Case 2  'column size
+                    fld.Size = fldDef(2)
+                Case 3  'column required
+                    fld.Required = fldDef(3)
+                Case 4  'column allow ZLS
+                    fld.AllowZeroLength = fldDef(4)
+                Case 5
+                Case Else
+            End Select
+        Next
+        tdf.fields.Append fld
+        tdf.fields.Refresh
+    Next
+    
+    'add table
+    db.tabledefs.Append tdf
+    
+    'update window
+    db.tabledefs.Refresh
+    RefreshDatabaseWindow
+    
+    'cleanup
+'    db.Close
+
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CreateTempTable[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          RemoveTempTable
+' Description:  removes a temp table from database
+' Assumptions:  -
+' Parameters:   tblName - table name (string)
+' Returns:      -
+' References:   -
+' Source/date:  Bonnie Campbell, September 20 2016
+' Revisions:    BLC, 9/20/2016 - initial version
+' ---------------------------------
+Public Sub RemoveTempTable(tblName As String)
+On Error GoTo Err_Handler
+
+    'check for blank table name
+    If Len(tblName) = 0 Then GoTo Exit_Handler
+
+    'check if table exists
+    If TableExists(tblName) Then
+    
+        'delete table
+        DoCmd.DeleteObject acTable, tblName
+    
+    End If
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RemoveTempTable[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          AddRecords
+' Description:  adds records to a recordset & table
+' Assumptions:  -
+' Parameters:   rs - (DAO.Recordset)
+'               aryCols - field/column names (string array)
+'               aryData - data for each record (variant array)
+' Returns:      -
+' References:
+'   simoco, February 9, 2014
+'   http://stackoverflow.com/questions/21885101/can-you-use-a-variable-for-the-field-name-when-using-addnew-to-a-record-set
+' Source/date:  Bonnie Campbell, September 20 2016
+' Revisions:    BLC, 9/20/2016 - initial version
+' ---------------------------------
+Public Sub AddRecords(rs As DAO.Recordset, aryCols() As String, aryData() As Variant, _
+                            delimiter As String)
+On Error GoTo Err_Handler
+
+    Dim aryRecord As String
+    Dim i As Integer, j As Integer
+    Dim strColName As String
+
+    With rs
+        
+        'add new record
+        .AddNew
+        
+        
+        'iterate through data records
+        For i = 0 To UBound(aryData)
+        
+            'get record array
+            aryRecord = Split(aryData(i), delimiter)
+            
+            'iterate through columns
+            For j = 0 To UBound(aryCols)
+            
+                strColName = aryCols(j)
+                
+                .fields(strColName) = aryRecord
+            
+            Next
+        
+        Next
+    
+    
+    End With
+    
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - AddRecord[mod_Db])"
     End Select
     Resume Exit_Handler
 End Sub

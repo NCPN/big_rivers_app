@@ -315,7 +315,7 @@ End Sub
 ' ---------------------------------
 Public Function SetPropertyDAO(obj As Object, strPropertyName As String, intType As Integer, _
     varValue As Variant, Optional strErrMsg As String) As Boolean
-On Error GoTo ErrHandler
+On Error GoTo errHandler
     'Purpose:   Set a property for an object, creating if necessary.
     'Arguments: obj = the object whose property should be set.
     '           strPropertyName = the name of the property to set.
@@ -333,7 +333,7 @@ On Error GoTo ErrHandler
 ExitHandler:
     Exit Function
 
-ErrHandler:
+errHandler:
     strErrMsg = strErrMsg & obj.Name & "." & strPropertyName & " not set to " & _
         varValue & ". Error encountered (#" & Err.Number & " - SetPropertyDAO[mod_Git])" & _
         Err.Number & " - " & Err.Description & vbCrLf

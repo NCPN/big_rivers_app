@@ -1177,14 +1177,64 @@ Public Sub ExecuteIt()
 'Dim p As New Person
 'p.Node = 1
 '
-Dim frm As Form
-Dim Params(0 To 1) As Variant
+'Dim frm As Form
+'Dim Params(0 To 1) As Variant
+'
+''params(0) = "s_photo_data"
+'Params(0) = "s_tsys_temp_photo_data"
+'
+'Set frm = Forms("Tree")
+''LoadTree frm, frm.Controls("tvwTree").Object, "s_photo_data", params
+'LoadTree frm, frm.Controls("tvwTree").Object, "s_usys_temp_photo_data", Params
 
-'params(0) = "s_photo_data"
-Params(0) = "s_tsys_temp_photo_data"
+''---------------------
+'' Declarations
+''---------------------
+'Private m_visible As Long
+''---------------------
+'' Event Declarations
+''---------------------
+'
+''---------------------
+'' Properties
+''---------------------
+'Public Property Let Visible(Value As Long)
+'    m_visible = Value
+'End Property
+'
+'Public Property Get Visible() As Long
+'    Visible = m_visible
+'End Property
+'Dim p As New Person
+'
+'p.Visible = 1
 
-Set frm = Forms("Tree")
-'LoadTree frm, frm.Controls("tvwTree").Object, "s_photo_data", params
-LoadTree frm, frm.Controls("tvwTree").Object, "s_usys_temp_photo_data", Params
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim aryData() As Variant
+    Dim aryFields() As Variant
+    
+    Set db = CurrentDb
+    
+    Set rs = db.OpenRecordset("SELECT '';")
+    
+    aryData = FetchDbTableFieldInfo("SurveyDataSourceFile")
+    'use Array("",...) vs. Split() since array ==> variant array, split ==> string array
+    aryFields = Array("Column|" & CLng(dbText) & "|25", _
+                    "ColType|" & CLng(dbLong), _
+                    "IsReqd|" & CLng(dbByte), _
+                    "Length|" & CLng(dbInteger), _
+                    "AllowZLS|" & CLng(dbByte))
+    'Split("Column|Text|25,ColType|Long,IsReqd|Byte,Length|Integer,AllowZLS|Byte", ",")
+    'Set rs = ArrayToRecordset(ary, Array("A", "B", "C"))
+    
+    Debug.Print ""
+    
+    'don't use Array("A","B","C"...) this creates Variant array
+    'Split("a,b,c,d,e",",") creates String array
+'    aryFields = Split("a,b,c,d,e,f,g,h,i", ",")
 
-End Sub
+    Set rs = ArrayToRecordset(aryFields, aryData, "|")
+
+    Debug.Print ""
+End Property

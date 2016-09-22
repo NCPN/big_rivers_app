@@ -89,7 +89,7 @@ On Error GoTo Err_Handler
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strTitle
         If strContext <> "DbAdmin" Then
-            ctrl.visible = True
+            ctrl.Visible = True
         End If
     End If
     
@@ -168,7 +168,7 @@ On Error GoTo Err_Handler
     If ctrl.ControlType = acLabel Then
         ctrl.Caption = strInstructions
         If strContext <> "DbAdmin" Then
-            ctrl.visible = True
+            ctrl.Visible = True
         End If
     End If
     
@@ -492,7 +492,7 @@ On Error GoTo Err_Handler
     End Select
 
     If Len(fName) > 0 Then
-        Forms("Main").visible = False
+        Forms("Main").Visible = False
         DoCmd.OpenForm fName, acNormal, OpenArgs:=oArgs
     ElseIf Len(rName) > 0 Then
         'print preview mode - acViewPreview
@@ -869,7 +869,7 @@ On Error GoTo Err_Handler
         Case "Version"
             strSort = "Version"
         Case "Template"
-            strSort = "Template"
+            strSort = "TemplateName"
         Case "Remarks"
             strSort = "Remarks"
         Case "EffectiveDate"

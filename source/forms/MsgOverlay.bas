@@ -286,18 +286,18 @@ On Error GoTo Err_Handler
                             Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
                             'set ID #
                             lblRecordNumber.Caption = ary2(1)
-                            lblRecordNumber.visible = True
+                            lblRecordNumber.Visible = True
                             
                         Case "tagline"
                             'set table
                             Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
                             'set ID #
                             lblRecordNumber.Caption = ary2(1)
-                            lblRecordNumber.visible = True
+                            lblRecordNumber.Visible = True
                             
                         Case Else
                             lblMessage.Caption = ary2(1)
-                            lblRecordNumber.visible = False
+                            lblRecordNumber.Visible = False
                     End Select
                     
                 Case 1 'overlay type

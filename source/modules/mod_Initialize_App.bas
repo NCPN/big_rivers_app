@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Initialize_App
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  Standard module for setting initial app & database values/settings & global variables
 ' Source/date:  Bonnie Campbell, July 2014
 ' Adapted:      -
@@ -20,6 +20,7 @@ Option Explicit
 '                                since these are application vs. framework specific, added Level & Version #
 '                                added blnRunQueries & blnUpdateAll from mod_User
 '               BLC, 6/24/2016 - 1.03 - replaced Exit_Function > Exit_Handler
+'               BLC, 9/21/2016 - 1.04 - updated AppSetup()
 ' =================================
 ' HISTORY:
 ' MERGED MODULE: mod_Global_Variables (merged with mod_Initialize_App)
@@ -184,13 +185,14 @@ End Sub
 '               BLC, 6/5/2016 - removed underscores from field names
 '               BLC, 9/1/2016 - accommodated tbxWebURL as well as tbxWeb_address,
 '                               new tsys_App_Releases structure via iIsSupported
+'               BLC, 9/21/2016 - adjusted to record accesslevel & release version
 ' =================================
 Public Function AppSetup()
     On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim strSysTable As String, strAddress As String, strUser As String, strRelease As String
-    Dim strSQL As String, strCaption As String, strReleaseID As String
+    Dim strSQL As String, strCaption As String, strReleaseVersion As String, strReleaseID As String
     Dim iIsSupported As Integer
 
     If Not FormIsOpen(DB_ADMIN_FORM) Then
@@ -270,7 +272,9 @@ Public Function AppSetup()
 ' FIX: adding login data to tsys_Logins
 '**********************************************
     ' Log the user, login time, release number, and application mode in the systems table
-    strRelease = Left(strReleaseID, 8) & " / " & TempVars.item("UserAccessLevel")
+    strRelease = Left(strReleaseID, InStr(strReleaseID, "(") - 2) & " / " & TempVars.item("UserAccessLevel")
+    strReleaseVersion = Replace(Left(strReleaseID, InStr(strReleaseID, "(") - 2), "version ", "")
+    strUser = TempVars.item("AppUsername")
     If IsODBC("tsys_Logins") Then
         ' Use a pass-through query to test the connection for write privileges
 '        strSQL = "INSERT INTO dbo.tsys_Logins " & _
@@ -290,11 +294,12 @@ Public Function AppSetup()
 '        strSQL = "INSERT INTO tsys_Logins ( UserName, ActionTaken ) SELECT '" _
 '            & strUser & "' AS User, """ & strRelease & """ AS Action;"
 '        strSQL = GetTemplate("i_tsys_logins", "username" & PARAM_SEPARATOR & strUser & "|action" & PARAM_SEPARATOR & strRelease)
-        Dim Params(0 To 3) As Variant
+        Dim Params(0 To 4) As Variant
         Params(0) = "i_login"
         Params(1) = strUser
         Params(2) = "Application login"
-        Params(3) = strRelease
+        Params(3) = strReleaseVersion
+        Params(4) = TempVars.item("UserAccessLevel")
         
 '        strSQL = GetTemplate("i_login") 'GetTemplate("i_login", params)
         SetRecord "i_login", Params
@@ -303,6 +308,9 @@ Public Function AppSetup()
 '        DoCmd.SetWarnings True
     End If
 
+'**********************************************
+' FIX:  strReleaseID to be ID
+'**********************************************
     ' If the current front-end release is not listed in the back-end file, run fxn to update
     '   Note: Needed where there are one or more back-end copies at remote locations that
     '   cannot be updated with new release information by the developer
@@ -340,7 +348,7 @@ Update_Settings:
         If TempVars.item("HasAccessBE") Then DoCmd.OpenForm "frm_Lock_BE", , , , , acHidden
     
         ' If there is an Access back-end, make the backups button visible
-        frm!fsub_DbAdmin.Form!cmdBackup.visible = TempVars.item("HasAccessBE")
+        frm!fsub_DbAdmin.Form!cmdBackup.Visible = TempVars.item("HasAccessBE")
     
         ' Requery the control that shows the linked back-ends
         frm!lbxLinkedDbs.Requery

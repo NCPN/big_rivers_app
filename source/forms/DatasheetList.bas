@@ -20,10 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =2145
-    Top =1950
-    Right =9525
-    Bottom =6315
+    Right =10530
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7ce3e0e10ec7e440
@@ -629,14 +627,15 @@ Option Explicit
 ' =================================
 ' Form:         DatasheetList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, July 1, 2016
 ' References:   -
-' Revisions:    BLC - 7/1/2016 - 1.00 - initial version
+' Revisions:    BLC - 7/1/2016  - 1.00 - initial version
+'               BLC - 9/22/2016 - 1.01 - updated to use GetRecords() vs GetTemplate()
 ' =================================
 
 '---------------------
@@ -730,6 +729,56 @@ End Property
 '---------------------
 
 ' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 7/1/2016  - initial version
+'   BLC - 9/22/2016 - use GetRecords() vs GetTemplate()
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    lblTitle.Caption = ""
+    lblDirections.Caption = "Edit records using the buttons for the record at right." _
+                            & vbCrLf & "Icon codes at left identify if record may be edited."
+    tbxIcon.Value = StringFromCodepoint(uLocked)
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
+    
+    'set hover
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+
+    btnDelete.Caption = StringFromCodepoint(uDelete)
+    btnDelete.ForeColor = lngRed
+    
+    'hide delete!
+    btnDelete.Visible = False
+
+'    Me.RecordSource = GetTemplate("s_tsys_datasheet_defaults", _
+'                        "ParkID" & PARAM_SEPARATOR & TempVars("ParkID"))
+
+    Set Me.Recordset = GetRecords("s_tsys_datasheet_defaults")
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[DatasheetList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Form_Load
 ' Description:  form loading actions
 ' Assumptions:  -
@@ -755,53 +804,6 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Load[DatasheetList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Form_Open
-' Description:  form opening actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, July 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 7/1/2016 - initial version
-' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    lblTitle.Caption = ""
-    lblDirections.Caption = "Edit records using the buttons for the record at right." _
-                            & vbCrLf & "Icon codes at left identify if record may be edited."
-    tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.ForeColor = lngDkGreen
-    lblDirections.ForeColor = lngLtBlue
-    
-    'set hover
-    btnEdit.HoverColor = lngGreen
-    btnDelete.HoverColor = lngGreen
-
-    btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.ForeColor = lngRed
-    
-    'hide delete!
-    btnDelete.visible = False
-
-    Me.RecordSource = GetTemplate("s_tsys_datasheet_defaults", _
-                        "ParkID" & PARAM_SEPARATOR & TempVars("ParkID"))
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[DatasheetList form])"
     End Select
     Resume Exit_Handler
 End Sub

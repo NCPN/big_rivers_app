@@ -1543,7 +1543,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
             lblError.Caption = strSkippedFiles & strDuplicates
             lblError.BackColor = lngYellow
             lblError.ForeColor = vbRed
-            lblError.visible = True
+            lblError.Visible = True
         Next
       Else
         'Data is not in the desired Format

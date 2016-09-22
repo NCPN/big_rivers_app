@@ -20,10 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =450
-    Top =2865
-    Right =7830
-    Bottom =6975
+    Right =10530
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7db051a491c3e440
@@ -513,36 +511,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 21, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/21/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[UserRoleList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -578,6 +546,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Open[UserRoleList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 21, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/21/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[UserRoleList form])"
     End Select
     Resume Exit_Handler
 End Sub

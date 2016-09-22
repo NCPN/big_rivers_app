@@ -390,10 +390,10 @@ Private Sub Form_Open(Cancel As Integer)
         With Me
             If TempVars.item("UserAccessLevel") = "admin" Then
                 .AllowEdits = True
-                .tbxWeb_address.visible = True
+                .tbxWeb_address.Visible = True
             Else
                 .AllowEdits = False
-                .tbxWeb_address.visible = False
+                .tbxWeb_address.Visible = False
             End If
             
             With Forms!frm_Switchboard!fsub_DbAdmin.Form

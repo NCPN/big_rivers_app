@@ -5,12 +5,10 @@ Begin Form
     RecordSelectors = NotDefault
     MaxButton = NotDefault
     MinButton = NotDefault
-    ControlBox = NotDefault
     NavigationButtons = NotDefault
-    CloseButton = NotDefault
+    AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    OrderByOn = NotDefault
     AllowEdits = NotDefault
     DefaultView =0
     ScrollBars =2
@@ -26,10 +24,9 @@ Begin Form
     ItemSuffix =38
     Left =3240
     Top =3525
-    Right =12480
+    Right =15795
     Bottom =14520
     DatasheetGridlinesColor =14806254
-    OrderBy ="EffectiveDate DESC"
     RecSrcDt = Begin
         0x0680db994fd0e440
     End
@@ -137,7 +134,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =1380
+            Height =1740
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -150,6 +147,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
+                    Caption ="Template SQL"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
@@ -157,23 +155,25 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =223
-                    Width =7260
-                    Height =840
+                    OverlapFlags =215
+                    Left =45
+                    Width =6600
+                    Height =1260
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Template SQL\015\012Icon codes at left identify if record may be edited/deleted."
+                    Caption ="directions"
                     GridlineColor =10921638
-                    LayoutCachedWidth =7260
-                    LayoutCachedHeight =840
+                    LayoutCachedLeft =45
+                    LayoutCachedWidth =6645
+                    LayoutCachedHeight =1260
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =6420
-                    Top =900
+                    Top =1320
                     Width =900
                     Height =315
                     FontWeight =500
@@ -183,73 +183,73 @@ Begin Form
                     Caption ="Format"
                     GridlineColor =10921638
                     LayoutCachedLeft =6420
-                    LayoutCachedTop =900
+                    LayoutCachedTop =1320
                     LayoutCachedWidth =7320
-                    LayoutCachedHeight =1215
+                    LayoutCachedHeight =1635
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =120
-                    Top =900
-                    Width =270
+                    Top =1320
+                    Width =540
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblHdrID"
-                    Caption ="ID"
+                    Caption ="1"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =390
-                    LayoutCachedHeight =1215
+                    LayoutCachedTop =1320
+                    LayoutCachedWidth =660
+                    LayoutCachedHeight =1635
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =1680
-                    Top =900
-                    Width =1245
+                    Top =1320
+                    Width =3000
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTemplateName"
-                    Caption ="Template"
+                    Caption ="s_get_parks"
                     GridlineColor =10921638
                     LayoutCachedLeft =1680
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =2925
-                    LayoutCachedHeight =1215
+                    LayoutCachedTop =1320
+                    LayoutCachedWidth =4680
+                    LayoutCachedHeight =1635
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =720
-                    Top =900
+                    Top =1320
                     Width =720
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblVersion"
-                    Caption ="Version"
+                    Caption ="1"
                     GridlineColor =10921638
                     LayoutCachedLeft =720
-                    LayoutCachedTop =900
+                    LayoutCachedTop =1320
                     LayoutCachedWidth =1440
-                    LayoutCachedHeight =1215
+                    LayoutCachedHeight =1635
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =4860
-                    Top =900
+                    Top =1320
                     Width =1440
                     Height =315
                     FontWeight =500
@@ -259,14 +259,14 @@ Begin Form
                     Caption ="Effective Date"
                     GridlineColor =10921638
                     LayoutCachedLeft =4860
-                    LayoutCachedTop =900
+                    LayoutCachedTop =1320
                     LayoutCachedWidth =6300
-                    LayoutCachedHeight =1215
+                    LayoutCachedHeight =1635
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin CommandButton
-                    OverlapFlags =215
+                    OverlapFlags =85
                     Left =6720
                     Top =120
                     Width =720
@@ -343,9 +343,11 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
+                    Enabled = NotDefault
                     Locked = NotDefault
                     CanGrow = NotDefault
                     CanShrink = NotDefault
+                    TabStop = NotDefault
                     ScrollBars =2
                     OldBorderStyle =0
                     OverlapFlags =85
@@ -360,7 +362,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxSQL"
-                    ControlSource ="Template"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
@@ -494,6 +495,71 @@ End Property
 '---------------------
 
 ' ---------------------------------
+' Sub:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    'minimize TemplateList
+    ToggleForm "TemplateList", -1
+
+    Me.Caption = "Template SQL"
+    lblTitle.Caption = ""
+    lblDirections.Caption = "Templates are read only to prevent inadvertent edits." _
+                            & vbCrLf _
+                            & " Run SQL SELECT statements by clicking the button at right." _
+                            & vbCrLf _
+                            & " Please contact NCPN data managers to make changes."
+    lblDirections.ForeColor = lngLtBlue
+    
+    'retrieve data from OpenArgs
+    If Len(OpenArgs) > 0 Then
+        Dim aryOA() As String
+        
+        aryOA = Split(OpenArgs, "|")
+        
+        Me.lblHdrID.Caption = "#" & aryOA(0)
+        Me.lblVersion.Caption = "vers. " & aryOA(1)
+        Me.lblTemplateName.Caption = aryOA(2)
+        Me.tbxSQL.Value = aryOA(3)
+        Me.lblEffectiveDate.Caption = aryOA(4)
+        Me.lblFormat.Caption = aryOA(5)
+    Else
+        GoTo Exit_Handler
+    End If
+    
+    'set hover
+    btnRunSQL.HoverColor = lngGreen
+    btnRunSQL.Enabled = False
+
+    'only enable if it's a SELECT query
+    If Left(aryOA(2), 1) = "s" Then btnRunSQL.Enabled = True
+    
+    'don't select SQL
+    
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[TemplateSQL form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Form_Load
 ' Description:  form loading actions
 ' Assumptions:  -
@@ -524,61 +590,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          Form_Open
-' Description:  form opening actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Open(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    lblTitle.Caption = "SQL templates are read only in this format to prevent inadvertent edits." _
-                            & "If edits are necessary please contact NCPN data managers."
-    lblDirections.Caption = "SQL templates are read only in this format to prevent inadvertent edits." _
-                            & "If edits are necessary please contact NCPN data managers."
-    lblDirections.ForeColor = lngLtBlue
-    
-    'retrieve data from OpenArgs
-    If Len(OpenArgs) > 0 Then
-        Dim aryOA() As String
-        
-        aryOA = Split(OpenArgs, "|")
-        
-        Me.lblHdrID.Caption = aryOA(0)
-        Me.lblVersion.Caption = aryOA(1)
-        Me.lblTemplateName.Caption = aryOA(2)
-        Me.lblEffectiveDate.Caption = aryOA(3)
-        Me.lblFormat.Caption = aryOA(4)
-    Else
-        GoTo Exit_Handler
-    End If
-    
-    'set hover
-    btnRunSQL.HoverColor = lngGreen
-    btnRunSQL.Enabled = False
-
-    'only enable if it's a SELECT query
-    If Left(aryOA(2), 1) = "s" Then btnRunSQL.Enabled = True
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[TemplateSQL form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Current
 ' Description:  form current actions
 ' Assumptions:  -
@@ -595,7 +606,7 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
     
     'open args
-    If Len(Me.lblTemplateName) > 0 Then
+    If Len(Me.lblTemplateName.Caption) > 0 Then
         Dim aryOA() As String
         
         aryOA = Split(Me.OpenArgs, "|")
@@ -664,17 +675,46 @@ End Sub
 Private Sub btnRunSQL_Click()
 On Error GoTo Err_Handler
     
-    'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-                "SQL Templates may require entry of parameters before" _
-                    & "results are presented." & PARAM_SEPARATOR & _
-                "|Type" & PARAM_SEPARATOR & "info"
-
+    'present message if SQL starts w/ params
+    If Left(Me.Template, 6) = "PARAMS" Then
+        
+        'show deleted record message & clear
+        DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                    "msg" & PARAM_SEPARATOR & "SQL Templates may require entry " _
+                        & "of parameters before results are presented. " & PARAM_SEPARATOR & _
+                    "|Type" & PARAM_SEPARATOR & "info"
+    End If
+    
     'edit, update, delete
     'selects
     'only run if it's a SELECT query
-    If Left(Me.lblTemplateName, 1) = "s" Then
-        DoCmd.RunSQL Me.tbxSQL
+    If Left(Me.lblTemplateName.Caption, 1) = "s" Then
+        Dim db As DAO.Database
+        Dim qdf As DAO.QueryDef
+        Dim rs As DAO.Recordset
+        
+        Set db = CurrentDb
+        
+        With db
+            Set qdf = .QueryDefs("usys_temp_qdf")
+            
+            With qdf
+                .SQL = Me.tbxSQL
+                
+                'don't .OpenRecordset here --> causes missing param errors
+            End With
+            
+            'open & run query to provide parameter prompts
+            DoCmd.OpenQuery "usys_temp_qdf", acViewNormal
+            
+            'minimize TemplateSQL
+            'ToggleForm "TemplateSQL", -1
+            
+            'close form
+            DoCmd.Close acForm, "TemplateSQL"
+            
+        End With
+    
     End If
 
 Exit_Handler:
@@ -695,7 +735,9 @@ End Sub
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   Fionnuala, October 21, 2010
+'   http://stackoverflow.com/questions/3992232/access-how-to-detect-with-vba-whether-a-query-is-opened
 ' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -704,47 +746,10 @@ End Sub
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[TemplateSQL form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnViewSQL_Click
-' Description:  button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:
-'   pere_de_chipstic, August 5, 2012
-'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
-' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 9/13/2016 - initial version
-' ---------------------------------
-Private Sub btnViewSQL_Click()
-On Error GoTo Err_Handler
-
-    'show deleted record message & clear
-    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-                "SQL Templates may require entry of parameters before" _
-                    & "results are presented." & PARAM_SEPARATOR & _
-                "|Type" & PARAM_SEPARATOR & "info"
-
-    'edit, update, delete
-    'selects
-    'only run if it's a SELECT query
-    If Left(Me.lblTemplateName, 1) = "s" Then
-        DoCmd.RunSQL Me.tbxSQL
+    'restore list if query isn't open, otherwise just close
+    If Not SysCmd(acSysCmdGetObjectState, acQuery, "usys_temp_qdf") = acObjStateOpen Then
+        'restore TemplateList
+        ToggleForm "TemplateList", 0
     End If
     
 Exit_Handler:
@@ -753,7 +758,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnViewSQL_Click[TemplateSQL form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[TemplateSQL form])"
     End Select
     Resume Exit_Handler
 End Sub

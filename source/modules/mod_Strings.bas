@@ -109,7 +109,7 @@ Public Const uSnail = &H1F40C               '128012
 Public Const uPawPrints = &H1F43E           '128062
 Public Const uEye = &H1F441                 '128065
 Public Const uThumbsUp = &H1F44D            '128077 thumbs up
-Public Const uThumbsDown = &H1F44E          '128078 thumbs donw
+Public Const uThumbsDown = &H1F44E          '128078 thumbs down
 
 Public Const uUser = &H1F464                '128100 bust in silhouette
 Public Const uUsers = &H1F465               '128101 busts in silhouette
@@ -132,6 +132,7 @@ Public Const uMagnifierLeft = &H1F50D       '128269
 Public Const uMagnifierRight = &H1F50E      '128270
 Public Const uCamera = &H1F4F7              '128247 camera icon
 Public Const uFlashCamera = &H1F4F8         '128248 camera w/flash icon
+Public Const uKey = &H1F511                 '128273 key
 Public Const uLocked = &H1F512              '128274
 Public Const uUnlocked = &H1F513            '128275
 Public Const uWrench = &H1F527              '128295

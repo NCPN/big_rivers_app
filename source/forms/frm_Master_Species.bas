@@ -1346,7 +1346,7 @@ Private Sub Form_Load()
 
       strSortBy = "Master_Plant_Code"
       strCol1 = "Master_Plant_Code"
-      Me!Master_PLANT_Code.visible = False
+      Me!Master_PLANT_Code.Visible = False
   
   strSQL = "SELECT " & strCol1 & ", Master_PLANT_Code AS [Master Plant Code], Master_Family AS [Master Family], Master_Species AS [Master Species], " & _
   "Master_Common_Name AS [Master Common Name], Utah_PLANT_Code AS [Utah Code], Utah_Species AS [Utah Species], " & _
@@ -1387,22 +1387,22 @@ Private Sub Sort_Options_AfterUpdate()
       strSortBy = "Master_Plant_Code"
       strCol1 = "Master_Plant_Code"
       Me!Combo_Caption.Caption = "Master PLANTS Code"
-      Me!Master_PLANT_Code.visible = False
+      Me!Master_PLANT_Code.Visible = False
     Case 2
       strSortBy = "Master_Species"
       strCol1 = "Master_Species"
       Me!Combo_Caption.Caption = "Master Species"
-      Me!Master_PLANT_Code.visible = True
+      Me!Master_PLANT_Code.Visible = True
     Case 3
       strSortBy = "Master_Family, Master_Species"
       strCol1 = "Master_Family"
       Me!Combo_Caption.Caption = "Master Family"
-      Me!Master_PLANT_Code.visible = True
+      Me!Master_PLANT_Code.Visible = True
     Case Else
       strSortBy = "Master_Common_Name"
       strCol1 = "Master_Common_Name"
       Me!Combo_Caption.Caption = "Master Common Name"
-      Me!Master_PLANT_Code.visible = True
+      Me!Master_PLANT_Code.Visible = True
   End Select
   
   strSQL = "SELECT " & strCol1 & ", Master_PLANT_Code AS [Master Plant Code], Master_Family AS [Master Family], Master_Species AS [Master Species], " & _

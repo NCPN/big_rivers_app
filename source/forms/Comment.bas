@@ -640,7 +640,7 @@ End Property
 
 Public Property Let CommentVisible(Value As Byte)
     m_CommentVisible = Value
-    tbxComment.visible = m_CommentVisible
+    tbxComment.Visible = m_CommentVisible
 End Property
 
 Public Property Get InstructionVisible() As Byte
@@ -649,7 +649,7 @@ End Property
 
 Public Property Let InstructionVisible(Value As Byte)
     m_InstructionVisible = Value
-    lblInstructions.visible = m_InstructionVisible
+    lblInstructions.Visible = m_InstructionVisible
 End Property
 
 Public Property Get CountLabelVisible() As Byte
@@ -658,7 +658,7 @@ End Property
 
 Public Property Let CountLabelVisible(Value As Byte)
     m_CountLabelVisible = Value
-    lblCount.visible = m_CountLabelVisible
+    lblCount.Visible = m_CountLabelVisible
 End Property
 
 Public Property Get CurrentCountVisible() As Byte
@@ -667,7 +667,7 @@ End Property
 
 Public Property Let CurrentCountVisible(Value As Byte)
     m_CurrentCountVisible = Value
-    lblCount.visible = m_CurrentCountVisible
+    lblCount.Visible = m_CurrentCountVisible
 End Property
 
 Public Property Get MaxCountVisible() As Byte
@@ -676,7 +676,7 @@ End Property
 
 Public Property Let MaxCountVisible(Value As Byte)
     m_MaxCountVisible = Value
-    lblMaxCount.visible = m_MaxCountVisible
+    lblMaxCount.Visible = m_MaxCountVisible
 End Property
 
 Public Property Get RemainingCountVisible() As Byte
@@ -693,7 +693,7 @@ End Property
 
 Public Property Let AlertBoxVisible(Value As Byte)
     m_AlertBoxVisible = Value
-    Me.rctAlert.visible = m_AlertBoxVisible
+    Me.rctAlert.Visible = m_AlertBoxVisible
 End Property
 
 ' ==== Buttons ====
@@ -844,7 +844,7 @@ On Error GoTo Err_Handler
     Me.Instructions = "Enter your establishment comment."
     Me.CountLabelVisible = False
     Me.CurrentCount = "Characters Remaining:"
-    Me.lblCharacterCount.visible = False
+    Me.lblCharacterCount.Visible = False
     Me.MaxCount = 50
     Me.AlertCount = 10
    

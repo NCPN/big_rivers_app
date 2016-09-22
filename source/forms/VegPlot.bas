@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =69
-    Left =4185
-    Top =1995
-    Right =12045
-    Bottom =11535
+    Left =3360
+    Top =2280
+    Right =11220
+    Bottom =11820
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x9116deeeb5cfe440
@@ -1677,66 +1677,66 @@ On Error GoTo Err_Handler
     tbxID.Value = 0
   
     'defaults --> turn off items
-    lblWater.visible = False
-    tbxPctWater.visible = False
-    lblURC.visible = False
-    tbxPctURC.visible = False
-    lblPlotDensity.visible = False
-    lblFraction.visible = False
-    tbxPlotDensity.visible = False
-    chkNoCanopyVeg.visible = False
-    lblNoCanopyVeg.visible = False
-    chkNoIndicatorSpecies.visible = False
-    lblNoIndicatorSpecies.visible = False
-    chkNoRootedVeg.visible = False
-    lblNoRootedVeg.visible = False
-    chkHasSocialTrails.visible = False
-    lblHasSocialTrails.visible = False
-    btnWCC.visible = False
-    btnURC.visible = False
-    btnARC.visible = False
+    lblWater.Visible = False
+    tbxPctWater.Visible = False
+    lblURC.Visible = False
+    tbxPctURC.Visible = False
+    lblPlotDensity.Visible = False
+    lblFraction.Visible = False
+    tbxPlotDensity.Visible = False
+    chkNoCanopyVeg.Visible = False
+    lblNoCanopyVeg.Visible = False
+    chkNoIndicatorSpecies.Visible = False
+    lblNoIndicatorSpecies.Visible = False
+    chkNoRootedVeg.Visible = False
+    lblNoRootedVeg.Visible = False
+    chkHasSocialTrails.Visible = False
+    lblHasSocialTrails.Visible = False
+    btnWCC.Visible = False
+    btnURC.Visible = False
+    btnARC.Visible = False
     
     'adjust UI based on park
     Select Case TempVars("ParkCode")
         Case "BLCA"
-            lblURC.visible = True
-            tbxPctURC.visible = True
-            lblPlotDensity.visible = True
-            lblFraction.visible = True
-            tbxPlotDensity.visible = True
-            chkNoCanopyVeg.visible = True
-            lblNoCanopyVeg.visible = True
-            chkNoIndicatorSpecies.visible = True
-            lblNoIndicatorSpecies.visible = True
-            chkHasSocialTrails.visible = True
-            lblHasSocialTrails.visible = True
-            btnWCC.visible = True
-            btnURC.visible = True
+            lblURC.Visible = True
+            tbxPctURC.Visible = True
+            lblPlotDensity.Visible = True
+            lblFraction.Visible = True
+            tbxPlotDensity.Visible = True
+            chkNoCanopyVeg.Visible = True
+            lblNoCanopyVeg.Visible = True
+            chkNoIndicatorSpecies.Visible = True
+            lblNoIndicatorSpecies.Visible = True
+            chkHasSocialTrails.Visible = True
+            lblHasSocialTrails.Visible = True
+            btnWCC.Visible = True
+            btnURC.Visible = True
         
         Case "CANY"
-            lblURC.visible = True
-            tbxPctURC.visible = True
-            lblWater.visible = True
-            tbxPctWater.visible = True
-            lblPlotDensity.visible = True
-            lblFraction.visible = True
-            tbxPlotDensity.visible = True
-            tbxPctURC.visible = True
-            chkNoCanopyVeg.visible = True
-            lblNoCanopyVeg.visible = True
-            chkNoRootedVeg.visible = True
-            lblNoRootedVeg.visible = True
-            chkHasSocialTrails.visible = True
-            lblHasSocialTrails.visible = True
-            btnWCC.visible = True
-            btnURC.visible = True
+            lblURC.Visible = True
+            tbxPctURC.Visible = True
+            lblWater.Visible = True
+            tbxPctWater.Visible = True
+            lblPlotDensity.Visible = True
+            lblFraction.Visible = True
+            tbxPlotDensity.Visible = True
+            tbxPctURC.Visible = True
+            chkNoCanopyVeg.Visible = True
+            lblNoCanopyVeg.Visible = True
+            chkNoRootedVeg.Visible = True
+            lblNoRootedVeg.Visible = True
+            chkHasSocialTrails.Visible = True
+            lblHasSocialTrails.Visible = True
+            btnWCC.Visible = True
+            btnURC.Visible = True
             
         Case "DINO"
-            lblWater.visible = True
-            tbxPctWater.visible = True
-            chkNoRootedVeg.visible = True
-            lblNoRootedVeg.visible = True
-            btnARC.visible = True
+            lblWater.Visible = True
+            tbxPctWater.Visible = True
+            chkNoRootedVeg.Visible = True
+            lblNoRootedVeg.Visible = True
+            btnARC.Visible = True
     End Select
     
     'ID default -> value used only for edits of existing table values
@@ -2350,7 +2350,7 @@ Private Sub btnTaglines_Click()
 On Error GoTo Err_Handler
     
     'open form
-    DoCmd.OpenForm "Tagline", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
+    DoCmd.OpenForm "Tagline", acNormal, , , , , Me.Name & "|" & tbxID
     
 Exit_Handler:
     Exit Sub

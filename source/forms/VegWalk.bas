@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =4215
+    Top =2685
+    Right =12075
+    Bottom =10050
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -939,10 +939,25 @@ On Error GoTo Err_Handler
     'default
     Me.CallingForm = "Main"
     
-    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then
+    
+        Dim strCaller As String
+    
+        'identify calling form
+        Select Case Split(Me.OpenArgs, "|")(0)
+            Case "WoodyCanopySpecies", "UnderstoryRootedSpecies", "AllRootedSpecies"
+                strCaller = "VegPlot"
+            Case Else
+                strCaller = Split(Me.OpenArgs, "|")(0)
+        End Select
+        
+        Me.CallingForm = strCaller
 
-    'minimize Main
+    End If
+    
+    'minimize calling form
     ToggleForm Me.CallingForm, -1
+
 
     'set context - based on TempVars
     lblContext.ForeColor = lngLime

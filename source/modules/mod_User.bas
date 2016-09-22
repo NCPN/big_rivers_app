@@ -318,7 +318,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                         .optgFormMode.Enabled = True
                         .subLookupTables.Locked = True
                     Case "frm_QA_Tools"
-                        .pgDataTables.visible = False
+                        .pgDataTables.Visible = False
                         .btnDesignView.Enabled = False
                         .optgScope.Enabled = False
                         .cmbTimeframe.Enabled = True
@@ -435,7 +435,7 @@ Debug.Print "useraccesslvl=" & TempVars("UserAccessLevel")
                     Case "fsub_Events_Browser"
                         .btnEdit.Caption = "View"               ' Set button caption
                     Case "frm_QA_Tools"
-                        .pgDataTables.visible = False
+                        .pgDataTables.Visible = False
                         .btnDesignView.Enabled = False
                         .optgScope.Enabled = False
                         .cmbTimeframe.Enabled = True
@@ -526,7 +526,7 @@ Admin_PowerUser:
                 .subSchedule.Form.AllowEdits = True
                 .btnAutoPopulate.Enabled = True
             Case "frm_QA_Tool"
-                .pgDataTables.visible = True
+                .pgDataTables.Visible = True
                 .btnDesignView.Enabled = True
                 .optgScope.Enabled = True
                 .cmbTimeframe.Enabled = True
