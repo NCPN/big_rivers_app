@@ -1100,11 +1100,19 @@ On Error GoTo Err_Handler
             .SQL = GetTemplate(Template)
         
             Select Case Template
+            
+                Case "s_access_level"
+                    
+                    '-- required parameters --
+                    .Parameters("lvl") = TempVars("tempLvl")
+                    
+                    'clear the tempvar
+                    TempVars.Remove "tempLvl"
                 
                 Case "s_datasheet_defaults_by_park"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                 
                 Case "s_datasheet_defaults_by_river"
                     
@@ -1133,12 +1141,12 @@ On Error GoTo Err_Handler
                 Case "s_feature_list"
                     
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                                         
                 Case "s_feature_list_by_site"
                     
                     '-- required parameters --
-                    .Parameters("pcode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
                                         
                 Case "s_get_parks"
@@ -1148,8 +1156,14 @@ On Error GoTo Err_Handler
                 Case "s_location_by_park_river"
                 
                     '-- required parameters --
-                    .Parameters("ParkCode") = TempVars("ParkCode")
+                    .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_location_by_park_river_segment"
+                
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("seg") = TempVars("River")
                 
                 Case "s_location_list_by_park_river"
                 
@@ -1172,7 +1186,7 @@ On Error GoTo Err_Handler
                 
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
-                    .Parameters("waterway") = TempVars("River")
+                    .Parameters("seg") = TempVars("River")
                 
                 Case "s_site_list_by_park_river"
                 
@@ -1394,11 +1408,11 @@ On Error GoTo Err_Handler
                 Case "i_cover_species"
                                     
                     'set the table name in the template --> handles WCC, URC, ARC species
-                    .SQL = Replace(.SQL, "FROM tbl ", "FROM " & Params(0) & " ")
+                    .SQL = Replace(.SQL, "INTO tbl ", "INTO " & Params(0) & " ")
                                     
                     '-- required parameters --
-                    .Parameters("VegPlot_ID") = Params(1)
-                    .Parameters("Master_PLANT_Code") = Params(2)
+                    .Parameters("VegPlotID") = Params(1)
+                    .Parameters("MasterPlantCode") = Params(2)
                     .Parameters("PctCover") = Params(3)
                         
 '        params(0) = "WoodyCanopySpecies"
@@ -1444,7 +1458,7 @@ On Error GoTo Err_Handler
                 Case "i_login"
                 
                     '-- required parameters --
-                    .Parameters("username") = Params(1)
+                    .Parameters("uname") = Params(1) 'username
                     .Parameters("activity") = Params(2)
                     .Parameters("version") = Params(3)
                     .Parameters("accesslvl") = Params(4)
@@ -1494,15 +1508,18 @@ On Error GoTo Err_Handler
                 Case "i_site"
                     
                     '-- required parameters --
-                    .Parameters("ParkID") = Params(1)
-                    .Parameters("RiverID") = Params(2)
-                    .Parameters("Code") = Params(3)
-                    .Parameters("Name") = Params(4)
-                    .Parameters("IsActiveForProtocol") = Params(5)
+                    .Parameters("parkID") = Params(1)
+                    .Parameters("riverID") = Params(2)
+                    .Parameters("code") = Params(3)         'SiteCode
+                    .Parameters("sname") = Params(4)        'SiteName
+                    'use |flag| to force 1/0 values vs. Access False (0) & True (-1)
+                    .Parameters("flag") = Abs(Params(5))    'IsActiveForProtocol
                     
                     '-- optional parameters --
-                    .Parameters("Directions") = Params(6)
-                    .Parameters("Description") = Params(7)
+                    'NOTE: parameters are limited to 255 char
+                    '      dir may be truncated via parameter since it's a MEMO field
+                    .Parameters("dir") = Params(6)          'Directions
+                    .Parameters("descr") = Params(7)        'Description
                 
                 Case "i_tagline"
                 

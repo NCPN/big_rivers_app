@@ -847,7 +847,7 @@ Next
 End Sub
 
 
-Public Sub doit()
+Public Sub DoIt()
 ' Mark K, 10/6/2011
 ' http://www.access-programmers.co.uk/forums/showthread.php?t=216531
 
@@ -1237,4 +1237,26 @@ Public Sub ExecuteIt()
     Set rs = ArrayToRecordset(aryFields, aryData, "|")
 
     Debug.Print ""
-End Property
+End Sub
+
+Public Sub DoIt2()
+    Dim db As DAO.Database
+    Dim qdf As DAO.QueryDef
+    Dim Template As String
+    
+    Template = "i_site"
+    
+    Set db = CurrentDb
+    
+    With db
+        Set qdf = .QueryDefs("usys_temp_qdf")
+        
+        With qdf
+        
+            'check if record exists in site
+            .SQL = GetTemplate(Template)
+        
+            Debug.Print .SQL
+        End With
+    End With
+End Sub

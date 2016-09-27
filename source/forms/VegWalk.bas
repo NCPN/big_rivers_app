@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =4215
-    Top =2685
-    Right =12075
-    Bottom =10050
+    Left =3360
+    Top =3000
+    Right =11220
+    Bottom =10365
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1415,7 +1415,8 @@ On Error GoTo Err_Handler
     'requires:  EventID, SiteID, FeatureID,
     '           Species, IsSeedlingS
     If Nz(cbxSpecies.Value, "") > -1 _
-        And Nz(chkIsSeedling.Value, "") > -1 Then
+        And Nz(chkIsSeedling.Value, "") > -1 _
+        And Nz(cbxEvent.Value, 0) > 0 Then
         
         isOK = True
         

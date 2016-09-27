@@ -21,12 +21,12 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =28
     Right =10785
-    Bottom =11250
+    Bottom =12045
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xc2b74d8760c3e440
+        0x69d3d7fef5d1e440
     End
-    RecordSource ="Event"
+    RecordSource ="Site"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -42,6 +42,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -468,7 +470,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxIsActive"
-                    ControlSource ="=[IsActiveForProtocol]"
+                    ControlSource ="IsActiveForProtocol"
                     ConditionalFormat = Begin
                         0x010000006c000000020000000000000002000000000000000200000001000000 ,
                         0x22b14c00ffffff000000000002000000030000000500000001000000ed1c2400 ,
@@ -694,7 +696,7 @@ On Error GoTo Err_Handler
 '                        "|waterway" & PARAM_SEPARATOR & TempVars("River"))
     'Me.Recordset = GetRecords("s_site_list_by_park_river")
     
-    Set Me.Recordset = GetRecords("s_site_list_by_park_river")
+    Set Me.Recordset = GetRecords("s_site_list_by_park_river_segment") '"s_site_list_by_park_river")
         
     Me.Requery
 
@@ -817,7 +819,7 @@ Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, tbxID
+    PopulateForm Me.Parent, tbxID.Value
 
 Exit_Handler:
     Exit Sub

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_User
 ' Level:        Framework module
-' Version:      1.07
+' Version:      1.08
 ' Description:  Access related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, May 2014
@@ -18,6 +18,7 @@ Option Explicit
 '               BLC, 4/4/2016  - 1.06 - changed Exit_Handler/Exit_Procedure > Exit_Handler
 '               BLC, 4/20/2016 - 1.07 - added getADCommonName() to retrieve person's name
 '               BLC, 6/30/2016 - 1.08 - adjusted to use GetTemplate
+'               BLC, 9/26/2016 - 1.09 - adjusted to use GetRecords() vs. GetTemplate()
 ' =================================
 
 ' ---------------------------------
@@ -809,6 +810,7 @@ End Function
 ' References:   none
 ' Source/date:  B. Campbell, 6/7/2016
 ' Revisions:    BLC, 6/7/2016 - initial version
+'               BLC, 9/26/2016 - adjusted to use GetRecords vs. GetTemplate
 ' =================================
 Public Function AccessID(AccessLevel As String) As Long
     On Error GoTo Err_Handler
@@ -817,9 +819,11 @@ Public Function AccessID(AccessLevel As String) As Long
     Dim rs As DAO.Recordset
     Dim strSQL As String
     
-    strSQL = GetTemplate("s_access_level", "lvl" & PARAM_SEPARATOR & LCase(AccessLevel))
+    'add temp tempvar!
+    TempVars.Add "tempLvl", LCase(AccessLevel)
+    'strSQL = GetTemplate("s_access_level", "lvl" & PARAM_SEPARATOR & LCase(AccessLevel))
     
-    Set rs = CurrentDb.OpenRecordset(strSQL, dbOpenSnapshot)
+    Set rs = GetRecords("s_access_lvl") 'CurrentDb.OpenRecordset(strSQL, dbOpenSnapshot)
     
     If rs.RecordCount > 0 Then
         AccessID = rs("ID")

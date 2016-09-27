@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =84
-    Left =3120
-    Top =3465
-    Right =12300
-    Bottom =14460
+    Left =3285
+    Top =3105
+    Right =13815
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1515,9 +1515,9 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If IsDate(tbxConfirmDate.Value) Then
+'    If IsDate(tbxConfirmDate.Value) Then
         isOK = True
-    End If
+'    End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK

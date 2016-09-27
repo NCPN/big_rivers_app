@@ -21,7 +21,7 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =34
     Right =10530
-    Bottom =10995
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x5dbc32126cd1e440
@@ -922,7 +922,7 @@ Private Sub btnActivate_Click()
 On Error GoTo Err_Handler
     
     'identify the record ID
-    ToggleIsActive "Flag", tbxID, Abs(tbxIsActive - 1)
+'    ToggleIsActive "Flag", tbxID, Abs(tbxIsActive - 1)
     
     'clear the Activated record
     Me.Requery

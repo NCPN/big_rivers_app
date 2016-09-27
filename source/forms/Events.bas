@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4035
-    Top =3540
-    Right =16335
-    Bottom =14550
+    Left =3285
+    Top =3105
+    Right =10440
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x45dde061d6cde440
@@ -576,7 +576,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
-                    ColumnCount =4
+                    ColumnCount =7
                     Left =1080
                     Top =60
                     Width =1740
@@ -594,12 +594,12 @@ Begin Form
                         0x61006c00750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxSite"
-                    ControlSource ="Site_ID"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;0;0;1440"
+                    ColumnWidths ="0;0;0;0;0;0;1440"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Select site of this sampling visit"
                     GridlineColor =10921638
+                    SeparatorCharacters =2
                     AllowValueListEdits =0
 
                     LayoutCachedLeft =1080
@@ -641,7 +641,6 @@ Begin Form
                         0x61006c00750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxLocation"
-                    ControlSource ="Location_ID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1440;0;0"
                     AfterUpdate ="[Event Procedure]"
@@ -917,11 +916,11 @@ On Error GoTo Err_Handler
     Me.RecordSource = ""
     
     'set data sources
-    Set cbxSite.Recordset = GetRecords("s_site_by_park_river")
+    Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
     'Set cbxSite.ControlSource = GetRecords("s_site_by_park_river")
     'Set cbxSite.RowSource = GetRecords("s_site_by_park_river")
     'cbxSite.ControlSource = GetRecords("s_site_by_park_river")
-    Set cbxLocation.Recordset = GetRecords("s_location_by_park_river")
+    Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
     
     'initialize values
     ClearForm Me

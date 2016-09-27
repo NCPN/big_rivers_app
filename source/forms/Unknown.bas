@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =6525
-    Top =600
-    Right =16665
-    Bottom =14400
+    Left =3285
+    Top =3105
+    Right =16470
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -335,7 +335,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =12420
+            Height =12120
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -347,7 +347,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =180
-                    Top =6240
+                    Top =5940
                     Width =9840
                     Height =1020
                     FontSize =14
@@ -358,9 +358,9 @@ Begin Form
                     Caption ="collected?"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
-                    LayoutCachedTop =6240
+                    LayoutCachedTop =5940
                     LayoutCachedWidth =10020
-                    LayoutCachedHeight =7260
+                    LayoutCachedHeight =6960
                     BackThemeColorIndex =-1
                     BorderThemeColorIndex =-1
                     BorderTint =100.0
@@ -555,11 +555,10 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =180
-                    Top =1920
+                    Top =1620
                     Width =4620
                     Height =720
                     TabIndex =1
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
@@ -568,15 +567,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =180
-                    LayoutCachedTop =1920
+                    LayoutCachedTop =1620
                     LayoutCachedWidth =4800
-                    LayoutCachedHeight =2640
+                    LayoutCachedHeight =2340
                     BackThemeColorIndex =-1
                     Begin
                         Begin Label
                             OverlapFlags =93
                             Left =60
-                            Top =1620
+                            Top =1320
                             Width =1200
                             Height =315
                             BorderColor =8355711
@@ -585,9 +584,9 @@ Begin Form
                             Caption ="Description:"
                             GridlineColor =10921638
                             LayoutCachedLeft =60
-                            LayoutCachedTop =1620
+                            LayoutCachedTop =1320
                             LayoutCachedWidth =1260
-                            LayoutCachedHeight =1935
+                            LayoutCachedHeight =1635
                         End
                     End
                 End
@@ -604,11 +603,11 @@ Begin Form
                     Name ="tbxUnknownCode"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
-                        0x0100000096000000020000000100000000000000000000001600000001000000 ,
-                        0x00000000fff200000000000003000000170000001a0000000100000000000000 ,
+                        0x010000009e000000020000000100000000000000000000001a00000001000000 ,
+                        0x00000000fff2000000000000030000001b0000001e0000000100000000000000 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00740062007800420065006100720069006e0067005d002e00560061006c00 ,
-                        0x750065003d0022002200000000002200220000000000
+                        0x5b0074006200780055006e006b006e006f0077006e0043006f00640065005d00 ,
+                        0x2e00560061006c00750065003d0022002200000000002200220000000000
                     End
                     GridlineColor =10921638
 
@@ -618,11 +617,11 @@ Begin Form
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
-                        0x740062007800420065006100720069006e0067005d002e00560061006c007500 ,
-                        0x65003d0022002200000000000000000000000000000000000000000000000000 ,
-                        0x00030000000100000000000000ffffff00020000002200220000000000000000 ,
-                        0x0000000000000000000000000000
+                        0x01000200000001000000000000000100000000000000fff20000190000005b00 ,
+                        0x74006200780055006e006b006e006f0077006e0043006f00640065005d002e00 ,
+                        0x560061006c00750065003d002200220000000000000000000000000000000000 ,
+                        0x000000000000000000030000000100000000000000ffffff0002000000220022 ,
+                        0x00000000000000000000000000000000000000000000
                     End
                 End
                 Begin Label
@@ -630,7 +629,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =2940
-                    Top =4500
+                    Top =4200
                     Width =2340
                     Height =1680
                     FontSize =14
@@ -642,9 +641,9 @@ Begin Form
                     ControlTipText ="Add/Edit flower charateristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =2940
-                    LayoutCachedTop =4500
+                    LayoutCachedTop =4200
                     LayoutCachedWidth =5280
-                    LayoutCachedHeight =6180
+                    LayoutCachedHeight =5880
                     BackThemeColorIndex =6
                     BackTint =40.0
                     BorderThemeColorIndex =-1
@@ -657,7 +656,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =4980
-                    Top =2745
+                    Top =2445
                     Width =5040
                     Height =1680
                     FontSize =14
@@ -668,9 +667,9 @@ Begin Form
                     Caption ="leaf"
                     GridlineColor =10921638
                     LayoutCachedLeft =4980
-                    LayoutCachedTop =2745
+                    LayoutCachedTop =2445
                     LayoutCachedWidth =10020
-                    LayoutCachedHeight =4425
+                    LayoutCachedHeight =4125
                     BackThemeColorIndex =9
                     BackTint =40.0
                     BorderThemeColorIndex =-1
@@ -683,7 +682,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =180
-                    Top =2745
+                    Top =2445
                     Width =4620
                     Height =1680
                     FontSize =14
@@ -695,9 +694,9 @@ Begin Form
                     ControlTipText ="Add/Edit grass characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
-                    LayoutCachedTop =2745
+                    LayoutCachedTop =2445
                     LayoutCachedWidth =4800
-                    LayoutCachedHeight =4425
+                    LayoutCachedHeight =4125
                     BackThemeColorIndex =8
                     BackTint =20.0
                     BorderThemeColorIndex =-1
@@ -710,7 +709,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =7920
+                    Top =7620
                     Width =9855
                     Height =4380
                     TabIndex =6
@@ -720,31 +719,31 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =7920
+                    LayoutCachedTop =7620
                     LayoutCachedWidth =9960
-                    LayoutCachedHeight =12300
+                    LayoutCachedHeight =12000
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =7800
+                    Top =7500
                     Width =10140
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =7800
+                    LayoutCachedTop =7500
                     LayoutCachedWidth =10140
-                    LayoutCachedHeight =12420
+                    LayoutCachedHeight =12120
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =5805
-                    Top =2865
+                    Top =2565
                     Width =525
                     Height =315
                     BorderColor =8355711
@@ -753,14 +752,14 @@ Begin Form
                     Caption ="Type"
                     GridlineColor =10921638
                     LayoutCachedLeft =5805
-                    LayoutCachedTop =2865
+                    LayoutCachedTop =2565
                     LayoutCachedWidth =6330
-                    LayoutCachedHeight =3180
+                    LayoutCachedHeight =2880
                 End
                 Begin CheckBox
                     OverlapFlags =215
                     Left =3600
-                    Top =6900
+                    Top =6600
                     Width =360
                     Height =360
                     TabIndex =7
@@ -770,14 +769,14 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3600
-                    LayoutCachedTop =6900
+                    LayoutCachedTop =6600
                     LayoutCachedWidth =3960
-                    LayoutCachedHeight =7260
+                    LayoutCachedHeight =6960
                     Begin
                         Begin Label
                             OverlapFlags =247
                             Left =3840
-                            Top =6840
+                            Top =6540
                             Width =1485
                             Height =315
                             BorderColor =8355711
@@ -786,16 +785,16 @@ Begin Form
                             Caption ="Photos Taken?"
                             GridlineColor =10921638
                             LayoutCachedLeft =3840
-                            LayoutCachedTop =6840
+                            LayoutCachedTop =6540
                             LayoutCachedWidth =5325
-                            LayoutCachedHeight =7155
+                            LayoutCachedHeight =6855
                         End
                     End
                 End
                 Begin CheckBox
                     OverlapFlags =215
                     Left =1980
-                    Top =6900
+                    Top =6600
                     Width =360
                     Height =360
                     TabIndex =8
@@ -806,14 +805,14 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1980
-                    LayoutCachedTop =6900
+                    LayoutCachedTop =6600
                     LayoutCachedWidth =2340
-                    LayoutCachedHeight =7260
+                    LayoutCachedHeight =6960
                     Begin
                         Begin Label
                             OverlapFlags =247
                             Left =2220
-                            Top =6840
+                            Top =6540
                             Width =1065
                             Height =315
                             BorderColor =8355711
@@ -823,9 +822,9 @@ Begin Form
                             ControlTipText ="Was plant collected?"
                             GridlineColor =10921638
                             LayoutCachedLeft =2220
-                            LayoutCachedTop =6840
+                            LayoutCachedTop =6540
                             LayoutCachedWidth =3285
-                            LayoutCachedHeight =7155
+                            LayoutCachedHeight =6855
                         End
                     End
                 End
@@ -834,7 +833,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =180
-                    Top =4500
+                    Top =4200
                     Width =2700
                     Height =1680
                     FontSize =20
@@ -846,9 +845,9 @@ Begin Form
                     ControlTipText ="Add/Edit stem characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
-                    LayoutCachedTop =4500
+                    LayoutCachedTop =4200
                     LayoutCachedWidth =2880
-                    LayoutCachedHeight =6180
+                    LayoutCachedHeight =5880
                     BackThemeColorIndex =3
                     BackShade =90.0
                     BorderThemeColorIndex =-1
@@ -861,7 +860,7 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =6900
-                    Top =6840
+                    Top =6540
                     Width =2274
                     Height =315
                     TabIndex =9
@@ -875,9 +874,9 @@ Begin Form
                     AllowValueListEdits =0
 
                     LayoutCachedLeft =6900
-                    LayoutCachedTop =6840
+                    LayoutCachedTop =6540
                     LayoutCachedWidth =9174
-                    LayoutCachedHeight =7155
+                    LayoutCachedHeight =6855
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
                     ForeTint =75.0
@@ -886,7 +885,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =215
                     Left =300
-                    Top =3645
+                    Top =3345
                     Width =600
                     Height =420
                     FontSize =8
@@ -895,9 +894,9 @@ Begin Form
                     Name ="lblHintPct"
                     GridlineColor =10921638
                     LayoutCachedLeft =300
-                    LayoutCachedTop =3645
+                    LayoutCachedTop =3345
                     LayoutCachedWidth =900
-                    LayoutCachedHeight =4065
+                    LayoutCachedHeight =3765
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -905,7 +904,7 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =7560
+                    Top =7260
                     Width =10140
                     Height =315
                     FontSize =9
@@ -919,9 +918,9 @@ Begin Form
                     Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =7560
+                    LayoutCachedTop =7260
                     LayoutCachedWidth =10140
-                    LayoutCachedHeight =7875
+                    LayoutCachedHeight =7575
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -931,7 +930,7 @@ Begin Form
                     OverlapFlags =223
                     TextAlign =2
                     Left =5760
-                    Top =7380
+                    Top =7080
                     Width =825
                     Height =600
                     FontSize =20
@@ -943,9 +942,9 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =5760
-                    LayoutCachedTop =7380
+                    LayoutCachedTop =7080
                     LayoutCachedWidth =6585
-                    LayoutCachedHeight =7980
+                    LayoutCachedHeight =7680
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -959,12 +958,10 @@ Begin Form
                     Left =180
                     Top =510
                     Width =9840
-                    Height =1080
+                    Height =690
                     FontSize =14
                     LeftMargin =216
-                    TopMargin =72
                     RightMargin =216
-                    BottomMargin =72
                     BackColor =32768
                     ForeColor =16777215
                     Name ="lblConfirmed"
@@ -973,7 +970,7 @@ Begin Form
                     LayoutCachedLeft =180
                     LayoutCachedTop =510
                     LayoutCachedWidth =10020
-                    LayoutCachedHeight =1590
+                    LayoutCachedHeight =1200
                     BackThemeColorIndex =-1
                     BorderThemeColorIndex =-1
                     BorderTint =100.0
@@ -984,7 +981,7 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =3870
-                    Top =6420
+                    Top =6120
                     Width =5310
                     Height =315
                     TabIndex =10
@@ -996,15 +993,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3870
-                    LayoutCachedTop =6420
+                    LayoutCachedTop =6120
                     LayoutCachedWidth =9180
-                    LayoutCachedHeight =6735
+                    LayoutCachedHeight =6435
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =1935
-                    Top =6435
+                    Top =6135
                     Width =1845
                     Height =240
                     BorderColor =8355711
@@ -1013,61 +1010,54 @@ Begin Form
                     Caption ="Best Guess Species"
                     GridlineColor =10921638
                     LayoutCachedLeft =1935
-                    LayoutCachedTop =6435
+                    LayoutCachedTop =6135
                     LayoutCachedWidth =3780
-                    LayoutCachedHeight =6675
+                    LayoutCachedHeight =6375
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =4140
-                    Top =660
-                    Width =3180
+                    Left =2520
+                    Top =720
+                    Width =2280
                     Height =315
                     TabIndex =11
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxConfirmedCode"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Confirmed species lookup code"
                     ConditionalFormat = Begin
-                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4140
-                    LayoutCachedTop =660
-                    LayoutCachedWidth =7320
-                    LayoutCachedHeight =975
+                    LayoutCachedLeft =2520
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =4800
+                    LayoutCachedHeight =1035
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
+                        0x010000000000
                     End
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2340
-                    Top =690
-                    Width =1590
+                    Left =1860
+                    Top =720
+                    Width =540
                     Height =315
                     BorderColor =8355711
                     ForeColor =15921906
                     Name ="lblConfirmedCode"
                     Caption ="Code"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2340
-                    LayoutCachedTop =690
-                    LayoutCachedWidth =3930
-                    LayoutCachedHeight =1005
+                    LayoutCachedLeft =1860
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =2400
+                    LayoutCachedHeight =1035
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                     ForeShade =95.0
@@ -1076,11 +1066,10 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =4980
-                    Top =1920
+                    Top =1620
                     Width =5040
                     Height =720
                     TabIndex =12
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSalientFeature"
@@ -1089,15 +1078,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4980
-                    LayoutCachedTop =1920
+                    LayoutCachedTop =1620
                     LayoutCachedWidth =10020
-                    LayoutCachedHeight =2640
+                    LayoutCachedHeight =2340
                     BackThemeColorIndex =-1
                     Begin
                         Begin Label
                             OverlapFlags =93
                             Left =4860
-                            Top =1620
+                            Top =1320
                             Width =1545
                             Height =315
                             BorderColor =8355711
@@ -1106,9 +1095,9 @@ Begin Form
                             Caption ="Salient Feature:"
                             GridlineColor =10921638
                             LayoutCachedLeft =4860
-                            LayoutCachedTop =1620
+                            LayoutCachedTop =1320
                             LayoutCachedWidth =6405
-                            LayoutCachedHeight =1935
+                            LayoutCachedHeight =1635
                         End
                     End
                 End
@@ -1126,11 +1115,11 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     ConditionalFormat = Begin
-                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0x010000009a000000020000000100000000000000000000001800000001000000 ,
+                        0x00000000fff200000000000003000000190000001c0000000100000000000000 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                        0x5b0063006200780050006c0061006e00740054007900700065005d002e005600 ,
+                        0x61006c00750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxPlantType"
                     RowSourceType ="Value List"
@@ -1148,18 +1137,18 @@ Begin Form
                     ForeTint =75.0
                     ForeShade =100.0
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
+                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
+                        0x63006200780050006c0061006e00740054007900700065005d002e0056006100 ,
+                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
+                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
+                        0x000000000000000000000000000000000000
                     End
                 End
                 Begin OptionGroup
                     SpecialEffect =0
                     OverlapFlags =215
                     Left =1260
-                    Top =3765
+                    Top =3465
                     Width =3366
                     Height =555
                     TabIndex =14
@@ -1168,15 +1157,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1260
-                    LayoutCachedTop =3765
+                    LayoutCachedTop =3465
                     LayoutCachedWidth =4626
-                    LayoutCachedHeight =4320
+                    LayoutCachedHeight =4020
                     Begin
                         Begin Label
                             BackStyle =1
                             OverlapFlags =215
                             Left =1380
-                            Top =3645
+                            Top =3345
                             Width =2010
                             Height =315
                             BackColor =16051931
@@ -1186,9 +1175,9 @@ Begin Form
                             Caption ="Perennial Grass Type"
                             GridlineColor =10921638
                             LayoutCachedLeft =1380
-                            LayoutCachedTop =3645
+                            LayoutCachedTop =3345
                             LayoutCachedWidth =3390
-                            LayoutCachedHeight =3960
+                            LayoutCachedHeight =3660
                             BackThemeColorIndex =8
                             BackTint =20.0
                             ForeThemeColorIndex =9
@@ -1199,21 +1188,21 @@ Begin Form
                             SpecialEffect =2
                             OverlapFlags =215
                             Left =1446
-                            Top =4003
+                            Top =3703
                             OptionValue =1
                             BorderColor =10921638
                             Name ="optBunchgrass"
                             GridlineColor =10921638
 
                             LayoutCachedLeft =1446
-                            LayoutCachedTop =4003
+                            LayoutCachedTop =3703
                             LayoutCachedWidth =1706
-                            LayoutCachedHeight =4243
+                            LayoutCachedHeight =3943
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     Left =1676
-                                    Top =3975
+                                    Top =3675
                                     Width =1110
                                     Height =315
                                     BorderColor =8355711
@@ -1222,9 +1211,9 @@ Begin Form
                                     Caption ="Bunchgrass"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =1676
-                                    LayoutCachedTop =3975
+                                    LayoutCachedTop =3675
                                     LayoutCachedWidth =2786
-                                    LayoutCachedHeight =4290
+                                    LayoutCachedHeight =3990
                                 End
                             End
                         End
@@ -1232,7 +1221,7 @@ Begin Form
                             SpecialEffect =2
                             OverlapFlags =215
                             Left =3000
-                            Top =4003
+                            Top =3703
                             TabIndex =1
                             OptionValue =2
                             BorderColor =10921638
@@ -1240,14 +1229,14 @@ Begin Form
                             GridlineColor =10921638
 
                             LayoutCachedLeft =3000
-                            LayoutCachedTop =4003
+                            LayoutCachedTop =3703
                             LayoutCachedWidth =3260
-                            LayoutCachedHeight =4243
+                            LayoutCachedHeight =3943
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     Left =3230
-                                    Top =3975
+                                    Top =3675
                                     Width =1275
                                     Height =315
                                     BorderColor =8355711
@@ -1256,9 +1245,9 @@ Begin Form
                                     Caption ="Rhizomatous"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =3230
-                                    LayoutCachedTop =3975
+                                    LayoutCachedTop =3675
                                     LayoutCachedWidth =4505
-                                    LayoutCachedHeight =4290
+                                    LayoutCachedHeight =3990
                                 End
                             End
                         End
@@ -1268,7 +1257,7 @@ Begin Form
                     SpecialEffect =0
                     OverlapFlags =215
                     Left =1260
-                    Top =2985
+                    Top =2685
                     Width =3366
                     Height =598
                     TabIndex =15
@@ -1277,15 +1266,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1260
-                    LayoutCachedTop =2985
+                    LayoutCachedTop =2685
                     LayoutCachedWidth =4626
-                    LayoutCachedHeight =3583
+                    LayoutCachedHeight =3283
                     Begin
                         Begin Label
                             BackStyle =1
                             OverlapFlags =215
                             Left =1380
-                            Top =2865
+                            Top =2565
                             Width =2010
                             Height =315
                             BackColor =16051931
@@ -1295,9 +1284,9 @@ Begin Form
                             Caption ="Forb/Grass Type"
                             GridlineColor =10921638
                             LayoutCachedLeft =1380
-                            LayoutCachedTop =2865
+                            LayoutCachedTop =2565
                             LayoutCachedWidth =3390
-                            LayoutCachedHeight =3180
+                            LayoutCachedHeight =2880
                             BackThemeColorIndex =8
                             BackTint =20.0
                             ForeThemeColorIndex =9
@@ -1308,21 +1297,21 @@ Begin Form
                             SpecialEffect =2
                             OverlapFlags =215
                             Left =1446
-                            Top =3223
+                            Top =2923
                             OptionValue =1
                             BorderColor =10921638
                             Name ="optAnnual"
                             GridlineColor =10921638
 
                             LayoutCachedLeft =1446
-                            LayoutCachedTop =3223
+                            LayoutCachedTop =2923
                             LayoutCachedWidth =1706
-                            LayoutCachedHeight =3463
+                            LayoutCachedHeight =3163
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     Left =1676
-                                    Top =3195
+                                    Top =2895
                                     Width =1110
                                     Height =315
                                     BorderColor =8355711
@@ -1331,9 +1320,9 @@ Begin Form
                                     Caption ="Annual"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =1676
-                                    LayoutCachedTop =3195
+                                    LayoutCachedTop =2895
                                     LayoutCachedWidth =2786
-                                    LayoutCachedHeight =3510
+                                    LayoutCachedHeight =3210
                                 End
                             End
                         End
@@ -1341,7 +1330,7 @@ Begin Form
                             SpecialEffect =2
                             OverlapFlags =215
                             Left =3000
-                            Top =3223
+                            Top =2923
                             TabIndex =1
                             OptionValue =2
                             BorderColor =10921638
@@ -1349,14 +1338,14 @@ Begin Form
                             GridlineColor =10921638
 
                             LayoutCachedLeft =3000
-                            LayoutCachedTop =3223
+                            LayoutCachedTop =2923
                             LayoutCachedWidth =3260
-                            LayoutCachedHeight =3463
+                            LayoutCachedHeight =3163
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     Left =3230
-                                    Top =3195
+                                    Top =2895
                                     Width =1275
                                     Height =315
                                     BorderColor =8355711
@@ -1365,9 +1354,9 @@ Begin Form
                                     Caption ="Perennial"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =3230
-                                    LayoutCachedTop =3195
+                                    LayoutCachedTop =2895
                                     LayoutCachedWidth =4505
-                                    LayoutCachedHeight =3510
+                                    LayoutCachedHeight =3210
                                 End
                             End
                         End
@@ -1377,7 +1366,7 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =6660
-                    Top =2865
+                    Top =2565
                     Width =3285
                     Height =315
                     TabIndex =16
@@ -1388,15 +1377,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
-                    LayoutCachedTop =2865
+                    LayoutCachedTop =2565
                     LayoutCachedWidth =9945
-                    LayoutCachedHeight =3180
+                    LayoutCachedHeight =2880
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =5580
-                    Top =6840
+                    Top =6540
                     Width =1230
                     Height =315
                     BorderColor =8355711
@@ -1405,14 +1394,14 @@ Begin Form
                     Caption ="Collected By"
                     GridlineColor =10921638
                     LayoutCachedLeft =5580
-                    LayoutCachedTop =6840
+                    LayoutCachedTop =6540
                     LayoutCachedWidth =6810
-                    LayoutCachedHeight =7155
+                    LayoutCachedHeight =6855
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =5805
-                    Top =3315
+                    Top =3015
                     Width =720
                     Height =315
                     BorderColor =8355711
@@ -1421,15 +1410,15 @@ Begin Form
                     Caption ="Margin"
                     GridlineColor =10921638
                     LayoutCachedLeft =5805
-                    LayoutCachedTop =3315
+                    LayoutCachedTop =3015
                     LayoutCachedWidth =6525
-                    LayoutCachedHeight =3630
+                    LayoutCachedHeight =3330
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =6660
-                    Top =3315
+                    Top =3015
                     Width =3285
                     Height =315
                     TabIndex =17
@@ -1440,15 +1429,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
-                    LayoutCachedTop =3315
+                    LayoutCachedTop =3015
                     LayoutCachedWidth =9945
-                    LayoutCachedHeight =3630
+                    LayoutCachedHeight =3330
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =223
                     Left =5160
-                    Top =3765
+                    Top =3465
                     Width =1500
                     Height =540
                     BorderColor =8355711
@@ -1457,15 +1446,15 @@ Begin Form
                     Caption ="Other Leaf Characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =5160
-                    LayoutCachedTop =3765
+                    LayoutCachedTop =3465
                     LayoutCachedWidth =6660
-                    LayoutCachedHeight =4305
+                    LayoutCachedHeight =4005
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =6660
-                    Top =3780
+                    Top =3480
                     Width =3285
                     Height =525
                     TabIndex =18
@@ -1476,15 +1465,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
-                    LayoutCachedTop =3780
+                    LayoutCachedTop =3480
                     LayoutCachedWidth =9945
-                    LayoutCachedHeight =4305
+                    LayoutCachedHeight =4005
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =223
                     Left =1320
-                    Top =4560
+                    Top =4260
                     Width =1425
                     Height =585
                     BorderColor =8355711
@@ -1493,15 +1482,15 @@ Begin Form
                     Caption ="Stem Characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =1320
-                    LayoutCachedTop =4560
+                    LayoutCachedTop =4260
                     LayoutCachedWidth =2745
-                    LayoutCachedHeight =5145
+                    LayoutCachedHeight =4845
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =300
-                    Top =5100
+                    Top =4800
                     Width =2460
                     Height =960
                     TabIndex =19
@@ -1512,15 +1501,15 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =300
-                    LayoutCachedTop =5100
+                    LayoutCachedTop =4800
                     LayoutCachedWidth =2760
-                    LayoutCachedHeight =6060
+                    LayoutCachedHeight =5760
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =215
                     Left =3780
-                    Top =4560
+                    Top =4260
                     Width =1425
                     Height =585
                     BorderColor =8355711
@@ -1529,15 +1518,15 @@ Begin Form
                     Caption ="Flower Characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =3780
-                    LayoutCachedTop =4560
+                    LayoutCachedTop =4260
                     LayoutCachedWidth =5205
-                    LayoutCachedHeight =5145
+                    LayoutCachedHeight =4845
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =3060
-                    Top =5160
+                    Top =4860
                     Width =2100
                     Height =900
                     TabIndex =20
@@ -1548,9 +1537,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3060
-                    LayoutCachedTop =5160
+                    LayoutCachedTop =4860
                     LayoutCachedWidth =5160
-                    LayoutCachedHeight =6060
+                    LayoutCachedHeight =5760
                     BackThemeColorIndex =-1
                 End
                 Begin Label
@@ -1558,7 +1547,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =5340
-                    Top =4500
+                    Top =4200
                     Width =4680
                     Height =1680
                     FontSize =14
@@ -1569,9 +1558,9 @@ Begin Form
                     Caption ="habitat"
                     GridlineColor =10921638
                     LayoutCachedLeft =5340
-                    LayoutCachedTop =4500
+                    LayoutCachedTop =4200
                     LayoutCachedWidth =10020
-                    LayoutCachedHeight =6180
+                    LayoutCachedHeight =5880
                     BackThemeColorIndex =-1
                     BorderThemeColorIndex =-1
                     BorderTint =100.0
@@ -1581,7 +1570,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =215
                     Left =6540
-                    Top =4590
+                    Top =4290
                     Width =2880
                     Height =510
                     BorderColor =8355711
@@ -1590,15 +1579,15 @@ Begin Form
                     Caption ="General && Microhabitat Characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =6540
-                    LayoutCachedTop =4590
+                    LayoutCachedTop =4290
                     LayoutCachedWidth =9420
-                    LayoutCachedHeight =5100
+                    LayoutCachedHeight =4800
                 End
                 Begin TextBox
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =5460
-                    Top =5160
+                    Top =4860
                     Width =4485
                     Height =900
                     TabIndex =21
@@ -1609,26 +1598,26 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5460
-                    LayoutCachedTop =5160
+                    LayoutCachedTop =4860
                     LayoutCachedWidth =9945
-                    LayoutCachedHeight =6060
+                    LayoutCachedHeight =5760
                     BackThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2340
-                    Top =1125
-                    Width =1590
+                    Left =4980
+                    Top =720
+                    Width =735
                     Height =315
                     BorderColor =8355711
                     ForeColor =15921906
                     Name ="lblConfirmedSpecies"
                     Caption ="Species"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2340
-                    LayoutCachedTop =1125
-                    LayoutCachedWidth =3930
-                    LayoutCachedHeight =1440
+                    LayoutCachedLeft =4980
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =5715
+                    LayoutCachedHeight =1035
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                     ForeShade =95.0
@@ -1637,20 +1626,17 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
-                    Left =4140
-                    Top =1110
-                    Width =3174
+                    Left =5880
+                    Top =720
+                    Width =3894
                     Height =315
                     TabIndex =22
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     ConditionalFormat = Begin
-                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000
                     End
                     Name ="cbxConfirmedSpecies"
                     RowSourceType ="Table/Query"
@@ -1658,20 +1644,16 @@ Begin Form
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =4140
-                    LayoutCachedTop =1110
-                    LayoutCachedWidth =7314
-                    LayoutCachedHeight =1425
+                    LayoutCachedLeft =5880
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =9774
+                    LayoutCachedHeight =1035
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
                     ForeTint =75.0
                     ForeShade =100.0
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
+                        0x010000000000
                     End
                 End
             End
@@ -1872,7 +1854,7 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngRed
     btnSave.Enabled = False
     tbxUnknownCode.BackColor = lngYellow
-    tbxBestGuess.BackColor = lngYellow
+    cbxPlantType.BackColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1899,6 +1881,13 @@ On Error GoTo Err_Handler
     cbxCollectedBy.ColumnWidths = "0;.7in"
     
     cbxPlantType.RowSource = Replace(PLANT_TYPES, ",", ";")
+  
+    Set cbxConfirmedSpecies.Recordset = GetRecords("s_species_by_park")
+  
+    cbxConfirmedSpecies.BoundColumn = 1 'bind to label (not ID)
+    cbxConfirmedSpecies.ColumnCount = 5
+    cbxConfirmedSpecies.ColumnHeads = True
+    cbxConfirmedSpecies.ColumnWidths = "0;.7in;.2in;0;0" 'display the display column (combines label - summary)
   
 Exit_Handler:
     Exit Sub
