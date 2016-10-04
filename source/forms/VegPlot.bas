@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =69
-    Left =3360
-    Top =2280
-    Right =11220
-    Bottom =11820
+    Left =5745
+    Top =3090
+    Right =13605
+    Bottom =12630
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x9116deeeb5cfe440
@@ -1479,6 +1479,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 9/8/2016  - 1.02 - added SetObserverRecorder button
+'               BLC - 10/3/2016 - 1.03 - disable taglines for CANY & DINO
 ' =================================
 
 '---------------------
@@ -1695,9 +1696,14 @@ On Error GoTo Err_Handler
     btnWCC.Visible = False
     btnURC.Visible = False
     btnARC.Visible = False
+    btnTaglines.Enabled = False
+    
+    'default plot density = 3 starting in 2015 (i.e. 1/3 density)
+    tbxPlotDensity.Value = 3
     
     'adjust UI based on park
     Select Case TempVars("ParkCode")
+        
         Case "BLCA"
             lblURC.Visible = True
             tbxPctURC.Visible = True
@@ -1712,7 +1718,8 @@ On Error GoTo Err_Handler
             lblHasSocialTrails.Visible = True
             btnWCC.Visible = True
             btnURC.Visible = True
-        
+            btnTaglines.Enabled = True
+            
         Case "CANY"
             lblURC.Visible = True
             tbxPctURC.Visible = True
@@ -1737,6 +1744,7 @@ On Error GoTo Err_Handler
             chkNoRootedVeg.Visible = True
             lblNoRootedVeg.Visible = True
             btnARC.Visible = True
+    
     End Select
     
     'ID default -> value used only for edits of existing table values

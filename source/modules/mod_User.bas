@@ -76,7 +76,7 @@ Dim rs As DAO.Recordset
             Set qdf = .QueryDefs("usys_temp_qdf")
                     
             With qdf
-                .SQL = GetTemplate("s_user_access")
+                .sql = GetTemplate("s_user_access")
                 
                 '-- required parameters --
                 .Parameters("appuser") = Environ("Username")
@@ -674,7 +674,7 @@ Dim strSQL As String
                         Set qdf = .QueryDefs("usys_temp_qdf")
                                 
                         With qdf
-                            .SQL = GetTemplate("tsys_login_action")
+                            .sql = GetTemplate("tsys_login_action")
                             
                             '-- required parameters --
                             .Parameters("environ_username") = Environ("Username")

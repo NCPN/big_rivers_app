@@ -18,13 +18,13 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =38
-    Left =3240
-    Top =3525
-    Right =12480
-    Bottom =14520
+    ItemSuffix =39
+    Left =3255
+    Top =3105
+    Right =10815
+    Bottom =14550
     DatasheetGridlinesColor =14806254
-    OrderBy ="EffectiveDate"
+    OrderBy ="TemplateName"
     RecSrcDt = Begin
         0x0680db994fd0e440
     End
@@ -268,6 +268,70 @@ Begin Form
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin CommandButton
+                    OverlapFlags =215
+                    Left =6660
+                    Top =180
+                    Width =720
+                    ForeColor =4210752
+                    Name ="btnAddTemplate"
+                    Caption ="Add Record"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add new template"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000b09880ff201010ff201010ff201010ff201010ff201010ff ,
+                        0x201010ff201010ff201010ff201010ff201010ff201010ff201010ff00000000 ,
+                        0x0000000000000000c0a090fffff8f0fffff8f0fffff0f0fffff0e0fff0e8e0ff ,
+                        0xf0e8d0fff0e0d0fff0e0d0fff0e0d0fff0d8d0fff0d8d0ff201810ff00000000 ,
+                        0x0000000000000000c0a090ffffffffffd07850ffd07840ffd07040ffc07040ff ,
+                        0xc06840ffc06840ffc06840ffc07040ffa06040fff0e0d0ff403830ff00000000 ,
+                        0x0000000000000000c0a890ffffffffffd07850fff0b8a0fff0b090fff0a880ff ,
+                        0xf0a080fff09870fff09870fff0a880ffc09880fffff0f0ff909090ff00000000 ,
+                        0x0000000000000000c0a890ffffffffffd07850ffd07850ffd07840ffd07040ff ,
+                        0xc07040ffc07050ffd09070ff70b8c0ff90d8f0ff90f0ffff40c0e0ffa0f0ffff ,
+                        0xa0e8ffff90d8f0ffc0a8a0fffffffffffffffffffffffffffffffffffff8f0ff ,
+                        0xfff8f0fffff8f0fffff8f0ffb0e8ffff30b8e0ff80e8ffff60c8e0ff90f0ffff ,
+                        0x30b8e0ffa0e8ffffc0a8a0ffc0a8a0ffc0a890ffc0a090ffc0a090ffc0a090ff ,
+                        0xc09880ffc0a090ffd0c0b0ffa0e8ffff90f0ffffc0f8ffffb0e8f0ffc0f8ffff ,
+                        0x90f0ffffa0f0ffff000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000020a8e0ff50c0e0ffb0e8f0fff0ffffffb0e8f0ff ,
+                        0x50c0e0ff30b8e0ff000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000080e8ffc090f0ffffc0f8ffffb0e8f0ffc0f8ffff ,
+                        0x90f0ffff90d8e0ff000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000050d8ff8030b8e0ff90f0ffff60c0e0ff90f0ffff ,
+                        0x30b8e0ff50d0f080000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000030b0e0a040c8f09080e8ffc020b0e0ff70e8ffc0 ,
+                        0x50d8f08030b0e080000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =6660
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =7380
+                    LayoutCachedHeight =540
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
@@ -622,7 +686,7 @@ Option Explicit
 ' =================================
 ' Form:         TemplateList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -630,6 +694,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 10/4/2016 - 1.01 - added Add Template button
 ' =================================
 
 '---------------------
@@ -820,6 +885,40 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[TemplateList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnAddTemplate_Click
+' Description:  Add template button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 4, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/4/2016 - initial version
+' ---------------------------------
+Private Sub btnAddTemplate_Click()
+On Error GoTo Err_Handler
+    
+    'minimize TemplateList
+    ToggleForm "TemplateList", -1
+    
+    'DoCmd.OpenTable "tsys_Db_Templates", acViewNormal, acAdd
+
+    DoCmd.OpenForm "TemplateAdd", acNormal
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddTemplate_Click[TemplateList form])"
     End Select
     Resume Exit_Handler
 End Sub

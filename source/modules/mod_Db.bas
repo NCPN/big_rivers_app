@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.04
+' Version:      1.05
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -14,6 +14,7 @@ Option Explicit
 '               BLC, 6/6/2016  - 1.03 - added error handling for duplicate templates, renamed global to g_AppTemplates
 '                                       also added SQL sanitization (escape/replace special chars)
 '               BLC, 6/9/2016  - 1.04 - added CreateTempRecords()
+'               BLC, 10/4/2016 - 1.05 - added GetParamsFromSQL()
 ' =================================
 
 ' ---------------------------------
@@ -1066,7 +1067,7 @@ Err_Handler:
                 Set qdf = CurrentDb.QueryDefs("UsysTempQuery")
             End If
             
-            qdf.SQL = strErrorSQL
+            qdf.sql = strErrorSQL
             
             DoCmd.OpenQuery "USysTempQuery", acViewNormal
 
@@ -1189,7 +1190,7 @@ Err_Handler:
                 Set qdf = CurrentDb.QueryDefs("UsysTempQuery")
             End If
             
-            qdf.SQL = strErrorSQL
+            qdf.sql = strErrorSQL
             
             DoCmd.OpenQuery "USysTempQuery", acViewNormal
 
@@ -1684,3 +1685,56 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' FUNCTION:     GetParamsFromSQL
+' Description:  extracts parameters from SQL string
+' Assumptions:  -
+' Parameters:   sql - SQL to retrieve parameters from(string)
+' Returns:      params - delimited string of parameters and parameter types (string)
+' References:   -
+' Source/date:  Bonnie Campbell, September 20 2016
+' Revisions:    BLC, 9/20/2016 - initial version
+' ---------------------------------
+Public Function GetParamsFromSQL(sql As String) As String
+On Error GoTo Err_Handler
+
+    Dim Params As String
+    
+    'default
+    Params = ""
+    
+    If Len(sql) > 0 Then
+        If InStr(sql, "PARAMETERS ") Then
+            Dim delimPos As Integer
+            
+            Params = Replace(sql, "PARAMETERS ", "")
+            delimPos = InStr(Params, ";")
+            Params = Left(Params, delimPos - 1)
+            Params = Replace(Params, ", ", "|")
+            Params = Replace(Params, " ", ":")
+            
+            'convert TEXT(#) values to STRING
+            If InStr(Params, "TEXT(") Then
+                'remove TEXT( )
+                Params = Replace(Params, "TEXT(", "STRING")
+                Params = Replace(Params, ")", "")
+                'remove numerics
+                Params = RemoveChars(Params, False)
+            End If
+            
+        End If
+    End If
+    
+Exit_Handler:
+    GetParamsFromSQL = Params
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - AddRecord[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function

@@ -70,7 +70,7 @@ On Error GoTo Err_Handler
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(Template)
+            .sql = GetTemplate(Template)
             
             '-------------------
             ' set SQL parameters --> .Parameters("") = params()

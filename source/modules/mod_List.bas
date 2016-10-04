@@ -325,7 +325,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/10/2015 - initial version
 ' ---------------------------------
-Public Function GetListCount(lbx As ListBox, hasHeaders As Boolean) As Integer
+Public Function GetListCount(lbx As ListBox, HasHeaders As Boolean) As Integer
 On Error GoTo Err_Handler
 
 Dim i As Integer

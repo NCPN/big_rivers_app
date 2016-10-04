@@ -1254,9 +1254,9 @@ Public Sub DoIt2()
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(Template)
+            .sql = GetTemplate(Template)
         
-            Debug.Print .SQL
+            Debug.Print .sql
         End With
     End With
 End Sub

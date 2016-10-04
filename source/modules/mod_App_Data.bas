@@ -59,11 +59,11 @@ On Error GoTo Err_Handler
     
         Case "lbxDataSheets", "sfrmDatasheets" 'Datasheets
             strQuery = "qry_Active_Datasheets"
-            strSQL = CurrentDb.QueryDefs(strQuery).SQL
+            strSQL = CurrentDb.QueryDefs(strQuery).sql
             
         Case "lbxSpecies", "lbxTgtSpecies", "fsub_Species_Listbox" 'Species
             strQuery = "qry_Plant_Species"
-            strSQL = CurrentDb.QueryDefs(strQuery).SQL
+            strSQL = CurrentDb.QueryDefs(strQuery).sql
             
     End Select
 
@@ -924,6 +924,7 @@ End Function
 ' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 6/28/2016  - initial version
+'   BLC - 10/4/2016  - update to use parameter query
 ' ---------------------------------
 Public Function GetFeatureID(ParkCode As String, Feature As String) As Long
 On Error GoTo Err_Handler
@@ -938,25 +939,25 @@ On Error GoTo Err_Handler
         GoTo Exit_Handler
     End If
     
-    'generate SQL
-    strSQL = GetTemplate("s_feature_id", _
-            "ParkCode" & PARAM_SEPARATOR & ParkCode & _
-            "|feature" & PARAM_SEPARATOR & Feature)
-            
-    'fetch data
-    Set db = CurrentDb
-    Set rs = db.OpenRecordset(strSQL)
-
-    If rs.BOF And rs.EOF Then GoTo Exit_Handler
-
-    rs.MoveLast
-    rs.MoveFirst
-    
-    If Not rs.BOF And rs.EOF Then
-        ID = rs.GetRows(1)
-    End If
-    
-    rs.Close
+'    'generate SQL
+'    strSQL = GetTemplate("s_feature_id", _
+'            "ParkCode" & PARAM_SEPARATOR & ParkCode & _
+'            "|feature" & PARAM_SEPARATOR & Feature)
+'
+'    'fetch data
+'    Set db = CurrentDb
+'    Set rs = db.OpenRecordset(strSQL)
+'
+'    If rs.BOF And rs.EOF Then GoTo Exit_Handler
+'
+'    rs.MoveLast
+'    rs.MoveFirst
+'
+'    If Not rs.BOF And rs.EOF Then
+'        ID = rs.GetRows(1)
+'    End If
+'
+'    rs.Close
     
     'return value
     GetFeatureID = ID
@@ -1097,7 +1098,7 @@ On Error GoTo Err_Handler
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(Template)
+            .sql = GetTemplate(Template)
         
             Select Case Template
             
@@ -1137,6 +1138,12 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_feature_id"
+                    
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
                 
                 Case "s_feature_list"
                     
@@ -1218,7 +1225,7 @@ On Error GoTo Err_Handler
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
-                    .SQL = Replace(Replace(.SQL, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
+                    .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_rooted_species_last_year_by_river"
                     
@@ -1228,7 +1235,7 @@ On Error GoTo Err_Handler
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
-                    .SQL = Replace(Replace(.SQL, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
+                    .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_understory_species_last_year_by_park"
                     
@@ -1237,7 +1244,7 @@ On Error GoTo Err_Handler
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
-                    .SQL = Replace(Replace(.SQL, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
+                    .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_understory_species_last_year_by_river"
                     
@@ -1247,7 +1254,7 @@ On Error GoTo Err_Handler
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
-                    .SQL = Replace(Replace(.SQL, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
+                    .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_woody_species_last_year_by_park"
                     
@@ -1256,7 +1263,7 @@ On Error GoTo Err_Handler
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
-                    .SQL = Replace(Replace(.SQL, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
+                    .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_woody_species_last_year_by_river"
                     
@@ -1266,7 +1273,7 @@ On Error GoTo Err_Handler
     
                     'revise TOP X --> 99 is replaced by # species to return (from datasheet defaults)
                     '             -->  8 is replaced by # blanks to return (")
-                    .SQL = Replace(Replace(.SQL, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
+                    .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_veg_walk_species_last_year_by_park"
                     
@@ -1274,7 +1281,7 @@ On Error GoTo Err_Handler
                     .Parameters("pkcode") = TempVars("ParkCode")
                     
                     'revise TOP X --> 8 is replaced by # blanks to return (from # rows remaining)
-                    .SQL = Replace(.SQL, 8, TempVars("Blanks"))
+                    .sql = Replace(.sql, 8, TempVars("Blanks"))
                 
                 Case "s_veg_walk_species_last_year_by_river"
                     
@@ -1283,7 +1290,7 @@ On Error GoTo Err_Handler
                     .Parameters("waterway") = TempVars("River")
                     
                     'revise TOP X --> 8 is replaced by # blanks to return (from # rows remaining)
-                    .SQL = Replace(.SQL, 8, TempVars("Blanks"))
+                    .sql = Replace(.sql, 8, TempVars("Blanks"))
                     
                     '-- optional parameters --
                 
@@ -1353,7 +1360,7 @@ On Error GoTo Err_Handler
         With qdf
         
             'check if record exists in site
-            .SQL = GetTemplate(Template)
+            .sql = GetTemplate(Template)
             
             '-------------------
             ' set SQL parameters --> .Parameters("") = params()
@@ -1408,7 +1415,7 @@ On Error GoTo Err_Handler
                 Case "i_cover_species"
                                     
                     'set the table name in the template --> handles WCC, URC, ARC species
-                    .SQL = Replace(.SQL, "INTO tbl ", "INTO " & Params(0) & " ")
+                    .sql = Replace(.sql, "INTO tbl ", "INTO " & Params(0) & " ")
                                     
                     '-- required parameters --
                     .Parameters("VegPlotID") = Params(1)
@@ -1677,7 +1684,7 @@ On Error GoTo Err_Handler
                 Case "u_cover_species"
                                     
                     'set the table name in the template --> handles WCC, URC, ARC species
-                    .SQL = Replace(.SQL, " tbl ", " " & Params(0) & " ")
+                    .sql = Replace(.sql, " tbl ", " " & Params(0) & " ")
                                     
                     '-- required parameters --
                     .Parameters("VegPlot_ID") = Params(1)
@@ -1868,7 +1875,7 @@ On Error GoTo Err_Handler
             End If
             
             'set record action
-            .SQL = GetTemplate("i_record_action")
+            .sql = GetTemplate("i_record_action")
                                             
             '-- required parameters --
             .Parameters("RefTable") = Params(0)
@@ -2164,6 +2171,29 @@ On Error GoTo Err_Handler
                     Set tk = Nothing
                 End With
                 
+            Case "TemplateAdd"
+                Dim tpl As New Template
+                
+                With tpl
+                    .TemplateName = frm!tbxTemplate
+                    .Context = .TemplateName
+                    .IsSupported = 1
+                    .Version = frm!tbxVersion
+                    .sql = frm!tbxTemplateSQL
+                    .EffectiveDate = frm!tbxEffectiveDate
+                    .Syntax = frm!cbxSyntax
+                    .Params = GetParamsFromSQL(.sql)
+                    .Remarks = frm!tbxRemarks
+                    .ContactID = TempVars("UserID")
+                    
+                    'set the generic object --> Transducer
+                    Set obj = tpl
+                    
+                    'cleanup
+                    Set tpl = Nothing
+                End With
+                
+                
             Case "Transducer"
                 Dim t As New Transducer
         
@@ -2433,6 +2463,8 @@ End Sub
 Public Sub UploadSurveyFile(strFilename As String)
 On Error GoTo Err_Handler
     
+    'import to table
+    ImportCSV strFilename, "usys_temp_csv", True, True
 
 Exit_Handler:
     Exit Sub
@@ -2507,7 +2539,7 @@ On Error GoTo Err_Handler
             strSQL = "SELECT " & strFields & " FROM " & tbl & " WHERE ID = " & ID & ";"
             
             'update the query SQL
-            .SQL = strSQL
+            .sql = strSQL
             
             Dim rs As DAO.Recordset
 

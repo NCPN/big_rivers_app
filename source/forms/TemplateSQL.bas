@@ -699,7 +699,7 @@ On Error GoTo Err_Handler
             Set qdf = .QueryDefs("usys_temp_qdf")
             
             With qdf
-                .SQL = Me.tbxSQL
+                .sql = Me.tbxSQL
                 
                 'don't .OpenRecordset here --> causes missing param errors
             End With

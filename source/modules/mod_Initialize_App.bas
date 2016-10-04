@@ -206,7 +206,10 @@ Public Function AppSetup()
         strReleaseID = APP_RELEASE_ID
         strAddress = APP_URL
     Else
-        strReleaseID = IIf(ControlExists("cbxVersion", frm), frm.Controls("cbxVersion").Column(1), "") 'ID
+'        strReleaseID = IIf(ControlExists("cbxVersion", frm), frm.Controls("cbxVersion").Column(1), "") 'ID
+        strReleaseID = IIf(ControlExists("cbxVersion", frm), frm.Controls("cbxVersion").Column(0), "") 'ID
+        strRelease = IIf(ControlExists("cbxVersion", frm), frm.Controls("cbxVersion").Column(1), "") 'version info
+
 '        strAddress = IIf(ControlExists("tbxWebURL", frm), frm.Controls("tbxWebURL"), _
 '                    IIf(ControlExists("tbxWeb_Address", frm), frm.Controls("tbxWeb_address"), ""))
         If ControlExists("tbxWebURL", frm) Then
@@ -214,7 +217,7 @@ Public Function AppSetup()
             strAddress = frm.Controls("tbxWebURL")
             iIsSupported = DLookup("IsSupported", "tsys_App_Releases", _
                                 "[VersionNumber] = """ & _
-                                Replace(Left(strReleaseID, InStr(strReleaseID, "(") - 2), "Version ", "") _
+                                Replace(Left(strRelease, InStr(strRelease, "(") - 2), "Version ", "") _
                                 & """")
         Else
             'old versions
@@ -272,8 +275,9 @@ Public Function AppSetup()
 ' FIX: adding login data to tsys_Logins
 '**********************************************
     ' Log the user, login time, release number, and application mode in the systems table
-    strRelease = Left(strReleaseID, InStr(strReleaseID, "(") - 2) & " / " & TempVars.item("UserAccessLevel")
-    strReleaseVersion = Replace(Left(strReleaseID, InStr(strReleaseID, "(") - 2), "version ", "")
+    strRelease = Left(strRelease, InStr(strRelease, "(") - 2) & " / " & TempVars.item("UserAccessLevel")
+    'strReleaseVersion = Replace(Left(strReleaseID, InStr(strReleaseID, "(") - 2), "Version ", "")
+    strReleaseVersion = Replace(Left(strRelease, InStr(strRelease, "/") - 2), "Version ", "")
     strUser = TempVars.item("AppUsername")
     If IsODBC("tsys_Logins") Then
         ' Use a pass-through query to test the connection for write privileges
@@ -314,7 +318,10 @@ Public Function AppSetup()
     ' If the current front-end release is not listed in the back-end file, run fxn to update
     '   Note: Needed where there are one or more back-end copies at remote locations that
     '   cannot be updated with new release information by the developer
-    If DCount("*", "tsys_App_Releases", "[ID]=""" & strReleaseID & """") = 0 Then
+        
+    
+    'If DCount("*", "tsys_App_Releases", "[ID]=""" & strReleaseID & """") = 0 Then
+    If DCount("*", "tsys_App_Releases", "[ID]=" & strReleaseID) = 0 Then
         If TempVars.item("WritePermission") Then BEUpdates (True)
         ' Check once more to make sure that the release was added properly - if not notify
         If DCount("*", "tsys_App_Releases", "[ID]=""" & strReleaseID & """") = 0 Then
@@ -329,8 +336,11 @@ Public Function AppSetup()
     End If
 
     ' Set the table-driven caption of the switchboard
-    strCaption = DLookup("[Database_title]", "tsys_App_Releases", "[ID] = '" _
+    'strCaption = DLookup("[Database_title]", "tsys_App_Releases", "[ID] = '" _
         & frm!ReleaseID & "'")
+        
+    'strCaption = DLookup("[Database_title]", "tsys_App_Releases", "[ID] = " & strReleaseID)
+    strCaption = DLookup("[DatabaseTitle]", "tsys_App_Releases", "[ID] = " & strReleaseID)
     frm.Caption = strCaption
 
 Exit_Procedure:

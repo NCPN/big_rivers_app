@@ -470,6 +470,8 @@ On Error GoTo Err_Handler
         Case "photo"
             rName = "Photo"
             oArgs = ""
+        Case "sediment class settings"
+            fName = "ModWentworth"
         Case "sheet settings"
             fName = "SetDatasheetDefaults"
         Case "transducer"
@@ -573,7 +575,7 @@ On Error GoTo Err_Handler
                 'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
                 'requires Contact & Contact_Access data
                 Dim qdf As DAO.QueryDef
-                CurrentDb.QueryDefs("usys_temp_qdf").SQL = GetTemplate("s_contact_access")
+                CurrentDb.QueryDefs("usys_temp_qdf").sql = GetTemplate("s_contact_access")
                 
                 strTable = "usys_temp_qdf"
                 'set form fields to record fields as datasource

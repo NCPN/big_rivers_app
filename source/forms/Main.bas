@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =4635
-    Top =4125
-    Right =12915
-    Bottom =12090
+    Left =6180
+    Top =2595
+    Right =14460
+    Bottom =10560
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -589,7 +589,10 @@ On Error GoTo Err_Handler
     oBCTile.Link4Caption = "Transducer"
     oBCTile.Link5Visible = 0
     oBCTile.Link6Caption = "Tasks"
-    oBCTile.Link7Visible = 0
+    oBCTile.lblIcon7L.Caption = StringFromCodepoint(uMapLighthouse)
+    oBCTile.lblIcon7L.ForeColor = lngBlue
+    oBCTile.lblIcon7L.FontWeight = wtMedium
+    oBCTile.Link7Caption = Space(4) & "Sediment Class Settings"
     oBCTile.lblIcon8L.Caption = StringFromCodepoint(uMapLighthouse)
     oBCTile.lblIcon8L.ForeColor = lngBlue
     oBCTile.lblIcon8L.FontWeight = wtMedium
@@ -964,7 +967,7 @@ On Error GoTo Err_Handler
     TC = "6"            'People
     TR = "6,7,8"        'Species, Unknowns, Species Search
     BL = ""             'N/A
-    BC = ""             'N/A
+    BC = "7"            'Mod Wentworth Settings
     BR = ""             'N/A
     
     'if no park --> all links deactivated, EXCEPT these
@@ -975,7 +978,7 @@ On Error GoTo Err_Handler
         TC = "6"            'People
         TR = "6,7,8"        'Species, Unknowns, Species Search
         BL = "4,7"          'Survey Files, Upload Survey File
-        BC = "1,2,3,4,6,8"  'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+        BC = "1,2,3,4,6,7,8"  'VegPlot, VegWalk, Photo, Transducer, Tasks, Mod Wentworth Settings, Sheet Settings
         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
         
         'prepare park specific sets
