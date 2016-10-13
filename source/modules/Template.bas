@@ -28,7 +28,6 @@ Private m_TemplateName As String '255
 Private m_Context As String '255
 Private m_Syntax As String '10
 Private m_TemplateSQL As String 'memo
-Private m_SQL As String 'memo
 Private m_Params As String '255
 Private m_Version As String '10
 Private m_IsSupported As Integer
@@ -75,9 +74,7 @@ End Property
 Public Property Let TemplateSQL(Value As String)
     m_TemplateSQL = Value
     
-    'set sql property
-    Me.sql = Value
-    
+    'set params property
     If Len(Me.Syntax) <> Len(Replace(Me.Syntax, "SQL", "")) Then
         Me.Params = GetParamsFromSQL(Me.TemplateSQL)
     End If
@@ -86,17 +83,6 @@ End Property
 
 Public Property Get TemplateSQL() As String
     TemplateSQL = m_TemplateSQL
-End Property
-
-Public Property Let sql(Value As String)
-    m_SQL = Value
-        
-    'set template sql property
-    Me.TemplateSQL = Value
-End Property
-
-Public Property Get sql() As String
-    sql = m_SQL
 End Property
 
 Public Property Let Syntax(Value As String)

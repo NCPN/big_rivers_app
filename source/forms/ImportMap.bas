@@ -17,13 +17,12 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7860
+    Width =8130
     DatasheetFontHeight =11
-    ItemSuffix =71
-    Left =3240
-    Top =3525
-    Right =12480
-    Bottom =14520
+    ItemSuffix =76
+    Left =3420
+    Right =11550
+    Bottom =15285
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x9116deeeb5cfe440
@@ -219,20 +218,20 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =3480
-                    Top =1080
+                    Left =900
+                    Top =1020
                     Width =2025
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblModalSedSize"
-                    Caption ="Modal Sediment Size"
+                    Name ="lblTable"
+                    Caption ="Database Table"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3480
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =5505
-                    LayoutCachedHeight =1395
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =2925
+                    LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -245,7 +244,6 @@ Begin Form
                     ForeColor =16711680
                     Name ="btnComment"
                     Caption ="í ½í·©"
-                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
@@ -265,44 +263,6 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                     Overlaps =1
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =1920
-                    Top =1080
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblDistance"
-                    Caption ="Distance (m)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1920
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =3165
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =1080
-                    Top =1080
-                    Width =600
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblNumber"
-                    Caption ="Plot #"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1080
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =1680
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =215
@@ -332,7 +292,6 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnSetObserverRecorder"
                     Caption ="í ½í±¥"
-                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5820
@@ -367,8 +326,8 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =1
                     OverlapFlags =93
-                    Left =5820
-                    Top =6945
+                    Left =2040
+                    Top =6300
                     Width =1860
                     Height =1860
                     FontSize =14
@@ -378,64 +337,12 @@ Begin Form
                     Name ="lblCover"
                     Caption ="Cover\015\012Species"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5820
-                    LayoutCachedTop =6945
-                    LayoutCachedWidth =7680
-                    LayoutCachedHeight =8805
+                    LayoutCachedLeft =2040
+                    LayoutCachedTop =6300
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =8160
                     BackThemeColorIndex =6
                     BackTint =40.0
-                    BorderThemeColorIndex =-1
-                    BorderTint =100.0
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    OverlapFlags =93
-                    Left =180
-                    Top =7665
-                    Width =5580
-                    Height =1140
-                    FontSize =14
-                    LeftMargin =216
-                    TopMargin =288
-                    BackColor =11916796
-                    Name ="lblChkboxes"
-                    Caption ="âœ”"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =7665
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =8805
-                    BackThemeColorIndex =9
-                    BackTint =40.0
-                    BorderThemeColorIndex =-1
-                    BorderTint =100.0
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    OverlapFlags =93
-                    Left =180
-                    Top =6165
-                    Width =4140
-                    Height =1380
-                    FontSize =14
-                    LeftMargin =216
-                    TopMargin =288
-                    BackColor =16051931
-                    Name ="lblPct"
-                    Caption ="%"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =6165
-                    LayoutCachedWidth =4320
-                    LayoutCachedHeight =7545
-                    BackThemeColorIndex =8
-                    BackTint =20.0
                     BorderThemeColorIndex =-1
                     BorderTint =100.0
                     ForeThemeColorIndex =-1
@@ -444,10 +351,10 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =6660
-                    Top =5685
+                    Left =6600
+                    Top =60
                     Width =720
-                    TabIndex =16
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -491,10 +398,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6660
-                    LayoutCachedTop =5685
-                    LayoutCachedWidth =7380
-                    LayoutCachedHeight =6045
+                    LayoutCachedLeft =6600
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =7320
+                    LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -516,7 +423,7 @@ Begin Form
                     Top =9405
                     Width =7650
                     Height =4380
-                    TabIndex =17
+                    TabIndex =5
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.ImportMapList"
@@ -530,10 +437,10 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =5760
-                    Top =5685
+                    Left =5700
+                    Top =60
                     Width =720
-                    TabIndex =18
+                    TabIndex =6
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -577,10 +484,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =5760
-                    LayoutCachedTop =5685
-                    LayoutCachedWidth =6480
-                    LayoutCachedHeight =6045
+                    LayoutCachedLeft =5700
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =6420
+                    LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -617,521 +524,26 @@ Begin Form
                     OverlapFlags =85
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =7560
-                    Top =5730
+                    Left =7500
+                    Top =105
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =19
+                    TabIndex =7
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
                     DefaultValue ="0"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7560
-                    LayoutCachedTop =5730
-                    LayoutCachedWidth =7800
-                    LayoutCachedHeight =6030
+                    LayoutCachedLeft =7500
+                    LayoutCachedTop =105
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =405
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
                     ForeTint =50.0
-                End
-                Begin TextBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =2160
-                    Top =5685
-                    Width =720
-                    Height =315
-                    TabIndex =1
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxDistance"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2160
-                    LayoutCachedTop =5685
-                    LayoutCachedWidth =2880
-                    LayoutCachedHeight =6000
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =1020
-                    Top =5685
-                    Width =720
-                    Height =315
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxNumber"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =5685
-                    LayoutCachedWidth =1740
-                    LayoutCachedHeight =6000
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =215
-                    IMESentenceMode =3
-                    Left =1020
-                    Top =6480
-                    Height =315
-                    TabIndex =3
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPctFines"
-                    ValidationRule ="Not Like \"[0-9]*.[0-9]*\""
-                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =6480
-                    LayoutCachedWidth =2460
-                    LayoutCachedHeight =6795
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =223
-                    IMESentenceMode =3
-                    Left =2580
-                    Top =6465
-                    Height =315
-                    TabIndex =4
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPctWater"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
-                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =6465
-                    LayoutCachedWidth =4020
-                    LayoutCachedHeight =6780
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =223
-                    IMESentenceMode =3
-                    Left =1020
-                    Top =7125
-                    Height =315
-                    TabIndex =5
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPctURC"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
-                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =7125
-                    LayoutCachedWidth =2460
-                    LayoutCachedHeight =7440
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =93
-                    IMESentenceMode =3
-                    Left =4800
-                    Top =6465
-                    Width =960
-                    Height =315
-                    TabIndex =7
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPlotDensity"
-                    AfterUpdate ="[Event Procedure]"
-                    ControlTipText ="Set plot density 1/x where X = 1, 2, 4, or 8"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =6465
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =6780
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =223
-                    IMESentenceMode =3
-                    Left =2580
-                    Top =7125
-                    Height =315
-                    TabIndex =6
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPctFA"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
-                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =7125
-                    LayoutCachedWidth =4020
-                    LayoutCachedHeight =7440
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =2580
-                    Top =6885
-                    Width =1020
-                    Height =240
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblFA"
-                    Caption ="FA"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =6885
-                    LayoutCachedWidth =3600
-                    LayoutCachedHeight =7125
-                End
-                Begin Label
-                    OverlapFlags =255
-                    Left =4440
-                    Top =6165
-                    Width =1200
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblPlotDensity"
-                    Caption ="Plot Density"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =6165
-                    LayoutCachedWidth =5640
-                    LayoutCachedHeight =6480
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =1020
-                    Top =6225
-                    Width =1020
-                    Height =240
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblFines"
-                    Caption ="Fines"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =6225
-                    LayoutCachedWidth =2040
-                    LayoutCachedHeight =6465
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =2580
-                    Top =6225
-                    Width =1020
-                    Height =240
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblWater"
-                    Caption ="Water"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =6225
-                    LayoutCachedWidth =3600
-                    LayoutCachedHeight =6465
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =1020
-                    Top =6885
-                    Width =1020
-                    Height =240
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblURC"
-                    Caption ="Total URC"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =6885
-                    LayoutCachedWidth =2040
-                    LayoutCachedHeight =7125
-                End
-                Begin CheckBox
-                    OverlapFlags =215
-                    Left =1140
-                    Top =7905
-                    Width =360
-                    Height =360
-                    TabIndex =8
-                    BorderColor =10921638
-                    Name ="chkNoCanopyVeg"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1140
-                    LayoutCachedTop =7905
-                    LayoutCachedWidth =1500
-                    LayoutCachedHeight =8265
-                    Begin
-                        Begin Label
-                            OverlapFlags =247
-                            Left =1380
-                            Top =7845
-                            Width =1485
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblNoCanopyVeg"
-                            Caption ="No Canopy Veg"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =1380
-                            LayoutCachedTop =7845
-                            LayoutCachedWidth =2865
-                            LayoutCachedHeight =8160
-                        End
-                    End
-                End
-                Begin CheckBox
-                    OverlapFlags =215
-                    Left =1140
-                    Top =8325
-                    Width =360
-                    Height =360
-                    TabIndex =9
-                    BorderColor =10921638
-                    Name ="chkNoRootedVeg"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1140
-                    LayoutCachedTop =8325
-                    LayoutCachedWidth =1500
-                    LayoutCachedHeight =8685
-                    Begin
-                        Begin Label
-                            OverlapFlags =247
-                            Left =1380
-                            Top =8265
-                            Width =1470
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblNoRootedVeg"
-                            Caption ="No Rooted Veg"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =1380
-                            LayoutCachedTop =8265
-                            LayoutCachedWidth =2850
-                            LayoutCachedHeight =8580
-                        End
-                    End
-                End
-                Begin CheckBox
-                    Visible = NotDefault
-                    OverlapFlags =215
-                    Left =3300
-                    Top =7905
-                    Width =360
-                    Height =360
-                    TabIndex =10
-                    BorderColor =10921638
-                    Name ="chkNoIndicatorSpecies"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =7905
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =8265
-                    Begin
-                        Begin Label
-                            Visible = NotDefault
-                            OverlapFlags =247
-                            Left =3540
-                            Top =7845
-                            Width =1965
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblNoIndicatorSpecies"
-                            Caption ="No Indicator Species"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =3540
-                            LayoutCachedTop =7845
-                            LayoutCachedWidth =5505
-                            LayoutCachedHeight =8160
-                        End
-                    End
-                End
-                Begin CheckBox
-                    OverlapFlags =215
-                    Left =3300
-                    Top =8325
-                    Width =360
-                    Height =360
-                    TabIndex =11
-                    BorderColor =10921638
-                    Name ="chkHasSocialTrails"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =8325
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =8685
-                    Begin
-                        Begin Label
-                            OverlapFlags =247
-                            Left =3540
-                            Top =8265
-                            Width =1530
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblHasSocialTrails"
-                            Caption ="Has Social Trails"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =3540
-                            LayoutCachedTop =8265
-                            LayoutCachedWidth =5070
-                            LayoutCachedHeight =8580
-                        End
-                    End
-                End
-                Begin Label
-                    OverlapFlags =119
-                    Left =4440
-                    Top =6480
-                    Width =315
-                    Height =315
-                    BorderColor =8355711
-                    Name ="lblFraction"
-                    Caption ="1 /"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =6480
-                    LayoutCachedWidth =4755
-                    LayoutCachedHeight =6795
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
                 End
                 Begin TextBox
                     TabStop = NotDefault
@@ -1139,21 +551,21 @@ Begin Form
                     OverlapFlags =85
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =120
-                    Top =5685
+                    Left =60
+                    Top =60
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =20
+                    TabIndex =8
                     BorderColor =8355711
                     ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =5685
-                    LayoutCachedWidth =840
-                    LayoutCachedHeight =5985
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =780
+                    LayoutCachedHeight =360
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -1162,21 +574,20 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =215
-                    Left =6840
-                    Top =7725
+                    Left =3060
+                    Top =7080
                     Width =720
-                    TabIndex =14
+                    TabIndex =2
                     ForeColor =4210752
                     Name ="btnURC"
                     Caption ="URC"
-                    OnClick ="[Event Procedure]"
                     ControlTipText ="Add/Edit Understory Rooted Cover Species"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6840
-                    LayoutCachedTop =7725
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =8085
+                    LayoutCachedLeft =3060
+                    LayoutCachedTop =7080
+                    LayoutCachedWidth =3780
+                    LayoutCachedHeight =7440
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1192,21 +603,20 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =215
-                    Left =6840
-                    Top =7185
+                    Left =3060
+                    Top =6540
                     Width =720
-                    TabIndex =13
+                    TabIndex =1
                     ForeColor =4210752
                     Name ="btnWCC"
                     Caption ="WCC"
-                    OnClick ="[Event Procedure]"
                     ControlTipText ="Add/Edit Woody Canopy Cover Species"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6840
-                    LayoutCachedTop =7185
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =7545
+                    LayoutCachedLeft =3060
+                    LayoutCachedTop =6540
+                    LayoutCachedWidth =3780
+                    LayoutCachedHeight =6900
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1223,115 +633,20 @@ Begin Form
                 Begin CommandButton
                     Visible = NotDefault
                     OverlapFlags =215
-                    Left =6840
-                    Top =8265
+                    Left =3060
+                    Top =7620
                     Width =720
-                    TabIndex =15
+                    TabIndex =3
                     ForeColor =4210752
                     Name ="btnARC"
                     Caption ="ARC"
-                    OnClick ="[Event Procedure]"
                     ControlTipText ="Add/Edit All Rooted Cover Species"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6840
-                    LayoutCachedTop =8265
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =8625
-                    BackColor =14136213
-                    BorderColor =14136213
-                    HoverColor =65280
-                    HoverThemeColorIndex =-1
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    OverlapFlags =93
-                    Left =5820
-                    Top =6165
-                    Width =1860
-                    Height =660
-                    FontSize =20
-                    LeftMargin =72
-                    TopMargin =72
-                    BackColor =12835293
-                    Name ="lblTagline"
-                    Caption ="í ½í³"
-                    ControlTipText ="Add/Edit Tagline Measurements"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =5820
-                    LayoutCachedTop =6165
-                    LayoutCachedWidth =7680
-                    LayoutCachedHeight =6825
-                    BackThemeColorIndex =3
-                    BackShade =90.0
-                    BorderThemeColorIndex =-1
-                    BorderTint =100.0
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin CommandButton
-                    OverlapFlags =215
-                    Left =6840
-                    Top =6255
-                    Width =720
-                    Height =480
-                    TabIndex =12
-                    ForeColor =4210752
-                    Name ="btnTaglines"
-                    Caption ="Tagline"
-                    OnClick ="[Event Procedure]"
-                    ControlTipText ="Add/Edit Tagline Measurements"
-                    GridlineColor =10921638
-                    ImageData = Begin
-                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a890ff604830ff604830ff604830ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a890fffff0e0ffffe0d0ffffe0c0ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0fffff8f0ff000000ff000000ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0fffff8f0fffff8f0ffffe8d0ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0fffff8fffffff8f0ff000000ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0fffffffffffff8fffffff0e0ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0ffffffffff000000ff000000ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0fffffffffffffffffff0f0f0ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0a8a0ffffffffffffffffff000000ff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0b0a0ffffffffffffffffffffffffff604830ff00000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000c0b0a0ffa08870ff806040ff705040ff604830ff604830ff ,
-                        0x604830ff604830ff604830ff604830ff604830ff604830ff604830ff604830ff ,
-                        0x604830ff00000000c0b0a0fffffffffff0f8f0fff0f8f0ff705040ffffffffff ,
-                        0x000000fff0f0f0ff000000ffffe8d0ff000000ffffe0c0ff000000ffffd8c0ff ,
-                        0x604830ff00000000c0b0a0fffffffffffffffffff0f8f0ff805840ffffffffff ,
-                        0xffffffffffffffff000000fffff8f0fffff0e0ffffe8e0ff000000ffffd8c0ff ,
-                        0x604830ff00000000c0b0a0ffffffffffffffffffffffffffa08070ffffffffff ,
-                        0xfffffffffffffffffffffffffff8f0fffff8f0fffff0e0ffffe8e0ffffe8d0ff ,
-                        0x604830ff00000000c0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ff ,
-                        0xc0a8a0ffc0a8a0ffc0a8a0ffc0a8a0ffc0a8a0ffc0a8a0ffc0a8a0ffc0a890ff ,
-                        0xc0a890ff00000000
-                    End
-
-                    LayoutCachedLeft =6840
-                    LayoutCachedTop =6255
-                    LayoutCachedWidth =7560
-                    LayoutCachedHeight =6735
+                    LayoutCachedLeft =3060
+                    LayoutCachedTop =7620
+                    LayoutCachedWidth =3780
+                    LayoutCachedHeight =7980
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1347,18 +662,17 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    RowSourceTypeInt =0
                     OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =4
-                    Left =3300
-                    Top =5685
-                    Width =2304
+                    Left =900
+                    Top =60
+                    Width =2964
                     Height =315
-                    TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"0\""
                     ConditionalFormat = Begin
                         0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
@@ -1366,21 +680,17 @@ Begin Form
                         0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
                         0x5d002e00560061006c00750065003d0022002200000000002200220000000000
                     End
-                    Name ="cbxModalSedSize"
-                    RowSourceType ="Table/Query"
-                    RowSource ="PARAMETERS etype Text ( 255 ); SELECT DISTINCT id, label, summary, label & ' - '"
-                        " & summary AS display, Sequence FROM AppEnum WHERE EnumType = ModWentworthClassS"
-                        "ize ORDER BY Sequence; "
+                    Name ="cbxTable"
                     ColumnWidths ="0;0;0;2"
                     AfterUpdate ="[Event Procedure]"
-                    ControlTipText ="Size class"
+                    ControlTipText ="Table to import into"
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =5685
-                    LayoutCachedWidth =5604
-                    LayoutCachedHeight =6000
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =3864
+                    LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
                     ForeTint =75.0
@@ -1392,25 +702,6 @@ Begin Form
                         0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
                         0x002200000000000000000000000000000000000000000000
                     End
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =300
-                    Top =7065
-                    Width =600
-                    Height =420
-                    FontSize =8
-                    BorderColor =8355711
-                    ForeColor =16711680
-                    Name ="lblHintPct"
-                    Caption ="Nearest 1% or T"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =300
-                    LayoutCachedTop =7065
-                    LayoutCachedWidth =900
-                    LayoutCachedHeight =7485
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
                 End
                 Begin Label
                     BackStyle =1
@@ -1460,42 +751,79 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
-                Begin ListBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =225
-                    Top =2880
-                    Width =2340
-                    Height =2700
-                    TabIndex =21
-                    ForeColor =4210752
+                Begin Subform
+                    CanShrink = NotDefault
+                    OverlapFlags =87
+                    Left =120
+                    Top =750
+                    Width =3600
+                    Height =4590
+                    TabIndex =9
                     BorderColor =10921638
-                    Name ="lbxTableFields"
-                    RowSourceType ="Table/Query"
+                    Name ="listTableFields"
+                    SourceObject ="Form.TableFieldList"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =225
-                    LayoutCachedTop =2880
-                    LayoutCachedWidth =2565
-                    LayoutCachedHeight =5580
-                    Begin
-                        Begin Label
-                            OverlapFlags =93
-                            Left =105
-                            Top =2400
-                            Width =1185
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblTableFields"
-                            Caption ="Table Fields"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =105
-                            LayoutCachedTop =2400
-                            LayoutCachedWidth =1290
-                            LayoutCachedHeight =2715
-                        End
-                    End
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =750
+                    LayoutCachedWidth =3720
+                    LayoutCachedHeight =5340
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =180
+                    Top =540
+                    Width =1260
+                    Height =180
+                    FontSize =8
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblHintReqd"
+                    Caption ="hint"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =1440
+                    LayoutCachedHeight =720
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =2460
+                    Top =570
+                    Width =1260
+                    Height =180
+                    FontSize =8
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblHintZLS"
+                    Caption ="hint"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2460
+                    LayoutCachedTop =570
+                    LayoutCachedWidth =3720
+                    LayoutCachedHeight =750
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Subform
+                    CanShrink = NotDefault
+                    OverlapFlags =85
+                    Left =4320
+                    Top =780
+                    Width =3600
+                    Height =4590
+                    TabIndex =10
+                    BorderColor =10921638
+                    Name ="listCSV"
+                    SourceObject ="Form.CSVColumnList"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =780
+                    LayoutCachedWidth =7920
+                    LayoutCachedHeight =5370
                 End
             End
         End
@@ -1625,26 +953,15 @@ End Property
 ' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
-' Assumptions:
-'   Certain fields are not applicable across all parks as noted below.
-'       % Water (inundation) - DINO & CANY
-'       % Total URC - BLCA & CANY
-'       Plot Density - BLCA & CANY
-'       No Canopy Veg - BLCA & CANY
-'       No Indicator Species - BLCA only
-'       No Rooted Veg - DINO & CANY
-'       Has Social Trail - BLCA & CANY
-'
+' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/31/2016 - initial version
-'   BLC - 7/13/2016 - added validation, hints
-'   BLC - 9/8/2016  - added SetObserverRecorder button
+'   BLC - 10/6/2016 - initial version
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1659,44 +976,32 @@ On Error GoTo Err_Handler
                  Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
                  Nz(TempVars("Feature"), "")
                  
-    Title = "VegPlot"
-    Directions = "Enter the plot information and click save." _
-                & vbCrLf & "Add cover species via buttons at right."
+    Title = "Map Import Fields"
+    Directions = "Select the table to import to && map the CSV fields at right." _
+                & vbCrLf & "Then import the CSV data by clicking the button at right."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
-    btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
-    lblChkboxes.Caption = StringFromCodepoint(uCheck)
-    lblCover.Caption = "Cover" & vbCrLf & "Species"
-    lblTagline.Caption = StringFromCodepoint(uRuler)
-    btnSetObserverRecorder.Caption = StringFromCodepoint(uUsers)
-    btnSetObserverRecorder.ControlTipText = "Set the selected veg plot's observer & recorder"
+    
+    'set data sources
+    Dim ShowSysTables As Boolean
+    ShowSysTables = False
+    
+    'include sys for administrators
+    If TempVars("UserAccessLevel") = "admin" Then ShowSysTables = True
+    
+    cbxTable.SeparatorCharacters = acSeparatorCharactersSemiColon
+    cbxTable.RowSourceType = "Value List"
+    cbxTable.RowSource = Replace(ListTables(ShowSysTables), "|", ";")
     
     'hints
-    lblHintPct.Caption = "Nearest 1% or T"
-    lblHintPct.ForeColor = lngBlue
-    
-    'validation
-    Dim strPctValidation As String, strValidationText As String
-    strPctValidation = "Is Null Or ""T"" Or Between 0 and 101"
-    tbxPctFines.ValidationRule = "Not Like ""[0-9]*.[0-9]*"""
-    tbxPctWater.ValidationRule = strPctValidation
-    tbxPctURC.ValidationRule = strPctValidation
-    tbxPctFA.ValidationRule = strPctValidation
-    
-    strValidationText = "Values may be whole percentages (0-100), 0.5, or T"
-    tbxPctFines.ValidationText = strValidationText
-    tbxPctWater.ValidationText = strValidationText
-    tbxPctURC.ValidationText = strValidationText
-    tbxPctFA.ValidationText = strValidationText
+    lblHintReqd.Caption = "* = Required Field"
+    lblHintReqd.ForeColor = lngRed
+    lblHintReqd.Visible = False
+    lblHintZLS.Caption = "Blue = Allows ZLS"
+    lblHintZLS.ForeColor = lngBlue
+    lblHintZLS.Visible = False
     
     'set hover
-    btnSetObserverRecorder.HoverColor = lngGreen
-    btnComment.HoverColor = lngGreen
-    btnTaglines.HoverColor = lngGreen
-    btnWCC.HoverColor = lngGreen
-    btnURC.HoverColor = lngGreen
-    btnARC.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
     btnUndo.HoverColor = lngGreen
       
@@ -1704,91 +1009,13 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxNumber.BackColor = lngYellow
-    tbxDistance.BackColor = lngYellow
-    cbxModalSedSize.BackColor = lngYellow
-    tbxPctFines.BackColor = lngYellow
-    tbxPctWater.BackColor = lngYellow
-    tbxPctURC.BackColor = lngYellow
-    tbxPlotDensity.BackColor = lngYellow
-    btnSetObserverRecorder.Enabled = False
-    
-    'populate modal sediment size
-    ' -------------------------------------------------------------------------------------
-    ' NOTE: s_enums_for_type *MUST* include "DISTINCT" for the combobox autoexpand to work!(Access bug)
-    '       Dan Some, August 7, 2011
-    '       http://answers.microsoft.com/en-us/office/forum/office_2007-access/combo-box-property-auto-expand-yes-doesnt-seem-to/05fa61af-853e-4c9d-a3e3-2f51aa094668
-    ' -------------------------------------------------------------------------------------
-    cbxModalSedSize.RowSource = GetTemplate("s_enums_for_type", "etype" & PARAM_SEPARATOR & "ModWentworthClassSize")
-    cbxModalSedSize.BoundColumn = 1 'bind to label (not ID)
-    cbxModalSedSize.ColumnCount = 4
-    cbxModalSedSize.ColumnWidths = "0,0,0,1.5" 'display the display column (combines label - summary)
+    cbxTable.BackColor = lngYellow
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
   
     'defaults --> turn off items
-    lblWater.Visible = False
-    tbxPctWater.Visible = False
-    lblURC.Visible = False
-    tbxPctURC.Visible = False
-    lblPlotDensity.Visible = False
-    lblFraction.Visible = False
-    tbxPlotDensity.Visible = False
-    chkNoCanopyVeg.Visible = False
-    lblNoCanopyVeg.Visible = False
-    chkNoIndicatorSpecies.Visible = False
-    lblNoIndicatorSpecies.Visible = False
-    chkNoRootedVeg.Visible = False
-    lblNoRootedVeg.Visible = False
-    chkHasSocialTrails.Visible = False
-    lblHasSocialTrails.Visible = False
-    btnWCC.Visible = False
-    btnURC.Visible = False
-    btnARC.Visible = False
-    
-    'adjust UI based on park
-    Select Case TempVars("ParkCode")
-        Case "BLCA"
-            lblURC.Visible = True
-            tbxPctURC.Visible = True
-            lblPlotDensity.Visible = True
-            lblFraction.Visible = True
-            tbxPlotDensity.Visible = True
-            chkNoCanopyVeg.Visible = True
-            lblNoCanopyVeg.Visible = True
-            chkNoIndicatorSpecies.Visible = True
-            lblNoIndicatorSpecies.Visible = True
-            chkHasSocialTrails.Visible = True
-            lblHasSocialTrails.Visible = True
-            btnWCC.Visible = True
-            btnURC.Visible = True
-        
-        Case "CANY"
-            lblURC.Visible = True
-            tbxPctURC.Visible = True
-            lblWater.Visible = True
-            tbxPctWater.Visible = True
-            lblPlotDensity.Visible = True
-            lblFraction.Visible = True
-            tbxPlotDensity.Visible = True
-            tbxPctURC.Visible = True
-            chkNoCanopyVeg.Visible = True
-            lblNoCanopyVeg.Visible = True
-            chkNoRootedVeg.Visible = True
-            lblNoRootedVeg.Visible = True
-            chkHasSocialTrails.Visible = True
-            lblHasSocialTrails.Visible = True
-            btnWCC.Visible = True
-            btnURC.Visible = True
-            
-        Case "DINO"
-            lblWater.Visible = True
-            tbxPctWater.Visible = True
-            chkNoRootedVeg.Visible = True
-            lblNoRootedVeg.Visible = True
-            btnARC.Visible = True
-    End Select
+    listTableFields.Visible = False
     
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
@@ -1868,366 +1095,385 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxNumber_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxNumber_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxNumber.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxNumber_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxDistance_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxDistance_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxDistance.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxDistance_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          cbxModalSedSize_AfterUpdate
+' Sub:          cbxTable_AfterUpdate
 ' Description:  Combobox after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/27/2016 - initial version
-'   BLC - 7/13/2016 - revised to combobox
+'   BLC - 10/6/2016 - initial version
 ' ---------------------------------
-Private Sub cbxModalSedSize_AfterUpdate()
+Private Sub cbxTable_AfterUpdate()
 On Error GoTo Err_Handler
-
-    If Len(cbxModalSedSize.Text) > 0 Then _
+    
+    If Len(cbxTable.Text) > 0 Then
+        
+        lblHintReqd.Visible = True
+        lblHintZLS.Visible = True
+        listTableFields.Visible = True
+        
+        Me.listTableFields.Form.Table = cbxTable.Text
+        
+        'listTableFields.Requery
+        
+       Me.listCSV.Form.Table = cbxTable.Text
+        
+        'set recordset for # of dropdowns
+        'Set Me.listCSV.Form.Records = Me.listTableFields.Form.Recordset
+        'listCSV.Requery
+        Set Me.listCSV.Form.Recordset = Me.listTableFields.Form.Recordset
+        
+        
         ReadyForSave
     
+    End If
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxModalSedSize_AfterUpdate[VegPlot form])"
+            "Error encountered (#" & Err.Number & " - cbxTable_AfterUpdate[ImportMap form])"
     End Select
     Resume Exit_Handler
 End Sub
-
-' ---------------------------------
-' Sub:          tbxPctFines_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxPctFines_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxPctFines.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPctFines_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxPctWater_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxPctWater_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxPctWater.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPctWater_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxPctURC_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxPctURC_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxPctURC.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPctURC_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxPctFA_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxPctFA_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxPctFA.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPctFA_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxPlotDensity_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxPlotDensity_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxPlotDensity.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPlotDensity_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          chkNoCanopyVeg_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub chkNoCanopyVeg_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(chkNoCanopyVeg.Value) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkNoCanopyVeg_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          chkNoRootedVeg_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub chkNoRootedVeg_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(chkNoRootedVeg.Value) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkNoRootedVeg_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          chkNoIndicatorSpecies_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub chkNoIndicatorSpecies_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(chkNoIndicatorSpecies.Value) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkNoIndicatorSpecies_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          chkHasSocialTrails_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub chkHasSocialTrails_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(chkHasSocialTrails.Value) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkHasSocialTrails_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
+'
+'' ---------------------------------
+'' Sub:          tbxDistance_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxDistance_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(tbxDistance.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxDistance_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          cbxModalSedSize_AfterUpdate
+'' Description:  Combobox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+''   BLC - 7/13/2016 - revised to combobox
+'' ---------------------------------
+'Private Sub cbxModalSedSize_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(cbxModalSedSize.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - cbxModalSedSize_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          tbxPctFines_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxPctFines_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(tbxPctFines.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxPctFines_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          tbxPctWater_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxPctWater_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(tbxPctWater.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxPctWater_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          tbxPctURC_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxPctURC_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(tbxPctURC.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxPctURC_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          tbxPctFA_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxPctFA_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(tbxPctFA.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxPctFA_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          tbxPlotDensity_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub tbxPlotDensity_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(tbxPlotDensity.Text) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - tbxPlotDensity_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          chkNoCanopyVeg_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub chkNoCanopyVeg_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(chkNoCanopyVeg.Value) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - chkNoCanopyVeg_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          chkNoRootedVeg_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub chkNoRootedVeg_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(chkNoRootedVeg.Value) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - chkNoRootedVeg_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          chkNoIndicatorSpecies_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub chkNoIndicatorSpecies_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(chkNoIndicatorSpecies.Value) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - chkNoIndicatorSpecies_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          chkHasSocialTrails_AfterUpdate
+'' Description:  Textbox after update actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub chkHasSocialTrails_AfterUpdate()
+'On Error GoTo Err_Handler
+'
+'    If Len(chkHasSocialTrails.Value) > 0 Then _
+'        ReadyForSave
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - chkHasSocialTrails_AfterUpdate[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
 ' ---------------------------------
 ' Sub:          btnUndo_Click
 ' Description:  Undo button click actions
@@ -2274,57 +1520,57 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim vp As New VegPlot
-    
-    With vp
-        'values passed into form
-
-
-'        .CollectionSourceName = "T"
-
-'        .CreateDate = ""
-'        .CreatedByID = 0
-'        .LastModified = ""
-'        .LastModifiedByID = 0
-        
-        '.ProtocolID = 1
-        '.SiteID = 1
-        
-        'form values
-        
-'        .EventID = cbxEvent.Column(0)
-'        .FeatureID = cbxFeature.Column(0)
-        
-        .PlotNumber = tbxNumber.Value
-        .PlotDistance = tbxDistance.Value
-        .ModalSedimentSize = cbxModalSedSize.Value
-        
-        .PlotDensity = tbxPlotDensity.Value
-        
-        'pct values
-        .PercentFines = tbxPctFines.Value
-        .PercentWater = tbxPctWater.Value
-        .UnderstoryRootedPctCover = tbxPctURC.Value
-        
-        'chk values
-        .NoCanopyVeg = chkNoCanopyVeg.Value
-        .NoRootedVeg = chkNoRootedVeg.Value
-        .NoIndicatorSpecies = chkNoIndicatorSpecies.Value
-        .HasSocialTrail = chkHasSocialTrails.Value
-        
-'        .LocationName = tbxName.Value
-'        .LocationType = "" 'cbxLocationType.SelText
+'    Dim vp As New VegPlot
 '
-'        .HeadtoOrientDistance = tbxDistance.Value
-'        .HeadtoOrientBearing = tbxBearing.Value
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value
-        tbxID = .ID
-        
-    End With
+'    With vp
+'        'values passed into form
+'
+'
+''        .CollectionSourceName = "T"
+'
+''        .CreateDate = ""
+''        .CreatedByID = 0
+''        .LastModified = ""
+''        .LastModifiedByID = 0
+'
+'        '.ProtocolID = 1
+'        '.SiteID = 1
+'
+'        'form values
+'
+''        .EventID = cbxEvent.Column(0)
+''        .FeatureID = cbxFeature.Column(0)
+'
+'        .PlotNumber = tbxNumber.Value
+'        .PlotDistance = tbxDistance.Value
+'        .ModalSedimentSize = cbxModalSedSize.Value
+'
+'        .PlotDensity = tbxPlotDensity.Value
+'
+'        'pct values
+'        .PercentFines = tbxPctFines.Value
+'        .PercentWater = tbxPctWater.Value
+'        .UnderstoryRootedPctCover = tbxPctURC.Value
+'
+'        'chk values
+'        .NoCanopyVeg = chkNoCanopyVeg.Value
+'        .NoRootedVeg = chkNoRootedVeg.Value
+'        .NoIndicatorSpecies = chkNoIndicatorSpecies.Value
+'        .HasSocialTrail = chkHasSocialTrails.Value
+'
+''        .LocationName = tbxName.Value
+''        .LocationType = "" 'cbxLocationType.SelText
+''
+''        .HeadtoOrientDistance = tbxDistance.Value
+''        .HeadtoOrientBearing = tbxBearing.Value
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'
+'        'set the tbxID.value
+'        tbxID = .ID
+'
+'    End With
     
     'clear values & refresh display
     
@@ -2355,184 +1601,184 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' Sub:          btnSetObserverRecorder_Click
-' Description:  Set observer recorder button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, September 8, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 9/8/2016 - initial version
-' ---------------------------------
-Private Sub btnSetObserverRecorder_Click()
-On Error GoTo Err_Handler
-    
-    DoCmd.OpenForm "SetObserverRecorder", acNormal, , , , , "VegPlot|" & Me.tbxID
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSetObserverRecorder_Click[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnTaglines_Click
-' Description:  Tagline button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub btnTaglines_Click()
-On Error GoTo Err_Handler
-    
-    'open form
-    DoCmd.OpenForm "Tagline", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnTaglines_Click[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnWCC_Click
-' Description:  Woody Canopy Cover button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub btnWCC_Click()
-On Error GoTo Err_Handler
-    
-    'open form
-    DoCmd.OpenForm "VegWalk", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnWCC_Click[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnURC_Click
-' Description:  Woody Canopy Cover button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub btnURC_Click()
-On Error GoTo Err_Handler
-    
-    'open form
-    DoCmd.OpenForm "VegWalk", acNormal, , , , , "UnderstoryRootedSpecies|" & tbxID
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnURC_Click[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnARC_Click
-' Description:  Woody Canopy Cover button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub btnARC_Click()
-On Error GoTo Err_Handler
-    
-    'open form
-    DoCmd.OpenForm "VegWalk", acNormal, , , , , "AllRootedSpecies|" & tbxID
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnARC_Click[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnComment_Click
-' Description:  Undo button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub btnComment_Click()
-On Error GoTo Err_Handler
-    
-    'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.Text
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnComment_Click[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
+'' ---------------------------------
+'' Sub:          btnSetObserverRecorder_Click
+'' Description:  Set observer recorder button click actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, September 8, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 9/8/2016 - initial version
+'' ---------------------------------
+'Private Sub btnSetObserverRecorder_Click()
+'On Error GoTo Err_Handler
+'
+'    DoCmd.OpenForm "SetObserverRecorder", acNormal, , , , , "VegPlot|" & Me.tbxID
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - btnSetObserverRecorder_Click[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          btnTaglines_Click
+'' Description:  Tagline button click actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/27/2016 - initial version
+'' ---------------------------------
+'Private Sub btnTaglines_Click()
+'On Error GoTo Err_Handler
+'
+'    'open form
+'    DoCmd.OpenForm "Tagline", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - btnTaglines_Click[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          btnWCC_Click
+'' Description:  Woody Canopy Cover button click actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/1/2016 - initial version
+'' ---------------------------------
+'Private Sub btnWCC_Click()
+'On Error GoTo Err_Handler
+'
+'    'open form
+'    DoCmd.OpenForm "VegWalk", acNormal, , , , , "WoodyCanopySpecies|" & tbxID
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - btnWCC_Click[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          btnURC_Click
+'' Description:  Woody Canopy Cover button click actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/1/2016 - initial version
+'' ---------------------------------
+'Private Sub btnURC_Click()
+'On Error GoTo Err_Handler
+'
+'    'open form
+'    DoCmd.OpenForm "VegWalk", acNormal, , , , , "UnderstoryRootedSpecies|" & tbxID
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - btnURC_Click[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          btnARC_Click
+'' Description:  Woody Canopy Cover button click actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/1/2016 - initial version
+'' ---------------------------------
+'Private Sub btnARC_Click()
+'On Error GoTo Err_Handler
+'
+'    'open form
+'    DoCmd.OpenForm "VegWalk", acNormal, , , , , "AllRootedSpecies|" & tbxID
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - btnARC_Click[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' Sub:          btnComment_Click
+'' Description:  Undo button click actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+'' Adapted:      -
+'' Revisions:
+''   BLC - 6/1/2016 - initial version
+'' ---------------------------------
+'Private Sub btnComment_Click()
+'On Error GoTo Err_Handler
+'
+'    'open comment form
+'    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.Text
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - btnComment_Click[VegPlot form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Close
@@ -2592,27 +1838,27 @@ On Error GoTo Err_Handler
     '           ModalSedSize, PctFine, PctWater, PctURC, PlotDensity,
     '           NoCanopyVeg, NoRootedVeg, HasSocialTrail, FA
     '           BLCA only: NoIndicatorSpecies
-    If Nz(tbxDistance.Value, "") > 0 _
-        And Nz(cbxModalSedSize.Value, "") > -1 _
-        And Nz(tbxPctFines.Value, "") > -1 _
-        And Nz(tbxPctWater.Value, "") > -1 _
-        And Nz(tbxPctURC.Value, "") > -1 _
-        And Nz(tbxPlotDensity.Value, "") > -1 _
-        And Nz(chkNoCanopyVeg.Value, "") > -1 _
-        And Nz(chkNoRootedVeg.Value, "") > -1 _
-        And Nz(chkHasSocialTrails.Value, "") > -1 Then
-        
-        Select Case TempVars("ParkCode")
-            Case "BLCA"
-                'requires NoIndicatorSpecies
-                If Nz(chkNoIndicatorSpecies.Value, "") > -1 Then GoTo Exit_Handler
-            Case "CANY"
-            Case "DINO"
-        End Select
+'    If Nz(tbxDistance.Value, "") > 0 _
+'        And Nz(cbxModalSedSize.Value, "") > -1 _
+'        And Nz(tbxPctFines.Value, "") > -1 _
+'        And Nz(tbxPctWater.Value, "") > -1 _
+'        And Nz(tbxPctURC.Value, "") > -1 _
+'        And Nz(tbxPlotDensity.Value, "") > -1 _
+'        And Nz(chkNoCanopyVeg.Value, "") > -1 _
+'        And Nz(chkNoRootedVeg.Value, "") > -1 _
+'        And Nz(chkHasSocialTrails.Value, "") > -1 Then
+'
+'        Select Case TempVars("ParkCode")
+'            Case "BLCA"
+'                'requires NoIndicatorSpecies
+'                If Nz(chkNoIndicatorSpecies.Value, "") > -1 Then GoTo Exit_Handler
+'            Case "CANY"
+'            Case "DINO"
+'        End Select
         
         isOK = True
         
-    End If
+'    End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK

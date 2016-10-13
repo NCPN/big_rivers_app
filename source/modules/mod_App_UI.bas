@@ -48,7 +48,7 @@ Option Explicit
 '                                Converted QAQC to Create, Logs to View
 '               BLC, 5/26/2015 - Added error handling
 ' =================================
-Public Sub PopulateInsetTitle(ctrl As Control, strContext As String)
+Public Sub PopulateInsetTitle(Ctrl As Control, strContext As String)
 On Error GoTo Err_Handler
     
     Dim strTitle As String
@@ -86,10 +86,10 @@ On Error GoTo Err_Handler
             strTitle = ""
     End Select
     
-    If ctrl.ControlType = acLabel Then
-        ctrl.Caption = strTitle
+    If Ctrl.ControlType = acLabel Then
+        Ctrl.Caption = strTitle
         If strContext <> "DbAdmin" Then
-            ctrl.Visible = True
+            Ctrl.Visible = True
         End If
     End If
     
@@ -121,7 +121,7 @@ End Sub
 '                                Converted QAQC to Create, Logs to View
 '               BLC, 5/26/2015 - Added error handling
 ' =================================
-Public Sub PopulateInstructions(ctrl As Control, strContext As String)
+Public Sub PopulateInstructions(Ctrl As Control, strContext As String)
 On Error GoTo Err_Handler
     Dim strInstructions As String
     
@@ -165,10 +165,10 @@ On Error GoTo Err_Handler
     End Select
     
     'populate caption & display instructions
-    If ctrl.ControlType = acLabel Then
-        ctrl.Caption = strInstructions
+    If Ctrl.ControlType = acLabel Then
+        Ctrl.Caption = strInstructions
         If strContext <> "DbAdmin" Then
-            ctrl.Visible = True
+            Ctrl.Visible = True
         End If
     End If
     
@@ -856,7 +856,7 @@ End Function
 ' Revisions:
 '   BLC - 9/13/2016 - initial version
 ' ---------------------------------
-Public Sub SortListForm(frm As Form, ctrl As Control)
+Public Sub SortListForm(frm As Form, Ctrl As Control)
 On Error GoTo Err_Handler
 
     Dim strSort As String
@@ -865,7 +865,7 @@ On Error GoTo Err_Handler
     strSort = ""
     
     'set sort field
-    Select Case Replace(ctrl.Name, "lbl", "")
+    Select Case Replace(Ctrl.Name, "lbl", "")
         Case "HdrID"
             strSort = "ID"
         Case "Version"
@@ -917,7 +917,7 @@ End Sub
 ' Revisions:
 '   BLC - 9/13/2016 - initial version
 ' ---------------------------------
-Public Sub FilterListForm(frm As Form, ctrl As Control)
+Public Sub FilterListForm(frm As Form, Ctrl As Control)
 On Error GoTo Err_Handler
 
     Dim strFilter As String
@@ -926,7 +926,7 @@ On Error GoTo Err_Handler
     strFilter = ""
     
     'set Filter field
-    Select Case Replace(ctrl.Name, "lbl", "")
+    Select Case Replace(Ctrl.Name, "lbl", "")
         Case "HdrID"
             strFilter = "ID"
         Case "Version"

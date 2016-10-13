@@ -1103,6 +1103,9 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
+    'set default
+    Me.IsSupported = 1
+    
     UpsertRecord Me
     
 Exit_Handler:

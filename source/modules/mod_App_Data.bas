@@ -24,6 +24,7 @@ Option Explicit
 '               BLC - 9/13/2016 - 1.12 - added FetchAddlData()
 '               BLC - 9/21/2016 - 1.13 - updated SetRecord() i_login parameters
 '               BLC - 9/22/2016 - 1.14 - added templates
+'               BLC - 10/16/2016 - 1.15 - fixed PopulateCombobox() to properly set recordset
 ' =================================
 
 ' ---------------------------------
@@ -125,7 +126,7 @@ On Error GoTo Err_Handler
     Set frm = ctrlSource.Parent
     
     rows = rs.RecordCount
-    cols = rs.fields.Count
+    cols = rs.Fields.Count
     
     'address no records
     If Nz(rows, 0) = 0 Then
@@ -191,7 +192,7 @@ On Error GoTo Err_Handler
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        strItem = strItem & rs.fields(j).Value & ";"
+                        strItem = strItem & rs.Fields(j).Value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
                         matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
@@ -324,7 +325,7 @@ On Error GoTo Err_Handler
     
     'assume only 1 record returned
     If rs.RecordCount > 0 Then
-        State = rs.fields("ParkState").Value
+        State = rs.Fields("ParkState").Value
     End If
    
     'return value
@@ -491,8 +492,9 @@ End Sub
 
 ' ---------------------------------
 ' SUB:          PopulateCombobox
-' Description:
-' Parameters:    - treeview type (string)
+' Description:  Populate priority/status comboboxes
+' Parameters:   cbx - combobox control to populate (ComboBox)
+'               BoxType - type of combobox, priority or status (string)
 ' Returns:      -
 ' Throws:       none
 ' References:   none
@@ -501,6 +503,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, June 3, 2015 - for NCPN tools
 ' Revisions:
 '   BLC - 6/3/2015  - initial version
+'   BLC - 10/12/2016 - fixed to set combobox recordset
 ' ---------------------------------
 Public Sub PopulateCombobox(cbx As ComboBox, BoxType As String)
 
@@ -524,7 +527,7 @@ On Error GoTo Err_Handler
  
     'assume only 1 record returned
     If rs.RecordCount > 0 Then
-        cbx.Recordset = rs
+        Set cbx.Recordset = rs
     Else
         GoTo Exit_Handler
     End If
@@ -536,7 +539,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - PopulateTree[mod_App_Data])"
+            "Error encountered (#" & Err.Number & " - PopulateCombobox[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -770,7 +773,7 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     
     If Not (rs.BOF And rs.EOF) Then
-        ID = rs.fields("ID")
+        ID = rs.Fields("ID")
     End If
     
     rs.Close
@@ -829,7 +832,7 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     
     If Not (rs.BOF And rs.EOF) Then
-        ID = rs.fields("ID")
+        ID = rs.Fields("ID")
     End If
     
     rs.Close
@@ -891,7 +894,7 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     
     If Not (rs.BOF And rs.EOF) Then
-        ID = rs.fields("ID")
+        ID = rs.Fields("ID")
     End If
     
     rs.Close
@@ -1120,7 +1123,14 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
-                
+                                
+                Case "s_events_by_feature"
+                    
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+                    .Parameters("feat") = TempVars("Feature")
+                                
                 Case "s_event_by_park_river_w_location"
                     
                     '-- required parameters --
@@ -1133,6 +1143,12 @@ On Error GoTo Err_Handler
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
+                Case "s_events_by_site"
+                    
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+
                 Case "s_events_list_by_park_river"
                     
                     '-- required parameters --
@@ -1466,9 +1482,9 @@ On Error GoTo Err_Handler
                 
                     '-- required parameters --
                     .Parameters("uname") = Params(1) 'username
-                    .Parameters("activity") = Params(2)
-                    .Parameters("version") = Params(3)
-                    .Parameters("accesslvl") = Params(4)
+                    .Parameters("activity") = Params(2) 'activity
+                    .Parameters("version") = TempVars("AppVersion")
+                    .Parameters("accesslvl") = TempVars("UserAccessLevelID")
                 
                     SkipRecordAction = True
                     
@@ -1798,6 +1814,11 @@ On Error GoTo Err_Handler
                     .Parameters("ActionDate") = Params(7)
                     .Parameters("ActionTime") = Params(8)
                 
+                Case "u_template"
+                
+                    '-- required parameters --
+                    .Parameters("") = Params()
+                
                 Case "u_tsys_datasheet_defaults"
 
                     '-- required parameters --
@@ -1928,6 +1949,7 @@ End Function
 ' Revisions:
 '   BLC - 7/28/2016 - initial version
 '   BLC - 9/1/2016  - added vegwalk, photo
+'   BLC - 10/4/2016 - added template, adjusted for form w/o list
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -1949,12 +1971,14 @@ On Error GoTo Err_Handler
 ' ----------------------------------------------------------------------------------
     
     Dim DoAction As String, strCriteria As String, strTable As String
+    Dim NoList As Boolean
     Dim obj As Object
     
     'use generic object to handle multiple obj types
     With obj
     
         'default
+        NoList = False
         strTable = frm.Name
     
         Select Case frm.Name
@@ -2179,12 +2203,12 @@ On Error GoTo Err_Handler
                     .Context = .TemplateName
                     .IsSupported = 1
                     .Version = frm!tbxVersion
-                    .sql = frm!tbxTemplateSQL
-                    .EffectiveDate = frm!tbxEffectiveDate
                     .Syntax = frm!cbxSyntax
-                    .Params = GetParamsFromSQL(.sql)
+                    .TemplateSQL = frm!tbxTemplateSQL
+                    .EffectiveDate = frm!tbxEffectiveDate
+                    .Params = GetParamsFromSQL(.TemplateSQL)
                     .Remarks = frm!tbxRemarks
-                    .ContactID = TempVars("UserID")
+                    .ContactID = TempVars("AppUserID")
                     
                     'set the generic object --> Transducer
                     Set obj = tpl
@@ -2193,6 +2217,8 @@ On Error GoTo Err_Handler
                     Set tpl = Nothing
                 End With
                 
+                'inserts only, no ID?
+                NoList = True
                 
             Case "Transducer"
                 Dim t As New Transducer
@@ -2295,43 +2321,51 @@ On Error GoTo Err_Handler
             Case Else
                 GoTo Exit_Handler
         End Select
-        
+                
         'set insert/update based on whether its an edit or new entry
         DoAction = IIf(frm!tbxID.Value > 0, "u", "i")
         
-        'check if the record already exists by checking event list form records
-        'event list form pulls active records for park, river segment
-        Dim rs As DAO.Recordset
-        
-        Set rs = frm!list.Form.RecordsetClone
-        rs.FindFirst strCriteria
-        
-        If rs.NoMatch Then
-            ' --- INSERT ---
-            frm!lblMsg.ForeColor = lngLime
-            frm!lblMsgIcon.ForeColor = lngLime
-            frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
-            frm!lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
-        Else
-            ' --- UPDATE ---
-            'record already exists & ID > 0
+        If NoList Then
+                    
+            'form doesn't contain list subform or message/icon fields
+            'so cut to the chase -> do nothing here
             
-            'retrieve ID
-            If frm!tbxID.Value = rs("Contact.ID") Then
-                'IDs are equivalent, just change the data
+        Else
+        
+            'check if the record already exists by checking event list form records
+            'event list form pulls active records for park, river segment
+            Dim rs As DAO.Recordset
+            
+            Set rs = frm!list.Form.RecordsetClone
+            rs.FindFirst strCriteria
+            
+            If rs.NoMatch Then
+                ' --- INSERT ---
                 frm!lblMsg.ForeColor = lngLime
                 frm!lblMsgIcon.ForeColor = lngLime
                 frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
-                frm!lblMsg.Caption = "Updating record..."
+                frm!lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
             Else
-                'prevent duplicate record entries
-                frm!lblMsg.ForeColor = lngYellow
-                frm!lblMsgIcon.ForeColor = lngYellow
-                frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
-                frm!lblMsg.Caption = "Oops, record already exists."
-                GoTo Exit_Handler
+                ' --- UPDATE ---
+                'record already exists & ID > 0
+                
+                'retrieve ID
+                If frm!tbxID.Value = rs("Contact.ID") Then
+                    'IDs are equivalent, just change the data
+                    frm!lblMsg.ForeColor = lngLime
+                    frm!lblMsgIcon.ForeColor = lngLime
+                    frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+                    frm!lblMsg.Caption = "Updating record..."
+                Else
+                    'prevent duplicate record entries
+                    frm!lblMsg.ForeColor = lngYellow
+                    frm!lblMsgIcon.ForeColor = lngYellow
+                    frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+                    frm!lblMsg.Caption = "Oops, record already exists."
+                    GoTo Exit_Handler
+                End If
+                
             End If
-            
         End If
         
         'T/F refers to whether the record is an update (T) or insert (F)
@@ -2383,6 +2417,10 @@ On Error GoTo Err_Handler
     'refresh list
     frm!list.Requery
     
+Form_Without_List:
+    DoAction = "i"
+    Resume Next
+
 Exit_Handler:
     'cleanup
     If Not rs Is Nothing Then
@@ -2496,11 +2534,11 @@ End Sub
 ' Revisions:
 '   BLC - 9/13/2016 - initial version
 ' ---------------------------------
-Public Function FetchAddlData(tbl As String, fields As String, ID As Long) As DAO.Recordset
+Public Function FetchAddlData(tbl As String, Fields As String, ID As Long) As DAO.Recordset
 On Error GoTo Err_Handler
     
     'values are required --> exit if not
-    If Len(tbl) = 0 Or Len(fields) = 0 Or Not (ID > 0) Then GoTo Exit_Handler
+    If Len(tbl) = 0 Or Len(Fields) = 0 Or Not (ID > 0) Then GoTo Exit_Handler
     
     'begin retrieval
     Dim field As String
@@ -2517,11 +2555,11 @@ On Error GoTo Err_Handler
         With qdf
             
             'check for multiple fields
-            If InStr(fields, "|") > 0 Then
+            If InStr(Fields, "|") > 0 Then
                 Dim aryFlds() As String
                 Dim i As Integer
                 
-                aryFlds = Split(fields, "|")
+                aryFlds = Split(Fields, "|")
                 
                 For i = 0 To UBound(aryFlds)
                     strFields = aryFlds(i) & ","
@@ -2532,7 +2570,7 @@ On Error GoTo Err_Handler
             
             Else
                 
-                strFields = fields
+                strFields = Fields
             End If
             
             'base

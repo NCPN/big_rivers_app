@@ -125,46 +125,46 @@ On Error GoTo Err_Handler
         Do Until .EOF
             
             'handle first enum
-            If .fields("EnumType") <> PrevEnumType Then
+            If .Fields("EnumType") <> PrevEnumType Then
                 
                 'handle plurals
-                If Right(.fields("EnumType"), 1) = "s" Or Right(.fields("EnumType"), 1) = "y" Then
-                    strEnumType = .fields("EnumType")
+                If Right(.Fields("EnumType"), 1) = "s" Or Right(.Fields("EnumType"), 1) = "y" Then
+                    strEnumType = .Fields("EnumType")
                 Else
-                    strEnumType = .fields("EnumType") & "s"
+                    strEnumType = .Fields("EnumType") & "s"
                 End If
             
                 s = s & vbNewLine & "'-----------------------------"
                 s = s & vbNewLine & "'  " & strEnumType
                 s = s & vbNewLine & "'-----------------------------"
                 
-                s = s & vbNewLine & "Public Enum " & .fields("EnumType")
-                If PrevEnumType = "" Then PrevEnumType = .fields("EnumType")
+                s = s & vbNewLine & "Public Enum " & .Fields("EnumType")
+                If PrevEnumType = "" Then PrevEnumType = .Fields("EnumType")
                             
                 'add the _First item
-                s = s & vbNewLine & vbTab & "[_First]" & " = " & .fields("ID")
+                s = s & vbNewLine & vbTab & "[_First]" & " = " & .Fields("ID")
             End If
             
-            s = s & vbNewLine & vbTab & .fields("Label") & " = " & .fields("ID")
+            s = s & vbNewLine & vbTab & .Fields("Label") & " = " & .Fields("ID")
             
             'capture last ID
-            lastID = .fields("ID")
+            lastID = .Fields("ID")
             
             .MoveNext
             
             If Not .EOF Then
-                If .fields("EnumType") <> PrevEnumType Then
+                If .Fields("EnumType") <> PrevEnumType Then
                     'add the _Last item
                     s = s & vbNewLine & vbTab & "[_Last]" & " = " & lastID
                     
                     s = s & vbNewLine & "End Enum" & vbNewLine
-                    PrevEnumType = .fields("EnumType")
+                    PrevEnumType = .Fields("EnumType")
                                         
                     'handle plurals
-                    If Right(.fields("EnumType"), 1) = "s" Or Right(.fields("EnumType"), 1) = "y" Then
-                        strEnumType = .fields("EnumType")
+                    If Right(.Fields("EnumType"), 1) = "s" Or Right(.Fields("EnumType"), 1) = "y" Then
+                        strEnumType = .Fields("EnumType")
                     Else
-                        strEnumType = .fields("EnumType") & "s"
+                        strEnumType = .Fields("EnumType") & "s"
                     End If
                     
                     'handle remaining enums
@@ -172,13 +172,13 @@ On Error GoTo Err_Handler
                     s = s & vbNewLine & "'  " & strEnumType
                     s = s & vbNewLine & "'-----------------------------"
                     
-                    s = s & vbNewLine & "Public Enum " & .fields("EnumType")
+                    s = s & vbNewLine & "Public Enum " & .Fields("EnumType")
                     
                     'add the _First item
-                    s = s & vbNewLine & vbTab & "[_First]" & " = " & .fields("ID")
+                    s = s & vbNewLine & vbTab & "[_First]" & " = " & .Fields("ID")
                     
                     'capture last ID
-                    lastID = .fields("ID")
+                    lastID = .Fields("ID")
                 End If
             End If
         

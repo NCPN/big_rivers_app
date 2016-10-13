@@ -824,14 +824,14 @@ On Error GoTo Err_Handler
             'clear notice
             lblNotice.Caption = ""
         
-            Dim ctrl As Control
+            Dim Ctrl As Control
             
             'iterate through the tiles - update indicator & enable links
-            For Each ctrl In Me.Controls
+            For Each Ctrl In Me.Controls
             
-                If Right(ctrl.Name, 4) = "Tile" Then
+                If Right(Ctrl.Name, 4) = "Tile" Then
                     
-                    With ctrl.Form
+                    With Ctrl.Form
                         
                         '.EnableLinks .TileTag & strLinksToEnable <-- enabled via PrepareLinks
                         .IndicatorVisible = 1
@@ -1044,14 +1044,14 @@ On Error GoTo Err_Handler
     End If
 
     'disable before selective re-enabling
-    Dim ctrl As Control
+    Dim Ctrl As Control
 
     'iterate through the tiles - disable links
-    For Each ctrl In Me.Controls
+    For Each Ctrl In Me.Controls
 
-        If Right(ctrl.Name, 4) = "Tile" Then
+        If Right(Ctrl.Name, 4) = "Tile" Then
     
-            ctrl.Form.DisableLinks
+            Ctrl.Form.DisableLinks
     
         End If
         

@@ -17,11 +17,11 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7560
+    Width =3480
     DatasheetFontHeight =11
-    ItemSuffix =34
-    Right =12555
-    Bottom =10995
+    ItemSuffix =42
+    Right =7530
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -41,6 +41,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -129,7 +131,8 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =1380
+            CanGrow = NotDefault
+            Height =315
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -142,288 +145,105 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
+                    Caption ="Site"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                 End
-                Begin Label
-                    Visible = NotDefault
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
                     OverlapFlags =215
-                    Left =180
-                    Top =120
-                    Width =7260
-                    Height =840
-                    BorderColor =8355711
-                    ForeColor =16777164
-                    Name ="lblDirections"
-                    Caption ="directions"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =7440
-                    LayoutCachedHeight =960
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =3600
-                    Top =1020
-                    Width =900
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3180
+                    Width =240
                     Height =315
-                    FontWeight =500
-                    BorderColor =8355711
+                    FontSize =9
+                    BorderColor =10921638
                     ForeColor =16777215
-                    Name ="lblSerialNo"
-                    Caption ="Serial #"
+                    Name ="tbxLinkedIcon"
+                    ControlSource ="=IIf([tbxLinked]=1,StringFromCodepoint([uLinked]),\"\")"
+                    ConditionalFormat = Begin
+                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
+                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0074006200780041006c006c006f0077005a004c005300 ,
+                        0x5d003d0031002c0031002c003000290000000000
+                    End
                     GridlineColor =10921638
-                    LayoutCachedLeft =3600
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =4500
-                    LayoutCachedHeight =1335
+
+                    LayoutCachedLeft =3180
+                    LayoutCachedWidth =3420
+                    LayoutCachedHeight =315
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =960
-                    Top =1020
-                    Width =270
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblHdrID"
-                    Caption ="ID"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =960
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =1230
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =2040
-                    Top =1020
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblNumber"
-                    Caption ="Transducer"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2040
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =3285
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =1260
-                    Top =1020
-                    Width =720
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblTiming"
-                    Caption ="Timing"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1260
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =1980
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =4800
-                    Top =1020
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblSampleDate"
-                    Caption ="Sample Date"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =6045
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ed1c2400ffffff00180000004900 ,
+                        0x4900660028005b0074006200780041006c006c006f0077005a004c0053005d00 ,
+                        0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
+                        0x000000
+                    End
                 End
             End
         End
         Begin Section
-            Height =3540
+            CanGrow = NotDefault
+            Height =315
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
-                Begin CommandButton
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =6000
-                    Top =3000
-                    Width =720
-                    ForeColor =4210752
-                    Name ="btnEdit"
-                    Caption ="Edit"
-                    OnClick ="[Event Procedure]"
-                    GridlineColor =10921638
-                    ImageData = Begin
-                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000303840ff404040ff505050ff504850f080686020 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000606060ff909890ffd0d0d0ffa0a8b0ff304850ff ,
-                        0xa090905000000000000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000a0a0a0fff0f0f0fff0f8ffffc0e0f0ff5090b0ff ,
-                        0x204850ff80686020000000000000000000000000000000000000000000000000 ,
-                        0x00000000000000000000000080787080e0e0e0ffd0f0f0ff90e0f0ff50c0d0ff ,
-                        0x4098b0ff204850ff806860200000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000000000006090a080c0e8f0ffa0f0f0ff70e0f0ff ,
-                        0x50c0d0ff4098b0ff204850ff8068602000000000000000000000000000000000 ,
-                        0x00000000000000000000000000000000000000006090a090b0e8f0ffa0f0f0ff ,
-                        0x70e0f0ff50c0d0ff4098b0ff204850ff80686020000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000006090a090b0e8f0ff ,
-                        0xa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff806860200000000000000000 ,
-                        0x000000000000000000000000000000000000000000000000000000006090a0a0 ,
-                        0xb0e8f0ffa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff8068602000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x6090a0a0b0e8f0ffa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff80686020 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0xd08060006090a0a0b0e8f0ffa0f0f0ff70e0f0ff50b8d0ff4098b0ff204850ff ,
-                        0x8068602000000000000000000000000000000000000000000000000000000000 ,
-                        0x00000000d0d8e0006090a0b0b0e8f0ffa0f0f0ff70d0e0ff50a0b0ff808890ff ,
-                        0x303870ff80686020000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000d0d8e0006090a0b0c0f0f0ffa0e0e0ffb0b0a0ff5058b0ff ,
-                        0x303090ff505880ff000000000000000000000000000000000000000000000000 ,
-                        0x000000000000000000000000d0d8e0006090a0b0a0b8d0ff8088d0ff6070d0ff ,
-                        0x303090ff202860ff000000000000000000000000000000000000000000000000 ,
-                        0x00000000000000000000000000000000d0d8e0006070b0b09098d0ff7078d0ff ,
-                        0x4050a0ff9098b0ff000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000d0d8e000606090d05060a0ff ,
-                        0x9090b0ff00000000
-                    End
-
-                    LayoutCachedLeft =6000
-                    LayoutCachedTop =3000
-                    LayoutCachedWidth =6720
-                    LayoutCachedHeight =3360
-                    BackColor =14136213
-                    BorderColor =14136213
-                    HoverColor =15060409
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
                 Begin TextBox
                     Visible = NotDefault
+                    Enabled = NotDefault
+                    CanGrow = NotDefault
+                    CanShrink = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =120
-                    Top =3045
-                    Width =720
+                    Left =60
                     Height =315
                     FontSize =9
-                    TabIndex =1
-                    BorderColor =8355711
-                    ForeColor =690698
-                    Name ="tbxIcon"
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxFieldType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =3045
-                    LayoutCachedWidth =840
-                    LayoutCachedHeight =3360
-                    BorderThemeColorIndex =0
-                    BorderTint =50.0
-                    BorderShade =100.0
-                    ForeThemeColorIndex =-1
-                    ForeTint =50.0
-                End
-                Begin CommandButton
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    TextFontFamily =2
-                    Left =6780
-                    Top =3000
-                    Width =720
-                    FontSize =14
-                    TabIndex =2
-                    ForeColor =255
-                    Name ="btnDelete"
-                    Caption ="í ½í·´"
-                    OnClick ="[Event Procedure]"
-                    FontName ="Academy Engraved LET"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =6780
-                    LayoutCachedTop =3000
-                    LayoutCachedWidth =7500
-                    LayoutCachedHeight =3360
-                    PictureCaptionArrangement =5
-                    ForeThemeColorIndex =-1
-                    BackColor =14136213
-                    BorderColor =14136213
-                    ThemeFontIndex =-1
-                    HoverColor =15060409
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
+                    LayoutCachedLeft =60
+                    LayoutCachedWidth =1500
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
+                    OverlapFlags =255
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =120
-                    Top =120
-                    Width =4200
+                    Left =60
+                    Width =1740
                     Height =315
-                    TabIndex =3
+                    FontSize =9
+                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxFieldName"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =4320
-                    LayoutCachedHeight =435
+                    LayoutCachedLeft =60
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -431,49 +251,25 @@ Begin Form
                 Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
+                    CanGrow = NotDefault
+                    CanShrink = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
+                    OverlapFlags =255
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =900
-                    Top =3045
-                    Width =360
+                    Left =1380
                     Height =315
-                    TabIndex =4
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxID"
-                    ControlSource ="ID"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =900
-                    LayoutCachedTop =3045
-                    LayoutCachedWidth =1260
-                    LayoutCachedHeight =3360
-                End
-                Begin TextBox
-                    Visible = NotDefault
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =3300
-                    Top =3045
-                    Height =315
-                    TabIndex =5
+                    FontSize =9
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxSerialNo"
-                    ControlSource ="SerialNumber"
+                    Name ="tbxAllowZLS"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =3045
-                    LayoutCachedWidth =4740
-                    LayoutCachedHeight =3360
+                    LayoutCachedLeft =1380
+                    LayoutCachedWidth =2820
+                    LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -481,53 +277,164 @@ Begin Form
                 Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
+                    CanGrow = NotDefault
+                    CanShrink = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
+                    OverlapFlags =255
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1350
-                    Top =3045
-                    Width =420
+                    Left =720
                     Height =315
+                    FontSize =9
+                    TabIndex =3
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxSize"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =720
+                    LayoutCachedWidth =2160
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =255
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1980
+                    Height =315
+                    FontSize =9
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxColTypeSize"
+                    ControlSource ="=IIf([tbxFieldType]=\"Text\",[tbxFieldType] & \"(\" & [tbxSize] & \")\",[tbxFiel"
+                        "dType])"
+                    ConditionalFormat = Begin
+                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
+                        0x0000ff00ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0074006200780041006c006c006f0077005a004c005300 ,
+                        0x5d003d0031002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1980
+                    LayoutCachedWidth =3420
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x0100010000000100000000000000010000000000ff00ffffff00180000004900 ,
+                        0x4900660028005b0074006200780041006c006c006f0077005a004c0053005d00 ,
+                        0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
+                        0x000000
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =255
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1800
+                    Width =240
+                    Height =315
+                    FontSize =9
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =255
+                    Name ="tbxReqdIcon"
+                    ControlSource ="=IIf([tbxRequired]=1,\"*\",\"\")"
+                    Format ="**"
+                    ConditionalFormat = Begin
+                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
+                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0074006200780052006500710075006900720065006400 ,
+                        0x5d003d0031002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1800
+                    LayoutCachedWidth =2040
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ed1c2400ffffff00180000004900 ,
+                        0x4900660028005b00740062007800520065007100750069007200650064005d00 ,
+                        0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
+                        0x000000
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =255
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3060
+                    Width =240
+                    Height =315
+                    FontSize =9
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxTiming"
-                    ControlSource ="Timing"
+                    Name ="tbxLinkedTable"
+                    ConditionalFormat = Begin
+                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
+                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0074006200780041006c006c006f0077005a004c005300 ,
+                        0x5d003d0031002c0031002c003000290000000000
+                    End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1350
-                    LayoutCachedTop =3045
-                    LayoutCachedWidth =1770
-                    LayoutCachedHeight =3360
+                    LayoutCachedLeft =3060
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ed1c2400ffffff00180000004900 ,
+                        0x4900660028005b0074006200780041006c006c006f0077005a004c0053005d00 ,
+                        0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
+                        0x000000
+                    End
                 End
                 Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
+                    CanGrow = NotDefault
+                    CanShrink = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
+                    OverlapFlags =247
+                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4860
-                    Top =3045
-                    Width =1020
+                    Left =1620
                     Height =315
+                    FontSize =9
                     TabIndex =7
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxSampleDate"
-                    ControlSource ="ActionDate"
+                    Name ="tbxRequired"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4860
-                    LayoutCachedTop =3045
-                    LayoutCachedWidth =5880
-                    LayoutCachedHeight =3360
+                    LayoutCachedLeft =1620
+                    LayoutCachedWidth =3060
+                    LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
@@ -572,7 +479,7 @@ Option Explicit
 ' Declarations
 '---------------------
 Private m_Title As String
-Private m_Directions As String
+'Private m_Directions As String
 'Private m_ButtonCaption
 'Private m_SelectedID As Integer
 'Private m_SelectedValue As String
@@ -607,60 +514,31 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
-
-        'set the form directions
-        Me.lblDirections.Caption = m_Directions
-    Else
-        RaiseEvent InvalidDirections(Value)
-    End If
-End Property
-
-Public Property Get Directions() As String
-    Directions = m_Directions
-End Property
-
-'Public Property Let ButtonCaption(Value As String)
+'Public Property Let Directions(Value As String)
 '    If Len(Value) > 0 Then
-'        m_ButtonCaption = Value
+'        m_Directions = Value
 '
-'        'set the form button caption
-'        Me.btnEdit.Caption = m_ButtonCaption
+'        'set the form directions
+'        Me.lblDirections.Caption = m_Directions
 '    Else
-'        RaiseEvent InvalidCaption(Value)
+'        RaiseEvent InvalidDirections(Value)
 '    End If
 'End Property
 '
-'Public Property Get ButtonCaption() As String
-'    ButtonCaption = m_ButtonCaption
-'End Property
-'
-'Public Property Let SelectedID(Value As Integer)
-'        m_SelectedID = Value
-'End Property
-'
-'Public Property Get SelectedID() As Integer
-'    SelectedID = m_SelectedID
-'End Property
-'
-'Public Property Let SelectedValue(Value As String)
-'        m_SelectedValue = Value
-'End Property
-'
-'Public Property Get SelectedValue() As String
-'    SelectedValue = m_SelectedValue
+'Public Property Get Directions() As String
+'    Directions = m_Directions
 'End Property
 
 Public Property Let Table(Value As String)
         m_Table = Value
+
+        'populate form
+        PopulateForm
 End Property
 
 Public Property Get Table() As String
     Table = m_Table
 End Property
-
 
 '---------------------
 ' Methods
@@ -673,6 +551,8 @@ End Property
 ' Returns:      -
 ' Throws:       none
 ' References:   -
+'   mbizup, 5/29/2008
+'   https://www.experts-exchange.com/questions/23441990/moving-data-from-array-to-a-table-in-Vba.html
 ' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -681,7 +561,10 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    lblTitle.Caption = Nz(Me.OpenArgs, "")
+    'close if no table identified
+'    If Len(Nz(Me.OpenArgs, "")) = 0 Then GoTo Exit_Handler
+    
+    lblTitle.Caption = Me.Title 'Me.OpenArgs
 '    lblDirections.Caption = "" '"Edit or Delete Records using the buttons for the record at right." _
                             '& vbCrLf & "Icon codes at left identify if record may be edited/deleted."
 '    tbxIcon.Value = StringFromCodepoint(uLocked)
@@ -694,28 +577,77 @@ On Error GoTo Err_Handler
 
 '    btnDelete.Caption = StringFromCodepoint(uDelete)
 '    btnDelete.ForeColor = lngRed
-
-    'close if no table identified
-    If Len(Me.OpenArgs) = 0 Then GoTo Exit_Handler
     
-    Me.Table = Me.OpenArgs
-
-    'retrieve field info
-    Dim aryFieldInfo() As String
-    
-    aryFieldInfo = FetchDbTableFieldInfo(Me.Table)
-
-    'populate fields
-'    Dim rs As ADODB.Recordset
-    
-'    Set rs = CreateObject("ADODB.Recordset")
-    
-    
-    Me.RecordSource = "" '
-    
-'    Me.tbxFieldName
+'    Me.Table = Me.OpenArgs
+'
+'    'retrieve field info
+'    Dim aryFieldInfo() As Variant 'string
+'
+'    aryFieldInfo = FetchDbTableFieldInfo(Me.Table)
+'
+'    'save to temp table
+'
+'
+'    'populate fields
+''    Dim rs As ADODB.Recordset
+''    Dim cols As Integer
+''    Dim aryFieldData() As Variant
+''
+''    Set rs = New ADODB.Recordset 'CreateObject("ADODB.Recordset")
+''    rs.Open
+''
+''    For i = 0 To UBound(aryFieldInfo)
+''        cols = CountInString(aryFieldInfo(i), "|") + 1
+''        aryFieldData(i) = Split(aryFieldInfo(i))
+''
+''    Next
+'
+'    'clear table
+'    ClearTable "usys_temp_rs"
+'
+'    'populate w/ table data
+'    Dim rs As DAO.Recordset
+'    Dim aryRecord() As String
+'    Dim i As Integer
+'
+'    Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
+'
+'    For i = 0 To UBound(aryFieldInfo)
+'
+'        'create new record
+'        rs.AddNew
+'
+'        aryRecord = Split(aryFieldInfo(i), "|")
+'
+'        rs!Column = aryRecord(0)
+'        rs!ColType = aryRecord(5)
+'        rs!IsReqd = IIf(aryRecord(3) = False, 0, 1)
+'        rs!Length = aryRecord(2)
+'        rs!AllowZLS = IIf(aryRecord(4) = False, 0, 1)
+'
+'        'add the new record
+'        rs.Update
+'
+'    Next
+'
+'    Set Forms!TableFieldList.Recordset = rs
+'
+'    'Me.Requery
+'
+'    tbxFieldName.ControlSource = "Column" 'rs.Fields("Column").Value
+'    tbxFieldType.ControlSource = "ColType" '.Fields("ColType").Value
+'    tbxRequired.ControlSource = "IsReqd"
+'    tbxSize.ControlSource = "Length"
+'    tbxAllowZLS.ControlSource = "AllowZLS"
+'    'tbxColTypeSize.ControlSource =
+'
+''    Me.RecordSource = "" '
+'
+''    Me.tbxFieldName
 
 Exit_Handler:
+    'cleanup
+'    Set rs = Nothing
     Exit Sub
 Err_Handler:
     Select Case Err.Number
@@ -771,6 +703,8 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
+       
+  'PopulateForm
        
 Exit_Handler:
     Exit Sub
@@ -832,8 +766,8 @@ On Error GoTo Err_Handler
     Dim result As Integer
     
     'identify the record ID
-     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
-                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
+'     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
+'                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
 '    If result = vbYes Then DeleteRecord "Event", ID
     
@@ -875,6 +809,85 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[TableFieldList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          PopulateForm
+' Description:  form populating actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+'   mbizup, 5/29/2008
+'   https://www.experts-exchange.com/questions/23441990/moving-data-from-array-to-a-table-in-Vba.html
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/6/2016 - initial version
+' ---------------------------------
+Private Sub PopulateForm()
+On Error GoTo Err_Handler
+    
+ '   Me.Table = Me.OpenArgs
+    'set displayed title
+    lblTitle.Caption = Me.Table & " fields"
+
+    'retrieve field info
+    Dim aryFieldInfo() As Variant 'string
+    
+    aryFieldInfo = FetchDbTableFieldInfo(Me.Table)
+    
+    'clear table
+    ClearTable "usys_temp_rs"
+    
+    'populate w/ table data
+    Dim rs As DAO.Recordset
+    Dim aryRecord() As String
+    Dim i As Integer
+    
+    Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
+    
+    For i = 0 To UBound(aryFieldInfo)
+    
+        'create new record
+        rs.AddNew
+        
+        aryRecord = Split(aryFieldInfo(i), "|")
+        
+        rs!Column = aryRecord(0)
+        rs!ColType = aryRecord(5)
+        rs!IsReqd = IIf(aryRecord(3) = False, 0, 1)
+        rs!Length = aryRecord(2)
+        rs!AllowZLS = IIf(aryRecord(4) = False, 0, 1)
+    
+        'add the new record
+        rs.Update
+        
+    Next
+    
+    Set Me.Recordset = rs 'Forms!TableFieldList.Recordset = rs
+    
+    Me.Requery
+    
+    tbxFieldName.ControlSource = "Column" 'rs.Fields("Column").Value
+    tbxFieldType.ControlSource = "ColType" '.Fields("ColType").Value
+    tbxRequired.ControlSource = "IsReqd"
+    tbxSize.ControlSource = "Length"
+    tbxAllowZLS.ControlSource = "AllowZLS"
+    'tbxColTypeSize.ControlSource =
+
+Exit_Handler:
+    'cleanup
+    Set rs = Nothing
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateForm[TableFieldList form])"
     End Select
     Resume Exit_Handler
 End Sub

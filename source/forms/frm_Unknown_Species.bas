@@ -1019,7 +1019,7 @@ On Error Resume Next
     
     Dim intResult As Integer
 
-    intResult = CurrentDb.tabledefs(strTableName)(strFieldName).Type
+    intResult = CurrentDb.TableDefs(strTableName)(strFieldName).Type
     GetDataType = intResult
 
 Exit_Handler:

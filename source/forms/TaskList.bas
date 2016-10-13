@@ -1,35 +1,36 @@
 ï»¿Version =20
 VersionRequired =20
 Begin Form
-    PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
     MinButton = NotDefault
     ControlBox = NotDefault
-    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     CloseButton = NotDefault
     DividingLines = NotDefault
-    DefaultView =0
+    AllowAdditions = NotDefault
+    AllowEdits = NotDefault
+    ScrollBars =2
+    ViewsAllowed =1
     BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =8040
+    Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =21
-    Left =2790
-    Top =3615
-    Right =16650
-    Bottom =14610
+    ItemSuffix =32
+    Right =12870
+    Bottom =11790
     DatasheetGridlinesColor =14806254
-    ShortcutMenuBar ="dataentry"
     RecSrcDt = Begin
-        0x50ebd450f7aae440
+        0x1faa16ae9bc7e440
     End
-    RecordSource ="Task"
+    RecordSource ="UnknownSpecies"
+    Caption ="_List"
     OnCurrent ="[Event Procedure]"
+    OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -41,15 +42,12 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
-    SplitFormSplitterBar =0
-    SaveSplitterBarPosition =0
-    SplitFormSplitterBar =0
-    SaveSplitterBarPosition =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
+    FitToScreen =1
     DatasheetBackThemeColorIndex =1
     BorderThemeColorIndex =3
     ThemeFontIndex =1
@@ -67,12 +65,6 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
-        Begin Line
-            BorderLineStyle =0
-            BorderThemeColorIndex =0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -117,23 +109,9 @@ Begin Form
             PressedForeThemeColorIndex =0
             PressedForeTint =75.0
         End
-        Begin BoundObjectFrame
-            AddColon = NotDefault
-            SizeMode =3
-            SpecialEffect =2
-            BorderLineStyle =0
-            LabelX =-1800
-            BackThemeColorIndex =1
-            BorderThemeColorIndex =1
-            BorderShade =65.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
         Begin TextBox
             AddColon = NotDefault
-            AllowAutoCorrect = NotDefault
             FELineBreak = NotDefault
-            LabelAlign =1
             BorderLineStyle =0
             LabelX =-1800
             FontSize =11
@@ -148,43 +126,14 @@ Begin Form
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
-        Begin ListBox
-            BorderLineStyle =0
-            LabelX =-1800
-            FontSize =11
-            FontName ="Calibri"
-            AllowValueListEdits =1
-            InheritValueList =1
-            ThemeFontIndex =1
-            BackThemeColorIndex =1
-            BorderThemeColorIndex =1
-            BorderShade =65.0
-            ForeThemeColorIndex =0
-            ForeTint =75.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
         Begin ComboBox
             AddColon = NotDefault
-            AllowAutoCorrect = NotDefault
             BorderLineStyle =0
             LabelX =-1800
             FontSize =11
             FontName ="Calibri"
             AllowValueListEdits =1
             InheritValueList =1
-            ThemeFontIndex =1
-            BackThemeColorIndex =1
-            BorderThemeColorIndex =1
-            BorderShade =65.0
-            ForeThemeColorIndex =2
-            ForeShade =50.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
-        Begin UnboundObjectFrame
-            SpecialEffect =2
-            OldBorderStyle =1
             ThemeFontIndex =1
             BackThemeColorIndex =1
             BorderThemeColorIndex =1
@@ -195,77 +144,209 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =480
-            BackColor =65280
+            Height =1335
+            BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
-                    Left =60
-                    Top =60
-                    Width =1980
+                    OverlapFlags =93
+                    Width =3480
                     Height =300
+                    BorderColor =8355711
+                    ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Tasks"
                     GridlineColor =10921638
-                    LayoutCachedLeft =60
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =2040
-                    LayoutCachedHeight =360
-                    BorderTint =100.0
+                    LayoutCachedWidth =3480
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =180
+                    Top =120
+                    Width =7260
+                    Height =840
+                    BorderColor =8355711
+                    ForeColor =16777164
+                    Name ="lblDirections"
+                    Caption ="Edit or Delete Records using the buttons for the record at right.\015\012Icon co"
+                        "des at left identify if record may be edited/deleted."
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =7440
+                    LayoutCachedHeight =960
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                    ForeShade =95.0
                 End
-                Begin Line
-                    BorderWidth =2
+                Begin Label
                     OverlapFlags =85
-                    Top =432
-                    Width =2592
-                    BorderColor =65280
-                    Name ="lineIndicator"
-                    LeftPadding =0
-                    TopPadding =0
-                    RightPadding =0
-                    BottomPadding =0
+                    Left =1380
+                    Top =1020
+                    Width =1425
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblTaskType"
+                    Caption ="Task Type"
                     GridlineColor =10921638
-                    LayoutCachedTop =432
-                    LayoutCachedWidth =2592
-                    LayoutCachedHeight =432
-                    BorderThemeColorIndex =-1
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =2805
+                    LayoutCachedHeight =1335
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =960
+                    Top =1020
+                    Width =270
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblHdrID"
+                    Caption ="ID"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =960
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =1230
+                    LayoutCachedHeight =1335
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =2940
+                    Top =1020
+                    Width =1590
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblTask"
+                    Caption ="Task"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2940
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =4530
+                    LayoutCachedHeight =1335
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =93
+                    Left =4635
+                    Top =1020
+                    Width =1485
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblPriority"
+                    Caption ="Priority"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4635
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =6120
+                    LayoutCachedHeight =1335
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =5760
+                    Top =1020
+                    Width =1485
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="Label30"
+                    Caption ="Status"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5760
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =7245
+                    LayoutCachedHeight =1335
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
         Begin Section
-            Height =420
+            Height =780
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
-                Begin TextBox
-                    OldBorderStyle =0
+                Begin CommandButton
                     OverlapFlags =85
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =1560
-                    Top =60
-                    Width =3480
-                    FontSize =9
-                    BorderColor =10921638
-                    ForeColor =8355711
-                    Name ="tbxTask"
-                    ControlSource ="Task"
+                    Left =6000
+                    Width =720
+                    ForeColor =4210752
+                    Name ="btnEdit"
+                    Caption ="Edit"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x000000000000000000000000303840ff404040ff505050ff504850f080686020 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x000000000000000000000000606060ff909890ffd0d0d0ffa0a8b0ff304850ff ,
+                        0xa090905000000000000000000000000000000000000000000000000000000000 ,
+                        0x000000000000000000000000a0a0a0fff0f0f0fff0f8ffffc0e0f0ff5090b0ff ,
+                        0x204850ff80686020000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000080787080e0e0e0ffd0f0f0ff90e0f0ff50c0d0ff ,
+                        0x4098b0ff204850ff806860200000000000000000000000000000000000000000 ,
+                        0x000000000000000000000000000000006090a080c0e8f0ffa0f0f0ff70e0f0ff ,
+                        0x50c0d0ff4098b0ff204850ff8068602000000000000000000000000000000000 ,
+                        0x00000000000000000000000000000000000000006090a090b0e8f0ffa0f0f0ff ,
+                        0x70e0f0ff50c0d0ff4098b0ff204850ff80686020000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000006090a090b0e8f0ff ,
+                        0xa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff806860200000000000000000 ,
+                        0x000000000000000000000000000000000000000000000000000000006090a0a0 ,
+                        0xb0e8f0ffa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff8068602000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x6090a0a0b0e8f0ffa0f0f0ff70e0f0ff50c0d0ff4098b0ff204850ff80686020 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0xd08060006090a0a0b0e8f0ffa0f0f0ff70e0f0ff50b8d0ff4098b0ff204850ff ,
+                        0x8068602000000000000000000000000000000000000000000000000000000000 ,
+                        0x00000000d0d8e0006090a0b0b0e8f0ffa0f0f0ff70d0e0ff50a0b0ff808890ff ,
+                        0x303870ff80686020000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000d0d8e0006090a0b0c0f0f0ffa0e0e0ffb0b0a0ff5058b0ff ,
+                        0x303090ff505880ff000000000000000000000000000000000000000000000000 ,
+                        0x000000000000000000000000d0d8e0006090a0b0a0b8d0ff8088d0ff6070d0ff ,
+                        0x303090ff202860ff000000000000000000000000000000000000000000000000 ,
+                        0x00000000000000000000000000000000d0d8e0006070b0b09098d0ff7078d0ff ,
+                        0x4050a0ff9098b0ff000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000d0d8e000606090d05060a0ff ,
+                        0x9090b0ff00000000
+                    End
 
-                    LayoutCachedLeft =1560
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =5040
-                    LayoutCachedHeight =300
-                    ForeTint =50.0
+                    LayoutCachedLeft =6000
+                    LayoutCachedWidth =6720
+                    LayoutCachedHeight =360
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin TextBox
                     OldBorderStyle =0
@@ -273,69 +354,178 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =60
-                    Width =1380
+                    Top =15
+                    Width =720
+                    Height =300
                     FontSize =9
                     TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =8355711
-                    Name ="tbxTaskType"
-                    ControlSource ="TaskType"
+                    BorderColor =8355711
+                    ForeColor =690698
+                    Name ="tbxIcon"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =1500
-                    LayoutCachedHeight =300
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =840
+                    LayoutCachedHeight =315
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeThemeColorIndex =-1
                     ForeTint =50.0
                 End
-                Begin TextBox
-                    OldBorderStyle =0
+                Begin CommandButton
                     OverlapFlags =85
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =5100
-                    Top =60
-                    Width =900
-                    FontSize =9
+                    TextFontFamily =2
+                    Left =6780
+                    Width =720
+                    FontSize =14
                     TabIndex =2
-                    BorderColor =10921638
-                    ForeColor =8355711
-                    Name ="tbxPriority"
-                    ControlSource ="Priority_ID"
+                    ForeColor =255
+                    Name ="btnDelete"
+                    Caption ="í ½í·´"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Academy Engraved LET"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5100
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =6000
-                    LayoutCachedHeight =300
-                    ForeTint =50.0
+                    LayoutCachedLeft =6780
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =360
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    ThemeFontIndex =-1
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin TextBox
+                    Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
+                    TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =6060
-                    Top =60
-                    Width =900
-                    FontSize =9
+                    Left =1425
+                    Top =15
+                    Width =1560
+                    Height =300
                     TabIndex =3
                     BorderColor =10921638
-                    ForeColor =8355711
-                    Name ="tbxStatus"
-                    ControlSource ="Status_ID"
+                    ForeColor =4138256
+                    Name ="tbxTaskType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6060
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =6960
+                    LayoutCachedLeft =1425
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =2985
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =900
+                    Width =480
+                    Height =315
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxID"
+                    ControlSource ="ID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =900
+                    LayoutCachedWidth =1380
+                    LayoutCachedHeight =315
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =87
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2985
+                    Width =1560
+                    Height =300
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxTask"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2985
+                    LayoutCachedWidth =4545
                     LayoutCachedHeight =300
-                    ForeTint =50.0
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =4800
+                    Width =1020
+                    Height =300
+                    TabIndex =6
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxIDDate"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4800
+                    LayoutCachedWidth =5820
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =4800
+                    Top =420
+                    Width =1020
+                    Height =300
+                    TabIndex =7
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxStatus"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =5820
+                    LayoutCachedHeight =720
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
                 Begin Image
-                    Left =7080
-                    Top =60
+                    Left =5880
+                    Top =420
                     Width =300
                     Height =300
                     BorderColor =10921638
@@ -343,16 +533,16 @@ Begin Form
                     GridlineColor =10921638
                     ControlSource ="Status_ID"
 
-                    LayoutCachedLeft =7080
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =7380
-                    LayoutCachedHeight =360
-                    TabIndex =4
+                    LayoutCachedLeft =5880
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =6180
+                    LayoutCachedHeight =720
+                    TabIndex =8
                 End
                 Begin Image
                     PictureType =1
-                    Left =7440
-                    Top =60
+                    Left =6240
+                    Top =420
                     Width =300
                     Height =300
                     BorderColor =10921638
@@ -360,11 +550,11 @@ Begin Form
                     GridlineColor =10921638
                     ControlSource ="Priority_ID"
 
-                    LayoutCachedLeft =7440
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =7740
-                    LayoutCachedHeight =360
-                    TabIndex =5
+                    LayoutCachedLeft =6240
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =6540
+                    LayoutCachedHeight =720
+                    TabIndex =9
                 End
             End
         End
@@ -387,461 +577,75 @@ Option Explicit
 
 ' =================================
 ' Form:         TaskList
-' Level:        Framework form
+' Level:        Application form
 ' Version:      1.00
+' Basis:        Dropdown form
 '
-' Description:  Tile form object related properties, events, functions & procedures for UI display
+' Description:  List form object related properties, events, functions & procedures for UI display
 '
-' Source/date:  Bonnie Campbell, 10/28/2015
-' References:
-'  SourceDaddy, unknown
-'  http://sourcedaddy.com/ms-access/managing-class-interface.htm
-'  Denise Gosnell, 2011
-'  Beginning Access 2007 VBA
-'  https://books.google.com/books?id=z2aoFGg1HFAC&pg=SA3-PA30&dq=access+vba+creating+custom+form+controls&hl=en&sa=X&ved=0CDAQ6AEwAGoVChMI6KblxdHoyAIVBcdjCh3Okw9V#v=onepage&q=access%20vba%20creating%20custom%20form%20controls&f=false
-' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
+' Source/date:  Bonnie Campbell, May 31, 2016
+' References:   -
+' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 ' =================================
 
 '---------------------
 ' Simulated Inheritance
 '---------------------
-Private oTaskList As Form_Tile
 
 '---------------------
 ' Declarations
 '---------------------
-'Private m_Title As String
-'Private m_Link1Caption As String
-'Private m_Link2Caption As String
-'Private m_Link3Caption As String
-'Private m_Link4Caption As String
-'Private m_Link5Caption As String
-'Private m_Link6Caption As String
-'Private m_BarColor As Variant
-'Private m_TileHeaderColor As Long
-'Private m_TitleFontColor As Long
-'Private m_Link1FontColor As Long
-'Private m_Link2FontColor As Long
-'Private m_Link3FontColor As Long
-'Private m_Link4FontColor As Long
-'Private m_Link5FontColor As Long
-'Private m_Link6FontColor As Long
-'Private m_TileVisible As Byte
-'Private m_Link1Visible As Byte
-'Private m_Link2Visible As Byte
-'Private m_Link3Visible As Byte
-'Private m_Link4Visible As Byte
-'Private m_Link5Visible As Byte
-'Private m_Link6Visible As Byte
-'Private m_Link1Action As String
-'Private m_Link2Action As String
-'Private m_Link3Action As String
-'Private m_Link4Action As String
-'Private m_Link5Action As String
-'Private m_Link6Action As String
-
+Private m_Title As String
+Private m_Directions As String
+Private m_ButtonCaption
+Private m_SelectedID As Integer
+Private m_SelectedValue As String
 
 '---------------------
-' Events
+' Event Declarations
 '---------------------
-'Public Event Selected()
-'Public Event CriticalState()
-'Public Event GoodState()
-Public Event Initialize()
-Public Event Terminate()
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-'Public Property Let Title(Value As String)
-'    m_Title = Value
-'    lblTitle.Caption = m_Title
-'End Property
-'
-'Public Property Get Title() As String
-'    Title = m_Title
-'End Property
-'
-'Public Property Get Link1Caption() As String
-'    Link1Caption = m_Link1Caption
-'End Property
-'
-'Public Property Let Link1Caption(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link1"
-'    m_Link1Caption = Value
-'    lblLink1.Caption = m_Link1Caption
-'End Property
-'
-'Public Property Get Link2Caption() As String
-'    Link2Caption = m_Link2Caption
-'End Property
-'
-'Public Property Let Link2Caption(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link2"
-'    m_Link2Caption = Value
-'    lblLink2.Caption = m_Link2Caption
-'End Property
-'
-'Public Property Get Link3Caption() As String
-'    Link3Caption = m_Link3Caption
-'End Property
-'
-'Public Property Let Link3Caption(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link3"
-'    m_Link3Caption = Value
-'    lblLink3.Caption = m_Link3Caption
-'End Property
-'
-'Public Property Get Link4Caption() As String
-'    Link4Caption = m_Link4Caption
-'End Property
-'
-'Public Property Let Link4Caption(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link4"
-'    m_Link4Caption = Value
-'    lblLink4.Caption = m_Link4Caption
-'End Property
-'
-'Public Property Get Link5Caption() As String
-'    Link5Caption = m_Link5Caption
-'End Property
-'
-'Public Property Let Link5Caption(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link5"
-'    m_Link5Caption = Value
-'    lblLink5.Caption = m_Link5Caption
-'End Property
-'
-'Public Property Get Link6Caption() As String
-'    Link6Caption = m_Link6Caption
-'End Property
-'
-'Public Property Let Link6Caption(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link6"
-'    m_Link6Caption = Value
-'    lblLink6.Caption = m_Link6Caption
-'End Property
-'
-'Public Property Get Link1Action() As String
-'    Link1Action = m_Link1Action
-'End Property
-'
-'Public Property Let Link1Action(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link1"
-'    m_Link1Action = Value
-'    'lblLink1.Action = m_Link1Action
-'End Property
-'
-'Public Property Get Link2Action() As String
-'    Link2Action = m_Link2Action
-'End Property
-'
-'Public Property Let Link2Action(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link2"
-'    m_Link2Action = Value
-'    'lblLink2.Action = m_Link2Action
-'End Property
-'
-'Public Property Get Link3Action() As String
-'    Link3Action = m_Link3Action
-'End Property
-'
-'Public Property Let Link3Action(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link3"
-'    m_Link3Action = Value
-'    'lblLink3.Action = m_Link3Action
-'End Property
-'
-'Public Property Get Link4Action() As String
-'    Link4Action = m_Link4Action
-'End Property
-'
-'Public Property Let Link4Action(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link4"
-'    m_Link4Action = Value
-'    'lblLink4.Action = m_Link4Action
-'End Property
-'
-'Public Property Get Link5Action() As String
-'    Link5Action = m_Link5Action
-'End Property
-'
-'Public Property Let Link5Action(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link5"
-'    m_Link5Action = Value
-'    'lblLink5.Action = m_Link5Action
-'End Property
-'
-'Public Property Get Link6Action() As String
-'    Link6Action = m_Link6Action
-'End Property
-'
-'Public Property Let Link6Action(Value As String)
-'    If Len(Trim(Value)) = 0 Then Value = "Link6"
-'    m_Link6Action = Value
-'    'lblLink6.Action = m_Link6Action
-'End Property
-'
-'Public Property Let TitleFontColor(Value As Long)
-'    m_TitleFontColor = Value
-'    lblTitle.ForeColor = m_TitleFontColor
-'End Property
-'
-'Public Property Get TitleFontColor() As Long
-'    TitleFontColor = m_TitleFontColor
-'End Property
-'
-'Public Property Let TileHeaderColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
-'    m_TileHeaderColor = Value
-'    FormHeader.BackColor = m_TileHeaderColor
-'    'set font color to match
-'    Select Case Value
-'        Case vbGreen
-'            Me.TitleFontColor = vbBlack
-'        Case vbRed, vbBlue
-'            Me.TitleFontColor = vbWhite
-'    End Select
-'End Property
-'
-'Public Property Get TileHeaderColor() As Long
-'    TileHeaderColor = m_TileHeaderColor 'FormHeader.BackColor
-'End Property
-'
-'Public Property Let BarColor(Value As Variant)
-'    m_BarColor = Value
-'    Me.lineIndicator.BorderColor = m_BarColor
-'End Property
-'
-'Public Property Get BarColor()
-'    BarColor = m_BarColor
-'End Property
-'
-'Public Property Get Link1FontColor() As Long
-'    Link1FontColor = m_Link1FontColor
-'End Property
-'
-'Public Property Let Link1FontColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen
-'    m_Link1FontColor = Value
-'End Property
-'
-'Public Property Get Link2FontColor() As Long
-'    Link2FontColor = m_Link2FontColor
-'End Property
-'
-'Public Property Let Link2FontColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen
-'    m_Link2FontColor = Value
-'End Property
-'
-'Public Property Get Link3FontColor() As Long
-'    Link3FontColor = m_Link3FontColor
-'End Property
-'
-'Public Property Let Link3FontColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen
-'    m_Link3FontColor = Value
-'End Property
-'
-'Public Property Get Link4FontColor() As Long
-'    Link4FontColor = m_Link4FontColor
-'End Property
-'
-'Public Property Let Link4FontColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
-'    m_Link4FontColor = Value
-'End Property
-'
-'Public Property Get Link5FontColor() As Long
-'    Link5FontColor = m_Link5FontColor
-'End Property
-'
-'Public Property Let Link5FontColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
-'    m_Link5FontColor = Value
-'End Property
-'
-'Public Property Get Link6FontColor() As Long
-'    Link6FontColor = m_Link6FontColor
-'End Property
-'
-'Public Property Let Link6FontColor(Value As Long)
-'    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
-'    m_Link6FontColor = Value
-'End Property
-'
-'Public Property Get TileVisible() As Byte
-'    TileVisible = m_TileVisible
-'End Property
-'
-'Public Property Let TileVisible(Value As Byte)
-'    m_TileVisible = Value
-'    Me.Visible = m_TileVisible
-'End Property
-'
-'Public Property Get Link1Visible() As Byte
-'    Link1Visible = m_Link1Visible
-'End Property
-'
-'Public Property Let Link1Visible(Value As Byte)
-'    m_Link1Visible = Value
-'    Me.lblLink1.Visible = m_Link1Visible
-'End Property
-'
-'Public Property Get Link2Visible() As Byte
-'    Link2Visible = m_Link2Visible
-'End Property
-'
-'Public Property Let Link2Visible(Value As Byte)
-'    m_Link2Visible = Value
-'    Me.lblLink2.Visible = m_Link2Visible
-'End Property
-'
-'Public Property Get Link3Visible() As Byte
-'    Link3Visible = m_Link3Visible
-'End Property
-'
-'Public Property Let Link3Visible(Value As Byte)
-'    m_Link3Visible = Value
-'    Me.lblLink3.Visible = m_Link3Visible
-'End Property
-'
-'Public Property Get Link4Visible() As Byte
-'    Link4Visible = m_Link4Visible
-'End Property
-'
-'Public Property Let Link4Visible(Value As Byte)
-'    m_Link4Visible = Value
-'    Me.lblLink4.Visible = m_Link4Visible
-'End Property
-'
-'Public Property Get Link5Visible() As Byte
-'    Link5Visible = m_Link5Visible
-'End Property
-'
-'Public Property Let Link5Visible(Value As Byte)
-'    m_Link5Visible = Value
-'    Me.lblLink5.Visible = m_Link5Visible
-'End Property
-'
-'Public Property Get Link6Visible() As Byte
-'    Link6Visible = m_Link6Visible
-'End Property
-'
-'Public Property Let Link6Visible(Value As Byte)
-'    m_Link6Visible = Value
-'    Me.lblLink6.Visible = m_Link6Visible
-'End Property
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
-'---------------------
-' Events
-'---------------------
+        'set the form title & caption
+        Me.lblTitle.Caption = m_Title
+        Me.Caption = m_Title
+    Else
+        RaiseEvent InvalidTitle(Value)
+    End If
+End Property
 
-' ---------------------------------
-' Sub:          lblLink1_Click
-' Description:  Link click event actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 29, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/29/2015 - initial version
-' ---------------------------------
-'Private Sub lblLink1_Click()
-'On Error GoTo Err_Handler
-'
-'    MsgBox "Click event...", vbOKOnly
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - lblLink1_Click[Tile form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
+Public Property Get Title() As String
+    Title = m_Title
+End Property
+
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
+
+        'set the form directions
+        Me.lblDirections.Caption = m_Directions
+    Else
+        RaiseEvent InvalidDirections(Value)
+    End If
+End Property
+
+Public Property Get Directions() As String
+    Directions = m_Directions
+End Property
 
 '---------------------
 ' Methods
 '---------------------
-
-' ---------------------------------
-' Sub:          Class_Initialize
-' Description:  Class initialization (starting) event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/28/2015 - initial version
-' ---------------------------------
-Private Sub Class_Initialize()
-On Error GoTo Err_Handler
-
-    MsgBox "Initializing...", vbOKOnly
-    
-    oTaskList.TileHeaderColor = lngBrown
-    oTaskList.TitleFontColor = lngWhite
-    
-    'Me.TileHeaderColor = lngBrown
-    'Me.TitleFontColor = lngWhite
-
-Exit_Handler:
-    Exit Sub
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Initialize[Tile form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Class_Terminate
-' Description:  Class termination (closing) event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/28/2015 - initial version
-' ---------------------------------
-Private Sub Class_Terminate()
-On Error GoTo Err_Handler
-
-    MsgBox "Terminating...", vbOKOnly
-
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Tile form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-Private Sub Form_Current()
-    Me.imgPriority.Picture = IIf(Priority.Value = 52, FLAG_RED, FLAG_BLUE)
-    Me.imgStatus.Picture = IIf(Status.Value = 48, DOT_PURPLE, DOT_LIME)
-End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Load
@@ -851,22 +655,16 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, November 10, 2015 - for NCPN tools
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 11/10/2015 - initial version
+'   BLC - 5/31/2016 - initial version
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
-    
-'    Set oTaskList = Me
-'    With oTaskList
-'        .TileHeaderColor = lngBrown
-'        .TitleFontColor = lngWhite
-'    End With
 
-MsgBox "loading..."
-
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
 
 Exit_Handler:
     Exit Sub
@@ -880,23 +678,156 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          SetHeaderColor
-' Description:  Set header color event
+' Sub:          Form_Open
+' Description:  form opening actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 10/28/2015 - initial version
+'   BLC - 5/31/2016 - initial version
 ' ---------------------------------
-Private Sub SetHeaderColor(color As Long)
+Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
-   
-    MsgBox "SetHeaderColor...", vbOKOnly
-    'Me.TileHeaderColor = Color
+
+    lblTitle.Caption = ""
+    lblDirections.Caption = "Edit or Delete Records using the buttons for the record at right." _
+                            & vbCrLf & "Icon codes at left identify if record may be edited/deleted."
+    tbxIcon.Value = StringFromCodepoint(uLocked)
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
+    'set hover
+    btnEdit.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+
+    btnDelete.Caption = StringFromCodepoint(uDelete)
+    btnDelete.ForeColor = lngRed
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[TaskList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Current
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub Form_Current()
+On Error GoTo Err_Handler
+       
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[TaskList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnEdit_Click
+' Description:  Enter button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub btnEdit_Click()
+On Error GoTo Err_Handler
+    
+    'populate the parent form
+    PopulateForm Me.Parent, ID
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnEdit_Click[TaskList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnDelete_Click
+' Description:  Delete button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/1/2016 - initial version
+' ---------------------------------
+Private Sub btnDelete_Click()
+On Error GoTo Err_Handler
+    
+    Dim result As Integer
+    
+    'identify the record ID
+     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
+                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
+
+    If result = vbYes Then DeleteRecord "Event", ID
+    
+    'clear the deleted record
+    Me.Requery
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[TaskList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Close
+' Description:  form closing actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Close()
+On Error GoTo Err_Handler
+
     
 Exit_Handler:
     Exit Sub
@@ -904,7 +835,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - SetHeaderColor[Tile form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[TaskList form])"
     End Select
     Resume Exit_Handler
 End Sub

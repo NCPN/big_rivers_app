@@ -130,6 +130,7 @@ Public Const uMemo = &H1F4DD                '128221
 Public Const uInbox = &H1F4E5               '128229 inbox tray
 Public Const uMagnifierLeft = &H1F50D       '128269
 Public Const uMagnifierRight = &H1F50E      '128270
+Public Const uLinked = &H1F517              '128279 link symbol
 Public Const uCamera = &H1F4F7              '128247 camera icon
 Public Const uFlashCamera = &H1F4F8         '128248 camera w/flash icon
 Public Const uKey = &H1F511                 '128273 key

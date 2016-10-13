@@ -15,6 +15,7 @@ Option Explicit
 '                                       also added SQL sanitization (escape/replace special chars)
 '               BLC, 6/9/2016  - 1.04 - added CreateTempRecords()
 '               BLC, 10/4/2016 - 1.05 - added GetParamsFromSQL()
+'               BLC, 10/11/2016 - 1.06 - added IsRecordset(), FieldCount(), MaxDbFieldCount()
 ' =================================
 
 ' ---------------------------------
@@ -101,7 +102,7 @@ Public Function BEUpdates(Optional ByVal bRunAll As Boolean = True)
                     .Edit
                     ![RunDate] = Now()
                     ![IsDone] = True
-                    .update
+                    .Update
                 End With
             End If
             rs.MoveNext
@@ -193,10 +194,10 @@ On Error GoTo Err_Handler
     Do Until rsB.EOF
         'add rsB values as new rsOut records
         rsOut.AddNew
-        For iCount = 0 To rsB.fields.Count - 1
-            rsOut.fields(iCount).Value = rsB.fields(iCount).Value
+        For iCount = 0 To rsB.Fields.Count - 1
+            rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
         Next
-        rsOut.update
+        rsOut.Update
         rsB.MoveNext
     Loop
     
@@ -331,7 +332,7 @@ On Error GoTo Err_Handler
   If db Is Nothing Then Set db = CurrentDb()
   
   'refresh tables
-  If tdfRefresh Then db.tabledefs.Refresh
+  If tdfRefresh Then db.TableDefs.Refresh
   
   Set tdf = db(tbl)
   
@@ -762,16 +763,14 @@ On Error GoTo Err_Handler
     
 '    Set rsFields = New ADODB.Recordset
     
-    'get accurate count
-    rs.MoveLast
-    rs.MoveFirst
-    iCols = rs.fields.Count
+    'get count
+    iCols = rs.Fields.Count
     iCol = 0
     
     ReDim Preserve aryFieldInfo(0 To iCols - 1)
     
     'iterate through fields
-    For Each fld In rs.fields
+    For Each fld In rs.Fields
 '        Debug.Print fld.Name
 '        Debug.Print fld.Attributes
 '        Debug.Print fld.Size
@@ -993,7 +992,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
 'Debug.Print rs.Fields(ary(i))
 
                 'separate parameters
-                ary2 = Split(Nz(rs.fields(ary(i)), ":"), "|")
+                ary2 = Split(Nz(rs.Fields(ary(i)), ":"), "|")
                 
                 'prepare sets of param name & data type --> split(ary2(i), ":") yields name & data type
                 For j = 0 To UBound(ary2)
@@ -1010,7 +1009,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
                 Set Value = dictParam
 
             Else
-                Value = Nz(rs.fields(ary(i)), "")
+                Value = Nz(rs.Fields(ary(i)), "")
             End If
             
             'add key if it isn't already there
@@ -1238,8 +1237,8 @@ On Error GoTo Err_Handler
             With rs
                 For i = 1 To iCount
                     .AddNew
-                    .fields("RecCount") = i
-                    .update
+                    .Fields("RecCount") = i
+                    .Update
                 Next
                 
                 .index = "RecCount"
@@ -1433,8 +1432,8 @@ On Error GoTo Err_Handler
     For i = 1 To iCount
 
         rs.AddNew
-        rs.fields(0) = i 'number integer field
-        rs.update
+        rs.Fields(0) = i 'number integer field
+        rs.Update
     Next
     
        
@@ -1563,15 +1562,15 @@ On Error GoTo Err_Handler
                 Case Else
             End Select
         Next
-        tdf.fields.Append fld
-        tdf.fields.Refresh
+        tdf.Fields.Append fld
+        tdf.Fields.Refresh
     Next
     
     'add table
-    db.tabledefs.Append tdf
+    db.TableDefs.Append tdf
     
     'update window
-    db.tabledefs.Refresh
+    db.TableDefs.Refresh
     RefreshDatabaseWindow
     
     'cleanup
@@ -1664,7 +1663,7 @@ On Error GoTo Err_Handler
             
                 strColName = aryCols(j)
                 
-                .fields(strColName) = aryRecord
+                .Fields(strColName) = aryRecord
             
             Next
         
@@ -1681,7 +1680,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - AddRecord[mod_Db])"
+            "Error encountered (#" & Err.Number & " - AddRecords[mod_Db])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1734,7 +1733,200 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - AddRecord[mod_Db])"
+            "Error encountered (#" & Err.Number & " - GetParamsFromSQL[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     ListTables
+' Description:  List database tables
+' Assumptions:  -
+' Parameters:   ShowSysTables - whether to limit
+'               limit - type(s) of tables to exclude(string)
+' Returns:      tables - delimited string of tables (string)
+' References:   -
+'   Daniel Pineault, June 10, 2010
+'   http://www.devhut.net/2010/06/10/ms-access-vba-list-the-tables-in-a-database/
+' Source/date:  Bonnie Campbell, October 6 2016
+' Revisions:    BLC, 10/6/2016 - initial version
+' ---------------------------------
+Public Function ListTables(ShowSysTables As Boolean) As String
+On Error GoTo Err_Handler
+
+    Dim db As DAO.Database
+    Dim tdefs As DAO.TableDefs
+    Dim tbl As DAO.TableDef
+    Dim tbls As String
+    
+    'default
+    tbls = ""
+    
+    Set db = CurrentDb()
+    Set tdefs = db.TableDefs
+    
+    'fetch tables
+    For Each tbl In tdefs
+        'If Left(tbl.Name, 4) = "MSys" And ShowSystables = False Then GoTo Continue
+        If Len(tbl.Name) > Len(Replace(tbl.Name, "sys_", "")) And ShowSysTables = False Then GoTo Continue
+        tbls = tbls & "|" & tbl.Name
+        
+Continue:
+    Next
+    
+    'trim starting delimiter
+    tbls = Right(tbls, Len(tbls) - 1)
+'    Debug.Print tbls
+    
+Exit_Handler:
+    ListTables = tbls
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ListTables[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     IsRecordset
+' Description:  Determines if the object is a recordset or not
+' Assumptions:
+'               Error handling is ignored since rs.Recordcount would produce
+'               an error if rs is not a recordset. In that case isRS remains
+'               false and that is returned through the Exit_Handler
+' Parameters:   rs - recordset object (object)
+' Returns:      isRS - if object was determined to be a recordset (boolean)
+'                      true = is a recordset object, false = is not a recordset object
+' References:   -
+' Source/date:  Bonnie Campbell, October 11 2016
+' Revisions:    BLC, 10/11/2016 - initial version
+' ---------------------------------
+Public Function IsRecordset(rs As Object)
+On Error GoTo Err_Handler
+
+    Dim isRS As Boolean
+    
+    isRS = False
+    
+    If Not rs Is Nothing Then
+            
+'        If Not IsError(IsNumeric(rs.RecordCount)) Then isRS = True
+        If IsNumeric(rs.RecordCount) Then isRS = True
+    
+    End If
+
+Exit_Handler:
+    IsRecordset = isRS
+    Exit Function
+Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - IsRecordset[mod_Db])"
+'    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     FieldCount
+' Description:  Determines the number of fields in a table/query
+' Assumptions:  -
+' Parameters:   TableName - name of table/query (variant)
+' Returns:      FieldCount - number of fields (variant)
+' References:
+'   Sinndho, May 8, 2012
+'   http://www.dbforums.com/showthread.php?1678970-Count-the-number-of-columns-(fields)-in-a-table
+' Source/date:  Bonnie Campbell, October 11 2016
+' Revisions:    BLC, 10/11/2016 - initial version
+' ---------------------------------
+Public Function FieldCount(ByVal TableName As String) As Long
+'Public Function FIeldCount(ByVal TableName As Variant) As Variant <<-- if including in query
+On Error GoTo Err_Handler
+
+    Dim rs As DAO.Recordset
+
+    Set rs = CurrentDb.OpenRecordset(TableName, dbOpenSnapshot)
+    
+    FieldCount = rs.Fields.Count
+
+Exit_Handler:
+    'cleanup
+    rs.Close
+    Set rs = Nothing
+    
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FieldCount[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     MaxDbFieldCount
+' Description:  Determines the maximum number of fields in Db tables/queries
+' Assumptions:  -
+' Parameters:   -
+' Returns:      MaxDbFieldCount - maximum number of fields (variant)
+' References:
+'   Sinndho, May 8, 2012
+'   http://www.dbforums.com/showthread.php?1678970-Count-the-number-of-columns-(fields)-in-a-table
+' Source/date:  Bonnie Campbell, October 11 2016
+' Revisions:    BLC, 10/11/2016 - initial version
+' ---------------------------------
+Public Function MaxDbFieldCount() As Long
+On Error GoTo Err_Handler
+    
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim qdf As DAO.QueryDef
+    Dim max As Long
+    Dim qtName As String
+    
+    Set db = CurrentDb
+    
+    'default
+    max = 0
+    
+    For Each tdf In db.TableDefs
+        
+        If tdf.Fields.Count > max Then
+            max = tdf.Fields.Count
+            qtName = tdf.Name
+        End If
+
+    Next
+    
+    For Each qdf In db.QueryDefs
+    
+        If qdf.Fields.Count > max Then
+            max = qdf.Fields.Count
+            qtName = qdf.Name
+        End If
+
+    Next
+    
+    Debug.Print qtName
+    
+    MaxDbFieldCount = max
+
+Exit_Handler:
+    'cleanup
+    Set tdf = Nothing
+    Set qdf = Nothing
+    Set db = Nothing
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FieldCount[mod_Db])"
     End Select
     Resume Exit_Handler
 End Function

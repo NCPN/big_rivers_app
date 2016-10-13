@@ -13,11 +13,11 @@ Begin Form
     GridY =24
     Width =11400
     DatasheetFontHeight =11
-    ItemSuffix =27
-    Left =4035
-    Top =3555
-    Right =15690
-    Bottom =12900
+    ItemSuffix =28
+    Left =3270
+    Top =2895
+    Right =16140
+    Bottom =14685
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -203,7 +203,7 @@ Begin Form
         End
         Begin FormHeader
             CanGrow = NotDefault
-            Height =9360
+            Height =9720
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -232,7 +232,7 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     Left =120
-                    Top =1800
+                    Top =2100
                     Width =4140
                     Height =7440
                     AutoActivate =1
@@ -630,9 +630,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =1800
+                    LayoutCachedTop =2100
                     LayoutCachedWidth =4260
-                    LayoutCachedHeight =9240
+                    LayoutCachedHeight =9540
                 End
                 Begin Image
                     Left =6180
@@ -649,7 +649,7 @@ Begin Form
                     LayoutCachedTop =180
                     LayoutCachedWidth =9600
                     LayoutCachedHeight =2280
-                    TabIndex =2
+                    TabIndex =3
                 End
                 Begin Subform
                     CanShrink = NotDefault
@@ -657,7 +657,7 @@ Begin Form
                     Left =4440
                     Top =2400
                     Width =6780
-                    Height =6840
+                    Height =7140
                     TabIndex =1
                     BorderColor =10921638
                     Name ="fsub"
@@ -667,7 +667,7 @@ Begin Form
                     LayoutCachedLeft =4440
                     LayoutCachedTop =2400
                     LayoutCachedWidth =11220
-                    LayoutCachedHeight =9240
+                    LayoutCachedHeight =9540
                     Begin
                         Begin Label
                             Visible = NotDefault
@@ -691,7 +691,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =120
-                    Top =1020
+                    Top =1380
                     Width =1185
                     Height =315
                     FontWeight =500
@@ -699,41 +699,6 @@ Begin Form
                     ForeColor =8355711
                     Name ="lblPhotoType"
                     Caption ="Photo Type:"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =1305
-                    LayoutCachedHeight =1335
-                End
-                Begin Label
-                    FontItalic = NotDefault
-                    OverlapFlags =85
-                    Left =1380
-                    Top =1020
-                    Width =2940
-                    Height =317
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblPhotoTypeValue"
-                    Caption ="Other"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1380
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =4320
-                    LayoutCachedHeight =1337
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =120
-                    Top =1380
-                    Width =1185
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblFile"
-                    Caption ="File:"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =1380
@@ -750,14 +715,49 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="lblPhotoFilename"
+                    Name ="lblPhotoTypeValue"
                     Caption ="Other"
-                    OnDblClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =1380
                     LayoutCachedTop =1380
                     LayoutCachedWidth =4320
                     LayoutCachedHeight =1697
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =120
+                    Top =1740
+                    Width =1185
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblFile"
+                    Caption ="File:"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =1740
+                    LayoutCachedWidth =1305
+                    LayoutCachedHeight =2055
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =85
+                    Left =1380
+                    Top =1740
+                    Width =2940
+                    Height =317
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblPhotoFilename"
+                    Caption ="Other"
+                    OnDblClick ="[Event Procedure]"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =1740
+                    LayoutCachedWidth =4320
+                    LayoutCachedHeight =2057
                 End
                 Begin Label
                     OverlapFlags =85
@@ -796,7 +796,7 @@ Begin Form
                     FontItalic = NotDefault
                     OverlapFlags =85
                     Left =120
-                    Top =480
+                    Top =840
                     Width =5940
                     Height =497
                     FontSize =9
@@ -807,9 +807,9 @@ Begin Form
                     Caption ="Error"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
-                    LayoutCachedTop =480
+                    LayoutCachedTop =840
                     LayoutCachedWidth =6060
-                    LayoutCachedHeight =977
+                    LayoutCachedHeight =1337
                 End
                 Begin Label
                     OverlapFlags =247
@@ -825,6 +825,86 @@ Begin Form
                     LayoutCachedTop =3180
                     LayoutCachedWidth =1815
                     LayoutCachedHeight =3225
+                End
+                Begin Label
+                    OverlapFlags =247
+                    TextAlign =3
+                    Left =8220
+                    Top =120
+                    Width =3060
+                    Height =315
+                    FontSize =14
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblContext"
+                    Caption ="DINO  >  Yampa"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =8220
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =11280
+                    LayoutCachedHeight =435
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    ColumnCount =3
+                    Left =2700
+                    Top =480
+                    Width =2574
+                    Height =315
+                    TabIndex =2
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxEvent"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;1440"
+                    OnChange ="[Event Procedure]"
+                    ControlTipText ="Event (Sampling Visit) Date"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =2700
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =5274
+                    LayoutCachedHeight =795
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin Label
+                    OverlapFlags =87
+                    Left =120
+                    Top =480
+                    Width =2580
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblEvent"
+                    Caption ="Event (Sampling Visit) Date:"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =2700
+                    LayoutCachedHeight =795
                 End
             End
         End
@@ -1011,6 +1091,10 @@ On Error GoTo Err_Handler
     'set subform
     PopulateSubForm
 
+    'populate events
+    'get events by feature (BLCA) or site (CANY, DINO)
+    Set cbxEvent.Recordset = GetRecords(IIf(TempVars("ParkCode") = "BLCA", "s_events_by_feature", "s_events_by_site"))
+
 Exit_Handler:
     Exit Sub
     
@@ -1159,6 +1243,41 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - lblPhotoFilename_DblClick[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxEvents_Change
+' Description:  combobox change event actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, October 13, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 10/13/2016 - initial version
+' ---------------------------------
+Private Sub cbxEvents_Change(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    'set the Event ID
+    If IsNothing(TempVars("EventID")) Then
+        TempVars.Add "EventID", Me.cbxEvent.Column(0)
+    Else
+        TempVars("EventID") = Me.cbxEvent.Column(0)
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxEvents_Change[Tree form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1817,144 +1936,38 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
-
-
 ' ---------------------------------
-' SUB:          CreatePopUpMenu
-' Description:  Create a popup context menu for nodes
+' FUNCTION:     SavePhotoRecord
+' Description:  delete photo record
 ' Assumptions:  -
-' Note:         Requires Microsoft Visual Basic for Applications Extensibility
-'               5.3 library (VBE6EXT.OLB) reference
-' Parameters:   -
+' Parameters:   node (treeview node object)
 ' Returns:      -
 ' Throws:       none
 ' References:   none
 ' Source/date:
-' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
+' Adapted:      Bonnie Campbell, July 28, 2015 - for NCPN tools
 ' Revisions:
-'   BLC - 7/27/2015 - initial version
+'   BLC - 7/28/2015 - initial version
 ' ---------------------------------
-Public Sub CreatePopUpMenu(Optional Node As Node)
+Public Function SavePhotoRecord(Node As Node) As Boolean
 
 On Error GoTo Err_Handler
 
-    ' Purpose: Creates and displays a sample pop-up menu.
+Debug.Print "SavePhotoRecord" & Node.Text
 
-    Dim objCommandBar As Office.CommandBar
-    
-    For Each objCommandBar In Application.CommandBars
-    
-        If objCommandBar.Name = "My New Popup Menu" Then
-        
-            objCommandBar.Delete
-        
-        End If
-        
-    Next objCommandBar
-    
-    Dim oCommandBarButton
-    Dim objCommandBarComboBox
-    
-    'create popup menu
-    Set objCommandBar = Application.CommandBars.Add _
-        ("My New Popup Menu", msoBarPopup)
-    With objCommandBar
-            
-            
-        ' ------- Photo Record -------
-            Set oCommandBarButton = .Controls.Add(msoControlButton)
-            With oCommandBarButton
-                .Caption = Node.Text
-                '.FaceId = 3
-                .Style = msoButtonWrapCaption
-                .OnAction = "=MsgBox(""You clicked node.text"")"
-            End With
-            
-            '--------------------------------
-            ' Debugging - Display Key & Tag
-            '--------------------------------
-            If DEV_MODE Then
-                Set oCommandBarButton = .Controls.Add(msoControlButton)
-                With oCommandBarButton
-                    .Caption = "Key:" & Node.key
-                    .Style = msoButtonWrapCaption
-                End With
-                
-                Set oCommandBarButton = .Controls.Add(msoControlButton)
-                With oCommandBarButton
-                    .Caption = "Tag:" & Node.Tag
-                    .Style = msoButtonWrapCaption
-                End With
-            End If
-
-         ' ------- Lock Photo Record -------
-            Set oCommandBarButton = .Controls.Add(msoControlButton)
-            With oCommandBarButton
-                .Caption = "&Lock Photo Record"
-                .FaceId = 3
-                .Style = msoButtonIconAndCaption
-                .OnAction = "=DeletePhotoRecord()"
-            End With
-            
-        ' ------- Save Photo Record -------
-            Set oCommandBarButton = .Controls.Add(msoControlButton)
-            With oCommandBarButton
-                .Caption = "&Save Photo Record"
-                .FaceId = 538
-                .Style = msoButtonIconAndCaption
-            End With
-            
-            
-        ' ------- Move To -----------------
-
-            Set objCommandBarComboBox = .Controls.Add(msoControlDropdown)
-            
-            Dim PhotoType As Variant
-
-            With objCommandBarComboBox
-                For Each PhotoType In Split(PHOTO_TYPES_MAIN, ",")
-                    .AddItem PhotoType 'Left(PhotoType, 1)
-                Next
-                For Each PhotoType In Split(PHOTO_TYPES_OTHER, ",")
-                    .AddItem "Other - " & PhotoType '"O" & Left(PhotoType, 1)
-                Next
-
-                .Caption = "Move To"
-                .Style = msoComboNormal
-            
-            End With
-            
-         ' ------- Delete Photo Record -----
-            Set oCommandBarButton = .Controls.Add(msoControlButton)
-            With oCommandBarButton
-                .Caption = "&Delete Photo Record"
-                .FaceId = 644
-                .Style = msoButtonIconAndCaption
-                .OnAction = "=DeletePhotoRecord(node)"
-            End With
-
-
-    End With
-    
-    objCommandBar.ShowPopup
-    'objCommandBar.ShowPopup Form.Width / 2, Form.Height / 2
-    'Application.Width / 2, Application.Height / 2
-        
-    ' To delete this pop-up menu, call:
-    ' Application.CommandBars("My New Popup Menu").Delete
-    
 Exit_Handler:
-    Exit Sub
+    Exit Function
     
 Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - CreatePopUpMenu[Tree form])"
+            "Error encountered (" & Err.Number & " - SavePhotoRecord[Tree form])"
     End Select
     Resume Exit_Handler
-End Sub
+End Function
+
+
 
 ' ---------------------------------
 ' FUNCTION:     DeletePhotoRecord
@@ -1997,4 +2010,234 @@ On Error Resume Next
 '        MsgBox "The node key you specified could not be found!"
 '        Err.Clear
 '    End If
+End Sub
+
+'================================
+' Context Menu Methods
+'================================
+
+' ---------------------------------
+' SUB:          CreatePopUpMenu
+' Description:  Create a popup context menu for nodes
+' Assumptions:  -
+' Note:         Requires Microsoft Visual Basic for Applications Extensibility
+'               5.3 library (VBE6EXT.OLB) reference
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, July 27, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 7/27/2015 - initial version
+' ---------------------------------
+Public Sub CreatePopUpMenu(Optional Node As Node)
+On Error GoTo Err_Handler
+
+    ' Purpose: Creates and displays a sample pop-up menu.
+
+    Dim objCommandBar As Office.CommandBar
+    
+    For Each objCommandBar In Application.CommandBars
+    
+        If objCommandBar.Name = "My New Popup Menu" Then
+        
+            objCommandBar.Delete
+        
+        End If
+        
+    Next objCommandBar
+    
+    Dim oCommandBarButton
+    Dim objCommandBarComboBox
+    
+    Dim cbar As CommandBar
+    Dim mnuItem As CommandBarControl
+    Dim mnu As String, action As String
+    Dim rs As DAO.Recordset
+    
+    'create popup menu
+    Set objCommandBar = Application.CommandBars.Add _
+        ("My New Popup Menu", msoBarPopup)
+            
+    With objCommandBar
+    
+        .TooltipText = "Photo actions"
+            
+        ' ------- Photo Record -------
+            Set oCommandBarButton = .Controls.Add(msoControlButton)
+            With oCommandBarButton
+                .Caption = Node.Text
+                '.FaceId = 3
+                .Style = msoButtonWrapCaption
+                .OnAction = "=MsgBox(""You clicked node.text"")"
+            End With
+            
+            '--------------------------------
+            ' Debugging - Display Key & Tag
+            '--------------------------------
+            If DEV_MODE Then
+                Set oCommandBarButton = .Controls.Add(msoControlButton)
+                With oCommandBarButton
+                    .Caption = "Key:" & Node.key
+                    .Style = msoButtonWrapCaption
+                End With
+                
+                Set oCommandBarButton = .Controls.Add(msoControlButton)
+                With oCommandBarButton
+                    .Caption = "Tag:" & Node.Tag
+                    .Style = msoButtonWrapCaption
+                End With
+            End If
+
+         ' ------- Lock Photo Record -------
+            Set oCommandBarButton = .Controls.Add(msoControlButton)
+            With oCommandBarButton
+                .Caption = "&Lock Photo Record"
+                .FaceId = 3
+                .Style = msoButtonIconAndCaption
+                .OnAction = "=DeletePhotoRecord()"
+            End With
+            
+        ' ------- Save Photo Record -------
+            Set oCommandBarButton = .Controls.Add(msoControlButton)
+            With oCommandBarButton
+                .Caption = "&Save Photo Record"
+                .FaceId = 538
+                .Style = msoButtonIconAndCaption
+                '.Parameter = ""
+                .OnAction = "=SavePhotoRecord()"
+            End With
+            
+        ' ------- Move To -----------------
+            Set objCommandBarComboBox = .Controls.Add(msoControlDropdown)
+            
+            Dim PhotoType As Variant
+
+            With objCommandBarComboBox
+                
+'                            Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="river")
+'                            mnuItem.Caption = rs.Fields("Segment")
+'                            mnuItem.Parameter = rs.Fields("Segment")
+'                            mnuItem.OnAction = "mnuSetRiver"
+                
+                For Each PhotoType In Split(PHOTO_TYPES_MAIN, ",")
+                    .AddItem PhotoType 'Left(PhotoType, 1)
+                Next
+                For Each PhotoType In Split(PHOTO_TYPES_OTHER, ",")
+                    .AddItem "Other - " & PhotoType '"O" & Left(PhotoType, 1)
+                Next
+
+                .Caption = "Move To"
+                .Style = msoComboNormal
+            
+'                .OnAction "mnuMovePhoto"
+                'action = "mnuMovePhoto"
+'                mnuItem.Parameter = ""
+'                mnuItem.OnAction = "mnuMovePhoto"
+            
+            End With
+            
+        ' ------- Set Event -----------------
+            Set cbar = .Controls.Add(msoCommandBar)
+            'oCommandBarButton = .Controls.Add(msoControlButton) 'objCommandBarComboBox = .Controls.Add(msoControlButton) 'msoControlDropdown)
+            
+            'Dim rs As DAO.Recordset
+
+            With cbar 'Button 'objCommandBarComboBox
+                
+                'get events by feature (BLCA) or site (CANY, DINO)
+                Set rs = GetRecords(IIf(TempVars("ParkCode") = "BLCA", "s_events_by_feature", "s_events_by_site"))
+                
+                If Not (rs.BOF And rs.EOF) Then
+                
+                    rs.MoveFirst
+                    
+                    Do Until rs.EOF
+                        Set mnuItem = .Controls.Add(Type:=msoControlButton, Parameter:="event")
+                        mnuItem.Caption = rs.Fields("SiteCode") & "-" & rs.Fields("StartDate")
+                        
+                        action = "mnuSetEvent"
+                        mnuItem.Parameter = rs.Fields("ID")
+                        mnuItem.OnAction = "mnuSetSetEvent"
+                        
+                        rs.MoveNext
+                    Loop
+                
+                Else
+                    'clear menu
+                
+                End If
+
+                .Caption = "Set Event"
+                .Style = msoButtonWrapCaption 'msoComboNormal
+            
+            End With
+
+            
+         ' ------- Delete Photo Record -----
+            Set oCommandBarButton = .Controls.Add(msoControlButton)
+            With oCommandBarButton
+                .Caption = "&Delete Photo Record"
+                .FaceId = 644
+                .Style = msoButtonIconAndCaption
+                .OnAction = "=DeletePhotoRecord(node)"
+            End With
+
+
+    End With
+    
+    objCommandBar.ShowPopup
+    'objCommandBar.ShowPopup Form.Width / 2, Form.Height / 2
+    'Application.Width / 2, Application.Height / 2
+        
+    ' To delete this pop-up menu, call:
+    ' Application.CommandBars("My New Popup Menu").Delete
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - CreatePopUpMenu[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+'================================
+' Context Menu Events
+'================================
+
+' ---------------------------------
+' SUB:          objCommandBarComboBox_Change
+' Description:  Create a popup context menu for nodes
+' Assumptions:  -
+' Note:         -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, October 12, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 10/12/2016 - initial version
+' ---------------------------------
+Public Sub objCommandBarComboBox_Change(ByVal Ctrl As CommandBarComboBox)
+On Error GoTo Err_Handler
+
+    Debug.Print "objCommandBarComboBox_Change"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - objCommandBarComboBox_Change[Tree form])"
+    End Select
+    Resume Exit_Handler
 End Sub

@@ -391,7 +391,7 @@ On Error Resume Next
     Dim Catalog As AccessObject
     Dim dsc As String
     Dim tbl As AccessObject
-    Dim tabledefs As Collection '??
+    Dim TableDefs As Collection '??
     
     Set Catalog = CreateObject("ADOX.Catalog")
     Catalog.ActiveConnection = "Provider=Microsoft.Jet.OLEDB.4.0;" & _
@@ -405,7 +405,7 @@ On Error Resume Next
  
     dsc = Catalog.Tables("table_name").Columns("column_name").Properties("Description").Value
  
-    For Each tbl In tabledefs
+    For Each tbl In TableDefs
         Debug.Print tbl.Name
     Next
     
@@ -443,11 +443,11 @@ On Error GoTo TableInfoErr
    Dim fld As DAO.field
    
    Set db = CurrentDb()
-   Set tdf = db.tabledefs(strTableName)
+   Set tdf = db.TableDefs(strTableName)
    Debug.Print "FIELD NAME", "FIELD TYPE", "SIZE", "DESCRIPTION"
    Debug.Print "==========", "==========", "====", "==========="
 
-   For Each fld In tdf.fields
+   For Each fld In tdf.Fields
       Debug.Print fld.Name,
       Debug.Print FieldTypeName(fld),
       Debug.Print fld.Size,

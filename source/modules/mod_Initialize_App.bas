@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Initialize_App
 ' Level:        Framework module
-' Version:      1.04
+' Version:      1.05
 ' Description:  Standard module for setting initial app & database values/settings & global variables
 ' Source/date:  Bonnie Campbell, July 2014
 ' Adapted:      -
@@ -21,6 +21,7 @@ Option Explicit
 '                                added blnRunQueries & blnUpdateAll from mod_User
 '               BLC, 6/24/2016 - 1.03 - replaced Exit_Function > Exit_Handler
 '               BLC, 9/21/2016 - 1.04 - updated AppSetup()
+'               BLC, 10/5/2016 - 1.05 - set AppVersion TempVar in AppSetup()
 ' =================================
 ' HISTORY:
 ' MERGED MODULE: mod_Global_Variables (merged with mod_Initialize_App)
@@ -186,6 +187,7 @@ End Sub
 '               BLC, 9/1/2016 - accommodated tbxWebURL as well as tbxWeb_address,
 '                               new tsys_App_Releases structure via iIsSupported
 '               BLC, 9/21/2016 - adjusted to record accesslevel & release version
+'               BLC, 10/5/2016 - set AppVersion TempVar
 ' =================================
 Public Function AppSetup()
     On Error GoTo Err_Handler
@@ -278,6 +280,8 @@ Public Function AppSetup()
     strRelease = Left(strRelease, InStr(strRelease, "(") - 2) & " / " & TempVars.item("UserAccessLevel")
     'strReleaseVersion = Replace(Left(strReleaseID, InStr(strReleaseID, "(") - 2), "Version ", "")
     strReleaseVersion = Replace(Left(strRelease, InStr(strRelease, "/") - 2), "Version ", "")
+    'set app version
+    TempVars.Add "AppVersion", strReleaseVersion
     strUser = TempVars.item("AppUsername")
     If IsODBC("tsys_Logins") Then
         ' Use a pass-through query to test the connection for write privileges

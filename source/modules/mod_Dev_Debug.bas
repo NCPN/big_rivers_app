@@ -50,7 +50,7 @@ On Error GoTo Err_Handler
     Dim tdf As DAO.TableDef
 
     Set db = CurrentDb()
-    Set tdf = db.tabledefs(strTable) 'TableName)
+    Set tdf = db.TableDefs(strTable) 'TableName)
 
     'Change the connect value
     tdf.Connect = strConn '"ODBC;DATABASE=pubs;UID=sa;PWD=;DSN=Publishers"
@@ -94,7 +94,7 @@ On Error GoTo Err_Handler
     Dim tdf As DAO.TableDef
 
     Set db = CurrentDb()
-    Set tdf = db.tabledefs(strTable)
+    Set tdf = db.TableDefs(strTable)
 
     'Change the database value
     tdf.Connect = ";DATABASE=" & strDbPath
@@ -1259,4 +1259,25 @@ Public Sub DoIt2()
             Debug.Print .sql
         End With
     End With
+End Sub
+
+Public Sub DoIt3()
+'    DoCmd.OpenForm "TableFieldList", acNormal, , , , , "Site"
+    DoCmd.OpenForm "TableFieldList", acNormal, , , , , "Photo"
+End Sub
+
+
+Public Sub CheckRS()
+    'populate w/ table data
+    Dim rs As DAO.Recordset
+    Dim aryRecord() As String
+    Dim i As Integer
+    
+    Set rs = CurrentDb.OpenRecordset("usys_temp_rs2", dbOpenDynaset)
+'    Dim rs As Object
+'
+'    Set rs = CreateObject("Word.application")
+
+    Debug.Print IsRecordset(rs)
+
 End Sub

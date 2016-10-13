@@ -588,7 +588,7 @@ End Sub
 Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
-    Dim ctrl As Control
+    Dim Ctrl As Control
     Dim strLink As String
     Dim i As Integer
     
@@ -596,11 +596,11 @@ On Error GoTo Err_Handler
 '
         strLink = "tbxReportName" '& i
     
-        For Each ctrl In Me.Controls
+        For Each Ctrl In Me.Controls
             
-            If ctrl.Name = strLink And ctrl.Tag <> "DISABLED" Then
+            If Ctrl.Name = strLink And Ctrl.Tag <> "DISABLED" Then
             
-                With ctrl
+                With Ctrl
                     'avoid flicker w/ if statement
                     If Not .ForeColor = lngGray50 Then .ForeColor = lngGray50
                     If Not .backstyle = acTransparent Then .backstyle = acTransparent

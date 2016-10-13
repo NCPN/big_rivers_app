@@ -307,12 +307,12 @@ End Function
 ' Revisions:
 '   BLC - 2/19/2015  - initial version
 ' ---------------------------------
-Public Sub AddControl(frm As Form, ctrl As Control, ctrlName As String, _
+Public Sub AddControl(frm As Form, Ctrl As Control, ctrlName As String, _
                         xPos As Integer, yPos As Integer)
 On Error GoTo Err_Handler
 
     ' Create ctrl
-    Set ctrl = CreateControl(frm.Name, ctrl.ControlType, , "", "", xPos, yPos)
+    Set Ctrl = CreateControl(frm.Name, Ctrl.ControlType, , "", "", xPos, yPos)
     
     ' Restore form
     DoCmd.Restore
@@ -602,14 +602,14 @@ On Error GoTo Err_Handler
         .RecordSource = ""
         
         'clear values so they no longer look for original control sources
-        Dim ctrl As Control
+        Dim Ctrl As Control
         
         'clear the control sources to clear the textboxes
-        For Each ctrl In frm.Controls
-            Select Case ctrl.ControlType
+        For Each Ctrl In frm.Controls
+            Select Case Ctrl.ControlType
                 Case acTextBox
-                    ctrl.ControlSource = ""
-                    ctrl.Value = ""
+                    Ctrl.ControlSource = ""
+                    Ctrl.Value = ""
                 Case acComboBox
                     'ctrl.Value = "" '<< error: 2448 can't assign value to object
                     'ctrl.Value = Null '<< error: 2448 can't assign value to object
@@ -664,10 +664,10 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Public Sub LimitKeyPress(ctrl As Control, iMaxLen As Integer, KeyAscii As Integer)
+Public Sub LimitKeyPress(Ctrl As Control, iMaxLen As Integer, KeyAscii As Integer)
 On Error GoTo Err_Handler
     
-    With ctrl
+    With Ctrl
         If Len(.Text) - .SelLength >= iMaxLen Then
             If KeyAscii <> vbKeyBack Then
                 KeyAscii = 0
@@ -703,12 +703,12 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Public Sub LimitChange(ctrl As Control, iMaxLen As Integer)
+Public Sub LimitChange(Ctrl As Control, iMaxLen As Integer)
 On Error GoTo Err_Handler
 
     Dim msg As String
     
-    With ctrl
+    With Ctrl
         If Len(.Text) > iMaxLen Then
             msg = "Oops! " & .Name & " field too long. Truncated to " & iMaxLen & " characters."
         

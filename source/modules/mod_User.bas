@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_User
 ' Level:        Framework module
-' Version:      1.08
+' Version:      1.10
 ' Description:  Access related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, May 2014
@@ -19,6 +19,7 @@ Option Explicit
 '               BLC, 4/20/2016 - 1.07 - added getADCommonName() to retrieve person's name
 '               BLC, 6/30/2016 - 1.08 - adjusted to use GetTemplate
 '               BLC, 9/26/2016 - 1.09 - adjusted to use GetRecords() vs. GetTemplate()
+'               BLC, 10/5/2016 - 1.10 - revised to set UserAccessLevelID TempVar
 ' =================================
 
 ' ---------------------------------
@@ -49,6 +50,7 @@ Option Explicit
 '               BLC, 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 4/4/2016  - changed Exit_Function > Exit_Handler, dbCurrent to CurrentDb
 '               BLC, 6/30/2016 - revised to use GetTemplate()
+'               BLC, 10/5/2016 - revised to set UserAccessLevelID TempVar
 ' ---------------------------------
 Public Function getDbUserAccess() As String
 On Error GoTo Err_Handler
@@ -90,9 +92,11 @@ Dim rs As DAO.Recordset
         If Not rs.BOF And Not rs.EOF Then
             'db user role
             TempVars("UserAccessLevel") = CStr(rs!AccessLevel)
+            TempVars("UserAccessLevelID") = CLng(rs!AccessLevelID)
         Else
             'default
             TempVars("UserAccessLevel") = "read only"
+            TempVars("UserAccessLevelID") = 4 'ID for read only (see Access table)
         End If
                 
                 
