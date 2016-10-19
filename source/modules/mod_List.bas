@@ -34,7 +34,7 @@ Option Explicit
 '                   http://forums.esri.com/Thread.asp?c=93&f=992&t=198775
 '               BLC, 4/30/2015 - added error handling & moved from mod_Common_UI to mod_List
 ' =================================
-Public Sub lvwPopulateFromQuery(Ctrl As MSComctlLib.ListView, strSQL As String, aryFields As Variant)
+Public Sub lvwPopulateFromQuery(ctrl As MSComctlLib.ListView, strSQL As String, aryFields As Variant)
 On Error GoTo Err_Handler
     Dim dbs As Database
     Dim rs As Recordset
@@ -43,7 +43,7 @@ On Error GoTo Err_Handler
     
     On Error Resume Next
     
-    Ctrl.ListItems.Clear
+    ctrl.ListItems.Clear
 
     Set dbs = CurrentDb
     Set rs = dbs.OpenRecordset(strSQL, dbOpenSnapshot)
@@ -51,7 +51,7 @@ On Error GoTo Err_Handler
     If rs.RecordCount > 0 Then
         rs.MoveFirst
         Do Until rs.EOF
-            Set item = Ctrl.ListItems.Add(, , rs(aryFields(i)))
+            Set item = ctrl.ListItems.Add(, , rs(aryFields(i)))
             For i = 1 To UBound(aryFields)
               item.SubItems(i) = rs(aryFields(i))
             Next
@@ -92,7 +92,7 @@ End Sub
 '   BLC - 2/19/2015 - converted to generic to handle listbox-like controls & documentation update
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 ' ---------------------------------
-Public Sub PopulateListHeaders(Ctrl As Control, rs As Recordset)
+Public Sub PopulateListHeaders(ctrl As Control, rs As Recordset)
 
 On Error GoTo Err_Handler
 
@@ -101,11 +101,11 @@ On Error GoTo Err_Handler
     Dim strItem As String, strColHeads As String, aryColWidths() As String
 
     'exit if subform control (hdrs are static & present on sfrm)
-    If Ctrl.ControlType = 112 Then
+    If ctrl.ControlType = 112 Then
         GoTo Exit_Handler
     End If
 
-    Set frm = Ctrl.Parent
+    Set frm = ctrl.Parent
     
     rows = rs.RecordCount
     cols = rs.Fields.Count
@@ -116,17 +116,17 @@ On Error GoTo Err_Handler
     End If
     
     'fetch column widths
-    aryColWidths = Split(Ctrl.ColumnWidths, ";")
+    aryColWidths = Split(ctrl.ColumnWidths, ";")
     
     'populate column names (if desired)
-    If Ctrl.ColumnHeads = True Then
+    If ctrl.ColumnHeads = True Then
         strColHeads = ""
         For i = 0 To cols - 1
             If CInt(aryColWidths(i)) > 0 Then
                 strColHeads = strColHeads & rs.Fields(i).Name & ";"
             End If
         Next i
-        Ctrl.AddItem strColHeads
+        ctrl.AddItem strColHeads
     End If
 
     'save headers
@@ -170,13 +170,13 @@ End Sub
 '                   http://forums.esri.com/Thread.asp?c=93&f=992&t=198775
 '               BLC, 4/30/2015 - added error handling & moved from mod_Common_UI to mod_List
 ' =================================
-Public Sub lbxConditionalColor(Ctrl As ListBox, tgtCol As Integer, normVal As String, altVal As String, normColor As Long, altColor As Long)
+Public Sub lbxConditionalColor(ctrl As ListBox, tgtCol As Integer, normVal As String, altVal As String, normColor As Long, altColor As Long)
 On Error GoTo Err_Handler
     Dim Counter As Long
     Dim col As Integer
     
-    For Counter = 0 To Ctrl.ListCount - 1
-        With Ctrl
+    For Counter = 0 To ctrl.ListCount - 1
+        With ctrl
             If CStr(.Column(tgtCol, Counter)) = normVal Then
                 For col = 0 To .ColumnCount - 1
                     .Column(col, Counter).ForeColor = normColor
@@ -413,7 +413,7 @@ End Function
 '   BLC - 2/8/2015  - initial version
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 ' ---------------------------------
-Public Sub SaveListToTable(Ctrl As Control, tbl As String, tblFields As Variant, blnSelectedOnly As Boolean)
+Public Sub SaveListToTable(ctrl As Control, tbl As String, tblFields As Variant, blnSelectedOnly As Boolean)
 
 On Error GoTo Err_Handler
     
@@ -435,11 +435,11 @@ On Error GoTo Err_Handler
     Next
 
     'iterate through items
-    For iRow = 0 To Ctrl.ListCount - 1
+    For iRow = 0 To ctrl.ListCount - 1
     
-            For jCol = 0 To Ctrl.ColumnCount - 1
+            For jCol = 0 To ctrl.ColumnCount - 1
             
-            strSQL = strSQL & "'" & Ctrl.Column(jCol, iRow) & "'"
+            strSQL = strSQL & "'" & ctrl.Column(jCol, iRow) & "'"
              
             CurrentDb.Execute strSQL, dbFailOnError
             

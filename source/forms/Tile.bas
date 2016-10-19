@@ -1206,7 +1206,7 @@ End Property
 Private Sub Form_Load()
 On Error GoTo Err_Handler
 
-    Dim Ctrl As Control
+    Dim ctrl As Control
     Dim strLink As String
     Dim i As Integer
     
@@ -1222,17 +1222,17 @@ On Error GoTo Err_Handler
         
         strLink = "lblLink" & i
     
-        For Each Ctrl In Me.Controls
+        For Each ctrl In Me.Controls
         
-            If Ctrl.Name = strLink Then
-                Ctrl.Caption = Replace(strLink, "lbl", "")
-                Ctrl.Visible = True
+            If ctrl.Name = strLink Then
+                ctrl.Caption = Replace(strLink, "lbl", "")
+                ctrl.Visible = True
                 
                 'standard fontcolor
                 'ctrl.forecolor = lngGray50
                 
                 'disable clicks until value set
-                Ctrl.Tag = "DISABLED"
+                ctrl.Tag = "DISABLED"
                 
                 Exit For
             End If
@@ -1835,7 +1835,7 @@ End Sub
 Private Sub Detail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 On Error GoTo Err_Handler
     
-    Dim Ctrl As Control
+    Dim ctrl As Control
     Dim strLink As String
     Dim i As Integer
     
@@ -1843,11 +1843,11 @@ On Error GoTo Err_Handler
     
         strLink = "lblLink" & i
     
-        For Each Ctrl In Me.Controls
+        For Each ctrl In Me.Controls
             
-            If Ctrl.Name = strLink And Ctrl.Tag <> "DISABLED" Then
+            If ctrl.Name = strLink And ctrl.Tag <> "DISABLED" Then
             
-                With Ctrl
+                With ctrl
                     'avoid flicker w/ if statement
                     If Not .ForeColor = LINK_NORMAL_TEXT Then .ForeColor = LINK_NORMAL_TEXT
                     If Not .backstyle = acTransparent Then .backstyle = acTransparent
@@ -1979,10 +1979,10 @@ End Sub
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
 ' ---------------------------------
-Public Sub LinkHighlight(Ctrl As Control)
+Public Sub LinkHighlight(ctrl As Control)
 On Error GoTo Err_Handler
     
-    With Ctrl
+    With ctrl
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
         If Not .backstyle = acNormalSolid Then .backstyle = acNormalSolid
@@ -2014,10 +2014,10 @@ End Sub
 ' Revisions:
 '   BLC - 9/7/2016 - initial version
 ' ---------------------------------
-Public Sub LinkNormal(Ctrl As Control)
+Public Sub LinkNormal(ctrl As Control)
 On Error GoTo Err_Handler
     
-    With Ctrl
+    With ctrl
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_NORMAL_TEXT Then .ForeColor = LINK_NORMAL_TEXT
         If Not .backstyle = acTransparent Then .backstyle = acTransparent
@@ -2052,7 +2052,7 @@ End Sub
 Public Sub DisableLinks(Optional links As String = "")
 On Error GoTo Err_Handler
 
-    Dim Ctrl As Control
+    Dim ctrl As Control
     Dim ary() As String
     Dim strLink As String
     Dim i As Integer
@@ -2061,11 +2061,11 @@ On Error GoTo Err_Handler
     ' Disable ALL links
     '-------------------------
     If Len(links) = 0 Then
-        For Each Ctrl In Me.Controls
-            If Left(Ctrl.Name, 7) = "lblLink" Then
-                Ctrl.Tag = "DISABLED"
-                Ctrl.ForeColor = LINK_NORMAL_TEXT
-                Ctrl.backstyle = acTransparent
+        For Each ctrl In Me.Controls
+            If Left(ctrl.Name, 7) = "lblLink" Then
+                ctrl.Tag = "DISABLED"
+                ctrl.ForeColor = LINK_NORMAL_TEXT
+                ctrl.backstyle = acTransparent
             End If
         Next
         
@@ -2081,12 +2081,12 @@ On Error GoTo Err_Handler
     For i = 0 To UBound(ary)
         strLink = "lblLink" & ary(i)
     
-        For Each Ctrl In Me.Controls
+        For Each ctrl In Me.Controls
             
-            If Ctrl.Name = strLink Then
-                Ctrl.Tag = "DISABLED"
-                Ctrl.ForeColor = LINK_NORMAL_TEXT
-                Ctrl.backstyle = acTransparent
+            If ctrl.Name = strLink Then
+                ctrl.Tag = "DISABLED"
+                ctrl.ForeColor = LINK_NORMAL_TEXT
+                ctrl.backstyle = acTransparent
             End If
         Next
         
@@ -2120,7 +2120,7 @@ End Sub
 Public Sub EnableLinks(links As String)
 On Error GoTo Err_Handler
 
-    Dim Ctrl As Control
+    Dim ctrl As Control
     Dim ary() As String
     Dim strLink As String, strTileTag As String
     Dim i As Integer
@@ -2135,12 +2135,12 @@ On Error GoTo Err_Handler
     For i = 0 To UBound(ary)
         strLink = "lblLink" & ary(i)
     
-        For Each Ctrl In Me.Controls
+        For Each ctrl In Me.Controls
             
             'set tag to overall tile tag & change font weight slightly
-            If Ctrl.Name = strLink Then
-                Ctrl.Tag = strTileTag
-                Ctrl.FontWeight = wtMedium
+            If ctrl.Name = strLink Then
+                ctrl.Tag = strTileTag
+                ctrl.FontWeight = wtMedium
             End If
         Next
         

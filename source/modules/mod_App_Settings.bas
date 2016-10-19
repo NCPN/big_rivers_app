@@ -142,6 +142,7 @@ Public Const PHOTO_TYPES_MAIN As String = "Reference,Overview,Feature,Transect,O
 Public Const PHOTO_TYPES_OTHER As String = "Animal,Plant,Cultural,Disturbance,Field Work,Scenic,Weather,Other"      'String -> other photo types
 Public Const PHOTO_EXT_ALLOWED As String = "jpg,jpeg,png"
 Public Const PHOTO_PATH As String = "Z:\_____LIB\dev\git_projects\big_rivers_app\"
+'photo number regex pattern defined in AppEnum
 
 '-----------------------------------------------------------------------
 ' Big Rivers Components

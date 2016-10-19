@@ -269,10 +269,10 @@ End Sub
 '               by Mark K., 4/26/2013.
 ' Revisions:    BLC, 5/10/2015 - initial version
 ' =================================
-Public Sub GetRibbonVisibility(Ctrl As Office.IRibbonControl, ByRef Visible)
+Public Sub GetRibbonVisibility(ctrl As Office.IRibbonControl, ByRef Visible)
 On Error GoTo Err_Handler
 
-    Select Case Ctrl.ID
+    Select Case ctrl.ID
         Case "tabExportOptions"
             Visible = True
             TempVars.Add "ribbon", True
@@ -345,10 +345,10 @@ End Sub
 ' Source/date:  Bonnie Campbell, 5/1/2015 for NCPN tools
 ' Revisions:    BLC, 5/1/2015 - initial version
 ' =================================
-Public Sub PopulateSubformControl(Ctrl As SubForm, strSubFormName As String)
+Public Sub PopulateSubformControl(ctrl As SubForm, strSubFormName As String)
     On Error GoTo Err_Handler
 
-    Ctrl.SourceObject = strSubFormName 'Forms(strSubFormName)
+    ctrl.SourceObject = strSubFormName 'Forms(strSubFormName)
 
 Exit_Procedure:
     Exit Sub
@@ -424,10 +424,10 @@ End Sub
 ' Revisions:
 '   BLC - 3/4/2015  - initial version
 ' ---------------------------------
-Public Function ChangeBackColor(Ctrl As Control, lngColor As Long)
+Public Function ChangeBackColor(ctrl As Control, lngColor As Long)
 On Error GoTo Err_Handler
 
-    Ctrl.BackColor = lngColor
+    ctrl.BackColor = lngColor
     
 Exit_Handler:
     Exit Function
@@ -474,26 +474,26 @@ Public Sub ResetHeaders(frm As Form, _
                         Optional oCtrl As Control)
 On Error GoTo Err_Handler
 
-Dim Ctrl As Control
+Dim ctrl As Control
 
     If allCtrls = True Then
     
         'iterate through all form controls
-        For Each Ctrl In frm
+        For Each ctrl In frm
             
             'check control type
-             If Ctrl.ControlType = acTextBox Or _
-                Ctrl.ControlType = acComboBox Or _
-                Ctrl.ControlType = acListBox Or _
-                Ctrl.ControlType = acLabel _
+             If ctrl.ControlType = acTextBox Or _
+                ctrl.ControlType = acComboBox Or _
+                ctrl.ControlType = acListBox Or _
+                ctrl.ControlType = acLabel _
              Then
              
                 'check tag
-                If Ctrl.Tag = ctrlTag Then
-                    If varType(fontBold) = vbBoolean Then Ctrl.fontBold = fontBold
-                    If varType(backstyle) = vbInteger Then Ctrl.backstyle = backstyle
-                    If varType(BackColor) = vbLong Then Ctrl.BackColor = BackColor
-                    If varType(ForeColor) = vbLong Then Ctrl.ForeColor = ForeColor
+                If ctrl.Tag = ctrlTag Then
+                    If varType(fontBold) = vbBoolean Then ctrl.fontBold = fontBold
+                    If varType(backstyle) = vbInteger Then ctrl.backstyle = backstyle
+                    If varType(BackColor) = vbLong Then ctrl.BackColor = BackColor
+                    If varType(ForeColor) = vbLong Then ctrl.ForeColor = ForeColor
                 End If
                 
           End If
@@ -563,16 +563,16 @@ Public Sub ShowControls(frm As Form, _
                         Optional oCtrl As Control)
 On Error GoTo Err_Handler
 
-Dim Ctrl As Control
+Dim ctrl As Control
 
     If allCtrls = True Then
     
         'iterate through all form controls
-        For Each Ctrl In frm
+        For Each ctrl In frm
 
             'check tag
-            If Ctrl.Tag = ctrlTag Then
-                Ctrl.Visible = visibility
+            If ctrl.Tag = ctrlTag Then
+                ctrl.Visible = visibility
             End If
 
         Next
@@ -662,18 +662,18 @@ End Function
 ' Revisions:    BLC, June 11, 2014 - initial version
 '               BLC, June 9, 2015  - adjust for hiding tabs only with blnHideOnly
 ' =================================
-Public Sub tabPageUnhide(Ctrl As TabControl, strTabName As String, Optional blnHideOnly As Boolean)
+Public Sub tabPageUnhide(ctrl As TabControl, strTabName As String, Optional blnHideOnly As Boolean)
 On Error GoTo Err_Handler
 
     Dim pg As Page
     
-    For Each pg In Ctrl.Pages
+    For Each pg In ctrl.Pages
         If pg.Name = strTabName Then
             If Not blnHideOnly = True Then
-                Ctrl.Pages(pg.Name).Visible = True
+                ctrl.Pages(pg.Name).Visible = True
             End If
         Else
-            Ctrl.Pages(pg.Name).Visible = False
+            ctrl.Pages(pg.Name).Visible = False
         End If
     Next pg
     
@@ -910,15 +910,15 @@ End Sub
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 '   BLC - 5/22/2015 - moved from mod_List to mod_UI
 ' ---------------------------------
-Public Sub DisableControl(Ctrl As Control)
+Public Sub DisableControl(ctrl As Control)
 
 On Error GoTo Err_Handler
     
-    Ctrl.BackColor = lngLtGray
-    Ctrl.ForeColor = lngGray
+    ctrl.BackColor = lngLtGray
+    ctrl.ForeColor = lngGray
     
-    If Ctrl.ControlType = acCommandButton Then
-        Ctrl.borderColor = lngGray
+    If ctrl.ControlType = acCommandButton Then
+        ctrl.borderColor = lngGray
     End If
 
 Exit_Sub:
@@ -956,7 +956,7 @@ End Sub
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 '   BLC - 5/22/2015 - moved from mod_List to mod_UI
 ' ---------------------------------
-Public Function EnableControl(Ctrl As Control, BackColor As Long, ForeColor As Long, _
+Public Function EnableControl(ctrl As Control, BackColor As Long, ForeColor As Long, _
                                 Optional borderColor As Long, _
                                 Optional HoverColor As Long, _
                                 Optional pressColor As Long, _
@@ -964,15 +964,15 @@ Public Function EnableControl(Ctrl As Control, BackColor As Long, ForeColor As L
                                 Optional pressedForeColor As Long)
 On Error GoTo Err_Handler
     
-    Ctrl.BackColor = BackColor
-    Ctrl.ForeColor = ForeColor
+    ctrl.BackColor = BackColor
+    ctrl.ForeColor = ForeColor
     
-    If Ctrl.ControlType = acCommandButton Then
-        Ctrl.borderColor = borderColor
-        Ctrl.HoverColor = HoverColor
-        Ctrl.PressedColor = pressColor
-        Ctrl.hoverForeColor = hoverForeColor
-        Ctrl.pressedForeColor = pressedForeColor
+    If ctrl.ControlType = acCommandButton Then
+        ctrl.borderColor = borderColor
+        ctrl.HoverColor = HoverColor
+        ctrl.PressedColor = pressColor
+        ctrl.hoverForeColor = hoverForeColor
+        ctrl.pressedForeColor = pressedForeColor
     End If
 
 Exit_Handler:
@@ -1005,20 +1005,20 @@ End Function
 Public Sub ToggleControl(frmName As String, btnName As String, Optional color As Variant = Null)
 On Error GoTo Err_Handler:
     
-    Dim Ctrl As Control
-    Set Ctrl = Forms(frmName).Controls(btnName)
+    Dim ctrl As Control
+    Set ctrl = Forms(frmName).Controls(btnName)
     
     'invert enabled value (change true -> false, false -> true) & change color
-    With Ctrl
+    With ctrl
     
         'enable/disable control (includes acCommandButton, acComboBox, acListBox, acTextBox, acToggleButton)
-        If Not Ctrl.ControlType = acLabel Then
+        If Not ctrl.ControlType = acLabel Then
             .Enabled = Not .Enabled
         End If
         
         If Not IsNull(color) Then
             ' change font color for appropriate controls with text
-            Select Case Ctrl.ControlType
+            Select Case ctrl.ControlType
                 Case acCommandButton, acComboBox, acLabel, acListBox, acTextBox, acToggleButton
                     .ForeColor = color
                 Case Else
@@ -1104,7 +1104,7 @@ End Function
 Public Sub PrepareCrumbs(frm As SubForm, aryCrumbs As Variant, Optional separator = ">")
  On Error GoTo Err_Handler
  
-    Dim Ctrl As Control
+    Dim ctrl As Control
     Dim i As Integer, intLastCtrlWidth As Integer, intLastCtrlPosition As Integer
     Dim strNum As String, strCtrlName As String, strCtrlSeparator As String
     
@@ -1201,7 +1201,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/10/2016 - initial version
 ' ---------------------------------
-Public Sub CircleControl(Ctrl As Control, Optional ellipse As Boolean = False)
+Public Sub CircleControl(ctrl As Control, Optional ellipse As Boolean = False)
 On Error GoTo Err_Handler
     
     Dim iWidth As Integer, iHeight As Integer
@@ -1210,20 +1210,20 @@ On Error GoTo Err_Handler
     Dim dblAspect As Double
     Dim sngStart As Single, sngEnd As Single
 
-    iCenterX = Ctrl.Left + Ctrl.Width / 2
-    iCenterY = Ctrl.Top + Ctrl.Height / 2
-    iRadius = Ctrl.Width '/ 3 '/ 2 + 100
+    iCenterX = ctrl.Left + ctrl.Width / 2
+    iCenterY = ctrl.Top + ctrl.Height / 2
+    iRadius = ctrl.Width '/ 3 '/ 2 + 100
     dblAspect = 1 'ctrl.Height / ctrl.Width
     
     sngStart = -0.00000001                    ' Start of pie slice.
 
     sngEnd = -2 * PI / 3                         ' End of pie slice.
-    Ctrl.Parent.fillColor = RGB(51, 51, 51)            ' Color pie slice red.
-    Ctrl.Parent.FillStyle = 0                          ' Fill pie slice.
+    ctrl.Parent.fillColor = RGB(51, 51, 51)            ' Color pie slice red.
+    ctrl.Parent.FillStyle = 0                          ' Fill pie slice.
     
     'add the circle to the parent
     ' X,Y center | radius | [ color, start, end, aspect ]
-    Ctrl.Parent.Circle (iCenterX, iCenterY), iRadius, lngLime, sngStart, sngEnd, dblAspect
+    ctrl.Parent.Circle (iCenterX, iCenterY), iRadius, lngLime, sngStart, sngEnd, dblAspect
 
 Exit_Handler:
     Exit Sub

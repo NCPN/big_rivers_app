@@ -19,6 +19,7 @@ Option Explicit
 '                                       for Contact form
 '               BLC, 8/30/2016 - 1.08 - added Batch Upload Photos to ClickAction()
 '               BLC, 9/13/2016 - 1.09 - added SortList()
+'               BLC, 10/14/2016 - 1.10 - added SetContext()
 ' =================================
 
 ' =================================
@@ -48,7 +49,7 @@ Option Explicit
 '                                Converted QAQC to Create, Logs to View
 '               BLC, 5/26/2015 - Added error handling
 ' =================================
-Public Sub PopulateInsetTitle(Ctrl As Control, strContext As String)
+Public Sub PopulateInsetTitle(ctrl As Control, strContext As String)
 On Error GoTo Err_Handler
     
     Dim strTitle As String
@@ -86,10 +87,10 @@ On Error GoTo Err_Handler
             strTitle = ""
     End Select
     
-    If Ctrl.ControlType = acLabel Then
-        Ctrl.Caption = strTitle
+    If ctrl.ControlType = acLabel Then
+        ctrl.Caption = strTitle
         If strContext <> "DbAdmin" Then
-            Ctrl.Visible = True
+            ctrl.Visible = True
         End If
     End If
     
@@ -121,7 +122,7 @@ End Sub
 '                                Converted QAQC to Create, Logs to View
 '               BLC, 5/26/2015 - Added error handling
 ' =================================
-Public Sub PopulateInstructions(Ctrl As Control, strContext As String)
+Public Sub PopulateInstructions(ctrl As Control, strContext As String)
 On Error GoTo Err_Handler
     Dim strInstructions As String
     
@@ -165,10 +166,10 @@ On Error GoTo Err_Handler
     End Select
     
     'populate caption & display instructions
-    If Ctrl.ControlType = acLabel Then
-        Ctrl.Caption = strInstructions
+    If ctrl.ControlType = acLabel Then
+        ctrl.Caption = strInstructions
         If strContext <> "DbAdmin" Then
-            Ctrl.Visible = True
+            ctrl.Visible = True
         End If
     End If
     
@@ -580,7 +581,7 @@ On Error GoTo Err_Handler
                 strTable = "usys_temp_qdf"
                 'set form fields to record fields as datasource
                 'contact data
-                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxID").ControlSource = "c.ID"
                 .Controls("tbxFirst").ControlSource = "FirstName"
                 .Controls("tbxMI").ControlSource = "MiddleInitial"
                 .Controls("tbxLast").ControlSource = "LastName"
@@ -686,7 +687,7 @@ On Error GoTo Err_Handler
         'alter to retrieve proper ID
         Select Case .Name
             Case "Contact"
-                strSQL = Replace(strSQL, " ID = ", " Contact.ID = ")
+                strSQL = Replace(strSQL, " ID = ", " c.ID = ")
         End Select
         
         .RecordSource = strSQL
@@ -856,7 +857,7 @@ End Function
 ' Revisions:
 '   BLC - 9/13/2016 - initial version
 ' ---------------------------------
-Public Sub SortListForm(frm As Form, Ctrl As Control)
+Public Sub SortListForm(frm As Form, ctrl As Control)
 On Error GoTo Err_Handler
 
     Dim strSort As String
@@ -865,7 +866,7 @@ On Error GoTo Err_Handler
     strSort = ""
     
     'set sort field
-    Select Case Replace(Ctrl.Name, "lbl", "")
+    Select Case Replace(ctrl.Name, "lbl", "")
         Case "HdrID"
             strSort = "ID"
         Case "Version"
@@ -917,7 +918,7 @@ End Sub
 ' Revisions:
 '   BLC - 9/13/2016 - initial version
 ' ---------------------------------
-Public Sub FilterListForm(frm As Form, Ctrl As Control)
+Public Sub FilterListForm(frm As Form, ctrl As Control)
 On Error GoTo Err_Handler
 
     Dim strFilter As String
@@ -926,7 +927,7 @@ On Error GoTo Err_Handler
     strFilter = ""
     
     'set Filter field
-    Select Case Replace(Ctrl.Name, "lbl", "")
+    Select Case Replace(ctrl.Name, "lbl", "")
         Case "HdrID"
             strFilter = "ID"
         Case "Version"
@@ -961,3 +962,50 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' FUNCTION:     GetContext
+' Description:  set the context based on tempvars
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, October 14, 2015 - for NCPN tools
+' Revisions:
+'   BLC - 10/14/2016  - initial version
+' ---------------------------------
+Public Function GetContext() As String
+On Error GoTo Err_Handler
+
+    Dim strContext
+    
+    strContext = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("River"), "-") & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("SiteCode"), "-")
+
+    Select Case Nz(TempVars("ParkCode"), "")
+    
+        Case "BLCA"
+            'add feature
+            strContext = strContext & Space(2) & ">" & Space(2) & _
+                 Nz(TempVars("Feature"), "-")
+        Case "CANY"
+            'site level
+        Case "DINO"
+            'site level
+    End Select
+    
+    GetContext = strContext
+
+Exit_Sub:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetContext[mod_App_UI])"
+    End Select
+    Resume Exit_Sub
+End Function

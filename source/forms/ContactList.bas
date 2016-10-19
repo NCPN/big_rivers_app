@@ -21,14 +21,12 @@ Begin Form
     Width =7500
     DatasheetFontHeight =11
     ItemSuffix =44
-    Right =10530
-    Bottom =10995
+    Right =12855
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x2e57b5586dcee440
+        0x8ae9cc518dd4e440
     End
-    RecordSource ="SELECT * FROM (Contact INNER JOIN Contact_Access ON Contact_Access.Contact_ID = "
-        "Contact.ID) INNER JOIN Access ON Access.ID = Contact_Access.Access_ID; "
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -485,7 +483,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxID"
-                    ControlSource ="Contact_ID"
+                    ControlSource ="c.ID"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001000000001000000 ,
                         0x22b14c00ffffff000100000000000000110000002100000001000000ff000000 ,
@@ -775,8 +773,9 @@ On Error GoTo Err_Handler
     'tbxIsActive = IIf([IsActive] = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
 
     'set data source
-    Me.RecordSource = GetTemplate("s_contact_access")
-    Me.Requery
+    Set Me.Recordset = GetRecords("s_contact_access")
+'    Me.RecordSource = GetTemplate("s_contact_access")
+'    Me.Requery
 
     'tbxName.ControlSource = [FirstName] & " " & IIf(Len([MiddleInitial]) > 0, [MiddleInitial] & " ", "") & [LastName]
 
@@ -981,40 +980,3 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-'' ---------------------------------
-'' Sub:          ToggleIsActive
-'' Description:  Toggle IsActive button click actions
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 20, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/20/2016 - initial version
-'' ---------------------------------
-'Private Sub ToggleIsActive(ID As Long, IsActive As Byte)
-'On Error GoTo Err_Handler
-'
-'    Dim strSQL As String
-'
-'    strSQL = GetTemplate("u_contact_isactive_flag", _
-'              "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
-'              "|ID" & PARAM_SEPARATOR & ID)
-'
-'    DoCmd.SetWarnings False
-'    DoCmd.RunSQL (strSQL)
-'    DoCmd.SetWarnings True
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - ToggleIsActive[ContactList form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub

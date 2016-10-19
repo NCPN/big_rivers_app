@@ -596,9 +596,9 @@ On Error GoTo Err_Handler
     End Select
     
     'iterate & position controls
-    Dim Ctrl As Control
-    For Each Ctrl In Me.Controls
-        With Ctrl
+    Dim ctrl As Control
+    For Each ctrl In Me.Controls
+        With ctrl
             Select Case .Name
                 '-- photographer --
                 Case "lblPhotogTransect" ' Transect

@@ -899,10 +899,10 @@ On Error GoTo Err_Handler
     End Select
     
     'iterate & position controls
-    Dim Ctrl As Control
-    For Each Ctrl In Me.Controls
-        With Ctrl
-            Select Case Left(Ctrl.Name, 6)
+    Dim ctrl As Control
+    For Each ctrl In Me.Controls
+        With ctrl
+            Select Case Left(ctrl.Name, 6)
                 Case "lblTra" ' "lblTransect"
                     .Left = LeftPos1
                     .Visible = blnShow
@@ -920,20 +920,20 @@ On Error GoTo Err_Handler
     Next
     
     'iterate
-    For Each Ctrl In Me.Controls
-        Select Case Ctrl.Name
+    For Each ctrl In Me.Controls
+        Select Case ctrl.Name
             Case "lblNumEx1"
-                Ctrl.Caption = ChrW(uCircle1)
+                ctrl.Caption = ChrW(uCircle1)
             Case "lblNumEx2"
-                Ctrl.Caption = ChrW(uCircle2)
+                ctrl.Caption = ChrW(uCircle2)
             Case "lblNumEx3"
-                Ctrl.Caption = ChrW(uCircle3)
+                ctrl.Caption = ChrW(uCircle3)
             Case "lblEx1"
-                Ctrl.Caption = ChrW(uCircleFilled1)
+                ctrl.Caption = ChrW(uCircleFilled1)
             Case "lblEx2"
-                Ctrl.Caption = ChrW(uCircleFilled2)
+                ctrl.Caption = ChrW(uCircleFilled2)
             Case "lblEx3"
-                Ctrl.Caption = ChrW(uCircleFilled3)
+                ctrl.Caption = ChrW(uCircleFilled3)
         End Select
     Next
     
@@ -970,25 +970,25 @@ End Sub
 Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
-    Dim Ctrl As Control
+    Dim ctrl As Control
     Dim strValue As String
     
     'iterate
-    For Each Ctrl In Me.Controls
+    For Each ctrl In Me.Controls
         
-        Select Case Ctrl.Name
+        Select Case ctrl.Name
             Case "lblNumEx1"
-                Ctrl.Caption = ChrW(uCircle1)
+                ctrl.Caption = ChrW(uCircle1)
             Case "lblNumEx2"
-                Ctrl.Caption = ChrW(uCircle2)
+                ctrl.Caption = ChrW(uCircle2)
             Case "lblNumEx3"
-                Ctrl.Caption = ChrW(uCircle3)
+                ctrl.Caption = ChrW(uCircle3)
             Case "lblEx1"
-                Ctrl.Caption = ChrW(uCircleFilled1)
+                ctrl.Caption = ChrW(uCircleFilled1)
             Case "lblEx2"
-                Ctrl.Caption = ChrW(uCircleFilled2)
+                ctrl.Caption = ChrW(uCircleFilled2)
             Case "lblEx3"
-                Ctrl.Caption = ChrW(uCircleFilled3)
+                ctrl.Caption = ChrW(uCircleFilled3)
         End Select
         
 '        If Left(ctrl.Name, 8) = "lblNumEx" Then

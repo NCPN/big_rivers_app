@@ -18,6 +18,7 @@ Option Explicit
 '               BLC - 8/8/2016   - 1.01 - SaveToDb() added update parameter to identify if
 '                                        this is an update vs. an insert
 '               BLC - 9/1/2016   - 1.02 - SaveToDb() code cleanup
+'               BLC - 10/15/2016 - 1.03 - adjust SaveToDb() to accommodate non-users
 ' =================================
 
 '---------------------
@@ -293,6 +294,7 @@ End Sub
 '   BLC, 6/22/2016 - revised to use parameterized qdf
 '   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '   BLC, 9/1/2016 - commented code cleanup
+'   BLC, 10/14/2016 - adjusted to accommodate photographers who are non-app users
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
@@ -311,9 +313,9 @@ On Error GoTo Err_Handler
         Params(1) = .FirstName
         Params(2) = .LastName
         Params(3) = .Email
-        Params(4) = .Username
-        Params(5) = .Organization
         
+        Params(4) = IIf(Len(.Username) > 0, .Username, Null)
+        Params(5) = IIf(Len(.Organization) > 0, .Organization, Null)
         Params(6) = IIf(Len(.MiddleInitial) > 0, .MiddleInitial, Null)
         Params(7) = IIf(Len(.PosTitle) > 0, .PosTitle, Null)
         Params(8) = IIf(.WorkPhone = 0, Null, .WorkPhone)
@@ -327,6 +329,9 @@ On Error GoTo Err_Handler
         
         .ID = SetRecord(Template, Params)
     End With
+    
+    'skip access if not set (non-users)
+    If Not (Me.AccessLevel > 0) Then GoTo Exit_Handler
 
     'set the person's role (update if contact template was update)
     Template = IIf(Left(Template, 1) = "u", "u_contact_access", "i_contact_access")

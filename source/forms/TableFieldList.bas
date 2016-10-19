@@ -20,12 +20,15 @@ Begin Form
     Width =3480
     DatasheetFontHeight =11
     ItemSuffix =42
-    Right =7530
-    Bottom =11790
+    Left =165
+    Top =2535
+    Right =3750
+    Bottom =7110
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xeecc3f14b0d0e440
+        0xd87c8399b1d4e440
     End
+    RecordSource ="usys_temp_rs"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -145,7 +148,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Site"
+                    Caption ="SurveyPoint fields"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
@@ -215,6 +218,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxFieldType"
+                    ControlSource ="ColType"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
@@ -239,6 +243,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxFieldName"
+                    ControlSource ="Column"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
@@ -265,6 +270,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxAllowZLS"
+                    ControlSource ="AllowZLS"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1380
@@ -291,6 +297,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxSize"
+                    ControlSource ="Length"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =720
@@ -430,6 +437,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRequired"
+                    ControlSource ="IsReqd"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1620
@@ -466,9 +474,9 @@ Option Explicit
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
 '
-' Source/date:  Bonnie Campbell, May 31, 2016
+' Source/date:  Bonnie Campbell, October 6, 2016
 ' References:   -
-' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+' Revisions:    BLC - 10/6/2016 - 1.00 - initial version
 ' =================================
 
 '---------------------
@@ -486,6 +494,7 @@ Private m_Title As String
 
 Private m_Table As String
 Private m_Fields As String
+Private m_TableColumns As String
 
 '---------------------
 ' Event Declarations
@@ -540,6 +549,14 @@ Public Property Get Table() As String
     Table = m_Table
 End Property
 
+Public Property Let TableColumns(Value As String)
+        m_TableColumns = Value
+End Property
+
+Public Property Get TableColumns() As String
+    TableColumns = m_TableColumns
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -551,12 +568,10 @@ End Property
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-'   mbizup, 5/29/2008
-'   https://www.experts-exchange.com/questions/23441990/moving-data-from-array-to-a-table-in-Vba.html
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/31/2016 - initial version
+'   BLC - 10/6/2016 - initial version
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -666,10 +681,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/31/2016 - initial version
+'   BLC - 10/6/2016 - initial version
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -725,10 +740,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/31/2016 - initial version
+'   BLC - 10/6/2016 - initial version
 ' ---------------------------------
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
@@ -793,10 +808,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 5/31/2016 - initial version
+'   BLC - 10/6/2016 - initial version
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
@@ -821,8 +836,6 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-'   mbizup, 5/29/2008
-'   https://www.experts-exchange.com/questions/23441990/moving-data-from-array-to-a-table-in-Vba.html
 ' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -847,11 +860,15 @@ On Error GoTo Err_Handler
     Dim rs As DAO.Recordset
     Dim aryRecord() As String
     Dim i As Integer
+    Dim strTableColumns As String
+    
+    'default
+    strTableColumns = ""
     
     Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
     
     For i = 0 To UBound(aryFieldInfo)
-    
+        
         'create new record
         rs.AddNew
         
@@ -866,7 +883,15 @@ On Error GoTo Err_Handler
         'add the new record
         rs.Update
         
+        'prepare table columns list
+        strTableColumns = strTableColumns & aryRecord(0) & ", "
+        
     Next
+    
+    'prepare table columns list
+    Me.TableColumns = Left(Trim(strTableColumns), Len(Trim(strTableColumns)) - 1)
+    
+    Debug.Print Me.TableColumns
     
     Set Me.Recordset = rs 'Forms!TableFieldList.Recordset = rs
     

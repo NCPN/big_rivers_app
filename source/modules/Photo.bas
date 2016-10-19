@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Photo
 ' Level:        Framework class
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  Photo object related properties, events, functions & procedures
 '
@@ -19,6 +19,7 @@ Option Explicit
 '               BLC - 4/19/2016  - 1.02 - adjusted to mirror data sheets
 '               BLC - 8/8/2016   - 1.03 - SaveToDb() added update parameter to identify if
 '                                        this is an update vs. an insert, revised Comment to AppComment
+'               BLC - 10/17/2016 - 1.04 - added ValidPhotoNumber(), PhotoNumber property
 ' =================================
 
 '    [ID] [smallint] IDENTITY(1,1) NOT NULL,
@@ -50,6 +51,7 @@ Private m_ID As Long
 Private m_PhotoDate As Date
 Private m_PhotoType As String '2
 Private m_PhotographerID As Long
+Private m_PhotoNumber As String
 Private m_Filename As String '10
 Private m_NCPNImageID As Long '50
 Private m_DirectionFacing As String '4
@@ -143,6 +145,18 @@ End Property
 
 Public Property Get NCPNImageID() As Long
     NCPNImageID = m_NCPNImageID
+End Property
+
+Public Property Let PhotoNumber(Value As String)
+    If ValidPhotoNumber(PhotoNumber) Then
+        m_PhotoNumber = Value
+    Else
+        RaiseEvent InvalidPhotoNumber(Value)
+    End If
+End Property
+
+Public Property Get PhotoNumber() As String
+    PhotoNumber = m_PhotoNumber
 End Property
 
 Public Property Let DirectionFacing(Value As String)
@@ -463,3 +477,49 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+'---------------------------------------------------------------------------------------
+' FUNCTION:     ValidPhotoNumber
+' Description:  Determine if photo number is valid
+' Parameters:   num - photo number to evaluate(string)
+' Returns:      boolean - true (if number matches proper photo number regex)
+'                         false (if number is not a proper photo number)
+' Throws:       -
+' References:   -
+' Source/Date:  Bonnie Campbell
+' Adapted:      Bonnie Campbell, 10/17/2016 - for NCPN tools
+' Revisions:
+'   BLC, 10/17/2016 - initial version
+'---------------------------------------------------------------------------------------
+Private Function ValidPhotoNumber(num As String)
+On Error GoTo Err_Handler
+
+    If Not (TempVars("EnumType")) Is Nothing Then
+        TempVars.Add "EnumType", "RegEx"
+    Else
+        TempVars("EnumType") = "RegEx"
+    End If
+    
+    Dim rs As DAO.Recordset
+    
+    Set rs = GetRecords("s_app_enum_list")
+        
+    Dim pattern As String
+    
+    If Not rs.BOF And rs.EOF Then
+        If rs.Fields("Label") = "PhotoNumberRegEx" Then
+            pattern = rs.Fields("Summary")
+        End If
+    End If
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Error #" & Err.Description, vbCritical, _
+                "Error encounter (#" & Err.Number & " - ValidPhotoNumber[cls_Photo])"
+    End Select
+    Resume Exit_Handler
+End Function

@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =6180
-    Top =2595
-    Right =14460
-    Bottom =10560
+    Left =4365
+    Top =3210
+    Right =12645
+    Bottom =11175
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -824,14 +824,14 @@ On Error GoTo Err_Handler
             'clear notice
             lblNotice.Caption = ""
         
-            Dim Ctrl As Control
+            Dim ctrl As Control
             
             'iterate through the tiles - update indicator & enable links
-            For Each Ctrl In Me.Controls
+            For Each ctrl In Me.Controls
             
-                If Right(Ctrl.Name, 4) = "Tile" Then
+                If Right(ctrl.Name, 4) = "Tile" Then
                     
-                    With Ctrl.Form
+                    With ctrl.Form
                         
                         '.EnableLinks .TileTag & strLinksToEnable <-- enabled via PrepareLinks
                         .IndicatorVisible = 1
@@ -993,7 +993,7 @@ On Error GoTo Err_Handler
                         
                         TL = "1,2,6"     'Site, Feature, Location
                         TC = "1,5,6"     'Event, Locations, People
-                        BL = "1,2,4,7,8" 'Photos, Transducers, Survey Files, Upload Survey File,
+                        BL = "2,4,7,8"   'Transducers, Survey Files, Upload Survey File,
                                          ' Batch Upload Photos
                         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
                                             ' VegWalk-Species, VegWalk-#Species, More
@@ -1001,6 +1001,8 @@ On Error GoTo Err_Handler
                         If Len(Nz(TempVars("Feature"), "")) > 0 Then
                             TL = "1,2,3,4,6"    'Site, Feature, Transect, Plot, Location
                             TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+                            BL = "1,2,4,7,8"   'Photos, Transducers, Survey Files, Upload Survey File,
+                                               ' Batch Upload Photos
                             BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
                                                 ' VegWalk-Species, VegWalk-#Species, More
                         End If
@@ -1044,14 +1046,14 @@ On Error GoTo Err_Handler
     End If
 
     'disable before selective re-enabling
-    Dim Ctrl As Control
+    Dim ctrl As Control
 
     'iterate through the tiles - disable links
-    For Each Ctrl In Me.Controls
+    For Each ctrl In Me.Controls
 
-        If Right(Ctrl.Name, 4) = "Tile" Then
+        If Right(ctrl.Name, 4) = "Tile" Then
     
-            Ctrl.Form.DisableLinks
+            ctrl.Form.DisableLinks
     
         End If
         

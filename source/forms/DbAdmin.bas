@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =3240
-    Top =3525
-    Right =12480
-    Bottom =14520
+    Left =3270
+    Top =2895
+    Right =16125
+    Bottom =14685
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -457,6 +457,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnUISetup"
                     Caption ="UI Setu&p"
+                    OnClick ="[Event Procedure]"
                     ControlTipText ="Update back-end database connections"
                     UnicodeAccessKey =112
                     GridlineColor =10921638
@@ -3975,7 +3976,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, June 30, 2016 for NCPN big rivers tool
 ' Revisions:    BLC - 6/30/2016 - initial version
 ' ---------------------------------
-Private Sub btnUISetupt_Click()
+Private Sub btnUISetup_Click()
 On Error GoTo Err_Handler
 
     ' Open the UI setup tool

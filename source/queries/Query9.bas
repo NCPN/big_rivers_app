@@ -20,85 +20,6 @@ dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="s.ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.IsActiveForProtocol"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.SiteCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.SiteName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.SiteDescription"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.SiteDirections"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr1006"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Site"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x4c5e233e1de98045a4bfd0f54e84bf02
-        End
-    End
-    Begin
-        dbText "Name" ="Expr1000"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="SiteCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="SiteName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="SiteDescription"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="SiteDirections"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.LocationName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.CollectionSourceName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.LocationType"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.River_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="s.Park_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="w.ID"
         dbLong "AggregateType" ="-1"
     End
@@ -108,10 +29,6 @@ Begin
     End
     Begin
         dbText "Name" ="w.Label"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="w.StartYear"
         dbLong "AggregateType" ="-1"
     End
     Begin

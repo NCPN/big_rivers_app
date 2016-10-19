@@ -1104,7 +1104,7 @@ On Error GoTo Err_Handler
             .sql = GetTemplate(Template)
         
             Select Case Template
-            
+                        
                 Case "s_access_level"
                     
                     '-- required parameters --
@@ -1112,6 +1112,15 @@ On Error GoTo Err_Handler
                     
                     'clear the tempvar
                     TempVars.Remove "tempLvl"
+                
+                Case "s_contact_list"
+                
+                    '-- required parameters --
+                    'N/A
+                
+                Case "s_app_enum_list"
+                    '-- required parameters --
+                    .Parameters("etype") = TempVars("EnumType")
                 
                 Case "s_datasheet_defaults_by_park"
                     
@@ -1950,6 +1959,7 @@ End Function
 '   BLC - 7/28/2016 - initial version
 '   BLC - 9/1/2016  - added vegwalk, photo
 '   BLC - 10/4/2016 - added template, adjusted for form w/o list
+'   BLC - 10/14/2016 - updated to accommodate non-users for contacts
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -1993,8 +2003,9 @@ On Error GoTo Err_Handler
                     .FirstName = frm!tbxFirst.Value
                     If Not IsNull(frm!tbxMI.Value) Then p.MiddleInitial = frm!tbxMI.Value  'FIX EMPTY STRING
                     .Email = frm!tbxEmail.Value
-                    .Username = frm!tbxUsername.Value
-                    .Organization = frm!tbxOrganization.Value
+                    '.Username = frm!tbxUsername.Value
+                    If Not IsNull(frm!tbxUsername.Value) Then p.Username = frm!tbxUsername.Value
+                    If Not IsNull(frm!tbxOrganization.Value) Then p.Organization = frm!tbxOrganization.Value
                     If Not IsNull(frm!tbxPosition.Value) Then .PosTitle = frm!tbxPosition.Value
                     If Not IsNull(frm!tbxPhone.Value) And Len(frm!tbxPhone.Value) > 0 Then
                         .WorkPhone = RemoveChars(frm!tbxPhone.Value, True) 'remove non-numerics
@@ -2006,7 +2017,7 @@ On Error GoTo Err_Handler
                     Else
                         .WorkExtension = Null
                     End If
-                    .AccessRole = frm!cbxUserRole.Column(1)
+                    If Not IsNull(frm!cbxUserRole.Column(1)) Then .AccessRole = frm!cbxUserRole.Column(1)
                     .ID = frm!tbxID.Value '0 if new, edit if > 0
                 
                     strCriteria = "[FirstName] = '" & .FirstName _
@@ -2416,6 +2427,9 @@ On Error GoTo Err_Handler
     
     'refresh list
     frm!list.Requery
+    
+    'exit
+    GoTo Exit_Handler
     
 Form_Without_List:
     DoAction = "i"

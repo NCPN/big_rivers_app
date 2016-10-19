@@ -136,10 +136,10 @@ On Error GoTo Err_Handler
                     Dim strKey As String, strText As String, strDisplayName As String
                     Dim strPhotoType As String
                     Dim strDuplicates As String
-                    Dim nodeSelected As Node
-                    Dim nodeParent As Node
-                    Dim nodeX As Node
-                    Dim nodeNew As Node
+                    Dim nodeSelected As node
+                    Dim nodeParent As node
+                    Dim nodeX As node
+                    Dim nodeNew As node
                     
                     'default
                     strPhotoType = "U"
@@ -332,12 +332,12 @@ End Sub
 '   BLC - 7/10/2015 - initial version
 '   BLC - 6/15/2016 - adapted for big rivers app
 ' ---------------------------------
-Public Sub AddChildren(tvw As Treeview, nodeParent As Node, aryKids As String)
+Public Sub AddChildren(tvw As Treeview, nodeParent As node, aryKids As String)
 'Private Sub AddChildren(tvw As TreeView, nodeParent As String, aryChildren As String)
 
 On Error GoTo Err_Handler
     
-    Dim nodeX As Node
+    Dim nodeX As node
     Dim aryChildren() As String
     Dim child As Variant
     
@@ -423,7 +423,7 @@ End Sub
 Public Function IsDuplicateKey(strKey As String, tvw As MSComctlLib.Treeview) As Boolean
 On Error GoTo Err_Handler
 
-    Dim tvwNode As Node
+    Dim tvwNode As node
     Dim item As Variant
     Dim blnIsDupe As Boolean
     
@@ -466,15 +466,15 @@ End Function
 '   BLC - 7/27/2015 - initial version
 '   BLC - 9/1/2016  - added unclassified photo type
 ' ---------------------------------
-Public Function ImmovableNode(Node As Node) As Boolean
+Public Function ImmovableNode(node As node) As Boolean
 
 On Error GoTo Err_Handler
     
         'default
         ImmovableNode = False
         
-        If CountInString(PHOTO_TYPES_MAIN, Node) + CountInString(PHOTO_TYPES_OTHER, Node) _
-           + CountInString("Unclassified", Node) > 0 Then
+        If CountInString(PHOTO_TYPES_MAIN, node) + CountInString(PHOTO_TYPES_OTHER, node) _
+           + CountInString("Unclassified", node) > 0 Then
 '            Debug.Print node
             ImmovableNode = True
         End If
@@ -506,19 +506,19 @@ End Function
 ' Revisions:
 '   BLC - 7/27/2015 - initial version
 ' ---------------------------------
-Private Sub tvwNodeSelect(Optional Node As Node, Optional blnNodeSelected As Boolean)
+Private Sub tvwNodeSelect(Optional node As node, Optional blnNodeSelected As Boolean)
 On Error GoTo Err_Handler
     Dim i As Long
-    Dim SelectedNode As Node
+    Dim SelectedNode As node
     Dim colTreeNodes As Collection
     
     If blnNodeSelected Then
-        If Node.BackColor = vbHighlight Then
+        If node.BackColor = vbHighlight Then
             If colTreeNodes.Count > 1 Then
-                Node.BackColor = vbWindowBackground
-                Node.ForeColor = vbWindowText
-                Node.Selected = False
-                colTreeNodes.Remove Node.key
+                node.BackColor = vbWindowBackground
+                node.ForeColor = vbWindowText
+                node.Selected = False
+                colTreeNodes.Remove node.key
             End If
             Exit Sub
         End If
@@ -531,10 +531,10 @@ On Error GoTo Err_Handler
         Next i
     End If
     
-    If Not Node Is Nothing Then
-        Node.BackColor = vbHighlight
-        Node.ForeColor = vbHighlightText
-        colTreeNodes.Add Node, Node.key
+    If Not node Is Nothing Then
+        node.BackColor = vbHighlight
+        node.ForeColor = vbHighlightText
+        colTreeNodes.Add node, node.key
     End If
     
 Exit_Handler:

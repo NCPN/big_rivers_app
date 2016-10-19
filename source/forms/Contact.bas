@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =4035
-    Top =3540
-    Right =16260
-    Bottom =14550
+    Left =3270
+    Top =2895
+    Right =16125
+    Bottom =14685
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -568,6 +568,7 @@ Begin Form
                 End
                 Begin TextBox
                     OverlapFlags =85
+                    BackStyle =0
                     IMESentenceMode =3
                     Left =2580
                     Top =60
@@ -684,7 +685,6 @@ Begin Form
                     Width =2040
                     Height =315
                     TabIndex =6
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxOrganization"
@@ -738,7 +738,6 @@ Begin Form
                     Width =2040
                     Height =315
                     TabIndex =7
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPosition"
@@ -846,7 +845,6 @@ Begin Form
                     Width =2040
                     Height =315
                     TabIndex =8
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPhone"
@@ -900,7 +898,6 @@ Begin Form
                     Width =2040
                     Height =315
                     TabIndex =9
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxExtension"
@@ -954,7 +951,6 @@ Begin Form
                     Width =3300
                     Height =315
                     TabIndex =5
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxUsername"
@@ -1074,7 +1070,6 @@ Begin Form
                     Width =2880
                     Height =315
                     TabIndex =3
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"30\""
@@ -1199,7 +1194,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.04
+' Version:      1.05
 ' Basis:        Dropdown form
 '
 ' Description:  Contact form object related properties, Contact, functions & procedures for UI display
@@ -1213,6 +1208,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.03 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 8/29/2016 - 1.04 - code cleanup btnSave_Click() uses UpsertRecord()
+'               BLC - 10/17/2016 - 1.05 - revise to restore calling form vs. Main/DbAdmin only
 ' =================================
 
 '---------------------
@@ -1227,6 +1223,7 @@ Private m_Directions As String
 Private m_ButtonCaption
 Private m_SelectedID As Integer
 Private m_SelectedValue As String
+Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 Private m_ContinueSave As Boolean 'ok to proceed saving (prevent Property Not Found error?)
@@ -1238,6 +1235,7 @@ Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidLabel(Value As String)
 Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -1304,6 +1302,18 @@ Public Property Get SelectedValue() As String
     SelectedValue = m_SelectedValue
 End Property
 
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
+    Else
+        RaiseEvent InvalidCallingForm(Value)
+    End If
+End Property
+
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -1324,9 +1334,14 @@ End Property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+    
+    'default
+    Me.CallingForm = "DbAdmin"
+    
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+    'minimize Calling Form
+    ToggleForm Me.CallingForm, -1
 
     Title = "Contact"
     Directions = "Enter the contact information and click save."
@@ -1910,18 +1925,22 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
+'   BLC - 10/17/2016 - revise to restore calling form vs. Main/DbAdmin only
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    Dim strParent As String
+'    Dim strParent As String
     'default
-    strParent = "DbAdmin"
+'    strParent = "DbAdmin"
     
-    If Not FormIsOpen("DbAdmin") Then strParent = "Main"
+'    If Not FormIsOpen("DbAdmin") Then strParent = "Main"
 
     'restore parent
-    ToggleForm strParent, 0
+'    ToggleForm strParent, 0
+    
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub
@@ -1960,12 +1979,12 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    'requires: first, last, email, username, org, 'pos, phone, ext
+    'requires: first, last, email', username, org, pos, phone, ext
     If Len(Nz(tbxFirst.Value, "")) > 0 _
         And Len(Nz(tbxLast.Value, "")) > 0 _
-        And IsEmail(Nz(tbxEmail.Value, "")) _
-        And Len(Nz(tbxUsername.Value, "")) > 0 _
-        And Len(Nz(tbxOrganization.Value, "")) > 0 Then
+        And IsEmail(Nz(tbxEmail.Value, "")) Then '_
+        'And Len(Nz(tbxUsername.Value, "")) > 0 _
+        'And Len(Nz(tbxOrganization.Value, "")) > 0 Then
         isOK = True
     End If
     

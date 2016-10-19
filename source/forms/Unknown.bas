@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3285
-    Top =3105
-    Right =16470
-    Bottom =14895
+    Left =3270
+    Top =2895
+    Right =16125
+    Bottom =14685
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1027,11 +1027,6 @@ Begin Form
                     Name ="tbxConfirmedCode"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Confirmed species lookup code"
-                    ConditionalFormat = Begin
-                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000
-                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2520
@@ -1039,9 +1034,6 @@ Begin Form
                     LayoutCachedWidth =4800
                     LayoutCachedHeight =1035
                     BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x010000000000
-                    End
                 End
                 Begin Label
                     OverlapFlags =215
@@ -1633,11 +1625,6 @@ Begin Form
                     TabIndex =22
                     BorderColor =10921638
                     ForeColor =4210752
-                    ConditionalFormat = Begin
-                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000
-                    End
                     Name ="cbxConfirmedSpecies"
                     RowSourceType ="Table/Query"
                     ControlTipText ="Confirmed species"
@@ -1652,9 +1639,6 @@ Begin Form
                     ForeThemeColorIndex =0
                     ForeTint =75.0
                     ForeShade =100.0
-                    ConditionalFormat14 = Begin
-                        0x010000000000
-                    End
                 End
             End
         End
@@ -1817,7 +1801,7 @@ On Error GoTo Err_Handler
     
     If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
 
-    'minimize Main
+    'minimize Calling Form
     ToggleForm Me.CallingForm, -1
 
     'set context - based on TempVars

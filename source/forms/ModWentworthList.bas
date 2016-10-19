@@ -17,13 +17,11 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7680
+    Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =33
-    Left =3270
-    Top =3255
-    Right =10905
-    Bottom =7620
+    ItemSuffix =37
+    Right =12870
+    Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x21398585f5d2e440
@@ -178,7 +176,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    TextAlign =2
+                    TextAlign =1
                     Left =1350
                     Top =1200
                     Width =1245
@@ -225,8 +223,8 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblDistance"
-                    Caption ="Distance (m)"
+                    Name ="lblCode"
+                    Caption ="Code"
                     GridlineColor =10921638
                     LayoutCachedLeft =2700
                     LayoutCachedTop =1200
@@ -236,65 +234,29 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =87
+                    OverlapFlags =215
                     TextAlign =2
-                    Left =4080
+                    Left =4020
                     Top =1200
                     Width =1140
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblBearing"
-                    Caption ="Bearing"
+                    Name ="lblDiameter"
+                    Caption ="Diameter"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4080
+                    LayoutCachedLeft =4020
                     LayoutCachedTop =1200
-                    LayoutCachedWidth =5220
+                    LayoutCachedWidth =5160
                     LayoutCachedHeight =1515
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
-                Begin Label
-                    OverlapFlags =93
-                    TextAlign =2
-                    Left =2700
-                    Top =840
-                    Width =2520
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblHeadtoOrient"
-                    Caption ="Head to Orient"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2700
-                    LayoutCachedTop =840
-                    LayoutCachedWidth =5220
-                    LayoutCachedHeight =1155
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Line
-                    LineSlant = NotDefault
-                    BorderWidth =1
-                    OverlapFlags =87
-                    Left =2699
-                    Top =1140
-                    Width =2519
-                    BorderColor =16777215
-                    Name ="lnHeadtoOrient"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2699
-                    LayoutCachedTop =1140
-                    LayoutCachedWidth =5218
-                    LayoutCachedHeight =1140
-                    BorderThemeColorIndex =-1
-                End
             End
         End
         Begin Section
-            Height =360
+            Height =765
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -303,8 +265,307 @@ Begin Form
             Begin
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6120
+                    TextFontFamily =2
+                    Left =7080
+                    Top =30
                     Width =720
+                    Height =330
+                    FontSize =14
+                    ForeColor =255
+                    Name ="btnDelete"
+                    Caption ="í ½í·´"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Academy Engraved LET"
+                    ControlTipText ="Delete record"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7080
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =7800
+                    LayoutCachedHeight =360
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    ThemeFontIndex =-1
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin TextBox
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =120
+                    Top =45
+                    Width =720
+                    Height =300
+                    FontSize =9
+                    TabIndex =1
+                    BorderColor =8355711
+                    ForeColor =690698
+                    Name ="tbxIcon"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =840
+                    LayoutCachedHeight =345
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeThemeColorIndex =-1
+                    ForeTint =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1320
+                    Top =45
+                    Width =1500
+                    Height =300
+                    FontSize =9
+                    TabIndex =2
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxClass"
+                    ControlSource ="Label"
+                    ConditionalFormat = Begin
+                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
+                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
+                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
+                        0x290029002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1320
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =2820
+                    LayoutCachedHeight =345
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ed1c2400ffffff00270000004900 ,
+                        0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
+                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
+                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
+                        0x00
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =900
+                    Top =30
+                    Width =360
+                    Height =315
+                    TabIndex =3
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxID"
+                    ControlSource ="ID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =1260
+                    LayoutCachedHeight =345
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2880
+                    Top =45
+                    Width =1020
+                    Height =300
+                    FontSize =9
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxCode"
+                    ControlSource ="Code"
+                    ConditionalFormat = Begin
+                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
+                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
+                        0x290029002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =345
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00270000004900 ,
+                        0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
+                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
+                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
+                        0x00
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5520
+                    Top =30
+                    Width =720
+                    Height =330
+                    FontSize =12
+                    TabIndex =5
+                    ForeColor =4210752
+                    Name ="btnActive"
+                    Caption ="Active"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Toggle sensitive location"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5520
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =6240
+                    LayoutCachedHeight =360
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3960
+                    Top =45
+                    Width =1500
+                    Height =300
+                    FontSize =9
+                    TabIndex =6
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxDiameter"
+                    ControlSource ="=Replace([DiameterRange_mm],\"micro\",\"\")"
+                    ConditionalFormat = Begin
+                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
+                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
+                        0x290029002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3960
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =5460
+                    LayoutCachedHeight =345
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00270000004900 ,
+                        0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
+                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
+                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
+                        0x00
+                    End
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =255
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2580
+                    Width =1020
+                    Height =300
+                    FontSize =9
+                    TabIndex =7
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxRetireYear"
+                    ControlSource ="RetireYear"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedWidth =3600
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1560
+                    Top =15
+                    Width =1020
+                    Height =300
+                    FontSize =9
+                    TabIndex =8
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxActiveYear"
+                    ControlSource ="ActiveYear"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1560
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =2580
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6300
+                    Top =30
+                    Width =720
+                    Height =330
+                    TabIndex =9
                     ForeColor =4210752
                     Name ="btnEdit"
                     Caption ="Edit"
@@ -348,129 +609,22 @@ Begin Form
                         0x9090b0ff00000000
                     End
 
-                    LayoutCachedLeft =6120
-                    LayoutCachedWidth =6840
-                    LayoutCachedHeight =360
-                    BackColor =14136213
-                    BorderColor =14136213
-                    HoverColor =65280
-                    HoverThemeColorIndex =-1
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin TextBox
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =120
-                    Top =45
-                    Width =720
-                    Height =300
-                    FontSize =9
-                    TabIndex =1
-                    BorderColor =8355711
-                    ForeColor =690698
-                    Name ="tbxIcon"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =840
-                    LayoutCachedHeight =345
-                    BorderThemeColorIndex =0
-                    BorderTint =50.0
-                    BorderShade =100.0
-                    ForeThemeColorIndex =-1
-                    ForeTint =50.0
-                End
-                Begin CommandButton
-                    OverlapFlags =85
-                    TextFontFamily =2
-                    Left =6900
-                    Width =720
-                    FontSize =14
-                    TabIndex =2
-                    ForeColor =255
-                    Name ="btnDelete"
-                    Caption ="í ½í·´"
-                    OnClick ="[Event Procedure]"
-                    FontName ="Academy Engraved LET"
-                    ControlTipText ="Delete record"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =6900
-                    LayoutCachedWidth =7620
-                    LayoutCachedHeight =360
-                    PictureCaptionArrangement =5
-                    ForeThemeColorIndex =-1
-                    BackColor =14136213
-                    BorderColor =14136213
-                    ThemeFontIndex =-1
-                    HoverColor =65280
-                    HoverThemeColorIndex =-1
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =1320
-                    Top =45
-                    Width =1260
-                    Height =300
-                    TabIndex =3
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxClass"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1320
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =2580
-                    LayoutCachedHeight =345
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =900
-                    Top =30
-                    Width =360
-                    Height =315
-                    TabIndex =4
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxID"
-                    ControlSource ="ID"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =900
+                    LayoutCachedLeft =6300
                     LayoutCachedTop =30
-                    LayoutCachedWidth =1260
-                    LayoutCachedHeight =345
+                    LayoutCachedWidth =7020
+                    LayoutCachedHeight =360
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -480,77 +634,39 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =2880
-                    Top =45
+                    Top =465
                     Width =1020
                     Height =300
-                    TabIndex =5
+                    FontSize =9
+                    TabIndex =10
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxDistance"
-                    ControlSource ="HeadtoOrientDistance_m"
+                    Name ="Text36"
+                    ControlSource ="CStr([uMu])"
+                    ConditionalFormat = Begin
+                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
+                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
+                        0x290029002c0031002c003000290000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2880
-                    LayoutCachedTop =45
+                    LayoutCachedTop =465
                     LayoutCachedWidth =3900
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =765
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4200
-                    Top =45
-                    Width =900
-                    Height =300
-                    TabIndex =6
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxBearing"
-                    ControlSource ="=CStr([HeadtoOrientBearing])"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4200
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =5100
-                    LayoutCachedHeight =345
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin CommandButton
-                    OverlapFlags =85
-                    Left =5340
-                    Width =720
-                    FontSize =16
-                    TabIndex =7
-                    ForeColor =4210752
-                    Name ="btnActive"
-                    Caption ="Active"
-                    OnClick ="[Event Procedure]"
-                    ControlTipText ="Toggle sensitive location"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =5340
-                    LayoutCachedWidth =6060
-                    LayoutCachedHeight =360
-                    BackColor =14136213
-                    BorderColor =14136213
-                    HoverColor =65280
-                    HoverThemeColorIndex =-1
-                    PressedColor =9592887
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00270000004900 ,
+                        0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
+                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
+                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
+                        0x00
+                    End
                 End
             End
         End
@@ -697,7 +813,7 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
     
-    lblBearing.Caption = "Bearing (" & StringFromCodepoint(uDegree) & ")"
+    lblDiameter.Caption = "Diameter"
     
     'set hover
     btnEdit.HoverColor = lngGreen
@@ -711,7 +827,7 @@ On Error GoTo Err_Handler
     btnActive.ForeColor = lngRed
 
     'set data source
-    Me.RecordSource = "Location"
+    Me.RecordSource = "ModWentworthScale"
 
 Exit_Handler:
     Exit Sub
