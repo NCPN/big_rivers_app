@@ -19,10 +19,10 @@ Begin Form
     Width =3480
     DatasheetFontHeight =11
     ItemSuffix =93
-    Left =7725
-    Top =915
-    Right =11055
-    Bottom =5490
+    Left =5445
+    Top =2325
+    Right =8775
+    Bottom =6900
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -162,7 +162,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="CSV fields"
+                    Caption ="CSV Columns"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
@@ -205,6 +205,7 @@ Begin Form
             Begin
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =93
                     TextAlign =1
                     BackStyle =0
@@ -266,6 +267,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -314,6 +316,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -362,6 +365,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -410,6 +414,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -458,6 +463,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -506,6 +512,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -554,6 +561,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -602,6 +610,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -650,6 +659,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -698,6 +708,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0

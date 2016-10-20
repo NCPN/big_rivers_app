@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =4365
-    Top =3210
-    Right =12645
-    Bottom =11175
+    Left =3435
+    Top =4860
+    Right =11715
+    Bottom =12825
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -427,7 +427,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.04
+' Version:      1.05
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -440,6 +440,7 @@ Option Explicit
 '               BLC - 9/8/2016  - 1.03 - code cleanup
 '               BLC - 9/21/2016 - 1.04 - update PrepareLinks so BLCA & CANY enable transect links,
 '                                        DINO does not
+'               BLC - 10/19/2016 - 1.05 - adjusted to provide calling form on btnAdmin click
 ' =================================
 
 '---------------------
@@ -689,12 +690,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/7/2016 - initial version
+'   BLC - 10/19/2016 - adjusted to include calling form
 ' ---------------------------------
 Private Sub btnAdmin_Click()
 On Error GoTo Err_Handler
 
     'open admin form
-    DoCmd.OpenForm "DbAdmin", acNormal
+    DoCmd.OpenForm "DbAdmin", acNormal, , , , , "Main"
     
 Exit_Handler:
     Exit Sub

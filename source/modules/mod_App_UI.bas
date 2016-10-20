@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.09
+' Version:      1.11
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -20,6 +20,7 @@ Option Explicit
 '               BLC, 8/30/2016 - 1.08 - added Batch Upload Photos to ClickAction()
 '               BLC, 9/13/2016 - 1.09 - added SortList()
 '               BLC, 10/14/2016 - 1.10 - added SetContext()
+'               BLC, 10/19/2016 - 1.11 - revised to use UploadCSVFile() vs. UploadSurveyFile()
 ' =================================
 
 ' =================================
@@ -360,6 +361,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/26/2016  - initial version
 '   BLC - 8/30/2016  - added Batch Upload Photos
+'   BLC - 10/19/2016 - revised to use UploadCSVFile() vs. UploadSurveyFile()
 ' ---------------------------------
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
@@ -433,7 +435,7 @@ On Error GoTo Err_Handler
             
             If Len(strPath) > 0 Then
                 'upload survey file
-                UploadSurveyFile strPath
+                UploadCSVFile strPath
             
             End If
         

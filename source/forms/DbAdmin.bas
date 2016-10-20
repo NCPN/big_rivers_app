@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =3270
-    Top =2895
-    Right =16125
-    Bottom =14685
+    Left =10230
+    Top =3405
+    Right =18090
+    Bottom =10050
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -2391,7 +2391,9 @@ Begin Form
                     Height =405
                     TabIndex =21
                     ForeColor =4210752
-                    Name ="btn2"
+                    Name ="btnImportCSV"
+                    Caption ="Import CSV"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2040
@@ -2463,7 +2465,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2475,6 +2477,7 @@ Option Explicit
 '               BLC - 8/31/2016 - 1.02 - added user access level controls
 '               BLC - 9/14/2016 - 1.03 - added btnViewTemplates & additional blanks
 '                                        for Management Tools
+'               BLC - 10/19/2016 - 1.04 - added Import CSV button, added callingform property
 ' =================================
 
 '---------------------
@@ -2486,7 +2489,8 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
+Private m_ButtonCaption As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
@@ -2495,6 +2499,7 @@ Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidLabel(Value As String)
 Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -2545,6 +2550,18 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
+    Else
+        RaiseEvent InvalidCallingForm(Value)
+    End If
+End Property
+
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -2561,13 +2578,19 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/19/2016 - adjust to use calling form property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize Main
-    ToggleForm "Main", -1
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
 
+    'minimize Main
+    ToggleForm Me.CallingForm, -1
+    
     Title = "Db Admin"
     Directions = "Choose the desired action below."
     lblDirections.ForeColor = lngLtBlue
@@ -2599,6 +2622,7 @@ On Error GoTo Err_Handler
     btnTaskListRpt.HoverColor = lngGreen
     btnUISetup.HoverColor = lngGreen
     btnViewTemplates.HoverColor = lngGreen
+    btnImportCSV.HoverColor = lngGreen
       
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
@@ -2728,12 +2752,13 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 6/24/2016 - added check for open form, restore main form
+'   BLC - 10/19/2016 - adjusted to use callingform property
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub
@@ -3422,6 +3447,35 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' Sub:          btnImportCSV_Click
+' Description:  Import CSV button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 19, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/19/2016 - initial version
+' ---------------------------------
+Private Sub btnImportCSV_Click()
+On Error GoTo Err_Handler
+    
+    'open import map form
+    DoCmd.OpenForm "ImportMap", acNormal, , , , , "DbAdmin"
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnImportCSV_Click[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' =================================
 '  DbAdmin: Summaries and db output

@@ -21,9 +21,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =42
     Left =165
-    Top =2535
+    Top =2295
     Right =3750
-    Bottom =7110
+    Bottom =6870
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xd87c8399b1d4e440
@@ -148,7 +148,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="SurveyPoint fields"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300

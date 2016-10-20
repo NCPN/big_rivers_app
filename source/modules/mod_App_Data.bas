@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.13
+' Version:      1.16
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -25,6 +25,7 @@ Option Explicit
 '               BLC - 9/21/2016 - 1.13 - updated SetRecord() i_login parameters
 '               BLC - 9/22/2016 - 1.14 - added templates
 '               BLC - 10/16/2016 - 1.15 - fixed PopulateCombobox() to properly set recordset
+'               BLC - 10/19/2016 - 1.16 - renamed UploadSurveyFile() to UploadCSVFile() to genericize
 ' =================================
 
 ' ---------------------------------
@@ -2500,10 +2501,10 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          UploadSurveyFile
-' Description:  Uploads survey data into database from CSV survey file
+' Sub:          UploadCSVFile
+' Description:  Uploads data into database from CSV file
 ' Assumptions:  -
-' Parameters:   strFilename - name of survey file being uploaded (string)
+' Parameters:   strFilename - name of file being uploaded (string)
 ' Returns:      -
 ' Throws:       none
 ' References:   -
@@ -2511,8 +2512,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 9/1/2016 - initial version
+'   BLC - 10/19/2016 - renamed to UploadCSVFile from UploadSurveyFile to genericize
 ' ---------------------------------
-Public Sub UploadSurveyFile(strFilename As String)
+Public Sub UploadCSVFile(strFilename As String)
 On Error GoTo Err_Handler
     
     'import to table
@@ -2524,7 +2526,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - UploadSurveyFile[mod_App_Data])"
+            "Error encountered (#" & Err.Number & " - UploadCSVFile[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Sub
