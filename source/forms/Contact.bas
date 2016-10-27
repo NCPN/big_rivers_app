@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =60
-    Left =3270
-    Top =2895
-    Right =16125
-    Bottom =14685
+    Left =3360
+    Top =2775
+    Right =23250
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -1194,7 +1194,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  Contact form object related properties, Contact, functions & procedures for UI display
@@ -1209,6 +1209,8 @@ Option Explicit
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 8/29/2016 - 1.04 - code cleanup btnSave_Click() uses UpsertRecord()
 '               BLC - 10/17/2016 - 1.05 - revise to restore calling form vs. Main/DbAdmin only
+'               BLC - 10/25/2016 - 1.06 - revised to remove strParent calls, Main calling form
+'                                         passed via ClickAction()
 ' =================================
 
 '---------------------
@@ -1220,9 +1222,6 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
 Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
@@ -1269,37 +1268,6 @@ End Property
 
 Public Property Get Directions() As String
     Directions = m_Directions
-End Property
-
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
-End Property
-
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
 End Property
 
 Public Property Let CallingForm(Value As String)
@@ -1926,18 +1894,10 @@ End Sub
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
 '   BLC - 10/17/2016 - revise to restore calling form vs. Main/DbAdmin only
+'   BLC - 10/25/2016 - revised to remove strParent calls, Main calling form passed via ClickAction()
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
-
-'    Dim strParent As String
-    'default
-'    strParent = "DbAdmin"
-    
-'    If Not FormIsOpen("DbAdmin") Then strParent = "Main"
-
-    'restore parent
-'    ToggleForm strParent, 0
     
     'restore calling form
     ToggleForm Me.CallingForm, 0

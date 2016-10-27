@@ -14,10 +14,10 @@ Begin Form
     Width =11400
     DatasheetFontHeight =11
     ItemSuffix =29
-    Left =11010
+    Left =3360
     Top =2775
-    Right =27405
-    Bottom =14565
+    Right =15015
+    Bottom =13740
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -287,7 +287,7 @@ Begin Form
                     ColumnCount =3
                     Left =2700
                     Top =1020
-                    Width =2574
+                    Width =1914
                     Height =315
                     ColumnOrder =0
                     BackColor =65535
@@ -310,7 +310,7 @@ Begin Form
 
                     LayoutCachedLeft =2700
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =5274
+                    LayoutCachedWidth =4614
                     LayoutCachedHeight =1335
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -399,23 +399,21 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5400
+                    Left =4680
                     Top =1020
-                    Width =1140
                     TabIndex =1
-                    ForeColor =4210752
-                    Name ="btnAddVisit"
-                    Caption ="Add Visit"
-                    StatusBarText ="Add event (sampling visit)"
+                    ForeColor =16711680
+                    Name ="btnAddEvent"
+                    Caption ="í ½í·“  Add Event"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Add event (sampling visit)"
+                    ControlTipText ="Add a new event/sampling visit"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5400
+                    LayoutCachedLeft =4680
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =6540
+                    LayoutCachedWidth =6120
                     LayoutCachedHeight =1380
-                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -427,6 +425,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
@@ -32720,6 +32719,7 @@ Begin Form
                     Top =420
                     Width =2940
                     Height =317
+                    FontSize =9
                     FontWeight =500
                     BackColor =14277081
                     BorderColor =8355711
@@ -32779,7 +32779,7 @@ Option Explicit
 ' MODULE:       Tree form
 ' Description:  Treeview functions & procedures
 ' Level:        Framework form
-' Version:      1.05
+' Version:      1.06
 '
 ' Source/date:  Bonnie Campbell, 7/10/2015
 ' Revisions:    BLC - 7/10/2015 - 1.00 - initial version
@@ -32791,6 +32791,7 @@ Option Explicit
 '                                        FindSpecificNode(), tvwNodeSelect() to mod_Tree
 '               BLC - 9/1/2016  - 1.05 - add LoadTree() calls on form open to populate tree images
 '                                        from usys_temp_photo & Photo tables
+'               BLC - 10/25/2016 - 1.06 - renamed btnAddVisit -> btnAddEvent
 ' =================================
 
 '---------------------
@@ -32830,6 +32831,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 7/10/2015 - initial version
 '   BLC - 6/29/2016 - added park,site,feature header captions
+'   BLC - 10/25/2016 - renamed btnAddVisit -> btnAddEvent
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -32857,7 +32859,7 @@ On Error GoTo Err_Handler
                             "right && save to save the photo record."
     
     'set hover
-    btnAddVisit.HoverColor = lngGreen
+    btnAddEvent.HoverColor = lngGreen
     
     'display no image to start (no image is selected)
     lblNoImageSelected.Visible = True
@@ -33028,7 +33030,7 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:          btnAddVisit_Click
+' SUB:          btnAddEvent_Click
 ' Description:  button click actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -33039,8 +33041,9 @@ End Sub
 ' Adapted:      Bonnie Campbell, October 17, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 10/17/2016 - initial version
+'   BLC - 10/25/2016 - renamed to btnAddEvent
 ' ---------------------------------
-Private Sub btnAddVisit_Click()
+Private Sub btnAddEvent_Click()
 On Error GoTo Err_Handler
 
     DoCmd.OpenForm "Events", acNormal, , , , , "Tree"
@@ -33052,7 +33055,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnAddVisit_Click[Tree form])"
+            "Error encountered (#" & Err.Number & " - btnAddEvent_Click[Tree form])"
     End Select
     Resume Exit_Handler
 End Sub

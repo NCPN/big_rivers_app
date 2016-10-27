@@ -17,13 +17,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7860
+    Width =8400
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =6390
-    Top =2760
-    Right =14250
-    Bottom =10245
+    Left =3360
+    Top =2775
+    Right =17595
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -156,7 +156,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =93
+                    OverlapFlags =85
                     Left =180
                     Top =60
                     Width =3480
@@ -213,7 +213,7 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =6660
+                    Left =7200
                     Top =900
                     Width =720
                     ForeColor =16711680
@@ -259,9 +259,9 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =7200
                     LayoutCachedTop =900
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =7920
                     LayoutCachedHeight =1260
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -316,9 +316,9 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =215
+                    OverlapFlags =85
                     TextAlign =3
-                    Left =3600
+                    Left =4140
                     Top =60
                     Width =4140
                     Height =315
@@ -328,9 +328,9 @@ Begin Form
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3600
+                    LayoutCachedLeft =4140
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7740
+                    LayoutCachedWidth =8280
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -349,7 +349,7 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =6660
+                    Left =7200
                     Top =60
                     Width =720
                     TabIndex =4
@@ -396,9 +396,9 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =7200
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =7920
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
@@ -418,6 +418,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =4140
                     Top =60
+                    Width =1980
                     Height =315
                     TabIndex =2
                     BackColor =65535
@@ -439,7 +440,7 @@ Begin Form
 
                     LayoutCachedLeft =4140
                     LayoutCachedTop =60
-                    LayoutCachedWidth =5580
+                    LayoutCachedWidth =6120
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -480,7 +481,7 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =5760
+                    Left =6300
                     Top =60
                     Width =720
                     TabIndex =6
@@ -527,9 +528,9 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =5760
+                    LayoutCachedLeft =6300
                     LayoutCachedTop =60
-                    LayoutCachedWidth =6480
+                    LayoutCachedWidth =7020
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
@@ -550,7 +551,7 @@ Begin Form
                     OverlapFlags =215
                     Left =105
                     Top =1620
-                    Width =7650
+                    Width =8235
                     Height =4380
                     TabIndex =7
                     BorderColor =10921638
@@ -560,7 +561,7 @@ Begin Form
 
                     LayoutCachedLeft =105
                     LayoutCachedTop =1620
-                    LayoutCachedWidth =7755
+                    LayoutCachedWidth =8340
                     LayoutCachedHeight =6000
                 End
                 Begin Rectangle
@@ -569,14 +570,14 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     Top =1500
-                    Width =7860
+                    Width =8400
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
                     LayoutCachedTop =1500
-                    LayoutCachedWidth =7860
+                    LayoutCachedWidth =8400
                     LayoutCachedHeight =6120
                     BackThemeColorIndex =-1
                 End
@@ -586,7 +587,7 @@ Begin Form
                     OverlapFlags =85
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =7560
+                    Left =8100
                     Top =105
                     Width =240
                     Height =300
@@ -597,9 +598,9 @@ Begin Form
                     Name ="tbxID"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7560
+                    LayoutCachedLeft =8100
                     LayoutCachedTop =105
-                    LayoutCachedWidth =7800
+                    LayoutCachedWidth =8340
                     LayoutCachedHeight =405
                     BorderThemeColorIndex =0
                     BorderTint =50.0
@@ -646,7 +647,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =1620
                     Top =480
-                    Width =1140
+                    Width =900
                     Height =300
                     TabIndex =3
                     BackColor =65535
@@ -667,7 +668,7 @@ Begin Form
 
                     LayoutCachedLeft =1620
                     LayoutCachedTop =480
-                    LayoutCachedWidth =2760
+                    LayoutCachedWidth =2520
                     LayoutCachedHeight =780
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -688,7 +689,7 @@ Begin Form
                             BorderColor =8355711
                             ForeColor =8355711
                             Name ="lblEffectiveDate"
-                            Caption ="Effective Date"
+                            Caption ="Effective Year"
                             GridlineColor =10921638
                             LayoutCachedLeft =240
                             LayoutCachedTop =480
@@ -736,7 +737,7 @@ Begin Form
                     OverlapFlags =223
                     TextAlign =3
                     Top =1200
-                    Width =7860
+                    Width =8400
                     Height =315
                     FontSize =9
                     LeftMargin =360
@@ -749,7 +750,7 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =1200
-                    LayoutCachedWidth =7860
+                    LayoutCachedWidth =8400
                     LayoutCachedHeight =1515
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
@@ -782,58 +783,62 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =4500
+                    Left =3900
                     Top =480
-                    Width =1140
+                    Width =840
                     Height =300
                     TabIndex =9
-                    BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxRetireDate"
                     OnChange ="[Event Procedure]"
                     ControlTipText ="Retire date"
-                    ConditionalFormat = Begin
-                        0x01000000b0000000020000000100000000000000000000002300000001000000 ,
-                        0x00000000fff20000000000000300000024000000270000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x49004900660028004c0065006e00280022007400620078004500660066006500 ,
-                        0x630074006900760065004400610074006500220029003d0030002c0031002c00 ,
-                        0x30002900000000002200220000000000
-                    End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4500
+                    LayoutCachedLeft =3900
                     LayoutCachedTop =480
-                    LayoutCachedWidth =5640
+                    LayoutCachedWidth =4740
                     LayoutCachedHeight =780
                     BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000220000004900 ,
-                        0x4900660028004c0065006e002800220074006200780045006600660065006300 ,
-                        0x74006900760065004400610074006500220029003d0030002c0031002c003000 ,
-                        0x2900000000000000000000000000000000000000000000000000000300000001 ,
-                        0x00000000000000ffffff00020000002200220000000000000000000000000000 ,
-                        0x0000000000000000
-                    End
                     Begin
                         Begin Label
                             OverlapFlags =85
-                            Left =3060
+                            Left =2760
                             Top =480
-                            Width =1320
+                            Width =1065
                             Height =315
                             BorderColor =8355711
                             ForeColor =8355711
                             Name ="lblRetireDate"
-                            Caption ="Retire Date"
+                            Caption ="Retire Year"
                             GridlineColor =10921638
-                            LayoutCachedLeft =3060
+                            LayoutCachedLeft =2760
                             LayoutCachedTop =480
-                            LayoutCachedWidth =4380
+                            LayoutCachedWidth =3825
                             LayoutCachedHeight =795
                         End
                     End
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =87
+                    Left =4920
+                    Top =480
+                    Width =3360
+                    Height =540
+                    FontSize =8
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16737792
+                    Name ="lblYearHint"
+                    Caption ="Year hint"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4920
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =8280
+                    LayoutCachedHeight =1020
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -857,7 +862,7 @@ Option Explicit
 ' =================================
 ' Form:         ModWentworth
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  ModWentworth form object related properties, ModWentworth, functions & procedures for UI display
@@ -865,6 +870,9 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 4, 2016
 ' References:   -
 ' Revisions:    BLC - 10/4/2016 - 1.00 - initial version
+'               BLC - 10/20/2016 - 1.01 - added CallingForm property, removed ButtonCaption, SelectedID,
+'                                         SelectedValue properties, revised to use GetContext()
+'               BLC - 10/24/2016 - 1.02 - added year hinting
 ' =================================
 
 '---------------------
@@ -876,17 +884,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -922,35 +927,12 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
 '---------------------
@@ -969,25 +951,31 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/4/2016 - initial version
+'   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
+'   BLC - 10/24/2016 - added year hint
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize Main
-    ToggleForm "Main", -1
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
+
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("Feature"), "")
+    lblContext.Caption = GetContext()
     
     Title = "Modified Wentworth Classes"
     Directions = "Enter the modified wentworth class size information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnViewScale.ForeColor = lngBlue
+    lblYearHint.Caption = "Effective year = first year class was used" _
+                                & vbCrLf & "Retire year = last year class was used"
     
     'set hover
     btnViewScale.HoverColor = lngGreen
@@ -1182,7 +1170,7 @@ End Sub
 Private Sub tbxEffectiveDate_Change()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    'ReadyForSave
 
 Exit_Handler:
     Exit Sub
@@ -1211,7 +1199,7 @@ End Sub
 Private Sub tbxRetireDate_Change()
 On Error GoTo Err_Handler
 
-    ReadyForSave
+    'ReadyForSave
 
 Exit_Handler:
     Exit Sub
@@ -1330,14 +1318,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/4/2016 - initial version
+'   BLC - 10/20/2016 - revised to use CallingForm property
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
-
-    'Forms("Main").Form.visible = True
     
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub

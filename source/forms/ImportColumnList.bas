@@ -18,11 +18,9 @@ Begin Form
     GridY =24
     Width =3480
     DatasheetFontHeight =11
-    ItemSuffix =93
-    Left =5445
-    Top =2325
-    Right =8775
-    Bottom =6900
+    ItemSuffix =103
+    Right =14235
+    Bottom =11850
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -162,7 +160,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="CSV Columns"
+                    Caption ="CSV fields"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
@@ -196,7 +194,7 @@ Begin Form
         Begin Section
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =15760
+            Height =18950
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -204,8 +202,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
+                    Enabled = NotDefault
                     OverlapFlags =93
                     TextAlign =1
                     BackStyle =0
@@ -235,12 +232,11 @@ Begin Form
                     End
                     Name ="cbxColumnName1"
                     RowSourceType ="Table/Query"
-                    AfterUpdate ="[Event Procedure]"
+                    AfterUpdate ="=[PrepareImportColumns]"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -266,8 +262,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -296,7 +290,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -315,8 +308,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -345,7 +336,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -364,8 +354,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -394,7 +382,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -413,8 +400,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -443,7 +428,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -462,8 +446,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -492,7 +474,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -511,8 +492,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -541,7 +520,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -560,8 +538,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
-                    Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
                     BackStyle =0
@@ -590,7 +566,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -609,7 +584,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -639,7 +613,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -658,7 +631,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -688,7 +660,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -707,7 +678,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -737,7 +707,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -756,7 +725,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -786,7 +754,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -805,7 +772,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -835,7 +801,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -854,7 +819,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -884,7 +848,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -903,7 +866,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -933,7 +895,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -952,7 +913,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -982,7 +942,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1001,7 +960,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1031,7 +989,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1050,7 +1007,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1080,7 +1036,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1099,7 +1054,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1129,7 +1083,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1148,7 +1101,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1178,7 +1130,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1197,7 +1148,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1227,7 +1177,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1246,7 +1195,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1276,7 +1224,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1295,7 +1242,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1325,7 +1271,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1344,7 +1289,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1374,7 +1318,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1393,7 +1336,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1423,7 +1365,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1442,7 +1383,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1472,7 +1412,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1491,7 +1430,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1521,7 +1459,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1540,7 +1477,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1570,7 +1506,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1589,7 +1524,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1619,7 +1553,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1638,7 +1571,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1668,7 +1600,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1687,7 +1618,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1717,7 +1647,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1736,7 +1665,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1766,7 +1694,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1785,7 +1712,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1815,7 +1741,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1834,7 +1759,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1864,7 +1788,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1883,7 +1806,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1913,7 +1835,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1932,7 +1853,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -1962,7 +1882,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -1981,7 +1900,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2011,7 +1929,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2030,7 +1947,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2060,7 +1976,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2079,7 +1994,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2109,7 +2023,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2128,7 +2041,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2158,7 +2070,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2177,7 +2088,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2207,7 +2117,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2226,7 +2135,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2256,7 +2164,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2275,7 +2182,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2305,7 +2211,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2324,7 +2229,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2354,7 +2258,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2373,7 +2276,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2403,7 +2305,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2422,7 +2323,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2452,7 +2352,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2471,7 +2370,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2501,7 +2399,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2520,7 +2417,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2550,7 +2446,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2569,7 +2464,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =95
                     TextAlign =1
@@ -2599,7 +2493,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2618,7 +2511,6 @@ Begin Form
                     End
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     Visible = NotDefault
                     OverlapFlags =87
                     TextAlign =1
@@ -2648,7 +2540,6 @@ Begin Form
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
-                    AllowValueListEdits =0
                     InheritValueList =0
 
                     LayoutCachedLeft =60
@@ -2662,6 +2553,476 @@ Begin Form
                         0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
                         0x006500350030005d0029003e0030002c0049004900660028005b006300620078 ,
                         0x0043006f006c0075006d006e004e0061006d006500350030005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =93
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =15780
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =50
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003100 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350031005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName51"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =15780
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =16094
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350031005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350031005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =16094
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =51
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003200 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350032005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName52"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =16094
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =16408
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350032005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350032005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =16408
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =52
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003300 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350033005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName53"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =16408
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =16722
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350033005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350033005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =16722
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =53
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003400 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350034005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName54"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =16722
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =17036
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350034005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350034005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =17036
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =54
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003500 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350035005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName55"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =17036
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =17350
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350035005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350035005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =17350
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =55
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003600 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350036005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName56"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =17350
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =17664
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350036005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350036005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =17664
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =56
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003700 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350037005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName57"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =17664
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =17978
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350037005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350037005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =17978
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =57
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003800 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350038005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName58"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =17978
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =18292
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350038005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350038005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =95
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =18292
+                    Width =3240
+                    Height =314
+                    FontSize =9
+                    TabIndex =58
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650035003900 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500350039005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName59"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =18292
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =18606
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500350039005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500350039005d003c003e0022 ,
+                        0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
+                Begin ComboBox
+                    Visible = NotDefault
+                    OverlapFlags =87
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Top =18606
+                    Width =3240
+                    Height =344
+                    FontSize =9
+                    TabIndex =59
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    ConditionalFormat = Begin
+                        0x01000000f8000000020000000000000002000000000000000700000001000000 ,
+                        0xff000000ffffff000100000000000000080000004b0000000100000000800000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e006f006e00650022000000000049004900660028004c0065006e002800 ,
+                        0x5b0063006200780043006f006c0075006d006e004e0061006d00650036003000 ,
+                        0x5d0029003e0030002c0049004900660028005b0063006200780043006f006c00 ,
+                        0x75006d006e004e0061006d006500360030005d003c003e0022004e006f006e00 ,
+                        0x650022002c0031002c00300029002c003000290000000000
+                    End
+                    Name ="cbxColumnName60"
+                    RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    CanGrow =255
+                    CanShrink =255
+                    InheritValueList =0
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =18606
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =18950
+                    ConditionalFormat14 = Begin
+                        0x010002000000000000000200000001000000ff000000ffffff00060000002200 ,
+                        0x4e006f006e006500220000000000000000000000000000000000000000000001 ,
+                        0x000000000000000100000000800000ffffff004200000049004900660028004c ,
+                        0x0065006e0028005b0063006200780043006f006c0075006d006e004e0061006d ,
+                        0x006500360030005d0029003e0030002c0049004900660028005b006300620078 ,
+                        0x0043006f006c0075006d006e004e0061006d006500360030005d003c003e0022 ,
                         0x004e006f006e00650022002c0031002c00300029002c00300029000000000000 ,
                         0x00000000000000000000000000000000
                     End
@@ -2688,7 +3049,7 @@ Option Explicit
 ' =================================
 ' Form:         ImportColumnList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -2696,6 +3057,9 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 18, 2016
 ' References:   -
 ' Revisions:    BLC - 10/18/2016 - 1.00 - initial version
+'               BLC - 10/20/2016 - 1.01 - removed ButtonCaption, SelectedID, SelectedValue properties,
+'                                         added cbxColumnName 51-60
+'               BLC - 10/25/2016 - 1.02 - added RefreshCSVColumnList() to handle newly imported CSV
 ' =================================
 
 '---------------------
@@ -2707,9 +3071,6 @@ Option Explicit
 '---------------------
 Private m_Title As String
 'Private m_Directions As String
-'Private m_ButtonCaption
-'Private m_SelectedID As Integer
-'Private m_SelectedValue As String
 
 Private m_Table As String
 Private m_Fields As String
@@ -2723,8 +3084,6 @@ Private m_ImportColumns As String
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-'Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 Public Event InvalidRecords(Value As DAO.Recordset)
 Public Event InvalidNumColumns(Value As Integer)
 
@@ -2805,6 +3164,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/18/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2824,9 +3184,6 @@ On Error GoTo Err_Handler
         Me.Controls(strControl).Visible = False
     
     Next
-
-
-'        AddFormControl Me.Name, acComboBox, "cbx2", , 2, 0
 
 Exit_Handler:
     Exit Sub
@@ -2896,73 +3253,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-' ---------------------------------
-' Sub:          btnEdit_Click
-' Description:  Enter button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 18, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/18/2016 - initial version
-' ---------------------------------
-Private Sub btnEdit_Click()
-On Error GoTo Err_Handler
-    
-    'populate the parent form
-'    PopulateForm Me.Parent, ID
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[ImportColumnList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnDelete_Click
-' Description:  Delete button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 18, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/18/2016 - initial version
-' ---------------------------------
-Private Sub btnDelete_Click()
-On Error GoTo Err_Handler
-    
-    Dim result As Integer
-    
-    'identify the record ID
-'     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
-'                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
-
-'    If result = vbYes Then DeleteRecord "Event", ID
-    
-    'clear the deleted record
-    Me.Requery
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[ImportColumnList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Close
@@ -3051,16 +3341,28 @@ On Error GoTo Err_Handler
     Next
     
     Dim strControl As String
+
+Debug.Print Me.NumColumns
     
     'expose & populate the proper # of dropdowns
     For i = 1 To Me.NumColumns 'CInt(Me.Records.RecordCount)
         strControl = "cbxColumnName" & i
+Debug.Print strControl
+
+'FIX HERE!
+        If i = 30 Then
+            Debug.Print "30"
+        End If
         
         Me.Controls(strControl).Visible = True
         Set Me.Controls(strControl).Recordset = rs2
         'Me.Controls(strControl).AddItem item:="None", index:=0
         
         'set "None" to red --> Conditional formmating = "None"
+    
+        'requery to refresh displayed controls
+        Me.Controls(strControl).Requery
+Debug.Print Me.Controls(strControl).ListRows
     Next
 
     If Me.NumColumns > 0 Then
@@ -3181,7 +3483,7 @@ On Error GoTo Err_Handler
     
     If ctrl = "ID" Then
     
-        Debug.Print "ID is here"
+ '       Debug.Print "ID is here"
     
         'ensure cbxColumnName1 doesn't have focus
 '        Me.tbxSetFocus.SetFocus
@@ -3194,9 +3496,17 @@ On Error GoTo Err_Handler
         End With
     
 '        Me.Requery
-        Debug.Print Me.cbxColumnName1.Enabled
+'        Debug.Print Me.cbxColumnName1.Enabled
 
     End If
+    
+    'check if all fields are represented
+    If CountInString(Me.ImportColumns, ",") + 1 = Me.NumColumns Then
+    
+        Form_ImportMap.btnImport.Enabled = True
+    
+    End If
+    
     
 Exit_Handler:
     Exit Sub
@@ -3209,6 +3519,38 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' Sub:          RefreshColumnList
+' Description:  refreshes dropdown data source to reflect newly imported CSV (new tsys_temp_csv data)
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 25, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/25/2016 - initial version
+' ---------------------------------
+Public Sub RefreshColumnList()
+On Error GoTo Err_Handler
+
+'    Me.Dirty = False
+    
+    PopulateForm
+    
+'    Me.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RefreshColumnList[CSVColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ------------------------------------
 '   Combobox 1-50 After Update Events
@@ -4030,6 +4372,167 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - cbxColumnName50_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ------- Columns 51-60 --------------
+Private Sub cbxColumnName51_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName51_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName52_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName52_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName53_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName53_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName54_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName55_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName55_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName55_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName56_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName56_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName57_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName57_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName58_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName58_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName59_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName59_AfterUpdate[ImportColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cbxColumnName60_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    PrepareImportColumns
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxColumnName60_AfterUpdate[ImportColumnList form])"
     End Select
     Resume Exit_Handler
 End Sub

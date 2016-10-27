@@ -22,15 +22,14 @@ Begin Form
     Width =9060
     DatasheetFontHeight =11
     ItemSuffix =44
-    Left =4110
-    Top =5715
-    Right =13095
-    Bottom =10965
+    Left =1425
+    Top =5670
+    Right =10665
+    Bottom =10995
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x3defb2bfced4e440
+        0xceb8be6c95d5e440
     End
-    RecordSource ="usys_temp_csv"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -215,7 +214,9 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="To view your selected table data below, choose Table or choose CSV to view CSV d"
+                        "ata.\015\012To change CSV data or re-import it to the temporary CSV table, click"
+                        " the button at right."
                     GridlineColor =10921638
                     LayoutCachedLeft =2820
                     LayoutCachedTop =120
@@ -247,8 +248,8 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =223
                     TextFontFamily =2
-                    Left =7980
-                    Top =780
+                    Left =8040
+                    Top =840
                     Width =720
                     FontSize =14
                     ForeColor =255
@@ -296,10 +297,10 @@ Begin Form
                         0xb08060ffb08060ff
                     End
 
-                    LayoutCachedLeft =7980
-                    LayoutCachedTop =780
-                    LayoutCachedWidth =8700
-                    LayoutCachedHeight =1140
+                    LayoutCachedLeft =8040
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =8760
+                    LayoutCachedHeight =1200
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -531,7 +532,7 @@ Begin Form
         Begin Section
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =4740
+            Height =3900
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -544,7 +545,7 @@ Begin Form
                     Left =60
                     Top =60
                     Width =8940
-                    Height =4620
+                    Height =3780
                     BorderColor =10921638
                     Name ="DataList"
                     GridlineColor =10921638
@@ -552,7 +553,7 @@ Begin Form
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
                     LayoutCachedWidth =9000
-                    LayoutCachedHeight =4680
+                    LayoutCachedHeight =3840
                 End
             End
         End
@@ -576,7 +577,7 @@ Option Explicit
 ' =================================
 ' Form:         CSVDataList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -584,6 +585,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 19, 2016
 ' References:   -
 ' Revisions:    BLC - 10/19/2016 - 1.00 - initial version
+'               BLC - 10/27/2016 - 1.01 - added RefreshDataList()
 ' =================================
 
 '---------------------
@@ -647,7 +649,9 @@ End Property
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   Isskint, November 7, 2012
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=236413
 ' Source/date:  Bonnie Campbell, October 19, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -753,11 +757,15 @@ End Sub
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   EraserveAP, July 21, 2008
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=153447
 ' Source/date:  Bonnie Campbell, October 19, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/19/2016 - initial version
+'   BLC - 10/25/2016 - revised to update tsys_temp_CSV on new import & refresh
+'                      CSV column list dropdowns
 ' ---------------------------------
 Private Sub btnImportCSVData_Click()
 On Error GoTo Err_Handler
@@ -768,11 +776,40 @@ On Error GoTo Err_Handler
     StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
     
     strPath = BrowseFolder("Select CSV file to upload", "Confirm File", _
-                        StartFolder, , msoFileDialogFilePicker, "CSV files")
+                        StartFolder, , msoFileDialogFilePicker, "Delimited files-CSV")
+    
+    'switch to Table view to avoid error # 2008(deleting open object)
+    Me.optgView.Value = 1
+    Call optgView_Click
     
     If Len(strPath) > 0 Then
         'upload CSV file
         UploadCSVFile strPath
+        'refresh CSVColumnList dropdowns
+        
+        'hide columns, reset the NumColumns variable
+        
+        'hide CSV form controls to initialize
+        'listCSV.Form.HideControls
+        'Call Form_ImportColumnList.HideControls
+                
+        'set recordset for # of dropdowns
+        'listCSV.Form.NumColumns = Me.listTableFields.Form.Recordset.RecordCount
+        'listCSV.Form.Table = cbxTable.Text
+        'Form_ImportColumnList.NumColumns = Form_TableFieldList.Recordset.RecordCount
+        'Form_ImportColumnList.Table = 'Form_ImportMap.cbxTable.Text
+        
+        'Call Forms("CSVColumnList").RefreshCSVColumnList <-- error
+        Call Form_ImportColumnList.RefreshColumnList
+        
+'FIX!!!
+        'refresh subform display
+'        Me.Parent.Form!listCSV.Visible = False
+'        Me.Parent.Form!listCSV.Form.Requery
+'        Me.Parent.Form!listCSV.Visible = True
+    
+'        Forms!ImportMap!listCSV.Form.Requery <-- doesn't work
+'         Forms!ImportMap!listCSV.Form.Controls("cbxColumnName2").Requery <-- doesn't work
     
     End If
 
@@ -900,4 +937,34 @@ End Sub
 
 Private Sub tglTable_KeyPress(KeyAscii As Integer)
     MsgBox "Table KeyPress = " & Me.optgView.Value
+End Sub
+
+' ---------------------------------
+' Sub:          RefreshDataList
+' Description:  refreshes data list to reflect newly imported data
+'               provides access to optgView_Click event to ImportMap form
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/27/2016 - initial version
+' ---------------------------------
+Public Sub RefreshDataList()
+On Error GoTo Err_Handler
+    
+    Call optgView_Click
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RefreshDataList[CSVDataList form])"
+    End Select
+    Resume Exit_Handler
 End Sub

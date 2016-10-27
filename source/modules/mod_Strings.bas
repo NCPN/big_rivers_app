@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.07
+' Version:      1.08
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -17,6 +17,7 @@ Option Explicit
 '                                       replaced Exit_Function > Exit_Handler
 '               BLC, 8/23/2016 - 1.06 - added ExtractString()
 '               BLC, 8/30/2016 - 1.07 - added ParseString()
+'               BLC, 10/25/2016 - 1.08 - added InsertSpaceBeforeCaps()
 ' =================================
 
 '---------------------
@@ -37,13 +38,19 @@ Public Const uDegree = &HB0                 '176    degree sign
 Public Const uLineHorizontal = &H332        '818    horizontal line (Combining Low LIne)
 Public Const uMu = &H3BC                    '956    microns
 Public Const uDegreeSimple = &H1B80         '7040   degree (Sudanese Sign Panyecek)
+Public Const uDagger = &H2020               '8224   general punctuation dagger
 Public Const uRArrow = &H2192               '8594   right arrow c.f. https://en.wikipedia.org/wiki/Arrow_(symbol)
 Public Const uDArrow = &H2193               '8495   down arrow
 Public Const uLessThanOrEqual = &H2264      '8804
 Public Const uGreaterThanOrEqual = &H2265   '8805
+Public Const uHourglass = &H231B            '8987   hourglass (sand in bottom only)
 Public Const uSquareFoot = &H23CD           '9165
 Public Const uDoubleTriangleBlkR = &H23E9   '9193   black right-pointing double triangle
 Public Const uDoubleTriangleBlkL = &H23EA   '9194   black left-pointing double triangle
+Public Const uAlarmClock = &H23F0           '9200
+Public Const uStopwatch = &H23F1            '9201
+Public Const uTimerClock = &H23F2           '9202   timer clock
+Public Const uHourglassFlowing = &H23F3     '9203   hour glass with flowing sand
 Public Const uMedTriangleBlkL = &H23F4      '9204   black medium left-pointing triangle
 ' --- new in June 2016 (unicode 9.0 release) ----
 Public Const uPowerOn = &H23FD              '9213 |
@@ -193,6 +200,7 @@ Public Const uDelete = &H1F5F4              '128500 script ballot X
 Public Const uCheckMark = &H1F5F8           '128504 check mark
 Public Const uCheckItem = &H1F5F9           '128505 checked ballot box
 Public Const uPedestrian = &H1F6B6          '128694
+Public Const uProhibited = &H1F6C7          '128711
 Public Const uHammerWrench = &H1F6E0        '128736 crossed hammer and wrench
 Public Const uIsocelesTriBlkR = &H1F782     '128898 black right pointing isoceles triangle
 Public Const uRHArrow = &H1F846             '129094 heavy right arrow
@@ -629,6 +637,51 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (" & Err.Number & " - ParseString[mod_Strings])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     InsertSpaceBeforeCaps
+' Description:  adds a space before capitals
+' Assumptions:  -
+' Parameters:   strInspect - string to check (string)
+' Returns:      string with spaces inserted (string)
+' Throws:       none
+' References:
+'   Bleuspam, May 20, 2010
+'   http://www.utteraccess.com/forum/Split-string-capital-le-t1945127.html
+' Source/date:  Bonnie Campbell, July 29, 2015 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/25/2016 - initial version
+' ---------------------------------
+Function InsertSpaceBeforeCaps(strInspect As String) As String
+On Error GoTo Err_Handler
+
+    Dim strTest As String, strNew As String
+    Dim i As Integer
+
+    For i = 1 To Len(strInspect)
+        strTest = Mid(strInspect, i, 1)
+        
+        If StrComp(strTest, StrConv(strTest, vbUpperCase), vbBinaryCompare) <> 0 Then
+            strNew = strNew & strTest
+        Else:
+            strNew = strNew & " " & strTest
+        End If
+    Next i
+    
+    InsertSpaceBeforeCaps = Trim(strNew)
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (" & Err.Number & " - InsertSpaceBeforeCaps[mod_Strings])"
     End Select
     Resume Exit_Handler
 End Function

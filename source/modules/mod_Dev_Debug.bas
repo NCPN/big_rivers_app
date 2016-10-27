@@ -1263,7 +1263,10 @@ End Sub
 
 Public Sub DoIt3()
 '    DoCmd.OpenForm "TableFieldList", acNormal, , , , , "Site"
-    DoCmd.OpenForm "TableFieldList", acNormal, , , , , "Photo"
+'    DoCmd.OpenForm "TableFieldList", acNormal, , , , , "Photo"
+    
+    DoCmd.OpenForm "Task", acNormal, , , , , "Site|Site|12"
+
 End Sub
 
 

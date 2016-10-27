@@ -21,7 +21,7 @@ Begin Form
     Width =7500
     DatasheetFontHeight =11
     ItemSuffix =44
-    Right =12855
+    Right =14235
     Bottom =11790
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -636,7 +636,7 @@ Option Explicit
 ' =================================
 ' Form:         ContactList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -645,6 +645,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 6/20/2016 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - shifted ToggleIsActive() to mod_App_Data
+'               BLC - 10/20/2016 - 1.02 - removed ButtonCaption, SelectedID, SelectedValue properties
 ' =================================
 
 '---------------------
@@ -656,17 +657,12 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
@@ -702,37 +698,6 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnEdit.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
-End Property
-
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
-End Property
-
 '---------------------
 ' Methods
 '---------------------
@@ -749,6 +714,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -770,14 +736,8 @@ On Error GoTo Err_Handler
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
 
-    'tbxIsActive = IIf([IsActive] = 1, StringFromCodepoint(uCircleBullet), StringFromCodepoint(uCircleBulletWhite))
-
     'set data source
     Set Me.Recordset = GetRecords("s_contact_access")
-'    Me.RecordSource = GetTemplate("s_contact_access")
-'    Me.Requery
-
-    'tbxName.ControlSource = [FirstName] & " " & IIf(Len([MiddleInitial]) > 0, [MiddleInitial] & " ", "") & [LastName]
 
 Exit_Handler:
     Exit Sub
@@ -832,13 +792,10 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-
-'    Me.tbxName.ControlSource = [FirstName] & " " & _
-'                                IIf(Len([MiddleInitial]) > 0, [MiddleInitial] & " ", "") & _
-'                                [LastName]
 
 Exit_Handler:
     Exit Sub

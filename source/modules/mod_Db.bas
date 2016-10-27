@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.05
+' Version:      1.07
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -16,6 +16,7 @@ Option Explicit
 '               BLC, 6/9/2016  - 1.04 - added CreateTempRecords()
 '               BLC, 10/4/2016 - 1.05 - added GetParamsFromSQL()
 '               BLC, 10/11/2016 - 1.06 - added IsRecordset(), FieldCount(), MaxDbFieldCount()
+'               BLC, 10/20/2016 - 1.07 - added IsLinked()
 ' =================================
 
 ' ---------------------------------
@@ -1742,34 +1743,48 @@ End Function
 ' FUNCTION:     ListTables
 ' Description:  List database tables
 ' Assumptions:  -
-' Parameters:   ShowSysTables - whether to limit
-'               limit - type(s) of tables to exclude(string)
+' Parameters:   ShowMSysTables - whether or not to show msys_ tables (boolean)
+'               ShowTsysTables - whether or not to show tsys_ tables (boolean)
+'               ShowUsysTables - whether or not to show usys_ tables (boolean)
+'               ShowLinkedTables - whether or not to show linked tables (boolean)
 ' Returns:      tables - delimited string of tables (string)
 ' References:   -
 '   Daniel Pineault, June 10, 2010
 '   http://www.devhut.net/2010/06/10/ms-access-vba-list-the-tables-in-a-database/
+'   HansUp, December 17, 2013
+'   http://stackoverflow.com/questions/20643263/how-can-one-search-tabledefs-for-linked-tables
 ' Source/date:  Bonnie Campbell, October 6 2016
 ' Revisions:    BLC, 10/6/2016 - initial version
+'               BLC, 10/20/2016 - revised to include linked tables, added Tsys, Usys parameters
 ' ---------------------------------
-Public Function ListTables(ShowSysTables As Boolean) As String
+Public Function ListTables(ShowMSysTables As Boolean, _
+                            ShowTSysTables As Boolean, _
+                            ShowUSysTables As Boolean, _
+                            ShowLinkedTables As Boolean) As String
 On Error GoTo Err_Handler
 
-    Dim db As DAO.Database
-    Dim tdefs As DAO.TableDefs
-    Dim tbl As DAO.TableDef
+    Dim tdf As DAO.TableDef
     Dim tbls As String
     
     'default
     tbls = ""
     
-    Set db = CurrentDb()
-    Set tdefs = db.TableDefs
-    
     'fetch tables
-    For Each tbl In tdefs
-        'If Left(tbl.Name, 4) = "MSys" And ShowSystables = False Then GoTo Continue
-        If Len(tbl.Name) > Len(Replace(tbl.Name, "sys_", "")) And ShowSysTables = False Then GoTo Continue
-        tbls = tbls & "|" & tbl.Name
+    For Each tdf In CurrentDb.TableDefs
+'Debug.Print tdf.Name
+        'handle MSys tables
+        If Len(tdf.Name) > Len(Replace(tdf.Name, "MSys", "")) And ShowMSysTables = False Then GoTo Continue
+        
+        'handle tsys tables
+        If Len(tdf.Name) > Len(Replace(tdf.Name, "tsys", "")) And ShowMSysTables = False Then GoTo Continue
+                
+        'handle usys tables
+        If Len(tdf.Name) > Len(Replace(tdf.Name, "usys", "")) And ShowMSysTables = False Then GoTo Continue
+        
+        'handle linked tables
+        If Len(tdf.Connect) > 0 And ShowLinkedTables = False Then GoTo Continue
+        
+        tbls = tbls & "|" & tdf.Name
         
 Continue:
     Next
@@ -1926,7 +1941,38 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - FieldCount[mod_Db])"
+            "Error encountered (#" & Err.Number & " - MaxDbFieldCount[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     IsLinked
+' Description:  Determines if a table is linked
+' Assumptions:  -
+' Parameters:   tblName - name of table to evaluate (string)
+' Returns:      IsLinked - whether table is linked (boolean)
+'                          returns true for types 4 (ODBC linked), 6 (other linked)
+'                                  false for type 1 (non-linked tables)
+' References:
+'   Douglas J. Steele, February 20, 2009
+'   http://www.pcreview.co.uk/threads/check-if-a-table-is-linked.3748757/
+' Source/date:  Bonnie Campbell, October 20, 2016
+' Revisions:    BLC, 10/20/2016 - initial version
+' ---------------------------------
+Public Function IsLinked(tblName As String) As Boolean
+On Error GoTo Err_Handler
+    
+    IsLinked = Nz(DLookup("Type", "MSysObjects", "Name='" & tblName & "'"), 0) <> 1
+
+Exit_Handler:
+    'cleanup
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - IsLinked[mod_Db])"
     End Select
     Resume Exit_Handler
 End Function

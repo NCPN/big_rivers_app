@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =3435
-    Top =4860
-    Right =11715
-    Bottom =12825
+    Left =7920
+    Top =2490
+    Right =16200
+    Bottom =10455
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -547,9 +547,9 @@ On Error GoTo Err_Handler
     oRTile.BarColor = lngWhite
     oRTile.TileHeaderColor = lngSageGreen
     oRTile.TitleFontColor = lngWhite
-    oRTile.Link1Caption = "Woody Canopy Cover"
-    oRTile.Link2Caption = "Understory Cover"
-    oRTile.Link3Caption = "Vegetation Walk"
+    oRTile.Link1Caption = "Veg Plots" '"Woody Canopy Cover"
+    oRTile.Link2Caption = "Vegetation Walk" '"Understory Cover"
+    oRTile.Link3Visible = 0
     oRTile.Link4Visible = 0
     oRTile.Link5Visible = 0
     oRTile.Link6Caption = "Species"
@@ -948,6 +948,7 @@ End Sub
 ' Revisions:
 '   BLC - 9/6/2016  - initial version
 '   BLC - 9/21/2016 - update so BLCA & CANY enable transect links, DINO does not
+'   BLC - 10/21/2016 - revised TR Veg Plots, Vegetation Walk, removed Understory Cover, Woody Canopy Cover
 ' ---------------------------------
 Private Sub PrepareLinks()
 On Error GoTo Err_Handler
@@ -995,6 +996,7 @@ On Error GoTo Err_Handler
                         
                         TL = "1,2,6"     'Site, Feature, Location
                         TC = "1,5,6"     'Event, Locations, People
+                        TR = "1,2,6,7,8" 'Veg Plots, Vegetation Walk, Species, Unknowns, Species Search
                         BL = "2,4,7,8"   'Transducers, Survey Files, Upload Survey File,
                                          ' Batch Upload Photos
                         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
@@ -1020,6 +1022,7 @@ On Error GoTo Err_Handler
                     If Len(Nz(TempVars("SiteCode"), "")) > 0 Then
                         TL = "1,3,4,6"      'Site, Transect, Plot, Location
                         TC = "1,3,5,6"      'Event, VegPlots, Locations, People
+                        TR = "1,2,6,7,8"    'Veg Plots, Vegetation Walk, Species, Unknowns, Species Search
                         BL = "1,2,4,7,8"    'Photos, Transducers, Survey Files, Upload Survey File,
                                             ' Batch Upload Photos
                         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
@@ -1035,7 +1038,7 @@ On Error GoTo Err_Handler
                     If Len(Nz(TempVars("SiteCode"), "")) > 0 Then
                         TL = "1,4,6"        'Site, Plot, Location
                         TC = "1,3,5,6"      'Event, VegPlots, Locations, People
-                        TR = "3,6,7,8"      'VegWalk, Species, Unknowns, Species Search
+                        TR = "1,2,6,7,8"    'Veg Plots, Vegetation Walk, Species, Unknowns, Species Search
                         BL = "1,2,4,7,8"    'Photos, Transducers, Survey Files, Upload Survey File,
                                             ' Batch Upload Photos
                         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
@@ -1064,7 +1067,7 @@ On Error GoTo Err_Handler
     'selectively re-enable links
     oLTile.EnableLinks TL    'Site
     oCTile.EnableLinks TC    'People
-    oRTile.EnableLinks TR    'Species, Unknowns, Species Search
+    oRTile.EnableLinks TR    'Veg Plots, VegWalk, Species, Unknowns, Species Search
     oBLTile.EnableLinks BL   'Batch Upload Photos
     oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
     oBRTile.EnableLinks BR   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species

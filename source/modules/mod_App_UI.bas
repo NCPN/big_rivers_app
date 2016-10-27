@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.11
+' Version:      1.13
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -21,6 +21,8 @@ Option Explicit
 '               BLC, 9/13/2016 - 1.09 - added SortList()
 '               BLC, 10/14/2016 - 1.10 - added SetContext()
 '               BLC, 10/19/2016 - 1.11 - revised to use UploadCSVFile() vs. UploadSurveyFile()
+'               BLC, 10/24/2016 - 1.12 - added modwentworth form
+'               BLC, 10/25/2016 - 1.13 - added originForm TempVar for species seach
 ' =================================
 
 ' =================================
@@ -362,6 +364,7 @@ End Sub
 '   BLC - 4/26/2016  - initial version
 '   BLC - 8/30/2016  - added Batch Upload Photos
 '   BLC - 10/19/2016 - revised to use UploadCSVFile() vs. UploadSurveyFile()
+'   BLC - 10/25/2016 - revised species search to add originForm TempVar, callingform oArg
 ' ---------------------------------
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
@@ -401,10 +404,13 @@ On Error GoTo Err_Handler
             oArgs = "" 'collection source name - feature (A-G), transect #(1-8) &
         Case "people"
             fName = "Contact"
-        'Vegetation
+            oArgs = "Main"
+        'VegetationS
+        Case "veg plots"
+            fName = "VegPlot"
         Case "woody canopy cover"
             fName = "VegWalk" '"WoodyCanopyCover"
-            oArgs = "1|2016|WCC"
+            oArgs = "" '"1|2016|WCC"
         Case "understory cover"
         Case "vegetation walk"
             fName = "VegWalk"
@@ -413,7 +419,13 @@ On Error GoTo Err_Handler
             fName = "Unknown"
         Case "species search"
             fName = "SpeciesSearch"
-            oArgs = "DisableDoubleClick" 'disable double click events
+            oArgs = "Main"
+            'disable double click events
+            If Not IsNull(TempVars("originForm")) Then
+                TempVars("originForm") = "DisableDoubleClick"
+            Else
+                TempVars.Add "originForm", "DisableDoubleClick"
+            End If
         'Observations
         Case "photos"
             fName = "Tree"
@@ -563,6 +575,7 @@ End Function
 '   BLC - 8/8/2016 - revised to use default table name
 '   BLC - 8/29/2016 - adjusted for Contact form (requires both Contact, Contact_Access data)
 '                     using usys_temp_qdf & adjusting ID to Contact_ID in final SQL
+'   BLC - 10/24/2016 - added ModWentworth form
 ' ---------------------------------
 Public Sub PopulateForm(frm As Form, ID As Long)
 On Error GoTo Err_Handler
@@ -619,6 +632,15 @@ On Error GoTo Err_Handler
                 .Controls("tbxDistance").ControlSource = "HeadToOrientDistance_m"
                 .Controls("tbxBearing").ControlSource = "HeadToOrientBearing"
                 .Controls("tbxNotes").ControlSource = "LocationNotes"
+            Case "ModWentworth"
+                strTable = "ModWentworthScale"
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("tbxClass").ControlSource = "Label"
+                .Controls("tbxCode").ControlSource = "Code"
+                .Controls("tbxSizeRange").ControlSource = "DiameterRange_mm"
+                .Controls("tbxEffectiveDate").ControlSource = "ActiveYear"
+                .Controls("tbxRetireDate").ControlSource = "RetireYear"
             Case "SetDatasheetDefaults"
                 'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "tsys_Datasheet_Defaults|id" & PARAM_SEPARATOR & ID)
                 strTable = "tsys_Datasheet_Defaults"

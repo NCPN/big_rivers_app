@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =4035
-    Top =3540
-    Right =16335
-    Bottom =14550
+    Left =3360
+    Top =2775
+    Right =17595
+    Bottom =14565
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -754,6 +754,8 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 9/1/2016  - 1.03 - btnSave_Click, btnUndo_Click code cleanup
+'               BLC - 10/20/2016 - 1.04 - added CallingForm property, removed buttoncaption,
+'                                         selectedID, selectedValue properties
 ' =================================
 
 '---------------------
@@ -765,17 +767,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -811,35 +810,12 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
 '---------------------
@@ -858,19 +834,22 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize Main
-    ToggleForm "Main", -1
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
+    
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("Feature"), "")
+    lblContext.Caption = GetContext()
     
     Title = "Location (Sampling Location)"
     Directions = "Enter the sampling location information and click save."
@@ -1217,14 +1196,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/20/2016 - revised to use CallingForm property
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
-
-    'Forms("Main").Form.visible = True
     
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub

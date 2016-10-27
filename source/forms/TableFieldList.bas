@@ -17,16 +17,16 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =3480
+    Width =3840
     DatasheetFontHeight =11
-    ItemSuffix =42
-    Left =165
-    Top =2295
-    Right =3750
-    Bottom =6870
+    ItemSuffix =43
+    Left =4185
+    Top =-195
+    Right =7515
+    Bottom =4380
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xd87c8399b1d4e440
+        0x6375f9ebf1d4e440
     End
     RecordSource ="usys_temp_rs"
     Caption ="_List"
@@ -135,7 +135,7 @@ Begin Form
         End
         Begin FormHeader
             CanGrow = NotDefault
-            Height =315
+            Height =360
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -143,52 +143,44 @@ Begin Form
             Begin
                 Begin Label
                     OverlapFlags =93
+                    Left =72
+                    Top =29
                     Width =3480
                     Height =300
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
+                    Caption ="SurveyPoint fields"
                     GridlineColor =10921638
-                    LayoutCachedWidth =3480
-                    LayoutCachedHeight =300
+                    LayoutCachedLeft =72
+                    LayoutCachedTop =29
+                    LayoutCachedWidth =3552
+                    LayoutCachedHeight =329
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                 End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
+                Begin Label
                     OverlapFlags =215
                     TextAlign =1
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =3180
-                    Width =240
-                    Height =315
-                    FontSize =9
+                    Left =3120
+                    Width =720
+                    Height =360
+                    FontSize =14
                     BorderColor =10921638
-                    ForeColor =16777215
-                    Name ="tbxLinkedIcon"
-                    ControlSource ="=IIf([tbxLinked]=1,StringFromCodepoint([uLinked]),\"\")"
-                    ConditionalFormat = Begin
-                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
-                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x49004900660028005b0074006200780041006c006c006f0077005a004c005300 ,
-                        0x5d003d0031002c0031002c003000290000000000
-                    End
+                    ForeColor =65535
+                    Name ="lblLinkedTable"
+                    Caption ="í ½í´—"
+                    ControlTipText ="Linked table"
                     GridlineColor =10921638
-
-                    LayoutCachedLeft =3180
-                    LayoutCachedWidth =3420
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =3120
+                    LayoutCachedWidth =3840
+                    LayoutCachedHeight =360
+                    BorderThemeColorIndex =1
+                    BorderTint =100.0
+                    BorderShade =65.0
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                    ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000ed1c2400ffffff00180000004900 ,
-                        0x4900660028005b0074006200780041006c006c006f0077005a004c0053005d00 ,
-                        0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
-                        0x000000
-                    End
+                    ForeShade =50.0
                 End
             End
         End
@@ -218,6 +210,13 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxFieldType"
                     ControlSource ="ColType"
+                    ConditionalFormat = Begin
+                        0x010000009c000000010000000100000000000000000000001d00000001000100 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b007400620078004600690065006c0064004e0061006d00 ,
+                        0x65005d003d0022004900440022002c0031002c003000290000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
@@ -226,6 +225,12 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000100ff000000ffffff001c0000004900 ,
+                        0x4900660028005b007400620078004600690065006c0064004e0061006d006500 ,
+                        0x5d003d0022004900440022002c0031002c003000290000000000000000000000 ,
+                        0x0000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -243,6 +248,12 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxFieldName"
                     ControlSource ="Column"
+                    ConditionalFormat = Begin
+                        0x010000006c000000010000000000000002000000000000000500000001000100 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x220049004400220000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
@@ -251,6 +262,10 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000000000000200000001000100ff000000ffffff00040000002200 ,
+                        0x490044002200000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Visible = NotDefault
@@ -323,11 +338,13 @@ Begin Form
                     ControlSource ="=IIf([tbxFieldType]=\"Text\",[tbxFieldType] & \"(\" & [tbxSize] & \")\",[tbxFiel"
                         "dType])"
                     ConditionalFormat = Begin
-                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
-                        0x0000ff00ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x01000000d0000000020000000100000000000000000000001900000001000000 ,
+                        0x0000ff00ffffff0001000000000000001a0000003700000001000100ff000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
                         0x49004900660028005b0074006200780041006c006c006f0077005a004c005300 ,
-                        0x5d003d0031002c0031002c003000290000000000
+                        0x5d003d0031002c0031002c00300029000000000049004900660028005b007400 ,
+                        0x620078004600690065006c0064004e0061006d0065005d003d00220049004400 ,
+                        0x22002c0031002c003000290000000000
                     End
                     GridlineColor =10921638
 
@@ -338,10 +355,13 @@ Begin Form
                     ForeTint =100.0
                     ForeShade =50.0
                     ConditionalFormat14 = Begin
-                        0x0100010000000100000000000000010000000000ff00ffffff00180000004900 ,
+                        0x0100020000000100000000000000010000000000ff00ffffff00180000004900 ,
                         0x4900660028005b0074006200780041006c006c006f0077005a004c0053005d00 ,
                         0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
-                        0x000000
+                        0x000000010000000000000001000100ff000000ffffff001c0000004900490066 ,
+                        0x0028005b007400620078004600690065006c0064004e0061006d0065005d003d ,
+                        0x0022004900440022002c0031002c003000290000000000000000000000000000 ,
+                        0x0000000000000000
                     End
                 End
                 Begin TextBox
@@ -383,43 +403,6 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =255
-                    TextAlign =1
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =3060
-                    Width =240
-                    Height =315
-                    FontSize =9
-                    TabIndex =6
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxLinkedTable"
-                    ConditionalFormat = Begin
-                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
-                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x49004900660028005b0074006200780041006c006c006f0077005a004c005300 ,
-                        0x5d003d0031002c0031002c003000290000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3060
-                    LayoutCachedWidth =3300
-                    LayoutCachedHeight =315
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                    ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000ed1c2400ffffff00180000004900 ,
-                        0x4900660028005b0074006200780041006c006c006f0077005a004c0053005d00 ,
-                        0x3d0031002c0031002c0030002900000000000000000000000000000000000000 ,
-                        0x000000
-                    End
-                End
-                Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
                     CanGrow = NotDefault
@@ -432,7 +415,7 @@ Begin Form
                     Left =1620
                     Height =315
                     FontSize =9
-                    TabIndex =7
+                    TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRequired"
@@ -445,6 +428,50 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                End
+                Begin TextBox
+                    OldBorderStyle =0
+                    OverlapFlags =119
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3420
+                    Width =240
+                    Height =315
+                    FontSize =9
+                    TabIndex =7
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxIDField"
+                    StatusBarText ="ID fields are autogenerated && cannot be imported. 'None' should be the CSV valu"
+                        "e at right."
+                    ControlTipText ="ID fields are autogenerated, do not import a CSV field to them!"
+                    ConditionalFormat = Begin
+                        0x01000000da000000020000000100000000000000000000001d00000001000000 ,
+                        0xff000000ffffff0001000000000000001e0000003c00000001000000ffffff00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b007400620078004600690065006c0064004e0061006d00 ,
+                        0x65005d003d0022004900440022002c0031002c00300029000000000049004900 ,
+                        0x660028005b007400620078004600690065006c0064004e0061006d0065005d00 ,
+                        0x3c003e0022004900440022002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3420
+                    LayoutCachedWidth =3660
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010002000000010000000000000001000000ff000000ffffff001c0000004900 ,
+                        0x4900660028005b007400620078004600690065006c0064004e0061006d006500 ,
+                        0x5d003d0022004900440022002c0031002c003000290000000000000000000000 ,
+                        0x0000000000000000000000010000000000000001000000ffffff00ffffff001d ,
+                        0x00000049004900660028005b007400620078004600690065006c0064004e0061 ,
+                        0x006d0065005d003c003e0022004900440022002c0031002c0030002900000000 ,
+                        0x000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -476,6 +503,8 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 6, 2016
 ' References:   -
 ' Revisions:    BLC - 10/6/2016 - 1.00 - initial version
+'               BLC - 10/20/2016 - 1.01 - removed button caption, selectedID, selectedvalue properties,
+'                                         button events
 ' =================================
 
 '---------------------
@@ -486,10 +515,6 @@ Option Explicit
 ' Declarations
 '---------------------
 Private m_Title As String
-'Private m_Directions As String
-'Private m_ButtonCaption
-'Private m_SelectedID As Integer
-'Private m_SelectedValue As String
 
 Private m_Table As String
 Private m_Fields As String
@@ -499,9 +524,6 @@ Private m_TableColumns As String
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-'Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
@@ -521,21 +543,6 @@ End Property
 Public Property Get Title() As String
     Title = m_Title
 End Property
-
-'Public Property Let Directions(Value As String)
-'    If Len(Value) > 0 Then
-'        m_Directions = Value
-'
-'        'set the form directions
-'        Me.lblDirections.Caption = m_Directions
-'    Else
-'        RaiseEvent InvalidDirections(Value)
-'    End If
-'End Property
-'
-'Public Property Get Directions() As String
-'    Directions = m_Directions
-'End Property
 
 Public Property Let Table(Value As String)
         m_Table = Value
@@ -571,97 +578,20 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/6/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
-
-    'close if no table identified
-'    If Len(Nz(Me.OpenArgs, "")) = 0 Then GoTo Exit_Handler
+        
+    'defaults
+    lblLinkedTable.Caption = StringFromCodepoint(uLinked)
+    lblLinkedTable.ForeColor = lngYellow
+    lblLinkedTable.Visible = False
+    tbxIDField = StringFromCodepoint(uProhibited)
+    tbxIDField.ControlTipText = "ID fields are autogenerated, do not import a CSV field to them!"
+    tbxIDField.StatusBarText = "ID fields are autogenerated && cannot be imported. 'None' should be the CSV value at right."
     
-    lblTitle.Caption = Me.Title 'Me.OpenArgs
-'    lblDirections.Caption = "" '"Edit or Delete Records using the buttons for the record at right." _
-                            '& vbCrLf & "Icon codes at left identify if record may be edited/deleted."
-'    tbxIcon.Value = StringFromCodepoint(uLocked)
-'    tbxIcon.ForeColor = lngDkGreen
-'    lblDirections.ForeColor = lngLtBlue
-    
-    'set hover
-'    btnEdit.HoverColor = lngGreen
-'    btnDelete.HoverColor = lngGreen
-
-'    btnDelete.Caption = StringFromCodepoint(uDelete)
-'    btnDelete.ForeColor = lngRed
-    
-'    Me.Table = Me.OpenArgs
-'
-'    'retrieve field info
-'    Dim aryFieldInfo() As Variant 'string
-'
-'    aryFieldInfo = FetchDbTableFieldInfo(Me.Table)
-'
-'    'save to temp table
-'
-'
-'    'populate fields
-''    Dim rs As ADODB.Recordset
-''    Dim cols As Integer
-''    Dim aryFieldData() As Variant
-''
-''    Set rs = New ADODB.Recordset 'CreateObject("ADODB.Recordset")
-''    rs.Open
-''
-''    For i = 0 To UBound(aryFieldInfo)
-''        cols = CountInString(aryFieldInfo(i), "|") + 1
-''        aryFieldData(i) = Split(aryFieldInfo(i))
-''
-''    Next
-'
-'    'clear table
-'    ClearTable "usys_temp_rs"
-'
-'    'populate w/ table data
-'    Dim rs As DAO.Recordset
-'    Dim aryRecord() As String
-'    Dim i As Integer
-'
-'    Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
-'
-'    For i = 0 To UBound(aryFieldInfo)
-'
-'        'create new record
-'        rs.AddNew
-'
-'        aryRecord = Split(aryFieldInfo(i), "|")
-'
-'        rs!Column = aryRecord(0)
-'        rs!ColType = aryRecord(5)
-'        rs!IsReqd = IIf(aryRecord(3) = False, 0, 1)
-'        rs!Length = aryRecord(2)
-'        rs!AllowZLS = IIf(aryRecord(4) = False, 0, 1)
-'
-'        'add the new record
-'        rs.Update
-'
-'    Next
-'
-'    Set Forms!TableFieldList.Recordset = rs
-'
-'    'Me.Requery
-'
-'    tbxFieldName.ControlSource = "Column" 'rs.Fields("Column").Value
-'    tbxFieldType.ControlSource = "ColType" '.Fields("ColType").Value
-'    tbxRequired.ControlSource = "IsReqd"
-'    tbxSize.ControlSource = "Length"
-'    tbxAllowZLS.ControlSource = "AllowZLS"
-'    'tbxColTypeSize.ControlSource =
-'
-''    Me.RecordSource = "" '
-'
-''    Me.tbxFieldName
-
 Exit_Handler:
-    'cleanup
-'    Set rs = Nothing
     Exit Sub
 Err_Handler:
     Select Case Err.Number
@@ -732,74 +662,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          btnEdit_Click
-' Description:  Enter button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/6/2016 - initial version
-' ---------------------------------
-Private Sub btnEdit_Click()
-On Error GoTo Err_Handler
-    
-    'populate the parent form
-'    PopulateForm Me.Parent, ID
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnEdit_Click[TableFieldList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          btnDelete_Click
-' Description:  Delete button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/1/2016 - initial version
-' ---------------------------------
-Private Sub btnDelete_Click()
-On Error GoTo Err_Handler
-    
-    Dim result As Integer
-    
-    'identify the record ID
-'     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
-'                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
-
-'    If result = vbYes Then DeleteRecord "Event", ID
-    
-    'clear the deleted record
-    Me.Requery
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnDelete_Click[TableFieldList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Close
 ' Description:  form closing actions
 ' Assumptions:  -
@@ -839,13 +701,16 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/6/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub PopulateForm()
 On Error GoTo Err_Handler
     
- '   Me.Table = Me.OpenArgs
     'set displayed title
     lblTitle.Caption = Me.Table & " fields"
+
+    'determine if table is linked
+    lblLinkedTable.Visible = IsLinked(Me.Table)
 
     'retrieve field info
     Dim aryFieldInfo() As Variant 'string
@@ -890,7 +755,7 @@ On Error GoTo Err_Handler
     'prepare table columns list
     Me.TableColumns = Left(Trim(strTableColumns), Len(Trim(strTableColumns)) - 1)
     
-    Debug.Print Me.TableColumns
+Debug.Print Me.TableColumns
     
     Set Me.Recordset = rs 'Forms!TableFieldList.Recordset = rs
     

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.16
+' Version:      1.17
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -26,6 +26,7 @@ Option Explicit
 '               BLC - 9/22/2016 - 1.14 - added templates
 '               BLC - 10/16/2016 - 1.15 - fixed PopulateCombobox() to properly set recordset
 '               BLC - 10/19/2016 - 1.16 - renamed UploadSurveyFile() to UploadCSVFile() to genericize
+'               BLC - 10/24/2016 - 1.17 - updated SetRecord(), ToggleIsActive()
 ' =================================
 
 ' ---------------------------------
@@ -985,6 +986,7 @@ End Function
 ' Parameters:   Context - form context for the action (string)
 '               ID - id of record to toggle (long)
 '               IsActive - state to change IsActiveFlag to (Byte), 0 - active, 1 - inactive
+'                          optional for ModWentworth scale retire date
 ' Returns:      -
 ' Throws:       none
 ' References:   -
@@ -993,26 +995,52 @@ End Function
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
 '   BLC - 6/28/2016 - shifted from ContactList form to mod_App_Data
+'   BLC - 10/20/2016 - added ModWentworth retire date toggle
+'   BLC - 10/24/2016 - revised to use SetRecord()
 ' ---------------------------------
-Public Sub ToggleIsActive(Context As String, ID As Long, IsActive As Byte)
+Public Sub ToggleIsActive(Context As String, ID As Long, Optional IsActive As Byte)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
+'    Dim strSQL As String
+'
+'    Select Case Context
+'        Case "Contact"
+'            strSQL = GetTemplate("u_contact_isactive_flag", _
+'                      "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
+'                      "|ID" & PARAM_SEPARATOR & ID)
+'        Case "Site"
+'            strSQL = GetTemplate("u_site_isactive_flag", _
+'                      "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
+'                      "|ID" & PARAM_SEPARATOR & ID)
+'        Case "ModWentworthScale"
+'            strSQL = GetTemplate("u_mod_wentworth_retireyear", _
+'                      "RetireDate" & PARAM_SEPARATOR & Date & "|ID" & _
+'                      PARAM_SEPARATOR & ID)
+'    End Select
+'
+'    DoCmd.SetWarnings False
+'    DoCmd.RunSQL (strSQL)
+'    DoCmd.SetWarnings True
+    
+    Dim Template As String
     
     Select Case Context
         Case "Contact"
-            strSQL = GetTemplate("u_contact_isactive_flag", _
-                      "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
-                      "|ID" & PARAM_SEPARATOR & ID)
+            Template = "u_contact_isactive_flag"
         Case "Site"
-            strSQL = GetTemplate("u_site_isactive_flag", _
-                      "IsActiveFlag" & PARAM_SEPARATOR & IsActive & _
-                      "|ID" & PARAM_SEPARATOR & ID)
+            Template = "u_site_isactive_flag"
+        Case "ModWentworthScale"
+            Template = "u_mod_wentworth_retireyear"
+            
     End Select
-
-    DoCmd.SetWarnings False
-    DoCmd.RunSQL (strSQL)
-    DoCmd.SetWarnings True
+    
+    Dim Params(0 To 3) As Variant
+    
+    Params(0) = Template
+    Params(1) = ID
+    Params(2) = IIf(InStr(Template, "wentworth") > 0, Year(Date), IsActive)
+        
+    SetRecord Template, Params
     
 Exit_Handler:
     Exit Sub
@@ -1360,6 +1388,7 @@ End Function
 ' Revisions:
 '   BLC - 7/26/2016 - initial version
 '   BLC - 9/21/2016 - updated i_login parameters
+'   BLC - 10/24/2016 - added flag templates (contact, site, mod wentworth)
 ' ---------------------------------
 Public Function SetRecord(Template As String, Params As Variant) As Long
 On Error GoTo Err_Handler
@@ -1659,7 +1688,6 @@ On Error GoTo Err_Handler
                     .Parameters("Name") = Params(2)
                     .Parameters("Segment") = Params(3)
                     
-                    
                 Case "i_usys_temp_photo"
                 
                     '-- required parameters --
@@ -1707,6 +1735,12 @@ On Error GoTo Err_Handler
                     .Parameters("AccessID") = Params(2)
                     ID = Params(1)
                 
+                Case "u_contact_isactive_flag"
+                    
+                    '-- required parameters --
+                    .Parameters("cid") = Params(1)
+                    .Parameters("flag") = Params(2)
+                
                 Case "u_cover_species"
                                     
                     'set the table name in the template --> handles WCC, URC, ARC species
@@ -1746,6 +1780,12 @@ On Error GoTo Err_Handler
                     
                     .Parameters("LastModified") = Now()
                     .Parameters("LastModifiedByID") = TempVars("ContactID")
+                
+                Case "u_mod_wentworth_retireyear"
+                
+                    '-- required parameters --
+                    .Parameters("mwsid") = Params(1)
+                    .Parameters("yr") = Params(2)
                 
                 Case "u_park"
         
@@ -1789,6 +1829,12 @@ On Error GoTo Err_Handler
                     .Parameters("Directions") = Params(6)
                     .Parameters("Description") = Params(7)
                 
+                Case "u_site_isactive_flag"
+                
+                    '-- required parameters --
+                    .Parameters("sid") = Params(1)
+                    .Parameters("flag") = Params(2)
+                
                 Case "u_tagline"
                 
                     '-- required parameters --
@@ -1827,7 +1873,7 @@ On Error GoTo Err_Handler
                 Case "u_template"
                 
                     '-- required parameters --
-                    .Parameters("") = Params()
+                    .Parameters("id") = Params(1)
                 
                 Case "u_tsys_datasheet_defaults"
 
@@ -2188,13 +2234,41 @@ On Error GoTo Err_Handler
                     'cleanup
                     Set s = Nothing
                 End With
+                
+            Case "Template"
+                Dim tpl As New Template
+                
+                With tpl
+                    .IsSupported = 1
+                    .Context = ""
+                    .EffectiveDate = Date
+                    .Remarks = ""
+                    .TemplateName = ""
+                    .Version = ""
+                    .TemplateSQL = ""
+                    .Syntax = ""
+    
+                End With
+                
+                'set the generic object --> Template
+                Set obj = tpl
+                
+                'cleanup
+                Set tpl = Nothing
             
             Case "Task"
                 Dim tk As New Task
                 
                 With tk
                     .ID = frm!tbxID.Value '0 if new, edit if > 0
-                
+                    .RequestDate = frm!tbxRequestDate.Value
+                    .RequestedByID = frm!cbxRequestedBy.Column(0)
+                    .Status = frm!cbxStatus.Column(0)
+                    .Priority = frm!cbxPriority.Column(0)
+                    .Task = frm!tbxTask.Value
+                    .TaskType = frm.CallingContext
+                    
+                    
 '                    strCriteria = "[TransducerNumber] = " & .TransducerNumber _
 '                                & " AND [Timing] = '" & .Timing _
 '                                & "' AND [SerialNumber] = '" & .SerialNumber _
@@ -2208,7 +2282,7 @@ On Error GoTo Err_Handler
                 End With
                 
             Case "TemplateAdd"
-                Dim tpl As New Template
+                'Dim tpl As New Template
                 
                 With tpl
                     .TemplateName = frm!tbxTemplate
@@ -2316,19 +2390,66 @@ On Error GoTo Err_Handler
                 End With
 
             Case "VegWalk"
-                Dim vw As New VegWalk
-                
-                With vw
-                    'values passed into form
-                
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
-                                
-                    'set the generic object --> Location
-                    Set obj = vw
+                Select Case frm.FormContext
+                    Case "AllRootedSpecies"
+                        Dim ars As New RootedSpecies
+                        
+                        With ars
+                            'values passed into form
+                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            
+                            'set the generic object --> Woody Canopy Species
+                            Set obj = ars
+                            
+                            'cleanup
+                            Set ars = Nothing
+                        End With
                     
-                    'cleanup
-                    Set vw = Nothing
-                End With
+                    Case "UnderstoryRootedSpecies"
+                        Dim ucs As New UnderstoryCoverSpecies
+                        
+                        With ucs
+                            'values passed into form
+                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            
+                            'set the generic object --> Woody Canopy Species
+                            Set obj = ucs
+                            
+                            'cleanup
+                            Set ucs = Nothing
+                        End With
+
+                    Case "VegWalk"
+                        Dim vw As New VegWalk
+                        
+                        With vw
+                            'values passed into form
+                        
+                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                                        
+                            'set the generic object --> Location
+                            Set obj = vw
+                            
+                            'cleanup
+                            Set vw = Nothing
+                        End With
+                    
+                    Case "WoodyCanopySpecies"
+                        Dim wcs As New WoodyCanopySpecies
+                        
+                        With wcs
+                            'values passed into form
+                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            
+                            'set the generic object --> Woody Canopy Species
+                            Set obj = wcs
+                            
+                            'cleanup
+                            Set wcs = Nothing
+                        End With
+                        
+                End Select
+            
 
             Case Else
                 GoTo Exit_Handler

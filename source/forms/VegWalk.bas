@@ -19,15 +19,16 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =72
+    ItemSuffix =75
     Left =3360
-    Top =3000
-    Right =11220
-    Bottom =10365
+    Top =2775
+    Right =17595
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x06ca311a8bd5e440
     End
+    RecordSource ="SELECT * FROM VegWalk WHERE ID = 0; "
     Caption ="VegWalk"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -174,7 +175,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="VegWalk"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -280,7 +280,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="context"
+                    Caption ="BLCA  >  Gunnison  >  RR  >  A"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -323,6 +323,7 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
+                    ColumnCount =5
                     Left =900
                     Top =1020
                     Width =3414
@@ -341,6 +342,8 @@ Begin Form
                     End
                     Name ="cbxEvent"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;0;0;2"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Event (sample visit)"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -400,7 +403,7 @@ Begin Form
                     Name ="btnAddEvent"
                     Caption ="í ½í·“  Add Event"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Add a new event"
+                    ControlTipText ="Add a new event/sampling visit"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4440
@@ -424,7 +427,8 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5400
+            CanShrink = NotDefault
+            Height =6000
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -432,7 +436,6 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6720
                     Top =60
@@ -500,9 +503,9 @@ Begin Form
                 Begin Subform
                     CanShrink = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =247
+                    OverlapFlags =215
                     Left =105
-                    Top =900
+                    Top =1500
                     Width =7650
                     Height =4380
                     TabIndex =2
@@ -512,9 +515,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =900
+                    LayoutCachedTop =1500
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =5280
+                    LayoutCachedHeight =5880
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -587,16 +590,16 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =780
+                    Top =1380
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =780
+                    LayoutCachedTop =1380
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5400
+                    LayoutCachedHeight =6000
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -614,6 +617,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -638,7 +642,7 @@ Begin Form
                     FontSize =9
                     TabIndex =5
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -653,8 +657,9 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     LimitToList = NotDefault
-                    OverlapFlags =93
+                    OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =5
                     Left =900
@@ -674,6 +679,7 @@ Begin Form
                     End
                     Name ="cbxSpecies"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1008;288;0;0"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Species"
                     GridlineColor =10921638
@@ -699,7 +705,7 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =540
+                    Top =1140
                     Width =7860
                     Height =315
                     FontSize =9
@@ -710,43 +716,41 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =540
+                    LayoutCachedTop =1140
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =855
+                    LayoutCachedHeight =1455
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =255
+                    OverlapFlags =223
                     TextAlign =2
                     Left =4320
-                    Top =360
+                    Top =960
                     Width =825
                     Height =600
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
-                    LayoutCachedTop =360
+                    LayoutCachedTop =960
                     LayoutCachedWidth =5145
-                    LayoutCachedHeight =960
+                    LayoutCachedHeight =1560
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin CheckBox
-                    OverlapFlags =215
+                    OverlapFlags =223
                     Left =5640
                     Top =135
                     Width =360
@@ -754,6 +758,7 @@ Begin Form
                     TabIndex =6
                     BorderColor =10921638
                     Name ="chkIsSeedling"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5640
@@ -762,7 +767,7 @@ Begin Form
                     LayoutCachedHeight =495
                     Begin
                         Begin Label
-                            OverlapFlags =247
+                            OverlapFlags =85
                             Left =4620
                             Top =60
                             Width =990
@@ -778,6 +783,80 @@ Begin Form
                             LayoutCachedHeight =375
                         End
                     End
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =1200
+                    Top =480
+                    Width =2850
+                    Height =315
+                    TabIndex =7
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxCoverPct"
+                    ConditionalFormat = Begin
+                        0x010000009e000000020000000100000000000000000000001a00000001000000 ,
+                        0x00000000fff2000000000000030000001b0000001e0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780055006e006b006e006f0077006e0043006f00640065005d00 ,
+                        0x2e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1200
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =4050
+                    LayoutCachedHeight =795
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000190000005b00 ,
+                        0x74006200780055006e006b006e006f0077006e0043006f00640065005d002e00 ,
+                        0x560061006c00750065003d002200220000000000000000000000000000000000 ,
+                        0x000000000000000000030000000100000000000000ffffff0002000000220022 ,
+                        0x00000000000000000000000000000000000000000000
+                    End
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =120
+                    Top =480
+                    Width =990
+                    Height =315
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblCoverPct"
+                    Caption ="Cover %"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =1110
+                    LayoutCachedHeight =795
+                End
+                Begin Label
+                    Visible = NotDefault
+                    FontItalic = NotDefault
+                    OverlapFlags =119
+                    Left =4140
+                    Top =480
+                    Width =1860
+                    Height =360
+                    FontSize =8
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16737792
+                    Name ="lblCoverPctHint"
+                    Caption ="Cover pct hint"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4140
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =6000
+                    LayoutCachedHeight =840
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -801,7 +880,7 @@ Option Explicit
 ' =================================
 ' Form:         VegWalk
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  VegWalk form object related properties, functions & procedures for UI display
@@ -811,6 +890,10 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 10/21/2016 - 1.02 - removed ButtonCaption, SelectedID, SelectedValue properties,
+'                                         use GetContext()
+'               BLC - 10/24/2016 - 1.03 - revised to accommodate VegPlot WCC, URC, ARC; &
+'                                         use UpsertRecord()
 ' =================================
 
 '---------------------
@@ -822,19 +905,16 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
 Private m_CallingForm As String
+Private m_FormContext As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 Public Event InvalidCallingForm(Value As String)
+Public Event InvalidFormContext(Value As String)
 
 '---------------------
 ' Properties
@@ -870,37 +950,6 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
-End Property
-
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
-End Property
-
 Public Property Let CallingForm(Value As String)
     If Len(Value) > 0 Then
         m_CallingForm = Value
@@ -912,6 +961,19 @@ End Property
 Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
+
+Public Property Let FormContext(Value As String)
+    If Len(Value) > 0 Then
+        m_FormContext = Value
+    Else
+        RaiseEvent InvalidFormContext(Value)
+    End If
+End Property
+
+Public Property Get FormContext() As String
+    FormContext = m_FormContext
+End Property
+
 
 '---------------------
 ' Methods
@@ -925,30 +987,41 @@ End Property
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   HansUp, February 26, 2014
+'   http://stackoverflow.com/questions/22021802/resize-form-in-ms-access-by-changing-detail-height
 ' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 7/13/2016 - added validation, hints
 '   BLC - 8/2/2016 - use Me.CallingForm
+'   BLC - 10/21/2016 - use GetContext()
+'   BLC - 10/24/2016 - revise to accommodate VegPlot WCC, URC, ARC
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    Dim strCaller As String, strTitle As String
+
     'default
     Me.CallingForm = "Main"
+    Me.FormContext = Me.Name
+    strCaller = Me.Name
+    strTitle = strCaller
     
     If Len(Nz(Me.OpenArgs, "")) > 0 Then
-    
-        Dim strCaller As String
-    
+        
         'identify calling form
-        Select Case Split(Me.OpenArgs, "|")(0)
+        Me.FormContext = Split(Me.OpenArgs, "|")(0)
+        
+        strTitle = InsertSpaceBeforeCaps((Split(Me.OpenArgs, "|")(0)))
+        
+        Select Case Me.FormContext
             Case "WoodyCanopySpecies", "UnderstoryRootedSpecies", "AllRootedSpecies"
                 strCaller = "VegPlot"
             Case Else
-                strCaller = Split(Me.OpenArgs, "|")(0)
+                strCaller = Me.FormContext
         End Select
         
         Me.CallingForm = strCaller
@@ -958,15 +1031,43 @@ On Error GoTo Err_Handler
     'minimize calling form
     ToggleForm Me.CallingForm, -1
 
+    'set UI based on form context
+    Select Case Me.FormContext
+    
+        Case "VegWalk"
+            'set list position & hide cover % UI
+            lblMsgIcon.Top = 0.375 * TWIPS_PER_INCH
+            lblMsg.Top = 0.5 * TWIPS_PER_INCH
+            rctList.Top = 0.6667 * TWIPS_PER_INCH
+            list.Top = 0.75 * TWIPS_PER_INCH
+            Me.Detail.Height = 3.875 * TWIPS_PER_INCH
+            lblCoverPct.Visible = False
+            tbxCoverPct.Visible = False
+            lblCoverPctHint.Visible = False
+            'move form to force height change
+            Me.Move Me.WindowLeft, Height:=Me.FormHeader.Height + Me.Detail.Height
+            
+        Case "WoodyCanopySpecies", "UnderstoryRootedSpecies", "AllRootedSpecies"
+            'drop list down & expose cover % UI
+            lblMsgIcon.Top = 0.6667 * TWIPS_PER_INCH
+            lblMsg.Top = 0.7917 * TWIPS_PER_INCH
+            rctList.Top = 0.9583 * TWIPS_PER_INCH
+            list.Top = 1.0417 * TWIPS_PER_INCH
+            Me.Detail.Height = 4.1667 * TWIPS_PER_INCH
+            lblCoverPct.Visible = True
+            tbxCoverPct.Visible = True
+            lblCoverPctHint.Visible = True
+            lblCoverPctHint.Caption = "nearest 1%"
+            'move form to force height change
+            Me.Move Me.WindowLeft, Height:=Me.FormHeader.Height + Me.Detail.Height
+    End Select
 
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("Feature"), "")
+    lblContext.Caption = GetContext()
                  
-    Title = "VegWalk"
+    Title = IIf(strCaller = "VegPlot", strTitle, "VegWalk")
+    lblTitle.Caption = "" 'hide inner title
     Directions = "Enter species found and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
@@ -1106,6 +1207,35 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          cbxEvent_AfterUpdate
+' Description:  Combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 25, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/25/2016 - initial version
+' ---------------------------------
+Private Sub cbxEvent_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxEvent_AfterUpdate[VegWalk form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          cbxSpecies_AfterUpdate
 ' Description:  Combobox after update actions
 ' Assumptions:  -
@@ -1117,12 +1247,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 8/2/2016 - initial version
+'   BLC - 10/25/2016 - revised to use ReadyForSave only
 ' ---------------------------------
 Private Sub cbxSpecies_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(cbxSpecies.Text) > 0 Then _
-        ReadyForSave
+    ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1134,6 +1264,36 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          chkIsSeedling_AfterUpdate
+' Description:  Checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 25, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/25/2016 - initial version
+' ---------------------------------
+Private Sub chkIsSeedling_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkIsSeedling_AfterUpdate[VegWalk form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 ' ---------------------------------
 ' Sub:          btnUndo_Click
@@ -1177,53 +1337,56 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/25/2016 - revised to use UpsertRecord()
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim vw As New VegWalk
-    
-    With vw
-        'values passed into form
+    UpsertRecord Me
 
-
-'        .CollectionSourceName = "T"
-
-'        .CreateDate = ""
-'        .CreatedByID = 0
-'        .LastModified = ""
-'        .LastModifiedByID = 0
-        
-        '.ProtocolID = 1
-        '.SiteID = 1
-        
-        'form values
-        
-        .EventID = cbxEvent.Column(0)
-'        .FeatureID = cbxFeature.Column(0)
-        
- '       .Species = cbxSpecies.Value
-        
-        
-        
-        .ID = tbxID.Value '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value
-        tbxID = .ID
-        
-    End With
-    
-    'clear values & refresh display
-    
-    ReadyForSave
-    
-    PopulateForm Me, tbxID.Value
-    
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+'    Dim vw As New VegWalk
+'
+'    With vw
+'        'values passed into form
+'
+'
+''        .CollectionSourceName = "T"
+'
+''        .CreateDate = ""
+''        .CreatedByID = 0
+''        .LastModified = ""
+''        .LastModifiedByID = 0
+'
+'        '.ProtocolID = 1
+'        '.SiteID = 1
+'
+'        'form values
+'
+'        .EventID = cbxEvent.Column(0)
+''        .FeatureID = cbxFeature.Column(0)
+'
+' '       .Species = cbxSpecies.Value
+'
+'
+'
+'        .ID = tbxID.Value '0 if new, edit if > 0
+'        .SaveToDb
+'
+'        'set the tbxID.value
+'        tbxID = .ID
+'
+'    End With
+'
+'    'clear values & refresh display
+'
+'    ReadyForSave
+'
+'    PopulateForm Me, tbxID.Value
+'
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
 Exit_Handler:
     Exit Sub
@@ -1340,12 +1503,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 8/2/2016 - initial version
+'   BLC - 10/25/2016 - revised to use strFormContext vs. VegWalk
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "VegWalk|" & tbxID.Text
+    'DoCmd.OpenForm "Comment", acNormal, , , , , "VegWalk|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID.Text
     
 Exit_Handler:
     Exit Sub
@@ -1414,8 +1579,11 @@ On Error GoTo Err_Handler
     'set color of icon depending on if values are set
     'requires:  EventID, SiteID, FeatureID,
     '           Species, IsSeedlingS
-    If Nz(cbxSpecies.Value, "") > -1 _
-        And Nz(chkIsSeedling.Value, "") > -1 _
+        '    If Nz(cbxSpecies.Value, "") > -1 _
+'        And Nz(chkIsSeedling.Value, "") > -1 _
+'        And Nz(cbxEvent.Value, 0) > 0 Then
+
+    If Nz(cbxSpecies.Value, 0) > 0 _
         And Nz(cbxEvent.Value, 0) > 0 Then
         
         isOK = True

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =3360
+    Top =2775
+    Right =17595
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -199,8 +199,8 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblSiteCode"
-                    Caption ="Site Code"
+                    Name ="lblFlagCode"
+                    Caption ="Flag Code"
                     GridlineColor =10921638
                     LayoutCachedLeft =1200
                     LayoutCachedTop =1080
@@ -264,8 +264,8 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblSiteName"
-                    Caption ="Site Name"
+                    Name ="lblFlagName"
+                    Caption ="Flag Name"
                     GridlineColor =10921638
                     LayoutCachedLeft =3000
                     LayoutCachedTop =1080
@@ -360,17 +360,14 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="tbxSiteCode"
-                    AfterUpdate ="[Event Procedure]"
-                    OnKeyPress ="[Event Procedure]"
+                    Name ="tbxFlagCode"
                     OnLostFocus ="[Event Procedure]"
-                    OnChange ="[Event Procedure]"
-                    ControlTipText ="Enter 2 letter site code"
+                    ControlTipText ="Enter flag code"
                     ConditionalFormat = Begin
                         0x010000009c000000020000000100000000000000000000001700000001000000 ,
                         0x00000000fff200000000000003000000190000001c0000000100000000000000 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00740062007800530069007400650043006f00640065005d002e0056006100 ,
+                        0x5b0074006200780046006c006100670043006f00640065005d002e0056006100 ,
                         0x6c00750065003d002200220000000000000022002200000000000000
                     End
                     GridlineColor =10921638
@@ -382,7 +379,7 @@ Begin Form
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000160000005b00 ,
-                        0x740062007800530069007400650043006f00640065005d002e00560061006c00 ,
+                        0x74006200780046006c006100670043006f00640065005d002e00560061006c00 ,
                         0x750065003d002200220000000000000000000000000000000000000000000000 ,
                         0x000000030000000100000000000000ffffff0002000000220022000000000000 ,
                         0x00000000000000000000000000000000
@@ -552,14 +549,13 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="tbxSiteName"
-                    AfterUpdate ="[Event Procedure]"
-                    ControlTipText ="Enter full site name"
+                    Name ="tbxFlagName"
+                    ControlTipText ="Enter full flag name"
                     ConditionalFormat = Begin
                         0x010000009c000000020000000100000000000000000000001700000001000000 ,
                         0x00000000fff200000000000003000000190000001c0000000100000000000000 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00740062007800530069007400650043006f00640065005d002e0056006100 ,
+                        0x5b0074006200780046006c006100670043006f00640065005d002e0056006100 ,
                         0x6c00750065003d002200220000000000000022002200000000000000
                     End
                     GridlineColor =10921638
@@ -571,7 +567,7 @@ Begin Form
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000160000005b00 ,
-                        0x740062007800530069007400650043006f00640065005d002e00560061006c00 ,
+                        0x74006200780046006c006100670043006f00640065005d002e00560061006c00 ,
                         0x750065003d002200220000000000000000000000000000000000000000000000 ,
                         0x000000030000000100000000000000ffffff0002000000220022000000000000 ,
                         0x00000000000000000000000000000000
@@ -625,7 +621,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSiteDirections"
-                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter directions to the site."
                     GridlineColor =10921638
 
@@ -722,18 +717,20 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Site
+' Form:         Flag
 ' Level:        Application form
 ' Version:      1.01
 ' Basis:        Dropdown form
 '
-' Description:  Site form object related properties, events, functions & procedures for UI display
+' Description:  Flag form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 10/20/2016 - 1.02 - added CallingForm property, removed buttoncaption
+'                                         selectedID, selectedValue properties
 ' =================================
 
 '---------------------
@@ -745,17 +742,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -791,35 +785,12 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
 '---------------------
@@ -838,22 +809,25 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/20/2016 - revised to use CallingForm property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize Main
-    ToggleForm "Main", -1
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
+    
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("Feature"), "")
-
-    Title = "Site"
-    Directions = "Enter site details."
+    lblContext.Caption = GetContext()
+    
+    Title = "Flag"
+    Directions = "Enter Flag details."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -868,8 +842,8 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
     btnSave.Enabled = False
-    tbxSiteCode.BackColor = lngYellow
-    tbxSiteName.BackColor = lngYellow
+    tbxFlagCode.BackColor = lngYellow
+    tbxFlagName.BackColor = lngYellow
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
   
@@ -885,7 +859,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[Site form])"
+            "Error encountered (#" & Err.Number & " - Form_Open[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -915,7 +889,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Site form])"
+            "Error encountered (#" & Err.Number & " - Form_Load[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -944,13 +918,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[Site form])"
+            "Error encountered (#" & Err.Number & " - Form_Current[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSiteCode_KeyPress
+' Sub:          tbxFlagCode_KeyPress
 ' Description:  Textbox keypress actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -962,10 +936,10 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSiteCode_KeyPress(KeyAscii As Integer)
+Private Sub tbxFlagCode_KeyPress(KeyAscii As Integer)
 On Error GoTo Err_Handler
 
-    LimitKeyPress Me.tbxSiteCode, 2, KeyAscii
+    LimitKeyPress Me.tbxFlagCode, 2, KeyAscii
     
 Exit_Handler:
     Exit Sub
@@ -973,13 +947,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSiteCode_KeyPress[Site form])"
+            "Error encountered (#" & Err.Number & " - tbxFlagCode_KeyPress[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSiteCode_Change
+' Sub:          tbxFlagCode_Change
 ' Description:  Textbox change actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -991,10 +965,10 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSiteCode_Change()
+Private Sub tbxFlagCode_Change()
 On Error GoTo Err_Handler
 
-    LimitChange Me.tbxSiteCode, 2
+    LimitChange Me.tbxFlagCode, 2
     
 Exit_Handler:
     Exit Sub
@@ -1002,13 +976,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSiteCode_Change[Site form])"
+            "Error encountered (#" & Err.Number & " - tbxFlagCode_Change[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSiteCode_AfterUpdate
+' Sub:          tbxFlagCode_AfterUpdate
 ' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -1020,7 +994,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSiteCode_AfterUpdate()
+Private Sub tbxFlagCode_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1031,13 +1005,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSiteCode_AfterUpdate[Site form])"
+            "Error encountered (#" & Err.Number & " - tbxFlagCode_AfterUpdate[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSiteName_AfterUpdate
+' Sub:          tbxFlagName_AfterUpdate
 ' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -1049,7 +1023,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSiteName_AfterUpdate()
+Private Sub tbxFlagName_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1060,13 +1034,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSiteName_AfterUpdate[Site form])"
+            "Error encountered (#" & Err.Number & " - tbxFlagName_AfterUpdate[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSiteDescription_AfterUpdate
+' Sub:          tbxFlagDescription_AfterUpdate
 ' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -1078,7 +1052,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSiteDescription_AfterUpdate()
+Private Sub tbxFlagDescription_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1089,13 +1063,13 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSiteDescription_AfterUpdate[Site form])"
+            "Error encountered (#" & Err.Number & " - tbxFlagDescription_AfterUpdate[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxSiteDirections_AfterUpdate
+' Sub:          tbxFlagDirections_AfterUpdate
 ' Description:  Textbox after update actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -1107,7 +1081,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/28/2016 - initial version
 ' ---------------------------------
-Private Sub tbxSiteDirections_AfterUpdate()
+Private Sub tbxFlagDirections_AfterUpdate()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1118,7 +1092,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxSiteDirections_AfterUpdate[Site form])"
+            "Error encountered (#" & Err.Number & " - tbxFlagDirections_AfterUpdate[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1147,7 +1121,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnUndo_Click[Site form])"
+            "Error encountered (#" & Err.Number & " - btnUndo_Click[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1170,7 +1144,7 @@ On Error GoTo Err_Handler
     
     UpsertRecord Me
     
-'    Dim s As New Site
+'    Dim s As New Flag
 '
 '    With s
 '        'values passed into form
@@ -1178,13 +1152,13 @@ On Error GoTo Err_Handler
 '        .River = TempVars("River")
 '
 '        'form values
-'        .Code = tbxSiteCode.Value
-'        .Name = tbxSiteName.Value
-'        .Directions = Nz(tbxSiteDirections.Value, "")
+'        .Code = tbxFlagCode.Value
+'        .Name = tbxFlagName.Value
+'        .Directions = Nz(tbxFlagDirections.Value, "")
 '        .Description = Nz(tbxDescription.Value, "")
 '
 '        'assumed
-'        .IsActiveForProtocol = 1 'all sites assumed active when added
+'        .IsActiveForProtocol = 1 'all Flags assumed active when added
 '
 '        .ID = tbxID.Value '0 if new, edit if > 0
 '        .SaveToDb
@@ -1211,7 +1185,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnSave_Click[Site form])"
+            "Error encountered (#" & Err.Number & " - btnSave_Click[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1241,7 +1215,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnComment_Click[Site form])"
+            "Error encountered (#" & Err.Number & " - btnComment_Click[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1258,12 +1232,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/20/2016 - revised to use calling form property
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub
@@ -1271,7 +1246,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Close[Site form])"
+            "Error encountered (#" & Err.Number & " - Form_Close[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1299,9 +1274,9 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    'requires: site code & name (directions & description optional)
-    If Len(Nz(tbxSiteCode.Value, "")) > 0 _
-        And Len(Nz(tbxSiteName.Value, "")) > 0 Then
+    'requires: Flag code & name (directions & description optional)
+    If Len(Nz(tbxFlagCode.Value, "")) > 0 _
+        And Len(Nz(tbxFlagName.Value, "")) > 0 Then
         isOK = True
     End If
     
@@ -1317,7 +1292,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ReadyForSave[Site form])"
+            "Error encountered (#" & Err.Number & " - ReadyForSave[Flag form])"
     End Select
     Resume Exit_Handler
 End Sub

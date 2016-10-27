@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3270
-    Top =2895
-    Right =16125
-    Bottom =14685
+    Left =3360
+    Top =2775
+    Right =17595
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1382,7 +1382,7 @@ Begin Form
                     Height =315
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="lblLeafTypes"
+                    Name ="lblCollectedBy"
                     Caption ="Collected By"
                     GridlineColor =10921638
                     LayoutCachedLeft =5580
@@ -1673,6 +1673,7 @@ Option Explicit
 '               BLC - 8/2/2016  - 1.01 - use Me.CallingForm
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 10/25/2016 - 1.03 - removed ButtonCaption, SeleectedID, SelectedValue properties
 ' =================================
 
 '---------------------
@@ -1684,9 +1685,6 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
 Private m_CallingForm As String
 
 '---------------------
@@ -1694,8 +1692,6 @@ Private m_CallingForm As String
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 Public Event InvalidCallingForm(Value As String)
 
 '---------------------
@@ -1730,37 +1726,6 @@ End Property
 
 Public Property Get Directions() As String
     Directions = m_Directions
-End Property
-
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
-End Property
-
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
 End Property
 
 Public Property Let CallingForm(Value As String)
@@ -2180,8 +2145,6 @@ On Error GoTo Err_Handler
 
     'restore calling form
     ToggleForm Me.CallingForm, 0
-
-    'Forms("Main").Form.visible = True
     
 Exit_Handler:
     Exit Sub

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =3285
-    Top =3105
-    Right =10440
-    Bottom =14895
+    Left =3360
+    Top =2775
+    Right =17595
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x45dde061d6cde440
@@ -244,17 +244,17 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =3
-                    Left =5820
+                    Left =3840
                     Top =60
-                    Width =1920
+                    Width =3900
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="DINO  >  Yampa"
+                    Caption ="context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5820
+                    LayoutCachedLeft =3840
                     LayoutCachedTop =60
                     LayoutCachedWidth =7740
                     LayoutCachedHeight =375
@@ -262,7 +262,8 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    Visible = NotDefault
+                    OverlapFlags =93
                     TextAlign =2
                     Left =1080
                     Top =1080
@@ -282,11 +283,11 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =2
-                    Left =2820
+                    Left =1140
                     Top =1080
-                    Width =1380
+                    Width =3060
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -294,7 +295,7 @@ Begin Form
                     Name ="lblLocation"
                     Caption ="Location"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2820
+                    LayoutCachedLeft =1140
                     LayoutCachedTop =1080
                     LayoutCachedWidth =4200
                     LayoutCachedHeight =1395
@@ -386,6 +387,7 @@ Begin Form
                     Top =60
                     Width =1020
                     Height =315
+                    FontSize =9
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -573,7 +575,8 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
-                    OverlapFlags =85
+                    Visible = NotDefault
+                    OverlapFlags =93
                     TextAlign =2
                     IMESentenceMode =3
                     ColumnCount =7
@@ -620,13 +623,13 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =247
                     TextAlign =2
                     IMESentenceMode =3
                     ColumnCount =4
-                    Left =2880
+                    Left =1080
                     Top =60
-                    Width =1320
+                    Width =3120
                     Height =315
                     FontSize =8
                     TabIndex =7
@@ -648,7 +651,7 @@ Begin Form
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =2880
+                    LayoutCachedLeft =1080
                     LayoutCachedTop =60
                     LayoutCachedWidth =4200
                     LayoutCachedHeight =375
@@ -735,7 +738,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.04
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -749,6 +752,8 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.04 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 9/1/2016  - 1.05 - btnSave_Click code cleanup, remove ClearForm()
+'               BLC - 10/20/2016 - 1.06 - removed buttoncaption, selectedID, selectedvalue properties
+'                                         revised to use GetContext()
 ' =================================
 
 '---------------------
@@ -760,9 +765,6 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
 Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
@@ -772,8 +774,6 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 Public Event InvalidCallingForm(Value As String)
 
 '---------------------
@@ -808,37 +808,6 @@ End Property
 
 Public Property Get Directions() As String
     Directions = m_Directions
-End Property
-
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
-End Property
-
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
 End Property
 
 Public Property Let CallingForm(Value As String)
@@ -881,14 +850,13 @@ On Error GoTo Err_Handler
     
     If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
 
-    'minimize Main
+    'minimize calling form
     ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "")
-
+    lblContext.Caption = GetContext()
+    
     Title = "Events (Sampling Visits)"
     Directions = "Choose the site " & StringFromCodepoint(uAmpersand) & " location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
@@ -917,9 +885,6 @@ On Error GoTo Err_Handler
     
     'set data sources
     Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
-    'Set cbxSite.ControlSource = GetRecords("s_site_by_park_river")
-    'Set cbxSite.RowSource = GetRecords("s_site_by_park_river")
-    'cbxSite.ControlSource = GetRecords("s_site_by_park_river")
     Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
     
     'initialize values
@@ -978,14 +943,11 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-'      If tbxID > 0 Then btnComment.Enabled = True
-    'MsgBox tbxID, vbCritical, "Current"
-    'If tbxID > 0 Then ReadyForSave
-
 Exit_Handler:
     Exit Sub
 Err_Handler:

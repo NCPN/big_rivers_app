@@ -20,8 +20,8 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =37
-    Right =12870
-    Bottom =11790
+    Right =14235
+    Bottom =11850
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x21398585f5d2e440
@@ -256,7 +256,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =765
+            Height =420
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -343,12 +343,14 @@ Begin Form
                     Name ="tbxClass"
                     ControlSource ="Label"
                     ConditionalFormat = Begin
-                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
-                        0xed1c2400ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x01000000f6000000020000000100000000000000000000002300000001000000 ,
+                        0xed1c2400ffffff000100000000000000240000004a0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
                         0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
-                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
-                        0x290029002c0031002c003000290000000000
+                        0x3c005900650061007200280044006100740065002800290029002c0031002c00 ,
+                        0x300029000000000049004900660028005b007400620078005200650074006900 ,
+                        0x7200650059006500610072005d003e0059006500610072002800440061007400 ,
+                        0x65002800290029002c0031002c003000290000000000
                     End
                     GridlineColor =10921638
 
@@ -360,11 +362,14 @@ Begin Form
                     ForeTint =100.0
                     ForeShade =50.0
                     ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000ed1c2400ffffff00270000004900 ,
+                        0x010002000000010000000000000001000000ed1c2400ffffff00220000004900 ,
                         0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
-                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
-                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x5900650061007200280044006100740065002800290029002c0031002c003000 ,
+                        0x2900000000000000000000000000000000000000000000010000000000000001 ,
+                        0x00000022b14c00ffffff002500000049004900660028005b0074006200780052 ,
+                        0x006500740069007200650059006500610072005d003e00590065006100720028 ,
+                        0x0044006100740065002800290029002c0031002c003000290000000000000000 ,
+                        0x0000000000000000000000000000
                     End
                 End
                 Begin TextBox
@@ -408,12 +413,14 @@ Begin Form
                     Name ="tbxCode"
                     ControlSource ="Code"
                     ConditionalFormat = Begin
-                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
-                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x01000000f6000000020000000100000000000000000000002300000001000000 ,
+                        0xff000000ffffff000100000000000000240000004a0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
                         0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
-                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
-                        0x290029002c0031002c003000290000000000
+                        0x3c005900650061007200280044006100740065002800290029002c0031002c00 ,
+                        0x300029000000000049004900660028005b007400620078005200650074006900 ,
+                        0x7200650059006500610072005d003e0059006500610072002800440061007400 ,
+                        0x65002800290029002c0031002c003000290000000000
                     End
                     GridlineColor =10921638
 
@@ -425,11 +432,14 @@ Begin Form
                     ForeTint =100.0
                     ForeShade =50.0
                     ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000ff000000ffffff00270000004900 ,
+                        0x010002000000010000000000000001000000ff000000ffffff00220000004900 ,
                         0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
-                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
-                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x5900650061007200280044006100740065002800290029002c0031002c003000 ,
+                        0x2900000000000000000000000000000000000000000000010000000000000001 ,
+                        0x00000022b14c00ffffff002500000049004900660028005b0074006200780052 ,
+                        0x006500740069007200650059006500610072005d003e00590065006100720028 ,
+                        0x0044006100740065002800290029002c0031002c003000290000000000000000 ,
+                        0x0000000000000000000000000000
                     End
                 End
                 Begin CommandButton
@@ -438,13 +448,12 @@ Begin Form
                     Top =30
                     Width =720
                     Height =330
-                    FontSize =12
                     TabIndex =5
                     ForeColor =4210752
                     Name ="btnActive"
-                    Caption ="Active"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Toggle sensitive location"
+                    FontName ="Lucida Sans Unicode"
+                    ControlTipText ="Toggle retired / retire date"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5520
@@ -453,6 +462,7 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
+                    ThemeFontIndex =-1
                     HoverColor =65280
                     HoverThemeColorIndex =-1
                     PressedColor =9592887
@@ -481,12 +491,14 @@ Begin Form
                     Name ="tbxDiameter"
                     ControlSource ="=Replace([DiameterRange_mm],\"micro\",\"\")"
                     ConditionalFormat = Begin
-                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
-                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x01000000f6000000020000000100000000000000000000002300000001000000 ,
+                        0xff000000ffffff000100000000000000240000004a0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
                         0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
-                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
-                        0x290029002c0031002c003000290000000000
+                        0x3c005900650061007200280044006100740065002800290029002c0031002c00 ,
+                        0x300029000000000049004900660028005b007400620078005200650074006900 ,
+                        0x7200650059006500610072005d003e0059006500610072002800440061007400 ,
+                        0x65002800290029002c0031002c003000290000000000
                     End
                     GridlineColor =10921638
 
@@ -498,11 +510,14 @@ Begin Form
                     ForeTint =100.0
                     ForeShade =50.0
                     ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000ff000000ffffff00270000004900 ,
+                        0x010002000000010000000000000001000000ff000000ffffff00220000004900 ,
                         0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
-                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
-                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x5900650061007200280044006100740065002800290029002c0031002c003000 ,
+                        0x2900000000000000000000000000000000000000000000010000000000000001 ,
+                        0x00000022b14c00ffffff002500000049004900660028005b0074006200780052 ,
+                        0x006500740069007200650059006500610072005d003e00590065006100720028 ,
+                        0x0044006100740065002800290029002c0031002c003000290000000000000000 ,
+                        0x0000000000000000000000000000
                     End
                 End
                 Begin TextBox
@@ -626,48 +641,6 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =2880
-                    Top =465
-                    Width =1020
-                    Height =300
-                    FontSize =9
-                    TabIndex =10
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="Text36"
-                    ControlSource ="CStr([uMu])"
-                    ConditionalFormat = Begin
-                        0x01000000b2000000010000000100000000000000000000002800000001000000 ,
-                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x49004900660028005b0052006500740069007200650059006500610072005d00 ,
-                        0x3c00430049006e0074002800590065006100720028004e006f00770028002900 ,
-                        0x290029002c0031002c003000290000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2880
-                    LayoutCachedTop =465
-                    LayoutCachedWidth =3900
-                    LayoutCachedHeight =765
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                    ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000ff000000ffffff00270000004900 ,
-                        0x4900660028005b0052006500740069007200650059006500610072005d003c00 ,
-                        0x430049006e0074002800590065006100720028004e006f007700280029002900 ,
-                        0x29002c0031002c00300029000000000000000000000000000000000000000000 ,
-                        0x00
-                    End
-                End
             End
         End
         Begin FormFooter
@@ -690,7 +663,7 @@ Option Explicit
 ' =================================
 ' Form:         ModWentworthList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -698,6 +671,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 10/20/2016 - 1.01 - removed ButtonCaption, SelectedID, SelectedValue properties
 ' =================================
 
 '---------------------
@@ -709,17 +683,12 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
@@ -753,37 +722,6 @@ End Property
 
 Public Property Get Directions() As String
     Directions = m_Directions
-End Property
-
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnEdit.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
-End Property
-
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
 End Property
 
 '---------------------
@@ -823,7 +761,7 @@ On Error GoTo Err_Handler
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
 
-    btnActive.Caption = StringFromCodepoint(uCheck)
+    btnActive.Caption = StringFromCodepoint(uAlarmClock)
     btnActive.ForeColor = lngRed
 
     'set data source
@@ -898,8 +836,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          btnSensitive_Click
-' Description:  Sensitive button click actions
+' Sub:          btnActive_Click
+' Description:  Active button click actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -909,12 +847,30 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/20/2016 - revised to toggle retire date
 ' ---------------------------------
-Private Sub btnSensitive_Click()
+Private Sub btnActive_Click()
 On Error GoTo Err_Handler
     
-    'toggle sensitive location
-    'ToggleSensitive Me.Parent, ID
+    Dim IsRetired As Byte
+    
+    'default
+    IsRetired = 0
+    
+    Select Case Nz(tbxRetireYear, Year(Date) + 100)
+        Case Is < Year(Date)   'past retire date
+            IsRetired = 1
+        Case Is = Year(Date) 'current year retire date
+            IsRetired = 1
+        Case Is > Year(Date) 'future retire date
+            'default
+    End Select
+    
+    'identify the record ID
+    ToggleIsActive "ModWentworthScale", tbxID, IsRetired 'Abs(tbxIsActive.Value - 1)
+
+    'clear the Activated record
+    Me.Requery
 
 Exit_Handler:
     Exit Sub

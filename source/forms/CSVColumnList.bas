@@ -16,11 +16,11 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =3480
+    Width =3552
     DatasheetFontHeight =11
     ItemSuffix =42
-    Right =10905
-    Bottom =11790
+    Right =19890
+    Bottom =11850
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -131,7 +131,7 @@ Begin Form
         End
         Begin FormHeader
             CanGrow = NotDefault
-            Height =315
+            Height =360
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -139,15 +139,19 @@ Begin Form
             Begin
                 Begin Label
                     OverlapFlags =85
+                    Left =72
+                    Top =29
                     Width =3480
                     Height =300
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="tbl"
+                    Caption ="CSV fields"
                     GridlineColor =10921638
-                    LayoutCachedWidth =3480
-                    LayoutCachedHeight =300
+                    LayoutCachedLeft =72
+                    LayoutCachedTop =29
+                    LayoutCachedWidth =3552
+                    LayoutCachedHeight =329
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                 End
@@ -209,7 +213,7 @@ Option Explicit
 ' =================================
 ' Form:         CSVColumnList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -217,6 +221,9 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 10/20/2016 - 1.01 - removed ButtonCaption, SelectedID, SelectedValue properties
+'               BLC - 10/25/2016 - 1.02 - added RefreshCSVColumnList() to handle newly imported CSV
+'               ---FORM NOT USED---
 ' =================================
 
 '---------------------
@@ -228,9 +235,6 @@ Option Explicit
 '---------------------
 Private m_Title As String
 'Private m_Directions As String
-'Private m_ButtonCaption
-'Private m_SelectedID As Integer
-'Private m_SelectedValue As String
 
 Private m_Table As String
 Private m_Fields As String
@@ -242,8 +246,6 @@ Private m_Records As DAO.Recordset
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-'Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
 Public Event InvalidRecords(Value As DAO.Recordset)
 
 '---------------------
@@ -308,6 +310,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/20/2016 - code cleanup
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -317,8 +320,6 @@ On Error GoTo Err_Handler
     
     lblTitle.Caption = Me.Title
     
-'        AddFormControl Me.Name, acComboBox, "cbx2", , 2, 0
-
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -551,6 +552,35 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - PopulateForm[CSVColumnList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          RefreshCSVColumnList
+' Description:  refreshes dropdown data source to reflect newly imported CSV (new tsys_temp_csv data)
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 25, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/25/2016 - initial version
+' ---------------------------------
+Public Sub RefreshCSVColumnList()
+On Error GoTo Err_Handler
+
+    PopulateForm
+        
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RefreshCSVColumnList[CSVColumnList form])"
     End Select
     Resume Exit_Handler
 End Sub
