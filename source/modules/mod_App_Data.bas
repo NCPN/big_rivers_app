@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.17
+' Version:      1.18
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -27,6 +27,7 @@ Option Explicit
 '               BLC - 10/16/2016 - 1.15 - fixed PopulateCombobox() to properly set recordset
 '               BLC - 10/19/2016 - 1.16 - renamed UploadSurveyFile() to UploadCSVFile() to genericize
 '               BLC - 10/24/2016 - 1.17 - updated SetRecord(), ToggleIsActive()
+'               BLC - 10/28/2016 - 1.18 - updated i_task, TempVars("ContactID") -> TempVars("AppUserID")
 ' =================================
 
 ' ---------------------------------
@@ -1389,6 +1390,7 @@ End Function
 '   BLC - 7/26/2016 - initial version
 '   BLC - 9/21/2016 - updated i_login parameters
 '   BLC - 10/24/2016 - added flag templates (contact, site, mod wentworth)
+'   BLC - 10/28/2016 - updated TempVars("ContactID") -> TempVars("AppUserID"), updated i_task
 ' ---------------------------------
 Public Function SetRecord(Template As String, Params As Variant) As Long
 On Error GoTo Err_Handler
@@ -1434,15 +1436,15 @@ On Error GoTo Err_Handler
                 Case "i_comment"
                 
                     '-- required parameters --
-                    .Parameters("CommentType") = Params(1) 'table
-                    .Parameters("TypeID") = Params(2)
-                    .Parameters("Comment") = Params(3)
-                    .Parameters("CommentorID") = Params(4)
+                    .Parameters("comtype") = Params(1)             'CommentType -> table
+                    .Parameters("ctid") = Params(2)                 'TypeID
+                    .Parameters("cmt") = Params(3)                  'Comment
+                    .Parameters("CID") = Params(4)                  'CommentorID
                     
-                    .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
-                    .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+'                    .Parameters("CreateDate") = Now()
+'                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID
+'                    .Parameters("LastModified") = Now()
+                    .Parameters("LMID") = TempVars("AppUserID")     'LastModifiedByID -> ContactID
         
                 Case "i_contact", "i_contact_new"
                     
@@ -1502,6 +1504,16 @@ On Error GoTo Err_Handler
                     .Parameters("LocationName") = Params(2)
                     .Parameters("Description") = Params(3)
                     .Parameters("Directions") = Params(4)
+                
+                Case "i_imported_data"
+                
+                    '-- required parameters --
+                    .Parameters("idate") = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
+                    .Parameters("sfile") = Params(1)
+                    .Parameters("dtbl") = Params(2)
+                    .Parameters("nrec") = Params(3)
+                    .Parameters("srec") = Params(4)
+                    .Parameters("erec") = Params(5)
                     
                 Case "i_location"
                     
@@ -1513,9 +1525,9 @@ On Error GoTo Err_Handler
                     .Parameters("HeadtoOrientBearing") = Params(5)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                                                         
                 Case "i_login"
                 
@@ -1552,9 +1564,9 @@ On Error GoTo Err_Handler
                     .Parameters("LastPhotoUpdate") = Params(12)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "i_record_action"
                                     
@@ -1594,19 +1606,22 @@ On Error GoTo Err_Handler
                     .Parameters("Height") = Params(6)
                 
                 Case "i_task"
-                
+
                     '-- required parameters --
-                    .Parameters("Task") = Params(1)
-                    .Parameters("Status") = Params(2)
-                    .Parameters("RequestedByID") = Params(3)
-                    .Parameters("RequestDate") = Params(4)
-                    .Parameters("CompletedByID") = Params(5)
-                    .Parameters("CompleteDate") = Params(6)
+                    .Parameters("descr") = Params(1)         'Task
+                    .Parameters("stat") = Params(2)         'Status
+                    .Parameters("prio") = Params(3)         'Priority
+                    .Parameters("ttype") = Params(4)        'TaskType
+                    .Parameters("typeident") = Params(5)    'TaskTypeID
+                    .Parameters("RID") = Params(6)          'RequestedByID
+                    .Parameters("reqdate") = Params(7)      'RequestDate
+                    .Parameters("CID") = Params(8)          'CompletedByID
+                    .Parameters("compldate") = Params(9)    'CompleteDate
                 
-                    .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
-                    .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    '.Parameters("CreateDate") = Now()                  'CreateDate
+                    '.Parameters("CreatedByID") = TempVars("ContactID") 'CreatedByID
+                    '.Parameters("LastModified") = Now()                'LastModified
+                    .Parameters("LMID") = TempVars("AppUserID") 'ContactID")  'lastmodifiedID
                 
                 Case "i_transducer"
                 
@@ -1649,9 +1664,9 @@ On Error GoTo Err_Handler
                     .Parameters("NoIndicatorSpecies") = Params(16)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "i_vegtransect"
         
@@ -1670,9 +1685,9 @@ On Error GoTo Err_Handler
                     .Parameters("StartDate") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                     
                 Case "i_vegwalk_species"
                     
@@ -1708,9 +1723,9 @@ On Error GoTo Err_Handler
                     .Parameters("CommentorID") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                     
                 Case "u_contact"
                     
@@ -1779,7 +1794,7 @@ On Error GoTo Err_Handler
                     .Parameters("HeadtoOrientBearing") = Params(5)
                     
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "u_mod_wentworth_retireyear"
                 
@@ -1812,9 +1827,9 @@ On Error GoTo Err_Handler
                     .Parameters("LastPhotoUpdate") = Params(12)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "u_site"
                     
@@ -1856,7 +1871,7 @@ On Error GoTo Err_Handler
                     .Parameters("CompleteDate") = Params(6)
                 
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "u_transducer"
                 
@@ -1910,9 +1925,9 @@ On Error GoTo Err_Handler
                     .Parameters("StartDate") = Params(4)
                     
                     .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("ContactID")
+                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
                     .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("ContactID")
+                    .Parameters("LastModifiedByID") = TempVars("AppUserID") '"ContactID")
                 
                 Case "u_vegwalk_species"
                     
@@ -2266,7 +2281,7 @@ On Error GoTo Err_Handler
                     .Status = frm!cbxStatus.Column(0)
                     .Priority = frm!cbxPriority.Column(0)
                     .Task = frm!tbxTask.Value
-                    .TaskType = frm.CallingContext
+                    .TaskType = frm.ContextType
                     
                     
 '                    strCriteria = "[TransducerNumber] = " & .TransducerNumber _

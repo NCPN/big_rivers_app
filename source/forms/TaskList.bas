@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =32
-    Right =12870
-    Bottom =11790
+    Right =14235
+    Bottom =11850
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x1faa16ae9bc7e440
@@ -184,7 +184,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1380
+                    Left =1320
                     Top =1020
                     Width =1425
                     Height =315
@@ -194,16 +194,16 @@ Begin Form
                     Name ="lblTaskType"
                     Caption ="Task Type"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1380
+                    LayoutCachedLeft =1320
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =2745
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =960
+                    Left =840
                     Top =1020
                     Width =270
                     Height =315
@@ -213,16 +213,16 @@ Begin Form
                     Name ="lblHdrID"
                     Caption ="ID"
                     GridlineColor =10921638
-                    LayoutCachedLeft =960
+                    LayoutCachedLeft =840
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =1230
+                    LayoutCachedWidth =1110
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
-                    Left =2940
+                    OverlapFlags =93
+                    Left =2880
                     Top =1020
                     Width =1590
                     Height =315
@@ -232,16 +232,16 @@ Begin Form
                     Name ="lblTask"
                     Caption ="Task"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2940
+                    LayoutCachedLeft =2880
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =4530
+                    LayoutCachedWidth =4470
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =93
-                    Left =4635
+                    OverlapFlags =223
+                    Left =4140
                     Top =1020
                     Width =1485
                     Height =315
@@ -251,16 +251,16 @@ Begin Form
                     Name ="lblPriority"
                     Caption ="Priority"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4635
+                    LayoutCachedLeft =4140
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =6120
+                    LayoutCachedWidth =5625
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =5760
+                    Left =5160
                     Top =1020
                     Width =1485
                     Height =315
@@ -270,9 +270,9 @@ Begin Form
                     Name ="Label30"
                     Caption ="Status"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5760
+                    LayoutCachedLeft =5160
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =7245
+                    LayoutCachedWidth =6645
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -280,7 +280,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =780
+            Height =360
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -288,7 +288,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =6000
                     Width =720
                     ForeColor =4210752
@@ -350,7 +350,7 @@ Begin Form
                 End
                 Begin TextBox
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
@@ -375,7 +375,7 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin CommandButton
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextFontFamily =2
                     Left =6780
                     Width =720
@@ -413,19 +413,21 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1425
+                    Left =1245
                     Top =15
-                    Width =1560
+                    Width =1155
                     Height =300
+                    FontSize =9
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxTaskType"
+                    ControlSource ="TaskType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1425
+                    LayoutCachedLeft =1245
                     LayoutCachedTop =15
-                    LayoutCachedWidth =2985
+                    LayoutCachedWidth =2400
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -434,23 +436,49 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =247
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =900
+                    Left =780
                     Width =480
                     Height =315
+                    FontSize =9
                     TabIndex =4
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxID"
-                    ControlSource ="ID"
+                    ControlSource ="t.ID"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =900
-                    LayoutCachedWidth =1380
+                    LayoutCachedLeft =780
+                    LayoutCachedWidth =1260
                     LayoutCachedHeight =315
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2460
+                    Width =1560
+                    Height =300
+                    FontSize =9
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxTask"
+                    ControlSource ="Task"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2460
+                    LayoutCachedWidth =4020
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -459,40 +487,19 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2985
-                    Width =1560
-                    Height =300
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxTask"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2985
-                    LayoutCachedWidth =4545
-                    LayoutCachedHeight =300
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4800
+                    Left =4020
                     Width =1020
                     Height =300
+                    FontSize =9
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxIDDate"
+                    ControlSource ="Priority"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4800
-                    LayoutCachedWidth =5820
+                    LayoutCachedLeft =4020
+                    LayoutCachedWidth =5040
                     LayoutCachedHeight =300
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -505,27 +512,27 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4800
-                    Top =420
-                    Width =1020
+                    Left =5160
+                    Width =780
                     Height =300
+                    FontSize =9
                     TabIndex =7
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxStatus"
+                    ControlSource ="Status"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =420
-                    LayoutCachedWidth =5820
-                    LayoutCachedHeight =720
+                    LayoutCachedLeft =5160
+                    LayoutCachedWidth =5940
+                    LayoutCachedHeight =300
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
                 End
                 Begin Image
-                    Left =5880
-                    Top =420
+                    Visible = NotDefault
+                    Left =6540
                     Width =300
                     Height =300
                     BorderColor =10921638
@@ -533,16 +540,15 @@ Begin Form
                     GridlineColor =10921638
                     ControlSource ="Status_ID"
 
-                    LayoutCachedLeft =5880
-                    LayoutCachedTop =420
-                    LayoutCachedWidth =6180
-                    LayoutCachedHeight =720
+                    LayoutCachedLeft =6540
+                    LayoutCachedWidth =6840
+                    LayoutCachedHeight =300
                     TabIndex =8
                 End
                 Begin Image
+                    Visible = NotDefault
                     PictureType =1
-                    Left =6240
-                    Top =420
+                    Left =6900
                     Width =300
                     Height =300
                     BorderColor =10921638
@@ -550,10 +556,9 @@ Begin Form
                     GridlineColor =10921638
                     ControlSource ="Priority_ID"
 
-                    LayoutCachedLeft =6240
-                    LayoutCachedTop =420
-                    LayoutCachedWidth =6540
-                    LayoutCachedHeight =720
+                    LayoutCachedLeft =6900
+                    LayoutCachedWidth =7200
+                    LayoutCachedHeight =300
                     TabIndex =9
                 End
             End
@@ -699,12 +704,16 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
+    
     'set hover
     btnEdit.HoverColor = lngGreen
     btnDelete.HoverColor = lngGreen
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
+
+    'set data source
+    Set Me.Recordset = GetRecords("s_task_list")
 
 Exit_Handler:
     Exit Sub

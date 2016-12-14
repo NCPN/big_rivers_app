@@ -752,7 +752,7 @@ On Error GoTo Err_Handler
     Dim rs As DAO.Recordset ', rsFields As ADODB.Recordset
     Dim fld As DAO.field
     Dim aryFieldInfo() As Variant
-    Dim iCols As Integer, iCol As Integer
+    Dim icols As Integer, iCol As Integer
     Dim strTypeName As String
     
     Set db = CurrentDb()
@@ -765,10 +765,10 @@ On Error GoTo Err_Handler
 '    Set rsFields = New ADODB.Recordset
     
     'get count
-    iCols = rs.Fields.Count
+    icols = rs.Fields.Count
     iCol = 0
     
-    ReDim Preserve aryFieldInfo(0 To iCols - 1)
+    ReDim Preserve aryFieldInfo(0 To icols - 1)
     
     'iterate through fields
     For Each fld In rs.Fields

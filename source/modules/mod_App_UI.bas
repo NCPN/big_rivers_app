@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.13
+' Version:      1.15
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -23,6 +23,8 @@ Option Explicit
 '               BLC, 10/19/2016 - 1.11 - revised to use UploadCSVFile() vs. UploadSurveyFile()
 '               BLC, 10/24/2016 - 1.12 - added modwentworth form
 '               BLC, 10/25/2016 - 1.13 - added originForm TempVar for species seach
+'               BLC, 12/9/2016 -  1.14 - added PopulateCSVFields()
+'               BLC, 12/13/2016 - 1.15 - added SetCurrentPseudoRecord()
 ' =================================
 
 ' =================================
@@ -347,6 +349,47 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Function:     SetCurrentPseudoRecord
+' Description:  sets a pseudo current record # based on the combobox w/ current focus
+' Assumptions:  -
+' Parameters:   -
+' Returns:      current # for combobox (integer)
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, December 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/13/2016 - initial version
+' ---------------------------------
+Public Function SetCurrentPseudoRecord(ctrl As Control) As Integer
+On Error GoTo Err_Handler
+              
+    'set psuedo current record <- set the # of the cbx
+'    'MsgBox ActiveControl.Name
+'    MsgBox Screen.ActiveForm.Name & " is the active form."
+'    MsgBox Screen.ActiveControl.Name & "is the active control."
+'    If InStr(Me.ActiveControl, "cbxColumnName") Then
+'        Me.Parent.Controls("tbxCSVRecord").Value = Replace(Me.ActiveControl.Name, "cbxColumnName", "")
+'    End If
+
+    If InStr(ctrl.Name, "cbxColumnName") Then
+        ctrl.Parent.Form.Parent.Form.Controls("tbxCSVRecord").Value = Replace(ctrl.Name, "cbxColumnName", "")
+        ChangeBackColor ctrl, lngYelLime
+        Call Forms("ImportMap").tbxCSVRecord_Change
+    End If
+              
+Exit_Handler:
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetCurrentPseudoRecord[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Function
 
 ' ---------------------------------
 ' SUB:          ClickAction
@@ -728,6 +771,122 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          PopulateCSVFields
+' Description:  CSV field combobox populating actions
+' Assumptions:  Control OnChange event = PopulateCSVFields([Screen].[ActiveControl])
+'               where Screen.ActiveControl passes in the proper combobox
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Jeremy Cook, September 13, 2013
+'   http://stackoverflow.com/questions/8787979/how-do-i-reference-the-current-form-in-an-expression-in-microsoft-access
+' Source/date:  Bonnie Campbell, October 6, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/8/2016 - initial version
+' ---------------------------------
+'Public Sub PopulateCombobox(ctrl As ComboBox)
+Public Function PopulateCSVFields(ctrl As Control) 'frm As Form) 'strName As String) 'ByRef ctrl As ComboBox)
+On Error GoTo Err_Handler
+    
+    'Dim ctrl As ComboBox
+    
+    'Set ctrl = Forms("ImportMap").Controls("listCSV").Form.Controls("cbxColumnName2")
+    
+'    Set ctrl = Me.ActiveControl
+    
+'    'set displayed title
+'    lblTitle.Caption = "CSV fields"
+    
+    'retrieve field info
+    Dim aryFieldInfo() As Variant 'string
+    
+    aryFieldInfo = FetchDbTableFieldInfo("usys_temp_csv")
+    
+    'clear table
+    ClearTable "usys_temp_rs2"
+    
+    'populate w/ table data
+    Dim rs2 As DAO.Recordset
+    Dim aryRecord() As String
+    Dim i As Integer
+    
+    Set rs2 = CurrentDb.OpenRecordset("usys_temp_rs2", dbOpenDynaset)
+    
+    'add the "None" value
+    rs2.AddNew
+    rs2.Fields(0) = "None"
+    rs2.Update
+    
+    For i = 0 To UBound(aryFieldInfo)
+    
+        'create new record
+        rs2.AddNew
+        
+        aryRecord = Split(aryFieldInfo(i), "|")
+        
+        'rs!Column = aryRecord(0)
+        rs2.Fields(0) = aryRecord(0)
+    
+        'add the new record
+        rs2.Update
+        
+    Next
+    
+    Set ctrl.Recordset = rs2 '<--ERROR #5302
+    
+'    Dim strControl As String
+'
+'Debug.Print Me.NumColumns
+'
+'    'expose & populate the proper # of dropdowns
+'    For i = 1 To Me.NumColumns 'CInt(Me.Records.RecordCount)
+'        strControl = "cbxColumnName" & i
+'Debug.Print strControl
+'
+''FIX HERE!
+'        If i = 30 Then
+'            Debug.Print "30"
+'        End If
+'
+'        Me.Controls(strControl).Visible = True
+''        Set Me.Controls(strControl).Recordset = rs2 '<--ERROR #5302
+'        'Me.Controls(strControl).AddItem item:="None", index:=0
+'
+'        'set "None" to red --> Conditional formmating = "None"
+'
+'        'requery to refresh displayed controls
+'        Me.Controls(strControl).Requery
+'Debug.Print Me.Controls(strControl).ListRows
+'    Next
+'
+'    If Me.NumColumns > 0 Then
+'        'set detail to proper height
+'        Me.Detail.Height = Me.Controls(strControl).Height * Me.NumColumns 'Me.Records.RecordCount
+'    End If
+'
+''    Set Me.Recordset = rs
+'
+''    Set cbxColumnName.Recordset = rs2
+'
+'    'set the # of repeats of the cbx
+''    Set Me.Recordset = rs
+
+Exit_Handler:
+    'cleanup
+    Set rs2 = Nothing
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateCSVFields[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Function
 
 ' ---------------------------------
 ' Sub:          DeleteRecord

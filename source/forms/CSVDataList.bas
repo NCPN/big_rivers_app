@@ -22,10 +22,10 @@ Begin Form
     Width =9060
     DatasheetFontHeight =11
     ItemSuffix =44
-    Left =1425
-    Top =5670
-    Right =10665
-    Bottom =10995
+    Left =390
+    Top =7425
+    Right =9375
+    Bottom =12495
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xceb8be6c95d5e440
@@ -577,7 +577,7 @@ Option Explicit
 ' =================================
 ' Form:         CSVDataList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -586,6 +586,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 10/19/2016 - 1.00 - initial version
 '               BLC - 10/27/2016 - 1.01 - added RefreshDataList()
+'               BLC - 12/8/2016 - 1.02 - revised to make btnImportCSVData_Click public to expose to Import Map form
 ' =================================
 
 '---------------------
@@ -766,8 +767,9 @@ End Sub
 '   BLC - 10/19/2016 - initial version
 '   BLC - 10/25/2016 - revised to update tsys_temp_CSV on new import & refresh
 '                      CSV column list dropdowns
+'   BLC - 12/8/2016 - revised to public to allow call from ImportMap form
 ' ---------------------------------
-Private Sub btnImportCSVData_Click()
+Public Sub btnImportCSVData_Click()
 On Error GoTo Err_Handler
     
     Dim StartFolder As String, strPath As String
@@ -800,10 +802,11 @@ On Error GoTo Err_Handler
         'Form_ImportColumnList.Table = 'Form_ImportMap.cbxTable.Text
         
         'Call Forms("CSVColumnList").RefreshCSVColumnList <-- error
-        Call Form_ImportColumnList.RefreshColumnList
+        Call Form_ImportColumnList.RefreshColumnList '<-- assumes ImportColumnList form is OPEN (it is)
         
 'FIX!!!
         'refresh subform display
+        Call Form_ImportMap.SetCSVFieldsDisplay '<-- assumes ImportMap form is OPEN (it is)
 '        Me.Parent.Form!listCSV.Visible = False
 '        Me.Parent.Form!listCSV.Form.Requery
 '        Me.Parent.Form!listCSV.Visible = True

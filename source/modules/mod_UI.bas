@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_UI
 ' Level:        Framework module
-' Version:      1.08
+' Version:      1.10
 ' Description:  User interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -19,6 +19,8 @@ Option Explicit
 '               BLC, 7/6/2016  - 1.07 - added functions to hide VBE (shift off screen)
 '                                       while the enum module is being updated
 '               BLC, 9/1/2016  - 1.08 - updated ControlExists()
+'               BLC, 12/8/2016 - 1.09 - added text alignment constants
+'               BLC, 12/12/2016 - 1.10 - added scrolling constants & function
 ' =================================
 
 ' ---------------------------------
@@ -27,10 +29,31 @@ Option Explicit
 Public Const acNormalSolid As Integer = 1
 Public Const acTransparent As Integer = 0
 
+'text alignment
+Public Const taGeneral As Integer = 0       'default alignment
+Public Const taLeft As Integer = 1
+Public Const taCenter As Integer = 2
+Public Const taRight As Integer = 3
+Public Const taDistribute As Integer = 4    'evenly distributed
+
+' ---------------------------------
+'  Scrollbars
+' ---------------------------------
+Declare Function FlatSB_SetScrollPos Lib "comctl32" (ByVal hWnd As Long, ByVal Code As Long, _
+                                        ByVal nPos As Long, ByVal fRedraw As Boolean) As Long
+Declare Function FlatSB_GetScrollPos Lib "comctl32" (ByVal hWnd As Long, _
+                                        ByVal Code As Long) As Long
+'Get the Handle of a Control
+Public Declare Function apiGetFocus Lib "user32" Alias "GetFocus" () As Long
+
+'scroll bar alignments
+Public Const SB_HORZ = 0
+Public Const SB_VERT = 1
+Public Const SB_BOTH = 3
+
 ' ---------------------------------
 '  Properties
 ' ---------------------------------
-
 
 ' ---------------------------------
 '  VBE
@@ -50,7 +73,7 @@ Public Const acTransparent As Integer = 0
 ' ---------------------------------
 
 Declare Function SetWindowPos Lib "user32.dll" ( _
-    ByVal hwnd As Long, _
+    ByVal hWnd As Long, _
     ByVal hWndInsertAfter As Long, _
     ByVal X As Long, _
     ByVal Y As Long, _
@@ -1041,6 +1064,52 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+'  Scrollbars
+' ---------------------------------
+
+' ---------------------------------
+' FUNCTION:     fhWnd
+' Description:  Returns the handle of a control
+' Assumptions:
+'   Used in combination w/ FlatSB_Set/GetScrollPos, apiGetFocus,
+'   SB_ constants for synchronizing scrollbar positions in listboxes
+' Parameters:   ctl - control whose handle is desired (control)
+' Returns:      control handle (long)
+' Throws:       none
+' References:
+'   CyberLynx, December 10, 2003
+'   http://www.dbforums.com/showthread.php?973824-Sync-Scrolling-of-Two-Listboxes
+' Source/date:  Bonnie Campbell, December 12, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/12/2016 - initial version
+' ---------------------------------
+Public Function fhWnd(ctl As Control) As Long
+    On Error GoTo Err_Handler 'Resume Next
+    
+    ctl.SetFocus
+    
+    If Err Then
+        fhWnd = 0
+    Else
+        fhWnd = apiGetFocus
+    End If
+    
+'    On Error GoTo 0
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - AddControl[mod_UI])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
 '  Text
 ' ---------------------------------
 
@@ -1057,6 +1126,7 @@ End Sub
 ' Revisions:    BLC, 6/12/2014 - initial version
 '               BLC, 4/30/2015 - moved from mod_Common_UI to mod_UI
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 12/12/2016 - revised to use Exit_handler vs. Exit_Function/Procedure
 ' =================================
 Public Function CrumbsToArray(strCrumbs As String, Optional delimiter = "|")
 
@@ -1073,7 +1143,7 @@ On Error GoTo Err_Handler
 
     CrumbsToArray = aryCrumbs
     
-Exit_Procedure:
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -1082,7 +1152,7 @@ Err_Handler:
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CrumbsToArray[mod_UI])"
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Function
 
 ' =================================

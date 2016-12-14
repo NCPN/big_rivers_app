@@ -87,9 +87,9 @@ Public Const aDistribute = 4
 '=================================================================
 '  Declarations
 '=================================================================
-Declare Function IsZoomed Lib "user32" (ByVal hwnd As Long) As _
+Declare Function IsZoomed Lib "user32" (ByVal hWnd As Long) As _
      Integer
-Declare Function IsIconic Lib "user32" (ByVal hwnd As Long) As _
+Declare Function IsIconic Lib "user32" (ByVal hWnd As Long) As _
      Integer
 
 ' -- Constants --
@@ -104,16 +104,16 @@ Public NoData As Scripting.Dictionary
 
 ' -- Functions --
 Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" _
-  (ByVal hwnd As Long, _
+  (ByVal hWnd As Long, _
    ByVal nIndex As Long) As Long
  
 Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" _
-  (ByVal hwnd As Long, _
+  (ByVal hWnd As Long, _
    ByVal nIndex As Long, _
    ByVal dwNewLong As Long) As Long
  
 Private Declare Function SetLayeredWindowAttributes Lib "user32" _
-  (ByVal hwnd As Long, _
+  (ByVal hWnd As Long, _
    ByVal crKey As Long, _
    ByVal bAlpha As Byte, _
    ByVal dwFlags As Long) As Long
@@ -471,9 +471,9 @@ On Error GoTo Err_Handler
     Dim lngStyle As Long
     
     ' get the current window style, then set transparency
-    lngStyle = GetWindowLong(frm.hwnd, GWL_EXSTYLE)
-    SetWindowLong frm.hwnd, GWL_EXSTYLE, lngStyle Or WS_EX_LAYERED
-    SetLayeredWindowAttributes frm.hwnd, TColor, (sngOpacity * 255), LWA_ALPHA
+    lngStyle = GetWindowLong(frm.hWnd, GWL_EXSTYLE)
+    SetWindowLong frm.hWnd, GWL_EXSTYLE, lngStyle Or WS_EX_LAYERED
+    SetLayeredWindowAttributes frm.hWnd, TColor, (sngOpacity * 255), LWA_ALPHA
     
 Exit_Handler:
     Exit Sub

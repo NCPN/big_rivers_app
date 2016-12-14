@@ -17,13 +17,11 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =3840
+    Width =3720
     DatasheetFontHeight =11
-    ItemSuffix =43
-    Left =4185
-    Top =-195
-    Right =7515
-    Bottom =4380
+    ItemSuffix =46
+    Right =10260
+    Bottom =7815
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6375f9ebf1d4e440
@@ -150,7 +148,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="SurveyPoint fields"
+                    Caption ="Table fields"
                     GridlineColor =10921638
                     LayoutCachedLeft =72
                     LayoutCachedTop =29
@@ -162,8 +160,8 @@ Begin Form
                 Begin Label
                     OverlapFlags =215
                     TextAlign =1
-                    Left =3120
-                    Width =720
+                    Left =3000
+                    Width =480
                     Height =360
                     FontSize =14
                     BorderColor =10921638
@@ -172,8 +170,8 @@ Begin Form
                     Caption ="í ½í´—"
                     ControlTipText ="Linked table"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3120
-                    LayoutCachedWidth =3840
+                    LayoutCachedLeft =3000
+                    LayoutCachedWidth =3480
                     LayoutCachedHeight =360
                     BorderThemeColorIndex =1
                     BorderTint =100.0
@@ -181,6 +179,28 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                     ForeShade =50.0
+                End
+                Begin TextBox
+                    AllowAutoCorrect = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =215
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2280
+                    Width =480
+                    Height =315
+                    ColumnOrder =0
+                    BorderColor =10921638
+                    ForeColor =2366701
+                    Name ="tbxCSVPseudoRecord"
+                    ControlSource ="=[Forms]![ImportMap].[Controls]![tbxCSVRecord]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2280
+                    LayoutCachedWidth =2760
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End
@@ -194,12 +214,59 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
-                    Visible = NotDefault
-                    Enabled = NotDefault
-                    CanGrow = NotDefault
-                    CanShrink = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =93
+                    TextAlign =1
+                    IMESentenceMode =3
+                    Width =3720
+                    Height =315
+                    FontSize =9
+                    TabIndex =8
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxHighlight"
+                    ConditionalFormat = Begin
+                        0x010000000a010000020000000100000000000000000000003500000001000000 ,
+                        0x0000ff00ccff99000100000000000000360000005400000001000000ffffff00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004d0065002e005200650063006f00720064007300650074002e0041006200 ,
+                        0x73006f006c0075007400650050006f0073006900740069006f006e005d003d00 ,
+                        0x5b00740062007800430053005600500073006500750064006f00520065006300 ,
+                        0x6f00720064005d000000000049004900660028005b0074006200780046006900 ,
+                        0x65006c0064004e0061006d0065005d003c003e0022004900440022002c003100 ,
+                        0x2c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedWidth =3720
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x0100020000000100000000000000010000000000ff00ccff9900340000005b00 ,
+                        0x4d0065002e005200650063006f00720064007300650074002e00410062007300 ,
+                        0x6f006c0075007400650050006f0073006900740069006f006e005d003d005b00 ,
+                        0x740062007800430053005600500073006500750064006f005200650063006f00 ,
+                        0x720064005d000000000000000000000000000000000000000000000100000000 ,
+                        0x00000001000000ffffff00ffffff001d00000049004900660028005b00740062 ,
+                        0x0078004600690065006c0064004e0061006d0065005d003c003e002200490044 ,
+                        0x0022002c0031002c003000290000000000000000000000000000000000000000 ,
+                        0x0000
+                    End
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    CanGrow = NotDefault
+                    CanShrink = NotDefault
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =255
                     TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
@@ -234,6 +301,8 @@ Begin Form
                 End
                 Begin TextBox
                     Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =255
                     TextAlign =1
@@ -270,8 +339,10 @@ Begin Form
                 Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
+                    Locked = NotDefault
                     CanGrow = NotDefault
                     CanShrink = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =255
                     TextAlign =1
@@ -297,8 +368,10 @@ Begin Form
                 Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
+                    Locked = NotDefault
                     CanGrow = NotDefault
                     CanShrink = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =255
                     TextAlign =1
@@ -323,6 +396,8 @@ Begin Form
                 End
                 Begin TextBox
                     Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =255
                     TextAlign =1
@@ -366,6 +441,8 @@ Begin Form
                 End
                 Begin TextBox
                     Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =255
                     TextAlign =1
@@ -405,8 +482,10 @@ Begin Form
                 Begin TextBox
                     Visible = NotDefault
                     Enabled = NotDefault
+                    Locked = NotDefault
                     CanGrow = NotDefault
                     CanShrink = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =247
                     TextAlign =1
@@ -430,12 +509,14 @@ Begin Form
                     ForeShade =50.0
                 End
                 Begin TextBox
+                    Locked = NotDefault
+                    TabStop = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =119
+                    OverlapFlags =247
                     TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =3420
+                    Left =3360
                     Width =240
                     Height =315
                     FontSize =9
@@ -457,8 +538,8 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3420
-                    LayoutCachedWidth =3660
+                    LayoutCachedLeft =3360
+                    LayoutCachedWidth =3600
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -505,6 +586,7 @@ Option Explicit
 ' Revisions:    BLC - 10/6/2016 - 1.00 - initial version
 '               BLC - 10/20/2016 - 1.01 - removed button caption, selectedID, selectedvalue properties,
 '                                         button events
+'               BLC - 12/13/2016 - 1.02 - added highlighting for current field
 ' =================================
 
 '---------------------
@@ -519,6 +601,10 @@ Private m_Title As String
 Private m_Table As String
 Private m_Fields As String
 Private m_TableColumns As String
+
+'listbox scrolling handles
+Dim hWnd_A As Long
+Dim hWnd_B As Long
 
 '---------------------
 ' Event Declarations
@@ -589,7 +675,7 @@ On Error GoTo Err_Handler
     lblLinkedTable.Visible = False
     tbxIDField = StringFromCodepoint(uProhibited)
     tbxIDField.ControlTipText = "ID fields are autogenerated, do not import a CSV field to them!"
-    tbxIDField.StatusBarText = "ID fields are autogenerated && cannot be imported. 'None' should be the CSV value at right."
+    tbxIDField.StatusBarText = "ID fields are autogenerated & cannot be imported. 'None' should be the CSV value at right."
     
 Exit_Handler:
     Exit Sub
@@ -649,6 +735,8 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
        
   'PopulateForm
+'  MsgBox Me.CurrentRecord
+   'Me.tbxCSVPseudoRecord.Value = Forms("ImportMap").Controls("tbxCSVRecord") '[Forms]![ImportMap].[Controls]![tbxCSVRecord]
        
 Exit_Handler:
     Exit Sub

@@ -1,6 +1,10 @@
-﻿dbMemo "SQL" ="INSERT INTO SurveyPoint ( PointName, PointType, XCoord, YCoord, ZCoord, PointDes"
-    "cription, IsDeleted )\015\012SELECT PtName, ptID, Easting_m, Northing_m, Elevati"
-    "on_m, Code, 0\015\012FROM usys_temp_csv;\015\012"
+﻿dbMemo "SQL" ="SELECT t.ID, t.TaskType, t.Task, t.Status_ID, t.Priority_ID, t.RequestedBy_ID, t"
+    ".RequestDate, t.CompletedBy_ID, t.CompleteDate, p.Priority, p.Icon, s.Status, s."
+    "Icon, c1.FirstName + ' ' + c1.LastName AS Requestor, c1.ID, c2.FirstName + ' ' +"
+    " c2.LastName AS Completor, c2.ID\015\012FROM (((Task AS t LEFT JOIN Priority AS "
+    "p ON p.ID = t.Priority_ID) LEFT JOIN Status AS s ON s.ID = t.Status_ID) LEFT JOI"
+    "N Contact AS c1 ON c1.ID = t.RequestedBy_ID) LEFT JOIN Contact AS c2 ON c2.ID = "
+    "t.CompletedBy_ID;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -61,6 +65,80 @@ Begin
     End
     Begin
         dbText "Name" ="Code"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Status_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Priority_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.RequestedBy_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.RequestDate"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.CompletedBy_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.CompleteDate"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Priority"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Icon"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="s.Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="s.Icon"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Requestor"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xe92aa8c03bc0a440b9abb6410e6243a3
+        End
+    End
+    Begin
+        dbText "Name" ="Completor"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x0c7bb549e85b6543a1b8319e956f3285
+        End
+    End
+    Begin
+        dbText "Name" ="c1.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="c2.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.TaskType"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Task"
         dbLong "AggregateType" ="-1"
     End
 End

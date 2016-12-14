@@ -8,13 +8,14 @@ Option Explicit
 ' =================================
 ' CLASS:        Task
 ' Level:        Framework class
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Task object related properties, events, functions & procedures
 '
-' Source/date:  Bonnie Campbell, 10/28/2015
+' Source/date:  Bonnie Campbell, 11/3/2015
 ' References:   -
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
+'               BLC - 10/28/2016 - 1.01 - added TaskTypeID property
 ' =================================
 
 '    [ID] [smallint] IDENTITY(1,1) NOT NULL,
@@ -36,6 +37,7 @@ Option Explicit
 Private m_ID As Integer
 Private m_Task As String
 Private m_TaskType As String
+Private m_TaskTypeID As Long
 Private m_Priority As Integer
 Private m_Status As Integer
 Private m_RequestedByID As Integer
@@ -81,6 +83,14 @@ End Property
 
 Public Property Get TaskType() As String
     TaskType = m_TaskType
+End Property
+
+Public Property Let TaskTypeID(Value As Long)
+    m_TaskTypeID = Value
+End Property
+
+Public Property Get TaskTypeID() As Long
+    TaskTypeID = m_TaskTypeID
 End Property
 
 Public Property Let Priority(Value As String)
@@ -311,6 +321,7 @@ End Sub
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
 '   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
+'   BLC, 10/28/2016 - added task type, task type ID, priority
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
@@ -319,23 +330,25 @@ On Error GoTo Err_Handler
     
     Template = "i_task"
     
-    Dim Params(0 To 13) As Variant
+    Dim Params(0 To 14) As Variant
     
     With Me
         Params(0) = "Task"
         Params(1) = .Task
         Params(2) = .Status
         Params(3) = .Priority
-        Params(4) = .RequestedByID
-        Params(5) = CDate(Format(.RequestDate, "YYYY-mm-dd"))
-        Params(6) = .CompletedByID
-        Params(7) = CDate(Format(.CompleteDate, "YYYY-mm-dd"))
+        Params(4) = .TaskType
+        Params(5) = .TaskTypeID
+        Params(6) = .RequestedByID
+        Params(7) = CDate(Format(.RequestDate, "YYYY-mm-dd"))
+        Params(8) = .CompletedByID
+        Params(9) = CDate(Format(.CompleteDate, "YYYY-mm-dd"))
         
-        'params 8-11 --> createdate, lastmodified
+        'params 10-13 --> createdate, lastmodified
         
         If IsUpdate Then
             Template = "u_task"
-            Params(12) = .ID
+            Params(14) = .ID
         End If
         
         .ID = SetRecord(Template, Params)

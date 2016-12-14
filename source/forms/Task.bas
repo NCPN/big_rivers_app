@@ -725,6 +725,14 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000ac000000020000000000000003000000000000000300000001000000 ,
+                        0x00000000ffffff00010000000000000004000000250000000100000000000000 ,
+                        0xfff2000000000000000000000000000000000000000000000000000000000000 ,
+                        0x220022000000000049004900660028004c0065006e0028005b00630062007800 ,
+                        0x520065007100750065007300740065006400420079005d0029003d0030002c00 ,
+                        0x31002c003000290000000000
+                    End
                     Name ="cbxRequestedBy"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1440"
@@ -740,6 +748,14 @@ Begin Form
                     ForeThemeColorIndex =0
                     ForeTint =75.0
                     ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000000000000030000000100000000000000ffffff00020000002200 ,
+                        0x2200000000000000000000000000000000000000000000010000000000000001 ,
+                        0x00000000000000fff200002000000049004900660028004c0065006e0028005b ,
+                        0x00630062007800520065007100750065007300740065006400420079005d0029 ,
+                        0x003d0030002c0031002c00300029000000000000000000000000000000000000 ,
+                        0x00000000
+                    End
                 End
                 Begin Label
                     OverlapFlags =85
@@ -787,6 +803,16 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxRequestDate"
                     Format ="Short Date"
+                    ConditionalFormat = Begin
+                        0x01000000ec000000020000000100000000000000000000002200000001000000 ,
+                        0x00000000ffffff00010000000000000023000000450000000100000000000000 ,
+                        0xfff2000000000000000000000000000000000000000000000000000000000000 ,
+                        0x490049006600280049007300440061007400650028005b007400620078005200 ,
+                        0x65007100750065007300740044006100740065005d0029002c0031002c003000 ,
+                        0x290000000000490049006600280049007300440061007400650028005b007400 ,
+                        0x62007800520065007100750065007300740044006100740065005d0029002c00 ,
+                        0x30002c003100290000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1560
@@ -797,6 +823,16 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000ffffff00210000004900 ,
+                        0x49006600280049007300440061007400650028005b0074006200780052006500 ,
+                        0x7100750065007300740044006100740065005d0029002c0031002c0030002900 ,
+                        0x0000000000000000000000000000000000000000000100000000000000010000 ,
+                        0x0000000000fff200002100000049004900660028004900730044006100740065 ,
+                        0x0028005b00740062007800520065007100750065007300740044006100740065 ,
+                        0x005d0029002c0030002c00310029000000000000000000000000000000000000 ,
+                        0x00000000
+                    End
                 End
                 Begin Label
                     OverlapFlags =85
@@ -1032,11 +1068,11 @@ Public Property Let CurrentCount(Value As String)
     lblCount.Caption = m_CurrentCount
 End Property
 
-Public Property Get MaxCount() As String
-    MaxCount = m_MaxCount
+Public Property Get maxcount() As String
+    maxcount = m_MaxCount
 End Property
 
-Public Property Let MaxCount(Value As String)
+Public Property Let maxcount(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "/ XX characters"
     If ValidateString(Value, "alphanumdashslashspace") Then
         m_MaxCount = Value
@@ -1344,7 +1380,7 @@ On Error GoTo Err_Handler
     Me.ContextType = ""
     Me.ContextID = 0
 
-    If Len(Nz(Me.OpenArgs, "")) > 0 Then
+    If Len(Nz(Me.OpenArgs, "")) > 0 And CountInString(Me.OpenArgs, "|") = 2 Then
         Dim aryContext() As String
         
         aryContext() = Split(Me.OpenArgs, "|")
@@ -1384,6 +1420,7 @@ On Error GoTo Err_Handler
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
   
+    cbxStatus.DefaultValue = 1 'open
     'populate form
     PopulateCombobox cbxPriority, "priority"
     PopulateCombobox cbxStatus, "status"
@@ -1395,7 +1432,7 @@ On Error GoTo Err_Handler
     Me.CountLabelVisible = False
     Me.CurrentCount = "Characters Remaining:"
     Me.lblCharacterCount.Visible = True
-    Me.MaxCount = 255
+    Me.maxcount = 255
     Me.AlertCount = 10
   
     'ID default -> value used only for edits of existing table values
@@ -1605,7 +1642,7 @@ On Error GoTo Err_Handler
     
     Dim CurrentCount As Integer
     
-    CurrentCount = CInt(Me.MaxCount) - Len(tbxTask.Text)
+    CurrentCount = CInt(Me.maxcount) - Len(tbxTask.Text)
 
     Me.lblMaxCount.Caption = CurrentCount & " remaining"
     
@@ -1630,15 +1667,15 @@ On Error GoTo Err_Handler
 '        Me.MaxCountFontColor = vbBlack
 '    End If
 
-    If Len(tbxTask.Text) > Me.MaxCount Then
-        Me.lblMaxCount.Caption = -(Me.MaxCount - Len(tbxTask.Text)) & " over"
+    If Len(tbxTask.Text) > Me.maxcount Then
+        Me.lblMaxCount.Caption = -(Me.maxcount - Len(tbxTask.Text)) & " over"
     End If
     
         If CurrentCount < 1 Then 'CInt(Me.MaxCount) Then
         Me.MaxCountFontColor = vbRed
     End If
     
-    If Len(tbxTask.Text) > CInt(Me.MaxCount) Then
+    If Len(tbxTask.Text) > CInt(Me.maxcount) Then
         Me.lblMaxCount.Caption = -CurrentCount & " over"
         'disable add comment button until count is < or = MaxCount
         Me.btnSave.Enabled = False

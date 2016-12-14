@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =9360
     DatasheetFontHeight =11
-    ItemSuffix =80
-    Left =4695
-    Top =1515
-    Right =14055
-    Bottom =13500
+    ItemSuffix =83
+    Left =5445
+    Top =1455
+    Right =14805
+    Bottom =13440
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8a05f9ebf1d4e440
@@ -335,8 +335,8 @@ Begin Form
                 Begin CommandButton
                     Visible = NotDefault
                     OverlapFlags =85
-                    Left =8400
-                    Top =480
+                    Left =7740
+                    Top =420
                     Width =720
                     TabIndex =2
                     ForeColor =4210752
@@ -381,10 +381,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =8400
-                    LayoutCachedTop =480
-                    LayoutCachedWidth =9120
-                    LayoutCachedHeight =840
+                    LayoutCachedLeft =7740
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =8460
+                    LayoutCachedHeight =780
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -425,6 +425,35 @@ Begin Form
                     BorderTint =50.0
                     BorderShade =100.0
                     ForeTint =50.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =8520
+                    Top =420
+                    Width =720
+                    TabIndex =4
+                    ForeColor =16711680
+                    Name ="btnComment"
+                    Caption ="í ½í·©"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =8520
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =9240
+                    LayoutCachedHeight =780
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
             End
         End
@@ -721,6 +750,123 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin Label
+                    BackStyle =1
+                    OverlapFlags =85
+                    Left =3900
+                    Top =2520
+                    Width =1380
+                    Height =840
+                    FontSize =8
+                    BackColor =62207
+                    BorderColor =8355711
+                    ForeColor =255
+                    Name ="lblImportAlert"
+                    Caption ="CSV table is empty, please import new CSV by clicking the button below."
+                    ControlTipText ="CSV table is empty, please import new CSV."
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3900
+                    LayoutCachedTop =2520
+                    LayoutCachedWidth =5280
+                    LayoutCachedHeight =3360
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    TextFontFamily =2
+                    Left =4200
+                    Top =3480
+                    Width =720
+                    FontSize =14
+                    TabIndex =4
+                    ForeColor =255
+                    Name ="btnImportCSVData"
+                    Caption ="import"
+                    StatusBarText ="Import CSV data to usys_temp_csv"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Academy Engraved LET"
+                    ControlTipText ="Import CSV data to usys_temp_csv"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000707880ff608090ff607880ff507080ff506070ff405860ff ,
+                        0x405060ff404850ff404850ff404040ff303030ff202020ff1018208000000000 ,
+                        0x0000000000000000708090ff80a0a0ff70b0d0ff0090d0ff0090d0ff1090d0ff ,
+                        0x30a0d0ff50a8d0ff80b8d0ff80b8d0ff70a8c0ff5090b0ff305860ff30384050 ,
+                        0x0000000000000000708090ff80c0d0ff80a0b0ff80e0ffff60d0ffff60d0ffff ,
+                        0x70d0ffff509860ff308040ff206030ff90b8a0ff80c0e0ff5088a0ff303840c0 ,
+                        0xfff8f00000000000708890ff80d0f0ff80a0b0ff80c0d0ff70d8ffff70d8ffff ,
+                        0x80d8ffffb0e0ffff308040ff60a870ff206830ff80a890ff70b0e0ff406070ff ,
+                        0x2038403000000000708890ff80d8f0ff80c8e0ff80a0b0ff80e0ffff70d8ffff ,
+                        0x80d8ffffa0e0ffffd0f0ffff308040ff60a870ff206030ffa0d8f0ff5088a0ff ,
+                        0x30587090fff8f000808890ff90e0f0ff90e0ffff90a0b0ff90b8c0ff80d8ffff ,
+                        0x80d8ffffb0e8ffffe0f0ffff308040ff80d8a0ff206030ffd0e8f0ff80c8e0ff ,
+                        0x707880f0705040608090a0ff90e0f0ffa0e8ffff80c0e0ff90a0b0ff90e0ffff ,
+                        0xb0e8ffff308050ff308040ff60a870ff80d8a0ff308040ff206830ff307040ff ,
+                        0x90c0e0ff706860d08090a0ffa0e8f0ffa0e8ffffa0e8ffff80a8b0ff90a8b0ff ,
+                        0xa0b8c0ffb0c0b0ff308050ff70c080ff80d8a0ff50a060ff408050ffb0c0b0ff ,
+                        0xa0a8b0ff8090a0ff8098a0ffa0e8f0ffa0f0ffffa0e8ffffa0e8ffff80d8ffff ,
+                        0xc0b0a0fffff8f0ffd0e0d0ff408050ff60a870ff408050ffc0d0c0fffff8f0ff ,
+                        0xffe8e0ff705040ff8098a0ffa0f0f0ffb0f0f0ffa0f0ffffa0e8ffffa0e8ffff ,
+                        0xc0a8a0ffd0c0b0ffe0d0c0ffc0c8c0ff408050ffc0c8c0ffe0c8c0ffd0b8b0ff ,
+                        0xc0b0a0ff604830ff8098a0ffa0d0e0ffb0f0f0ffb0f0f0ffa0f0ffffa0e8ffff ,
+                        0xb0a8a0fffffffffffff8ffffd0c0c0fffff8f0fffff0e0ffd0b8b0fffff8f0ff ,
+                        0xffe8e0ff604830ff8098a0508098a0ff8098a0ff8098a0ff8098a0ff8098a0ff ,
+                        0xb0a8a0ffc0b0a0ffc0b8a0ffc0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ff ,
+                        0xc0b0a0ff604830ff000000000000000000000000000000000000000000000000 ,
+                        0xb0a8a0ffffffffffffffffffc0b0a0fffff8fffffff0f0ffc0b0a0fffff8f0ff ,
+                        0xfff0f0ff604830ff000000000000000000000000000000000000000000000000 ,
+                        0xb09080ffb08060ffb08060ffb08060ffb07860ffb07860ffb07860ffb07860ff ,
+                        0xb08060ffb08060ff000000000000000000000000000000000000000000000000 ,
+                        0xb08870ffe0c8b0ffe0c0b0ffb08060ffe0c0b0ffe0c0b0ffb07860ffe0b8b0ff ,
+                        0xe0b8b0ffb08060ff000000000000000000000000000000000000000000000000 ,
+                        0xb08870ffc09080ffc09070ffb08870ffb08070ffb08060ffb08060ffb08060ff ,
+                        0xb08060ffb08060ff
+                    End
+
+                    LayoutCachedLeft =4200
+                    LayoutCachedTop =3480
+                    LayoutCachedWidth =4920
+                    LayoutCachedHeight =3840
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    ThemeFontIndex =-1
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =4260
+                    Top =420
+                    Width =480
+                    Height =315
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxCSVRecord"
+                    ControlSource ="=[Forms]![ImportColumnList].[CurrentRecord]"
+                    OnChange ="[Event Procedure]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4260
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =4740
+                    LayoutCachedHeight =735
+                End
             End
         End
         Begin FormFooter
@@ -743,7 +889,7 @@ Option Explicit
 ' =================================
 ' Form:         ImportMap
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  ImportMap form object related properties, functions & procedures for UI display
@@ -755,6 +901,10 @@ Option Explicit
 '               BLC - 10/20/2016 - 1.02 - adjusted to use GetContext(), remove btnSave, ReadyForSave,
 '                                         code cleanup
 '               BLC - 10/27/2016 - 1.03 - revised to refresh data list after import
+'               BLC - 12/1/2016 - 1.04 - added btnComment & click event
+'               BLC - 12/5/2016 - 1.05 - revised comment click event to pass imported data ID & max length
+'               BLC - 12/8/2016 - 1.06 - revise to make comment button invisible, require CSV import to start
+'               BLC - 12/13/2016 - 1.07 - added row highlighting (current CSV record drives highlighting of table fields)
 ' =================================
 
 '---------------------
@@ -853,6 +1003,7 @@ End Property
 '   BLC - 10/6/2016 - initial version
 '   BLC - 10/19/2016 - adjusted to use callingform property
 '   BLC - 10/20/2016 - adjusted to use GetContext(), revised ListTables()
+'   BLC - 12/8/2016 - revised to make comment invisible, require CSV import to start
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -873,11 +1024,28 @@ On Error GoTo Err_Handler
     Me.lblTitle.Visible = False
     Me.lblContext.Visible = False
     Directions = "Select the table to import to && map the CSV fields at right." _
-                & vbCrLf & "Then import the CSV data by clicking the button at right."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+                & vbCrLf & "Import the CSV data by clicking the left arrow button."
     lblDirections.ForeColor = lngLtBlue
+    lblDirections.Caption = Directions
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     btnImport.Caption = StringFromCodepoint(uTriangleBlkL)
     btnImport.ForeColor = lngRed
+    
+    'new CSV import
+    lblImportAlert.Visible = False
+    lblImportAlert.TextAlign = taCenter
+    lblImportAlert.Caption = "Importing a new CSV?" & vbCrLf & "Use the button below."
+    lblImportAlert.ForeColor = lngRed
+    lblImportAlert.BackColor = lngYellow
+    btnImportCSVData.Visible = False
+    
+    'comment no longer used
+    btnComment.Visible = False
+    btnComment.ForeColor = lngBlue
+    btnComment.Enabled = False
+    
+    'disable import until comment complete
+    btnImport.Enabled = False
     
     'set data sources
     Dim strTables As String
@@ -995,6 +1163,10 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
 
+    'pseudo current record for CSV columns (record highlighting)
+'    tbxCSVRecord.Value = Replace(Me.listCSV.Form.ActiveControl.Name, "cbxColumnName", "")
+    'Forms![ImportColumnList].CurrentRecord '[listCSV].[Form].[CurrentRecord]
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1018,6 +1190,8 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/6/2016 - initial version
+'   BLC - 12/5/2016 - enabled comment button
+'   BLC - 12/8/2016 - disabled import button until CSV fields selected
 ' ---------------------------------
 Private Sub cbxTable_AfterUpdate()
 On Error GoTo Err_Handler
@@ -1037,26 +1211,35 @@ On Error GoTo Err_Handler
         listCSV.Visible = True
         btnImport.Visible = True
         
+        'disable import until fields are selected
+        btnImport.Enabled = False
+        
+        'new CSV import
+        lblImportAlert.Visible = True
+        btnImportCSVData.Visible = True
+        
         listTableFields.Form.Table = cbxTable.Text
         
-        'hide CSV form controls to initialize
-        listCSV.Form.HideControls
-                
-        'set recordset for # of dropdowns
-        listCSV.Form.NumColumns = Me.listTableFields.Form.Recordset.RecordCount
-        listCSV.Form.Table = cbxTable.Text
+'        'hide CSV form controls to initialize
+'        listCSV.Form.HideControls
+'
+'        'set recordset for # of dropdowns
+'        listCSV.Form.NumColumns = Me.listTableFields.Form.Recordset.RecordCount
+'        listCSV.Form.Table = cbxTable.Text
+'
+'        'disable import on any table ID field columns
+'        Debug.Print listTableFields.Form.Controls("tbxFieldName")
+'
+'        If listTableFields.Form.Controls("tbxFieldName") = "ID" Then
+'
+'            With listCSV.Form.Controls("cbxColumnName1")
+'                .Value = "None"
+'                .Enabled = False
+'            End With
+'
+'        End If
         
-        'disable import on any table ID field columns
-        Debug.Print listTableFields.Form.Controls("tbxFieldName")
-        
-        If listTableFields.Form.Controls("tbxFieldName") = "ID" Then
-        
-            With listCSV.Form.Controls("cbxColumnName1")
-                .Value = "None"
-                .Enabled = False
-            End With
-            
-        End If
+        SetCSVFieldsDisplay
         
         'display table data - IF view is set to table
         'Me.list.Form.DataList.Form.RecordSource = "SELECT * FROM " & cbxTable.Text & ";" 'SourceObject
@@ -1066,6 +1249,8 @@ On Error GoTo Err_Handler
         
         'ReadyForSave
     
+        'read to comment
+        btnComment.Enabled = True
     End If
 
 Exit_Handler:
@@ -1080,9 +1265,73 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          tbxCSVRecord_Change
+' Description:  textbox value change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, December 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/13/2016 - initial version
+' ---------------------------------
+Public Sub tbxCSVRecord_Change()
+On Error GoTo Err_Handler
+    
+'MsgBox Me.Parent.Form.Controls("TableFieldList").Form.Controls("tbxHighlight").Name
+    Me.listTableFields.Form.Controls("tbxHighlight") = CStr(Me.tbxCSVRecord)
+       
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxCSVRecord_Change[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnComment_Click
+' Description:  Undo button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, December 1, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/1/2016 - initial version
+'   BLC - 12/5/2016 - add imported data ID & max length (255)
+' ---------------------------------
+Private Sub btnComment_Click()
+On Error GoTo Err_Handler
+    
+    'determine next import ID --> DMax("ID","ImportedData")
+    
+    'open comment form
+    DoCmd.OpenForm "Comment", acNormal, , , , , "ImportedData|" & Nz(DMax("ID", "ImportedData"), 0) + 1 & "|255"
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnComment_Click[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnImport_Click
 ' Description:  Import button click actions
-' Assumptions:  -
+' Assumptions:
+'               Assumes that the first ID imported (StartImportID) is the current max record ID + 1
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -1092,9 +1341,22 @@ End Sub
 ' Revisions:
 '   BLC - 10/18/2016 - initial version
 '   BLC - 10/27/2016 - revised to update datalist & complete import
+'   BLC - 12/1/2016 - add import logging via ImportedData
 ' ---------------------------------
 Private Sub btnImport_Click()
 On Error GoTo Err_Handler
+
+    'determine next import ID --> DMax("ID","ImportedData")
+    
+    'open comment form
+    DoCmd.OpenForm "Comment", acNormal, , , , , "ImportedData|" & Nz(DMax("ID", "ImportedData"), 0) + 1 & "|255"
+
+    'determine initial imported record ID
+    Dim StartImportID As Long, EndImportID As Long
+    Dim StartCount As Integer, EndCount As Integer, ImportCount As Integer
+    
+    StartImportID = DMax("ID", Me.listTableFields.Form.Table) + 1
+    StartCount = DCount("ID", Me.listTableFields.Form.Table)
 
     Dim strTableFields As String, strImportColumns As String
     
@@ -1142,6 +1404,24 @@ On Error GoTo Err_Handler
     DoCmd.RunSQL strSQL
 '    DoCmd.SetWarnings True
     
+    'retrieve end & import counts
+    EndImportID = DMax("ID", Me.listTableFields.Form.Table)
+    EndCount = DCount("ID", Me.listTableFields.Form.Table)
+    
+    ImportCount = EndCount - StartCount
+    
+    'record import info
+    Dim Params(0 To 4) As Variant
+    Dim sfile As String
+    
+    Params(0) = sfile
+    Params(1) = Me.listTableFields.Form.Table
+    Params(2) = ImportCount
+    Params(3) = StartImportID
+    Params(4) = EndImportID
+    
+    SetRecord "i_imported_data", Params
+    
     'reset CSV comboboxes to remove user's list additions <--- FIX!!
     Call Form_ImportColumnList.RefreshColumnList
     
@@ -1159,6 +1439,85 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          btnImportCSVData_Click
+' Description:  Enter button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   EraserveAP, July 21, 2008
+'   Galaxiom, November 21, 2012
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=153447
+' Source/date:  Bonnie Campbell, December 8, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/8/2016 - initial version
+' ---------------------------------
+Private Sub btnImportCSVData_Click()
+On Error GoTo Err_Handler
+
+    'call click event --> assumes CSVDataList is OPEN (it is as a subform)
+    Form_CSVDataList.btnImportCSVData_Click
+    
+    SetCSVFieldsDisplay
+
+'    Dim StartFolder As String, strPath As String
+'
+'    'handle upload
+'    StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
+'
+'    strPath = BrowseFolder("Select CSV file to upload", "Confirm File", _
+'                        StartFolder, , msoFileDialogFilePicker, "Delimited files-CSV")
+'
+'    'switch to Table view to avoid error # 2008(deleting open object)
+'    Me.optgView.Value = 1
+'    Call optgView_Click
+'
+'    If Len(strPath) > 0 Then
+'        'upload CSV file
+'        UploadCSVFile strPath
+'        'refresh CSVColumnList dropdowns
+'
+'        'hide columns, reset the NumColumns variable
+'
+'        'hide CSV form controls to initialize
+'        'listCSV.Form.HideControls
+'        'Call Form_ImportColumnList.HideControls
+'
+'        'set recordset for # of dropdowns
+'        'listCSV.Form.NumColumns = Me.listTableFields.Form.Recordset.RecordCount
+'        'listCSV.Form.Table = cbxTable.Text
+'        'Form_ImportColumnList.NumColumns = Form_TableFieldList.Recordset.RecordCount
+'        'Form_ImportColumnList.Table = 'Form_ImportMap.cbxTable.Text
+'
+'        'Call Forms("CSVColumnList").RefreshCSVColumnList <-- error
+'        Call Form_ImportColumnList.RefreshColumnList
+'
+''FIX!!!
+'        'refresh subform display
+''        Me.Parent.Form!listCSV.Visible = False
+''        Me.Parent.Form!listCSV.Form.Requery
+''        Me.Parent.Form!listCSV.Visible = True
+'
+''        Forms!ImportMap!listCSV.Form.Requery <-- doesn't work
+''         Forms!ImportMap!listCSV.Form.Controls("cbxColumnName2").Requery <-- doesn't work
+'
+'    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnImportCSVData_Click[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 
 ' ---------------------------------
 ' Sub:          Form_Close
@@ -1187,6 +1546,53 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          SetCSVFieldsDisplay
+' Description:  CSV field list display actions
+' Assumptions:  Public to allow
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, December 6, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/8/2016 - initial version
+' ---------------------------------
+Public Sub SetCSVFieldsDisplay()
+On Error GoTo Err_Handler
+    
+    'hide CSV form controls to initialize
+    listCSV.Form.HideControls
+            
+    'set recordset for # of dropdowns
+    listCSV.Form.NumColumns = Me.listTableFields.Form.Recordset.RecordCount
+    listCSV.Form.Table = Me.cbxTable ' cbxTable.Text --> error #2185: can't reference a property or
+                                     ' method for a control unless the control has the focus
+    
+    'disable import on any table ID field columns
+    Debug.Print listTableFields.Form.Controls("tbxFieldName")
+    
+    If listTableFields.Form.Controls("tbxFieldName") = "ID" Then
+    
+        With listCSV.Form.Controls("cbxColumnName1")
+            .Value = "None"
+            .Enabled = False
+        End With
+        
+    End If
+        
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetCSVFieldsDisplay[ImportMap form])"
     End Select
     Resume Exit_Handler
 End Sub

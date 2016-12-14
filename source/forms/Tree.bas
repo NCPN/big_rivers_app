@@ -13,11 +13,11 @@ Begin Form
     GridY =24
     Width =11400
     DatasheetFontHeight =11
-    ItemSuffix =29
+    ItemSuffix =31
     Left =3360
     Top =2775
-    Right =15015
-    Bottom =13740
+    Right =17595
+    Bottom =14625
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -203,7 +203,6 @@ Begin Form
         End
         Begin FormHeader
             CanGrow = NotDefault
-            Height =1560
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -32617,7 +32616,7 @@ Begin Form
                     LayoutCachedTop =60
                     LayoutCachedWidth =9540
                     LayoutCachedHeight =2160
-                    TabIndex =2
+                    TabIndex =4
                 End
                 Begin Subform
                     CanShrink = NotDefault
@@ -32756,6 +32755,65 @@ Begin Form
                     LayoutCachedHeight =1337
                     BackShade =85.0
                 End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =9900
+                    Top =120
+                    TabIndex =2
+                    ForeColor =16711680
+                    Name ="btnAddTask"
+                    Caption =" Add Task"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new task"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =9900
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =11340
+                    LayoutCachedHeight =480
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin TextBox
+                    FontItalic = NotDefault
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =9960
+                    Top =600
+                    Width =480
+                    Height =317
+                    FontSize =9
+                    FontWeight =500
+                    TabIndex =3
+                    BackColor =14277081
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =9960
+                    LayoutCachedTop =600
+                    LayoutCachedWidth =10440
+                    LayoutCachedHeight =917
+                    BackShade =85.0
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
+                End
             End
         End
         Begin FormFooter
@@ -32779,7 +32837,7 @@ Option Explicit
 ' MODULE:       Tree form
 ' Description:  Treeview functions & procedures
 ' Level:        Framework form
-' Version:      1.06
+' Version:      1.07
 '
 ' Source/date:  Bonnie Campbell, 7/10/2015
 ' Revisions:    BLC - 7/10/2015 - 1.00 - initial version
@@ -32792,6 +32850,7 @@ Option Explicit
 '               BLC - 9/1/2016  - 1.05 - add LoadTree() calls on form open to populate tree images
 '                                        from usys_temp_photo & Photo tables
 '               BLC - 10/25/2016 - 1.06 - renamed btnAddVisit -> btnAddEvent
+'               BLC - 10/28/2016 - 1.07 - added btnAddTask()
 ' =================================
 
 '---------------------
@@ -32857,9 +32916,11 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Choose the sampling visit date, then classify " & _
                             "or update photos. Enter photo details in the form at " & _
                             "right && save to save the photo record."
+    btnAddTask.Caption = StringFromCodepoint(uCheckItem) & " Add Task"
     
     'set hover
     btnAddEvent.HoverColor = lngGreen
+    btnAddTask.HoverColor = lngGreen
     
     'display no image to start (no image is selected)
     lblNoImageSelected.Visible = True
@@ -33056,6 +33117,41 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnAddEvent_Click[Tree form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnAddTask_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, October 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 10/28/2016 - initial version
+' ---------------------------------
+Private Sub btnAddTask_Click()
+On Error GoTo Err_Handler
+
+    Dim picID As Long
+    
+    'default
+    picID = Nz(Me.tbxID, 0)
+
+    DoCmd.OpenForm "Task", acNormal, , , , , "Tree|Photo|" & picID
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddTask_Click[Tree form])"
     End Select
     Resume Exit_Handler
 End Sub

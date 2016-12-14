@@ -1033,7 +1033,7 @@ Public Event InvalidCallingForm(Value As String)
 '   BLC - 2/23/2015  - initial version
 ' ---------------------------------
 Public Property Get Maximized() As Boolean
-     Maximized = IsZoomed(Me.hwnd) * 1
+     Maximized = IsZoomed(Me.hWnd) * 1
 End Property
 
 ' ---------------------------------
@@ -1052,7 +1052,7 @@ End Property
 '   BLC - 2/23/2015  - initial version
 ' ---------------------------------
 Public Property Get Minimized() As Boolean
-     Minimized = IsIconic(Me.hwnd) * 1
+     Minimized = IsIconic(Me.hWnd) * 1
 End Property
 
 ' ---------------------------------

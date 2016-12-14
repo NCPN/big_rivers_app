@@ -16,10 +16,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =2790
-    Top =3615
-    Right =16650
-    Bottom =14610
+    Left =5145
+    Top =5070
+    Right =11700
+    Bottom =8565
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -383,7 +383,7 @@ Option Explicit
 ' =================================
 ' Form:         AppComment
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Comment form object related properties, events, functions & procedures for UI display
 '
@@ -391,6 +391,7 @@ Option Explicit
 ' References:
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 8/9/2016  - 1.01 - revised Comment to AppComment (comment reserved word)
+'               BLC - 12/5/2016 - 1.02 - added instruction & max count
 ' =================================
 
 '---------------------
@@ -513,11 +514,11 @@ Public Property Let CurrentCount(Value As String)
     lblCount.Caption = m_CurrentCount
 End Property
 
-Public Property Get MaxCount() As String
-    MaxCount = m_MaxCount
+Public Property Get maxcount() As String
+    maxcount = m_MaxCount
 End Property
 
-Public Property Let MaxCount(Value As String)
+Public Property Let maxcount(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "/ XX characters"
     If ValidateString(Value, "alphanumdashslashspace") Then
         m_MaxCount = Value
@@ -821,6 +822,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 11/4/2015 - initial version
+'   BLC - 12/5/2016 - added instruction and max count inputs
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -833,19 +835,33 @@ On Error GoTo Err_Handler
     Me.lineIndicator.Width = Me.Form.Width
     Me.lineIndicator.borderColor = lngLime
     
+    'defaults
+    Dim instruction As String
+    Dim maxcount As Integer
+    
+    instruction = "Enter your establishment comment."
+    maxcount = 50
+    
     'set comment context
     ary = Split(Nz(Me.OpenArgs, ""), "|")
     If IsArray(ary) Then
         Me.Context = ary(0) & " - " & ary(1) '"Plot - 24"
+        maxcount = ary(2)
+        
+        'set instructions based on calling form
+        Select Case LCase(ary(0))
+            Case "importeddata"
+                instruction = "Enter your import comment."
+        End Select
     Else
         GoTo Exit_Handler
     End If
     
-    Me.Instructions = "Enter your establishment comment."
+    Me.Instructions = instruction
     Me.CountLabelVisible = False
     Me.CurrentCount = "Characters Remaining:"
     Me.lblCharacterCount.Visible = False
-    Me.MaxCount = 50
+    Me.maxcount = maxcount
     Me.AlertCount = 10
    
     Me.AddAction = "add_"
@@ -882,7 +898,7 @@ On Error GoTo Err_Handler
     
     Dim CurrentCount As Integer
     
-    CurrentCount = CInt(Me.MaxCount) - Len(tbxComment.Text)
+    CurrentCount = CInt(Me.maxcount) - Len(tbxComment.Text)
 
     Me.lblMaxCount.Caption = CurrentCount & " remaining"
     
@@ -903,7 +919,7 @@ On Error GoTo Err_Handler
         Me.MaxCountFontColor = vbRed
     End If
     
-    If Len(tbxComment.Text) > CInt(Me.MaxCount) Then
+    If Len(tbxComment.Text) > CInt(Me.maxcount) Then
         Me.lblMaxCount.Caption = -CurrentCount & " over"
         'disable add comment button until count is < or = MaxCount
         Me.btnAdd.Enabled = False
@@ -930,7 +946,7 @@ End Sub
 ' ---------------------------------
 ' Sub:          btnAdd_Click
 ' Description:  Add comment form entry
-' Assumptions:  -
+' Assumptions:  Person using the application is the "commentor"
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -940,6 +956,7 @@ End Sub
 ' Revisions:
 '   BLC - 11/12/2015 - initial version
 '   BLC - 8/9/2016   - revised Comment > AppComment (comment reserved word)
+'   BLC - 12/6/2016 - revise so comment type = context before "- ID#"
 ' ---------------------------------
 Private Sub btnAdd_Click()
 On Error GoTo Err_Handler
@@ -947,15 +964,24 @@ On Error GoTo Err_Handler
     Dim oComment As New AppComment
     
     With oComment
-        .CommentType = lblContext.Caption
-        .TypeID = 4
+        .CommentType = Left(lblContext.Caption, InStr(lblContext.Caption, " - "))
+        .TypeID = RemoveChars(lblContext.Caption, True) 'return only numbers
         .Comment = tbxComment.Value
-        .CommentorID = 3 'Requestor
+        .CommentorID = TempVars("AppUserID") '3 'Requestor
         '.RequestedByID = 3 'Requestor
         .AddComment
     
         If IsNumeric(.ID) Then
-            MsgBox "New Comment ID = " & .ID
+'            MsgBox "New Comment ID = " & .ID
+
+            'show added record message & clear
+            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                        "Comment added (# " & .ID & " )" & _
+                        "|Type" & PARAM_SEPARATOR & "info"
+            
+            'close comment form
+            DoCmd.Close acForm, "Comment"
+            
         End If
     
     End With
