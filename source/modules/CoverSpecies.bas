@@ -21,7 +21,7 @@ Option Explicit
 '---------------------
 ' Declarations
 '---------------------
-Private m_Species As New Species
+Private m_Species As New species
 
 Private m_PercentCover As Integer
 Private m_VegPlotID As Long
@@ -335,7 +335,7 @@ On Error GoTo Err_Handler
 
 '    MsgBox "Initializing...", vbOKOnly
     
-    Set m_Species = New Species
+    Set m_Species = New species
 
 Exit_Handler:
     Exit Sub

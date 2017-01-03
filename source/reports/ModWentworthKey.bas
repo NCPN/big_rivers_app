@@ -17,22 +17,27 @@ Begin Report
     PictureType =1
     GridX =24
     GridY =24
-    Width =6600
+    Width =6480
     DatasheetFontHeight =11
-    ItemSuffix =115
-    Right =25395
-    Bottom =11790
+    ItemSuffix =123
+    Right =10260
+    Bottom =5655
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
-        0xfe0d64e16dc2e440
+        0x662cc1c4d5dbe440
     End
+    RecordSource ="PARAMETERS yr Long; SELECT Label AS ClassSize, Code, DiameterRange_mm, ActiveYea"
+        "r, RetireYear, CategoryOrder, KeyOrder FROM ModWentworthScale WHERE ([yr] = [Act"
+        "iveYear] AND ([yr]<[RetireYear] OR [RetireYear] IS NULL)) OR ([yr] = [RetireYear"
+        "]) OR ([yr] > [ActiveYear] AND ([yr] <= [RetireYear] OR [RetireYear] IS NULL)) O"
+        "RDER BY CategoryOrder; "
     Caption ="Modified Wentworth Key"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6801000068010000680100006d01000000000000901500003804000001000000 ,
-        0x010000006801000000000000a10700000100000001000000
+        0x6a01000068010000680100006801000000000000a80c00002001000000000000 ,
+        0x020000000000000000000000a10700000100000001000000
     End
     FilterOnLoad =0
     DisplayOnSharePointSite =1
@@ -127,12 +132,177 @@ Begin Report
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
+        Begin BreakLevel
+            ControlSource ="KeyOrder"
+        End
         Begin FormHeader
             KeepTogether = NotDefault
-            Height =0
+            Height =720
             Name ="ReportHeader"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
+            Begin
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Width =6480
+                    Height =360
+                    FontWeight =700
+                    BackColor =11265523
+                    BorderColor =8355711
+                    Name ="lblTitle"
+                    Caption ="NCPN Modified Wentworth Scale"
+                    GridlineColor =10921638
+                    LayoutCachedWidth =6480
+                    LayoutCachedHeight =360
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Top =360
+                    Width =1368
+                    Height =360
+                    FontSize =8
+                    FontWeight =700
+                    BackColor =0
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblClassSize1"
+                    Caption ="Class Size"
+                    GridlineColor =10921638
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =1368
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Left =1368
+                    Top =360
+                    Width =432
+                    Height =360
+                    FontSize =8
+                    FontWeight =700
+                    BackColor =0
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblCode1"
+                    Caption ="Code"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1368
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Left =1800
+                    Top =360
+                    Width =1440
+                    Height =360
+                    FontSize =8
+                    FontWeight =700
+                    BackColor =0
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblDiameter1"
+                    Caption ="Diameter (mm)"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1800
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =3240
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Left =3240
+                    Top =360
+                    Width =1368
+                    Height =360
+                    FontSize =8
+                    FontWeight =700
+                    BackColor =0
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblClassSize2"
+                    Caption ="Class Size"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3240
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =4608
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Left =4608
+                    Top =360
+                    Width =432
+                    Height =360
+                    FontSize =8
+                    FontWeight =700
+                    BackColor =0
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblCode2"
+                    Caption ="Code"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4608
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =5040
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    TextAlign =2
+                    Left =5040
+                    Top =360
+                    Width =1440
+                    Height =360
+                    FontSize =8
+                    FontWeight =700
+                    BackColor =0
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblDiameter2"
+                    Caption ="Diameter (mm)"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5040
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =6480
+                    LayoutCachedHeight =720
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+            End
         End
         Begin PageHeader
             Height =0
@@ -145,7 +315,7 @@ Begin Report
             KeepTogether = NotDefault
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =2364
+            Height =288
             OnFormat ="[Event Procedure]"
             OnPrint ="[Event Procedure]"
             Name ="Detail"
@@ -154,306 +324,84 @@ Begin Report
                 Begin Label
                     BackStyle =1
                     OldBorderStyle =1
-                    TextAlign =2
-                    Top =360
-                    Width =1512
-                    Height =360
-                    FontSize =8
-                    FontWeight =700
-                    BackColor =0
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblClassSize1"
-                    Caption ="Class Size"
-                    GridlineColor =10921638
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =1512
-                    LayoutCachedHeight =720
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =2
-                    Left =1536
-                    Top =360
-                    Width =576
-                    Height =360
-                    FontSize =8
-                    FontWeight =700
-                    BackColor =0
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblCode1"
-                    Caption ="Code"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1536
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =2112
-                    LayoutCachedHeight =720
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =2
-                    Left =2136
-                    Top =360
-                    Width =1152
-                    Height =360
-                    FontSize =8
-                    FontWeight =700
-                    BackColor =0
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblDiameter1"
-                    Caption ="Diameter (mm)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2136
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =3288
-                    LayoutCachedHeight =720
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =2
-                    Left =3300
-                    Top =360
-                    Width =1512
-                    Height =360
-                    FontSize =8
-                    FontWeight =700
-                    BackColor =0
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblClassSize2"
-                    Caption ="Class Size"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =4812
-                    LayoutCachedHeight =720
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
                     TextAlign =1
-                    Top =744
-                    Width =6595
+                    Width =3235
                     Height =288
                     FontSize =8
                     TopMargin =29
                     BackColor =14869733
                     BorderColor =8355711
                     Name ="lblRow1"
-                    Caption ="        Fines                              F        See SOP definition          "
-                        "     Gravel                     GR                > 2 - 16"
                     GridlineColor =10921638
-                    LayoutCachedTop =744
-                    LayoutCachedWidth =6595
-                    LayoutCachedHeight =1032
+                    LayoutCachedWidth =3235
+                    LayoutCachedHeight =288
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
+                Begin TextBox
                     TextAlign =2
-                    Left =4836
-                    Top =360
-                    Width =576
-                    Height =360
-                    FontSize =8
-                    FontWeight =700
-                    BackColor =0
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblCode2"
-                    Caption ="Code"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4836
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =5412
-                    LayoutCachedHeight =720
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =1
-                    Top =1056
-                    Width =6595
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Width =1368
                     Height =288
                     FontSize =8
-                    TopMargin =29
-                    BackColor =14869733
-                    BorderColor =8355711
-                    Name ="lblRow2"
-                    Caption ="        Clay                               CL                                   "
-                        "                    Pebble                    PB                 > 16 - 64"
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxClassSize"
+                    ControlSource ="ClassSize"
+                    LeftPadding =14
+                    RightPadding =14
                     GridlineColor =10921638
-                    LayoutCachedTop =1056
-                    LayoutCachedWidth =6595
-                    LayoutCachedHeight =1344
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
+
+                    LayoutCachedWidth =1368
+                    LayoutCachedHeight =288
                 End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =1
-                    Top =1368
-                    Width =6595
+                Begin TextBox
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1368
+                    Width =432
                     Height =288
                     FontSize =8
-                    TopMargin =29
-                    BackColor =14869733
-                    BorderColor =8355711
-                    Name ="lblRow3"
-                    Caption ="    Loam/Clay                        LC                                         "
-                        "              Cobble                   CO                > 64 - 256"
+                    TabIndex =1
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxCode"
+                    ControlSource ="Code"
                     GridlineColor =10921638
-                    LayoutCachedTop =1368
-                    LayoutCachedWidth =6595
-                    LayoutCachedHeight =1656
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
+
+                    LayoutCachedLeft =1368
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =288
                 End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =1
-                    Top =1680
-                    Width =6595
+                Begin TextBox
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1800
                     Height =288
                     FontSize =8
-                    TopMargin =29
-                    BackColor =14869733
-                    BorderColor =8355711
-                    Name ="lblRow4"
-                    Caption ="       Loam                              LO                                     "
-                        "                  Boulder                  BL                > 256 - 512"
+                    TabIndex =2
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxDiameter"
+                    ControlSource ="DiameterRange_mm"
                     GridlineColor =10921638
-                    LayoutCachedTop =1680
-                    LayoutCachedWidth =6595
-                    LayoutCachedHeight =1968
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =1
-                    Top =1992
-                    Width =6600
-                    Height =372
-                    FontSize =8
-                    TopMargin =29
-                    BackColor =14869733
-                    BorderColor =8355711
-                    Name ="lblRow5"
-                    Caption ="       Sand                               SA              0.5 m- 2mm            "
-                        " Bedrock, Hardpan        BR               > 512"
-                    GridlineColor =10921638
-                    LayoutCachedTop =1992
-                    LayoutCachedWidth =6600
-                    LayoutCachedHeight =2364
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =2
-                    Width =6600
-                    Height =360
-                    FontWeight =700
-                    BackColor =11265523
-                    BorderColor =8355711
-                    Name ="lblTitle"
-                    Caption ="NCPN Modified Wentworth Scale"
-                    GridlineColor =10921638
-                    LayoutCachedWidth =6600
-                    LayoutCachedHeight =360
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    BackStyle =1
-                    OldBorderStyle =1
-                    TextAlign =2
-                    Left =5436
-                    Top =360
-                    Width =1152
-                    Height =360
-                    FontSize =8
-                    FontWeight =700
-                    BackColor =0
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblDiameter2"
-                    Caption ="Diameter (mm)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =5436
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =6588
-                    LayoutCachedHeight =720
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Line
-                    Left =2640
-                    Top =960
-                    Width =0
-                    Height =900
-                    Name ="lnVertical"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2640
-                    LayoutCachedTop =960
-                    LayoutCachedWidth =2640
-                    LayoutCachedHeight =1860
-                End
-                Begin Line
-                    LineSlant = NotDefault
-                    Left =2580
-                    Top =1740
-                    Width =144
-                    Height =180
-                    Name ="lnEnd"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =1740
-                    LayoutCachedWidth =2724
-                    LayoutCachedHeight =1920
+
+                    LayoutCachedLeft =1800
+                    LayoutCachedWidth =3240
+                    LayoutCachedHeight =288
                 End
             End
         End
         Begin PageFooter
             Height =0
+            BackColor =8421504
             Name ="PageFooterSection"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
-            BackThemeColorIndex =1
         End
         Begin FormFooter
             KeepTogether = NotDefault
@@ -476,7 +424,7 @@ Option Explicit
 ' =================================
 ' Report:       ModWentworthKey
 ' Level:        Application report
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Modified Wentworth Key report object related properties, events, functions & procedures for UI display
 '
@@ -485,6 +433,7 @@ Option Explicit
 '  Allen Browne, April 2010
 '  http://allenbrowne.com/ser-43.html
 ' Revisions:    BLC - 5/12/2016 - 1.00 - initial version
+'               BLC - 12/14/2016 - 1.01 - revised to dynamic scale
 ' =================================
 
 '---------------------
@@ -518,6 +467,7 @@ Option Explicit
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
+'   BLC - 12/14/2016 - revised to dynamic scale
 ' ---------------------------------
 Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -535,13 +485,17 @@ On Error GoTo Err_Handler
     lblDiameter2.Caption = "Diameter (mm)"
     
     'rows
-    lblRow1.Caption = "        Fines                              F        See SOP definition               Gravel                     GR                > 2 - 16"
-    lblRow2.Caption = "        Clay                               CL                                                       Pebble                     PB                 > 16 - 64"
-    lblRow3.Caption = "    Loam/Clay                        LC                                                       Cobble                    CO                > 64 - 256"
-    lblRow4.Caption = "       Loam                              LO                                                       Boulder                   BL                > 256 - 512"
-    lblRow5.Caption = "       Sand                               SA            0.5" & ChrW(uMu) & "m- 2mm              Bedrock, Hardpan       BR               > 512"
+'    lblRow1.Caption = "        Fines                              F        See SOP definition               Gravel                     GR                > 2 - 16"
+'    lblRow2.Caption = "        Clay                               CL                                                       Pebble                     PB                 > 16 - 64"
+'    lblRow3.Caption = "    Loam/Clay                        LC                                                       Cobble                    CO                > 64 - 256"
+'    lblRow4.Caption = "       Loam                              LO                                                       Boulder                   BL                > 256 - 512"
+'    lblRow5.Caption = "       Sand                               SA            0.5" & ChrW(uMu) & "m- 2mm              Bedrock, Hardpan       BR               > 512"
 
     'arrow --> from lines
+    
+    'data
+    
+    
     
     If Len(Nz(OpenArgs, "")) > 0 Or IsNull(OpenArgs) Then
         strPark = Nz(TempVars("ParkCode"), "")

@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 12/14/2016  - 1.02 - latest enum update from db
-'                                         last updated: 12/14/2016 6:39:52 AM
+'               app - 1/3/2017  - 1.02 - latest enum update from db
+'                                         last updated: 1/3/2017 10:19:52 AM
 ' =================================
 
 '-----------------------------
@@ -190,7 +190,7 @@ Public Enum TaglineType
     V = 85
     G = 86
     w = 87
-    R = 88
+    r = 88
     D = 89
     [_Last] = 89
 End Enum

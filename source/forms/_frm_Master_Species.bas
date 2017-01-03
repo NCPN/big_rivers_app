@@ -1426,15 +1426,15 @@ On Error GoTo Err_ButtonSave_Click
       If Not IsNull(DLookup("[Shrub_ID]", "tbl_LP_Shrub", "[Transect_ID] = '" & Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Belt_Shrub.Form!Transect_ID & "' AND [Species] = '" & Me![Master_PLANT_Code] & "'")) Then
         MsgBox "This species is already recorded for this transect."
       Else
-        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Belt_Shrub.Form!Species = Me![Master_PLANT_Code]
-        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Belt_Shrub.Form!Species.Requery
+        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Belt_Shrub.Form!species = Me![Master_PLANT_Code]
+        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Belt_Shrub.Form!species.Requery
       End If
     ElseIf Me.OpenArgs = "fsub_LP_Exotic" Then
       If Not IsNull(DLookup("[Exotic_ID]", "tbl_LP_Exotic", "[Transect_ID] = '" & Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Exotic.Form!Transect_ID & "' AND [Species] = '" & Me![Master_PLANT_Code] & "'")) Then
         MsgBox "This species is already recorded for this transect."
       Else
-        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Exotic.Form!Species = Me![Master_PLANT_Code]
-        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Exotic.Form!Species.Requery
+        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Exotic.Form!species = Me![Master_PLANT_Code]
+        Forms!frm_Data_Entry!frm_LP_Belt_Transect.Form!fsub_LP_Exotic.Form!species.Requery
       End If
     ElseIf Me.OpenArgs = "fsub_LP_Intercept" Then
       If Not IsNull(DLookup("[LC_ID]", "tbl_LP_Lower_Canopy", "[Intercept_ID] = '" & Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!Intercept_ID & "' AND [Species] = '" & Me![Master_PLANT_Code] & "'")) Then
@@ -1448,8 +1448,8 @@ On Error GoTo Err_ButtonSave_Click
       If Not IsNull(DLookup("[LC_ID]", "tbl_LP_Lower_Canopy", "[Intercept_ID] = '" & Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!Intercept_ID & "' AND [Species] = '" & Me![Master_PLANT_Code] & "'")) Or Not IsNull(DLookup("[Intercept_ID]", "tbl_LP_Intercept", "[Intercept_ID] = '" & Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!Intercept_ID & "' AND [Top] = '" & Me![Master_PLANT_Code] & "'")) Then
         MsgBox "This species is already recorded for this point."
       Else
-        Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!Species = Me![Master_PLANT_Code]
-        Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!Species.Requery
+        Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!species = Me![Master_PLANT_Code]
+        Forms!frm_Data_Entry!frm_LP_Transect.Form!fsub_LP_Intercept.Form!fsub_LP_Lower_Canopy.Form!species.Requery
       End If
     End If ' End if for form name tests
   End If   ' End if for null OpenArgs test

@@ -4,6 +4,7 @@ CREATE TABLE [ModWentworthScale] (
   [Label] VARCHAR (25),
   [DiameterRange_mm] VARCHAR (255),
   [CategoryOrder] SHORT ,
+  [KeyOrder] SHORT ,
   [ActiveYear] SHORT ,
   [RetireYear] SHORT 
 )

@@ -21,11 +21,9 @@ Begin Form
     GridY =24
     Width =9060
     DatasheetFontHeight =11
-    ItemSuffix =44
-    Left =390
-    Top =7425
-    Right =9375
-    Bottom =12495
+    ItemSuffix =45
+    Right =10935
+    Bottom =7815
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xceb8be6c95d5e440
@@ -209,7 +207,7 @@ Begin Form
                     OverlapFlags =223
                     Left =2820
                     Top =120
-                    Width =5280
+                    Width =5100
                     Height =1320
                     BorderColor =8355711
                     ForeColor =16777164
@@ -220,7 +218,7 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =2820
                     LayoutCachedTop =120
-                    LayoutCachedWidth =8100
+                    LayoutCachedWidth =7920
                     LayoutCachedHeight =1440
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -527,6 +525,77 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin CommandButton
+                    OverlapFlags =85
+                    TextFontFamily =2
+                    Left =8040
+                    Top =120
+                    Width =720
+                    FontSize =14
+                    TabIndex =4
+                    ForeColor =255
+                    Name ="btnExportXLS"
+                    Caption ="import"
+                    StatusBarText ="Export data below as an Excel file"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Academy Engraved LET"
+                    ControlTipText ="Export data below as an Excel file"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000308030ff308030ff307830ff307830ff307020ff307020ff ,
+                        0x307020ff306810ff306810ff306010ff306010ff306010ff306000ff305800ff ,
+                        0x305800ff305800ff308040ffffffffffffffffffffffffffffffffffffffffff ,
+                        0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff ,
+                        0xffffffff305800ff308840ffffffffffd0e8d0ffd0e8d0ffd0e8d0ffc0e8c0ff ,
+                        0xc0e8c0ffc0e0b0ffb0e0b0ffb0e0b0ffb0e0a0ffa0e0a0ffa0e0a0ffa0e0a0ff ,
+                        0xffffffff305800ff308840ffffffffffd0e8d0ff70c090ff20a060ff209860ff ,
+                        0x209040ff208020ff509040fff0f8f0ff70c080ff40a860ff60b070fffff8ffff ,
+                        0xfff8f0ff305800ff309040ffffffffffd0e8d0ffd0e8d0ff309850ff209040ff ,
+                        0x208030ff307820ff709850ff90d8b0ff40b870ff40b060ffc0e0c0fffff8ffff ,
+                        0xffffffff306000ff309050ffffffffffd0e8d0ffd0e8d0ffa0d0b0ff307820ff ,
+                        0x307810ff407810ffd0f0e0ff40c080ff40c080ff80d0a0fffffffffff0f8f0ff ,
+                        0xffffffff306010ff309050ffffffffffd0e8d0ffd0e8d0ffd0e8d0ff70a050ff ,
+                        0x306000ff306000ff50c890ff40c890ff60c890fff0f8f0ffffffffffb0e0b0ff ,
+                        0xffffffff306010ff309050ffffffffffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ff ,
+                        0x406820ff40a060ff40d0a0ff40d090ffb0e8d0ffffffffffd0f0d0ffb0e0b0ff ,
+                        0xffffffff306810ff409850ffffffffffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ff ,
+                        0x80c090ff40c890ff40d090ff50b070fffffffffffff8ffffb0e0b0ffc0e0b0ff ,
+                        0xffffffff306810ff409850ffffffffffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ff ,
+                        0x50c080ff40c080ff40c080ff406830ffa0a890fffff8f0fff0f8f0ffc0e8c0ff ,
+                        0xffffffff306820ff409850f0ffffffffe0f0e0ffd0e8d0ffd0e8d0ff80c890ff ,
+                        0x40b870ff40b880ff508850ff506030ff506830ffe0e8e0fffff8f0ffe0f0e0ff ,
+                        0xffffffff307020ff409850d0f0f8f0fff0f8f0ffd0e8d0ffb0d8b0ff40a860ff ,
+                        0x40b060ff80c8a0ffd0e0d0ff506830ff506830ff607850fffff8f0fffff8f0ff ,
+                        0xffffffff307020ff40985090c0e0d0fff0f8f0ffd0e8d0ff409840ff40a050ff ,
+                        0x40a860fff0f8f0fffff8ffff80a070ff506830ff506830ff909880fffff8f0ff ,
+                        0xfff8ffff307820ff4098505060b080f0f0f8f0fff0f8f0fff0f8f0ffe0f0e0ff ,
+                        0xd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ffd0e8d0ff ,
+                        0xffffffff307830ff000000004098505060b080f0c0e0d0fff0f8f0ffffffffff ,
+                        0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff ,
+                        0xffffffff307830ff00000000000000004098505040985090409850d0409850f0 ,
+                        0x409850ff409050ff309050ff309050ff309040ff308840ff308840ff308840ff ,
+                        0x308030ff308030ff
+                    End
+
+                    LayoutCachedLeft =8040
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =8760
+                    LayoutCachedHeight =480
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    ThemeFontIndex =-1
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
             End
         End
         Begin Section
@@ -577,7 +646,7 @@ Option Explicit
 ' =================================
 ' Form:         CSVDataList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -587,6 +656,7 @@ Option Explicit
 ' Revisions:    BLC - 10/19/2016 - 1.00 - initial version
 '               BLC - 10/27/2016 - 1.01 - added RefreshDataList()
 '               BLC - 12/8/2016 - 1.02 - revised to make btnImportCSVData_Click public to expose to Import Map form
+'               BLC - 1/3/2017 - 1.03 - added btnExportToExcel()
 ' =================================
 
 '---------------------
@@ -823,6 +893,66 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnImportCSVData_Click[CSVDataList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnExportXLS_Click
+' Description:  Export to XLS file button click actions
+'               Exports data within the CSV import grid which is either
+'               the usys_temp_CSV or the selected table
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Lawrence P. Kelley, December 4, 2009
+'   http://stackoverflow.com/questions/1849580/export-ms-access-tables-through-vba-to-an-excel-spreadsheet-in-same-directory
+' Source/date:  Bonnie Campbell, January 3, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/3/2017 - initial version
+' ---------------------------------
+Private Sub btnExportXLS_Click()
+On Error GoTo Err_Handler
+
+    Dim tbl As String
+    
+    'default
+    tbl = ""
+    
+    'determine which table to export from
+    Select Case Me.optgView.Value
+        Case 0  'Default
+        Case 1  'Table
+            Dim strTable As String
+            strTable = Nz(Me.Parent.SelectedTable, "")
+            If Len(strTable) > 0 Then _
+                tbl = strTable
+        Case 2  'CSV
+            tbl = "usys_temp_CSV"
+    End Select
+
+    'exit if tbl is empty
+    If Len(tbl) = 0 Then GoTo Exit_Handler
+
+    'export data to XLS & open
+    Dim outputFileName As String
+    Dim outputPath As String
+    
+    'output to user desktop vs. CurrentProject.Path
+    outputPath = "C:\documents and settings\%username%\Desktop"
+    outputFileName = outputPath & "\" & Format(Date, "yyyyMMdd") & "_BigRivers_" & tbl & ".xls"
+    DoCmd.TransferSpreadsheet acExport, acSpreadsheetTypeExcel9, tbl, outputFileName, True
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportXLS_Click[CSVDataList form])"
     End Select
     Resume Exit_Handler
 End Sub

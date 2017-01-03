@@ -529,12 +529,12 @@ Private Sub ButtonDetails_Click()
   ' Now do belt shrubs
   Set InputTable = db.OpenRecordset("tbl_LP_Shrub")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[Shrub_ID]", "tbl_LP_Shrub", "[Transect_ID] = '" & InputTable!Transect_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate belt shrub species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -547,12 +547,12 @@ Private Sub ButtonDetails_Click()
   ' Now do exotics
   Set InputTable = db.OpenRecordset("tbl_LP_Exotic")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[Exotic_ID]", "tbl_LP_Exotic", "[Transect_ID] = '" & InputTable!Transect_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate exotic species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -565,12 +565,12 @@ Private Sub ButtonDetails_Click()
   ' Now do exotic frequency
   Set InputTable = db.OpenRecordset("tbl_LP_Exotic_freq")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[Exotic_ID]", "tbl_LP_Exotic_freq", "[Transect_ID] = '" & InputTable!Transect_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate exotic species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -583,12 +583,12 @@ Private Sub ButtonDetails_Click()
   ' Now do site impact exotics
   Set InputTable = db.OpenRecordset("tbl_Dist_Exotic")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[Exotic_ID]", "tbl_Dist_Exotic", "[Impact_ID] = '" & InputTable!Impact_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate exotic species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -601,12 +601,12 @@ Private Sub ButtonDetails_Click()
   ' Now do tree seedlings
   Set InputTable = db.OpenRecordset("tbl_LP_Seedling")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[Seedling_ID]", "tbl_LP_Seedling", "[Transect_ID] = '" & InputTable!Transect_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate tree seedling species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -619,9 +619,9 @@ Private Sub ButtonDetails_Click()
   ' Monument trees
   Set InputTable = db.OpenRecordset("tbl_Monument")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
       End If
@@ -633,9 +633,9 @@ Private Sub ButtonDetails_Click()
   ' OT Census
   Set InputTable = db.OpenRecordset("tbl_OT_Census")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
       End If
@@ -647,12 +647,12 @@ Private Sub ButtonDetails_Click()
   ' 5 meter belt
   Set InputTable = db.OpenRecordset("tbl_OT_Tree_Saplings")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[TS_ID]", "tbl_OT_Tree_Saplings", "[Event_ID] = '" & InputTable!Event_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate 5 meter belt species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -665,12 +665,12 @@ Private Sub ButtonDetails_Click()
   ' shrub line intercept
   Set InputTable = db.OpenRecordset("tbl_SLI_Gaps")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[SLI_ID]", "tbl_SLI_Gaps", "[Transect_ID] = '" & InputTable!Transect_ID & "' AND [Species] = '" & Me!Replace_By & "' AND " & InputTable!Shrub_End & " BETWEEN [Shrub_Start] AND [Shrub_End]")) Then
           MsgBox "Overlapping shrub line species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If
@@ -683,12 +683,12 @@ Private Sub ButtonDetails_Click()
   ' 1 meter belt additional species
   Set InputTable = db.OpenRecordset("tbl_LP_Add_Species")
     Do Until InputTable.EOF
-      If InputTable!Species = Me!Unknown_Code Then
+      If InputTable!species = Me!Unknown_Code Then
         If Not IsNull(DLookup("[Add_ID]", "tbl_LP_Add_Species", "[Transect_ID] = '" & InputTable!Transect_ID & "' AND [Species] = '" & Me!Replace_By & "'")) Then
           MsgBox "Duplicate 1 meter additional species - bypassed."
         Else
           InputTable.Edit
-            InputTable!Species = Me!Replace_By
+            InputTable!species = Me!Replace_By
           InputTable.Update
           intRecordCount = intRecordCount + 1
         End If

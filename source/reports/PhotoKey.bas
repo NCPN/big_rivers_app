@@ -20,8 +20,8 @@ Begin Report
     Width =5520
     DatasheetFontHeight =11
     ItemSuffix =103
-    Right =25395
-    Bottom =11790
+    Right =10260
+    Bottom =5655
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -615,7 +615,7 @@ Begin Report
                 Begin Label
                     Left =2520
                     Top =120
-                    Width =2556
+                    Width =2706
                     Height =228
                     FontSize =8
                     BorderColor =8355711
@@ -629,7 +629,7 @@ Begin Report
                     GridlineColor =10921638
                     LayoutCachedLeft =2520
                     LayoutCachedTop =120
-                    LayoutCachedWidth =5076
+                    LayoutCachedWidth =5226
                     LayoutCachedHeight =348
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1

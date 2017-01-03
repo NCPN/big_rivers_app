@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =10230
-    Top =3405
-    Right =18090
-    Bottom =10050
+    Left =3690
+    Top =4410
+    Right =14625
+    Bottom =12225
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -3364,7 +3364,6 @@ On Error GoTo Err_Handler
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
     End If
-
 
 Exit_Handler:
     Exit Sub

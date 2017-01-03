@@ -260,7 +260,7 @@ Begin Form
                                     TabIndex =2
                                     BorderColor =0
                                     Name ="subResults"
-                                    SourceObject ="Form.fsub_QA_Results"
+                                    SourceObject ="Form._fsub_QA_Results"
                                     LinkChildFields ="Time_frame;Data_scope"
                                     LinkMasterFields ="cmbTimeframe;optgScope"
 

@@ -20,10 +20,10 @@ Begin Form
     Width =8400
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    Left =3690
+    Top =4410
+    Right =12090
+    Bottom =11895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -1292,8 +1292,8 @@ On Error GoTo Err_Handler
     'minimize Modified Wentworth form
     ToggleForm "ModWentworth", -1
     
-    'open modified wentworth report
-    DoCmd.OpenReport "ModWentworthKey", acViewNormal
+    'open modified wentworth report (acViewNormal -> default, prints immediately)
+    DoCmd.OpenReport "ModWentworthKey", acViewPreview
     
 Exit_Handler:
     Exit Sub
