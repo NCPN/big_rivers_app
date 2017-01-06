@@ -20,10 +20,10 @@ Begin Form
     Width =9360
     DatasheetFontHeight =11
     ItemSuffix =83
-    Left =5445
-    Top =1455
-    Right =14805
-    Bottom =13440
+    Left =6555
+    Top =645
+    Right =15915
+    Bottom =12630
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8a05f9ebf1d4e440
@@ -889,7 +889,7 @@ Option Explicit
 ' =================================
 ' Form:         ImportMap
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  ImportMap form object related properties, functions & procedures for UI display
@@ -905,6 +905,8 @@ Option Explicit
 '               BLC - 12/5/2016 - 1.05 - revised comment click event to pass imported data ID & max length
 '               BLC - 12/8/2016 - 1.06 - revise to make comment button invisible, require CSV import to start
 '               BLC - 12/13/2016 - 1.07 - added row highlighting (current CSV record drives highlighting of table fields)
+'               BLC - 1/3/2017  - 1.08  - btnImportCSV_Click code cleanup, enabled XLS export button
+'                                         when table is specified (CSV data list is populated)
 ' =================================
 
 '---------------------
@@ -1039,7 +1041,7 @@ On Error GoTo Err_Handler
     lblImportAlert.BackColor = lngYellow
     btnImportCSVData.Visible = False
     
-    'comment no longer used
+    'comment --> no longer used
     btnComment.Visible = False
     btnComment.ForeColor = lngBlue
     btnComment.Enabled = False
@@ -1192,6 +1194,7 @@ End Sub
 '   BLC - 10/6/2016 - initial version
 '   BLC - 12/5/2016 - enabled comment button
 '   BLC - 12/8/2016 - disabled import button until CSV fields selected
+'   BLC - 1/3/2017  - enable XLS export button when table selected
 ' ---------------------------------
 Private Sub cbxTable_AfterUpdate()
 On Error GoTo Err_Handler
@@ -1249,8 +1252,12 @@ On Error GoTo Err_Handler
         
         'ReadyForSave
     
-        'read to comment
+        'ready to comment
         btnComment.Enabled = True
+        
+        'ready for XLS export
+        Me!list.Form!btnExportXLS.Enabled = True
+        
     End If
 
 Exit_Handler:
@@ -1455,6 +1462,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/8/2016 - initial version
+'   BLC - 1/3/2017  - code cleanup
 ' ---------------------------------
 Private Sub btnImportCSVData_Click()
 On Error GoTo Err_Handler
@@ -1463,49 +1471,6 @@ On Error GoTo Err_Handler
     Form_CSVDataList.btnImportCSVData_Click
     
     SetCSVFieldsDisplay
-
-'    Dim StartFolder As String, strPath As String
-'
-'    'handle upload
-'    StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
-'
-'    strPath = BrowseFolder("Select CSV file to upload", "Confirm File", _
-'                        StartFolder, , msoFileDialogFilePicker, "Delimited files-CSV")
-'
-'    'switch to Table view to avoid error # 2008(deleting open object)
-'    Me.optgView.Value = 1
-'    Call optgView_Click
-'
-'    If Len(strPath) > 0 Then
-'        'upload CSV file
-'        UploadCSVFile strPath
-'        'refresh CSVColumnList dropdowns
-'
-'        'hide columns, reset the NumColumns variable
-'
-'        'hide CSV form controls to initialize
-'        'listCSV.Form.HideControls
-'        'Call Form_ImportColumnList.HideControls
-'
-'        'set recordset for # of dropdowns
-'        'listCSV.Form.NumColumns = Me.listTableFields.Form.Recordset.RecordCount
-'        'listCSV.Form.Table = cbxTable.Text
-'        'Form_ImportColumnList.NumColumns = Form_TableFieldList.Recordset.RecordCount
-'        'Form_ImportColumnList.Table = 'Form_ImportMap.cbxTable.Text
-'
-'        'Call Forms("CSVColumnList").RefreshCSVColumnList <-- error
-'        Call Form_ImportColumnList.RefreshColumnList
-'
-''FIX!!!
-'        'refresh subform display
-''        Me.Parent.Form!listCSV.Visible = False
-''        Me.Parent.Form!listCSV.Form.Requery
-''        Me.Parent.Form!listCSV.Visible = True
-'
-''        Forms!ImportMap!listCSV.Form.Requery <-- doesn't work
-''         Forms!ImportMap!listCSV.Form.Controls("cbxColumnName2").Requery <-- doesn't work
-'
-'    End If
 
 Exit_Handler:
     Exit Sub

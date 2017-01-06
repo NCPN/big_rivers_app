@@ -1284,3 +1284,44 @@ Public Sub CheckRS()
     Debug.Print IsRecordset(rs)
 
 End Sub
+
+Public Sub PrepCSV()
+
+    Dim plots As New Collection
+
+    With ActiveSheet
+        Dim col As Long
+        For col = 1 To 5
+            Dim current As Plot
+            Set current = New Plot
+            
+            With current
+                .PlotID = .Cells(10, col).Value
+                .VisitDate = .Cells(1, col).Value
+                .LocationID = .Cells(4, col).Value
+                .EventID = .Cells(3, col).Value
+                .SiteID = .Cells(7, col).Value
+                .ModalSedimentSize = .Cells(12, col).Value
+                .PercentWater = .Cells(14, col).Value
+                .Litter = .Cells(15, col).Value
+            
+            Dim r As Long
+            For r = 16 To 155
+                Dim cover As String
+                Dim seedling As Byte
+                cover = .Cells(r, col).Value
+                seedling = .Cells(r, col + 1).Value
+                If cover <> vbNullString Then
+                    current.AddSpeciesCover .Cells(r, 1).Value, cover, seedling
+                End If
+            Next
+            plots.Add current
+        Next
+
+    End With
+
+    For Each current In plots
+        Debug.Print current.CsvRows
+    Next
+
+End Sub

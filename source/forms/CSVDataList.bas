@@ -22,7 +22,7 @@ Begin Form
     Width =9060
     DatasheetFontHeight =11
     ItemSuffix =45
-    Right =10935
+    Right =15345
     Bottom =7815
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -526,6 +526,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     TextFontFamily =2
                     Left =8040
@@ -539,6 +540,7 @@ Begin Form
                     StatusBarText ="Export data below as an Excel file"
                     OnClick ="[Event Procedure]"
                     FontName ="Academy Engraved LET"
+                    OnGotFocus ="[Event Procedure]"
                     ControlTipText ="Export data below as an Excel file"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -822,6 +824,38 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          btnExportXLS_GotFocus
+' Description:  ExportXLS button actions on focus
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 3, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/3/2017 - initial version
+' ---------------------------------
+Private Sub btnExportXLS_GotFocus()
+On Error GoTo Err_Handler
+          
+    Dim strTable As String
+    strTable = Nz(Me.Parent.SelectedTable, "")
+    
+    If Len(strTable) <> 0 Then Me.btnExportXLS.Enabled = True
+       
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportXLS_GotFocus[CSVDataList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnImportCSVData_Click
 ' Description:  Enter button click actions
 ' Assumptions:  -
@@ -903,12 +937,18 @@ End Sub
 '               Exports data within the CSV import grid which is either
 '               the usys_temp_CSV or the selected table
 ' Assumptions:  -
+'               Microsoft Excel 14.0 Object Library is referenced
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:
 '   Lawrence P. Kelley, December 4, 2009
 '   http://stackoverflow.com/questions/1849580/export-ms-access-tables-through-vba-to-an-excel-spreadsheet-in-same-directory
+'   odin1701, September 17, 2007
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=135622
+'   ajetrumpet, April 21, 2009
+'   lpopa, February 27, 2014
+'   http://www.access-programmers.co.uk/forums/showthread.php?p=835501
 ' Source/date:  Bonnie Campbell, January 3, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -935,18 +975,34 @@ On Error GoTo Err_Handler
     End Select
 
     'exit if tbl is empty
-    If Len(tbl) = 0 Then GoTo Exit_Handler
+    If Len(tbl) = 0 Then
 
+        GoTo Exit_Handler
+    End If
+    
     'export data to XLS & open
     Dim outputFileName As String
     Dim outputPath As String
     
     'output to user desktop vs. CurrentProject.Path
-    outputPath = "C:\documents and settings\%username%\Desktop"
-    outputFileName = outputPath & "\" & Format(Date, "yyyyMMdd") & "_BigRivers_" & tbl & ".xls"
+    outputPath = "C:\documents and settings\" & Environ("UserName") & "\Desktop"
+    outputFileName = outputPath & "\" & Format(Now, "yyyyMMdd_hhmm") & _
+                    "_BigRivers_" & tbl & ".xls"
+    
+    'display working
+    DoCmd.Hourglass True
     DoCmd.TransferSpreadsheet acExport, acSpreadsheetTypeExcel9, tbl, outputFileName, True
+    DoCmd.Hourglass False
+    
+    'open file
+    Dim xlApp As Excel.Application
+    Set xlApp = CreateObject("Excel.Application")
+
+    xlApp.Visible = True
+    xlApp.Workbooks.Open outputFileName, True, False
 
 Exit_Handler:
+    Set xlApp = Nothing
     Exit Sub
 Err_Handler:
     Select Case Err.Number
