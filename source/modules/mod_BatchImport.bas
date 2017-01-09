@@ -97,27 +97,27 @@ If img.IsAnimated Then
 End If
 
 If img.Properties.Exists("40091") Then
-    Set V = img.Properties("40091").Value
+    Set V = img.Properties("40091").value
     s = s & "Title = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40092") Then
-    Set V = img.Properties("40092").Value
+    Set V = img.Properties("40092").value
     s = s & "Comment = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40093") Then
-    Set V = img.Properties("40093").Value
+    Set V = img.Properties("40093").value
     s = s & "Author = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40094") Then
-    Set V = img.Properties("40094").Value
+    Set V = img.Properties("40094").value
     s = s & "Keywords = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40095") Then
-    Set V = img.Properties("40095").Value
+    Set V = img.Properties("40095").value
     s = s & "Subject = " & V.String & vbCrLf
 End If
 

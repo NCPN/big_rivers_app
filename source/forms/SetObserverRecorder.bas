@@ -734,28 +734,28 @@ Private m_RAContactID As Long
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
-Public Event InvalidCallingForm(Value As String)
-Public Event InvalidRefTable(Value As String)
-Public Event InvalidRefID(Value As Long)
-Public Event InvalidRAAction(Value As String)
-Public Event InvalidRAContactID(Value As Long)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidCaption(value As String)
+Public Event InvalidCallingForm(value As String)
+Public Event InvalidRefTable(value As String)
+Public Event InvalidRefID(value As Long)
+Public Event InvalidRAAction(value As String)
+Public Event InvalidRAContactID(value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -763,14 +763,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -778,14 +778,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
+Public Property Let ButtonCaption(value As String)
+    If Len(value) > 0 Then
+        m_ButtonCaption = value
 
         'set the form button caption
         Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCaption(value)
     End If
 End Property
 
@@ -793,27 +793,27 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
+Public Property Let SelectedID(value As Integer)
+        m_SelectedID = value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
+Public Property Let SelectedValue(value As String)
+        m_SelectedValue = value
 End Property
 
 Public Property Get SelectedValue() As String
     SelectedValue = m_SelectedValue
 End Property
 
-Public Property Let CallingForm(Value As String)
-    If Len(Value) > 0 Then
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+    If Len(value) > 0 Then
+        m_CallingForm = value
     Else
-        RaiseEvent InvalidCallingForm(Value)
+        RaiseEvent InvalidCallingForm(value)
     End If
 End Property
 
@@ -821,11 +821,11 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let RefTable(Value As String)
-    If Len(Value) > 0 Then
-        m_RefTable = Value
+Public Property Let RefTable(value As String)
+    If Len(value) > 0 Then
+        m_RefTable = value
     Else
-        RaiseEvent InvalidRefTable(Value)
+        RaiseEvent InvalidRefTable(value)
     End If
 End Property
 
@@ -837,36 +837,36 @@ Public Property Get RefID() As Long
     RefID = m_RefID
 End Property
 
-Public Property Let RefID(Value As Long)
-        m_RefID = Value
+Public Property Let RefID(value As Long)
+        m_RefID = value
 End Property
 
 Public Property Get ObserverID() As Long
     ObserverID = m_ObserverID
 End Property
 
-Public Property Let ObserverID(Value As Long)
-        m_ObserverID = Value
+Public Property Let ObserverID(value As Long)
+        m_ObserverID = value
 End Property
 
 Public Property Get RecorderID() As Long
     RecorderID = m_RecorderID
 End Property
 
-Public Property Let RecorderID(Value As Long)
-        m_RecorderID = Value
+Public Property Let RecorderID(value As Long)
+        m_RecorderID = value
 End Property
 
 'Record Action properties
-Public Property Let RAAction(Value As String)
-    If Len(Value) > 0 Then
-        If InStr(Value, "O") + InStr(Value, "R") > 0 Then
-            m_RAAction = Value
+Public Property Let RAAction(value As String)
+    If Len(value) > 0 Then
+        If InStr(value, "O") + InStr(value, "R") > 0 Then
+            m_RAAction = value
         Else
-            RaiseEvent InvalidRAAction(Value)
+            RaiseEvent InvalidRAAction(value)
         End If
     Else
-        RaiseEvent InvalidRAAction(Value)
+        RaiseEvent InvalidRAAction(value)
     End If
 End Property
 
@@ -878,8 +878,8 @@ Public Property Get RAContactID() As Long
     RAContactID = m_RAContactID
 End Property
 
-Public Property Let RAContactID(Value As Long)
-        m_RAContactID = Value
+Public Property Let RAContactID(value As Long)
+        m_RAContactID = value
 End Property
 
 
@@ -930,7 +930,7 @@ On Error GoTo Err_Handler
 
     Title = "Set Observer/Recorder"
     Directions = "Choose the observer && recorder for the record."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1082,7 +1082,7 @@ End Sub
 Private Sub cbxObserver_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Me.ObserverID = cbxObserver.Value
+    Me.ObserverID = cbxObserver.value
     
     ReadyForSave
     
@@ -1113,7 +1113,7 @@ End Sub
 Private Sub cbxRecorder_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Me.RecorderID = cbxRecorder.Value
+    Me.RecorderID = cbxRecorder.value
     
     ReadyForSave
     

@@ -91,6 +91,7 @@ Public Const uMtnSun = &H30DA               '12506  mountain & sun (Katakana Let
 Public Const uRipple = &HA5BF               '42431  3x water surface W (Vai Syllable Wo)
 Public Const uPerson = &H10982              '67970  simple ancient person (Meroitic Hieroglyph Letter I)
 Public Const uDuck = &H10996                '67990  simple ancient duck (Meroitic Hieroglyph Letter Ka)
+Public Const uWavyLines = &H10A58           '68184  Kharoshthi punctuation lines (ancient Kharosthi script)
 Public Const uSheepHead = &H14485           '83077  simple sheep head (Anatolian Hieroglyph A110A)
 Public Const uSpiral2 = &H169B9             '92601  Bamum Letter Phase-E Ngkaami
 

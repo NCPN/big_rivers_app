@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.07
+' Version:      1.08
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -17,6 +17,7 @@ Option Explicit
 '               BLC, 10/4/2016 - 1.05 - added GetParamsFromSQL()
 '               BLC, 10/11/2016 - 1.06 - added IsRecordset(), FieldCount(), MaxDbFieldCount()
 '               BLC, 10/20/2016 - 1.07 - added IsLinked()
+'               BLC, 1/9/2017 - 1.08   - added SetTempVar()
 ' =================================
 
 ' ---------------------------------
@@ -196,7 +197,7 @@ On Error GoTo Err_Handler
         'add rsB values as new rsOut records
         rsOut.AddNew
         For iCount = 0 To rsB.Fields.Count - 1
-            rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
+            rsOut.Fields(iCount).value = rsB.Fields(iCount).value
         Next
         rsOut.Update
         rsB.MoveNext
@@ -934,7 +935,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String, strSQLWhere As String, key As String
-    Dim Value As Variant
+    Dim value As Variant
     
     'handle default
     strSQLWhere = " WHERE IsSupported > 0"
@@ -1007,17 +1008,17 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
                 
                 Next
                 
-                Set Value = dictParam
+                Set value = dictParam
 
             Else
-                Value = Nz(rs.Fields(ary(i)), "")
+                value = Nz(rs.Fields(ary(i)), "")
             End If
             
             'add key if it isn't already there
             If Not dict.Exists(key) Then
-                If IsNull(Value) Then MsgBox key, vbOKCancel, "is NULL"
+                If IsNull(value) Then MsgBox key, vbOKCancel, "is NULL"
                 'Debug.Print Nz(Value, key & "-NULL")
-                dict.Add key, Value
+                dict.Add key, value
             End If
             
         Next
@@ -1976,3 +1977,38 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' SUB:          SetTempVar
+' Description:  Checks if TempVar exists, creates it if not, & sets value
+' Assumptions:  -
+' Parameters:   strVar - TempVar name (string)
+'               Val - value to set (variant)
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:  -
+' Adapted:      Bonnie Campbell, January 9, 2017 - for NCPN tools
+' Revisions:
+'   BLC - 1/9/2017 - initial version
+' ---------------------------------
+Public Sub SetTempVar(strVar As String, Val As Variant)
+On Error GoTo Err_Handler
+
+    If Not TempVars(strVar) Is Nothing Then
+        TempVars(strVar) = Val
+    Else
+        TempVars.Add strVar, Val
+    End If
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetTempVar[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Sub

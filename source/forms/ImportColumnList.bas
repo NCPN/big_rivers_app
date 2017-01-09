@@ -3153,23 +3153,23 @@ Private m_ImportColumns As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidRecords(Value As DAO.Recordset)
-Public Event InvalidNumColumns(Value As Integer)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidRecords(value As DAO.Recordset)
+Public Event InvalidNumColumns(value As Integer)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -3177,8 +3177,8 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Table(Value As String)
-        m_Table = Value
+Public Property Let Table(value As String)
+        m_Table = value
 
         'populate form
         PopulateForm
@@ -3188,14 +3188,14 @@ Public Property Get Table() As String
     Table = m_Table
 End Property
 
-Public Property Let Records(Value As DAO.Recordset)
-    If IsRecordset(Value) Then
-        Set m_Records = Value
+Public Property Let Records(value As DAO.Recordset)
+    If IsRecordset(value) Then
+        Set m_Records = value
         
         'set the form's # of records based on this rs
         Set Me.Recordset = m_Records
     Else
-        RaiseEvent InvalidRecords(Value)
+        RaiseEvent InvalidRecords(value)
     End If
 End Property
 
@@ -3204,8 +3204,8 @@ Public Property Get Records() As DAO.Recordset
 End Property
 
 'number of columns to import (from table vs. CSV)
-Public Property Let NumColumns(Value As Integer)
-        m_NumColumns = Value
+Public Property Let NumColumns(value As Integer)
+        m_NumColumns = value
 End Property
 
 Public Property Get NumColumns() As Integer
@@ -3216,8 +3216,8 @@ Public Property Get ImportColumns() As String
     ImportColumns = m_ImportColumns
 End Property
 
-Public Property Let ImportColumns(Value As String)
-        m_ImportColumns = Value
+Public Property Let ImportColumns(value As String)
+        m_ImportColumns = value
 End Property
 
 '---------------------
@@ -3572,7 +3572,7 @@ On Error GoTo Err_Handler
             For i = 1 To 60 'Me.NumColumns
                 strControl = "cbxColumnName" & i
                 
-                Me.Controls(strControl).Value = ""
+                Me.Controls(strControl).value = ""
                 Me.Controls(strControl).Visible = False
                 
             Next
@@ -3639,7 +3639,7 @@ On Error GoTo Err_Handler
 '        Me.tbxSetFocus.SetFocus
         
         With Me.cbxColumnName1
-            .Value = "None"
+            .value = "None"
             .Enabled = False
             .Locked = True
 '            .Visible = False
@@ -3734,7 +3734,7 @@ On Error GoTo Err_Handler
     MsgBox Screen.ActiveForm.Name & " is the active form."
     MsgBox Screen.ActiveControl.Name & "is the active control."
     If InStr(Me.ActiveControl, "cbxColumnName") Then
-        Me.Parent.Controls("tbxCSVRecord").Value = Replace(Me.ActiveControl.Name, "cbxColumnName", "")
+        Me.Parent.Controls("tbxCSVRecord").value = Replace(Me.ActiveControl.Name, "cbxColumnName", "")
     End If
               
 Exit_Handler:

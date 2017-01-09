@@ -1018,27 +1018,27 @@ If img.IsAnimated Then
 End If
 
 If img.Properties.Exists("40091") Then
-    Set V = img.Properties("40091").Value
+    Set V = img.Properties("40091").value
     s = s & "Title = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40092") Then
-    Set V = img.Properties("40092").Value
+    Set V = img.Properties("40092").value
     s = s & "Comment = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40093") Then
-    Set V = img.Properties("40093").Value
+    Set V = img.Properties("40093").value
     s = s & "Author = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40094") Then
-    Set V = img.Properties("40094").Value
+    Set V = img.Properties("40094").value
     s = s & "Keywords = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40095") Then
-    Set V = img.Properties("40095").Value
+    Set V = img.Properties("40095").value
     s = s & "Subject = " & V.String & vbCrLf
 End If
 
@@ -1049,23 +1049,23 @@ With img
     For Each propEach In .Properties
             Select Case propEach.Name
                 Case "40091"
-                    Set vecProperty = propEach.Value
+                    Set vecProperty = propEach.value
                     Debug.Print "Title = " & vecProperty.String
 
                 Case "40092"
-                    Set vecProperty = propEach.Value
+                    Set vecProperty = propEach.value
                     Debug.Print "Comment = " & vecProperty.String
 
                 Case "40093"
-                    Set vecProperty = propEach.Value
+                    Set vecProperty = propEach.value
                     Debug.Print "Author = " & vecProperty.String
 
                 Case "40094"
-                    Set vecProperty = propEach.Value
+                    Set vecProperty = propEach.value
                     Debug.Print "Keywords = " & vecProperty.String
 
                 Case "40095"
-                    Set vecProperty = propEach.Value
+                    Set vecProperty = propEach.value
                     Debug.Print "Subject = " & vecProperty.String
 
                 Case Else
@@ -1074,8 +1074,8 @@ With img
                     
                     If Not (propEach.Name = "ChrominanceTable" Or _
                             propEach.Name = "LuminanceTable") Then
-                    If Not varType(propEach.Value) = vbObject Then _
-                    Debug.Print propEach.Name & " (" & propEach.PropertyID & ") ="; CStr(propEach.Value)
+                    If Not varType(propEach.value) = vbObject Then _
+                    Debug.Print propEach.Name & " (" & propEach.PropertyID & ") ="; CStr(propEach.value)
                     End If
             End Select
         Next
@@ -1285,43 +1285,43 @@ Public Sub CheckRS()
 
 End Sub
 
-Public Sub PrepCSV()
-
-    Dim plots As New Collection
-
-    With ActiveSheet
-        Dim col As Long
-        For col = 1 To 5
-            Dim current As Plot
-            Set current = New Plot
-            
-            With current
-                .PlotID = .Cells(10, col).Value
-                .VisitDate = .Cells(1, col).Value
-                .LocationID = .Cells(4, col).Value
-                .EventID = .Cells(3, col).Value
-                .SiteID = .Cells(7, col).Value
-                .ModalSedimentSize = .Cells(12, col).Value
-                .PercentWater = .Cells(14, col).Value
-                .Litter = .Cells(15, col).Value
-            
-            Dim r As Long
-            For r = 16 To 155
-                Dim cover As String
-                Dim seedling As Byte
-                cover = .Cells(r, col).Value
-                seedling = .Cells(r, col + 1).Value
-                If cover <> vbNullString Then
-                    current.AddSpeciesCover .Cells(r, 1).Value, cover, seedling
-                End If
-            Next
-            plots.Add current
-        Next
-
-    End With
-
-    For Each current In plots
-        Debug.Print current.CsvRows
-    Next
-
-End Sub
+'Public Sub PrepCSV()
+'
+'    Dim plots As New Collection
+'
+'    With ActiveSheet
+'        Dim col As Long
+'        For col = 1 To 5
+'            Dim current As Plot
+'            Set current = New Plot
+'
+'            With current
+'                .PlotID = .Cells(10, col).Value
+'                .VisitDate = .Cells(1, col).Value
+'                .LocationID = .Cells(4, col).Value
+'                .EventID = .Cells(3, col).Value
+'                .SiteID = .Cells(7, col).Value
+'                .ModalSedimentSize = .Cells(12, col).Value
+'                .PercentWater = .Cells(14, col).Value
+'                .Litter = .Cells(15, col).Value
+'
+'            Dim r As Long
+'            For r = 16 To 155
+'                Dim cover As String
+'                Dim seedling As Byte
+'                cover = .Cells(r, col).Value
+'                seedling = .Cells(r, col + 1).Value
+'                If cover <> vbNullString Then
+'                    current.AddSpeciesCover .Cells(r, 1).Value, cover, seedling
+'                End If
+'            Next
+'            plots.Add current
+'        Next
+'
+'    End With
+'
+'    For Each current In plots
+'        Debug.Print current.CsvRows
+'    Next
+'
+'End Sub

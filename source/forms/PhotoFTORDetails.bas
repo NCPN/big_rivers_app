@@ -1616,8 +1616,8 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: direction facing, photog (comments optional)
-    If Len(Nz(cbxPhotog.Value, "")) > 0 _
-        And Len(Nz(tbxPhotoNum.Value, "")) > 0 Then
+    If Len(Nz(cbxPhotog.value, "")) > 0 _
+        And Len(Nz(tbxPhotoNum.value, "")) > 0 Then
         isOK = True
     End If
     
@@ -1750,18 +1750,18 @@ End Sub
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub lblFacing_DblClick(Cancel As Integer)
     'clear options
-    optgRRRL.Value = ""
-    optgUSDS.Value = ""
+    optgRRRL.value = ""
+    optgUSDS.value = ""
 End Sub
 
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub optgRRRL_DblClick(Cancel As Integer)
     'clear options
-    optgRRRL.Value = ""
+    optgRRRL.value = ""
 End Sub
 
 ' http://www.geeksengine.com/article/unselect_access_radio_buttons.html
 Private Sub optgUSDS_DblClick(Cancel As Integer)
     'clear options
-    optgUSDS.Value = ""
+    optgUSDS.value = ""
 End Sub

@@ -1230,24 +1230,24 @@ Private m_ContinueSave As Boolean 'ok to proceed saving (prevent Property Not Fo
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidCaption(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -1255,14 +1255,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -1270,11 +1270,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-    If Len(Value) > 0 Then
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+    If Len(value) > 0 Then
+        m_CallingForm = value
     Else
-        RaiseEvent InvalidCallingForm(Value)
+        RaiseEvent InvalidCallingForm(value)
     End If
 End Property
 
@@ -1313,7 +1313,7 @@ On Error GoTo Err_Handler
 
     Title = "Contact"
     Directions = "Enter the contact information and click save."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1940,9 +1940,9 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: first, last, email', username, org, pos, phone, ext
-    If Len(Nz(tbxFirst.Value, "")) > 0 _
-        And Len(Nz(tbxLast.Value, "")) > 0 _
-        And IsEmail(Nz(tbxEmail.Value, "")) Then '_
+    If Len(Nz(tbxFirst.value, "")) > 0 _
+        And Len(Nz(tbxLast.value, "")) > 0 _
+        And IsEmail(Nz(tbxEmail.value, "")) Then '_
         'And Len(Nz(tbxUsername.Value, "")) > 0 _
         'And Len(Nz(tbxOrganization.Value, "")) > 0 Then
         isOK = True

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.18
+' Version:      1.19
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -28,6 +28,8 @@ Option Explicit
 '               BLC - 10/19/2016 - 1.16 - renamed UploadSurveyFile() to UploadCSVFile() to genericize
 '               BLC - 10/24/2016 - 1.17 - updated SetRecord(), ToggleIsActive()
 '               BLC - 10/28/2016 - 1.18 - updated i_task, TempVars("ContactID") -> TempVars("AppUserID")
+'               BLC - 1/9/2017   - 1.19 - revised UpsertRecord from ContactID to ID,
+'                                         added GetRecords templates
 ' =================================
 
 ' ---------------------------------
@@ -195,7 +197,7 @@ On Error GoTo Err_Handler
                     'check if column is displayed width > 0
                     If CInt(aryColWidths(j)) > 0 Then
                     
-                        strItem = strItem & rs.Fields(j).Value & ";"
+                        strItem = strItem & rs.Fields(j).value & ";"
                     
                         'determine how many separators there are (";") --> should equal # cols
                         matches = (Len(strItem) - Len(Replace$(strItem, ";", ""))) / Len(";")
@@ -328,7 +330,7 @@ On Error GoTo Err_Handler
     
     'assume only 1 record returned
     If rs.RecordCount > 0 Then
-        State = rs.Fields("ParkState").Value
+        State = rs.Fields("ParkState").value
     End If
    
     'return value
@@ -1115,6 +1117,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/26/2016 - initial version
 '   BLC - 9/22/2016 - added templates
+'   BLC - 1/9/2017 - added templates
 ' ---------------------------------
 Public Function GetRecords(Template As String) As DAO.Recordset
 On Error GoTo Err_Handler
@@ -1232,6 +1235,12 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_mod_wentworth_for_eventyr"
+                
+                    '-- required parameters --
+                    'default event year to current year if not passed in
+                    .Parameters("eventyr") = Nz(TempVars("EventYear"), Year(Now))
                 
                 Case "s_river_list"
                 
@@ -2022,6 +2031,7 @@ End Function
 '   BLC - 9/1/2016  - added vegwalk, photo
 '   BLC - 10/4/2016 - added template, adjusted for form w/o list
 '   BLC - 10/14/2016 - updated to accommodate non-users for contacts
+'   BLC - 1/9/2017 - revised retrieve ID from ContactID to ID, revised i_event to use TempVar("SiteID")
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -2061,26 +2071,26 @@ On Error GoTo Err_Handler
                     'values passed into form
                             
                     'form values
-                    .LastName = frm!tbxLast.Value
-                    .FirstName = frm!tbxFirst.Value
-                    If Not IsNull(frm!tbxMI.Value) Then p.MiddleInitial = frm!tbxMI.Value  'FIX EMPTY STRING
-                    .Email = frm!tbxEmail.Value
+                    .LastName = frm!tbxLast.value
+                    .FirstName = frm!tbxFirst.value
+                    If Not IsNull(frm!tbxMI.value) Then p.MiddleInitial = frm!tbxMI.value  'FIX EMPTY STRING
+                    .Email = frm!tbxEmail.value
                     '.Username = frm!tbxUsername.Value
-                    If Not IsNull(frm!tbxUsername.Value) Then p.Username = frm!tbxUsername.Value
-                    If Not IsNull(frm!tbxOrganization.Value) Then p.Organization = frm!tbxOrganization.Value
-                    If Not IsNull(frm!tbxPosition.Value) Then .PosTitle = frm!tbxPosition.Value
-                    If Not IsNull(frm!tbxPhone.Value) And Len(frm!tbxPhone.Value) > 0 Then
-                        .WorkPhone = RemoveChars(frm!tbxPhone.Value, True) 'remove non-numerics
+                    If Not IsNull(frm!tbxUsername.value) Then p.Username = frm!tbxUsername.value
+                    If Not IsNull(frm!tbxOrganization.value) Then p.Organization = frm!tbxOrganization.value
+                    If Not IsNull(frm!tbxPosition.value) Then .PosTitle = frm!tbxPosition.value
+                    If Not IsNull(frm!tbxPhone.value) And Len(frm!tbxPhone.value) > 0 Then
+                        .WorkPhone = RemoveChars(frm!tbxPhone.value, True) 'remove non-numerics
                     Else
                         .WorkPhone = Null
                     End If
-                    If Not IsNull(frm!tbxExtension.Value) And Len(frm!tbxExtension.Value) > 0 Then
-                        .WorkExtension = RemoveChars(frm!tbxExtension.Value, True) 'remove non-numerics
+                    If Not IsNull(frm!tbxExtension.value) And Len(frm!tbxExtension.value) > 0 Then
+                        .WorkExtension = RemoveChars(frm!tbxExtension.value, True) 'remove non-numerics
                     Else
                         .WorkExtension = Null
                     End If
                     If Not IsNull(frm!cbxUserRole.Column(1)) Then .AccessRole = frm!cbxUserRole.Column(1)
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                 
                     strCriteria = "[FirstName] = '" & .FirstName _
                                     & "' AND [LastName] = '" & .LastName _
@@ -2104,11 +2114,11 @@ On Error GoTo Err_Handler
                     'form values
                     .LocationID = frm!cbxLocation.Column(0)
                     .ProtocolID = 1 ' assumes this is for big rivers protocol
-                    .SiteID = frm!cbxSite.Column(0)
+                    .SiteID = TempVars("SiteID") 'frm!cbxSite.Column(0)
                     
-                    .StartDate = frm!tbxStartDate.Value
+                    .StartDate = frm!tbxStartDate.value
                     
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                     
                     strCriteria = "[Site_ID] = " & .SiteID & " AND [Location_ID] = " & .LocationID & " AND [StartDate] = " & Format(.StartDate, "YYYY-mm-dd")
                     
@@ -2127,11 +2137,11 @@ On Error GoTo Err_Handler
                                 
                         'form values
                         .LocationID = frm!cbxLocation.Column(0)
-                        .Name = frm!tbxFeature.Value
+                        .Name = frm!tbxFeature.value
                         
-                        If Not IsNull(frm!tbxFeatureDirections.Value) Then f.Directions = frm!tbxFeatureDirections.Value
-                        If Not IsNull(frm!tbxDescription.Value) Then .Directions = frm!tbxDescription.Value
-                        .ID = frm!tbxID.Value '0 if new, edit if > 0
+                        If Not IsNull(frm!tbxFeatureDirections.value) Then f.Directions = frm!tbxFeatureDirections.value
+                        If Not IsNull(frm!tbxDescription.value) Then .Directions = frm!tbxDescription.value
+                        .ID = frm!tbxID.value '0 if new, edit if > 0
                     
                         strCriteria = "[Location_ID] = " & .LocationID & " AND [Feature] = '" & .Name & "'"
                         
@@ -2158,13 +2168,13 @@ On Error GoTo Err_Handler
                         '.SiteID = 1
                         
                         'form values
-                        .LocationName = frm!tbxName.Value 'Collection feature ID (A, B, C, ...) or Transect number (1-8)
+                        .LocationName = frm!tbxName.value 'Collection feature ID (A, B, C, ...) or Transect number (1-8)
                         .LocationType = "T" 'cbxLocationType.SelText 'F- feature, T- transect, P - plot
                 
-                        .HeadtoOrientDistance = frm!tbxDistance.Value
-                        .HeadtoOrientBearing = frm!tbxBearing.Value
+                        .HeadtoOrientDistance = frm!tbxDistance.value
+                        .HeadtoOrientBearing = frm!tbxBearing.value
                         
-                        .ID = frm!tbxID.Value '0 if new, edit if > 0
+                        .ID = frm!tbxID.value '0 if new, edit if > 0
 
                         strCriteria = "[LocationName] = '" & .LocationName _
                                     & "' AND [LocationType] = '" & .LocationType _
@@ -2187,7 +2197,7 @@ On Error GoTo Err_Handler
                 With ph
                     'values passed into form
                 
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                                 
                     'set the generic object --> Location
                     Set obj = p
@@ -2208,7 +2218,7 @@ On Error GoTo Err_Handler
                     '.ActionType = frm.RAAction
                     .ActionDate = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
                 
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                                 
                     strCriteria = "[Contact_ID] = " & .ContactID _
                                 & " AND [Activity] = '" & .RefAction _
@@ -2231,15 +2241,15 @@ On Error GoTo Err_Handler
                     .River = TempVars("River")
                     
                     'form values
-                    .Code = frm!tbxSiteCode.Value
-                    .Name = frm!tbxSiteName.Value
-                    .Directions = Nz(frm!tbxSiteDirections.Value, "")
-                    .Description = Nz(frm!tbxDescription.Value, "")
+                    .Code = frm!tbxSiteCode.value
+                    .Name = frm!tbxSiteName.value
+                    .Directions = Nz(frm!tbxSiteDirections.value, "")
+                    .Description = Nz(frm!tbxDescription.value, "")
                     
                     'assumed
                     .IsActiveForProtocol = 1 'all sites assumed active when added
         
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                 
                     strCriteria = "[SiteCode] = '" & .Code & "' AND [SiteName] = '" & .Name & "'"
                 
@@ -2275,12 +2285,12 @@ On Error GoTo Err_Handler
                 Dim tk As New Task
                 
                 With tk
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
-                    .RequestDate = frm!tbxRequestDate.Value
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
+                    .RequestDate = frm!tbxRequestDate.value
                     .RequestedByID = frm!cbxRequestedBy.Column(0)
                     .Status = frm!cbxStatus.Column(0)
                     .Priority = frm!cbxPriority.Column(0)
-                    .Task = frm!tbxTask.Value
+                    .Task = frm!tbxTask.value
                     .TaskType = frm.ContextType
                     
                     
@@ -2331,13 +2341,13 @@ On Error GoTo Err_Handler
                     'form values
                     .TransducerType = ""
                     .TransducerNumber = frm!cbxTransducer.SelText
-                    .SerialNumber = frm!tbxSerialNo.Value
-                    .IsSurveyed = frm!chkSurveyed.Value
+                    .SerialNumber = frm!tbxSerialNo.value
+                    .IsSurveyed = frm!chkSurveyed.value
                     .Timing = frm!cbxTiming.SelText
-                    .ActionDate = Format(frm!tbxSampleDate.Value, "YYYY-mm-dd")
-                    .ActionTime = Format(frm!tbxSampleTime.Value, "hh:mm.ss")
+                    .ActionDate = Format(frm!tbxSampleDate.value, "YYYY-mm-dd")
+                    .ActionTime = Format(frm!tbxSampleTime.value, "hh:mm.ss")
                     
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                 
                     strCriteria = "[TransducerNumber] = " & .TransducerNumber _
                                 & " AND [Timing] = '" & .Timing _
@@ -2362,10 +2372,10 @@ On Error GoTo Err_Handler
                     .EventID = 1
                             
                     'form values
-                    .TransectNumber = frm!tbxNumber.Value
-                    .SampleDate = Format(frm!tbxSampleDate.Value, "YYYY-mm-dd")
+                    .TransectNumber = frm!tbxNumber.value
+                    .SampleDate = Format(frm!tbxSampleDate.value, "YYYY-mm-dd")
                     
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                     
                     strCriteria = "[TransectNumber] = " & .TransectNumber _
                                 & "' AND [SampleDate] = " & .SampleDate
@@ -2393,7 +2403,7 @@ On Error GoTo Err_Handler
             '        .ActionDate = Format(tbxSampleDate.value, "YYYY-mm-dd")
             '        .ActionTime = Format(tbxSampleTime.value, "hh:mm.ss")
                     
-                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                    .ID = frm!tbxID.value '0 if new, edit if > 0
                 
                     'strCriteria = "[UserRoleNumber] = " & .UserRoleNumber
                 
@@ -2411,7 +2421,7 @@ On Error GoTo Err_Handler
                         
                         With ars
                             'values passed into form
-                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            .ID = frm!tbxID.value '0 if new, edit if > 0
                             
                             'set the generic object --> Woody Canopy Species
                             Set obj = ars
@@ -2425,7 +2435,7 @@ On Error GoTo Err_Handler
                         
                         With ucs
                             'values passed into form
-                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            .ID = frm!tbxID.value '0 if new, edit if > 0
                             
                             'set the generic object --> Woody Canopy Species
                             Set obj = ucs
@@ -2440,7 +2450,7 @@ On Error GoTo Err_Handler
                         With vw
                             'values passed into form
                         
-                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            .ID = frm!tbxID.value '0 if new, edit if > 0
                                         
                             'set the generic object --> Location
                             Set obj = vw
@@ -2454,7 +2464,7 @@ On Error GoTo Err_Handler
                         
                         With wcs
                             'values passed into form
-                            .ID = frm!tbxID.Value '0 if new, edit if > 0
+                            .ID = frm!tbxID.value '0 if new, edit if > 0
                             
                             'set the generic object --> Woody Canopy Species
                             Set obj = wcs
@@ -2471,7 +2481,7 @@ On Error GoTo Err_Handler
         End Select
                 
         'set insert/update based on whether its an edit or new entry
-        DoAction = IIf(frm!tbxID.Value > 0, "u", "i")
+        DoAction = IIf(frm!tbxID.value > 0, "u", "i")
         
         If NoList Then
                     
@@ -2498,7 +2508,7 @@ On Error GoTo Err_Handler
                 'record already exists & ID > 0
                 
                 'retrieve ID
-                If frm!tbxID.Value = rs("Contact.ID") Then
+                If frm!tbxID.value = rs("ID") Then 'rs("Contact.ID") Then
                     'IDs are equivalent, just change the data
                     frm!lblMsg.ForeColor = lngLime
                     frm!lblMsgIcon.ForeColor = lngLime

@@ -43,29 +43,29 @@ Private m_IsActive As Byte 'using byte to avoid Access vs. SQL boolean issues
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidName(Value)
-Public Event InvalidInitial(Value)
-Public Event InvalidEmail(Value)
-Public Event InvalidRole(Value)
-Public Event InvalidPhone(Value)
-Public Event InvalidAccessRole(Value)
+Public Event InvalidName(value)
+Public Event InvalidInitial(value)
+Public Event InvalidEmail(value)
+Public Event InvalidRole(value)
+Public Event InvalidPhone(value)
+Public Event InvalidAccessRole(value)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let FirstName(Value As String)
-    If IsName(Value) Then
-        m_FirstName = Value
+Public Property Let FirstName(value As String)
+    If IsName(value) Then
+        m_FirstName = value
     Else
-        RaiseEvent InvalidName(Value)
+        RaiseEvent InvalidName(value)
     End If
 End Property
 
@@ -73,11 +73,11 @@ Public Property Get FirstName() As String
     FirstName = m_FirstName
 End Property
 
-Public Property Let LastName(Value As String)
-    If IsName(Value) Then
-        m_LastName = Value
+Public Property Let LastName(value As String)
+    If IsName(value) Then
+        m_LastName = value
     Else
-        RaiseEvent InvalidName(Value)
+        RaiseEvent InvalidName(value)
     End If
 End Property
 
@@ -85,9 +85,9 @@ Public Property Get LastName() As String
     LastName = m_LastName
 End Property
 
-Public Property Let MiddleInitial(Value As Variant) 'String)
-    If IsAlpha(CStr(Value)) And Len(Value) = 1 Then
-        m_MiddleInitial = Value
+Public Property Let MiddleInitial(value As Variant) 'String)
+    If IsAlpha(CStr(value)) And Len(value) = 1 Then
+        m_MiddleInitial = value
     Else
         m_MiddleInitial = Null
 '        RaiseEvent InvalidInitial(Value)
@@ -98,19 +98,19 @@ Public Property Get MiddleInitial() As Variant 'String
     MiddleInitial = m_MiddleInitial
 End Property
 
-Public Property Let Name(Value As String) 'Optional first As String, Value As String)
-    m_Name = Value
+Public Property Let Name(value As String) 'Optional first As String, Value As String)
+    m_Name = value
 End Property
 
 Public Property Get Name() As String 'Optional first As String) As String
     Name = m_Name
 End Property
 
-Public Property Let Email(Value As String)
-    If IsEmail(Value) Then
-        m_Email = Value
+Public Property Let Email(value As String)
+    If IsEmail(value) Then
+        m_Email = value
     Else
-        RaiseEvent InvalidEmail(Value)
+        RaiseEvent InvalidEmail(value)
     End If
 End Property
 
@@ -118,20 +118,20 @@ Public Property Get Email() As String
     Email = m_Email
 End Property
 
-Public Property Let Organization(Value As String)
-    m_Organization = Value
+Public Property Let Organization(value As String)
+    m_Organization = value
 End Property
 
 Public Property Get Organization() As String
     Organization = m_Organization
 End Property
 
-Public Property Let WorkPhone(Value As Variant) 'Integer)
-    If Not IsNull(Value) Then
-        If IsPhone(CStr(Value)) Then
-            m_WorkPhone = Value
+Public Property Let WorkPhone(value As Variant) 'Integer)
+    If Not IsNull(value) Then
+        If IsPhone(CStr(value)) Then
+            m_WorkPhone = value
         Else
-           RaiseEvent InvalidPhone(Value)
+           RaiseEvent InvalidPhone(value)
         End If
     Else
         m_WorkPhone = Null
@@ -143,46 +143,46 @@ Public Property Get WorkPhone() As Variant 'Integer
     WorkPhone = m_WorkPhone
 End Property
 
-Public Property Let WorkExtension(Value As Variant) 'Long)
-    m_WorkExtension = Value
+Public Property Let WorkExtension(value As Variant) 'Long)
+    m_WorkExtension = value
 End Property
 
 Public Property Get WorkExtension() As Variant 'Long
     WorkExtension = m_WorkExtension
 End Property
 
-Public Property Let PosTitle(Value As String)
-    m_PosTitle = Value
+Public Property Let PosTitle(value As String)
+    m_PosTitle = value
 End Property
 
 Public Property Get PosTitle() As String
     PosTitle = m_PosTitle
 End Property
 
-Public Property Let Username(Value As String)
-    m_Username = Value
+Public Property Let Username(value As String)
+    m_Username = value
 End Property
 
 Public Property Get Username() As String
     Username = m_Username
 End Property
 
-Public Property Let IsActive(Value As Byte)
-    m_IsActive = Value
+Public Property Let IsActive(value As Byte)
+    m_IsActive = value
 End Property
 
 Public Property Get IsActive() As Byte
     IsActive = m_IsActive
 End Property
 
-Public Property Let Role(Value As String)
+Public Property Let Role(value As String)
     Dim aryRoles() As String
     aryRoles = Split(CONTACT_ROLES, ",")
 
-    If IsInArray(Value, aryRoles) Then
-        m_Role = Value
+    If IsInArray(value, aryRoles) Then
+        m_Role = value
     Else
-        RaiseEvent InvalidRole(Value)
+        RaiseEvent InvalidRole(value)
     End If
 End Property
 
@@ -190,16 +190,16 @@ Public Property Get Role() As String
     Role = m_Role
 End Property
 
-Public Property Let AccessRole(Value As String)
+Public Property Let AccessRole(value As String)
     Dim aryAccessRoles() As String
     aryAccessRoles = Split(ACCESS_ROLES, ",")
 
-    If IsInArray(Value, aryAccessRoles) Then
-        m_AccessRole = Value
+    If IsInArray(value, aryAccessRoles) Then
+        m_AccessRole = value
         'set access level based on role name (admin, power user, data entry, read only)
         AccessLevel = AccessID(m_AccessRole)
     Else
-        RaiseEvent InvalidAccessRole(Value)
+        RaiseEvent InvalidAccessRole(value)
     End If
 End Property
 
@@ -207,8 +207,8 @@ Public Property Get AccessRole() As String
     AccessRole = m_AccessRole
 End Property
 
-Public Property Let AccessLevel(Value As Long)
-    m_AccessLevel = Value
+Public Property Let AccessLevel(value As Long)
+    m_AccessLevel = value
 End Property
 
 Public Property Get AccessLevel() As Long

@@ -42,40 +42,40 @@ Public Event InvalidSiteID()
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let SiteID(Value As Integer)
-    m_SiteID = Value
+Public Property Let SiteID(value As Integer)
+    m_SiteID = value
 End Property
 
 Public Property Get SiteID() As Integer
     SiteID = m_SiteID
 End Property
 
-Public Property Let LocationID(Value As Integer)
-    m_LocationID = Value
+Public Property Let LocationID(value As Integer)
+    m_LocationID = value
 End Property
 
 Public Property Get LocationID() As Integer
     LocationID = m_LocationID
 End Property
 
-Public Property Let ProtocolID(Value As Integer)
-    m_ProtocolID = Value
+Public Property Let ProtocolID(value As Integer)
+    m_ProtocolID = value
 End Property
 
 Public Property Get ProtocolID() As Integer
     ProtocolID = m_ProtocolID
 End Property
 
-Public Property Let StartDate(Value As Date)
-    m_StartDate = Value
+Public Property Let StartDate(value As Date)
+    m_StartDate = value
 End Property
 
 Public Property Get StartDate() As Date

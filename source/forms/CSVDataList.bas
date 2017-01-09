@@ -674,21 +674,21 @@ Private m_Directions As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -696,14 +696,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -736,7 +736,7 @@ On Error GoTo Err_Handler
     Dim strTableOrCSV As String
     
     strTableOrCSV = ""
-    strTableOrCSV = IIf(Me.optgView.Value = 1, "table", "CSV")
+    strTableOrCSV = IIf(Me.optgView.value = 1, "table", "CSV")
 
     lblTitle.Caption = ""
 '    lblDirections.Caption = "Current " & strTableOrCSV & " data is shown below. " _
@@ -748,7 +748,7 @@ On Error GoTo Err_Handler
                             & vbCrLf & "To change CSV data or re-import it to the " _
                             & "temporary CSV table, click the button at right."
                             
-    tbxIcon.Value = StringFromCodepoint(uLocked)
+    tbxIcon.value = StringFromCodepoint(uLocked)
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
     
@@ -885,7 +885,7 @@ On Error GoTo Err_Handler
                         StartFolder, , msoFileDialogFilePicker, "Delimited files-CSV")
     
     'switch to Table view to avoid error # 2008(deleting open object)
-    Me.optgView.Value = 1
+    Me.optgView.value = 1
     Call optgView_Click
     
     If Len(strPath) > 0 Then
@@ -963,7 +963,7 @@ On Error GoTo Err_Handler
     tbl = ""
     
     'determine which table to export from
-    Select Case Me.optgView.Value
+    Select Case Me.optgView.value
         Case 0  'Default
         Case 1  'Table
             Dim strTable As String
@@ -1039,7 +1039,7 @@ On Error GoTo Err_Handler
     
     'Me.Controls("optgView").Value << error 438 object doesn't support property - EVEN tho immediate does!
     
-    Select Case Me.optgView.Value
+    Select Case Me.optgView.value
         Case 0  'Default
         Case 1  'Table
             'Me.tglTable.BackColor = lngLime
@@ -1125,7 +1125,7 @@ Err_Handler:
 End Sub
 
 Private Sub tglTable_KeyPress(KeyAscii As Integer)
-    MsgBox "Table KeyPress = " & Me.optgView.Value
+    MsgBox "Table KeyPress = " & Me.optgView.value
 End Sub
 
 ' ---------------------------------

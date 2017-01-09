@@ -76,6 +76,8 @@ Public Const lngLtSalmon As Long = 10998527 '?RGB(255, 210, 167) #FFD2A7
 Public Const lngSalmon As Long = 7051001    '?RGB(249, 150, 107) #F9966B
 Public Const lngLtSienna As Long = 3497896  '?RGB(168, 95, 53) #A85F35
 Public Const lngSpringGreen As Long = 32768 '?RGB(0,128,0) #008000
+Public Const lngTan As Long = 9221330       '?RGB(210,180,140) #D2B48C tan
+Public Const lngBurlywood As Long = 8894686 '?RGB(222,184,135) burlywood
 
 ' ---------------------------------
 '  Subroutines & Functions

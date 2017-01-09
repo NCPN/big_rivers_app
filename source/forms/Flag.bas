@@ -747,22 +747,22 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -770,14 +770,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -785,8 +785,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+        m_CallingForm = value
 End Property
 
 Public Property Get CallingForm() As String
@@ -828,7 +828,7 @@ On Error GoTo Err_Handler
     
     Title = "Flag"
     Directions = "Enter Flag details."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1275,8 +1275,8 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: Flag code & name (directions & description optional)
-    If Len(Nz(tbxFlagCode.Value, "")) > 0 _
-        And Len(Nz(tbxFlagName.Value, "")) > 0 Then
+    If Len(Nz(tbxFlagCode.value, "")) > 0 _
+        And Len(Nz(tbxFlagName.value, "")) > 0 Then
         isOK = True
     End If
     

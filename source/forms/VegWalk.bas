@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    Left =9765
+    Top =3030
+    Right =18540
+    Bottom =14010
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -223,8 +223,8 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =6660
-                    Top =900
+                    Left =7020
+                    Top =1020
                     Width =720
                     ForeColor =16711680
                     Name ="btnComment"
@@ -232,10 +232,10 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6660
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =7380
-                    LayoutCachedHeight =1260
+                    LayoutCachedLeft =7020
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =1380
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -411,6 +411,34 @@ Begin Form
                     LayoutCachedWidth =5880
                     LayoutCachedHeight =1380
                     ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6240
+                    Top =1020
+                    Width =720
+                    TabIndex =5
+                    ForeColor =4210752
+                    Name ="btnSetObserverRecorder"
+                    Caption ="í ½í±¥"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6240
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =6960
+                    LayoutCachedHeight =1380
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -911,23 +939,23 @@ Private m_FormContext As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
-Public Event InvalidFormContext(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
+Public Event InvalidFormContext(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -935,14 +963,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -950,11 +978,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-    If Len(Value) > 0 Then
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+    If Len(value) > 0 Then
+        m_CallingForm = value
     Else
-        RaiseEvent InvalidCallingForm(Value)
+        RaiseEvent InvalidCallingForm(value)
     End If
 End Property
 
@@ -962,18 +990,17 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let FormContext(Value As String)
-    If Len(Value) > 0 Then
-        m_FormContext = Value
+Public Property Let FormContext(value As String)
+    If Len(value) > 0 Then
+        m_FormContext = value
     Else
-        RaiseEvent InvalidFormContext(Value)
+        RaiseEvent InvalidFormContext(value)
     End If
 End Property
 
 Public Property Get FormContext() As String
     FormContext = m_FormContext
 End Property
-
 
 '---------------------
 ' Methods
@@ -1069,7 +1096,7 @@ On Error GoTo Err_Handler
     Title = IIf(strCaller = "VegPlot", strTitle, "VegWalk")
     lblTitle.Caption = "" 'hide inner title
     Directions = "Enter species found and click save."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1116,7 +1143,7 @@ On Error GoTo Err_Handler
     cbxSpecies.ColumnWidths = "0;.7in;.2in;0;0" 'display the display column (combines label - summary)
     
     'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
+    tbxID.value = 0
   
     'defaults --> turn off items
     
@@ -1293,7 +1320,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          btnUndo_Click
@@ -1583,8 +1609,8 @@ On Error GoTo Err_Handler
 '        And Nz(chkIsSeedling.Value, "") > -1 _
 '        And Nz(cbxEvent.Value, 0) > 0 Then
 
-    If Nz(cbxSpecies.Value, 0) > 0 _
-        And Nz(cbxEvent.Value, 0) > 0 Then
+    If Nz(cbxSpecies.value, 0) > 0 _
+        And Nz(cbxEvent.value, 0) > 0 Then
         
         isOK = True
         

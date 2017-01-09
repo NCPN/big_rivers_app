@@ -609,7 +609,7 @@ On Error GoTo Err_Handler
             Select Case ctrl.ControlType
                 Case acTextBox
                     ctrl.ControlSource = ""
-                    ctrl.Value = ""
+                    ctrl.value = ""
                 Case acComboBox
                     'ctrl.Value = "" '<< error: 2448 can't assign value to object
                     'ctrl.Value = Null '<< error: 2448 can't assign value to object

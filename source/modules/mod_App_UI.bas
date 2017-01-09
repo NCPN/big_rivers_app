@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.15
+' Version:      1.16
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -25,6 +25,7 @@ Option Explicit
 '               BLC, 10/25/2016 - 1.13 - added originForm TempVar for species seach
 '               BLC, 12/9/2016 -  1.14 - added PopulateCSVFields()
 '               BLC, 12/13/2016 - 1.15 - added SetCurrentPseudoRecord()
+'               BLC, 1/9/2017   - 1.16 - revised ClickAction() to use SetTempVar()
 ' =================================
 
 ' =================================
@@ -375,7 +376,7 @@ On Error GoTo Err_Handler
 '    End If
 
     If InStr(ctrl.Name, "cbxColumnName") Then
-        ctrl.Parent.Form.Parent.Form.Controls("tbxCSVRecord").Value = Replace(ctrl.Name, "cbxColumnName", "")
+        ctrl.Parent.Form.Parent.Form.Controls("tbxCSVRecord").value = Replace(ctrl.Name, "cbxColumnName", "")
         ChangeBackColor ctrl, lngYelLime
         Call Forms("ImportMap").tbxCSVRecord_Change
     End If
@@ -408,6 +409,7 @@ End Function
 '   BLC - 8/30/2016  - added Batch Upload Photos
 '   BLC - 10/19/2016 - revised to use UploadCSVFile() vs. UploadSurveyFile()
 '   BLC - 10/25/2016 - revised species search to add originForm TempVar, callingform oArg
+'   BLC - 1/9/2017   - revised to use SetTempVar()
 ' ---------------------------------
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
@@ -464,11 +466,12 @@ On Error GoTo Err_Handler
             fName = "SpeciesSearch"
             oArgs = "Main"
             'disable double click events
-            If Not IsNull(TempVars("originForm")) Then
-                TempVars("originForm") = "DisableDoubleClick"
-            Else
-                TempVars.Add "originForm", "DisableDoubleClick"
-            End If
+            SetTempVar "originForm", "DisableDoubleClick"
+'            If Not IsNull(TempVars("originForm")) Then
+'                TempVars("originForm") = "DisableDoubleClick"
+'            Else
+'                TempVars.Add "originForm", "DisableDoubleClick"
+'            End If
         'Observations
         Case "photos"
             fName = "Tree"
@@ -958,7 +961,7 @@ On Error GoTo Err_Handler
             frm.Controls("cbxWY").DefaultValue = False
             frm.Controls("cbxITIS").DefaultValue = False
             frm.Controls("cbxCommon").DefaultValue = False
-            frm.Controls("tbxSearchFor").Value = ""
+            frm.Controls("tbxSearchFor").value = ""
     End Select
     
 Exit_Sub:

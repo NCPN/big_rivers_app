@@ -41,28 +41,28 @@ Public Event InvalidSequence(Sequence As Integer)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
    ID = m_ID
 End Property
 
-Public Property Let LocationID(Value As Long)
-    m_LocationID = Value
+Public Property Let LocationID(value As Long)
+    m_LocationID = value
 End Property
 
 Public Property Get LocationID() As Long
    LocationID = m_LocationID
 End Property
 
-Public Property Let Name(Value As String)
+Public Property Let Name(value As String)
     'feature names are 1 or 2 characters (letters only)
-    If Len(Trim(Value)) < 3 And IsAlpha(Value) Then
-        m_Name = Value
+    If Len(Trim(value)) < 3 And IsAlpha(value) Then
+        m_Name = value
     Else
-        RaiseEvent InvalidName(Value)
+        RaiseEvent InvalidName(value)
     End If
 End Property
 
@@ -70,12 +70,12 @@ Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let Description(Value As String)
+Public Property Let Description(value As String)
     'descriptions - 255 characters or less
-    If Len(Trim(Value)) < 256 Then
-        m_Description = Value
+    If Len(Trim(value)) < 256 Then
+        m_Description = value
     Else
-        RaiseEvent InvalidDescription(Value)
+        RaiseEvent InvalidDescription(value)
     End If
 End Property
 
@@ -83,19 +83,19 @@ Public Property Get Description() As String
     Description = m_Description
 End Property
 
-Public Property Let Directions(Value As String)
-    m_Directions = Value
+Public Property Let Directions(value As String)
+    m_Directions = value
 End Property
 
 Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let Sequence(Value As Integer)
-    If Value > -1 Then
-        m_Sequence = Value
+Public Property Let Sequence(value As Integer)
+    If value > -1 Then
+        m_Sequence = value
     Else
-        RaiseEvent InvalidSequence(Value)
+        RaiseEvent InvalidSequence(value)
     End If
 End Property
 

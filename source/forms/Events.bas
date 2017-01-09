@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    Left =8205
+    Top =2490
+    Right =16065
+    Bottom =9210
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x45dde061d6cde440
@@ -754,6 +754,8 @@ Option Explicit
 '               BLC - 9/1/2016  - 1.05 - btnSave_Click code cleanup, remove ClearForm()
 '               BLC - 10/20/2016 - 1.06 - removed buttoncaption, selectedID, selectedvalue properties
 '                                         revised to use GetContext()
+'               BLC - 1/9/2017   - 1.07 - revised to update VegPlot calling form event list,
+'                                         hid form title
 ' =================================
 
 '---------------------
@@ -772,22 +774,22 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -795,14 +797,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -810,11 +812,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-    If Len(Value) > 0 Then
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+    If Len(value) > 0 Then
+        m_CallingForm = value
     Else
-        RaiseEvent InvalidCallingForm(Value)
+        RaiseEvent InvalidCallingForm(value)
     End If
 End Property
 
@@ -858,8 +860,9 @@ On Error GoTo Err_Handler
     lblContext.Caption = GetContext()
     
     Title = "Events (Sampling Visits)"
+    lblTitle.Caption = "" 'hide second title
     Directions = "Choose the site " & StringFromCodepoint(uAmpersand) & " location, then enter the sampling start date."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1133,12 +1136,23 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 8/2/2016 - use Me.CallingForm
+'   BLC - 1/9/2017 - revise to update VegPlot form's event combobox
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
     'restore calling form
     ToggleForm Me.CallingForm, 0
+    
+    'update events combobox for VegPlot
+    Select Case Me.CallingForm
+        Case "VegPlot"
+'   show #DELETED vs. refreshing combo
+'            Forms("VegPlot").Controls("cbxEvent").Requery
+'            Forms("VegPlot").Controls("cbxEvent").Refresh
+        Set Forms("VegPlot").Controls("cbxEvent").Recordset = GetRecords("s_events_by_park_river")
+        Forms("VegPlot").Controls("cbxEvent").Requery
+    End Select
     
 Exit_Handler:
     Exit Sub

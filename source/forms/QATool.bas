@@ -2670,22 +2670,22 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -2693,14 +2693,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -2708,11 +2708,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-    If Len(Value) > 0 Then
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+    If Len(value) > 0 Then
+        m_CallingForm = value
     Else
-        RaiseEvent InvalidCallingForm(Value)
+        RaiseEvent InvalidCallingForm(value)
     End If
 End Property
 
@@ -3082,7 +3082,7 @@ Private Sub PageTabs_Change()
         varReturn = UpdateQAResults(False, Me.cbxObject)
         Me.Requery
         FilterRecords
-        strCriteria = "[Query_name] = """ & Me.cbxObject.Value & _
+        strCriteria = "[Query_name] = """ & Me.cbxObject.value & _
             """ AND [Time_frame] = """ & Me.cbxTimeframe & _
             """ AND [Data_scope] = " & Me.optgScope
 
@@ -3443,9 +3443,9 @@ Private Sub cbxObject_AfterUpdate()
     End If
     
     ' Bind the subform to the selected query
-    Me.subQueryResults.SourceObject = "Query." & Me.cbxObject.Value
+    Me.subQueryResults.SourceObject = "Query." & Me.cbxObject.value
     ' Build the filter string and see if a record already exists
-    strCriteria = "[Query_name] = """ & Me.cbxObject.Value & _
+    strCriteria = "[Query_name] = """ & Me.cbxObject.value & _
         """ AND [Time_frame] = """ & Me.cbxTimeframe & _
         """ AND [Data_scope] = " & Me.optgScope
     If DCount("*", "tbl_QA_Results", strCriteria) = 0 Then
@@ -3466,7 +3466,7 @@ Private Sub cbxObject_AfterUpdate()
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.cbxObject.Value Then
+        If qdf.Name = Me.cbxObject.value Then
             MsgBox ("This query returns (" & DCount("*", qdf.Name) & _
                 ") records that meet the following criteria: " & _
                 vbCrLf & vbCrLf & qdf.Properties("Description"))
@@ -3512,7 +3512,7 @@ Private Sub btnDesignView_Click()
 
     ' Open the selected query in design view after checking that a query is selected
     If IsNull(Me.cbxObject) = False Then _
-        DoCmd.OpenQuery Me.cbxObject.Value, acViewDesign, acReadOnly
+        DoCmd.OpenQuery Me.cbxObject.value, acViewDesign, acReadOnly
 
 Exit_Handler:
     Exit Sub
@@ -3550,7 +3550,7 @@ Private Sub btnAutoFix_Click()
 
     On Error Resume Next
     Set ctlAutoFix = Forms!frm_QA_Tool.subQueryResults!varAutoFix
-    varAutoFix = ctlAutoFix.Value
+    varAutoFix = ctlAutoFix.value
     On Error GoTo Err_Handler
 
     If IsNull(varAutoFix) Then
@@ -3636,11 +3636,11 @@ Private Sub btnOpenRecord_Click()
     
     On Error Resume Next
     Set ctlObject = Forms!frm_QA_Tool.subQueryResults!varObject
-    varObject = ctlObject.Value
+    varObject = ctlObject.value
     Set ctlFilter = Forms!frm_QA_Tool.subQueryResults!varFilter
-    varFilter = ctlFilter.Value
+    varFilter = ctlFilter.value
     Set ctlArgs = Forms!frm_QA_Tool.subQueryResults!varArgs
-    varArgs = ctlArgs.Value
+    varArgs = ctlArgs.value
     On Error GoTo Err_Handler
 
     If IsNull(varObject) Then
@@ -3819,9 +3819,9 @@ Private Sub btnCloseup_Click()
     ' Open the selected query in a new window after checking that a query is selected
     If IsNull(Me.cbxObject) = False Then
         If Me.tbxEditQuery = "OK" Then
-            DoCmd.OpenQuery Me.cbxObject.Value, acViewNormal, acEdit
+            DoCmd.OpenQuery Me.cbxObject.value, acViewNormal, acEdit
         Else
-            DoCmd.OpenQuery Me.cbxObject.Value, acViewNormal, acReadOnly
+            DoCmd.OpenQuery Me.cbxObject.value, acViewNormal, acReadOnly
         End If
         DoCmd.Maximize
     End If
@@ -3979,7 +3979,7 @@ Private Sub cbxTable_AfterUpdate()
     Else
     ' If a table is selected ...
         If TableExists(Me.cbxTable) Then
-            Me.subDataTables.SourceObject = "Table." & Me.cbxTable.Value
+            Me.subDataTables.SourceObject = "Table." & Me.cbxTable.value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"
@@ -4127,7 +4127,7 @@ Private Function SetQueryFlag()
 
     ' Update the visual flag to indicate whether or not the query results are editable
     '   Note: suffix of "_X" means that the query results may be edited
-    If Right(Me.cbxObject.Value, 2) = "_X" Then
+    If Right(Me.cbxObject.value, 2) = "_X" Then
         Me.tbxEditQuery = "OK"
         Me.tbxEditQuery.ForeColor = 16777215   'white
         Me.tbxEditQuery.BackColor = 4227072    'green

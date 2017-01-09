@@ -36,9 +36,9 @@ Private m_MaxLength As Integer
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    If IsNumeric(Value) Then
-        m_ID = Value
+Public Property Let ID(value As Long)
+    If IsNumeric(value) Then
+        m_ID = value
     End If
 End Property
 
@@ -46,9 +46,9 @@ Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let TypeID(Value As Integer)
-    If IsNumeric(Value) Then
-        m_TypeID = Value
+Public Property Let TypeID(value As Integer)
+    If IsNumeric(value) Then
+        m_TypeID = value
     End If
 End Property
 
@@ -56,9 +56,9 @@ Public Property Get TypeID() As Integer
     TypeID = m_TypeID
 End Property
 
-Public Property Let CommentType(Value As String)
-    If ValidateString(Value, "alphanumdashslashspace") Then
-        m_CommentType = Value
+Public Property Let CommentType(value As String)
+    If ValidateString(value, "alphanumdashslashspace") Then
+        m_CommentType = value
     End If
 End Property
 
@@ -66,9 +66,9 @@ Public Property Get CommentType() As String
     CommentType = m_CommentType
 End Property
 
-Public Property Let Comment(Value As String)
-    If ValidateString(Value, "paragraph") Then
-        m_Comment = Value
+Public Property Let Comment(value As String)
+    If ValidateString(value, "paragraph") Then
+        m_Comment = value
     End If
 End Property
 
@@ -76,9 +76,9 @@ Public Property Get Comment() As String
     Comment = m_Comment
 End Property
 
-Public Property Let CommentorID(Value As Integer)
-    If IsNumeric(Value) Then
-        m_CommentorID = Value
+Public Property Let CommentorID(value As Integer)
+    If IsNumeric(value) Then
+        m_CommentorID = value
     End If
 End Property
 
@@ -86,9 +86,9 @@ Public Property Get CommentorID() As Integer
     ID = m_CommentorID
 End Property
 
-Public Property Let MaxLength(Value As Integer)
-    If IsNumeric(Value) Then
-        m_MaxLength = Value
+Public Property Let MaxLength(value As Integer)
+    If IsNumeric(value) Then
+        m_MaxLength = value
     End If
 End Property
 

@@ -35,10 +35,10 @@ Private m_CreatedByID As Long 'Integer
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidLocationType(Value)
-Public Event InvalidLocationName(Value)
-Public Event InvalidBearing(Value)
-Public Event InvalidSourceName(Value)
+Public Event InvalidLocationType(value)
+Public Event InvalidLocationName(value)
+Public Event InvalidBearing(value)
+Public Event InvalidSourceName(value)
 'Public Event Modified()
 'Public Event SavedToDb()
 'Public Event Deleted()
@@ -46,23 +46,23 @@ Public Event InvalidSourceName(Value)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(Value As Long)
-    m_ID = Value
+Public Property Let ID(value As Long)
+    m_ID = value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let LocationType(Value As String)
+Public Property Let LocationType(value As String)
     'get valid location types (mod_App_Settings)
     Dim aryLocTypes() As String
     aryLocTypes = Split(LOCATION_TYPES, ",")
 
-    If Len(Trim(Value)) = 1 And IsInArray(Value, aryLocTypes) Then
-        m_LocationType = Value
+    If Len(Trim(value)) = 1 And IsInArray(value, aryLocTypes) Then
+        m_LocationType = value
     Else
-        RaiseEvent InvalidLocationType(Value)
+        RaiseEvent InvalidLocationType(value)
     End If
 
 End Property
@@ -71,13 +71,13 @@ Public Property Get LocationType() As String
     LocationType = m_LocationType
 End Property
 
-Public Property Let CollectionSourceName(Value As String)
+Public Property Let CollectionSourceName(value As String)
     'Collection feature ID (A, B, C, ...) or Transect number (1-8)
     'limit = 25
-    If Len(Trim(Value)) < 26 Then
-        m_CollectionSourceName = Value
+    If Len(Trim(value)) < 26 Then
+        m_CollectionSourceName = value
     Else
-        RaiseEvent InvalidSourceName(Value)
+        RaiseEvent InvalidSourceName(value)
     End If
 End Property
 
@@ -85,12 +85,12 @@ Public Property Get CollectionSourceName() As String
     CollectionSourceName = m_CollectionSourceName
 End Property
 
-Public Property Let LocationName(Value As String)
+Public Property Let LocationName(value As String)
     'limit = 100
-    If Len(Trim(Value)) < 101 Then
-        m_LocationName = Value
+    If Len(Trim(value)) < 101 Then
+        m_LocationName = value
     Else
-        RaiseEvent InvalidLocationName(Value)
+        RaiseEvent InvalidLocationName(value)
     End If
 End Property
 
@@ -98,17 +98,17 @@ Public Property Get LocationName() As String
     LocationName = m_LocationName
 End Property
 
-Public Property Let HeadtoOrientDistance(Value As Integer)
-    m_HeadtoOrientDistance = Value
+Public Property Let HeadtoOrientDistance(value As Integer)
+    m_HeadtoOrientDistance = value
 End Property
 
 Public Property Get HeadtoOrientDistance() As Integer
     HeadtoOrientDistance = m_HeadtoOrientDistance
 End Property
 
-Public Property Let HeadtoOrientBearing(Value As Integer)
-    If IsBetween(Value, 0, 360, True) Then
-        m_HeadtoOrientBearing = Value
+Public Property Let HeadtoOrientBearing(value As Integer)
+    If IsBetween(value, 0, 360, True) Then
+        m_HeadtoOrientBearing = value
     End If
 End Property
 
@@ -116,32 +116,32 @@ Public Property Get HeadtoOrientBearing() As Integer
     HeadtoOrientBearing = m_HeadtoOrientBearing
 End Property
 
-Public Property Let CreatedByID(Value As Integer)
-    m_CreatedByID = Value
+Public Property Let CreatedByID(value As Integer)
+    m_CreatedByID = value
 End Property
 
 Public Property Get CreatedByID() As Integer
     CreatedByID = m_CreatedByID
 End Property
 
-Public Property Let CreateDate(Value As Date)
-    m_CreateDate = Value
+Public Property Let CreateDate(value As Date)
+    m_CreateDate = value
 End Property
 
 Public Property Get CreateDate() As Date
     CreateDate = m_CreateDate
 End Property
 
-Public Property Let LastModifiedByID(Value As Integer)
-    m_LastModifiedByID = Value
+Public Property Let LastModifiedByID(value As Integer)
+    m_LastModifiedByID = value
 End Property
 
 Public Property Get LastModifiedByID() As Integer
     LastModifiedByID = m_LastModifiedByID
 End Property
 
-Public Property Let LastModified(Value As Date)
-    m_LastModified = Value
+Public Property Let LastModified(value As Date)
+    m_LastModified = value
 End Property
 
 Public Property Get LastModified() As Date

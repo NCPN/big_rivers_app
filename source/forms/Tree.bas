@@ -14,10 +14,10 @@ Begin Form
     Width =11400
     DatasheetFontHeight =11
     ItemSuffix =31
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    Left =8205
+    Top =2490
+    Right =16980
+    Bottom =13470
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x80331edabcc4e440
@@ -32837,7 +32837,7 @@ Option Explicit
 ' MODULE:       Tree form
 ' Description:  Treeview functions & procedures
 ' Level:        Framework form
-' Version:      1.07
+' Version:      1.08
 '
 ' Source/date:  Bonnie Campbell, 7/10/2015
 ' Revisions:    BLC - 7/10/2015 - 1.00 - initial version
@@ -32851,6 +32851,7 @@ Option Explicit
 '                                        from usys_temp_photo & Photo tables
 '               BLC - 10/25/2016 - 1.06 - renamed btnAddVisit -> btnAddEvent
 '               BLC - 10/28/2016 - 1.07 - added btnAddTask()
+'               BLC - 1/9/2017   - 1.08 - revised cbxEvent_Change() to use SetTempVar()
 ' =================================
 
 '---------------------
@@ -33246,16 +33247,18 @@ End Sub
 ' Adapted:      Bonnie Campbell, October 13, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 10/13/2016 - initial version
+'   BLC - 1/9/2017   - revised to use SetTempVar()
 ' ---------------------------------
 Private Sub cbxEvents_Change(Cancel As Integer)
 On Error GoTo Err_Handler
 
     'set the Event ID
-    If TempVars("EventID") Is Nothing Then
-        TempVars.Add "EventID", Me.cbxEvent.Column(0)
-    Else
-        TempVars("EventID") = Me.cbxEvent.Column(0)
-    End If
+    SetTempVar "EventID", Me.cbxEvent.Column(0)
+'    If TempVars("EventID") Is Nothing Then
+'        TempVars.Add "EventID", Me.cbxEvent.Column(0)
+'    Else
+'        TempVars("EventID") = Me.cbxEvent.Column(0)
+'    End If
 
 Exit_Handler:
     Exit Sub

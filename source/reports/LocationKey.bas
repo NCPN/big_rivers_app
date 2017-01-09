@@ -507,11 +507,11 @@ Public Event InvalidPark(Park As String)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Park(Value As String)
-    If Len(Value) = 4 Then
-        m_Park = Value
+Public Property Let Park(value As String)
+    If Len(value) = 4 Then
+        m_Park = value
     Else
-        RaiseEvent InvalidPark(Value)
+        RaiseEvent InvalidPark(value)
     End If
 End Property
 

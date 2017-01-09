@@ -365,7 +365,7 @@ End Function
 '   BLC - 2/7/2015  - initial version
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 ' ---------------------------------
-Public Function CountArrayValues(ary As Variant, val As Variant) As Integer
+Public Function CountArrayValues(ary As Variant, Val As Variant) As Integer
 
 On Error GoTo Err_Handler
     
@@ -377,7 +377,7 @@ On Error GoTo Err_Handler
     If IsArray(ary) Then
     
         For i = LBound(ary) To UBound(ary)
-            If ary(i) = val Then
+            If ary(i) = Val Then
                 numItems = numItems + 1
             End If
         Next
@@ -584,7 +584,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryData, 2) ' - 1
                 
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                    rsProcess(aryFieldNames(iCol)).Value = aryData(iRow, iCol)
+                    rsProcess(aryFieldNames(iCol)).value = aryData(iRow, iCol)
 
             Next
             
@@ -708,7 +708,7 @@ Dim blnTableExists As Boolean
             For iCol = 0 To UBound(aryFieldNames) ' - 1
             
                 'add record field values for each record (aryFields - 1, row 0 = field names)
-                rsProcess(aryFieldNames(iCol)).Value = rsList(aryFieldNames(iCol)).Value
+                rsProcess(aryFieldNames(iCol)).value = rsList(aryFieldNames(iCol)).value
 
 '                iCol = iCol + 1
             Next

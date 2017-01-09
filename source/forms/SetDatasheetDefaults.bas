@@ -844,23 +844,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidLabel(value As String)
+Public Event InvalidCaption(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let Title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
@@ -868,14 +868,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -883,14 +883,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
+Public Property Let ButtonCaption(value As String)
+    If Len(value) > 0 Then
+        m_ButtonCaption = value
 
         'set the form button caption
         Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCaption(value)
     End If
 End Property
 
@@ -898,16 +898,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
+Public Property Let SelectedID(value As Integer)
+        m_SelectedID = value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
+Public Property Let SelectedValue(value As String)
+        m_SelectedValue = value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -946,7 +946,7 @@ On Error GoTo Err_Handler
 
     Title = "SetDatasheetDefaults"
     Directions = "Enter the SetDatasheetDefaults information and click save."
-    tbxIcon.Value = StringFromCodepoint(uBullet)
+    tbxIcon.value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     
     'cover types
@@ -971,8 +971,8 @@ On Error GoTo Err_Handler
     lblMsg.Caption = ""
   
     'ID default -> value used only for edits of existing table values
-    tbxID.Value = 0
-    tbxTotalRows.Value = CInt(Nz(tbxSpecies.Value, 0)) + CInt(Nz(tbxBlanks.Value, 0))
+    tbxID.value = 0
+    tbxTotalRows.value = CInt(Nz(tbxSpecies.value, 0)) + CInt(Nz(tbxBlanks.value, 0))
       
     'initialize values
     ClearForm Me
@@ -1059,7 +1059,7 @@ Private Sub tbxSpecies_AfterUpdate()
 On Error GoTo Err_Handler
 
     'update total
-    tbxTotalRows.Value = CInt(Nz(tbxSpecies.Value, 0)) + CInt(Nz(tbxBlanks.Value, 0))
+    tbxTotalRows.value = CInt(Nz(tbxSpecies.value, 0)) + CInt(Nz(tbxBlanks.value, 0))
 
     ReadyForSave
     
@@ -1091,7 +1091,7 @@ Private Sub tbxBlanks_AfterUpdate()
 On Error GoTo Err_Handler
 
     'update total
-    tbxTotalRows.Value = CInt(Nz(tbxSpecies.Value, 0)) + CInt(Nz(tbxBlanks.Value, 0))
+    tbxTotalRows.value = CInt(Nz(tbxSpecies.value, 0)) + CInt(Nz(tbxBlanks.value, 0))
     
     ReadyForSave
     
@@ -1157,12 +1157,12 @@ On Error GoTo Err_Handler
         
     Dim Params(0 To 5) As Variant
 
-    Params(0) = tbxID.Value
+    Params(0) = tbxID.value
     Params(1) = TempVars("ParkID")
     Params(2) = TempVars("RiverID")
     Params(3) = cbxCoverType.Column(0)
-    Params(4) = tbxSpecies.Value
-    Params(5) = tbxBlanks.Value
+    Params(4) = tbxSpecies.value
+    Params(5) = tbxBlanks.value
         
     SetRecord Template, Params
         
@@ -1274,7 +1274,7 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If (tbxSpecies.Value + tbxBlanks.Value) <> 0 And Len(cbxCoverType.Value) > 0 Then
+    If (tbxSpecies.value + tbxBlanks.value) <> 0 And Len(cbxCoverType.value) > 0 Then
         isOK = True
     End If
     
