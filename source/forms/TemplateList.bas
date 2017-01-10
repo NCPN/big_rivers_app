@@ -18,11 +18,11 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =39
-    Left =4185
-    Top =3000
-    Right =11745
-    Bottom =14445
+    ItemSuffix =41
+    Left =8865
+    Top =2535
+    Right =16425
+    Bottom =13140
     DatasheetGridlinesColor =14806254
     OrderBy ="TemplateName"
     RecSrcDt = Begin
@@ -271,7 +271,7 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =215
-                    Left =6660
+                    Left =6780
                     Top =180
                     Width =720
                     ForeColor =4210752
@@ -317,10 +317,75 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =6780
                     LayoutCachedTop =180
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =7500
                     LayoutCachedHeight =540
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =215
+                    Left =6780
+                    Top =720
+                    Width =720
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="btnOpenTable"
+                    Caption ="Add Record"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Open tsys_Db_Templates table"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x000000000000000000000000b0a090ff604830ff604830ff604830ff604830ff ,
+                        0x604830ff604830ff604830ff604830ff604830ff604830ff604830ff604830ff ,
+                        0x604830ff0000000000000000b0a090ffe0c8c0ffd0c0b0ffd0b8b0ffd0b8b0ff ,
+                        0xc0b0a0ffc0b0a0ffc0b0a0ffc0a8a0ffc0a890ffc0a890ffb0a090ffb0a090ff ,
+                        0x604830ff0000000000000000b0a090fffffffffffffffffffff8ffffd0b8b0ff ,
+                        0xfff0f0fffff0e0ffffe8e0ffc0a8a0fff0d8d0fff0d8c0fff0d0b0ffb0a090ff ,
+                        0x604830ff0000000000000000b0a090ffffffffffffffffffffffffffd0c0b0ff ,
+                        0xfff8f0fffff0f0fffff0e0ffc0b0a0ffffe0d0fff0d8d0fff0d8c0ffc0a890ff ,
+                        0x604830ff0000000000000000b0a090ffe0d0d0ffd0c8c0ffd0c0c0ffd0c0b0ff ,
+                        0xd0c0b0ffd0b8b0ffd0b8b0ffc0b0a0ffc0b0a0ffc0b0a0ffc0a8a0ffc0a890ff ,
+                        0x604830ff0000000000000000c0a890ffffffffffffffffffffffffffd0c8c0ff ,
+                        0xfffffffffff8fffffff8f0ffd0b8b0fffff0e0ffffe8e0ffffe0d0ffc0a8a0ff ,
+                        0x604830ff0000000000000000c0a8a0ffffffffffffffffffffffffffd0c8c0ff ,
+                        0xfffffffffffffffffff8ffffd0b8b0fffff0f0fffff0e0ffffe8e0ffc0a8a0ff ,
+                        0x604830ff0000000000000000c0b0a0ffe0d8d0ffe0d0c0ffe0d0c0ffe0c8c0ff ,
+                        0xd0c8c0ffd0c8c0ffd0c0b0ffd0c0b0ffd0b8b0ffd0b8b0ffc0b0a0ffc0b0a0ff ,
+                        0x604830ff0000000000000000d0b0a0ffffffffffffffffffffffffffe0d0c0ff ,
+                        0xffffffffffffffffffffffffd0c0b0fffff8fffffff8f0fffff0f0ffc0b0a0ff ,
+                        0x604830ff0000000000000000d0b8a0ffffffffffffffffffffffffffe0d0c0ff ,
+                        0xffffffffffffffffffffffffd0c8c0fffffffffffff8fffffff8f0ffd0b8b0ff ,
+                        0x604830ff0000000000000000f0a890fff0a890fff0a890fff0a880fff0a080ff ,
+                        0xe09870ffe09060ffe08850ffe08050ffe07840ffe07040ffe07040ffe07040ff ,
+                        0xd06030ff0000000000000000f0a890ffffc0a0ffffc0a0ffffc0a0ffffb890ff ,
+                        0xffb890ffffb090ffffa880ffffa880fff0a070fff0a070fff09870fff09860ff ,
+                        0xd06830ff0000000000000000f0a890fff0a890fff0a890fff0a890fff0a880ff ,
+                        0xf0a080fff09870ffe09870ffe09060ffe08860ffe08050ffe07840ffe07840ff ,
+                        0xe07040ff00000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =6780
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =1080
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -686,7 +751,7 @@ Option Explicit
 ' =================================
 ' Form:         TemplateList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -695,6 +760,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 10/4/2016 - 1.01 - added Add Template button
+'               BLC - 1/10/2017 - 1.02 - added Open Table button to access tsys_Db_Templates for
+'                                        editing
 ' =================================
 
 '---------------------
@@ -713,23 +780,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -737,14 +804,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -752,14 +819,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         'Me.btnEdit.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -767,16 +834,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -799,6 +866,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 1/10/2017 - added btnOpenTable, set
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -810,16 +878,22 @@ On Error GoTo Err_Handler
     lblTitle.Caption = ""
     lblDirections.Caption = "Sort records by clicking the header." _
                             & vbCrLf & "Effective date color reflects if template is retired or not."
-    tbxIcon.value = StringFromCodepoint(uLocked)
+    tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
     
     'set hover
     btnDelete.HoverColor = lngGreen
     btnViewSQL.HoverColor = lngGreen
+    btnOpenTable.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
+
+    'enable textbox to ensure scrollbar is available for longer text
+    tbxTemplate.Enabled = True
+    
+    'cover to avoid data entry
 
 Exit_Handler:
     Exit Sub
@@ -924,6 +998,38 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          btnOpenTable_Click
+' Description:  Open table button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 10, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/10/2017 - initial version
+' ---------------------------------
+Private Sub btnOpenTable_Click()
+On Error GoTo Err_Handler
+    
+    'minimize TemplateList
+    ToggleForm "TemplateList", -1
+    
+    DoCmd.OpenTable "tsys_Db_Templates", acViewNormal ',acAdd
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenTable_Click[TemplateList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnViewSQL_Click
 ' Description:  Delete button click actions
 ' Assumptions:  -
@@ -942,12 +1048,12 @@ On Error GoTo Err_Handler
     Dim strOA As String
     
     'prepare open args
-    strOA = Me.ID.value & "|" _
-            & Me.Version.value & "|" _
-            & Me.TemplateName.value & "|" _
-            & Me.Template.value & "|" _
-            & Me.EffectiveDate.value & "|" _
-            & Me.Syntax.value
+    strOA = Me.ID.Value & "|" _
+            & Me.Version.Value & "|" _
+            & Me.TemplateName.Value & "|" _
+            & Me.Template.Value & "|" _
+            & Me.EffectiveDate.Value & "|" _
+            & Me.Syntax.Value
     
     DoCmd.OpenForm "TemplateSQL", acNormal, , , , , strOA
 

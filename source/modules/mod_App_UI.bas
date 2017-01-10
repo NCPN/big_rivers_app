@@ -376,7 +376,7 @@ On Error GoTo Err_Handler
 '    End If
 
     If InStr(ctrl.Name, "cbxColumnName") Then
-        ctrl.Parent.Form.Parent.Form.Controls("tbxCSVRecord").value = Replace(ctrl.Name, "cbxColumnName", "")
+        ctrl.Parent.Form.Parent.Form.Controls("tbxCSVRecord").Value = Replace(ctrl.Name, "cbxColumnName", "")
         ChangeBackColor ctrl, lngYelLime
         Call Forms("ImportMap").tbxCSVRecord_Change
     End If
@@ -961,7 +961,7 @@ On Error GoTo Err_Handler
             frm.Controls("cbxWY").DefaultValue = False
             frm.Controls("cbxITIS").DefaultValue = False
             frm.Controls("cbxCommon").DefaultValue = False
-            frm.Controls("tbxSearchFor").value = ""
+            frm.Controls("tbxSearchFor").Value = ""
     End Select
     
 Exit_Sub:

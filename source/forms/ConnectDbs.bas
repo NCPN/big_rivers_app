@@ -1571,9 +1571,9 @@ Private Sub btnUpdateLinks_Click()
 
         With rs
             .Edit
-            !LinkDb = rs.Fields("NewDb").value
-            !FilePath = rs.Fields("NewPath").value
-            !Server = rs.Fields("NewServer").value
+            !LinkDb = rs.Fields("NewDb").Value
+            !FilePath = rs.Fields("NewPath").Value
+            !Server = rs.Fields("NewServer").Value
             !NewDb = Null
             !NewPath = Null
             !NewServer = Null

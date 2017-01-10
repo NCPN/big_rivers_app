@@ -1201,7 +1201,7 @@ Public Sub PrepareCrumbs(frm As SubForm, aryCrumbs As Variant, Optional separato
                 .Caption = aryCrumbs(i)
             Else
                 'hyperlink control (displaytext vs caption)
-                .value = aryCrumbs(i)
+                .Value = aryCrumbs(i)
             End If
             
             'set control position
@@ -1248,6 +1248,84 @@ Err_Handler:
     End Select
     Resume Exit_Procedure
 End Sub
+
+' ---------------------------------
+' FUNCTION:     ColorizeText
+' Description:  Colors specific text items based on the colorizing type.
+' Assumptions:  Text is used in Rich Text textboxes or HTML.
+' Parameters:   InputText - text to colorize (string)
+'               TextType - type of colorizing to do (string)
+'               TextColor - text coloring to use (string)
+' Returns:      -
+' Throws:       none
+' References:
+'   TJ Poorman, August 15, 2013
+'   http://www.access-programmers.co.uk/forums/showthread.php?t=251953
+' Source/date:  Bonnie Campbell, January 10, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/10/2017 - initial version
+' ---------------------------------
+Public Function ColorizeText(InputText As String, TextType As String, _
+                                Optional TextColor As String = "red")
+On Error GoTo Err_Handler
+    
+    Dim aryText() As Variant
+    Dim colorizedText As String
+    Dim colorizeStart As String
+    Dim colorizeEnd As String
+    Dim i As Integer
+    
+    Select Case TextType
+        Case "SQL"
+            aryText = Array("SELECT", "INSERT", "UPDATE", "DELETE", "FROM", "WHERE", _
+                            "LEFT OUTER JOIN", "LEFT INNER JOIN", "RIGHT OUTER JOIN", _
+                            "RIGHT INNER JOIN", _
+                            "INTO", " BETWEEN ", " IN ", "INNER JOIN", "OUTER JOIN", _
+                            "LEFT JOIN", "RIGHT JOIN", "JOIN", " AS ", "UNION", _
+                            "UNION ALL", "PARAMETERS", "ORDER BY", "TOP", _
+                            "VALUES", "IIf", "LCASE", "UCASE", "DISTINCT", _
+                            " ON ", "COUNT", "DESC", "ASC", "AND")
+        Case "NULL"
+            aryText = Array("NULL")
+        Case "NEGATIVE"
+            aryText = Array("NULL", "NOT", "IS NOTHING")
+        Case "COLTYPES"
+            aryText = Array("INT", "TEXT", "BYTE", "DOUBLE", "LONG", "MEMO")
+    End Select
+    
+    'setup colorizing
+    colorizeStart = " <font color=" & TextColor & ">"
+    colorizeEnd = "</font> "
+    
+    'begin
+    colorizedText = InputText
+    
+    'iterate through text
+    For i = 0 To UBound(aryText)
+    
+        If InStr(1, InputText, aryText(i)) Then
+               
+            colorizedText = Replace(colorizedText, aryText(i), colorizeStart & aryText(i) & colorizeEnd)
+        
+        End If
+        
+    Next
+
+    ColorizeText = colorizedText
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ColorizeText[mod_UI])"
+    End Select
+    Resume Exit_Handler
+End Function
+
 
 ' ---------------------------------
 '  Drawing

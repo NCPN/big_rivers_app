@@ -30,32 +30,32 @@ Private m_Length As Integer
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let Name(value As String)
-    m_Name = value
+Public Property Let Name(Value As String)
+    m_Name = Value
 End Property
 
 Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let Length(value As Integer)
-    m_Length = value
+Public Property Let Length(Value As Integer)
+    m_Length = Value
 End Property
 
 Public Property Get Length() As Integer
     Length = m_Length
 End Property
 
-Public Property Let Count(value As Integer)
-    m_Count = value
+Public Property Let Count(Value As Integer)
+    m_Count = Value
 End Property
 
 Public Property Get Count() As Integer

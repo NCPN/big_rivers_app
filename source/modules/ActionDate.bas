@@ -38,55 +38,55 @@ Private m_ActionType As String
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let FirstName(value As String)
-    m_FirstName = value
+Public Property Let FirstName(Value As String)
+    m_FirstName = Value
 End Property
 
 Public Property Get FirstName() As String
     FirstName = m_FirstName
 End Property
 
-Public Property Let Record(value As String)
-    m_Record = value
+Public Property Let Record(Value As String)
+    m_Record = Value
 End Property
 
 Public Property Get Record() As String
     Record = m_Record
 End Property
 
-Public Property Let Contact(value As Person)
-    m_Contact = value
+Public Property Let Contact(Value As Person)
+    m_Contact = Value
 End Property
 
 Public Property Get Contact() As Person
     Contact = m_Contact
 End Property
 
-Public Property Let DateValue(value As Date)
-    m_DateValue = value
+Public Property Let DateValue(Value As Date)
+    m_DateValue = Value
 End Property
 
 Public Property Get DateValue() As Date
     DateValue = m_DateValue
 End Property
 
-Public Property Let ActionType(value As String)
-    Select Case value
+Public Property Let ActionType(Value As String)
+    Select Case Value
         Case "Sample"
         Case "DataEntry"
         Case "Verification"
         Case "Download"
         Case "Change"
     End Select
-    m_ActionType = value
+    m_ActionType = Value
 End Property
 
 Public Property Get ActionType() As String

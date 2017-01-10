@@ -31,27 +31,27 @@ Private m_IsActiveForProtocol As Boolean
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidParkID(value As Long)
-Public Event InvalidParkCode(value As String)
-Public Event InvalidPark(value As String)
-Public Event InvalidParkState(value As String)
+Public Event InvalidParkID(Value As Long)
+Public Event InvalidParkCode(Value As String)
+Public Event InvalidPark(Value As String)
+Public Event InvalidParkState(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let Code(value As String)
-    If Len(Trim(value)) = 4 Then
-        m_Code = value
+Public Property Let Code(Value As String)
+    If Len(Trim(Value)) = 4 Then
+        m_Code = Value
     Else
-        RaiseEvent InvalidParkCode(value)
+        RaiseEvent InvalidParkCode(Value)
     End If
 End Property
 
@@ -59,12 +59,12 @@ Public Property Get Code() As String
     Code = m_Code
 End Property
 
-Public Property Let Name(value As String)
+Public Property Let Name(Value As String)
     'max length = 25
-    If Len(Trim(value)) < 26 Then
-        m_Name = value
+    If Len(Trim(Value)) < 26 Then
+        m_Name = Value
     Else
-        RaiseEvent InvalidPark(value)
+        RaiseEvent InvalidPark(Value)
     End If
 End Property
 
@@ -72,12 +72,12 @@ Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let State(value As String)
+Public Property Let State(Value As String)
     'max length = 2
-    If Len(Trim(value)) < 3 Then
-        m_State = value
+    If Len(Trim(Value)) < 3 Then
+        m_State = Value
     Else
-        RaiseEvent InvalidParkState(value)
+        RaiseEvent InvalidParkState(Value)
     End If
 End Property
 
@@ -85,8 +85,8 @@ Public Property Get State() As String
     State = m_State
 End Property
 
-Public Property Let IsActiveForProtocol(value As Boolean)
-    m_IsActiveForProtocol = value
+Public Property Let IsActiveForProtocol(Value As Boolean)
+    m_IsActiveForProtocol = Value
 End Property
 
 Public Property Get IsActiveForProtocol() As Boolean

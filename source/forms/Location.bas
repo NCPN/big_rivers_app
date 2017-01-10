@@ -772,22 +772,22 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -795,14 +795,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -810,8 +810,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -853,7 +853,7 @@ On Error GoTo Err_Handler
     
     Title = "Location (Sampling Location)"
     Directions = "Enter the sampling location information and click save."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -873,7 +873,7 @@ On Error GoTo Err_Handler
     lblMsg.Caption = ""
     
     'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
+    tbxID.Value = 0
     
     'initialize values
     ClearForm Me
@@ -1238,7 +1238,7 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If Len(tbxName.value) > 0 And tbxDistance.value > 0 And tbxBearing.value <> "" Then
+    If Len(tbxName.Value) > 0 And tbxDistance.Value > 0 And tbxBearing.Value <> "" Then
         isOK = True
     End If
     

@@ -41,38 +41,38 @@ Private m_ContactID As Long
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidTemplateSQL(value As String)
-Public Event InvalidSyntax(value As String)
+Public Event InvalidTemplateSQL(Value As String)
+Public Event InvalidSyntax(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let TemplateName(value As String)
-    m_TemplateName = value
+Public Property Let TemplateName(Value As String)
+    m_TemplateName = Value
 End Property
 
 Public Property Get TemplateName() As String
     TemplateName = m_TemplateName
 End Property
 
-Public Property Let Context(value As String)
-    m_Context = value
+Public Property Let Context(Value As String)
+    m_Context = Value
 End Property
 
 Public Property Get Context() As String
     Context = m_Context
 End Property
 
-Public Property Let TemplateSQL(value As String)
-    m_TemplateSQL = value
+Public Property Let TemplateSQL(Value As String)
+    m_TemplateSQL = Value
     
     'set params property
     If Len(Me.Syntax) <> Len(Replace(Me.Syntax, "SQL", "")) Then
@@ -85,64 +85,64 @@ Public Property Get TemplateSQL() As String
     TemplateSQL = m_TemplateSQL
 End Property
 
-Public Property Let Syntax(value As String)
-    m_Syntax = value
+Public Property Let Syntax(Value As String)
+    m_Syntax = Value
 End Property
 
 Public Property Get Syntax() As String
     Syntax = m_Syntax
 End Property
 
-Public Property Let Params(value As String)
-    m_Params = value
+Public Property Let Params(Value As String)
+    m_Params = Value
 End Property
 
 Public Property Get Params() As String
     Params = m_Params
 End Property
 
-Public Property Let Version(value As String)
-    m_Version = value
+Public Property Let Version(Value As String)
+    m_Version = Value
 End Property
 
 Public Property Get Version() As String
     Version = m_Version
 End Property
 
-Public Property Let Remarks(value As String)
-    m_Remarks = value
+Public Property Let Remarks(Value As String)
+    m_Remarks = Value
 End Property
 
 Public Property Get Remarks() As String
     Remarks = m_Remarks
 End Property
 
-Public Property Let IsSupported(value As Integer)
-    m_IsSupported = value
+Public Property Let IsSupported(Value As Integer)
+    m_IsSupported = Value
 End Property
 
 Public Property Get IsSupported() As Integer
     IsSupported = m_IsSupported
 End Property
 
-Public Property Let EffectiveDate(value As Date)
-    m_EffectiveDate = Format(value, "mm/dd/yyyy")
+Public Property Let EffectiveDate(Value As Date)
+    m_EffectiveDate = Format(Value, "mm/dd/yyyy")
 End Property
 
 Public Property Get EffectiveDate() As Date
     EffectiveDate = m_EffectiveDate
 End Property
 
-Public Property Let RetireDate(value As Date)
-    m_RetireDate = Format(value, "mm/dd/yyyy")
+Public Property Let RetireDate(Value As Date)
+    m_RetireDate = Format(Value, "mm/dd/yyyy")
 End Property
 
 Public Property Get RetireDate() As Date
     RetireDate = m_RetireDate
 End Property
 
-Public Property Let ContactID(value As Long)
-    m_ContactID = value
+Public Property Let ContactID(Value As Long)
+    m_ContactID = Value
 End Property
 
 Public Property Get ContactID() As Long

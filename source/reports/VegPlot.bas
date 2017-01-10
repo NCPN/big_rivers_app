@@ -554,15 +554,15 @@ Private m_Park As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidRow(value As Integer)
-Public Event InvalidNumRows(value As Integer)
+Public Event InvalidRow(Value As Integer)
+Public Event InvalidNumRows(Value As Integer)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Park(value As String)
-    If Len(value) = 4 Then
-        m_Park = value
+Public Property Let Park(Value As String)
+    If Len(Value) = 4 Then
+        m_Park = Value
     End If
 End Property
 

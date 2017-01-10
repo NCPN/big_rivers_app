@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14565
+    Left =10185
+    Top =1020
+    Right =18045
+    Bottom =11685
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -719,7 +719,7 @@ Option Explicit
 ' =================================
 ' Form:         Feature
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Feature form object related properties, Feature, functions & procedures for UI display
@@ -731,6 +731,8 @@ Option Explicit
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 10/20/2016 - 1.02 - added calling form property, removed buttoncaption,
 '                                         selectedID, selectedValue properties
+'               BLC - 1/10/2017 - 1.03 - revised to use GetRecords() vs. GetTemplate()
+'                                        to populate location, code cleanup
 ' =================================
 
 '---------------------
@@ -747,22 +749,22 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -770,14 +772,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -785,8 +787,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -810,6 +812,8 @@ End Property
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
 '   BLC - 10/20/2016 - revised to use callingform property, GetContext()
+'   BLC - 1/10/2017 - revised to use GetRecords() vs. GetTemplate() to populate location,
+'                     code cleanup
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -825,16 +829,10 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
-'    Nz(TempVars("ParkCode"), "") & Space(2) & _
-'                 IIf(Len(Nz(TempVars("River"), "")) > 0, ">" & Space(2) & _
-'                 TempVars("River"), "")
-                 ' & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("Feature"), "")
                  
     Title = "Feature"
     Directions = "Enter the feature details."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     lblDirections.Caption = "Enter feature details."
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -855,7 +853,11 @@ On Error GoTo Err_Handler
     
     'get locations for park or river segment depending upon if river segment is set
     With cbxLocation
-        .RowSource = IIf(Len(Nz(TempVars("River"), "")) > 0, GetTemplate("s_location_by_park_river"), GetTemplate("s_location_by_park"))
+        '.RowSource = IIf(Len(Nz(TempVars("River"), "")) > 0, GetTemplate("s_location_by_park_river"), GetTemplate("s_location_by_park"))
+        Set .Recordset = IIf(Len(Nz(TempVars("River"), "")) > 0, _
+                        GetRecords("s_location_by_park_river"), _
+                        GetRecords("s_location_by_park"))
+                        
         .ColumnCount = 2
         .BoundColumn = 1
         .ColumnWidths = "0;1in"
@@ -868,7 +870,6 @@ On Error GoTo Err_Handler
     
     'initialize values
     ClearForm Me
-
 
 Exit_Handler:
     Exit Sub
@@ -1143,7 +1144,7 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: feature & location ID
-    If Len(Nz(tbxFeature.value, "")) > 0 Then
+    If Len(Nz(tbxFeature.Value, "")) > 0 Then
         isOK = True
     End If
     

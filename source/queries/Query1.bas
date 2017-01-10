@@ -48,10 +48,4 @@ Begin
         dbInteger "ColumnWidth" ="2250"
         dbBoolean "ColumnHidden" ="0"
     End
-    Begin
-        dbText "Name" ="'Size Class'"
-        dbInteger "ColumnWidth" ="2025"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
 End

@@ -35,32 +35,32 @@ Private m_Activity As String
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Username(value As String)
-    m_Username = value
+Public Property Let Username(Value As String)
+    m_Username = Value
 End Property
 
 Public Property Get Username() As String
     Username = m_Username
 End Property
 
-Public Property Let Password(value As String)
-    m_Password = value
+Public Property Let Password(Value As String)
+    m_Password = Value
 End Property
 
 Public Property Get Password() As String
     Password = m_Password
 End Property
 
-Public Property Let Logins(value As Integer)
-    m_Logins = value
+Public Property Let Logins(Value As Integer)
+    m_Logins = Value
 End Property
 
 Public Property Get Logins() As Integer
     Logins = m_Logins
 End Property
 
-Public Property Let Activity(value As String)
-    m_Activity = value
+Public Property Let Activity(Value As String)
+    m_Activity = Value
 End Property
 
 Public Property Get Activity() As String

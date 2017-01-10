@@ -20,10 +20,10 @@ Begin Form
     Width =7620
     DatasheetFontHeight =11
     ItemSuffix =44
-    Left =3270
-    Top =2895
-    Right =11145
-    Bottom =9255
+    Left =8205
+    Top =2490
+    Right =16980
+    Bottom =13470
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x0680db994fd0e440
@@ -646,8 +646,8 @@ Begin Form
                     TextAlign =1
                     Left =180
                     Top =1200
-                    Width =780
-                    Height =240
+                    Width =870
+                    Height =315
                     BorderColor =10921638
                     ForeColor =8355711
                     Name ="lblRemarks"
@@ -655,8 +655,8 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =1200
-                    LayoutCachedWidth =960
-                    LayoutCachedHeight =1440
+                    LayoutCachedWidth =1050
+                    LayoutCachedHeight =1515
                     BorderThemeColorIndex =1
                     BorderTint =100.0
                     BorderShade =65.0
@@ -822,23 +822,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -846,14 +846,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -861,14 +861,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         'Me.btnEdit.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -876,16 +876,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -921,7 +921,7 @@ On Error GoTo Err_Handler
                             "naming conventions (see hints below) and save." & vbCrLf & vbCrLf & _
                             "To format your template text, use the Notepad button at right," & vbCrLf & _
                             "then copy && paste it into the template textbox."
-    tbxIcon.value = StringFromCodepoint(uLocked)
+    tbxIcon.Value = StringFromCodepoint(uLocked)
     tbxIcon.ForeColor = lngDkGreen
     lblDirections.ForeColor = lngLtBlue
     
@@ -1173,11 +1173,11 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: site code & name (directions & description optional)
-    If Len(Nz(tbxTemplate.value, "")) > 0 _
-        And Len(Nz(tbxRemarks.value, "")) > 0 _
-        And Len(Nz(tbxTemplateSQL.value, "")) > 0 _
-        And Len(Nz(tbxVersion.value, "")) > 0 _
-        And Len(Nz(tbxEffectiveDate.value, "")) > 0 _
+    If Len(Nz(tbxTemplate.Value, "")) > 0 _
+        And Len(Nz(tbxRemarks.Value, "")) > 0 _
+        And Len(Nz(tbxTemplateSQL.Value, "")) > 0 _
+        And Len(Nz(tbxVersion.Value, "")) > 0 _
+        And Len(Nz(tbxEffectiveDate.Value, "")) > 0 _
         Then
         isOK = True
     End If

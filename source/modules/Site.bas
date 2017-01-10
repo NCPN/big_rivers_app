@@ -50,43 +50,43 @@ Private m_Comment As String
 '---------------------
 ' Events
 '---------------------
-Public Event InvalidPark(value)
-Public Event InvalidRiver(value)
-Public Event InvalidSiteName(value)
-Public Event InvalidSiteCode(value)
+Public Event InvalidPark(Value)
+Public Event InvalidRiver(Value)
+Public Event InvalidSiteName(Value)
+Public Event InvalidSiteCode(Value)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let ParkID(value As Long)
-    m_ParkID = value
+Public Property Let ParkID(Value As Long)
+    m_ParkID = Value
 End Property
 
 Public Property Get ParkID() As Long
     ParkID = m_ParkID
 End Property
 
-Public Property Let RiverID(value As Long)
-    m_RiverID = value
+Public Property Let RiverID(Value As Long)
+    m_RiverID = Value
 End Property
 
 Public Property Get RiverID() As Long
     RiverID = m_RiverID
 End Property
 
-Public Property Let Code(value As String)
-    If Len(Trim(value)) = 2 Then
-        m_Code = value
+Public Property Let Code(Value As String)
+    If Len(Trim(Value)) = 2 Then
+        m_Code = Value
     Else
-        RaiseEvent InvalidSiteCode(value)
+        RaiseEvent InvalidSiteCode(Value)
     End If
 End Property
 
@@ -94,48 +94,48 @@ Public Property Get Code() As String
     Code = m_Code
 End Property
 
-Public Property Let Name(value As String)
-    m_Name = value
+Public Property Let Name(Value As String)
+    m_Name = Value
 End Property
 
 Public Property Get Name() As String
     Name = m_Name
 End Property
 
-Public Property Let Description(value As String)
-    m_Description = value
+Public Property Let Description(Value As String)
+    m_Description = Value
 End Property
 
 Public Property Get Description() As String
     Description = m_Description
 End Property
 
-Public Property Let Directions(value As String)
-    m_Directions = value
+Public Property Let Directions(Value As String)
+    m_Directions = Value
 End Property
 
 Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let IsActiveForProtocol(value As Byte)
-    m_IsActiveForProtocol = value
+Public Property Let IsActiveForProtocol(Value As Byte)
+    m_IsActiveForProtocol = Value
 End Property
 
 Public Property Get IsActiveForProtocol() As Byte
     IsActiveForProtocol = m_IsActiveForProtocol
 End Property
 
-Public Property Let Park(value As String)
+Public Property Let Park(Value As String)
     Dim aryParks() As String
     aryParks = Split(PARKS, ",")
-    If IsInArray(value, aryParks) Then
-        m_Park = value
+    If IsInArray(Value, aryParks) Then
+        m_Park = Value
         
         'set park id also
         ParkID = GetParkID(m_Park)
     Else
-        RaiseEvent InvalidPark(value)
+        RaiseEvent InvalidPark(Value)
     End If
 End Property
 
@@ -143,14 +143,14 @@ Public Property Get Park() As String
     Park = m_Park
 End Property
 
-Public Property Let River(value As String)
-    If Len(value) > 2 Then
-        m_River = value
+Public Property Let River(Value As String)
+    If Len(Value) > 2 Then
+        m_River = Value
         
         'set River id also
         RiverID = GetRiverSegmentID(m_River)
     Else
-        RaiseEvent InvalidRiver(value)
+        RaiseEvent InvalidRiver(Value)
     End If
 End Property
 
@@ -158,40 +158,40 @@ Public Property Get River() As String
     River = m_River
 End Property
 
-Public Property Let LocationID(value As Long)
-    m_LocationID = value
+Public Property Let LocationID(Value As Long)
+    m_LocationID = Value
 End Property
 
 Public Property Get LocationID() As Long
     LocationID = m_LocationID
 End Property
 
-Public Property Let ObserverID(value As Long)
-    m_ObserverID = value
+Public Property Let ObserverID(Value As Long)
+    m_ObserverID = Value
 End Property
 
 Public Property Get ObserverID() As Long
     ObserverID = m_ObserverID
 End Property
 
-Public Property Let Observer(value As String)
-    m_Observer = value
+Public Property Let Observer(Value As String)
+    m_Observer = Value
 End Property
 
 Public Property Get Observer() As String
     Observer = m_Observer
 End Property
 
-Public Property Let RecorderID(value As Long)
-    m_RecorderID = value
+Public Property Let RecorderID(Value As Long)
+    m_RecorderID = Value
 End Property
 
 Public Property Get RecorderID() As Long
     RecorderID = m_RecorderID
 End Property
 
-Public Property Let Recorder(value As String)
-    m_Recorder = value
+Public Property Let Recorder(Value As String)
+    m_Recorder = Value
 End Property
 
 Public Property Get Recorder() As String
@@ -201,16 +201,16 @@ End Property
 '---------------------
 'change to comment object instead??
 '---------------------
-Public Property Let CommentID(value As Long)
-    m_CommentID = value
+Public Property Let CommentID(Value As Long)
+    m_CommentID = Value
 End Property
 
 Public Property Get CommentID() As Long
     CommentID = m_CommentID
 End Property
 
-Public Property Let Comment(value As String)
-    m_Comment = value
+Public Property Let Comment(Value As String)
+    m_Comment = Value
 End Property
 
 Public Property Get Comment() As String

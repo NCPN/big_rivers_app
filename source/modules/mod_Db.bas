@@ -197,7 +197,7 @@ On Error GoTo Err_Handler
         'add rsB values as new rsOut records
         rsOut.AddNew
         For iCount = 0 To rsB.Fields.Count - 1
-            rsOut.Fields(iCount).value = rsB.Fields(iCount).value
+            rsOut.Fields(iCount).Value = rsB.Fields(iCount).Value
         Next
         rsOut.Update
         rsB.MoveNext
@@ -935,7 +935,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim strSQL As String, strSQLWhere As String, key As String
-    Dim value As Variant
+    Dim Value As Variant
     
     'handle default
     strSQLWhere = " WHERE IsSupported > 0"
@@ -1008,17 +1008,17 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
                 
                 Next
                 
-                Set value = dictParam
+                Set Value = dictParam
 
             Else
-                value = Nz(rs.Fields(ary(i)), "")
+                Value = Nz(rs.Fields(ary(i)), "")
             End If
             
             'add key if it isn't already there
             If Not dict.Exists(key) Then
-                If IsNull(value) Then MsgBox key, vbOKCancel, "is NULL"
+                If IsNull(Value) Then MsgBox key, vbOKCancel, "is NULL"
                 'Debug.Print Nz(Value, key & "-NULL")
-                dict.Add key, value
+                dict.Add key, Value
             End If
             
         Next

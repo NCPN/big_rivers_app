@@ -1018,27 +1018,27 @@ If img.IsAnimated Then
 End If
 
 If img.Properties.Exists("40091") Then
-    Set V = img.Properties("40091").value
+    Set V = img.Properties("40091").Value
     s = s & "Title = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40092") Then
-    Set V = img.Properties("40092").value
+    Set V = img.Properties("40092").Value
     s = s & "Comment = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40093") Then
-    Set V = img.Properties("40093").value
+    Set V = img.Properties("40093").Value
     s = s & "Author = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40094") Then
-    Set V = img.Properties("40094").value
+    Set V = img.Properties("40094").Value
     s = s & "Keywords = " & V.String & vbCrLf
 End If
 
 If img.Properties.Exists("40095") Then
-    Set V = img.Properties("40095").value
+    Set V = img.Properties("40095").Value
     s = s & "Subject = " & V.String & vbCrLf
 End If
 
@@ -1049,23 +1049,23 @@ With img
     For Each propEach In .Properties
             Select Case propEach.Name
                 Case "40091"
-                    Set vecProperty = propEach.value
+                    Set vecProperty = propEach.Value
                     Debug.Print "Title = " & vecProperty.String
 
                 Case "40092"
-                    Set vecProperty = propEach.value
+                    Set vecProperty = propEach.Value
                     Debug.Print "Comment = " & vecProperty.String
 
                 Case "40093"
-                    Set vecProperty = propEach.value
+                    Set vecProperty = propEach.Value
                     Debug.Print "Author = " & vecProperty.String
 
                 Case "40094"
-                    Set vecProperty = propEach.value
+                    Set vecProperty = propEach.Value
                     Debug.Print "Keywords = " & vecProperty.String
 
                 Case "40095"
-                    Set vecProperty = propEach.value
+                    Set vecProperty = propEach.Value
                     Debug.Print "Subject = " & vecProperty.String
 
                 Case Else
@@ -1074,8 +1074,8 @@ With img
                     
                     If Not (propEach.Name = "ChrominanceTable" Or _
                             propEach.Name = "LuminanceTable") Then
-                    If Not varType(propEach.value) = vbObject Then _
-                    Debug.Print propEach.Name & " (" & propEach.PropertyID & ") ="; CStr(propEach.value)
+                    If Not varType(propEach.Value) = vbObject Then _
+                    Debug.Print propEach.Name & " (" & propEach.PropertyID & ") ="; CStr(propEach.Value)
                     End If
             End Select
         Next

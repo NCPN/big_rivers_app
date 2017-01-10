@@ -30,20 +30,20 @@ Private m_ObservationType As String
 '---------------------
 ' Properties
 '---------------------
-Public Property Let ID(value As Long)
-    m_ID = value
+Public Property Let ID(Value As Long)
+    m_ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let ObservationType(value As String)
-    Select Case value
+Public Property Let ObservationType(Value As String)
+    Select Case Value
         Case "WCC"  'Woody Canopy Cover
         Case "U"        'Understory
     End Select
-    m_ObservationType = value
+    m_ObservationType = Value
 End Property
 
 Public Property Get ObservationType() As String

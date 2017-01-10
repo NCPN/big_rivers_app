@@ -32,25 +32,25 @@ Private m_IsSeedling As Byte
 ' Events
 '---------------------
 '-- base events (coverspecies)
-Public Event InvalidVegPlotID(value As String)
-Public Event InvalidPercentCover(value As Integer)
-Public Event InvalidIsSeedling(value As Byte)
+Public Event InvalidVegPlotID(Value As String)
+Public Event InvalidPercentCover(Value As Integer)
+Public Event InvalidIsSeedling(Value As Byte)
 
 '-- base events (species) --
-Public Event InvalidMasterPlantCode(value As String)
-Public Event InvalidLUCode(value As String)
-Public Event InvalidFamily(value As String)
-Public Event InvalidSpecies(value As String)
-Public Event InvalidCode(value As String)
+Public Event InvalidMasterPlantCode(Value As String)
+Public Event InvalidLUCode(Value As String)
+Public Event InvalidFamily(Value As String)
+Public Event InvalidSpecies(Value As String)
+Public Event InvalidCode(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let IsSeedling(value As Byte)
-    If varType(value) = vbByte Then
-        m_IsSeedling = value
+Public Property Let IsSeedling(Value As Byte)
+    If varType(Value) = vbByte Then
+        m_IsSeedling = Value
     Else
-        RaiseEvent InvalidIsSeedling(value)
+        RaiseEvent InvalidIsSeedling(Value)
     End If
 End Property
 
@@ -66,19 +66,19 @@ End Property
 ' ---------------------------
 ' base class = Cover Species
 ' ---------------------------
-Public Property Let VegPlotID(value As Long)
-    m_CoverSpecies.VegPlotID = value
+Public Property Let VegPlotID(Value As Long)
+    m_CoverSpecies.VegPlotID = Value
 End Property
 
 Public Property Get VegPlotID() As Long
     VegPlotID = m_CoverSpecies.VegPlotID
 End Property
 
-Public Property Let PercentCover(value As Integer)
-    If IsBetween(value, 0, 100, True) Then
-        m_CoverSpecies.PercentCover = value
+Public Property Let PercentCover(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_CoverSpecies.PercentCover = Value
     Else
-        RaiseEvent InvalidPercentCover(value)
+        RaiseEvent InvalidPercentCover(Value)
     End If
 End Property
 
@@ -89,20 +89,20 @@ End Property
 ' ---------------------------
 ' base class = Species
 ' ---------------------------
-Public Property Let ID(value As Long)
-    m_CoverSpecies.ID = value
+Public Property Let ID(Value As Long)
+    m_CoverSpecies.ID = Value
 End Property
 
 Public Property Get ID() As Long
     ID = m_CoverSpecies.ID
 End Property
 
-Public Property Let MasterPlantCode(value As String)
+Public Property Let MasterPlantCode(Value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(value), 1, 20, True) Then
-        m_CoverSpecies.MasterPlantCode = value
+    If IsBetween(Len(Value), 1, 20, True) Then
+        m_CoverSpecies.MasterPlantCode = Value
     Else
-        RaiseEvent InvalidMasterPlantCode(value)
+        RaiseEvent InvalidMasterPlantCode(Value)
     End If
 End Property
 
@@ -110,12 +110,12 @@ Public Property Get MasterPlantCode() As String
     MasterPlantCode = m_CoverSpecies.MasterPlantCode
 End Property
 
-Public Property Let COfamily(value As String)
+Public Property Let COfamily(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.COfamily = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.COfamily = Value
     Else
-        RaiseEvent InvalidFamily(value)
+        RaiseEvent InvalidFamily(Value)
     End If
 End Property
 
@@ -123,12 +123,12 @@ Public Property Get COfamily() As String
     COfamily = m_CoverSpecies.COfamily
 End Property
 
-Public Property Let UTfamily(value As String)
+Public Property Let UTfamily(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.UTfamily = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.UTfamily = Value
     Else
-        RaiseEvent InvalidFamily(value)
+        RaiseEvent InvalidFamily(Value)
     End If
 End Property
 
@@ -136,12 +136,12 @@ Public Property Get UTfamily() As String
     UTfamily = m_CoverSpecies.UTfamily
 End Property
 
-Public Property Let WYfamily(value As String)
+Public Property Let WYfamily(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.WYfamily = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.WYfamily = Value
     Else
-        RaiseEvent InvalidFamily(value)
+        RaiseEvent InvalidFamily(Value)
     End If
 End Property
 
@@ -149,12 +149,12 @@ Public Property Get WYfamily() As String
     WYfamily = m_CoverSpecies.WYfamily
 End Property
 
-Public Property Let COspecies(value As String)
+Public Property Let COspecies(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.COspecies = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.COspecies = Value
     Else
-        RaiseEvent InvalidSpecies(value)
+        RaiseEvent InvalidSpecies(Value)
     End If
 End Property
 
@@ -162,12 +162,12 @@ Public Property Get COspecies() As String
     COspecies = m_CoverSpecies.COspecies
 End Property
 
-Public Property Let UTspecies(value As String)
+Public Property Let UTspecies(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.UTspecies = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.UTspecies = Value
     Else
-        RaiseEvent InvalidSpecies(value)
+        RaiseEvent InvalidSpecies(Value)
     End If
 End Property
 
@@ -175,12 +175,12 @@ Public Property Get UTspecies() As String
     UTspecies = m_CoverSpecies.UTspecies
 End Property
 
-Public Property Let WYspecies(value As String)
+Public Property Let WYspecies(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.WYspecies = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.WYspecies = Value
     Else
-        RaiseEvent InvalidSpecies(value)
+        RaiseEvent InvalidSpecies(Value)
     End If
 End Property
 
@@ -188,12 +188,12 @@ Public Property Get WYspecies() As String
     WYspecies = m_CoverSpecies.WYspecies
 End Property
 
-Public Property Let LUcode(value As String)
+Public Property Let LUcode(Value As String)
     'valid length varchar(25) but 6-letter lookup
-    If Not IsNull(value) And IsBetween(Len(value), 1, 6, True) Then
-        m_CoverSpecies.LUcode = value
+    If Not IsNull(Value) And IsBetween(Len(Value), 1, 6, True) Then
+        m_CoverSpecies.LUcode = Value
     Else
-        RaiseEvent InvalidLUCode(value)
+        RaiseEvent InvalidLUCode(Value)
     End If
 End Property
 
@@ -201,12 +201,12 @@ Public Property Get LUcode() As String
     LUcode = m_CoverSpecies.LUcode
 End Property
 
-Public Property Let MasterFamily(value As String)
+Public Property Let MasterFamily(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.MasterFamily = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.MasterFamily = Value
     Else
-        RaiseEvent InvalidFamily(value)
+        RaiseEvent InvalidFamily(Value)
     End If
 End Property
 
@@ -214,12 +214,12 @@ Public Property Get MasterFamily() As String
     MasterFamily = m_CoverSpecies.MasterFamily
 End Property
 
-Public Property Let MasterCode(value As String)
+Public Property Let MasterCode(Value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(value), 1, 20, True) Then
-        m_CoverSpecies.MasterCode = value
+    If IsBetween(Len(Value), 1, 20, True) Then
+        m_CoverSpecies.MasterCode = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -227,12 +227,12 @@ Public Property Get MasterCode() As String
     MasterCode = m_CoverSpecies.MasterCode
 End Property
 
-Public Property Let MasterSpecies(value As String)
+Public Property Let MasterSpecies(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.MasterSpecies = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.MasterSpecies = Value
     Else
-        RaiseEvent InvalidFamily(value)
+        RaiseEvent InvalidFamily(Value)
     End If
 End Property
 
@@ -240,12 +240,12 @@ Public Property Get MasterSpecies() As String
     MasterSpecies = m_CoverSpecies.MasterSpecies
 End Property
 
-Public Property Let UTcode(value As String)
+Public Property Let UTcode(Value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(value), 1, 20, True) Then
-        m_CoverSpecies.UTcode = value
+    If IsBetween(Len(Value), 1, 20, True) Then
+        m_CoverSpecies.UTcode = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -253,12 +253,12 @@ Public Property Get UTcode() As String
     UTcode = m_CoverSpecies.UTcode
 End Property
 
-Public Property Let COcode(value As String)
+Public Property Let COcode(Value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(value), 1, 20, True) Then
-        m_CoverSpecies.COcode = value
+    If IsBetween(Len(Value), 1, 20, True) Then
+        m_CoverSpecies.COcode = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -266,12 +266,12 @@ Public Property Get COcode() As String
     COcode = m_CoverSpecies.COcode
 End Property
 
-Public Property Let WYcode(value As String)
+Public Property Let WYcode(Value As String)
     'valid length varchar(20) or ZLS
-    If IsBetween(Len(value), 1, 20, True) Then
-        m_CoverSpecies.WYcode = value
+    If IsBetween(Len(Value), 1, 20, True) Then
+        m_CoverSpecies.WYcode = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -279,12 +279,12 @@ Public Property Get WYcode() As String
     WYcode = m_CoverSpecies.WYcode
 End Property
 
-Public Property Let MasterCommonName(value As String)
+Public Property Let MasterCommonName(Value As String)
     'valid length varchar(50) or ZLS
-    If IsBetween(Len(value), 1, 50, True) Then
-        m_CoverSpecies.MasterCommonName = value
+    If IsBetween(Len(Value), 1, 50, True) Then
+        m_CoverSpecies.MasterCommonName = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -292,12 +292,12 @@ Public Property Get MasterCommonName() As String
     MasterCommonName = m_CoverSpecies.MasterCommonName
 End Property
 
-Public Property Let Lifeform(value As String)
+Public Property Let Lifeform(Value As String)
     'valid length varchar(255) or ZLS
-    If IsBetween(Len(value), 1, 255, True) Then
-        m_CoverSpecies.Lifeform = value
+    If IsBetween(Len(Value), 1, 255, True) Then
+        m_CoverSpecies.Lifeform = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -305,12 +305,12 @@ Public Property Get Lifeform() As String
     Lifeform = m_CoverSpecies.Lifeform
 End Property
 
-Public Property Let Duration(value As String)
+Public Property Let Duration(Value As String)
     'valid length varchar(255) or ZLS
-    If IsBetween(Len(value), 1, 255, True) Then
-        m_CoverSpecies.Duration = value
+    If IsBetween(Len(Value), 1, 255, True) Then
+        m_CoverSpecies.Duration = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 
@@ -318,12 +318,12 @@ Public Property Get Duration() As String
     Duration = m_CoverSpecies.Duration
 End Property
 
-Public Property Let Nativity(value As String)
+Public Property Let Nativity(Value As String)
     'valid length varchar(255) or ZLS
-    If IsBetween(Len(value), 1, 255, True) Then
-        m_CoverSpecies.Nativity = value
+    If IsBetween(Len(Value), 1, 255, True) Then
+        m_CoverSpecies.Nativity = Value
     Else
-        RaiseEvent InvalidCode(value)
+        RaiseEvent InvalidCode(Value)
     End If
 End Property
 

@@ -1649,22 +1649,22 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -1672,14 +1672,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1687,8 +1687,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -1744,7 +1744,7 @@ On Error GoTo Err_Handler
     Me.lblTitle.Caption = "" 'clear header title
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add cover species via buttons at right."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1820,7 +1820,7 @@ On Error GoTo Err_Handler
     cbxModalSedSize.ColumnWidths = "0;1.3in;.4in;0;0;0" 'display the display column (combines label - summary)
     
     'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
+    tbxID.Value = 0
   
     'defaults --> turn off items
     lblWater.Visible = False
@@ -1844,7 +1844,7 @@ On Error GoTo Err_Handler
     btnTaglines.Enabled = False
     
     'default plot density = 3 starting in 2015 (i.e. 1/3 density)
-    tbxPlotDensity.value = 3
+    tbxPlotDensity.Value = 3
     
     'adjust UI based on park
     Select Case TempVars("ParkCode")
@@ -1956,7 +1956,7 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
               
 '      If tbxID > 0 Then btnComment.Enabled = True
-    btnSetObserverRecorder.Enabled = IIf(tbxID.value > 0, True, False)
+    btnSetObserverRecorder.Enabled = IIf(tbxID.Value > 0, True, False)
 
 Exit_Handler:
     Exit Sub
@@ -2265,7 +2265,7 @@ End Sub
 Private Sub chkNoCanopyVeg_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkNoCanopyVeg.value) > 0 Then _
+    If Len(chkNoCanopyVeg.Value) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2295,7 +2295,7 @@ End Sub
 Private Sub chkNoRootedVeg_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkNoRootedVeg.value) > 0 Then _
+    If Len(chkNoRootedVeg.Value) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2325,7 +2325,7 @@ End Sub
 Private Sub chkNoIndicatorSpecies_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkNoIndicatorSpecies.value) > 0 Then _
+    If Len(chkNoIndicatorSpecies.Value) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2355,7 +2355,7 @@ End Sub
 Private Sub chkHasSocialTrails_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkHasSocialTrails.value) > 0 Then _
+    If Len(chkHasSocialTrails.Value) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2436,22 +2436,22 @@ On Error GoTo Err_Handler
 '        .EventID = cbxEvent.Column(0)
 '        .FeatureID = cbxFeature.Column(0)
         
-        .PlotNumber = tbxNumber.value
-        .PlotDistance = tbxDistance.value
-        .ModalSedimentSize = cbxModalSedSize.value
+        .PlotNumber = tbxNumber.Value
+        .PlotDistance = tbxDistance.Value
+        .ModalSedimentSize = cbxModalSedSize.Value
         
-        .PlotDensity = tbxPlotDensity.value
+        .PlotDensity = tbxPlotDensity.Value
         
         'pct values
-        .PercentFines = tbxPctFines.value
-        .PercentWater = tbxPctWater.value
-        .UnderstoryRootedPctCover = tbxPctURC.value
+        .PercentFines = tbxPctFines.Value
+        .PercentWater = tbxPctWater.Value
+        .UnderstoryRootedPctCover = tbxPctURC.Value
         
         'chk values
-        .NoCanopyVeg = chkNoCanopyVeg.value
-        .NoRootedVeg = chkNoRootedVeg.value
-        .NoIndicatorSpecies = chkNoIndicatorSpecies.value
-        .HasSocialTrail = chkHasSocialTrails.value
+        .NoCanopyVeg = chkNoCanopyVeg.Value
+        .NoRootedVeg = chkNoRootedVeg.Value
+        .NoIndicatorSpecies = chkNoIndicatorSpecies.Value
+        .HasSocialTrail = chkHasSocialTrails.Value
         
 '        .LocationName = tbxName.Value
 '        .LocationType = "" 'cbxLocationType.SelText
@@ -2459,7 +2459,7 @@ On Error GoTo Err_Handler
 '        .HeadtoOrientDistance = tbxDistance.Value
 '        .HeadtoOrientBearing = tbxBearing.Value
         
-        .ID = tbxID.value '0 if new, edit if > 0
+        .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
         
         'set the tbxID.value
@@ -2471,9 +2471,9 @@ On Error GoTo Err_Handler
     
     ReadyForSave
     
-    PopulateForm Me, tbxID.value
+    PopulateForm Me, tbxID.Value
     
-    If tbxID.value > 0 Then
+    If tbxID.Value > 0 Then
         'highlight SetObserverRecorder button
         btnSetObserverRecorder.borderColor = lngRed
         lblMsg.ForeColor = lngYellow
@@ -2811,16 +2811,16 @@ On Error GoTo Err_Handler
     
 '       And Nz(tbxPctFA.Value,"") > -1 _
 
-    If Nz(tbxDistance.value, "") > 0 _
-        And Nz(cbxModalSedSize.value, "") > -1 _
-        And Nz(tbxPctFines.value, "") > -1 _
-        And Nz(tbxPctWater.value, "") > -1 _
-        And Nz(chkNoRootedVeg.value, "") > -1 Then
+    If Nz(tbxDistance.Value, "") > 0 _
+        And Nz(cbxModalSedSize.Value, "") > -1 _
+        And Nz(tbxPctFines.Value, "") > -1 _
+        And Nz(tbxPctWater.Value, "") > -1 _
+        And Nz(chkNoRootedVeg.Value, "") > -1 Then
         
         Select Case TempVars("ParkCode")
             Case "BLCA"
                 'requires NoIndicatorSpecies
-                If Nz(chkNoIndicatorSpecies.value, "") > -1 Then GoTo Exit_Handler
+                If Nz(chkNoIndicatorSpecies.Value, "") > -1 Then GoTo Exit_Handler
             Case "CANY"
             Case "DINO"
         End Select
@@ -2832,8 +2832,8 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
-    btnSubstrateCover.Enabled = IIf(tbxID.value > 0, True, False)
-    btnSetObserverRecorder.Enabled = IIf(tbxID.value > 0, True, False)
+    btnSubstrateCover.Enabled = IIf(tbxID.Value > 0, True, False)
+    btnSetObserverRecorder.Enabled = IIf(tbxID.Value > 0, True, False)
     
     'refresh form
     Me.Requery

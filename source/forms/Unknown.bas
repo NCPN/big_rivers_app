@@ -1690,22 +1690,22 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -1713,14 +1713,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1728,11 +1728,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -1779,7 +1779,7 @@ On Error GoTo Err_Handler
     Title = "Unknown Species"
     lblTitle.Caption = ""
     Directions = "Enter the unknown information and click save."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     
     lblLeaf.Caption = StringFromCodepoint(uLeafFallen)
@@ -1806,7 +1806,7 @@ On Error GoTo Err_Handler
     cbxPlantType.BackColor = lngYellow
   
     'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
+    tbxID.Value = 0
 
 'Veg unknowns
 'Public Const PLANT_TYPES As String = "herb,shrub,tree,grass,sedge,other"  'TEXT(50) --> TEXT(15)
@@ -1982,7 +1982,7 @@ On Error GoTo Err_Handler
     
     'clear values
 '    tbxName.Value = ""
-    tbxDescription.value = ""
+    tbxDescription.Value = ""
     
     btnSave.Enabled = False
     
@@ -2036,7 +2036,7 @@ On Error GoTo Err_Handler
 '        .HeadtoOrientDistance = tbxDistance.Value
 '        .HeadtoOrientBearing = tbxBearing.Value
         
-        .ID = tbxID.value '0 if new, edit if > 0
+        .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
     End With
     
@@ -2046,7 +2046,7 @@ On Error GoTo Err_Handler
     tbxDescription.ControlSource = ""
     
     tbxID.ControlSource = ""
-    tbxID.value = 0
+    tbxID.Value = 0
     
     ReadyForSave
     
@@ -2083,7 +2083,7 @@ Private Sub btnConfirmUnknown_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "ConfirmUnknown", acNormal, , , , , "Unknown|" & tbxID.value
+    DoCmd.OpenForm "ConfirmUnknown", acNormal, , , , , "Unknown|" & tbxID.Value
     
 Exit_Handler:
     Exit Sub

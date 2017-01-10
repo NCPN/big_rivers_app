@@ -717,23 +717,23 @@ Private m_FormContext As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
-Public Event InvalidFormContext(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
+Public Event InvalidFormContext(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -741,14 +741,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -756,11 +756,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -768,11 +768,11 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let FormContext(value As String)
-    If Len(value) > 0 Then
-        m_FormContext = value
+Public Property Let FormContext(Value As String)
+    If Len(Value) > 0 Then
+        m_FormContext = Value
     Else
-        RaiseEvent InvalidFormContext(value)
+        RaiseEvent InvalidFormContext(Value)
     End If
 End Property
 
@@ -882,7 +882,7 @@ On Error GoTo Err_Handler
     Title = "Substrate Cover"
     lblTitle.Caption = "" 'hide inner title
     Directions = "Enter substrates found, their percent cover and click save."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -915,7 +915,7 @@ On Error GoTo Err_Handler
     cbxSubstrates.ColumnWidths = "0in;1.3in;.4in;.5in;0in;0in" 'display label, code, diameter range
     
     'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
+    tbxID.Value = 0
   
     'defaults --> turn off items
         
@@ -1174,8 +1174,8 @@ On Error GoTo Err_Handler
     'set color of icon depending on if values are set
     'requires:  EventID, ModWentworthID, PercentCover
 
-    If Nz(cbxSubstrates.value, 0) > 0 _
-        And Nz(tbxCoverPct.value, 0) > 0 Then
+    If Nz(cbxSubstrates.Value, 0) > 0 _
+        And Nz(tbxCoverPct.Value, 0) > 0 Then
         
         isOK = True
         

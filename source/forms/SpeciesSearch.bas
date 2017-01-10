@@ -1011,7 +1011,7 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidCallingForm(Value As String)
 
 
 '=================================================================
@@ -1112,11 +1112,11 @@ End Property
 '---------------------
 ' Properties
 '---------------------
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -1200,7 +1200,7 @@ End Sub
 Private Sub tbxSearchFor_LostFocus()
 On Error GoTo Err_Handler
     
-    If Len(tbxSearchFor.value) > 0 Then
+    If Len(tbxSearchFor.Value) > 0 Then
         'check if species list is identified
         If Len(TempVars("speciestype")) > 0 Then
             'enable the search "button"
@@ -1623,7 +1623,7 @@ On Error GoTo Err_Handler
     'ignore if disabled
     If btnSearch.Enabled = False Then GoTo Exit_Handler
 
-    strSearch = Trim(tbxSearchFor.value)
+    strSearch = Trim(tbxSearchFor.Value)
             
     'check strSearch is alpha numeric
     

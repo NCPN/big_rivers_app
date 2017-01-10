@@ -609,20 +609,20 @@ Dim hWnd_B As Long
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
+Public Event InvalidTitle(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -630,8 +630,8 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Table(value As String)
-        m_Table = value
+Public Property Let Table(Value As String)
+        m_Table = Value
 
         'populate form
         PopulateForm
@@ -641,8 +641,8 @@ Public Property Get Table() As String
     Table = m_Table
 End Property
 
-Public Property Let TableColumns(value As String)
-        m_TableColumns = value
+Public Property Let TableColumns(Value As String)
+        m_TableColumns = Value
 End Property
 
 Public Property Get TableColumns() As String

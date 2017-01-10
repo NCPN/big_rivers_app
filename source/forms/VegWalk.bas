@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =9765
-    Top =3030
-    Right =18540
-    Bottom =14010
+    Left =8790
+    Top =1950
+    Right =16650
+    Bottom =9495
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -259,7 +259,7 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblNumber"
+                    Name ="lblEvent"
                     Caption ="Event"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -939,23 +939,23 @@ Private m_FormContext As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
-Public Event InvalidFormContext(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
+Public Event InvalidFormContext(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -963,14 +963,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -978,11 +978,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -990,11 +990,11 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let FormContext(value As String)
-    If Len(value) > 0 Then
-        m_FormContext = value
+Public Property Let FormContext(Value As String)
+    If Len(Value) > 0 Then
+        m_FormContext = Value
     Else
-        RaiseEvent InvalidFormContext(value)
+        RaiseEvent InvalidFormContext(Value)
     End If
 End Property
 
@@ -1025,6 +1025,8 @@ End Property
 '   BLC - 8/2/2016 - use Me.CallingForm
 '   BLC - 10/21/2016 - use GetContext()
 '   BLC - 10/24/2016 - revise to accommodate VegPlot WCC, URC, ARC
+'   BLC - 1/10/2017 - revise to use s_events_by_site to avoid conflict w/
+'                     context (picking site that doesn't match context)
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1062,6 +1064,11 @@ On Error GoTo Err_Handler
     Select Case Me.FormContext
     
         Case "VegWalk"
+            'expose event, start date for VegWalk form
+            lblEvent.Visible = True
+            cbxEvent.Visible = True
+            btnAddEvent.Visible = True
+            
             'set list position & hide cover % UI
             lblMsgIcon.Top = 0.375 * TWIPS_PER_INCH
             lblMsg.Top = 0.5 * TWIPS_PER_INCH
@@ -1075,6 +1082,11 @@ On Error GoTo Err_Handler
             Me.Move Me.WindowLeft, Height:=Me.FormHeader.Height + Me.Detail.Height
             
         Case "WoodyCanopySpecies", "UnderstoryRootedSpecies", "AllRootedSpecies"
+            'hide event (already on VegPlot form)
+            lblEvent.Visible = False
+            cbxEvent.Visible = False
+            btnAddEvent.Visible = False
+            
             'drop list down & expose cover % UI
             lblMsgIcon.Top = 0.6667 * TWIPS_PER_INCH
             lblMsg.Top = 0.7917 * TWIPS_PER_INCH
@@ -1096,7 +1108,7 @@ On Error GoTo Err_Handler
     Title = IIf(strCaller = "VegPlot", strTitle, "VegWalk")
     lblTitle.Caption = "" 'hide inner title
     Directions = "Enter species found and click save."
-    tbxIcon.value = StringFromCodepoint(uBullet)
+    tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
@@ -1124,11 +1136,22 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     cbxSpecies.BackColor = lngYellow
     
+    'determine level for events
+    Dim filter As String
+    If Not TempVars("SiteCode") Is Nothing Then
+            filter = "s_events_by_site"
+        If Not TempVars("Feature") Is Nothing Then
+            filter = "s_events_by_feature"
+        End If
+    End If
+    
     'populate events
-    Set cbxEvent.Recordset = GetRecords("s_events_by_park_river")
+'    Set cbxEvent.Recordset = GetRecords("s_events_by_park_river")
+    Set cbxEvent.Recordset = GetRecords(filter)
     cbxEvent.BoundColumn = 1
     cbxEvent.ColumnCount = 5
-    cbxEvent.ColumnWidths = "0;0;0;0;2"
+'    cbxEvent.ColumnWidths = "0;0;0;0;2"
+    cbxEvent.ColumnWidths = "0;0;1in;0;0"
     
     'populate species
     ' -------------------------------------------------------------------------------------
@@ -1143,7 +1166,7 @@ On Error GoTo Err_Handler
     cbxSpecies.ColumnWidths = "0;.7in;.2in;0;0" 'display the display column (combines label - summary)
     
     'ID default -> value used only for edits of existing table values
-    tbxID.value = 0
+    tbxID.Value = 0
   
     'defaults --> turn off items
     
@@ -1608,13 +1631,23 @@ On Error GoTo Err_Handler
         '    If Nz(cbxSpecies.Value, "") > -1 _
 '        And Nz(chkIsSeedling.Value, "") > -1 _
 '        And Nz(cbxEvent.Value, 0) > 0 Then
-
-    If Nz(cbxSpecies.value, 0) > 0 _
-        And Nz(cbxEvent.value, 0) > 0 Then
+    
+    Select Case Me.CallingForm
+        Case "VegPlot"
+            If Nz(cbxSpecies.Value, 0) > 0 _
+                And Nz(tbxCoverPct.Value, 0) >= 0 Then
+            
+            isOK = True
+            
+        End If
+        Case "VegWalk"
+            If Nz(cbxSpecies.Value, 0) > 0 _
+                And Nz(cbxEvent.Value, 0) > 0 Then
         
-        isOK = True
+                isOK = True
         
-    End If
+            End If
+    End Select
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK

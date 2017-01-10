@@ -21,11 +21,11 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =38
-    Left =3240
-    Top =3525
-    Right =15795
-    Bottom =14520
+    ItemSuffix =41
+    Left =8205
+    Top =2505
+    Right =16020
+    Bottom =7845
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x0680db994fd0e440
@@ -69,6 +69,16 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Rectangle
+            SpecialEffect =3
+            BackStyle =0
+            BorderLineStyle =0
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -134,7 +144,8 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =1740
+            CanGrow = NotDefault
+            Height =1680
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -210,19 +221,20 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1680
+                    Left =1500
                     Top =1320
-                    Width =3000
+                    Width =3300
                     Height =315
+                    FontSize =9
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTemplateName"
                     Caption ="s_get_parks"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1680
+                    LayoutCachedLeft =1500
                     LayoutCachedTop =1320
-                    LayoutCachedWidth =4680
+                    LayoutCachedWidth =4800
                     LayoutCachedHeight =1635
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -334,7 +346,7 @@ Begin Form
         Begin Section
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =3660
+            Height =3675
             Name ="Detail"
             AutoHeight =255
             AlternateBackColor =15921906
@@ -343,34 +355,27 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
-                    Enabled = NotDefault
                     Locked = NotDefault
                     CanGrow = NotDefault
                     CanShrink = NotDefault
-                    TabStop = NotDefault
                     ScrollBars =2
-                    OldBorderStyle =0
                     OverlapFlags =85
-                    TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =120
+                    Left =60
                     Top =60
-                    Width =7320
-                    Height =3480
-                    FontSize =9
+                    Width =7440
+                    Height =3555
                     BorderColor =10921638
-                    ForeColor =4138256
+                    ForeColor =4210752
                     Name ="tbxSQL"
                     GridlineColor =10921638
+                    TextFormat =1
 
-                    LayoutCachedLeft =120
+                    LayoutCachedLeft =60
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7440
-                    LayoutCachedHeight =3540
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =3615
                 End
             End
         End
@@ -394,7 +399,7 @@ Option Explicit
 ' =================================
 ' Form:         TemplateSQL
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -402,6 +407,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 1/10/2017 - 1.01 - added tbxSQL property documentation
 ' =================================
 
 '---------------------
@@ -420,23 +426,23 @@ Private m_SelectedValue As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
@@ -444,14 +450,14 @@ Public Property Get Title() As String
     Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -459,14 +465,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
 '        Me.btnEdit.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -474,16 +480,16 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let SelectedID(value As Integer)
-        m_SelectedID = value
+Public Property Let SelectedID(Value As Integer)
+        m_SelectedID = Value
 End Property
 
 Public Property Get SelectedID() As Integer
     SelectedID = m_SelectedID
 End Property
 
-Public Property Let SelectedValue(value As String)
-        m_SelectedValue = value
+Public Property Let SelectedValue(Value As String)
+        m_SelectedValue = Value
 End Property
 
 Public Property Get SelectedValue() As String
@@ -497,7 +503,8 @@ End Property
 ' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
-' Assumptions:  -
+' Assumptions:  tbxSQL is an unbound textbox which is enabled, locked,
+'               can grow, can shrink, & has vertical scrollbars enabled
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -506,6 +513,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 1/10/2017 - added documentation @ error 2448, tbxSQL properties, ColorizeText()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -531,7 +539,11 @@ On Error GoTo Err_Handler
         Me.lblHdrID.Caption = "#" & aryOA(0)
         Me.lblVersion.Caption = "vers. " & aryOA(1)
         Me.lblTemplateName.Caption = aryOA(2)
-        Me.tbxSQL.value = aryOA(3)
+        '---------------------------------------------------
+        ' NOTE: tbxSQL must be unbound or Error 2448 occurs
+        '       "can't assign a value to this object"
+        '---------------------------------------------------
+        Me.tbxSQL.Value = aryOA(3) 'ColorizeText(ColorizeText(aryOA(3), "SQL", "blue"), "NEGATIVE")
         Me.lblEffectiveDate.Caption = aryOA(4)
         Me.lblFormat.Caption = aryOA(5)
     Else
