@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_UI
 ' Level:        Framework module
-' Version:      1.10
+' Version:      1.11
 ' Description:  User interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -21,6 +21,7 @@ Option Explicit
 '               BLC, 9/1/2016  - 1.08 - updated ControlExists()
 '               BLC, 12/8/2016 - 1.09 - added text alignment constants
 '               BLC, 12/12/2016 - 1.10 - added scrolling constants & function
+'               BLC, 1/11/2017 - 1.11 - added SetToggleCaption()
 ' =================================
 
 ' ---------------------------------
@@ -1061,6 +1062,47 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - ToggleControl[mod_UI])"
     End Select
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          ToggleCaption
+' Description:  Sets toggle button caption based on button state
+' Assumptions:  -
+' Parameters:   ctrl - tgl (toggle button control)
+'               TrueText - caption text to display when toggle is true (optional, string)
+'               FalseText - caption text to display when toggle is false (optional, string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 11, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2017 - initial version
+' ---------------------------------
+Public Sub ToggleCaption(ctrl As ToggleButton, blnCheckbox As Boolean, _
+                Optional TrueText As String = "", _
+                Optional FalseText As String = "")
+On Error GoTo Err_Handler
+    
+    'set default if checkbox desired
+    If blnCheckbox Then TrueText = StringFromCodepoint(uCheck)
+    
+    If ctrl Then
+        ctrl.Caption = TrueText
+    Else
+        ctrl.Caption = FalseText
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ToggleCaption[mod_UI])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------

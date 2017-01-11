@@ -19,14 +19,14 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =37
-    Left =4035
-    Top =3540
-    Right =16335
-    Bottom =14550
+    ItemSuffix =40
+    Left =5460
+    Top =2505
+    Right =13320
+    Bottom =10110
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x20e2f9274edfe440
     End
     Caption ="Transect"
     OnCurrent ="[Event Procedure]"
@@ -149,7 +149,7 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =1380
+            Height =2280
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -182,7 +182,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the transect data."
+                    Caption ="Enter the transect information and click save."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -192,23 +192,26 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
-                    Top =900
+                    Top =1800
                     Width =720
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="í ½í·©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
-                    LayoutCachedTop =900
+                    LayoutCachedTop =1800
                     LayoutCachedWidth =7380
-                    LayoutCachedHeight =1260
+                    LayoutCachedHeight =2160
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -216,11 +219,12 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =2700
-                    Top =1065
+                    Top =1965
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -230,16 +234,16 @@ Begin Form
                     Caption ="Sample Date"
                     GridlineColor =10921638
                     LayoutCachedLeft =2700
-                    LayoutCachedTop =1065
+                    LayoutCachedTop =1965
                     LayoutCachedWidth =3945
-                    LayoutCachedHeight =1380
+                    LayoutCachedHeight =2280
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =1200
-                    Top =1065
+                    Top =1965
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -249,9 +253,9 @@ Begin Form
                     Caption ="Transect #"
                     GridlineColor =10921638
                     LayoutCachedLeft =1200
-                    LayoutCachedTop =1065
+                    LayoutCachedTop =1965
                     LayoutCachedWidth =2445
-                    LayoutCachedHeight =1380
+                    LayoutCachedHeight =2280
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -264,9 +268,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777215
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="CANY  >  Green  >  BB  >  "
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -274,6 +278,230 @@ Begin Form
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =480
+                    Top =1380
+                    Width =600
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="Label70"
+                    Caption ="Event"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =480
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =1080
+                    LayoutCachedHeight =1695
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    ColumnCount =5
+                    Left =1380
+                    Top =1380
+                    Width =3414
+                    Height =315
+                    ColumnOrder =0
+                    TabIndex =1
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxEvent"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;0;0;1"
+                    ControlTipText ="Event (sample visit)"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =4794
+                    LayoutCachedHeight =1695
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4920
+                    Top =1380
+                    TabIndex =2
+                    ForeColor =16711680
+                    Name ="btnAddEvent"
+                    Caption ="í ½í·“  Add Event"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new event/sampling visit"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4920
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =6360
+                    LayoutCachedHeight =1740
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =480
+                    Top =840
+                    Width =855
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblLocation"
+                    Caption ="Location"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =480
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =1335
+                    LayoutCachedHeight =1155
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    ColumnCount =5
+                    Left =1380
+                    Top =840
+                    Width =3414
+                    Height =315
+                    ColumnOrder =1
+                    TabIndex =3
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxLocation"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;0;0;1"
+                    ControlTipText ="Transect location"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =4794
+                    LayoutCachedHeight =1155
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4920
+                    Top =840
+                    Width =1680
+                    TabIndex =4
+                    ForeColor =16711680
+                    Name ="btnAddLocation"
+                    Caption =" Add Location"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new location"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000009070603090706080 ,
+                        0x906850c0806850f0806050f0805840c070584080705040300000000000000000 ,
+                        0x0000000000000000000000000000000000000000a0786060907060e0907050ff ,
+                        0x706840ff906840ffb06840ff906040ff805040ff705040e07050406000000000 ,
+                        0x00000000000000000000000000000000a0806060a07860f0c08060ff807830ff ,
+                        0x607820ff506040ff906040ffc06840ffb06040ff905840ff705040f070504060 ,
+                        0x000000000000000000000000b0807030a07860e0d08860fff08860ffd08040ff ,
+                        0x608820ff308820ff606830ff706840ffb06840ffb06040ff905840ff705040e0 ,
+                        0x705040300000000000000000b0807080c08870fff09860fff09060ffc08860ff ,
+                        0x508040ff409820ff408830ff707040ffb06840ff806040ff606040ff605840ff ,
+                        0x705840800000000000000000b08070c0e09870ffffa070ffe09070ff707850ff ,
+                        0x50a840ff50a830ff809830ffd07850ff707040ff506840ff307810ff606830ff ,
+                        0x805840c00000000000000000b08870f0f0b890fff0a880ff607860ff609850ff ,
+                        0x60b040ff90a040ffe08860ffd08050ff507050ff408830ff309010ff408020ff ,
+                        0x806050f00000000000000000b08870f0ffb8a0ffa09880ff40a850ff60b850ff ,
+                        0x909860ffe09870ffe09060ffe08860ff60a030ff40a020ff409820ff408820ff ,
+                        0x806850f00000000000000000b08870c0e0b8a0ff90b880ff50c870ff50c870ff ,
+                        0x80a070ffc0a070ffd09870ffe09060ffa09840ff50a830ff40a020ff508830ff ,
+                        0x906850c00000000000000000b0907080b0a080ff90d0a0ff70e090ff90e0a0ff ,
+                        0x80e8a0ffa0d090ffb0a870fff09870ffe09060ff50a830ff50a830ff708840ff ,
+                        0x907060800000000000000000b0907030b09080e090c8a0ffa0e8b0ffd0f0c0ff ,
+                        0xd0f8d0fff0f8d0ffb0e8b0ff809860ffd09840ffb09040ff609840ff907050e0 ,
+                        0x90706030000000000000000000000000b0908070b0a080f0b0d8b0ffd0f0d0ff ,
+                        0xe0f8d0ff80b070ff80d890ff50b070ff908840ffd08860ffa07860f0a0786060 ,
+                        0x0000000000000000000000000000000000000000b0908070b09080e0c0c0a0ff ,
+                        0xd0e0c0ffb0e8b0ff80e0a0ff60b870ffa08850ffa07860e0a080606000000000 ,
+                        0x000000000000000000000000000000000000000000000000b0908030b0908080 ,
+                        0xb09080c0b09080f0c09880f0b09080c0b0807080b08070300000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =4920
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =6600
+                    LayoutCachedHeight =1200
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
@@ -287,6 +515,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -341,7 +570,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -364,7 +594,7 @@ Begin Form
                     FontSize =9
                     TabIndex =3
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -434,7 +664,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -589,7 +820,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =495
@@ -610,9 +840,8 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -657,6 +886,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert / SetRecord()
 '               BLC - 9/1/2016  - 1.02 - btnSave_Click code cleanup
+'               BLC - 1/11/2017 - 1.03 - added CallingForm property
 ' =================================
 
 '---------------------
@@ -671,6 +901,8 @@ Private m_Directions As String
 Private m_ButtonCaption
 Private m_SelectedID As Integer
 Private m_SelectedValue As String
+Private m_CallingForm As String
+Private m_CallingRecordID As String
 
 '---------------------
 ' Event Declarations
@@ -679,6 +911,8 @@ Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidLabel(Value As String)
 Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
+Public Event InvalidCallingRecordID(Value As Integer)
 
 '---------------------
 ' Properties
@@ -745,6 +979,31 @@ Public Property Get SelectedValue() As String
     SelectedValue = m_SelectedValue
 End Property
 
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
+    Else
+        RaiseEvent InvalidCallingForm(Value)
+    End If
+End Property
+
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
+End Property
+
+Public Property Let CallingRecordID(Value As Integer)
+    If Len(Value) > 0 Then
+        m_CallingRecordID = Value
+    Else
+        RaiseEvent InvalidCallingRecordID(Value)
+    End If
+End Property
+
+Public Property Get CallingRecordID() As Integer
+    CallingRecordID = m_CallingRecordID
+End Property
+
+
 '---------------------
 ' Methods
 '---------------------
@@ -764,18 +1023,37 @@ End Property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+    
+    Dim aryOArgs As Variant
+    
+    'default
+    Me.CallingForm = "Main"
+    Me.CallingRecordID = -1
+    
+'    If Len(Me.OpenArgs) > 0 Then
+'        aryOArgs = Split(Me.OpenArgs, "|")
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+'       If IsArray(aryOArgs) Then
+'
+'            'set calling for & record
+'            Me.CallingForm = aryOArgs(0)
+'            Me.CallingRecordID = Nz(aryOArgs(1), -1)
+'
+'        End If
+'    End If
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("Feature"), "")
+'    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+'                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+'                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+'                 Nz(TempVars("Feature"), "")
+    lblContext.Caption = GetContext()
 
     Title = "Transect"
+    lblTitle.Caption = "" 'hide 2nd title
     Directions = "Enter the transect information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
@@ -961,6 +1239,66 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          btnAddLocation_Click
+' Description:  Add location button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 11, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2017 - initial version
+' ---------------------------------
+Private Sub btnAddLocation_Click()
+On Error GoTo Err_Handler
+    
+    'open comment form
+    DoCmd.OpenForm "Location", acNormal, , , , , "Transect|" & tbxID
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddLocation_Click[Transect form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnAddEvent_Click
+' Description:  Add event button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 11, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2017 - initial version
+' ---------------------------------
+Private Sub btnAddEvent_Click()
+On Error GoTo Err_Handler
+    
+    'open comment form
+    DoCmd.OpenForm "Events", acNormal, , , , , "Transect|" & tbxID
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddEvent_Click[Transect form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnComment_Click
 ' Description:  Undo button click actions
 ' Assumptions:  -
@@ -1003,12 +1341,34 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 6/27/2016 - adjusted for ToggleForm
+'   BLC - 1/11/2017 - revised to use CallingForm property
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
+    
+    'update transect combobox for VegPlot
+    Dim filter As String
+    
+    Select Case Me.CallingForm
+        Case "VegPlot"
+            Select Case GetHierarchyLevel
+                Case "feature"
+                    filter = "s_vegtransect_by_feature"
+                Case "site"
+                    filter = "s_vegtransect_by_site"
+            End Select
+            
+            Set Forms("VegPlot").Controls("cbxTransect").Recordset = GetRecords(filter)
+            Forms("VegPlot").Controls("cbxTransect").Requery
+    
+    
+    End Select
+    
+'    Set Forms(Me.CallingForm).Controls("cbxTransect").Recordset = GetRecords(filter)
+'    Forms(Me.CallingForm).Controls("cbxTransect").Requery
     
 Exit_Handler:
     Exit Sub

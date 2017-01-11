@@ -19,14 +19,14 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =73
-    Left =8205
-    Top =2490
-    Right =16065
-    Bottom =12435
+    ItemSuffix =76
+    Left =10185
+    Top =1110
+    Right =18045
+    Bottom =11535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x9116deeeb5cfe440
+        0x6efd080b49dfe440
     End
     Caption ="VegPlot"
     OnCurrent ="[Event Procedure]"
@@ -157,9 +157,38 @@ Begin Form
             BorderShade =65.0
             ShowPageHeaderAndPageFooter =1
         End
+        Begin ToggleButton
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =2
+            Bevel =1
+            BackColor =-1
+            BackThemeColorIndex =4
+            BackTint =60.0
+            OldBorderStyle =0
+            BorderLineStyle =0
+            BorderColor =-1
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverColor =0
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedColor =0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeColor =0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeColor =0
+            PressedForeThemeColorIndex =1
+        End
         Begin FormHeader
             CanGrow = NotDefault
-            Height =1800
+            Height =2280
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -174,7 +203,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="VegPlot"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -205,7 +233,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =3300
-                    Top =1440
+                    Top =1920
                     Width =2520
                     Height =315
                     FontSize =10
@@ -216,9 +244,9 @@ Begin Form
                     Caption ="Modal Sediment Size (Overall)"
                     GridlineColor =10921638
                     LayoutCachedLeft =3300
-                    LayoutCachedTop =1440
+                    LayoutCachedTop =1920
                     LayoutCachedWidth =5820
-                    LayoutCachedHeight =1755
+                    LayoutCachedHeight =2235
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -226,7 +254,7 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =85
                     Left =6960
-                    Top =1380
+                    Top =1860
                     Width =720
                     ForeColor =16711680
                     Name ="btnComment"
@@ -235,9 +263,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6960
-                    LayoutCachedTop =1380
+                    LayoutCachedTop =1860
                     LayoutCachedWidth =7680
-                    LayoutCachedHeight =1740
+                    LayoutCachedHeight =2220
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -255,7 +283,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =1800
-                    Top =1440
+                    Top =1920
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -265,16 +293,16 @@ Begin Form
                     Caption ="Distance (m)"
                     GridlineColor =10921638
                     LayoutCachedLeft =1800
-                    LayoutCachedTop =1440
+                    LayoutCachedTop =1920
                     LayoutCachedWidth =3045
-                    LayoutCachedHeight =1755
+                    LayoutCachedHeight =2235
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =1080
-                    Top =1440
+                    Top =1920
                     Width =600
                     Height =315
                     FontWeight =500
@@ -284,9 +312,9 @@ Begin Form
                     Caption ="Plot #"
                     GridlineColor =10921638
                     LayoutCachedLeft =1080
-                    LayoutCachedTop =1440
+                    LayoutCachedTop =1920
                     LayoutCachedWidth =1680
-                    LayoutCachedHeight =1755
+                    LayoutCachedHeight =2235
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -301,7 +329,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="CANY  >  Green  >  HC  >  "
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -311,21 +339,23 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6120
-                    Top =1380
+                    Top =1860
                     Width =720
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnSetObserverRecorder"
                     Caption ="í ½í±¥"
                     OnClick ="[Event Procedure]"
+                    ControlTipText ="Set the selected veg plot's observer & recorder"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6120
-                    LayoutCachedTop =1380
+                    LayoutCachedTop =1860
                     LayoutCachedWidth =6840
-                    LayoutCachedHeight =1740
+                    LayoutCachedHeight =2220
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -363,11 +393,11 @@ Begin Form
                     OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =5
-                    Left =900
+                    Left =1080
                     Top =900
                     Width =3414
                     Height =315
-                    ColumnOrder =0
+                    ColumnOrder =1
                     TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
@@ -381,15 +411,15 @@ Begin Form
                     End
                     Name ="cbxEvent"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;0;0;0;1"
+                    ColumnWidths ="0;0;0;0;2880"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Event (sample visit)"
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =900
+                    LayoutCachedLeft =1080
                     LayoutCachedTop =900
-                    LayoutCachedWidth =4314
+                    LayoutCachedWidth =4494
                     LayoutCachedHeight =1215
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -405,7 +435,7 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =4440
+                    Left =4620
                     Top =900
                     TabIndex =3
                     ForeColor =16711680
@@ -415,9 +445,9 @@ Begin Form
                     ControlTipText ="Add a new event/sampling visit"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4440
+                    LayoutCachedLeft =4620
                     LayoutCachedTop =900
-                    LayoutCachedWidth =5880
+                    LayoutCachedWidth =6060
                     LayoutCachedHeight =1260
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -431,6 +461,100 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =180
+                    Top =1380
+                    Width =855
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="Label73"
+                    Caption ="Transect"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =1695
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    ColumnCount =5
+                    Left =1080
+                    Top =1380
+                    Width =3414
+                    Height =315
+                    ColumnOrder =0
+                    TabIndex =4
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxTransect"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;0;0;1"
+                    ControlTipText ="Veg transect"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =1080
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =4494
+                    LayoutCachedHeight =1695
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4620
+                    Top =1380
+                    TabIndex =5
+                    ForeColor =16711680
+                    Name ="btnAddTransect"
+                    Caption ="  Add Transect"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new veg transect"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4620
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =1740
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
@@ -522,7 +646,6 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -907,7 +1030,7 @@ Begin Form
                     Top =1620
                     Width =960
                     Height =315
-                    TabIndex =7
+                    TabIndex =8
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -1054,148 +1177,6 @@ Begin Form
                     LayoutCachedWidth =2040
                     LayoutCachedHeight =1500
                 End
-                Begin CheckBox
-                    OverlapFlags =215
-                    Left =1140
-                    Top =2280
-                    Width =360
-                    Height =360
-                    TabIndex =8
-                    BorderColor =10921638
-                    Name ="chkNoCanopyVeg"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1140
-                    LayoutCachedTop =2280
-                    LayoutCachedWidth =1500
-                    LayoutCachedHeight =2640
-                    Begin
-                        Begin Label
-                            OverlapFlags =247
-                            Left =1380
-                            Top =2220
-                            Width =1485
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblNoCanopyVeg"
-                            Caption ="No Canopy Veg"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =1380
-                            LayoutCachedTop =2220
-                            LayoutCachedWidth =2865
-                            LayoutCachedHeight =2535
-                        End
-                    End
-                End
-                Begin CheckBox
-                    OverlapFlags =215
-                    Left =1140
-                    Top =2700
-                    Width =360
-                    Height =360
-                    TabIndex =9
-                    BorderColor =10921638
-                    Name ="chkNoRootedVeg"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1140
-                    LayoutCachedTop =2700
-                    LayoutCachedWidth =1500
-                    LayoutCachedHeight =3060
-                    Begin
-                        Begin Label
-                            OverlapFlags =247
-                            Left =1380
-                            Top =2640
-                            Width =1470
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblNoRootedVeg"
-                            Caption ="No Rooted Veg"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =1380
-                            LayoutCachedTop =2640
-                            LayoutCachedWidth =2850
-                            LayoutCachedHeight =2955
-                        End
-                    End
-                End
-                Begin CheckBox
-                    Visible = NotDefault
-                    OverlapFlags =215
-                    Left =3300
-                    Top =2280
-                    Width =360
-                    Height =360
-                    TabIndex =10
-                    BorderColor =10921638
-                    Name ="chkNoIndicatorSpecies"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =2280
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =2640
-                    Begin
-                        Begin Label
-                            Visible = NotDefault
-                            OverlapFlags =247
-                            Left =3540
-                            Top =2220
-                            Width =1965
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblNoIndicatorSpecies"
-                            Caption ="No Indicator Species"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =3540
-                            LayoutCachedTop =2220
-                            LayoutCachedWidth =5505
-                            LayoutCachedHeight =2535
-                        End
-                    End
-                End
-                Begin CheckBox
-                    OverlapFlags =215
-                    Left =3300
-                    Top =2700
-                    Width =360
-                    Height =360
-                    TabIndex =11
-                    BorderColor =10921638
-                    Name ="chkHasSocialTrails"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3300
-                    LayoutCachedTop =2700
-                    LayoutCachedWidth =3660
-                    LayoutCachedHeight =3060
-                    Begin
-                        Begin Label
-                            OverlapFlags =247
-                            Left =3540
-                            Top =2640
-                            Width =1530
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="lblHasSocialTrails"
-                            Caption ="Has Social Trails"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =3540
-                            LayoutCachedTop =2640
-                            LayoutCachedWidth =5070
-                            LayoutCachedHeight =2955
-                        End
-                    End
-                End
                 Begin Label
                     OverlapFlags =119
                     Left =4440
@@ -1226,7 +1207,7 @@ Begin Form
                     FontSize =9
                     TabIndex =20
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -1359,6 +1340,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =215
                     Left =6840
                     Top =630
@@ -1427,6 +1409,7 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Enabled = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =6
@@ -1438,7 +1421,7 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
-                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"0\";\"0\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"510\""
                     ConditionalFormat = Begin
                         0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
@@ -1451,7 +1434,7 @@ Begin Form
                     RowSource ="PARAMETERS etype Text ( 255 ); SELECT DISTINCT id, label, summary, label & ' - '"
                         " & summary AS display, Sequence FROM AppEnum WHERE EnumType = ModWentworthClassS"
                         "ize ORDER BY Sequence; "
-                    ColumnWidths ="0;0;0;0;0;0"
+                    ColumnWidths ="0;1872;576;0;0;0"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Size class"
                     GridlineColor =10921638
@@ -1566,6 +1549,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =215
                     Left =4860
                     Top =720
@@ -1595,6 +1579,257 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
+                Begin ToggleButton
+                    OverlapFlags =215
+                    Left =3180
+                    Top =2640
+                    Width =270
+                    Height =300
+                    TabIndex =11
+                    Name ="tglHasSocialTrails"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Plot has social trails"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3180
+                    LayoutCachedTop =2640
+                    LayoutCachedWidth =3450
+                    LayoutCachedHeight =2940
+                    ForeTint =100.0
+                    Shape =0
+                    Bevel =0
+                    Gradient =12
+                    BackColor =12419407
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =12419407
+                    BorderTint =100.0
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    HoverTint =80.0
+                    PressedColor =10250042
+                    PressedShade =80.0
+                    HoverForeTint =100.0
+                    PressedForeThemeColorIndex =0
+                    QuickStyle =23
+                    QuickStyleMask =-5
+                    WebImagePaddingLeft =4
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =4
+                    WebImagePaddingBottom =7
+                    Overlaps =1
+                    Begin
+                        Begin Label
+                            OverlapFlags =215
+                            Left =3540
+                            Top =2640
+                            Width =1530
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblHasSocialTrails"
+                            Caption ="Has Social Trails"
+                            ControlTipText ="Plot has social trails"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =3540
+                            LayoutCachedTop =2640
+                            LayoutCachedWidth =5070
+                            LayoutCachedHeight =2955
+                        End
+                    End
+                End
+                Begin ToggleButton
+                    Visible = NotDefault
+                    OverlapFlags =215
+                    Left =3180
+                    Top =2220
+                    Width =270
+                    Height =299
+                    TabIndex =10
+                    Name ="tglNoIndicatorSpecies"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Plot has no indicator species"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3180
+                    LayoutCachedTop =2220
+                    LayoutCachedWidth =3450
+                    LayoutCachedHeight =2519
+                    ForeTint =100.0
+                    Shape =0
+                    Bevel =0
+                    Gradient =12
+                    BackColor =12419407
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =12419407
+                    BorderTint =100.0
+                    HoverColor =13277810
+                    HoverTint =80.0
+                    PressedColor =10250042
+                    PressedShade =80.0
+                    HoverForeTint =100.0
+                    PressedForeThemeColorIndex =0
+                    QuickStyle =23
+                    QuickStyleMask =-5
+                    WebImagePaddingLeft =4
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =4
+                    WebImagePaddingBottom =7
+                    Overlaps =1
+                    Begin
+                        Begin Label
+                            Visible = NotDefault
+                            OverlapFlags =215
+                            Left =3540
+                            Top =2220
+                            Width =1965
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblNoIndicatorSpecies"
+                            Caption ="No Indicator Species"
+                            ControlTipText ="Plot has no indicator species"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =3540
+                            LayoutCachedTop =2220
+                            LayoutCachedWidth =5505
+                            LayoutCachedHeight =2535
+                        End
+                    End
+                End
+                Begin ToggleButton
+                    OverlapFlags =215
+                    Left =1020
+                    Top =2640
+                    Width =270
+                    Height =299
+                    TabIndex =9
+                    Name ="tglNoRootedVeg"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Plot has no rooted vegetation"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =2640
+                    LayoutCachedWidth =1290
+                    LayoutCachedHeight =2939
+                    ForeTint =100.0
+                    Shape =0
+                    Bevel =0
+                    Gradient =12
+                    BackColor =12419407
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =12419407
+                    BorderTint =100.0
+                    HoverColor =13277810
+                    HoverTint =80.0
+                    PressedColor =10250042
+                    PressedShade =80.0
+                    HoverForeTint =100.0
+                    PressedForeThemeColorIndex =0
+                    QuickStyle =23
+                    QuickStyleMask =-5
+                    WebImagePaddingLeft =4
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =4
+                    WebImagePaddingBottom =7
+                    Overlaps =1
+                    Begin
+                        Begin Label
+                            OverlapFlags =215
+                            Left =1380
+                            Top =2640
+                            Width =1470
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblNoRootedVeg"
+                            Caption ="No Rooted Veg"
+                            ControlTipText ="Plot has no rooted vegetation"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =1380
+                            LayoutCachedTop =2640
+                            LayoutCachedWidth =2850
+                            LayoutCachedHeight =2955
+                        End
+                    End
+                End
+                Begin ToggleButton
+                    OverlapFlags =215
+                    Left =1020
+                    Top =2220
+                    Width =270
+                    Height =299
+                    TabIndex =7
+                    Name ="tglNoCanopyVeg"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Plot has no canopy vegetation"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =2220
+                    LayoutCachedWidth =1290
+                    LayoutCachedHeight =2519
+                    ForeTint =100.0
+                    Shape =0
+                    Bevel =0
+                    Gradient =12
+                    BackColor =12419407
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =12419407
+                    BorderTint =100.0
+                    HoverColor =13277810
+                    HoverTint =80.0
+                    PressedColor =10250042
+                    PressedShade =80.0
+                    HoverForeTint =100.0
+                    PressedForeThemeColorIndex =0
+                    QuickStyle =23
+                    QuickStyleMask =-5
+                    WebImagePaddingLeft =4
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =4
+                    WebImagePaddingBottom =7
+                    Overlaps =1
+                    Begin
+                        Begin Label
+                            OverlapFlags =215
+                            Left =1380
+                            Top =2220
+                            Width =1485
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblNoCanopyVeg"
+                            Caption ="No Canopy Veg"
+                            ControlTipText ="Plot has no canopy vegetation"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =1380
+                            LayoutCachedTop =2220
+                            LayoutCachedWidth =2865
+                            LayoutCachedHeight =2535
+                        End
+                    End
+                End
             End
         End
         Begin FormFooter
@@ -1617,7 +1852,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -1633,6 +1868,9 @@ Option Explicit
 '                                         SelectedID, SelectedValue properties
 '               BLC - 1/9/2017 - 1.05 - added cbxEvent, observer/recorder, substrate cover %
 '                                       functionality
+'               BLC - 1/11/2017 - 1.06 - changed checkboxes (chk) to toggles (tgl)
+'                                        & converted -1/0 values to 1/0 for SQL clarity,
+'                                        changed event/transect display based on site/feature set
 ' =================================
 
 '---------------------
@@ -1724,6 +1962,7 @@ End Property
 '   BLC - 9/8/2016  - added SetObserverRecorder button
 '   BLC - 10/24/2016 - revised to use CallingForm property, GetContext()
 '   BLC - 1/9/2017 - added cbxEvent, observer/recorder, substrate cover % functionality
+'   BLC - 1/11/2017 - changed event & transect to display based on site/feature set
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1782,7 +2021,11 @@ On Error GoTo Err_Handler
     btnARC.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
     btnUndo.HoverColor = lngGreen
-      
+    tglNoCanopyVeg.HoverColor = lngGreen
+    tglNoRootedVeg.HoverColor = lngGreen
+    tglNoIndicatorSpecies.HoverColor = lngGreen
+    tglHasSocialTrails.HoverColor = lngGreen
+    
     'defaults
     tbxIcon.ForeColor = lngRed
     btnComment.Enabled = False
@@ -1800,11 +2043,42 @@ On Error GoTo Err_Handler
     'disable until Event selected
     Me.cbxModalSedSize.Enabled = False
     
+    'determine what level to populate
+    Dim efilter As String, tfilter As String
+    
+    'site is default <-- cannot reach VegPlot if site isn't set
+    efilter = "s_events_by_site"
+    cbxEvent.ColumnCount = 6
+    cbxEvent.ColumnWidths = "0;0;0;2in;0;0"
+    tfilter = "s_vegtransect_by_site"
+    cbxTransect.ColumnCount = 8
+    cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0"
+
+    Select Case TempVars("ParkCode")
+        Case "BLCA" 'feature level if set
+            If Not TempVars("Feature") Is Nothing Then _
+                efilter = "s_events_by_feature"
+                cbxTransect.ColumnCount = 8
+                cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
+                
+                tfilter = "s_vegtransect_by_feature"
+                cbxTransect.ColumnCount = 9
+                cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
+        Case "CANY" 'site level
+        Case "DINO" 'no transects
+    End Select
+    
     'populate events
-    Set cbxEvent.Recordset = GetRecords("s_events_by_park_river")
+    Set cbxEvent.Recordset = GetRecords(efilter) '"s_events_by_park_river")
     cbxEvent.BoundColumn = 1
-    cbxEvent.ColumnCount = 5
-    cbxEvent.ColumnWidths = "0in;0in;0in;0in;2in"
+    'cbxEvent.ColumnCount = 5
+    'cbxEvent.ColumnWidths = "0in;0in;0in;0in;2in"
+    
+    'populate veg transects
+    Set cbxTransect.Recordset = GetRecords(tfilter) 's_transect_by_park_river")
+    cbxTransect.BoundColumn = 1
+    'cbxTransect.ColumnCount = 5
+    'cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
     
     'populate modal sediment size
     ' -------------------------------------------------------------------------------------
@@ -1830,13 +2104,13 @@ On Error GoTo Err_Handler
     lblPlotDensity.Visible = False
     lblFraction.Visible = False
     tbxPlotDensity.Visible = False
-    chkNoCanopyVeg.Visible = False
+    tglNoCanopyVeg.Visible = False
     lblNoCanopyVeg.Visible = False
-    chkNoIndicatorSpecies.Visible = False
+    tglNoIndicatorSpecies.Visible = False
     lblNoIndicatorSpecies.Visible = False
-    chkNoRootedVeg.Visible = False
+    tglNoRootedVeg.Visible = False
     lblNoRootedVeg.Visible = False
-    chkHasSocialTrails.Visible = False
+    tglHasSocialTrails.Visible = False
     lblHasSocialTrails.Visible = False
     btnWCC.Visible = False
     btnURC.Visible = False
@@ -1855,11 +2129,11 @@ On Error GoTo Err_Handler
             lblPlotDensity.Visible = True
             lblFraction.Visible = True
             tbxPlotDensity.Visible = True
-            chkNoCanopyVeg.Visible = True
+            tglNoCanopyVeg.Visible = True
             lblNoCanopyVeg.Visible = True
-            chkNoIndicatorSpecies.Visible = True
+            tglNoIndicatorSpecies.Visible = True
             lblNoIndicatorSpecies.Visible = True
-            chkHasSocialTrails.Visible = True
+            tglHasSocialTrails.Visible = True
             lblHasSocialTrails.Visible = True
             btnWCC.Visible = True
             btnURC.Visible = True
@@ -1874,11 +2148,11 @@ On Error GoTo Err_Handler
             lblFraction.Visible = True
             tbxPlotDensity.Visible = True
             tbxPctURC.Visible = True
-            chkNoCanopyVeg.Visible = True
+            tglNoCanopyVeg.Visible = True
             lblNoCanopyVeg.Visible = True
-            chkNoRootedVeg.Visible = True
+            tglNoRootedVeg.Visible = True
             lblNoRootedVeg.Visible = True
-            chkHasSocialTrails.Visible = True
+            tglHasSocialTrails.Visible = True
             lblHasSocialTrails.Visible = True
             btnWCC.Visible = True
             btnURC.Visible = True
@@ -1886,7 +2160,7 @@ On Error GoTo Err_Handler
         Case "DINO"
             lblWater.Visible = True
             tbxPctWater.Visible = True
-            chkNoRootedVeg.Visible = True
+            tglNoRootedVeg.Visible = True
             lblNoRootedVeg.Visible = True
             btnARC.Visible = True
     
@@ -2250,8 +2524,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          chkNoCanopyVeg_AfterUpdate
-' Description:  Textbox after update actions
+' Sub:          tglNoCanopyVeg_AfterUpdate
+' Description:  Toggle button after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -2262,10 +2536,13 @@ End Sub
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub chkNoCanopyVeg_AfterUpdate()
+Private Sub tglNoCanopyVeg_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkNoCanopyVeg.Value) > 0 Then _
+    'display as checkbox
+    ToggleCaption tglNoCanopyVeg, True
+    
+    If tglNoCanopyVeg > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2274,14 +2551,14 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkNoCanopyVeg_AfterUpdate[VegPlot form])"
+            "Error encountered (#" & Err.Number & " - tglNoCanopyVeg_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          chkNoRootedVeg_AfterUpdate
-' Description:  Textbox after update actions
+' Sub:          tglNoRootedVeg_AfterUpdate
+' Description:  Toggle button after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -2292,10 +2569,13 @@ End Sub
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub chkNoRootedVeg_AfterUpdate()
+Private Sub tglNoRootedVeg_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkNoRootedVeg.Value) > 0 Then _
+    'display as checkbox
+    ToggleCaption tglNoRootedVeg, True
+    
+    If tglNoRootedVeg Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2304,14 +2584,14 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkNoRootedVeg_AfterUpdate[VegPlot form])"
+            "Error encountered (#" & Err.Number & " - tglNoRootedVeg_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          chkNoIndicatorSpecies_AfterUpdate
-' Description:  Textbox after update actions
+' Sub:          tglNoIndicatorSpecies_AfterUpdate
+' Description:  Toggle button after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -2322,10 +2602,13 @@ End Sub
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
 ' ---------------------------------
-Private Sub chkNoIndicatorSpecies_AfterUpdate()
+Private Sub tglNoIndicatorSpecies_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkNoIndicatorSpecies.Value) > 0 Then _
+    'display as checkbox
+    ToggleCaption tglNoIndicatorSpecies, True
+    
+    If tglNoIndicatorSpecies Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2334,14 +2617,14 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkNoIndicatorSpecies_AfterUpdate[VegPlot form])"
+            "Error encountered (#" & Err.Number & " - tglNoIndicatorSpecies_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          chkHasSocialTrails_AfterUpdate
-' Description:  Textbox after update actions
+' Sub:          tglHasSocialTrails_AfterUpdate
+' Description:  Toggle after update actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -2351,11 +2634,22 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
+'   BLC - 1/11/2017 - revised to toggle w/ text change
 ' ---------------------------------
-Private Sub chkHasSocialTrails_AfterUpdate()
+Private Sub tglHasSocialTrails_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(chkHasSocialTrails.Value) > 0 Then _
+'    If tglHasSocialTrails Then
+'        tglHasSocialTrails.Caption = StringFromCodepoint(uCheck)
+'        ReadyForSave
+'    Else
+'        tglHasSocialTrails.Caption = ""
+'    End If
+    
+    'display as checkbox
+    ToggleCaption tglHasSocialTrails, True
+    
+    If tglHasSocialTrails Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2364,7 +2658,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - chkHasSocialTrails_AfterUpdate[VegPlot form])"
+            "Error encountered (#" & Err.Number & " - tglHasSocialTrails_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2411,6 +2705,8 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 1/11/2017 - revised checkboxes to toggle buttons &
+'                     converted values to 1/0 vs. -1/0 for SQL clarity
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
@@ -2447,11 +2743,12 @@ On Error GoTo Err_Handler
         .PercentWater = tbxPctWater.Value
         .UnderstoryRootedPctCover = tbxPctURC.Value
         
-        'chk values
-        .NoCanopyVeg = chkNoCanopyVeg.Value
-        .NoRootedVeg = chkNoRootedVeg.Value
-        .NoIndicatorSpecies = chkNoIndicatorSpecies.Value
-        .HasSocialTrail = chkHasSocialTrails.Value
+        'chk/tgl values -> change Access -1 (true) to clearer 1 for use in SQL
+        '                  so value of 1 = has no canopy veg, 0 = has canopy veg etc.
+        .NoCanopyVeg = IIf(tglNoCanopyVeg = -1, 1, 0) 'chkNoCanopyVeg.Value
+        .NoRootedVeg = IIf(tglNoRootedVeg = -1, 1, 0) 'chkNoRootedVeg.Value
+        .NoIndicatorSpecies = IIf(tglNoIndicatorSpecies = -1, 1, 0) 'chkNoIndicatorSpecies.Value
+        .HasSocialTrail = IIf(tglHasSocialTrails = -1, 1, 0)
         
 '        .LocationName = tbxName.Value
 '        .LocationType = "" 'cbxLocationType.SelText
@@ -2709,6 +3006,38 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          btnAddTransect_Click
+' Description:  Add transect button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 11, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2017 - initial version
+' ---------------------------------
+Private Sub btnAddTransect_Click()
+On Error GoTo Err_Handler
+    
+    'open form
+    DoCmd.OpenForm "Transect", acNormal, , , , , Me.Name
+    
+    'refresh cbx (done from transect form close)
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddTransect_Click[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnComment_Click
 ' Description:  Undo button click actions
 ' Assumptions:  -
@@ -2784,6 +3113,7 @@ End Sub
 '   BLC - 5/31/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
 '   BLC - 1/9/2017  - adjusted for park specific modifications, substrate cover
+'   BLC - 1/11/2017 - adjusted for toggle buttons vs. checkboxes
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -2814,13 +3144,14 @@ On Error GoTo Err_Handler
     If Nz(tbxDistance.Value, "") > 0 _
         And Nz(cbxModalSedSize.Value, "") > -1 _
         And Nz(tbxPctFines.Value, "") > -1 _
-        And Nz(tbxPctWater.Value, "") > -1 _
-        And Nz(chkNoRootedVeg.Value, "") > -1 Then
+        And Nz(tbxPctWater.Value, "") > -1 Then '_
+'        And Nz(chkNoRootedVeg.Value, "") > -1 Then
         
         Select Case TempVars("ParkCode")
             Case "BLCA"
                 'requires NoIndicatorSpecies
-                If Nz(chkNoIndicatorSpecies.Value, "") > -1 Then GoTo Exit_Handler
+                'If Nz(chkNoIndicatorSpecies.Value, "") > -1 Then GoTo Exit_Handler
+
             Case "CANY"
             Case "DINO"
         End Select

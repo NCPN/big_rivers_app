@@ -1139,7 +1139,6 @@ On Error GoTo Err_Handler
             Select Case Template
                         
                 Case "s_access_level"
-                    
                     '-- required parameters --
                     .Parameters("lvl") = TempVars("tempLvl")
                     
@@ -1147,7 +1146,6 @@ On Error GoTo Err_Handler
                     TempVars.Remove "tempLvl"
                 
                 Case "s_contact_list"
-                
                     '-- required parameters --
                     'N/A
                 
@@ -1156,134 +1154,111 @@ On Error GoTo Err_Handler
                     .Parameters("etype") = TempVars("EnumType")
                 
                 Case "s_datasheet_defaults_by_park"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                 
                 Case "s_datasheet_defaults_by_river"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                                 
                 Case "s_events_by_feature"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
                     .Parameters("feat") = TempVars("Feature")
                                 
                 Case "s_event_by_park_river_w_location"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                     
                 Case "s_events_by_park_river"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_events_by_site"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
 
                 Case "s_events_list_by_park_river"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_feature_id"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
                 
                 Case "s_feature_list"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                                         
                 Case "s_feature_list_by_site"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
                                         
                 Case "s_get_parks"
-                
                     '-- required parameters --
                 
                 Case "s_location_by_park_river"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_location_by_park_river_segment"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("seg") = TempVars("River")
                 
                 Case "s_location_list_by_park_river"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_mod_wentworth_for_eventyr"
-                
                     '-- required parameters --
                     'default event year to current year if not passed in
                     .Parameters("eventyr") = Nz(TempVars("EventYear"), Year(Now))
                 
                 Case "s_river_list"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                 
                 Case "s_site_by_park_river"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_site_by_park_river_segment"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("seg") = TempVars("River")
                 
                 Case "s_site_list_by_park_river"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_site_list_by_park_river_segment"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
                 Case "s_site_list_active"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("seg") = TempVars("River")
             
                 Case "s_species_by_park"
-                
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     
                 Case "s_top_rooted_species_last_year_by_park"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
     
@@ -1292,7 +1267,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_rooted_species_last_year_by_river"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
@@ -1302,7 +1276,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_understory_species_last_year_by_park"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
     
@@ -1311,7 +1284,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_understory_species_last_year_by_river"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
@@ -1321,7 +1293,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_woody_species_last_year_by_park"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
     
@@ -1330,7 +1301,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_top_woody_species_last_year_by_river"
-                    
                     '-- required parameters --
                     .Parameters("pkode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
@@ -1340,7 +1310,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(Replace(.sql, 99, TempVars("TopSpecies")), 8, TempVars("TopBlanks"))
                     
                 Case "s_veg_walk_species_last_year_by_park"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     
@@ -1348,7 +1317,6 @@ On Error GoTo Err_Handler
                     .sql = Replace(.sql, 8, TempVars("Blanks"))
                 
                 Case "s_veg_walk_species_last_year_by_river"
-                    
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
@@ -1358,8 +1326,18 @@ On Error GoTo Err_Handler
                     
                     '-- optional parameters --
                 
+                Case "s_vegtransect_by_feature"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+                    .Parameters("feat") = TempVars("Feature")
+                
+                Case "s_vegtransect_by_site"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+                
                 Case "s_tsys_datasheet_defaults"
-    
                     '-- required parameters --
                     .Parameters("parkID") = TempVars("ParkID")
                 
@@ -1443,7 +1421,6 @@ On Error GoTo Err_Handler
         '  INSERTS
         '-----------------------
                 Case "i_comment"
-                
                     '-- required parameters --
                     .Parameters("comtype") = Params(1)             'CommentType -> table
                     .Parameters("ctid") = Params(2)                 'TypeID
@@ -1456,7 +1433,6 @@ On Error GoTo Err_Handler
                     .Parameters("LMID") = TempVars("AppUserID")     'LastModifiedByID -> ContactID
         
                 Case "i_contact", "i_contact_new"
-                    
                     '-- required parameters --
                     .Parameters("First") = Params(1)
                     .Parameters("Last") = Params(2)
@@ -1470,7 +1446,6 @@ On Error GoTo Err_Handler
                     .Parameters("IsActiveFlag") = Params(10)
                     
                 Case "i_contact_access"
-                    
                     '-- required parameters --
                     .Parameters("ContactID") = Params(1)
                     .Parameters("AccessID") = Params(2)
@@ -1479,7 +1454,6 @@ On Error GoTo Err_Handler
                     SkipRecordAction = True
                 
                 Case "i_cover_species"
-                                    
                     'set the table name in the template --> handles WCC, URC, ARC species
                     .sql = Replace(.sql, "INTO tbl ", "INTO " & Params(0) & " ")
                                     
@@ -1499,7 +1473,6 @@ On Error GoTo Err_Handler
 '        params(3) = .PercentCover
                 
                 Case "i_event"
-                                    
                     '-- required parameters --
                     .Parameters("SID") = Params(1)
                     .Parameters("LID") = Params(2)
@@ -1507,7 +1480,6 @@ On Error GoTo Err_Handler
                     .Parameters("Start") = Params(4)
                                         
                 Case "i_feature"
-                
                     '-- required parameters --
                     .Parameters("LocationID") = Params(1)
                     .Parameters("LocationName") = Params(2)
@@ -1515,7 +1487,6 @@ On Error GoTo Err_Handler
                     .Parameters("Directions") = Params(4)
                 
                 Case "i_imported_data"
-                
                     '-- required parameters --
                     .Parameters("idate") = CDate(Format(Now(), "YYYY-mm-dd hh:nn:ss AMPM"))
                     .Parameters("sfile") = Params(1)
@@ -1525,7 +1496,6 @@ On Error GoTo Err_Handler
                     .Parameters("erec") = Params(5)
                     
                 Case "i_location"
-                    
                     '-- required parameters --
                     .Parameters("CollectionSourceName") = Params(1)
                     .Parameters("LocationType") = Params(2)
@@ -1539,7 +1509,6 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                                                         
                 Case "i_login"
-                
                     '-- required parameters --
                     .Parameters("uname") = Params(1) 'username
                     .Parameters("activity") = Params(2) 'activity
@@ -1549,7 +1518,6 @@ On Error GoTo Err_Handler
                     SkipRecordAction = True
                     
                 Case "i_park"
-        
                     '-- required parameters --
                     .Parameters("ParkCode") = Params(1)
                     .Parameters("ParkName") = Params(2)
@@ -1557,7 +1525,6 @@ On Error GoTo Err_Handler
                     .Parameters("IsActiveForProtocol") = Params(4)
                                                         
                 Case "i_photo"
-                
                     '-- required parameters --
                     .Parameters("PhotoDate") = Params(1)
                     .Parameters("PhotoType") = Params(2)
@@ -1578,7 +1545,6 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "i_record_action"
-                                    
                     '-- required parameters --
                     .Parameters("RefTable") = Params(0)
                     .Parameters("RefID") = Params(1)
@@ -1589,7 +1555,6 @@ On Error GoTo Err_Handler
                     SkipRecordAction = True
                 
                 Case "i_site"
-                    
                     '-- required parameters --
                     .Parameters("parkID") = Params(1)
                     .Parameters("riverID") = Params(2)
@@ -1605,7 +1570,6 @@ On Error GoTo Err_Handler
                     .Parameters("descr") = Params(7)        'Description
                 
                 Case "i_tagline"
-                
                     '-- required parameters --
                     .Parameters("LineDistSource") = Params(1)
                     .Parameters("LineDistSourceID") = Params(2)
@@ -1615,7 +1579,6 @@ On Error GoTo Err_Handler
                     .Parameters("Height") = Params(6)
                 
                 Case "i_task"
-
                     '-- required parameters --
                     .Parameters("descr") = Params(1)         'Task
                     .Parameters("stat") = Params(2)         'Status
@@ -1633,7 +1596,6 @@ On Error GoTo Err_Handler
                     .Parameters("LMID") = TempVars("AppUserID") 'ContactID")  'lastmodifiedID
                 
                 Case "i_transducer"
-                
                     '-- required parameters --
                     .Parameters("EventID") = Params(1)
                     .Parameters("TransducerType") = Params(2)
@@ -1645,7 +1607,6 @@ On Error GoTo Err_Handler
                     .Parameters("ActionTime") = Params(8)
                 
                 Case "i_understory_species"
-
                     '-- required parameters --
                     .Parameters("VegPlotID") = Params(1)
                     .Parameters("MasterPlantCode") = Params(2)
@@ -1653,7 +1614,6 @@ On Error GoTo Err_Handler
                     .Parameters("IsSeedling") = Params(4)
                      
                 Case "i_vegplot"
-                
                     '-- required parameters --
                     .Parameters("EventID") = Params(1)
                     .Parameters("SiteID") = Params(2)
@@ -1678,7 +1638,6 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "i_vegtransect"
-        
                     '-- required parameters --
                     .Parameters("LocationID") = Params(1)
                     .Parameters("EventID") = Params(2)
@@ -1686,7 +1645,6 @@ On Error GoTo Err_Handler
                     .Parameters("SampleDate") = Params(4)
         
                 Case "i_vegwalk"
-                    
                     '-- required parameters --
                     .Parameters("EventID") = Params(1)
                     .Parameters("CollectionPlaceID") = Params(2)
@@ -1699,21 +1657,18 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                     
                 Case "i_vegwalk_species"
-                    
                     '-- required parameters --
                     .Parameters("VegWalkID") = Params(1)
                     .Parameters("MasterPlantCode") = Params(2)
                     .Parameters("IsSeedling") = Params(3)
                     
                 Case "i_waterway"
-                    
                     '-- required parameters --
                     .Parameters("ParkID") = Params(1)
                     .Parameters("Name") = Params(2)
                     .Parameters("Segment") = Params(3)
                     
                 Case "i_usys_temp_photo"
-                
                     '-- required parameters --
                     .Parameters("ppath") = Params(1)
                     .Parameters("pfile") = Params(2)
@@ -1724,7 +1679,6 @@ On Error GoTo Err_Handler
         '  UPDATES
         '-----------------------
                 Case "u_comment"
-                
                     '-- required parameters --
                     .Parameters("CommentType") = Params(1)
                     .Parameters("TypeID") = Params(2)
@@ -1737,7 +1691,6 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                     
                 Case "u_contact"
-                    
                     '-- required parameters --
                     .Parameters("First") = Params(1)
                     .Parameters("Last") = Params(2)
@@ -1753,20 +1706,17 @@ On Error GoTo Err_Handler
                     ID = Params(11)
                 
                 Case "u_contact_access"
-                    
                     '-- required parameters --
                     .Parameters("ContactID") = Params(1)
                     .Parameters("AccessID") = Params(2)
                     ID = Params(1)
                 
                 Case "u_contact_isactive_flag"
-                    
                     '-- required parameters --
                     .Parameters("cid") = Params(1)
                     .Parameters("flag") = Params(2)
                 
                 Case "u_cover_species"
-                                    
                     'set the table name in the template --> handles WCC, URC, ARC species
                     .sql = Replace(.sql, " tbl ", " " & Params(0) & " ")
                                     
@@ -1776,7 +1726,6 @@ On Error GoTo Err_Handler
                     .Parameters("PctCover") = Params(3)
                 
                 Case "u_event"
-                                    
                     '-- required parameters --
                     .Parameters("SID") = Params(1)
                     .Parameters("LID") = Params(2)
@@ -1786,7 +1735,6 @@ On Error GoTo Err_Handler
                     ID = Params(5)
                     
                 Case "u_feature"
-                
                     '-- required parameters --
                     .Parameters("LocationID") = Params(1)
                     .Parameters("LocationName") = Params(2)
@@ -1794,7 +1742,6 @@ On Error GoTo Err_Handler
                     .Parameters("Directions") = Params(4)
                     
                 Case "u_location"
-                    
                     '-- required parameters --
                     .Parameters("CollectionSourceName") = Params(1)
                     .Parameters("LocationType") = Params(2)
@@ -1806,13 +1753,11 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "u_mod_wentworth_retireyear"
-                
                     '-- required parameters --
                     .Parameters("mwsid") = Params(1)
                     .Parameters("yr") = Params(2)
                 
                 Case "u_park"
-        
                     '-- required parameters --
                     .Parameters("ParkCode") = Params(1)
                     .Parameters("ParkName") = Params(2)
@@ -1820,7 +1765,6 @@ On Error GoTo Err_Handler
                     .Parameters("IsActiveForProtocol") = Params(4)
                         
                 Case "u_photo"
-                
                     '-- required parameters --
                     .Parameters("PhotoDate") = Params(1)
                     .Parameters("PhotoType") = Params(2)
@@ -1841,7 +1785,6 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "u_site"
-                    
                     '-- required parameters --
                     .Parameters("ParkID") = Params(1)
                     .Parameters("RiverID") = Params(2)
@@ -1854,13 +1797,11 @@ On Error GoTo Err_Handler
                     .Parameters("Description") = Params(7)
                 
                 Case "u_site_isactive_flag"
-                
                     '-- required parameters --
                     .Parameters("sid") = Params(1)
                     .Parameters("flag") = Params(2)
                 
                 Case "u_tagline"
-                
                     '-- required parameters --
                     .Parameters("LineDistSource") = Params(1)
                     .Parameters("LineDistSourceID") = Params(2)
@@ -1870,7 +1811,6 @@ On Error GoTo Err_Handler
                     .Parameters("Height") = Params(6)
                 
                 Case "u_task"
-                
                     '-- required parameters --
                     .Parameters("Task") = Params(1)
                     .Parameters("Status") = Params(2)
@@ -1883,7 +1823,6 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
                 
                 Case "u_transducer"
-                
                     '-- required parameters --
                     .Parameters("EventID") = Params(1)
                     .Parameters("TransducerType") = Params(2)
@@ -1895,12 +1834,10 @@ On Error GoTo Err_Handler
                     .Parameters("ActionTime") = Params(8)
                 
                 Case "u_template"
-                
                     '-- required parameters --
                     .Parameters("id") = Params(1)
                 
                 Case "u_tsys_datasheet_defaults"
-
                     '-- required parameters --
                     .Parameters("id") = Params(1)
                     .Parameters("pid") = Params(2)
@@ -1912,13 +1849,11 @@ On Error GoTo Err_Handler
                     '-- optional parameters --
                 
                 Case "u_usys_temp_photo"
-                
                     '-- required parameters --
                     .Parameters("iid") = Params(1)
                     .Parameters("ptype") = Params(4)
                 
                 Case "u_vegtransect"
-        
                     '-- required parameters --
                     .Parameters("LocationID") = Params(1)
                     .Parameters("EventID") = Params(2)
@@ -1926,7 +1861,6 @@ On Error GoTo Err_Handler
                     .Parameters("SampleDate") = Params(4)
                 
                 Case "u_vegwalk"
-                
                     '-- required parameters --
                     .Parameters("EventID") = Params(1)
                     .Parameters("CollectionPlaceID") = Params(2)
@@ -1939,14 +1873,12 @@ On Error GoTo Err_Handler
                     .Parameters("LastModifiedByID") = TempVars("AppUserID") '"ContactID")
                 
                 Case "u_vegwalk_species"
-                    
                     '-- required parameters --
                     .Parameters("VegWalkID") = Params(1)
                     .Parameters("MasterPlantCode") = Params(2)
                     .Parameters("IsSeedling") = Params(3)
                     
                 Case "u_understory_species"
-                
                     '-- required parameters --
                     .Parameters("VegPlotID") = Params(1)
                     .Parameters("MasterPlantCode") = Params(2)
@@ -1954,7 +1886,6 @@ On Error GoTo Err_Handler
                     .Parameters("IsSeedling") = Params(4)
                 
                 Case "u_waterway"
-                    
                     '-- required parameters --
                     .Parameters("ParkID") = Params(1)
                     .Parameters("Name") = Params(2)
@@ -2157,7 +2088,20 @@ On Error GoTo Err_Handler
                     
                     With loc
                         'values passed into form
-                        .CollectionSourceName = "T"
+                        Dim loctype As String
+                        
+                        Select Case frm.CallingForm
+                            Case "Feature"
+                                loctype = "F"
+                            Case "VegPlot"
+                                loctype = "P"
+                            Case "Transect"
+                                loctype = "T"
+                        End Select
+                        
+                        'CollectionSourceName is the ID from passed in form
+                        'collection feature ID (A, B, C...) or Transect number (1-8)
+                        .CollectionSourceName = frm.CallingRecordID '"T"
                         
 '                        .CreateDate = ""
 '                        .CreatedByID = 0
@@ -2169,7 +2113,7 @@ On Error GoTo Err_Handler
                         
                         'form values
                         .LocationName = frm!tbxName.Value 'Collection feature ID (A, B, C, ...) or Transect number (1-8)
-                        .LocationType = "T" 'cbxLocationType.SelText 'F- feature, T- transect, P - plot
+                        .LocationType = loctype '"T" 'cbxLocationType.SelText 'F- feature, T- transect, P - plot
                 
                         .HeadtoOrientDistance = frm!tbxDistance.Value
                         .HeadtoOrientBearing = frm!tbxBearing.Value
@@ -2764,6 +2708,53 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FetchAddlData[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' Sub:          GetHierarchyLevel
+' Description:  Determine the hierarchy level set
+' Assumptions:  -
+' Parameters:   -
+' Returns:      lvl - maximum level set in the application (string)
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 1, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2017 - initial version
+' ---------------------------------
+Public Function GetHierarchyLevel() As String
+On Error GoTo Err_Handler
+    
+    Dim lvl As String
+    
+    'default
+    lvl = ""
+    
+    If Not TempVars("ParkCode") Is Nothing Then
+        lvl = "park"
+        If Not TempVars("River") Is Nothing Then
+            lvl = "river"
+            If Not TempVars("SiteCode") Is Nothing Then
+                lvl = "site"
+                If Not TempVars("Feature") Is Nothing Then
+                    lvl = "feature"
+                End If
+            End If
+        End If
+    End If
+
+    GetHierarchyLevel = lvl
+
+Exit_Handler:
+    Exit Function
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetHierarchyLevel[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Function

@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =36
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14565
+    ItemSuffix =37
+    Left =7440
+    Top =1515
+    Right =15300
+    Bottom =10740
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -174,7 +174,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =420
                     Width =6840
@@ -296,6 +296,68 @@ Begin Form
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =180
+                    Top =720
+                    Width =855
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblTransect"
+                    Caption ="Transect"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =1035
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    OverlapFlags =215
+                    IMESentenceMode =3
+                    ColumnCount =5
+                    Left =1260
+                    Top =720
+                    Width =2514
+                    Height =315
+                    TabIndex =1
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxTransect"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;0;0;1"
+                    ControlTipText ="Veg transect"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =1260
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =3774
+                    LayoutCachedHeight =1035
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -742,7 +804,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.05
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -756,6 +818,7 @@ Option Explicit
 '               BLC - 9/1/2016  - 1.03 - btnSave_Click, btnUndo_Click code cleanup
 '               BLC - 10/20/2016 - 1.04 - added CallingForm property, removed buttoncaption,
 '                                         selectedID, selectedValue properties
+'               BLC - 1/11/2017 - 1.05 - hide title label, CallingRecordID
 ' =================================
 
 '---------------------
@@ -768,6 +831,8 @@ Option Explicit
 Private m_Title As String
 Private m_Directions As String
 Private m_CallingForm As String
+Private m_CallingRecordID As Integer
+Private m_LocationType As String
 
 '---------------------
 ' Event Declarations
@@ -775,6 +840,8 @@ Private m_CallingForm As String
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidCallingForm(Value As String)
+Public Event InvalidCallingRecordID(Value As Integer)
+Public Event InvalidLocationType(Value As String)
 
 '---------------------
 ' Properties
@@ -818,6 +885,22 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
+Public Property Let CallingRecordID(Value As Integer)
+        m_CallingRecordID = Value
+End Property
+
+Public Property Get CallingRecordID() As Integer
+    CallingRecordID = m_CallingRecordID
+End Property
+
+Public Property Let LocationType(Value As String)
+        m_LocationType = Value
+End Property
+
+Public Property Get LocationType() As String
+    LocationType = m_LocationType
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -835,14 +918,43 @@ End Property
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
+'   BLC - 1/11/2017 - hide second title
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+'    Dim aryOArgs() As Variant
+    Dim ltype As String
+    
     'default
     Me.CallingForm = "Main"
+    Me.CallingRecordID = -1
     
-    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
+'    If Len(Me.OpenArgs) > 0 Then
+'        aryOArgs = Split(Me.OpenArgs, "|")
+'
+'        If IsArray(aryOArgs) Then
+'
+'            'set calling for & record
+'            Me.CallingForm = aryOArgs(0)
+'            Me.CallingRecordID = Nz(aryOArgs(1), -1)
+'
+'        End If
+'    End If
+    
+    'set location type
+    ltype = "" 'default
+    
+    Select Case Me.CallingForm
+        Case "Feature"
+            ltype = "F"
+        Case "Transect"
+            ltype = "T"
+        Case "VegPlot"
+            ltype = "P"
+    End Select
+    
+    Me.LocationType = ltype
     
     'minimize calling form
     ToggleForm Me.CallingForm, -1
@@ -852,6 +964,7 @@ On Error GoTo Err_Handler
     lblContext.Caption = GetContext()
     
     Title = "Location (Sampling Location)"
+    lblTitle.Caption = "" 'hide second title
     Directions = "Enter the sampling location information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
@@ -1140,7 +1253,7 @@ End Sub
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
-    
+        
     UpsertRecord Me
     
 Exit_Handler:
