@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        VegPlot
 ' Level:        Framework class
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  VegPlot object related properties, events, functions & procedures
 '
@@ -17,6 +17,9 @@ Option Explicit
 ' Revisions:    BLC - 10/28/2015 - 1.00 - initial version
 '               BLC - 8/8/2016   - 1.01 - SaveToDb() added update parameter to identify if
 '                                        this is an update vs. an insert
+'               BLC - 1/12/2017 - 1.02 - added % litter, woody debris (all parks)
+'                                        replaced FilamentousAlgae (boolean) w/
+'                                        PctFilamentousAlgae (%)
 ' =================================
 
 '---------------------
@@ -33,13 +36,14 @@ Private m_ModalSedimentSize As String '3
 Private m_PercentFines As Integer
 Private m_PercentWater As Integer
 Private m_UnderstoryRootedPctCover As Integer
+Private m_PctFilamentousAlgae As Integer
+Private m_PercentLitter As Integer
+Private m_PercentWoodyDebris As Integer
 Private m_PlotDensity As Integer
 Private m_NoCanopyVeg As Boolean
 Private m_NoRootedVeg As Boolean
 Private m_HasSocialTrail As Boolean
-Private m_FilamentousAlgae As Boolean
 Private m_NoIndicatorSpecies As Boolean
-
 '---------------------
 ' Events
 '---------------------
@@ -159,6 +163,43 @@ Public Property Get UnderstoryRootedPctCover() As Integer
     UnderstoryRootedPctCover = m_UnderstoryRootedPctCover
 End Property
 
+Public Property Let PctFilamentousAlgae(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_PctFilamentousAlgae = Value
+    Else
+        RaiseEvent InvalidPercent(Value)
+    End If
+End Property
+
+Public Property Get PctFilamentousAlgae() As Integer
+    PctFilamentousAlgae = m_PctFilamentousAlgae
+End Property
+
+Public Property Let PercentLitter(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_PercentLitter = Value
+    Else
+        RaiseEvent InvalidPercent(Value)
+    End If
+End Property
+
+Public Property Get PercentLitter() As Integer
+    PercentLitter = m_PercentLitter
+End Property
+
+
+Public Property Let PercentWoodyDebris(Value As Integer)
+    If IsBetween(Value, 0, 100, True) Then
+        m_PercentWoodyDebris = Value
+    Else
+        RaiseEvent InvalidPercent(Value)
+    End If
+End Property
+
+Public Property Get PercentWoodyDebris() As Integer
+    PercentWoodyDebris = m_PercentWoodyDebris
+End Property
+
 Public Property Let PlotDensity(Value As Integer)
     Dim aryDensity() As String
     aryDensity = Split(PLOT_DENSITIES, ",")
@@ -195,14 +236,6 @@ End Property
 
 Public Property Get HasSocialTrail() As Boolean
     HasSocialTrail = m_HasSocialTrail
-End Property
-
-Public Property Let FilamentousAlgae(Value As Boolean)
-    m_FilamentousAlgae = Value
-End Property
-
-Public Property Get FilamentousAlgae() As Boolean
-    FilamentousAlgae = m_FilamentousAlgae
 End Property
 
 Public Property Let NoIndicatorSpecies(Value As Boolean)
@@ -292,6 +325,7 @@ End Sub
 ' Revisions:
 '   BLC, 4/4/2016 - initial version
 '   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
+'   BLC, 1/12/2017 - added % litter, woody debris
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
@@ -325,7 +359,7 @@ On Error GoTo Err_Handler
     
     Template = "i_vegplot"
     
-    Dim Params(0 To 18) As Variant
+    Dim Params(0 To 19) As Variant
 
     With Me
         Params(0) = "VegPlot"
@@ -339,16 +373,18 @@ On Error GoTo Err_Handler
         Params(8) = .PercentFines
         Params(9) = .PercentWater
         Params(10) = .UnderstoryRootedPctCover
-        Params(11) = .PlotDensity
-        Params(12) = .NoCanopyVeg
-        Params(13) = .NoRootedVeg
-        Params(14) = .HasSocialTrail
-        Params(15) = .FilamentousAlgae
-        Params(16) = .NoIndicatorSpecies
+        Params(11) = .PctFilamentousAlgae
+        Params(12) = .PercentLitter
+        Params(13) = .PercentWoodyDebris
+        Params(14) = .PlotDensity
+        Params(15) = .NoCanopyVeg
+        Params(16) = .NoRootedVeg
+        Params(17) = .HasSocialTrail
+        Params(18) = .NoIndicatorSpecies
         
         If IsUpdate Then
             Template = "u_vegplot"
-            Params(17) = .ID
+            Params(19) = .ID
         End If
         
         .ID = SetRecord(Template, Params)

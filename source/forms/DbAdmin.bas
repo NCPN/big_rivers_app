@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =3690
-    Top =4410
-    Right =14625
-    Bottom =12225
+    Left =5460
+    Top =2505
+    Right =17250
+    Bottom =13470
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xafbe80e1eec6e440
@@ -2335,7 +2335,9 @@ Begin Form
                     Height =405
                     TabIndex =19
                     ForeColor =4210752
-                    Name ="btn4"
+                    Name ="btnVersions"
+                    Caption ="Versions"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5880
@@ -2465,7 +2467,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.04
+' Version:      1.05
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2478,6 +2480,7 @@ Option Explicit
 '               BLC - 9/14/2016 - 1.03 - added btnViewTemplates & additional blanks
 '                                        for Management Tools
 '               BLC - 10/19/2016 - 1.04 - added Import CSV button, added callingform property
+'               BLC - 1/12/2017 - 1.05 - added Version button
 ' =================================
 
 '---------------------
@@ -2579,6 +2582,7 @@ End Property
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 10/19/2016 - adjust to use calling form property
+'   BLC - 1/12/2017 - add versions button
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2623,6 +2627,7 @@ On Error GoTo Err_Handler
     btnUISetup.HoverColor = lngGreen
     btnViewTemplates.HoverColor = lngGreen
     btnImportCSV.HoverColor = lngGreen
+    btnVersions.HoverColor = lngGreen
       
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
@@ -3472,6 +3477,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnImportCSV_Click[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnVersions_Click
+' Description:  Versions button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/12/2017 - initial version
+' ---------------------------------
+Private Sub btnVersions_Click()
+On Error GoTo Err_Handler
+    
+    'open import map form
+    DoCmd.OpenForm "Versions", acNormal, , , , , "DbAdmin"
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnVersions_Click[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub

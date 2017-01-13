@@ -19,11 +19,9 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =30
-    Left =150
-    Top =6330
-    Right =7785
-    Bottom =10695
+    ItemSuffix =32
+    Right =11040
+    Bottom =10965
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xe8a9c07c72c3e440
@@ -462,7 +460,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxModalSedSize"
-                    ControlSource ="ModalSedimentSize"
+                    ControlSource ="ModalSedimentSize_ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4080
@@ -623,6 +621,8 @@ On Error GoTo Err_Handler
 
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
+    
+    'populate Modal Sediment Size
 
 Exit_Handler:
     Exit Sub

@@ -751,6 +751,7 @@ End Function
 ' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 6/28/2016  - initial version
+'   BLC - 1/12/2017  - revised to use GetRecords() vs. GetTemplate()
 ' ---------------------------------
 Public Function GetParkID(ParkCode As String) As Long
 On Error GoTo Err_Handler
@@ -766,11 +767,11 @@ On Error GoTo Err_Handler
     End If
     
     'generate SQL
-    strSQL = GetTemplate("s_park_id", "ParkCode" & PARAM_SEPARATOR & ParkCode)
+'    strSQL = GetTemplate("s_park_id", "ParkCode" & PARAM_SEPARATOR & ParkCode)
             
     'fetch data
-    Set db = CurrentDb
-    Set rs = db.OpenRecordset(strSQL)
+'    Set db = CurrentDb
+    Set rs = GetRecords("s_park_id") 'db.OpenRecordset(strSQL)
 
     If rs.BOF And rs.EOF Then GoTo Exit_Handler
 
@@ -810,6 +811,7 @@ End Function
 ' Adapted:      Bonnie Campbell, June 28, 2016 - for NCPN tools
 ' Revisions:
 '   BLC - 6/28/2016  - initial version
+'   BLC - 1/17/2017  - revise to use GetRecords() vs. GetTemplate()
 ' ---------------------------------
 Public Function GetRiverSegmentID(segment As String) As Long
 On Error GoTo Err_Handler
@@ -825,11 +827,11 @@ On Error GoTo Err_Handler
     End If
     
     'generate SQL
-    strSQL = GetTemplate("s_river_segment_id", "waterway" & PARAM_SEPARATOR & segment)
+'    strSQL = GetTemplate("s_river_segment_id", "waterway" & PARAM_SEPARATOR & segment)
             
     'fetch data
-    Set db = CurrentDb
-    Set rs = db.OpenRecordset(strSQL)
+'    Set db = CurrentDb
+    Set rs = GetRecords("s_river_segment_id") 'db.OpenRecordset(strSQL)
 
     If rs.BOF And rs.EOF Then GoTo Exit_Handler
 
@@ -1145,14 +1147,14 @@ On Error GoTo Err_Handler
                     'clear the tempvar
                     TempVars.Remove "tempLvl"
                 
-                Case "s_contact_list"
-                    '-- required parameters --
-                    'N/A
-                
                 Case "s_app_enum_list"
                     '-- required parameters --
                     .Parameters("etype") = TempVars("EnumType")
                 
+                Case "s_contact_list"
+                    '-- required parameters --
+                    'N/A
+                                
                 Case "s_datasheet_defaults_by_park"
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
@@ -1204,7 +1206,7 @@ On Error GoTo Err_Handler
                                         
                 Case "s_get_parks"
                     '-- required parameters --
-                
+                                    
                 Case "s_location_by_park_river"
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
@@ -1224,6 +1226,14 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     'default event year to current year if not passed in
                     .Parameters("eventyr") = Nz(TempVars("EventYear"), Year(Now))
+                
+                Case "s_park_id"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                
+                Case "s_river_segment_id"
+                    '-- required parameters --
+                    .Parameters("waterway") = TempVars("River")
                 
                 Case "s_river_list"
                     '-- required parameters --

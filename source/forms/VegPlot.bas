@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =76
-    Left =10185
-    Top =1110
-    Right =18045
-    Bottom =11535
+    ItemSuffix =85
+    Left =4755
+    Top =3360
+    Right =15795
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6efd080b49dfe440
@@ -212,11 +212,11 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =223
                     Left =180
-                    Top =420
-                    Width =6840
-                    Height =315
+                    Top =120
+                    Width =7500
+                    Height =615
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
@@ -224,8 +224,8 @@ Begin Form
                         "at right."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
-                    LayoutCachedTop =420
-                    LayoutCachedWidth =7020
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =7680
                     LayoutCachedHeight =735
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -560,7 +560,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =8160
+            Height =9660
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -572,9 +572,37 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =5820
+                    Top =3840
+                    Width =1860
+                    Height =720
+                    FontSize =20
+                    LeftMargin =72
+                    TopMargin =72
+                    BackColor =15855852
+                    Name ="lblPlotDensityBgd"
+                    Caption ="pd"
+                    FontName ="Arial"
+                    ControlTipText ="Plot Density"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5820
+                    LayoutCachedTop =3840
+                    LayoutCachedWidth =7680
+                    LayoutCachedHeight =4560
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    BorderThemeColorIndex =-1
+                    BorderTint =100.0
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    OverlapFlags =93
+                    Left =5820
                     Top =1320
                     Width =1860
-                    Height =1860
+                    Height =1740
                     FontSize =14
                     LeftMargin =72
                     TopMargin =144
@@ -585,7 +613,7 @@ Begin Form
                     LayoutCachedLeft =5820
                     LayoutCachedTop =1320
                     LayoutCachedWidth =7680
-                    LayoutCachedHeight =3180
+                    LayoutCachedHeight =3060
                     BackThemeColorIndex =6
                     BackTint =40.0
                     BorderThemeColorIndex =-1
@@ -598,7 +626,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =180
-                    Top =2040
+                    Top =3420
                     Width =5580
                     Height =1140
                     FontSize =14
@@ -609,9 +637,9 @@ Begin Form
                     Caption ="✔"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
-                    LayoutCachedTop =2040
+                    LayoutCachedTop =3420
                     LayoutCachedWidth =5760
-                    LayoutCachedHeight =3180
+                    LayoutCachedHeight =4560
                     BackThemeColorIndex =9
                     BackTint =40.0
                     BorderThemeColorIndex =-1
@@ -625,8 +653,8 @@ Begin Form
                     OverlapFlags =93
                     Left =180
                     Top =540
-                    Width =4140
-                    Height =1380
+                    Width =5520
+                    Height =2760
                     FontSize =14
                     LeftMargin =216
                     TopMargin =288
@@ -636,8 +664,8 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =540
-                    LayoutCachedWidth =4320
-                    LayoutCachedHeight =1920
+                    LayoutCachedWidth =5700
+                    LayoutCachedHeight =3300
                     BackThemeColorIndex =8
                     BackTint =20.0
                     BorderThemeColorIndex =-1
@@ -716,7 +744,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =3660
+                    Top =5160
                     Width =7650
                     Height =4380
                     TabIndex =17
@@ -726,9 +754,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =3660
+                    LayoutCachedTop =5160
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =8040
+                    LayoutCachedHeight =9540
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -802,16 +830,16 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =3540
+                    Top =5040
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =3540
+                    LayoutCachedTop =5040
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =8160
+                    LayoutCachedHeight =9660
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -916,7 +944,7 @@ Begin Form
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =1020
-                    Top =855
+                    Top =1515
                     Height =315
                     TabIndex =3
                     BackColor =65535
@@ -926,6 +954,83 @@ Begin Form
                     ValidationRule ="Not Like \"[0-9]*.[0-9]*\""
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Percent of plot covered by fines"
+                    ConditionalFormat = Begin
+                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
+                        0x00000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =1515
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =1830
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =2580
+                    Top =1500
+                    Height =315
+                    TabIndex =4
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxPctWater"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Percent of plot covered by water (inundated)"
+                    ConditionalFormat = Begin
+                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
+                        0x00000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =1500
+                    LayoutCachedWidth =4020
+                    LayoutCachedHeight =1815
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =1020
+                    Top =855
+                    Height =315
+                    TabIndex =5
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxPctURC"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Total percent understory rooted cover (URC) for the plot"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -952,83 +1057,9 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =223
                     IMESentenceMode =3
-                    Left =2580
-                    Top =840
-                    Height =315
-                    TabIndex =4
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPctWater"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
-                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =840
-                    LayoutCachedWidth =4020
-                    LayoutCachedHeight =1155
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =223
-                    IMESentenceMode =3
-                    Left =1020
-                    Top =1500
-                    Height =315
-                    TabIndex =5
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxPctURC"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
-                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
-                    AfterUpdate ="[Event Procedure]"
-                    ConditionalFormat = Begin
-                        0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000000000220022000000 ,
-                        0x00000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =1500
-                    LayoutCachedWidth =2460
-                    LayoutCachedHeight =1815
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
-                End
-                Begin TextBox
-                    OverlapFlags =93
-                    IMESentenceMode =3
-                    Left =4800
-                    Top =1620
-                    Width =960
+                    Left =6840
+                    Top =4140
+                    Width =780
                     Height =315
                     TabIndex =8
                     BackColor =65535
@@ -1047,10 +1078,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =1620
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =1935
+                    LayoutCachedLeft =6840
+                    LayoutCachedTop =4140
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =4455
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
@@ -1063,7 +1094,7 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =223
                     IMESentenceMode =3
-                    Left =2580
+                    Left =4140
                     Top =1500
                     Height =315
                     TabIndex =6
@@ -1074,6 +1105,7 @@ Begin Form
                     ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Percent of plot covered by filamentous algae"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,
@@ -1084,9 +1116,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2580
+                    LayoutCachedLeft =4140
                     LayoutCachedTop =1500
-                    LayoutCachedWidth =4020
+                    LayoutCachedWidth =5580
                     LayoutCachedHeight =1815
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -1099,7 +1131,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =215
-                    Left =2580
+                    Left =4140
                     Top =1260
                     Width =1020
                     Height =240
@@ -1107,16 +1139,17 @@ Begin Form
                     ForeColor =8355711
                     Name ="lblFA"
                     Caption ="FA"
+                    ControlTipText ="Percent of plot covered by filamentous algae"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2580
+                    LayoutCachedLeft =4140
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =3600
+                    LayoutCachedWidth =5160
                     LayoutCachedHeight =1500
                 End
                 Begin Label
                     OverlapFlags =255
-                    Left =4440
-                    Top =1320
+                    Left =6420
+                    Top =3840
                     Width =1200
                     Height =315
                     BorderColor =8355711
@@ -1124,42 +1157,10 @@ Begin Form
                     Name ="lblPlotDensity"
                     Caption ="Plot Density"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =1320
-                    LayoutCachedWidth =5640
-                    LayoutCachedHeight =1635
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =1020
-                    Top =600
-                    Width =1020
-                    Height =240
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblFines"
-                    Caption ="Fines"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1020
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =2040
-                    LayoutCachedHeight =840
-                End
-                Begin Label
-                    OverlapFlags =215
-                    Left =2580
-                    Top =600
-                    Width =1020
-                    Height =240
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblWater"
-                    Caption ="Water"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2580
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =3600
-                    LayoutCachedHeight =840
+                    LayoutCachedLeft =6420
+                    LayoutCachedTop =3840
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =4155
                 End
                 Begin Label
                     OverlapFlags =215
@@ -1169,8 +1170,9 @@ Begin Form
                     Height =240
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="lblURC"
-                    Caption ="Total URC"
+                    Name ="lblFines"
+                    Caption ="Fines"
+                    ControlTipText ="Percent of plot covered by fines"
                     GridlineColor =10921638
                     LayoutCachedLeft =1020
                     LayoutCachedTop =1260
@@ -1178,19 +1180,53 @@ Begin Form
                     LayoutCachedHeight =1500
                 End
                 Begin Label
-                    OverlapFlags =119
-                    Left =4440
-                    Top =1635
+                    OverlapFlags =215
+                    Left =2580
+                    Top =1260
+                    Width =1020
+                    Height =240
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblWater"
+                    Caption ="Water"
+                    ControlTipText ="Percent of plot covered by water (inundated)"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =1260
+                    LayoutCachedWidth =3600
+                    LayoutCachedHeight =1500
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =1020
+                    Top =615
+                    Width =1020
+                    Height =240
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblURC"
+                    Caption ="Total URC"
+                    ControlTipText ="Total percent understory rooted cover (URC) for the plot"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =615
+                    LayoutCachedWidth =2040
+                    LayoutCachedHeight =855
+                End
+                Begin Label
+                    OverlapFlags =247
+                    Left =6480
+                    Top =4140
                     Width =315
                     Height =315
                     BorderColor =8355711
                     Name ="lblFraction"
                     Caption ="1 /"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =1635
-                    LayoutCachedWidth =4755
-                    LayoutCachedHeight =1950
+                    LayoutCachedLeft =6480
+                    LayoutCachedTop =4140
+                    LayoutCachedWidth =6795
+                    LayoutCachedHeight =4455
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -1224,7 +1260,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =215
                     Left =6840
-                    Top =2100
+                    Top =2040
                     Width =720
                     TabIndex =14
                     ForeColor =4210752
@@ -1235,9 +1271,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6840
-                    LayoutCachedTop =2100
+                    LayoutCachedTop =2040
                     LayoutCachedWidth =7560
-                    LayoutCachedHeight =2460
+                    LayoutCachedHeight =2400
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1254,7 +1290,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =215
                     Left =6840
-                    Top =1560
+                    Top =1500
                     Width =720
                     TabIndex =13
                     ForeColor =4210752
@@ -1265,9 +1301,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6840
-                    LayoutCachedTop =1560
+                    LayoutCachedTop =1500
                     LayoutCachedWidth =7560
-                    LayoutCachedHeight =1920
+                    LayoutCachedHeight =1860
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1285,7 +1321,7 @@ Begin Form
                     Visible = NotDefault
                     OverlapFlags =215
                     Left =6840
-                    Top =2640
+                    Top =2580
                     Width =720
                     TabIndex =15
                     ForeColor =4210752
@@ -1296,9 +1332,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6840
-                    LayoutCachedTop =2640
+                    LayoutCachedTop =2580
                     LayoutCachedWidth =7560
-                    LayoutCachedHeight =3000
+                    LayoutCachedHeight =2940
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1317,7 +1353,7 @@ Begin Form
                     OldBorderStyle =1
                     OverlapFlags =93
                     Left =5820
-                    Top =540
+                    Top =3120
                     Width =1860
                     Height =660
                     FontSize =20
@@ -1329,9 +1365,9 @@ Begin Form
                     ControlTipText ="Add/Edit Tagline Measurements"
                     GridlineColor =10921638
                     LayoutCachedLeft =5820
-                    LayoutCachedTop =540
+                    LayoutCachedTop =3120
                     LayoutCachedWidth =7680
-                    LayoutCachedHeight =1200
+                    LayoutCachedHeight =3780
                     BackThemeColorIndex =3
                     BackShade =90.0
                     BorderThemeColorIndex =-1
@@ -1343,7 +1379,7 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =215
                     Left =6840
-                    Top =630
+                    Top =3240
                     Width =720
                     Height =480
                     TabIndex =12
@@ -1391,9 +1427,9 @@ Begin Form
                     End
 
                     LayoutCachedLeft =6840
-                    LayoutCachedTop =630
+                    LayoutCachedTop =3240
                     LayoutCachedWidth =7560
-                    LayoutCachedHeight =1110
+                    LayoutCachedHeight =3720
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -1479,7 +1515,7 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =3300
+                    Top =4800
                     Width =7860
                     Height =315
                     FontSize =9
@@ -1492,9 +1528,9 @@ Begin Form
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =3300
+                    LayoutCachedTop =4800
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =3615
+                    LayoutCachedHeight =5115
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -1504,7 +1540,7 @@ Begin Form
                     OverlapFlags =223
                     TextAlign =2
                     Left =4320
-                    Top =3120
+                    Top =4620
                     Width =825
                     Height =600
                     FontSize =20
@@ -1515,9 +1551,9 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
-                    LayoutCachedTop =3120
+                    LayoutCachedTop =4620
                     LayoutCachedWidth =5145
-                    LayoutCachedHeight =3720
+                    LayoutCachedHeight =5220
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -1527,9 +1563,9 @@ Begin Form
                     BackStyle =1
                     OldBorderStyle =1
                     OverlapFlags =93
-                    Left =4380
+                    Left =5820
                     Top =480
-                    Width =1380
+                    Width =1860
                     Height =780
                     FontSize =14
                     LeftMargin =72
@@ -1538,9 +1574,9 @@ Begin Form
                     Name ="lblSubstrates"
                     Caption ="%"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4380
+                    LayoutCachedLeft =5820
                     LayoutCachedTop =480
-                    LayoutCachedWidth =5760
+                    LayoutCachedWidth =7680
                     LayoutCachedHeight =1260
                     BackThemeColorIndex =-1
                     BorderThemeColorIndex =-1
@@ -1551,9 +1587,9 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =215
-                    Left =4860
+                    Left =6300
                     Top =720
-                    Width =720
+                    Width =1140
                     TabIndex =21
                     ForeColor =4210752
                     Name ="btnSubstrateCover"
@@ -1562,9 +1598,9 @@ Begin Form
                     ControlTipText ="Add/Edit Substrate Cover"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4860
+                    LayoutCachedLeft =6300
                     LayoutCachedTop =720
-                    LayoutCachedWidth =5580
+                    LayoutCachedWidth =7440
                     LayoutCachedHeight =1080
                     BackColor =14136213
                     BorderColor =14136213
@@ -1582,7 +1618,7 @@ Begin Form
                 Begin ToggleButton
                     OverlapFlags =215
                     Left =3180
-                    Top =2640
+                    Top =4020
                     Width =270
                     Height =300
                     TabIndex =11
@@ -1596,9 +1632,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3180
-                    LayoutCachedTop =2640
+                    LayoutCachedTop =4020
                     LayoutCachedWidth =3450
-                    LayoutCachedHeight =2940
+                    LayoutCachedHeight =4320
                     ForeTint =100.0
                     Shape =0
                     Bevel =0
@@ -1626,7 +1662,7 @@ Begin Form
                         Begin Label
                             OverlapFlags =215
                             Left =3540
-                            Top =2640
+                            Top =4020
                             Width =1530
                             Height =315
                             BorderColor =8355711
@@ -1636,9 +1672,9 @@ Begin Form
                             ControlTipText ="Plot has social trails"
                             GridlineColor =10921638
                             LayoutCachedLeft =3540
-                            LayoutCachedTop =2640
+                            LayoutCachedTop =4020
                             LayoutCachedWidth =5070
-                            LayoutCachedHeight =2955
+                            LayoutCachedHeight =4335
                         End
                     End
                 End
@@ -1646,7 +1682,7 @@ Begin Form
                     Visible = NotDefault
                     OverlapFlags =215
                     Left =3180
-                    Top =2220
+                    Top =3600
                     Width =270
                     Height =299
                     TabIndex =10
@@ -1660,9 +1696,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3180
-                    LayoutCachedTop =2220
+                    LayoutCachedTop =3600
                     LayoutCachedWidth =3450
-                    LayoutCachedHeight =2519
+                    LayoutCachedHeight =3899
                     ForeTint =100.0
                     Shape =0
                     Bevel =0
@@ -1690,7 +1726,7 @@ Begin Form
                             Visible = NotDefault
                             OverlapFlags =215
                             Left =3540
-                            Top =2220
+                            Top =3600
                             Width =1965
                             Height =315
                             BorderColor =8355711
@@ -1700,16 +1736,16 @@ Begin Form
                             ControlTipText ="Plot has no indicator species"
                             GridlineColor =10921638
                             LayoutCachedLeft =3540
-                            LayoutCachedTop =2220
+                            LayoutCachedTop =3600
                             LayoutCachedWidth =5505
-                            LayoutCachedHeight =2535
+                            LayoutCachedHeight =3915
                         End
                     End
                 End
                 Begin ToggleButton
                     OverlapFlags =215
                     Left =1020
-                    Top =2640
+                    Top =4020
                     Width =270
                     Height =299
                     TabIndex =9
@@ -1723,9 +1759,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1020
-                    LayoutCachedTop =2640
+                    LayoutCachedTop =4020
                     LayoutCachedWidth =1290
-                    LayoutCachedHeight =2939
+                    LayoutCachedHeight =4319
                     ForeTint =100.0
                     Shape =0
                     Bevel =0
@@ -1752,7 +1788,7 @@ Begin Form
                         Begin Label
                             OverlapFlags =215
                             Left =1380
-                            Top =2640
+                            Top =4020
                             Width =1470
                             Height =315
                             BorderColor =8355711
@@ -1762,16 +1798,16 @@ Begin Form
                             ControlTipText ="Plot has no rooted vegetation"
                             GridlineColor =10921638
                             LayoutCachedLeft =1380
-                            LayoutCachedTop =2640
+                            LayoutCachedTop =4020
                             LayoutCachedWidth =2850
-                            LayoutCachedHeight =2955
+                            LayoutCachedHeight =4335
                         End
                     End
                 End
                 Begin ToggleButton
                     OverlapFlags =215
                     Left =1020
-                    Top =2220
+                    Top =3600
                     Width =270
                     Height =299
                     TabIndex =7
@@ -1785,9 +1821,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1020
-                    LayoutCachedTop =2220
+                    LayoutCachedTop =3600
                     LayoutCachedWidth =1290
-                    LayoutCachedHeight =2519
+                    LayoutCachedHeight =3899
                     ForeTint =100.0
                     Shape =0
                     Bevel =0
@@ -1814,7 +1850,7 @@ Begin Form
                         Begin Label
                             OverlapFlags =215
                             Left =1380
-                            Top =2220
+                            Top =3600
                             Width =1485
                             Height =315
                             BorderColor =8355711
@@ -1824,11 +1860,233 @@ Begin Form
                             ControlTipText ="Plot has no canopy vegetation"
                             GridlineColor =10921638
                             LayoutCachedLeft =1380
-                            LayoutCachedTop =2220
+                            LayoutCachedTop =3600
                             LayoutCachedWidth =2865
-                            LayoutCachedHeight =2535
+                            LayoutCachedHeight =3915
                         End
                     End
+                End
+                Begin TextBox
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =1020
+                    Top =2175
+                    Height =315
+                    TabIndex =22
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxPctLitter"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Percent of plot covered by litter"
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =2175
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =2490
+                    DatasheetCaption ="Litter"
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =2580
+                    Top =2175
+                    Height =315
+                    TabIndex =23
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxPctWoodyDebris"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Percent of plot covered by woody debris"
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =2175
+                    LayoutCachedWidth =4020
+                    LayoutCachedHeight =2490
+                    DatasheetCaption ="Woody Debris"
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2580
+                    Top =1935
+                    Width =1380
+                    Height =240
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblWoodyDebris"
+                    Caption ="Woody Debris"
+                    ControlTipText ="Percent of plot covered by woody debris"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =1935
+                    LayoutCachedWidth =3960
+                    LayoutCachedHeight =2175
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =1020
+                    Top =1935
+                    Width =1020
+                    Height =240
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblLitter"
+                    Caption ="Litter"
+                    ControlTipText ="Percent of plot covered by litter"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =1935
+                    LayoutCachedWidth =2040
+                    LayoutCachedHeight =2175
+                End
+                Begin TextBox
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =2580
+                    Top =2880
+                    Height =315
+                    TabIndex =24
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxPctStandingDead"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Percent of plot woody canopy covered by standing dead (rooted/non-rotted), all s"
+                        "pecies."
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =2880
+                    LayoutCachedWidth =4020
+                    LayoutCachedHeight =3195
+                    DatasheetCaption ="Standing Dead"
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =1020
+                    Top =2880
+                    Height =315
+                    TabIndex =25
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxPctWCC"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Total percent woody canopy cover (WCC) for the plot"
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =2880
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =3195
+                    DatasheetCaption ="Total WCC"
+                    BackThemeColorIndex =-1
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =1020
+                    Top =2640
+                    Width =1380
+                    Height =240
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblWCC"
+                    Caption ="Total WCC"
+                    ControlTipText ="Total percent woody canopy cover (WCC) for the plot"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =2640
+                    LayoutCachedWidth =2400
+                    LayoutCachedHeight =2880
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =2580
+                    Top =2640
+                    Width =1380
+                    Height =240
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblStandingDead"
+                    Caption ="Standing Dead"
+                    ControlTipText ="Percent of plot woody canopy covered by standing dead (rooted/non-rotted), all s"
+                        "pecies."
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2580
+                    LayoutCachedTop =2640
+                    LayoutCachedWidth =3960
+                    LayoutCachedHeight =2880
                 End
             End
         End
@@ -1852,7 +2110,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.07
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -1871,6 +2129,9 @@ Option Explicit
 '               BLC - 1/11/2017 - 1.06 - changed checkboxes (chk) to toggles (tgl)
 '                                        & converted -1/0 values to 1/0 for SQL clarity,
 '                                        changed event/transect display based on site/feature set
+'               BLC - 1/12/2017 - 1.07 - revised to VegTransect vs. Transect form,
+'                                        added % litter, % woody debris (all parks),
+'                                        Total WCC %, standing dead
 ' =================================
 
 '---------------------
@@ -1982,7 +2243,7 @@ On Error GoTo Err_Handler
     Title = "VegPlot"
     Me.lblTitle.Caption = "" 'clear header title
     Directions = "Enter the plot information and click save." _
-                & vbCrLf & "Add cover species via buttons at right."
+                & vbCrLf & "Add substrates, cover species, taglines via buttons at right."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -1990,6 +2251,7 @@ On Error GoTo Err_Handler
     lblChkboxes.Caption = StringFromCodepoint(uCheck)
     lblCover.Caption = "Cover" & vbCrLf & "Species"
     lblTagline.Caption = StringFromCodepoint(uRuler)
+    lblPlotDensityBgd.Caption = StringFromCodepoint(uBrailleDots267)
     btnSetObserverRecorder.Caption = StringFromCodepoint(uUsers)
     btnSetObserverRecorder.ControlTipText = "Set the selected veg plot's observer & recorder"
     
@@ -2000,16 +2262,24 @@ On Error GoTo Err_Handler
     'validation
     Dim strPctValidation As String, strValidationText As String
     strPctValidation = "Is Null Or ""T"" Or Between 0 and 101"
+    tbxPctURC.ValidationRule = strPctValidation
     tbxPctFines.ValidationRule = "Not Like ""[0-9]*.[0-9]*"""
     tbxPctWater.ValidationRule = strPctValidation
-    tbxPctURC.ValidationRule = strPctValidation
     tbxPctFA.ValidationRule = strPctValidation
+    tbxPctLitter.ValidationRule = strPctValidation
+    tbxPctWoodyDebris.ValidationRule = strPctValidation
+    tbxPctWCC.ValidationRule = strPctValidation
+    tbxPctStandingDead.ValidationRule = strPctValidation
     
     strValidationText = "Values may be whole percentages (0-100), 0.5, or T"
+    tbxPctURC.ValidationText = strValidationText
     tbxPctFines.ValidationText = strValidationText
     tbxPctWater.ValidationText = strValidationText
-    tbxPctURC.ValidationText = strValidationText
     tbxPctFA.ValidationText = strValidationText
+    tbxPctLitter.ValidationText = strValidationText
+    tbxPctWoodyDebris.ValidationText = strValidationText
+    tbxPctWCC.ValidationText = strValidationText
+    tbxPctStandingDead.ValidationText = strValidationText
     
     'set hover
     btnSetObserverRecorder.HoverColor = lngGreen
@@ -2033,12 +2303,21 @@ On Error GoTo Err_Handler
     tbxNumber.BackColor = lngYellow
     tbxDistance.BackColor = lngYellow
     cbxModalSedSize.BackColor = lngYellow
+    tbxPctURC.BackColor = lngYellow
     tbxPctFines.BackColor = lngYellow
     tbxPctWater.BackColor = lngYellow
-    tbxPctURC.BackColor = lngYellow
+    tbxPctFA.BackColor = lngYellow
+    tbxPctLitter.BackColor = lngYellow
+    tbxPctWoodyDebris.BackColor = lngYellow
+    tbxPctWCC.BackColor = lngYellow
+    tbxPctStandingDead.BackColor = lngYellow
     tbxPlotDensity.BackColor = lngYellow
-    btnSubstrateCover.Enabled = False
     btnSetObserverRecorder.Enabled = False
+    btnSubstrateCover.Enabled = False
+    btnWCC.Enabled = False
+    btnURC.Enabled = False
+    btnARC.Enabled = False
+    btnTaglines.Enabled = False
     
     'disable until Event selected
     Me.cbxModalSedSize.Enabled = False
@@ -2096,14 +2375,14 @@ On Error GoTo Err_Handler
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
   
+    'defaults --> always on items
+    '% litter, woody debris
+  
     'defaults --> turn off items
-    lblWater.Visible = False
-    tbxPctWater.Visible = False
     lblURC.Visible = False
     tbxPctURC.Visible = False
-    lblPlotDensity.Visible = False
-    lblFraction.Visible = False
-    tbxPlotDensity.Visible = False
+    lblWater.Visible = False
+    tbxPctWater.Visible = False
     tglNoCanopyVeg.Visible = False
     lblNoCanopyVeg.Visible = False
     tglNoIndicatorSpecies.Visible = False
@@ -2116,6 +2395,9 @@ On Error GoTo Err_Handler
     btnURC.Visible = False
     btnARC.Visible = False
     btnTaglines.Enabled = False
+    lblPlotDensity.Visible = False
+    lblFraction.Visible = False
+    tbxPlotDensity.Visible = False
     
     'default plot density = 3 starting in 2015 (i.e. 1/3 density)
     tbxPlotDensity.Value = 3
@@ -2374,6 +2656,36 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          tbxPctURC_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctURC_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctURC.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctURC_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          tbxPctFines_AfterUpdate
 ' Description:  Textbox after update actions
 ' Assumptions:  -
@@ -2434,36 +2746,6 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxPctURC_AfterUpdate
-' Description:  Textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 6/27/2016 - initial version
-' ---------------------------------
-Private Sub tbxPctURC_AfterUpdate()
-On Error GoTo Err_Handler
-
-    If Len(tbxPctURC.Text) > 0 Then _
-        ReadyForSave
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPctURC_AfterUpdate[VegPlot form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          tbxPctFA_AfterUpdate
 ' Description:  Textbox after update actions
 ' Assumptions:  -
@@ -2489,6 +2771,126 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - tbxPctFA_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctLitter_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxPctLitter_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctLitter.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctLitter_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctWoodyDebris_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxPctWoodyDebris_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctWoodyDebris.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctWoodyDebris_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctWCC_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' SoWCCe/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctWCC_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctWCC.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctWCC_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxPctStandingDead_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' SoPctStandingDeade/date:  Bonnie Campbell, June 27, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/27/2016 - initial version
+' ---------------------------------
+Private Sub tbxPctStandingDead_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxPctStandingDead.Text) > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPctStandingDead_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2707,6 +3109,8 @@ End Sub
 '   BLC - 5/31/2016 - initial version
 '   BLC - 1/11/2017 - revised checkboxes to toggle buttons &
 '                     converted values to 1/0 vs. -1/0 for SQL clarity
+'   BLC - 1/12/2017 - code cleanup, enabled buttons after tbxID > 0
+'                     (plot saved & ID returned)
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
@@ -2715,23 +3119,6 @@ On Error GoTo Err_Handler
     
     With vp
         'values passed into form
-
-
-'        .CollectionSourceName = "T"
-
-'        .CreateDate = ""
-'        .CreatedByID = 0
-'        .LastModified = ""
-'        .LastModifiedByID = 0
-        
-        '.ProtocolID = 1
-        '.SiteID = 1
-        
-        'form values
-        
-'        .EventID = cbxEvent.Column(0)
-'        .FeatureID = cbxFeature.Column(0)
-        
         .PlotNumber = tbxNumber.Value
         .PlotDistance = tbxDistance.Value
         .ModalSedimentSize = cbxModalSedSize.Value
@@ -2743,19 +3130,14 @@ On Error GoTo Err_Handler
         .PercentWater = tbxPctWater.Value
         .UnderstoryRootedPctCover = tbxPctURC.Value
         
+        
         'chk/tgl values -> change Access -1 (true) to clearer 1 for use in SQL
         '                  so value of 1 = has no canopy veg, 0 = has canopy veg etc.
-        .NoCanopyVeg = IIf(tglNoCanopyVeg = -1, 1, 0) 'chkNoCanopyVeg.Value
-        .NoRootedVeg = IIf(tglNoRootedVeg = -1, 1, 0) 'chkNoRootedVeg.Value
-        .NoIndicatorSpecies = IIf(tglNoIndicatorSpecies = -1, 1, 0) 'chkNoIndicatorSpecies.Value
+        .NoCanopyVeg = IIf(tglNoCanopyVeg = -1, 1, 0)
+        .NoRootedVeg = IIf(tglNoRootedVeg = -1, 1, 0)
+        .NoIndicatorSpecies = IIf(tglNoIndicatorSpecies = -1, 1, 0)
         .HasSocialTrail = IIf(tglHasSocialTrails = -1, 1, 0)
-        
-'        .LocationName = tbxName.Value
-'        .LocationType = "" 'cbxLocationType.SelText
-'
-'        .HeadtoOrientDistance = tbxDistance.Value
-'        .HeadtoOrientBearing = tbxBearing.Value
-        
+                
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
         
@@ -2776,6 +3158,13 @@ On Error GoTo Err_Handler
         lblMsg.ForeColor = lngYellow
         lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
         lblMsg.Caption = "Don't forget to set observer & recorder!"
+        
+        'enable buttons
+        btnSubstrateCover.Enabled = True
+        btnWCC.Enabled = True
+        btnURC.Enabled = True
+        btnARC.Enabled = True
+        btnTaglines.Enabled = True
     End If
     'refresh list
     Me.list.Requery
@@ -3017,12 +3406,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/11/2017 - initial version
+'   BLC - 1/12/2017 - revised form name to VegTransect vs. Transect
 ' ---------------------------------
 Private Sub btnAddTransect_Click()
 On Error GoTo Err_Handler
     
     'open form
-    DoCmd.OpenForm "Transect", acNormal, , , , , Me.Name
+    DoCmd.OpenForm "VegTransect", acNormal, , , , , Me.Name
     
     'refresh cbx (done from transect form close)
     

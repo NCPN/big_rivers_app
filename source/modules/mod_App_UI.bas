@@ -26,6 +26,7 @@ Option Explicit
 '               BLC, 12/9/2016 -  1.14 - added PopulateCSVFields()
 '               BLC, 12/13/2016 - 1.15 - added SetCurrentPseudoRecord()
 '               BLC, 1/9/2017   - 1.16 - revised ClickAction() to use SetTempVar()
+'               BLC, 1/12/2017 - 1.17 - revised to VegTransect vs. Transect form
 ' =================================
 
 ' =================================
@@ -431,7 +432,7 @@ On Error GoTo Err_Handler
         Case "feature"
             fName = "Feature"
         Case "transect"
-            fName = "Transect"
+            fName = "VegTransect"
             oArgs = ""
         Case "plot"
             fName = "VegPlot"
@@ -622,6 +623,7 @@ End Function
 '   BLC - 8/29/2016 - adjusted for Contact form (requires both Contact, Contact_Access data)
 '                     using usys_temp_qdf & adjusting ID to Contact_ID in final SQL
 '   BLC - 10/24/2016 - added ModWentworth form
+'   BLC - 1/12/2017 - code cleanup
 ' ---------------------------------
 Public Sub PopulateForm(frm As Form, ID As Long)
 On Error GoTo Err_Handler
@@ -634,7 +636,6 @@ On Error GoTo Err_Handler
         'find the form & populate its controls from the ID
         Select Case .Name
             Case "Contact"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Contact|id" & PARAM_SEPARATOR & ID)
                 'requires Contact & Contact_Access data
                 Dim qdf As DAO.QueryDef
                 CurrentDb.QueryDefs("usys_temp_qdf").sql = GetTemplate("s_contact_access")
@@ -655,7 +656,6 @@ On Error GoTo Err_Handler
                 'contact_access data
                 .Controls("cbxUserRole").ControlSource = "Access_ID"
             Case "Events"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Event|id" & PARAM_SEPARATOR & ID)
                 strTable = "Event"
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
@@ -665,13 +665,11 @@ On Error GoTo Err_Handler
                 .Controls("lblMsgIcon").Caption = ""
                 .Controls("lblMsg").Caption = ""
             Case "Feature"
-                'strSQL = GetTemplate()
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxFeature").ControlSource = "Feature"
                 '.Controls("cbxLocation").ControlSource = ""
             Case "Location"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Location|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxName").ControlSource = "CollectionSourceName"
@@ -688,14 +686,12 @@ On Error GoTo Err_Handler
                 .Controls("tbxEffectiveDate").ControlSource = "ActiveYear"
                 .Controls("tbxRetireDate").ControlSource = "RetireYear"
             Case "SetDatasheetDefaults"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "tsys_Datasheet_Defaults|id" & PARAM_SEPARATOR & ID)
                 strTable = "tsys_Datasheet_Defaults"
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxSpecies").ControlSource = "SpeciesRows"
                 .Controls("tbxBlanks").ControlSource = "BlankRows"
             Case "Site"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Site|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxSiteCode").ControlSource = "SiteCode"
@@ -703,14 +699,12 @@ On Error GoTo Err_Handler
                 .Controls("tbxDescription").ControlSource = "SiteDescription"
                 .Controls("tbxSiteDirections").ControlSource = "SiteDirections"
             Case "Tagline"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Tagline|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxCause").ControlSource = "HeightType"
                 .Controls("tbxDistance").ControlSource = "LineDistance_m"
                 .Controls("tbxHeight").ControlSource = "Height_cm"
             Case "Transducer"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "Transducer|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("cbxTiming").ControlSource = "Timing"
@@ -720,7 +714,6 @@ On Error GoTo Err_Handler
                 .Controls("tbxSampleTime").ControlSource = "ActionTime"
                 .Controls("chkSurveyed").ControlSource = "IsSurveyed"
             Case "VegPlot"
-                'strSQL = GetTemplate("s_form_edit", "tbl" & PARAM_SEPARATOR & "VegPlot|id" & PARAM_SEPARATOR & ID)
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
                 .Controls("tbxNumber").ControlSource = "PlotNumber"
@@ -735,9 +728,6 @@ On Error GoTo Err_Handler
                 .Controls("chkNoIndicatorSpecies").ControlSource = "NoIndicatorSpecies"
                 .Controls("chkHasSocialTrails").ControlSource = "HasSocialTrails"
             Case "VegTransect"
-                'strSQL = GetTemplate()
-                'set form fields to record fields as datasource
-                '.Controls("").ControlSource = ""
             
         End Select
     

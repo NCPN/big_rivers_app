@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =3360
-    Top =2775
-    Right =23250
-    Bottom =14625
+    Left =3780
+    Top =1995
+    Right =11640
+    Bottom =12600
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1146,46 +1146,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 1/17/2017 - code cleanup
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     UpsertRecord Me
-    
-'    Dim s As New Site
-'
-'    With s
-'        'values passed into form
-'        .Park = TempVars("ParkCode")
-'        .River = TempVars("River")
-'
-'        'form values
-'        .Code = tbxSiteCode.Value
-'        .Name = tbxSiteName.Value
-'        .Directions = Nz(tbxSiteDirections.Value, "")
-'        .Description = Nz(tbxDescription.Value, "")
-'
-'        'assumed
-'        .IsActiveForProtocol = 1 'all sites assumed active when added
-'
-'        .ID = tbxID.Value '0 if new, edit if > 0
-'        .SaveToDb
-'
-'        'set the tbxID.value
-'        'tbxID = .ID #can't assign value to object
-'
-'    End With
-'
-'    'clear values & refresh display
-'
-'    ReadyForSave
-'
-'    PopulateForm Me, tbxID.Value
-'
-'    'refresh list
-'    Me.list.Requery
-'
-'    Me.Requery
     
 Exit_Handler:
     Exit Sub

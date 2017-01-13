@@ -671,7 +671,7 @@ With myVegPlot
     .NoCanopyVeg = 0
     .NoRootedVeg = 0
     .HasSocialTrail = 0
-    .FilamentousAlgae = 1
+    .PctFilamentousAlgae = 1
     .NoIndicatorSpecies = 0
     .SaveToDb
 End With
