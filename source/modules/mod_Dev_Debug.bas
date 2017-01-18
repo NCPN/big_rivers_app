@@ -1325,3 +1325,16 @@ End Sub
 '    Next
 '
 'End Sub
+
+Public Sub FixID()
+'   HansUp, January 15, 2014
+'   http://stackoverflow.com/questions/20738596/how-to-reset-an-access-tables-autonumber-field-it-didnt-start-from-1
+Dim strSQL As String
+
+'requires ADO, DAO fails w/ CurrentDb.Execute strSQL
+'Added MSFT ADO 6.1 library
+strSQL = "ALTER TABLE SOP ALTER COLUMN ID COUNTER(1,1);"
+CurrentProject.Connection.Execute strSQL
+
+    
+End Sub
