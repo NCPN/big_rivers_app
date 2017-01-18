@@ -22,7 +22,7 @@ Begin Form
     ItemSuffix =85
     Left =4755
     Top =3360
-    Right =15795
+    Right =21315
     Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -3412,7 +3412,7 @@ Private Sub btnAddTransect_Click()
 On Error GoTo Err_Handler
     
     'open form
-    DoCmd.OpenForm "VegTransect", acNormal, , , , , Me.Name
+    DoCmd.OpenForm "VegTransect", acNormal, , , , , Me.Name & "|" & tbxID
     
     'refresh cbx (done from transect form close)
     

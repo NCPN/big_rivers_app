@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =9360
     DatasheetFontHeight =11
-    ItemSuffix =83
-    Left =6555
-    Top =645
-    Right =15915
-    Bottom =12630
+    ItemSuffix =85
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8a05f9ebf1d4e440
@@ -551,8 +551,8 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
-                    OverlapFlags =87
-                    Left =120
+                    OverlapFlags =95
+                    Left =300
                     Top =510
                     Width =3600
                     Height =4590
@@ -562,14 +562,14 @@ Begin Form
                     SourceObject ="Form.TableFieldList"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =120
+                    LayoutCachedLeft =300
                     LayoutCachedTop =510
-                    LayoutCachedWidth =3720
+                    LayoutCachedWidth =3900
                     LayoutCachedHeight =5100
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =180
+                    Left =360
                     Top =300
                     Width =1260
                     Height =180
@@ -579,16 +579,16 @@ Begin Form
                     Name ="lblHintReqd"
                     Caption ="* = Required Field"
                     GridlineColor =10921638
-                    LayoutCachedLeft =180
+                    LayoutCachedLeft =360
                     LayoutCachedTop =300
-                    LayoutCachedWidth =1440
+                    LayoutCachedWidth =1620
                     LayoutCachedHeight =480
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =93
-                    Left =2460
+                    Left =2640
                     Top =330
                     Width =1260
                     Height =180
@@ -598,9 +598,9 @@ Begin Form
                     Name ="lblHintZLS"
                     Caption ="Blue = Allows ZLS"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2460
+                    LayoutCachedLeft =2640
                     LayoutCachedTop =330
-                    LayoutCachedWidth =3720
+                    LayoutCachedWidth =3900
                     LayoutCachedHeight =510
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -608,7 +608,7 @@ Begin Form
                 Begin Subform
                     CanShrink = NotDefault
                     OverlapFlags =85
-                    Left =5400
+                    Left =5580
                     Top =540
                     Width =3600
                     Height =4590
@@ -618,14 +618,14 @@ Begin Form
                     SourceObject ="Form.ImportColumnList"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5400
+                    LayoutCachedLeft =5580
                     LayoutCachedTop =540
-                    LayoutCachedWidth =9000
+                    LayoutCachedWidth =9180
                     LayoutCachedHeight =5130
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =5220
+                    Left =5400
                     Top =60
                     Width =3719
                     Height =180
@@ -635,16 +635,16 @@ Begin Form
                     Name ="lblHintSelected"
                     Caption ="Green = Import column to the field at left"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5220
+                    LayoutCachedLeft =5400
                     LayoutCachedTop =60
-                    LayoutCachedWidth =8939
+                    LayoutCachedWidth =9119
                     LayoutCachedHeight =240
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =5220
+                    Left =5400
                     Top =300
                     Width =3720
                     Height =180
@@ -654,9 +654,9 @@ Begin Form
                     Name ="lblHintNone"
                     Caption ="None = Set table column values to NULL on import"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5220
+                    LayoutCachedLeft =5400
                     LayoutCachedTop =300
-                    LayoutCachedWidth =8940
+                    LayoutCachedWidth =9120
                     LayoutCachedHeight =480
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -664,7 +664,7 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =4200
+                    Left =4380
                     Top =1980
                     Width =720
                     FontSize =20
@@ -713,9 +713,9 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =4200
+                    LayoutCachedLeft =4380
                     LayoutCachedTop =1980
-                    LayoutCachedWidth =4920
+                    LayoutCachedWidth =5100
                     LayoutCachedHeight =2340
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -733,7 +733,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =180
+                    Left =360
                     Top =60
                     Width =4080
                     Height =180
@@ -743,9 +743,9 @@ Begin Form
                     Name ="lblHintIDField"
                     Caption ="í ½í»‡ = Autogenerated ID field. CSV field should be 'None'"
                     GridlineColor =10921638
-                    LayoutCachedLeft =180
+                    LayoutCachedLeft =360
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4260
+                    LayoutCachedWidth =4440
                     LayoutCachedHeight =240
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -753,7 +753,7 @@ Begin Form
                 Begin Label
                     BackStyle =1
                     OverlapFlags =85
-                    Left =3900
+                    Left =4080
                     Top =2520
                     Width =1380
                     Height =840
@@ -765,9 +765,9 @@ Begin Form
                     Caption ="CSV table is empty, please import new CSV by clicking the button below."
                     ControlTipText ="CSV table is empty, please import new CSV."
                     GridlineColor =10921638
-                    LayoutCachedLeft =3900
+                    LayoutCachedLeft =4080
                     LayoutCachedTop =2520
-                    LayoutCachedWidth =5280
+                    LayoutCachedWidth =5460
                     LayoutCachedHeight =3360
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -776,7 +776,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     TextFontFamily =2
-                    Left =4200
+                    Left =4380
                     Top =3480
                     Width =720
                     FontSize =14
@@ -826,9 +826,9 @@ Begin Form
                         0xb08060ffb08060ff
                     End
 
-                    LayoutCachedLeft =4200
+                    LayoutCachedLeft =4380
                     LayoutCachedTop =3480
-                    LayoutCachedWidth =4920
+                    LayoutCachedWidth =5100
                     LayoutCachedHeight =3840
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -843,6 +843,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -850,7 +851,7 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =4260
+                    Left =4440
                     Top =420
                     Width =480
                     Height =315
@@ -862,10 +863,25 @@ Begin Form
                     OnChange ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4260
+                    LayoutCachedLeft =4440
                     LayoutCachedTop =420
-                    LayoutCachedWidth =4740
+                    LayoutCachedWidth =4920
                     LayoutCachedHeight =735
+                End
+                Begin Subform
+                    OverlapFlags =247
+                    Top =765
+                    Width =720
+                    Height =4320
+                    TabIndex =6
+                    BorderColor =10921638
+                    Name ="overlay"
+                    SourceObject ="Form.TableFieldListOverlay"
+                    GridlineColor =10921638
+
+                    LayoutCachedTop =765
+                    LayoutCachedWidth =720
+                    LayoutCachedHeight =5085
                 End
             End
         End
@@ -1060,7 +1076,7 @@ On Error GoTo Err_Handler
     If TempVars("UserAccessLevel") = "admin" Then showsys = True
     
     strTables = ListTables(False, showsys, showsys, True)
-Debug.Print strTables
+Debug.Print "ImportMap form_open strTables = " & strTables
 
     cbxTable.SeparatorCharacters = acSeparatorCharactersSemiColon
     cbxTable.RowSourceType = "Value List"
@@ -1104,6 +1120,9 @@ Debug.Print strTables
      
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
+    
+    'hide control tracker
+    tbxCSVRecord.Visible = False
     
     'initialize values
     ClearForm Me
@@ -1283,13 +1302,43 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/13/2016 - initial version
+'   BLC - 1/17/2017  - highlight overlay control
 ' ---------------------------------
 Public Sub tbxCSVRecord_Change()
 On Error GoTo Err_Handler
     
 'MsgBox Me.Parent.Form.Controls("TableFieldList").Form.Controls("tbxHighlight").Name
     Me.listTableFields.Form.Controls("tbxHighlight") = CStr(Me.tbxCSVRecord)
-       
+    
+    'clear/hide all
+    Dim ctrl As Control
+    
+    For Each ctrl In Me.overlay.Form.Controls
+    
+        If InStr(ctrl.Name, "lblColumnName") Then
+        
+            ctrl.Visible = False
+            ctrl.backstyle = 0 'transparent
+        
+        End If
+    
+    Next
+    
+    'highlight
+    Dim strControl As String
+    
+    strControl = "lblColumnName" & CStr(Me.tbxCSVRecord)
+    
+    Debug.Print "tbxCSVRecord_Change ctrl = " & strControl
+    
+    Me.overlay.Form.Controls(strControl).BackColor = lngYelLime
+    Me.overlay.Form.Controls(strControl).ForeColor = lngBlue
+    Me.overlay.Form.Controls(strControl).Caption = StringFromCodepoint(uRArrow)
+    'Me.overlay.Form.Requery
+    Me.overlay.Form.Controls(strControl).Visible = True
+    Me.overlay.Form.Controls(strControl).backstyle = 1
+    
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1540,7 +1589,7 @@ On Error GoTo Err_Handler
                                      ' method for a control unless the control has the focus
     
     'disable import on any table ID field columns
-    Debug.Print listTableFields.Form.Controls("tbxFieldName")
+    Debug.Print "ImportMap form SetCSVFieldsDisplay = " & listTableFields.Form.Controls("tbxFieldName")
     
     If listTableFields.Form.Controls("tbxFieldName") = "ID" Then
     

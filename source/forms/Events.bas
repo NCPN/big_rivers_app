@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =8205
-    Top =2490
-    Right =16065
-    Bottom =9210
+    Left =4755
+    Top =3360
+    Right =21315
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x45dde061d6cde440
@@ -738,7 +738,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -756,6 +756,7 @@ Option Explicit
 '                                         revised to use GetContext()
 '               BLC - 1/9/2017   - 1.07 - revised to update VegPlot calling form event list,
 '                                         hid form title
+'               BLC - 1/13/2017 - 1.08 - revised to use && vs. StringFromCodepoint(uAmpersand)
 ' =================================
 
 '---------------------
@@ -843,6 +844,7 @@ End Property
 '   BLC - 6/27/2016 - updated to use ToggleForm() & ClearForm()
 '   BLC - 7/26/2016 - added GetRecords() for cbxSite, cbxLocation recordsets
 '   BLC - 8/2/2016 - use Me.CallingForm
+'   BLC - 1/13/2017 - revised to use && vs. StringFromCodepoint(uAmpersand) for directions
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -861,7 +863,7 @@ On Error GoTo Err_Handler
     
     Title = "Events (Sampling Visits)"
     lblTitle.Caption = "" 'hide second title
-    Directions = "Choose the site " & StringFromCodepoint(uAmpersand) & " location, then enter the sampling start date."
+    Directions = "Choose the site && location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)

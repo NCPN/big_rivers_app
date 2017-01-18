@@ -831,6 +831,8 @@ On Error GoTo Err_Handler
     
     Set ctrl.Recordset = rs2 '<--ERROR #5302
     
+    Debug.Print "mod_App_UI PopulateCSVFields rs2 count = " & rs2.RecordCount
+    
 '    Dim strControl As String
 '
 'Debug.Print Me.NumColumns

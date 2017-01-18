@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =40
-    Left =5460
-    Top =2505
-    Right =17250
-    Bottom =13470
+    Left =4755
+    Top =3360
+    Right =21315
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20e2f9274edfe440
@@ -1025,23 +1025,24 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
-    Dim aryOArgs As Variant
-    
     'default
     Me.CallingForm = "Main"
     Me.CallingRecordID = -1
     
-'    If Len(Me.OpenArgs) > 0 Then
-'        aryOArgs = Split(Me.OpenArgs, "|")
-
-'       If IsArray(aryOArgs) Then
-'
-'            'set calling for & record
-'            Me.CallingForm = aryOArgs(0)
-'            Me.CallingRecordID = Nz(aryOArgs(1), -1)
-'
-'        End If
-'    End If
+    If Len(Me.OpenArgs) > 0 Then
+        Dim aryOArgs() As String
+        
+        aryOArgs = Split(Me.OpenArgs, "|")
+        
+        If IsArray(aryOArgs) Then
+        
+            'set calling for & record
+            Me.CallingForm = aryOArgs(0)
+            Me.CallingRecordID = Nz(aryOArgs(1), -1)
+        End If
+        
+    End If
+    
     'minimize calling form
     ToggleForm Me.CallingForm, -1
     

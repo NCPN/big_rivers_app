@@ -20,8 +20,8 @@ Begin Form
     Width =3480
     DatasheetFontHeight =11
     ItemSuffix =105
-    Right =10260
-    Bottom =7815
+    Right =24690
+    Bottom =12585
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -36,6 +36,7 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     OnKeyDown ="[Event Procedure]"
+    OnGotFocus ="[Event Procedure]"
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
@@ -232,10 +233,7 @@ Begin Form
                     End
                     Name ="cbxColumnName1"
                     RowSourceType ="Table/Query"
-                    AfterUpdate ="=[PrepareImportColumns]"
                     OnGotFocus ="=SetCurrentPseudoRecord([screen].[activecontrol])"
-                    OnClick ="=ChangeBackColor([Screen].[ActiveControl],[lngYelLime])"
-                    OnChange ="=PopulateCSVFields([Screen].[ActiveControl])"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
@@ -294,10 +292,7 @@ Begin Form
                     End
                     Name ="cbxColumnName2"
                     RowSourceType ="Table/Query"
-                    AfterUpdate ="=[PrepareImportColumns]"
                     OnGotFocus ="=SetCurrentPseudoRecord([screen].[activecontrol])"
-                    OnClick ="=ChangeBackColor([Screen].[ActiveControl],[lngYelLime])"
-                    OnChange ="=PopulateCSVFields([Screen].[ActiveControl])"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
@@ -341,10 +336,7 @@ Begin Form
                     End
                     Name ="cbxColumnName3"
                     RowSourceType ="Table/Query"
-                    AfterUpdate ="=[PrepareImportColumns]"
                     OnGotFocus ="=SetCurrentPseudoRecord([screen].[activecontrol])"
-                    OnClick ="=ChangeBackColor([Screen].[ActiveControl],[lngYelLime])"
-                    OnChange ="=PopulateCSVFields([Screen].[ActiveControl])"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
@@ -388,10 +380,7 @@ Begin Form
                     End
                     Name ="cbxColumnName4"
                     RowSourceType ="Table/Query"
-                    AfterUpdate ="=[PrepareImportColumns]"
                     OnGotFocus ="=SetCurrentPseudoRecord([screen].[activecontrol])"
-                    OnClick ="=ChangeBackColor([Screen].[ActiveControl],[lngYelLime])"
-                    OnChange ="=PopulateCSVFields([Screen].[ActiveControl])"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
@@ -435,10 +424,7 @@ Begin Form
                     End
                     Name ="cbxColumnName5"
                     RowSourceType ="Table/Query"
-                    AfterUpdate ="=[PrepareImportColumns]"
                     OnGotFocus ="=SetCurrentPseudoRecord([screen].[activecontrol])"
-                    OnClick ="=ChangeBackColor([Screen].[ActiveControl],[lngYelLime])"
-                    OnChange ="=PopulateCSVFields([Screen].[ActiveControl])"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
@@ -485,7 +471,6 @@ Begin Form
                     AfterUpdate ="=[PrepareImportColumns]"
                     OnGotFocus ="=SetCurrentPseudoRecord([screen].[activecontrol])"
                     OnClick ="=ChangeBackColor([Screen].[ActiveControl],[lngYelLime])"
-                    OnChange ="=PopulateCSVFields([Screen].[ActiveControl])"
                     GridlineColor =10921638
                     CanGrow =255
                     CanShrink =255
@@ -3131,6 +3116,8 @@ Option Explicit
 '               BLC - 12/8/2016  - 1.03 - revised PrepareImportColumns() to enable import button
 '                                         when all import columns set, fixed Hide to include 51-60
 '               BLC - 12/13/2016 - 1.04 - added current row highlighting, key up|down navigation
+'               BLC - 1/17/2017  - 1.05 - adjusted to set combobox events w/in form load,
+'                                         switched PrepareImportColumns() to function from sub
 ' =================================
 
 '---------------------
@@ -3284,7 +3271,7 @@ Private Sub Form_Load()
 On Error GoTo Err_Handler
 
     'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+'    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
 
 Exit_Handler:
     Exit Sub
@@ -3330,6 +3317,38 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - Form_Current[ImportColumnList form])"
     End Select
     Resume Exit_Handler
+End Sub
+
+
+'   BLC - 1/17/2017  - adjusted to set comboxbox events vs in IDE
+Private Sub Form_GotFocus()
+    
+    Dim ctrl As Control
+
+    'set events
+    For Each ctrl In Me.Controls
+        
+        With ctrl
+            If Len(.Name) > Len(Replace(.Name, "cbxColumnName", "")) Then
+ Debug.Print "ImportColumnList - " & .Name
+            'set events
+            'onclick        =ChangeBackColor([Screen].[ActiveControl],[lngYelLime])
+            'afterupdate    =PrepImportCols()
+            'onchange       =PopulateCSVFields([Screen].[ActiveControl])
+            'ongotfocus     =SetCurrentPseudoRecord([screen].[activecontrol])
+            
+            'using [Screen].[ActiveControl] / Me.ActiveControl --> error 2474
+            
+             .OnClick = ChangeBackColor(ctrl, lngYelLime)
+             .AfterUpdate = PrepImportCols
+             .OnChange = PopulateCSVFields(ctrl)
+             '.OnGotFocus = SetCurrentPseudoRecord(ctrl)
+             
+            End If
+        End With
+            
+    Next
+
 End Sub
 
 ' ---------------------------------
@@ -3490,12 +3509,12 @@ On Error GoTo Err_Handler
     Dim strControl As String
     Dim i As Integer
 
-Debug.Print Me.NumColumns
+Debug.Print "PopulateForm - NumColumns = " & Me.NumColumns
     
     'expose & populate the proper # of dropdowns
     For i = 1 To Me.NumColumns 'CInt(Me.Records.RecordCount)
         strControl = "cbxColumnName" & i
-Debug.Print strControl
+Debug.Print "PopulateForm control:" & strControl
 
 'FIX HERE!
         If i = 30 Then
@@ -3510,7 +3529,7 @@ Debug.Print strControl
     
         'requery to refresh displayed controls
         Me.Controls(strControl).Requery
-Debug.Print Me.Controls(strControl).ListRows
+Debug.Print "PopulateForm - ListRows = " & Me.Controls(strControl).ListRows
     Next
 
     If Me.NumColumns > 0 Then
@@ -3625,7 +3644,7 @@ On Error GoTo Err_Handler
     
     Me.ImportColumns = Replace(Left(Trim(strImportColumns), Len(Trim(strImportColumns)) - 1), "None", "NULL")
     
-    Debug.Print Me.ImportColumns
+    Debug.Print "PrepareImportColumns importcols = " & Me.ImportColumns
     
     'disable import on any table ID field columns
     Dim ctrl As Control
@@ -3679,6 +3698,14 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+Public Function PrepImportCols()
+
+Debug.Print "PrepImportCols Me Name - " & Me.Name
+
+PrepareImportColumns
+
+End Function
 
 ' ---------------------------------
 ' Sub:          RefreshColumnList
