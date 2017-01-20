@@ -671,7 +671,7 @@ On Error GoTo Err_Handler:
     With oRegExp
         .Global = True
         .IgnoreCase = True
-        .pattern = strPattern
+        .Pattern = strPattern
         
         IsRegExpMatch = .test(strInspect)
 

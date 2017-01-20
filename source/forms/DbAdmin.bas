@@ -20,15 +20,20 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =5460
-    Top =2505
-    Right =17250
-    Bottom =13470
+    Left =8520
+    Top =5115
+    Right =20475
+    Bottom =14355
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xafbe80e1eec6e440
+        0xe350ab484ae0e440
     End
-    Caption ="Location (Sampling Location)"
+    RecordSource ="SELECT\015\012Project, Release_ID, DataTimeframe,\015\012UserName, Park, BackupP"
+        "romptOnStartUp, BackupPromptOnExit,CompactBEOnExit,\015\012WebURL, AppContactNam"
+        "e, AppContactOrg, AppContactPhone, AppContactEmail,\015\012ar.ReleaseDate, ar.Is"
+        "Supported, DatabaseTitle, VersionNumber, FileName\015\012FROM (tsys_App_Defaults"
+        " ad\015\012INNER JOIN tsys_App_Releases ar ON ar.ID = ad.Release_ID)\015\012;"
+    Caption ="NCPN Big Rivers App"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -208,7 +213,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="title"
+                    Caption ="Db Admin"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -226,7 +231,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Choose the desired action below."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -369,7 +374,8 @@ Begin Form
                     LayoutCachedHeight =1725
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -402,7 +408,8 @@ Begin Form
                     LayoutCachedHeight =1245
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -435,7 +442,8 @@ Begin Form
                     LayoutCachedHeight =765
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -468,7 +476,8 @@ Begin Form
                     LayoutCachedHeight =3705
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -499,7 +508,8 @@ Begin Form
                     LayoutCachedHeight =765
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -530,7 +540,8 @@ Begin Form
                     LayoutCachedHeight =2745
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -561,7 +572,8 @@ Begin Form
                     LayoutCachedHeight =2265
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -592,7 +604,8 @@ Begin Form
                     LayoutCachedHeight =1785
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -622,7 +635,8 @@ Begin Form
                     LayoutCachedHeight =1305
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -653,7 +667,8 @@ Begin Form
                     LayoutCachedHeight =5145
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -686,7 +701,8 @@ Begin Form
                     LayoutCachedHeight =5145
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -719,7 +735,8 @@ Begin Form
                     LayoutCachedHeight =5145
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -752,7 +769,8 @@ Begin Form
                     LayoutCachedHeight =5145
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -785,7 +803,8 @@ Begin Form
                     LayoutCachedHeight =4255
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -818,7 +837,8 @@ Begin Form
                     LayoutCachedHeight =3765
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -851,7 +871,8 @@ Begin Form
                     LayoutCachedHeight =3145
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -884,7 +905,8 @@ Begin Form
                     LayoutCachedHeight =2655
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -1712,7 +1734,8 @@ Begin Form
                                     LayoutCachedHeight =945
                                     BackColor =14136213
                                     BorderColor =14136213
-                                    HoverColor =15060409
+                                    HoverColor =65280
+                                    HoverThemeColorIndex =-1
                                     PressedColor =9592887
                                     HoverForeColor =4210752
                                     PressedForeColor =4210752
@@ -1765,6 +1788,8 @@ Begin Form
                                     Name ="cbxVersion"
                                     ControlSource ="Release_ID"
                                     RowSourceType ="Table/Query"
+                                    RowSource ="SELECT tsys_App_Releases.ID, 'Version ' & [VersionNumber] & ' (' & [ReleaseDate]"
+                                        " & ')' AS Version FROM tsys_App_Releases;"
                                     ColumnWidths ="0;2880"
                                     FontName ="Arial"
                                     ControlTipText ="Version number of this application"
@@ -2014,7 +2039,8 @@ Begin Form
                                     LayoutCachedHeight =3525
                                     BackColor =14136213
                                     BorderColor =14136213
-                                    HoverColor =15060409
+                                    HoverColor =65280
+                                    HoverThemeColorIndex =-1
                                     PressedColor =9592887
                                     HoverForeColor =4210752
                                     PressedForeColor =4210752
@@ -2045,7 +2071,8 @@ Begin Form
                                     LayoutCachedHeight =4050
                                     BackColor =14136213
                                     BorderColor =14136213
-                                    HoverColor =15060409
+                                    HoverColor =65280
+                                    HoverThemeColorIndex =-1
                                     PressedColor =9592887
                                     HoverForeColor =4210752
                                     PressedForeColor =4210752
@@ -2261,6 +2288,7 @@ Begin Form
                                     End
                                 End
                                 Begin CommandButton
+                                    Enabled = NotDefault
                                     TabStop = NotDefault
                                     OverlapFlags =247
                                     Left =420
@@ -2281,7 +2309,8 @@ Begin Form
                                     LayoutCachedHeight =3105
                                     BackColor =14136213
                                     BorderColor =14136213
-                                    HoverColor =15060409
+                                    HoverColor =65280
+                                    HoverThemeColorIndex =-1
                                     PressedColor =9592887
                                     HoverForeColor =4210752
                                     PressedForeColor =4210752
@@ -2312,7 +2341,8 @@ Begin Form
                                     LayoutCachedHeight =3705
                                     BackColor =14136213
                                     BorderColor =14136213
-                                    HoverColor =15060409
+                                    HoverColor =65280
+                                    HoverThemeColorIndex =-1
                                     PressedColor =9592887
                                     HoverForeColor =4210752
                                     PressedForeColor =4210752
@@ -2335,8 +2365,8 @@ Begin Form
                     Height =405
                     TabIndex =19
                     ForeColor =4210752
-                    Name ="btnVersions"
-                    Caption ="Versions"
+                    Name ="btnSOPs"
+                    Caption ="SOPs"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -2346,7 +2376,8 @@ Begin Form
                     LayoutCachedHeight =5685
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -2404,7 +2435,8 @@ Begin Form
                     LayoutCachedHeight =5685
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -2435,7 +2467,8 @@ Begin Form
                     LayoutCachedHeight =5685
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -2467,7 +2500,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2481,6 +2514,7 @@ Option Explicit
 '                                        for Management Tools
 '               BLC - 10/19/2016 - 1.04 - added Import CSV button, added callingform property
 '               BLC - 1/12/2017 - 1.05 - added Version button
+'               BLC - 1/19/2017 - 1.06 - revised to SOPs from Version (button)
 ' =================================
 
 '---------------------
@@ -2627,7 +2661,7 @@ On Error GoTo Err_Handler
     btnUISetup.HoverColor = lngGreen
     btnViewTemplates.HoverColor = lngGreen
     btnImportCSV.HoverColor = lngGreen
-    btnVersions.HoverColor = lngGreen
+    btnSOPs.HoverColor = lngGreen
       
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
@@ -3482,8 +3516,8 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          btnVersions_Click
-' Description:  Versions button click actions
+' Sub:          btnSOPs_Click
+' Description:  SOPs button click actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
@@ -3493,12 +3527,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/12/2017 - initial version
+'   BLC - 1/19/2017 - revised to SOPs vs. Versions
 ' ---------------------------------
-Private Sub btnVersions_Click()
+Private Sub btnSOPs_Click()
 On Error GoTo Err_Handler
     
     'open import map form
-    DoCmd.OpenForm "Versions", acNormal, , , , , "DbAdmin"
+    DoCmd.OpenForm "SOPVersion", acNormal, , , , , "DbAdmin"
     
 Exit_Handler:
     Exit Sub
@@ -3506,7 +3541,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnVersions_Click[DbAdmin form])"
+            "Error encountered (#" & Err.Number & " - btnSOPs_Click[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub

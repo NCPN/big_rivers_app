@@ -546,9 +546,9 @@ On Error GoTo Err_Handler:
     
     With oReg
         If blnNumeric Then
-            .pattern = "[^\d]+" '\d -> digit character of any length
+            .Pattern = "[^\d]+" '\d -> digit character of any length
         Else
-            .pattern = "[^\D]+" '\D -> non-digit character of any length
+            .Pattern = "[^\D]+" '\D -> non-digit character of any length
         End If
         .Global = True
     End With

@@ -45,12 +45,12 @@ Public Property Get ID() As Long
     ID = m_ID
 End Property
 
-Public Property Let Text(Value As String)
+Public Property Let text(Value As String)
     m_Text = Value
 End Property
 
-Public Property Get Text() As String
-    Text = m_Text
+Public Property Get text() As String
+    text = m_Text
 End Property
 
 Public Property Let action(Value As String)

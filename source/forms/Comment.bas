@@ -898,7 +898,7 @@ On Error GoTo Err_Handler
     
     Dim CurrentCount As Integer
     
-    CurrentCount = CInt(Me.maxcount) - Len(tbxComment.Text)
+    CurrentCount = CInt(Me.maxcount) - Len(tbxComment.text)
 
     Me.lblMaxCount.Caption = CurrentCount & " remaining"
     
@@ -919,11 +919,11 @@ On Error GoTo Err_Handler
         Me.MaxCountFontColor = vbRed
     End If
     
-    If Len(tbxComment.Text) > CInt(Me.maxcount) Then
+    If Len(tbxComment.text) > CInt(Me.maxcount) Then
         Me.lblMaxCount.Caption = -CurrentCount & " over"
         'disable add comment button until count is < or = MaxCount
         Me.btnAdd.Enabled = False
-    ElseIf Len(tbxComment.Text) = 0 Then
+    ElseIf Len(tbxComment.text) = 0 Then
         'disable add comment button if count = 0
         Me.btnAdd.Enabled = False
     Else

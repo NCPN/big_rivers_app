@@ -1218,10 +1218,10 @@ End Sub
 Private Sub cbxTable_AfterUpdate()
 On Error GoTo Err_Handler
     
-    If Len(cbxTable.Text) > 0 Then
+    If Len(cbxTable.text) > 0 Then
         
         'set selected table property
-        Me.SelectedTable = cbxTable.Text
+        Me.SelectedTable = cbxTable.text
         
         'unhide & populate controls
         lblHintReqd.Visible = True
@@ -1240,7 +1240,7 @@ On Error GoTo Err_Handler
         lblImportAlert.Visible = True
         btnImportCSVData.Visible = True
         
-        listTableFields.Form.Table = cbxTable.Text
+        listTableFields.Form.Table = cbxTable.text
         
 '        'hide CSV form controls to initialize
 '        listCSV.Form.HideControls
@@ -1266,7 +1266,7 @@ On Error GoTo Err_Handler
         'display table data - IF view is set to table
         'Me.list.Form.DataList.Form.RecordSource = "SELECT * FROM " & cbxTable.Text & ";" 'SourceObject
         If Me!list.Form!optgView = 1 Then
-            Me!list.Form!DataList.SourceObject = "Table." & cbxTable.Text
+            Me!list.Form!DataList.SourceObject = "Table." & cbxTable.text
         End If
         
         'ReadyForSave

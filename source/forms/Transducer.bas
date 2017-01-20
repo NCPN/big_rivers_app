@@ -1536,7 +1536,7 @@ End Sub
 Private Sub tbxSampleTime_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxSampleTime.Text) > 0 Then _
+    If Len(tbxSampleTime.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1566,7 +1566,7 @@ End Sub
 Private Sub tbxRefToWaterline_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxRefToWaterline.Text) > 0 Then _
+    If Len(tbxRefToWaterline.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1596,7 +1596,7 @@ End Sub
 Private Sub tbxEyeboltToWaterline_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxEyeboltToWaterline.Text) > 0 Then _
+    If Len(tbxEyeboltToWaterline.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1626,7 +1626,7 @@ End Sub
 Private Sub tbxRefToEyebolt_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxRefToEyebolt.Text) > 0 Then _
+    If Len(tbxRefToEyebolt.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1656,7 +1656,7 @@ End Sub
 Private Sub tbxEyeboltToScribeline_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxEyeboltToScribeline.Text) > 0 Then _
+    If Len(tbxEyeboltToScribeline.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:

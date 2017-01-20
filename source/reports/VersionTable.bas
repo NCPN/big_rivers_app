@@ -15,7 +15,7 @@ Begin Report
     DatasheetFontHeight =11
     ItemSuffix =106
     Right =11955
-    Bottom =7080
+    Bottom =9240
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -1014,7 +1014,7 @@ Public Property Let Directions(Value As String)
         m_Directions = Value
 
         'set the form directions
-        Me.lblDirections.Caption = m_Directions
+        'Me.lblDirections.Caption = m_Directions
     Else
         RaiseEvent InvalidDirections(Value)
     End If

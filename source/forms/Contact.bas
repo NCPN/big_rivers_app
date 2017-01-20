@@ -1518,7 +1518,7 @@ End Sub
 Private Sub tbxFirst_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxFirst.Text) > 0 Then _
+    If Len(tbxFirst.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1548,7 +1548,7 @@ End Sub
 Private Sub tbxLast_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxLast.Text) > 0 Then _
+    If Len(tbxLast.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1578,7 +1578,7 @@ End Sub
 Private Sub tbxEmail_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxEmail.Text) > 0 Then _
+    If Len(tbxEmail.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1608,7 +1608,7 @@ End Sub
 Private Sub tbxUsername_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxUsername.Text) > 0 Then _
+    If Len(tbxUsername.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1638,7 +1638,7 @@ End Sub
 Private Sub tbxOrganization_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxOrganization.Text) > 0 Then _
+    If Len(tbxOrganization.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1668,7 +1668,7 @@ End Sub
 Private Sub tbxPosition_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPosition.Text) > 0 Then _
+    If Len(tbxPosition.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1760,7 +1760,7 @@ End Sub
 Private Sub cbxUserRole_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(cbxUserRole.Text) > 0 Then _
+    If Len(cbxUserRole.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:

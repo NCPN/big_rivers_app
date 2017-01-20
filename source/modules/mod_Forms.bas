@@ -668,7 +668,7 @@ Public Sub LimitKeyPress(ctrl As Control, iMaxLen As Integer, KeyAscii As Intege
 On Error GoTo Err_Handler
     
     With ctrl
-        If Len(.Text) - .SelLength >= iMaxLen Then
+        If Len(.text) - .SelLength >= iMaxLen Then
             If KeyAscii <> vbKeyBack Then
                 KeyAscii = 0
                 Beep
@@ -709,14 +709,14 @@ On Error GoTo Err_Handler
     Dim msg As String
     
     With ctrl
-        If Len(.Text) > iMaxLen Then
+        If Len(.text) > iMaxLen Then
             msg = "Oops! " & .Name & " field too long. Truncated to " & iMaxLen & " characters."
         
             DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
                 "msg" & PARAM_SEPARATOR & msg & _
                 "|Type" & PARAM_SEPARATOR & "caution"
             
-            .Text = Left(.Text, iMaxLen)
+            .text = Left(.text, iMaxLen)
             .SelStart = iMaxLen
         End If
     End With

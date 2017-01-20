@@ -20,8 +20,8 @@ Begin Form
     Width =3720
     DatasheetFontHeight =11
     ItemSuffix =48
-    Right =20175
-    Bottom =12585
+    Right =16470
+    Bottom =9240
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6375f9ebf1d4e440
@@ -825,6 +825,7 @@ End Sub
 ' Revisions:
 '   BLC - 10/6/2016 - initial version
 '   BLC - 10/20/2016 - code cleanup
+'   BLC - 1/19/2017 - revised to call RetrieveTableColumnData()
 ' ---------------------------------
 Private Sub PopulateForm()
 On Error GoTo Err_Handler
@@ -835,52 +836,61 @@ On Error GoTo Err_Handler
     'determine if table is linked
     lblLinkedTable.Visible = IsLinked(Me.Table)
 
-    'retrieve field info
-    Dim aryFieldInfo() As Variant 'string
+'    'retrieve field info
+'    Dim aryFieldInfo() As Variant 'string
+'
+'    aryFieldInfo = FetchDbTableFieldInfo(Me.Table)
+'
+'    'clear table
+'    ClearTable "usys_temp_rs"
+'
+'    'populate w/ table data
+'    Dim rs As DAO.Recordset
+'    Dim aryRecord() As String
+'    Dim i As Integer
+'    Dim strTableColumns As String
+'
+'    'default
+'    strTableColumns = ""
+'
+'    Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
+'
+'    For i = 0 To UBound(aryFieldInfo)
+'
+'        'create new record
+'        rs.AddNew
+'
+'        aryRecord = Split(aryFieldInfo(i), "|")
+'
+'        rs!Column = aryRecord(0)
+'        rs!ColType = aryRecord(5)
+'        rs!IsReqd = IIf(aryRecord(3) = False, 0, 1)
+'        rs!Length = aryRecord(2)
+'        rs!AllowZLS = IIf(aryRecord(4) = False, 0, 1)
+'
+'        'add the new record
+'        rs.Update
+'
+'        'prepare table columns list
+'        strTableColumns = strTableColumns & aryRecord(0) & ", "
+'
+'    Next
     
-    aryFieldInfo = FetchDbTableFieldInfo(Me.Table)
-    
-    'clear table
-    ClearTable "usys_temp_rs"
-    
-    'populate w/ table data
-    Dim rs As DAO.Recordset
-    Dim aryRecord() As String
-    Dim i As Integer
+    'retrieve table column data
+    Dim aryColData() As Variant
     Dim strTableColumns As String
     
-    'default
-    strTableColumns = ""
+    'column data returned in array - 1st element = rs, 2nd element = string of col data
+    aryColData = RetrieveTableColumnData(Me.Table)
     
-    Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
-    
-    For i = 0 To UBound(aryFieldInfo)
-        
-        'create new record
-        rs.AddNew
-        
-        aryRecord = Split(aryFieldInfo(i), "|")
-        
-        rs!Column = aryRecord(0)
-        rs!ColType = aryRecord(5)
-        rs!IsReqd = IIf(aryRecord(3) = False, 0, 1)
-        rs!Length = aryRecord(2)
-        rs!AllowZLS = IIf(aryRecord(4) = False, 0, 1)
-    
-        'add the new record
-        rs.Update
-        
-        'prepare table columns list
-        strTableColumns = strTableColumns & aryRecord(0) & ", "
-        
-    Next
+    strTableColumns = aryColData(1)
     
     'prepare table columns list
     Me.TableColumns = Left(Trim(strTableColumns), Len(Trim(strTableColumns)) - 1)
     
 Debug.Print Me.TableColumns
     
-    Set Me.Recordset = rs 'Forms!TableFieldList.Recordset = rs
+    Set Me.Recordset = aryColData(0) 'rs 'Forms!TableFieldList.Recordset = rs
     
     Me.Requery
     
@@ -892,8 +902,8 @@ Debug.Print Me.TableColumns
     'tbxColTypeSize.ControlSource =
 
 Exit_Handler:
-    'cleanup
-    Set rs = Nothing
+'    'cleanup
+'    Set rs = Nothing
     Exit Sub
 Err_Handler:
     Select Case Err.Number

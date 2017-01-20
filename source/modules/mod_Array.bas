@@ -210,3 +210,105 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' FUNCTION:     ArrayReplace
+' Description:  iterate through array elements replacing portions of the element string
+' Assumptions:  Array to convert is a one dimensional string
+'               regex to remove
+'                   #s:     "[0-9]+-"
+'                   text:   "-([a-z]|\s|_|&|/|/.|[a-z],\s[a-z]+)+" (used for isolating SOP #s)
+' Parameters:   ary - array data (variant, string or array)
+'               UseRegEx - whether to use regex or not (boolean)
+'               Remove - item to replace (string)
+'               ReplaceWith - item to replace with (optional, string)
+'               iStart - array position to start modification (optional, integer)
+'               iEnd - array position to stop modification (optional, integer)
+' Returns:      array of items after modification (variant array)
+' Throws:       none
+' References:
+'   osknows, April 18, 2013
+'   http://stackoverflow.com/questions/16084909/vba-multiple-matches-within-one-string-using-regular-expressions-execute-method
+' Source/date:  Bonnie Campbell, January 19, 2017 - for NCPN tools
+' Adapted:  -
+' Revisions:
+'   BLC - 1/19/2017 - initial version
+' ---------------------------------
+Public Function ArrayReplace(ary As Variant, _
+            Remove As String, _
+            UseRegEx As Boolean, _
+            Optional ReplaceWith As String = "", _
+            Optional iStart As Integer = 0, _
+            Optional iEnd As Integer = 0 _
+            ) As Variant
+On Error GoTo Err_Handler
+
+    If UseRegEx Then
+        'Dim rgx As New Regex(pattern)
+      'Dim result As String = rgx.Replace(input, replacement)
+        Dim RegEx As New RegExp
+        
+        RegEx.Pattern = Remove
+        RegEx.Global = True     'replace globally!
+        RegEx.IgnoreCase = True
+        
+    End If
+    
+    If Not IsArray(ary) Then
+        Dim strNew As String
+        
+        If UseRegEx Then
+            strNew = RegEx.Replace(ary, ReplaceWith)
+        Else
+            strNew = Replace(ary, Remove, ReplaceWith)
+        End If
+        
+        ArrayReplace = strNew
+        
+    Else
+    
+        Dim aryNew As Variant '() As String
+        Dim i As Integer
+        
+        'set default end
+        If iEnd = 0 Then iEnd = UBound(ary)
+        
+        'iterate through array
+        For i = 0 To UBound(ary)
+            Select Case i
+                Case Is = iStart, _
+                     Is < iStart, _
+                     Is < iEnd, _
+                     Is = iEnd
+                     
+                        If UseRegEx Then
+                            ary(i) = RegEx.Replace(ary(i), ReplaceWith)
+                        Else
+                            ary(i) = Replace(ary(i), Remove, ReplaceWith)
+                        End If
+                
+                Case Else
+                    'do nothing
+            End Select
+        Next
+        
+        'aryNew = ary
+        
+        ArrayReplace = ary
+        
+    End If
+
+    'ArrayReplace = aryNew 'strNew
+
+Exit_Handler:
+    'cleanup
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ArrayReplace[mod_Array])"
+    End Select
+    Resume Exit_Handler
+End Function

@@ -502,11 +502,11 @@ On Error GoTo Err_Handler
     
     Set rs = GetRecords("s_app_enum_list")
         
-    Dim pattern As String
+    Dim Pattern As String
     
     If Not rs.BOF And rs.EOF Then
         If rs.Fields("Label") = "PhotoNumberRegEx" Then
-            pattern = rs.Fields("Summary")
+            Pattern = rs.Fields("Summary")
         End If
     End If
 

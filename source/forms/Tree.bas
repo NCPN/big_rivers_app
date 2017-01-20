@@ -33516,7 +33516,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
                    
             'Save key & text to use when node re-added
             strKey = nodeDragged.key
-            strText = nodeDragged.Text
+            strText = nodeDragged.text
                 
              'selected node = immovable --> highlight selected item only
              If ImmovableNode(nodeDragged) Then Set oTree.SelectedItem = oTree.DropHighlight
@@ -33555,7 +33555,7 @@ Private Sub tvwTree_OLEDragDrop(Data As Object, Effect As Long, _
 
             'Save key & text to use when node re-added
             strKey = nodeDragged.key
-            strText = nodeDragged.Text
+            strText = nodeDragged.text
                 
             'if the selected node is immovable, set the new parent
             If ImmovableNode(nodeDragged) Then Set oTree.SelectedItem = oTree.DropHighlight
@@ -33727,7 +33727,7 @@ On Error GoTo Err_Handler
             Case "tag"
                 item = tvwNode.Tag
             Case "text"
-                item = tvwNode.Text
+                item = tvwNode.text
         End Select
         
         If item = strFind Then
@@ -34015,7 +34015,7 @@ Public Function SavePhotoRecord(node As node) As Boolean
 
 On Error GoTo Err_Handler
 
-Debug.Print "SavePhotoRecord" & node.Text
+Debug.Print "SavePhotoRecord" & node.text
 
 Exit_Handler:
     Exit Function
@@ -34046,7 +34046,7 @@ Public Function DeletePhotoRecord(node As node) As Boolean
 
 On Error GoTo Err_Handler
 
-Debug.Print "DeletePhotoRecord" & node.Text
+Debug.Print "DeletePhotoRecord" & node.text
 
 Exit_Handler:
     Exit Function
@@ -34127,7 +34127,7 @@ On Error GoTo Err_Handler
         ' ------- Photo Record -------
             Set oCommandBarButton = .Controls.Add(msoControlButton)
             With oCommandBarButton
-                .Caption = node.Text
+                .Caption = node.text
                 '.FaceId = 3
                 .Style = msoButtonWrapCaption
                 .OnAction = "=MsgBox(""You clicked node.text"")"

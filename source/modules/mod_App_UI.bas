@@ -1030,10 +1030,12 @@ End Function
 ' References:
 '   pere_de_chipstic, August 5, 2012
 '   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
-' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+'   Allen Browne, June 28, 2006
+'   https://bytes.com/topic/access/answers/506322-using-orderby-multiple-fields
+' Source/date:  Bonnie Campbell, January 19, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 9/13/2016 - initial version
+'   BLC - 1/19/2017 - initial version
 ' ---------------------------------
 Public Sub SortListForm(frm As Form, ctrl As Control)
 On Error GoTo Err_Handler
@@ -1047,12 +1049,12 @@ On Error GoTo Err_Handler
     Select Case Replace(ctrl.Name, "lbl", "")
         Case "HdrID"
             strSort = "ID"
+        Case "SOPNum"
+            strSort = "SOPNumber"
+        Case "SOP"
+            strSort = "FullName"
         Case "Version"
             strSort = "Version"
-        Case "Template"
-            strSort = "TemplateName"
-        Case "Remarks"
-            strSort = "Remarks"
         Case "EffectiveDate"
             strSort = "EffectiveDate"
         Case ""

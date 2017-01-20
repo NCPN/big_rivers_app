@@ -2580,7 +2580,7 @@ End Sub
 Private Sub tbxNumber_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxNumber.Text) > 0 Then _
+    If Len(tbxNumber.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2610,7 +2610,7 @@ End Sub
 Private Sub tbxDistance_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxDistance.Text) > 0 Then _
+    If Len(tbxDistance.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2641,7 +2641,7 @@ End Sub
 Private Sub cbxModalSedSize_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(cbxModalSedSize.Text) > 0 Then _
+    If Len(cbxModalSedSize.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2671,7 +2671,7 @@ End Sub
 Private Sub tbxPctURC_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctURC.Text) > 0 Then _
+    If Len(tbxPctURC.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2701,7 +2701,7 @@ End Sub
 Private Sub tbxPctFines_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctFines.Text) > 0 Then _
+    If Len(tbxPctFines.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2731,7 +2731,7 @@ End Sub
 Private Sub tbxPctWater_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctWater.Text) > 0 Then _
+    If Len(tbxPctWater.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2761,7 +2761,7 @@ End Sub
 Private Sub tbxPctFA_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctFA.Text) > 0 Then _
+    If Len(tbxPctFA.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2791,7 +2791,7 @@ End Sub
 Private Sub tbxPctLitter_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctLitter.Text) > 0 Then _
+    If Len(tbxPctLitter.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2821,7 +2821,7 @@ End Sub
 Private Sub tbxPctWoodyDebris_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctWoodyDebris.Text) > 0 Then _
+    If Len(tbxPctWoodyDebris.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2851,7 +2851,7 @@ End Sub
 Private Sub tbxPctWCC_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctWCC.Text) > 0 Then _
+    If Len(tbxPctWCC.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2881,7 +2881,7 @@ End Sub
 Private Sub tbxPctStandingDead_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPctStandingDead.Text) > 0 Then _
+    If Len(tbxPctStandingDead.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2911,7 +2911,7 @@ End Sub
 Private Sub tbxPlotDensity_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPlotDensity.Text) > 0 Then _
+    If Len(tbxPlotDensity.text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -3199,7 +3199,7 @@ Private Sub btnSubstrateCover_Click()
 On Error GoTo Err_Handler
     
     'open substrate cover form
-    DoCmd.OpenForm "SubstrateCover", acNormal, , , , , "VegPlot|" & tbxID.Text _
+    DoCmd.OpenForm "SubstrateCover", acNormal, , , , , "VegPlot|" & tbxID.text _
         & "|" & Me.cbxEvent.Column(1)
     
 Exit_Handler:
@@ -3444,7 +3444,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.text
     
 Exit_Handler:
     Exit Sub

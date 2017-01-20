@@ -20,8 +20,8 @@ Begin Form
     Width =3480
     DatasheetFontHeight =11
     ItemSuffix =105
-    Right =20175
-    Bottom =12585
+    Right =11955
+    Bottom =9240
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -1723,9 +1723,9 @@ On Error GoTo Err_Handler
             Dim i As Integer
             
             'set focus elsewhere to avoid error
-            Me.tbxSetFocus.Enabled = True
-            Me.tbxSetFocus.SetFocus
-            Me.tbxSetFocus.Enabled = False
+ '           Me.tbxSetFocus.Enabled = True
+ '           Me.tbxSetFocus.SetFocus
+ '           Me.tbxSetFocus.Enabled = False
             
             'hide dropdowns
             For i = 1 To 60 'Me.NumColumns

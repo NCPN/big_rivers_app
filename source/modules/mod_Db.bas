@@ -18,6 +18,7 @@ Option Explicit
 '               BLC, 10/11/2016 - 1.06 - added IsRecordset(), FieldCount(), MaxDbFieldCount()
 '               BLC, 10/20/2016 - 1.07 - added IsLinked()
 '               BLC, 1/9/2017 - 1.08   - added SetTempVar()
+'               BLC, 1/19/2017 - 1.09  - added RetrieveTableColumnData()
 ' =================================
 
 ' ---------------------------------
@@ -743,12 +744,19 @@ End Function
 '   http://stackoverflow.com/questions/3343922/get-column-names
 '   HansUp, October 18, 2013
 '   http://stackoverflow.com/questions/19452952/how-to-count-number-of-fields-in-a-table
+'   Stuart McCall, Sep 24, 2010
+'   https://www.pcreview.co.uk/threads/stop-all-vba-code-running.4025375/
 ' Source/date:  Bonnie Campbell, June 2016
 ' Revisions:    BLC, 6/8/2016 - initial version
+'               BLC, 1/19/2017 - added error handling for non-table inputs
 ' ---------------------------------
 Public Function FetchDbTableFieldInfo(tbl As String) As Variant 'DAO.Recordset
 On Error GoTo Err_Handler
 
+    Dim blnNoTable As Boolean
+    'default
+    blnNoTable = False
+    
     Dim db As DAO.Database
     Dim rs As DAO.Recordset ', rsFields As ADODB.Recordset
     Dim fld As DAO.field
@@ -759,7 +767,10 @@ On Error GoTo Err_Handler
     Set db = CurrentDb()
     
     'determine if table is in database
-    If Not DbTableExists(tbl) Then GoTo Err_Handler
+    If Not DbTableExists(tbl) Then
+        blnNoTable = True
+        GoTo Err_Handler
+    End If
     
     Set rs = db.OpenRecordset(tbl)
     
@@ -817,6 +828,14 @@ Exit_Handler:
 
 Err_Handler:
     Select Case Err.Number
+      Case 0
+        If blnNoTable Then _
+        MsgBox "The table name (" & tbl & ") provided does not exist or was typed " _
+            & "incorrectly." & vbCrLf & vbCrLf _
+            & "Please check it and try again or contact your data manager.", vbCritical, _
+            "Error: Table Doesn't Exist ( FetchDbTableFieldInfo[mod_Db] )"
+        'quit the process! (otherwise additional errors will occur w/in calling subs
+        End
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - FetchDbTableFieldInfo[mod_Db])"
@@ -2012,3 +2031,80 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          RetrieveTableColumnData
+' Description:  Retrieves table column names & attributes
+' Assumptions:  -
+' Parameters:   tbl - table name (string)
+' Returns:      array of column data (variant, 2-element array)
+'                 0 - column data recordset (rs)
+'                 1 - table column data as a comma separated string (string)
+' Throws:       none
+' References:   none
+' Source/date:  -
+' Adapted:      Bonnie Campbell, January 19, 2017 - for NCPN tools
+' Revisions:
+'   BLC - 1/19/2017 - initial version
+' ---------------------------------
+Public Function RetrieveTableColumnData(tbl As String) As Variant
+On Error GoTo Err_Handler
+
+    'retrieve field info
+    Dim aryFieldInfo() As Variant 'string
+    
+    aryFieldInfo = FetchDbTableFieldInfo(tbl)
+    
+    'clear table
+    ClearTable "usys_temp_rs"
+
+    'populate w/ table data
+    Dim rs As DAO.Recordset
+    Dim aryRecord() As String
+    Dim i As Integer
+    Dim strTableColumns As String
+    
+    'default
+    strTableColumns = ""
+    
+    Set rs = CurrentDb.OpenRecordset("usys_temp_rs", dbOpenDynaset)
+    
+    For i = 0 To UBound(aryFieldInfo)
+        
+        'create new record
+        rs.AddNew
+        
+        aryRecord = Split(aryFieldInfo(i), "|")
+        
+        rs!Column = aryRecord(0)
+        rs!ColType = aryRecord(5)
+        rs!IsReqd = IIf(aryRecord(3) = False, 0, 1)
+        rs!Length = aryRecord(2)
+        rs!AllowZLS = IIf(aryRecord(4) = False, 0, 1)
+    
+        'add the new record
+        rs.Update
+        
+        'prepare table columns list
+        strTableColumns = strTableColumns & aryRecord(0) & ", "
+        
+    Next
+    
+    Dim ary() As Variant
+    ary = Array(rs, strTableColumns)
+    
+    RetrieveTableColumnData = ary
+    
+Exit_Handler:
+    'cleanup
+    Set rs = Nothing
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetTempVar[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
