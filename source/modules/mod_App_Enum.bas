@@ -35,7 +35,7 @@ Option Explicit
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
 '               app - 1/20/2017  - 1.02 - latest enum update from db
-'                                         last updated: 1/20/2017 6:16:11 AM
+'                                         last updated: 1/20/2017 11:26:59 AM
 ' =================================
 
 '-----------------------------

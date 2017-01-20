@@ -20,7 +20,7 @@ Begin Form
     Width =3720
     DatasheetFontHeight =11
     ItemSuffix =48
-    Right =16470
+    Right =11955
     Bottom =9240
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -181,6 +181,7 @@ Begin Form
                     ForeShade =50.0
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =215
@@ -206,7 +207,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =675
+            Height =315
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -555,10 +556,10 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    Visible = NotDefault
+                    OverlapFlags =247
                     IMESentenceMode =3
-                    Left =480
-                    Top =360
+                    Left =540
                     Width =780
                     Height =315
                     TabIndex =9
@@ -575,10 +576,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =480
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =1260
-                    LayoutCachedHeight =675
+                    LayoutCachedLeft =540
+                    LayoutCachedWidth =1320
+                    LayoutCachedHeight =315
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000100000000000000ccff99001d0000005b00 ,
                         0x52006f0077004e0075006d005d003d005b007400620078004300530056005000 ,
