@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =85
-    Left =4755
-    Top =3360
-    Right =21315
-    Bottom =14325
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6efd080b49dfe440
@@ -1067,7 +1067,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxPlotDensity"
                     AfterUpdate ="[Event Procedure]"
-                    ControlTipText ="Set plot density 1/x where X = 1, 2, 4, or 8"
+                    ControlTipText ="Set plot density 1/x where X = 1, 2, 3, 4, or 8"
                     ConditionalFormat = Begin
                         0x01000000a4000000020000000100000000000000000000001b00000001000000 ,
                         0x00000000fff2000000000000030000001d000000200000000100000000000000 ,

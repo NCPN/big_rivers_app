@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Linked_Tables
 ' Level:        Framework module
-' Version:      1.02
+' Version:      1.03
 ' Description:  Linked table related functions & subroutines
 '
 ' Adapted from: John R. Boetsch, May 24, 2006
@@ -15,7 +15,10 @@ Option Explicit
 '               BLC, 4/30/2015 - 1.00 - added fxnVerifyLinks, fxnRefreshLinks, fxnVerifyLinkTableInfo,
 '                                fxnMakeBackup from mod_Custom_Functions
 '               BLC, 5/19/2015 - 1.01 - renamed functions, removed fxn prefix
-'               BLC, 6/5/2016  - 1.02 - renamed frm_Progress_Meter to ProgressMeter, removed underscores from fields
+'               BLC, 6/5/2016  - 1.02 - renamed frm_Progress_Meter to ProgressMeter,
+'                                       removed underscores from fields
+'               BLC, 1/24/2017 - 1.03 - revised MakeBackup() to use FilePath vs. File_path
+'                                       (tsys_Link_Dbs)
 ' =================================
 
 ' ---------------------------------
@@ -312,6 +315,7 @@ End Function
 '               -------------------------------------------------------------------------
 '               BLC, 4/30/2015 - moved to mod_Linked_Tables from mod_Custom_Functions
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 1/24/2017 - revised DLookup for tsys_Link_Dbs to check FilePath vs. File_path
 ' =================================
 Public Function MakeBackup()
     On Error GoTo Err_Handler
@@ -358,7 +362,7 @@ Public Function MakeBackup()
         strDbFile = rs![Database]
         ' If the string is not empty and backups are indicated for this back-end ...
         If strDbFile <> "" And _
-            DLookup("[Backups]", "tsys_Link_Dbs", "[File_path]=""" & strDbFile & """") Then
+            DLookup("[Backups]", "tsys_Link_Dbs", "[FilePath]=""" & strDbFile & """") Then
 
             ' Remove the file name from the path
             strPath = ParsePath(strDbFile)

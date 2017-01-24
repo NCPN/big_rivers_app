@@ -8,7 +8,7 @@ Option Explicit
 ' =================================
 ' CLASS:        Person
 ' Level:        Framework class
-' Version:      1.02
+' Version:      1.04
 '
 ' Description:  Person object related properties, events, functions & procedures
 '
@@ -19,6 +19,7 @@ Option Explicit
 '                                        this is an update vs. an insert
 '               BLC - 9/1/2016   - 1.02 - SaveToDb() code cleanup
 '               BLC - 10/15/2016 - 1.03 - adjust SaveToDb() to accommodate non-users
+'               BLC - 1/27/2017  - 1.04 - added IsNPS flag
 ' =================================
 
 '---------------------
@@ -39,6 +40,7 @@ Private m_AccessLevel As Integer
 Private m_AccessRole As String
 Private m_Username As String
 Private m_IsActive As Byte 'using byte to avoid Access vs. SQL boolean issues
+Private m_IsNPS As Byte
 
 '---------------------
 ' Events
@@ -175,6 +177,14 @@ Public Property Get IsActive() As Byte
     IsActive = m_IsActive
 End Property
 
+Public Property Let IsNPS(Value As Byte)
+    m_IsNPS = Value
+End Property
+
+Public Property Get IsNPS() As Byte
+    IsNPS = m_IsNPS
+End Property
+
 Public Property Let Role(Value As String)
     Dim aryRoles() As String
     aryRoles = Split(CONTACT_ROLES, ",")
@@ -295,6 +305,7 @@ End Sub
 '   BLC, 8/8/2016 - added update parameter to identify if this is an update vs. an insert
 '   BLC, 9/1/2016 - commented code cleanup
 '   BLC, 10/14/2016 - adjusted to accommodate photographers who are non-app users
+'   BLC, 1/24/2017 - added IsNPS flag
 '---------------------------------------------------------------------------------------
 Public Sub SaveToDb(Optional IsUpdate As Boolean = False)
 On Error GoTo Err_Handler
@@ -306,7 +317,7 @@ On Error GoTo Err_Handler
     Dim Params() As Variant
     
     'dimension for contact
-    ReDim Params(0 To 12) As Variant
+    ReDim Params(0 To 13) As Variant
 
     With Me
         Params(0) = "Contact"
@@ -321,10 +332,11 @@ On Error GoTo Err_Handler
         Params(8) = IIf(.WorkPhone = 0, Null, .WorkPhone)
         Params(9) = IIf(.WorkExtension = 0, Null, .WorkExtension)
         Params(10) = IIf(.IsActive > 0, .IsActive, 0) 'Null)
+        Params(11) = IIf(.IsNPS > 0, .IsNPS, 0)
         
         If IsUpdate Then
             Template = "u_contact"
-            Params(11) = .ID
+            Params(12) = .ID
         End If
         
         .ID = SetRecord(Template, Params)

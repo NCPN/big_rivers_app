@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =53
-    Left =4035
-    Top =3540
-    Right =16335
-    Bottom =14550
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1242,7 +1242,7 @@ Option Explicit
 ' =================================
 ' Form:         Transducer
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  Transducer form object related properties, Transducer, functions & procedures for UI display
@@ -1254,6 +1254,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 9/1/2016  - 1.03 - btnSave_Click code cleanup
+'               BLC - 1/24/2017 - 1.04 - adjusted to use GetContext()
 ' =================================
 
 '---------------------
@@ -1358,6 +1359,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/3/2016 - initial version
+'   BLC - 1/24/2017 - adjusted to use GetContext()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1367,8 +1369,9 @@ On Error GoTo Err_Handler
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
+    lblContext.Caption = GetContext()
+                 'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
                  'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
                  'Nz(TempVars("Feature"), "")
     

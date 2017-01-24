@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =8205
-    Top =2505
-    Right =19995
-    Bottom =13470
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -156,7 +156,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =60
                     Width =3480
@@ -237,10 +237,11 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin Label
-                    OverlapFlags =85
-                    Left =5820
+                    OverlapFlags =87
+                    TextAlign =3
+                    Left =3660
                     Top =60
-                    Width =1920
+                    Width =4140
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
@@ -248,9 +249,9 @@ Begin Form
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5820
+                    LayoutCachedLeft =3660
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7740
+                    LayoutCachedWidth =7800
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0

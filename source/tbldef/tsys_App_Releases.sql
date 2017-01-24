@@ -4,7 +4,7 @@ CREATE TABLE [tsys_App_Releases] (
   [DatabaseTitle] VARCHAR (100),
   [VersionNumber] VARCHAR (20),
   [FileName] VARCHAR (50),
-  [ReleaseBy_ID] SHORT ,
+  [ReleaseBy_ID] LONG ,
   [ReleaseBy] VARCHAR (50),
   [ReleaseNotes] LONGTEXT ,
   [IsSupported] BYTE ,

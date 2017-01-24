@@ -10,7 +10,7 @@ Begin Form
     DividingLines = NotDefault
     AllowAdditions = NotDefault
     DefaultView =0
-    ScrollBars =0
+    ScrollBars =2
     ViewsAllowed =1
     BorderStyle =1
     PictureAlignment =2
@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    Left =3855
+    Top =2430
+    Right =28545
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1662,7 +1662,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -1673,7 +1673,9 @@ Option Explicit
 '               BLC - 8/2/2016  - 1.01 - use Me.CallingForm
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
-'               BLC - 10/25/2016 - 1.03 - removed ButtonCaption, SeleectedID, SelectedValue properties
+'               BLC - 10/25/2016 - 1.03 - removed ButtonCaption, SeleectedID,
+'                                        SelectedValue properties
+'               BLC - 1/24/2017 - 1.04 - adjust to use GetContext()
 ' =================================
 
 '---------------------
@@ -1757,6 +1759,7 @@ End Property
 ' Revisions:
 '   BLC - 7/5/2016 - initial version
 '   BLC - 8/2/2016 - use Me.CallingForm
+'   BLC - 1/24/2017 - adjust to use GetContext()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1771,10 +1774,11 @@ On Error GoTo Err_Handler
 
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("Feature"), "")
+    lblContext.Caption = GetContext()
+                'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                'Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
+                'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
+                'Nz(TempVars("Feature"), "")
 
     Title = "Unknown Species"
     lblTitle.Caption = ""

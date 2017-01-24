@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =8220
     DatasheetFontHeight =11
-    ItemSuffix =60
-    Left =3360
-    Top =2775
-    Right =23250
-    Bottom =14625
+    ItemSuffix =61
+    Left =3855
+    Top =2430
+    Right =28545
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -1172,6 +1172,86 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin ToggleButton
+                    OverlapFlags =215
+                    Left =2400
+                    Top =1560
+                    Width =270
+                    Height =299
+                    TabIndex =16
+                    Name ="tglIsNPS"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Person is an NPS employee"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2400
+                    LayoutCachedTop =1560
+                    LayoutCachedWidth =2670
+                    LayoutCachedHeight =1859
+                    ForeTint =100.0
+                    Shape =0
+                    Bevel =0
+                    Gradient =12
+                    BackColor =12419407
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =12419407
+                    BorderTint =100.0
+                    HoverColor =13277810
+                    HoverTint =80.0
+                    PressedColor =10250042
+                    PressedShade =80.0
+                    HoverForeTint =100.0
+                    PressedForeThemeColorIndex =0
+                    QuickStyle =23
+                    QuickStyleMask =-5
+                    WebImagePaddingLeft =4
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =4
+                    WebImagePaddingBottom =7
+                    Overlaps =1
+                    Begin
+                        Begin Label
+                            Visible = NotDefault
+                            OverlapFlags =223
+                            Left =1380
+                            Top =3600
+                            Width =1965
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblNoIndicatorSpecies"
+                            Caption ="No Indicator Species"
+                            ControlTipText ="Plot has no indicator species"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =1380
+                            LayoutCachedTop =3600
+                            LayoutCachedWidth =3345
+                            LayoutCachedHeight =3915
+                        End
+                    End
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =1740
+                    Top =1560
+                    Width =600
+                    Height =315
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblIsNPS"
+                    Caption ="NPS?"
+                    ControlTipText ="Person is an NPS employee"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1740
+                    LayoutCachedTop =1560
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =1875
+                End
             End
         End
         Begin FormFooter
@@ -1194,7 +1274,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.07
 ' Basis:        Dropdown form
 '
 ' Description:  Contact form object related properties, Contact, functions & procedures for UI display
@@ -1211,6 +1291,7 @@ Option Explicit
 '               BLC - 10/17/2016 - 1.05 - revise to restore calling form vs. Main/DbAdmin only
 '               BLC - 10/25/2016 - 1.06 - revised to remove strParent calls, Main calling form
 '                                         passed via ClickAction()
+'               BLC - 1/24/2017 - 1.07 - hid header title, added IsNPS flag toggle button
 ' =================================
 
 '---------------------
@@ -1299,6 +1380,7 @@ End Property
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
 '   BLC - 6/27/2016 - adjusted for ToggleForm()
+'   BLC - 1/24/2017 - hid header title, added IsNPS hover color
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1312,6 +1394,7 @@ On Error GoTo Err_Handler
     ToggleForm Me.CallingForm, -1
 
     Title = "Contact"
+    lblTitle.Caption = "" 'hide header title
     Directions = "Enter the contact information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
@@ -1323,6 +1406,7 @@ On Error GoTo Err_Handler
     btnComment.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
     btnUndo.HoverColor = lngGreen
+    tglIsNPS.HoverColor = lngGreen
       
     'defaults
     lblWork.BackColor = lngCream
@@ -1770,6 +1854,39 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - cbxUserRole_AfterUpdate[Contact form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tglIsNPS_AfterUpdate
+' Description:  Toggle button after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/24/2017 - initial version
+' ---------------------------------
+Private Sub tglIsNPS_AfterUpdate()
+On Error GoTo Err_Handler
+
+    'display as checkbox
+    ToggleCaption tglIsNPS, True
+    
+    If tglIsNPS > 0 Then _
+        ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglIsNPS_AfterUpdate[Contact form])"
     End Select
     Resume Exit_Handler
 End Sub

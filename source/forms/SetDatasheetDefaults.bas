@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =41
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =3855
+    Top =2430
+    Right =28545
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -815,7 +815,7 @@ Option Explicit
 ' =================================
 ' Form:         SetDatasheetDefaults
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Set datasheet defaults form object related properties, SetDatasheetDefaults,
@@ -826,6 +826,7 @@ Option Explicit
 ' Revisions:    BLC - 7/1/2016 - 1.00 - initial version
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for mod_App_Data
 '                                        Upsert/SetRecord()
+'               BLC - 1/24/2017 - 1.02 - adjusted to use GetContext()
 ' =================================
 
 '---------------------
@@ -930,6 +931,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
+'   BLC - 1/24/2017 - adjusted to use GetContext()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -939,7 +941,8 @@ On Error GoTo Err_Handler
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") '& Space(2) & ">" & Space(2) & _
+    lblContext.Caption = GetContext()
+              'Nz(TempVars("ParkCode"), "") '& Space(2) & ">" & Space(2) & _
               '   Nz(TempVars("River"), "") & Space(2) '& ">" & Space(2) & _
               '   Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
               '   Nz(TempVars("Feature"), "")

@@ -1,0 +1,6 @@
+CREATE TABLE [xPriority] (
+  [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
+  [Priority] VARCHAR (15),
+  [Icon] VARCHAR (255),
+  [Sequence] SHORT 
+)

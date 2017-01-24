@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.19
+' Version:      1.20
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -30,6 +30,7 @@ Option Explicit
 '               BLC - 10/28/2016 - 1.18 - updated i_task, TempVars("ContactID") -> TempVars("AppUserID")
 '               BLC - 1/9/2017   - 1.19 - revised UpsertRecord from ContactID to ID,
 '                                         added GetRecords templates
+'               BLC - 1/24/2017  - 1.20 - added IsNPS flag for SetRecord() contacts
 ' =================================
 
 ' ---------------------------------
@@ -1388,6 +1389,7 @@ End Function
 '   BLC - 9/21/2016 - updated i_login parameters
 '   BLC - 10/24/2016 - added flag templates (contact, site, mod wentworth)
 '   BLC - 10/28/2016 - updated TempVars("ContactID") -> TempVars("AppUserID"), updated i_task
+'   BLC - 1/24/2017 - added IsNPS flag parameter for contacts
 ' ---------------------------------
 Public Function SetRecord(Template As String, Params As Variant) As Long
 On Error GoTo Err_Handler
@@ -1454,6 +1456,7 @@ On Error GoTo Err_Handler
                     .Parameters("Phone") = Params(8)
                     .Parameters("Ext") = Params(9)
                     .Parameters("IsActiveFlag") = Params(10)
+                    .Parameters("IsNPSFlag") = Params(11)
                     
                 Case "i_contact_access"
                     '-- required parameters --

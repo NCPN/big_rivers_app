@@ -17,13 +17,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7860
+    Width =7920
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4485
-    Top =3585
-    Right =13965
-    Bottom =14580
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -239,9 +239,9 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =3
-                    Left =5820
+                    Left =3720
                     Top =60
-                    Width =1920
+                    Width =4140
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
@@ -249,9 +249,9 @@ Begin Form
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5820
+                    LayoutCachedLeft =3720
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7740
+                    LayoutCachedWidth =7860
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -728,6 +728,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, July 30, 2016
 ' References:   -
 ' Revisions:    BLC - 7/30/2016 - 1.00 - initial version
+'               BLC - 1/24/2017 - 1.01 - adjusted to use GetContext()
 ' =================================
 
 '---------------------
@@ -832,6 +833,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/30/2016 - initial version
+'   BLC - 1/24/2017 - adjusted to use GetContext()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -841,8 +843,9 @@ On Error GoTo Err_Handler
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "")
+    lblContext.Caption = GetContext()
+                 'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("River"), "")
 
     Title = "Report"
     Directions = "Double click the desired report."

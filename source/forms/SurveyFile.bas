@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =57
-    Left =3090
-    Top =3495
-    Right =12330
-    Bottom =14490
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -872,7 +872,7 @@ Option Explicit
 ' =================================
 ' Form:         SurveyFile
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Survey file form object related properties, survey file, functions & procedures for UI display
@@ -883,6 +883,7 @@ Option Explicit
 '               BLC - 7/29/2016 - 1.01 - revised to use UpsertRecord()
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 1/24/2017 - 1.03 - adjusted to use GetContext()
 ' =================================
 
 '---------------------
@@ -987,6 +988,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 9/1/2016 - initial version
+'   BLC - 1/24/2017 - adjusted to use GetContext()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -996,8 +998,9 @@ On Error GoTo Err_Handler
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
+    lblContext.Caption = GetContext()
+                 'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
+                 'Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
                  'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
                  'Nz(TempVars("Feature"), "")
     
