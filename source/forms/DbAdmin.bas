@@ -20,13 +20,13 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =8520
-    Top =5115
-    Right =20475
-    Bottom =14355
+    Left =4275
+    Top =2895
+    Right =12570
+    Bottom =13770
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xe350ab484ae0e440
+        0x11fc963334e1e440
     End
     RecordSource ="SELECT\015\012Project, Release_ID, DataTimeframe,\015\012UserName, Park, BackupP"
         "romptOnStartUp, BackupPromptOnExit,CompactBEOnExit,\015\012WebURL, AppContactNam"
@@ -276,7 +276,7 @@ Begin Form
                     SpecialEffect =5
                     Top =735
                     Width =7859
-                    Name ="Line62"
+                    Name ="lnHdr"
                     LayoutCachedTop =735
                     LayoutCachedWidth =7859
                     LayoutCachedHeight =735
@@ -626,6 +626,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnSpeciesListRpt"
                     Caption ="Species lists"
+                    OnClick ="[Event Procedure]"
                     ControlTipText ="Generate transect species lists"
                     GridlineColor =10921638
 
@@ -815,6 +816,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =215
                     AccessKey =79
@@ -849,6 +851,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =215
                     AccessKey =85
@@ -1033,7 +1036,7 @@ Begin Form
                     Left =5520
                     Top =2820
                     Width =2016
-                    Name ="Line26"
+                    Name ="lnRpt"
                     LayoutCachedLeft =5520
                     LayoutCachedTop =2820
                     LayoutCachedWidth =7536
@@ -1592,7 +1595,6 @@ Begin Form
                                     Locked = NotDefault
                                     AllowAutoCorrect = NotDefault
                                     FELineBreak = NotDefault
-                                    SpecialEffect =3
                                     OldBorderStyle =0
                                     OverlapFlags =215
                                     BackStyle =0
@@ -2085,6 +2087,7 @@ Begin Form
                             End
                         End
                         Begin Page
+                            Enabled = NotDefault
                             OverlapFlags =247
                             Left =75
                             Top =435
@@ -2500,7 +2503,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.06
+' Version:      1.07
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2515,6 +2518,8 @@ Option Explicit
 '               BLC - 10/19/2016 - 1.04 - added Import CSV button, added callingform property
 '               BLC - 1/12/2017 - 1.05 - added Version button
 '               BLC - 1/19/2017 - 1.06 - revised to SOPs from Version (button)
+'               BLC - 1/26/2017 - 1.07 - hid unused defaults, temporarily redirected button
+'                                        clicks to messages
 ' =================================
 
 '---------------------
@@ -2617,6 +2622,7 @@ End Property
 '   BLC - 5/31/2016 - initial version
 '   BLC - 10/19/2016 - adjust to use calling form property
 '   BLC - 1/12/2017 - add versions button
+'   BLC - 1/26/2017 - hid unused defaults
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2634,6 +2640,11 @@ On Error GoTo Err_Handler
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
+    
+    'set mode display
+    tbxAppMode.ForeColor = lngGreen
+    tbxAppMode.BorderStyle = 0  '0-transparent, 1-normal
+    tbxAppMode.TextAlign = 2    '0-general, 1-left, 2-center, 3-right
     
     'set hovers
     btnComment.HoverColor = lngGreen
@@ -2667,6 +2678,16 @@ On Error GoTo Err_Handler
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
     cbxVersion.RowSource = GetTemplate("s_app_releases")
     cbxVersion.ControlSource = "Release_ID" '"ID"
+    
+    tbxAppMode.Value = TempVars("UserAccessLevel")
+    
+    'hide unused defaults
+    lblDatum.Visible = False
+    tbxDatum.Visible = False
+    lblDeclination.Visible = False
+    tbxDeclination.Visible = False
+    lblGPS_model.Visible = False
+    tbxGPS_model.Visible = False
     
     ' Update the DbAdmin switchboard settings according to application mode
     setUserAccess Me
@@ -3278,13 +3299,15 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnTaskList_Click()
 On Error GoTo Err_Handler
 
     ' View the list of tasks associated with sample locations
     If TempVars("Connected") Then
-        DoCmd.OpenForm "TaskList"
+'        DoCmd.OpenForm "TaskList"
+        DisplayMsg "undev"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3318,18 +3341,19 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnBrowser_Click()
 On Error GoTo Err_Handler
 
     ' Open the data browser
     If TempVars("Connected") Then
-        DoCmd.OpenForm "SetDefaults", , , , , , 2
+        'DoCmd.OpenForm "SetDefaults", , , , , , 2
+        DisplayMsg "undev"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
     End If
-
 
 Exit_Handler:
     Exit Sub
@@ -3355,6 +3379,7 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnLookups_Click()
 On Error GoTo Err_Handler
@@ -3364,9 +3389,9 @@ On Error GoTo Err_Handler
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
     Else
-        DoCmd.OpenForm "Lookups"
+'        DoCmd.OpenForm "Lookups"
+        DisplayMsg "undev"
     End If
-
 
 Exit_Handler:
     Exit Sub
@@ -3392,13 +3417,15 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnQA_Click()
 On Error GoTo Err_Handler
 
     ' Open the data validation tool
     If TempVars("Connected") Then
-        DoCmd.OpenForm "QATool"
+'        DoCmd.OpenForm "QATool"
+         DisplayMsg "dev"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3428,18 +3455,19 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnEditLog_Click()
 On Error GoTo Err_Handler
 
     ' Open the edit log form
     If TempVars("Connected") Then
-        DoCmd.OpenForm "EditLog"
+        'DoCmd.OpenForm "EditLog"
+        DisplayMsg "undev"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
     End If
-
 
 Exit_Handler:
     Exit Sub
@@ -3563,13 +3591,15 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnSummaries_Click()
 On Error GoTo Err_Handler
 
     ' Open the data summary tool
     If TempVars("Connected") Then
-        DoCmd.OpenForm "SummaryTool"
+'        DoCmd.OpenForm "SummaryTool"
+        DisplayMsg "undev"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"
@@ -3582,6 +3612,40 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnSummaries_Click[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnSpeciesListRpt_Click
+' Description:  Open the species list tool
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  Bonnie Campbell - January 26, 2017 for NCPN tools
+' Adapted:      -
+' Revisions:    BLC - 1/26/2017 - initial version & temporariliy redirected to undeveloped message
+' ---------------------------------
+Private Sub btnSpeciesListRpt_Click()
+On Error GoTo Err_Handler
+
+    ' Open the species list tool
+    If TempVars("Connected") Then
+'        DoCmd.OpenForm "SummaryTool"
+        DisplayMsg "undev"
+    Else
+        MsgBox "The back-end connections must be fixed first", vbOKOnly, _
+            "Not connected to back-end database"
+    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSpeciesListRpt_Click[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -3600,6 +3664,7 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnTaskListRpt_Click()
 On Error GoTo Err_Handler
@@ -3611,6 +3676,9 @@ On Error GoTo Err_Handler
         GoTo Exit_Handler
     End If
 
+    DisplayMsg "undev"
+    GoTo Exit_Handler
+    
     ' Generate the task list report
     Dim strRptName As String
     Dim strMsg As String
@@ -3820,6 +3888,7 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnNavReport_Click()
 On Error GoTo Err_Handler
@@ -3830,6 +3899,9 @@ On Error GoTo Err_Handler
             "Not connected to back-end database"
         GoTo Exit_Handler
     End If
+
+    DisplayMsg "undev"
+    GoTo Exit_Handler
 
     ' Generate the transect navigation report
     Dim strRptName As String
@@ -3924,6 +3996,7 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnQAReport_Click()
 On Error GoTo Err_Handler
@@ -3934,6 +4007,9 @@ On Error GoTo Err_Handler
             "Not connected to back-end database"
         GoTo Exit_Handler
     End If
+
+    DisplayMsg "undev"
+    GoTo Exit_Handler
 
     ' Generate the QA report
     Dim strRptName As String
@@ -4013,6 +4089,7 @@ End Sub
 '               BLC - 6/12/2015 - replaced TempVars.item("... with TempVars("...
 '               BLC, 6/30/2015 - updated cmd button prefixes to btn
 '               BLC - 6/12/2016 - adapted for big rivers
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnNavCoords_Click()
 On Error GoTo Err_Handler
@@ -4023,6 +4100,9 @@ On Error GoTo Err_Handler
             "Not connected to back-end database"
         GoTo Exit_Handler
     End If
+
+    DisplayMsg "undev"
+    GoTo Exit_Handler
 
     ' Export navigation target coordinates for pre-season upload to GPS units
     Dim strQryName As String
@@ -4098,13 +4178,15 @@ End Sub
 ' Source/date:  John Boetsch - NCCN Landbirds db by DbAdmin control set
 ' Adapted:      Bonnie Campbell, June 30, 2016 for NCPN big rivers tool
 ' Revisions:    BLC - 6/30/2016 - initial version
+'               BLC - 1/26/2017 - temporariliy redirected to undeveloped message
 ' ---------------------------------
 Private Sub btnUISetup_Click()
 On Error GoTo Err_Handler
 
     ' Open the UI setup tool
     If TempVars("Connected") Then
-        DoCmd.OpenForm "SummaryTool"
+        'DoCmd.OpenForm "SummaryTool"
+        DisplayMsg "undev"
     Else
         MsgBox "The back-end connections must be fixed first", vbOKOnly, _
             "Not connected to back-end database"

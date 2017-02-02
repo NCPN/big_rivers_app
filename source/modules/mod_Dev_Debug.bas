@@ -1338,3 +1338,33 @@ CurrentProject.Connection.Execute strSQL
 
     
 End Sub
+
+
+
+Public Function FixQDF(Template As String)
+Dim db As DAO.Database
+Dim qdf As DAO.QueryDef
+Dim strSQL As String
+
+    Set db = CurrentDb
+
+    With db
+        Set qdf = .QueryDefs("usys_temp_qdf")
+
+        With qdf
+
+            'check if record exists in site
+            '.sql = GetTemplate(Template)
+
+            strSQL = "PARAMETERS vers FLOAT, sflag INTEGER, contxt TEXT(255), syntx TEXT(10)," _
+                     & "tname TEXT(255), prms TEXT(255), tmpl TEXT(500), rmks TEXT(255), effdate DATE, CID LONG, LMID LONG;" _
+                     & "INSERT INTO tsys_Db_templates (Version, IsSupported, Context, Syntax, TemplateName, Params, Template, Remarks, EffectiveDate, RetireDate, CreateDate, CreatedBy_ID, LastModified, LastModifiedBy_ID)" _
+                     & "VALUES" _
+                     & "([vers],[sflag],[contxt],[syntx],[tname],[prms],[tmpl],[rmks],[effdate]," _
+                     & "NULL, NOW, [CID],NOW, [LMID]);"
+    'Debug.Print strSQL
+            .sql = strSQL
+        End With
+
+    End With
+End Function

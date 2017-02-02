@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =57
-    Left =3855
-    Top =2430
-    Right =24030
-    Bottom =15015
+    ItemSuffix =59
+    Left =4440
+    Top =3315
+    Right =12735
+    Bottom =14190
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -208,7 +208,7 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6660
+                    Left =7020
                     Top =900
                     Width =720
                     ForeColor =4210752
@@ -217,9 +217,9 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =7020
                     LayoutCachedTop =900
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =7740
                     LayoutCachedHeight =1260
                     BackColor =14136213
                     BorderColor =14136213
@@ -235,7 +235,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =3360
+                    Left =4320
                     Top =1020
                     Width =705
                     Height =315
@@ -245,9 +245,9 @@ Begin Form
                     Name ="lblType"
                     Caption ="Type"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3360
+                    LayoutCachedLeft =4320
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =4065
+                    LayoutCachedWidth =5025
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -292,31 +292,76 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
-                Begin Label
+                Begin CommandButton
                     OverlapFlags =85
-                    TextAlign =2
-                    Left =4320
-                    Top =1020
-                    Width =1605
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblSource"
-                    Caption ="Source"
+                    Left =6180
+                    Top =900
+                    Width =720
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="btnUpload"
+                    Caption ="upload"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Upload file"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4320
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =5925
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000707880ff608090ff607880ff507080ff506070ff405860ff ,
+                        0x405060ff404850ff404850ff404040ff303030ff202020ff1018208000000000 ,
+                        0x0000000000000000708090ff80a0a0ff70b0d0ff0090d0ff0090d0ff1090d0ff ,
+                        0x30a0d0ff50a8d0ff80b8d0ff80b8d0ff70a8c0ff5090b0ff305860ff30384050 ,
+                        0x0000000000000000708090ff80c0d0ff80a0b0ff80e0ffff60d0ffff60d0ffff ,
+                        0x70d0ffff509860ff308040ff206030ff90b8a0ff80c0e0ff5088a0ff303840c0 ,
+                        0xfff8f00000000000708890ff80d0f0ff80a0b0ff80c0d0ff70d8ffff70d8ffff ,
+                        0x80d8ffffb0e0ffff308040ff60a870ff206830ff80a890ff70b0e0ff406070ff ,
+                        0x2038403000000000708890ff80d8f0ff80c8e0ff80a0b0ff80e0ffff70d8ffff ,
+                        0x80d8ffffa0e0ffffd0f0ffff308040ff60a870ff206030ffa0d8f0ff5088a0ff ,
+                        0x30587090fff8f000808890ff90e0f0ff90e0ffff90a0b0ff90b8c0ff80d8ffff ,
+                        0x80d8ffffb0e8ffffe0f0ffff308040ff80d8a0ff206030ffd0e8f0ff80c8e0ff ,
+                        0x707880f0705040608090a0ff90e0f0ffa0e8ffff80c0e0ff90a0b0ff90e0ffff ,
+                        0xb0e8ffff308050ff308040ff60a870ff80d8a0ff308040ff206830ff307040ff ,
+                        0x90c0e0ff706860d08090a0ffa0e8f0ffa0e8ffffa0e8ffff80a8b0ff90a8b0ff ,
+                        0xa0b8c0ffb0c0b0ff308050ff70c080ff80d8a0ff50a060ff408050ffb0c0b0ff ,
+                        0xa0a8b0ff8090a0ff8098a0ffa0e8f0ffa0f0ffffa0e8ffffa0e8ffff80d8ffff ,
+                        0xc0b0a0fffff8f0ffd0e0d0ff408050ff60a870ff408050ffc0d0c0fffff8f0ff ,
+                        0xffe8e0ff705040ff8098a0ffa0f0f0ffb0f0f0ffa0f0ffffa0e8ffffa0e8ffff ,
+                        0xc0a8a0ffd0c0b0ffe0d0c0ffc0c8c0ff408050ffc0c8c0ffe0c8c0ffd0b8b0ff ,
+                        0xc0b0a0ff604830ff8098a0ffa0d0e0ffb0f0f0ffb0f0f0ffa0f0ffffa0e8ffff ,
+                        0xb0a8a0fffffffffffff8ffffd0c0c0fffff8f0fffff0e0ffd0b8b0fffff8f0ff ,
+                        0xffe8e0ff604830ff8098a0508098a0ff8098a0ff8098a0ff8098a0ff8098a0ff ,
+                        0xb0a8a0ffc0b0a0ffc0b8a0ffc0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ffc0b0a0ff ,
+                        0xc0b0a0ff604830ff000000000000000000000000000000000000000000000000 ,
+                        0xb0a8a0ffffffffffffffffffc0b0a0fffff8fffffff0f0ffc0b0a0fffff8f0ff ,
+                        0xfff0f0ff604830ff000000000000000000000000000000000000000000000000 ,
+                        0xb09080ffb08060ffb08060ffb08060ffb07860ffb07860ffb07860ffb07860ff ,
+                        0xb08060ffb08060ff000000000000000000000000000000000000000000000000 ,
+                        0xb08870ffe0c8b0ffe0c0b0ffb08060ffe0c0b0ffe0c0b0ffb07860ffe0b8b0ff ,
+                        0xe0b8b0ffb08060ff000000000000000000000000000000000000000000000000 ,
+                        0xb08870ffc09080ffc09070ffb08870ffb08070ffb08060ffb08060ffb08060ff ,
+                        0xb08060ffb08060ff
+                    End
+
+                    LayoutCachedLeft =6180
+                    LayoutCachedTop =900
+                    LayoutCachedWidth =6900
+                    LayoutCachedHeight =1260
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
                 End
             End
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5880
+            Height =6120
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -486,7 +531,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =1380
+                    Top =1620
                     Width =7650
                     Height =4380
                     TabIndex =6
@@ -496,25 +541,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =1380
+                    LayoutCachedTop =1620
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =5760
+                    LayoutCachedHeight =6000
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =1260
+                    Top =1500
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =1260
+                    LayoutCachedTop =1500
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5880
+                    LayoutCachedHeight =6120
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -546,9 +591,9 @@ Begin Form
                 Begin ComboBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =3360
+                    Left =4260
                     Top =60
-                    Width =900
+                    Width =1620
                     Height =315
                     BackColor =65535
                     BorderColor =10921638
@@ -565,9 +610,9 @@ Begin Form
                     AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3360
+                    LayoutCachedLeft =4260
                     LayoutCachedTop =60
-                    LayoutCachedWidth =4260
+                    LayoutCachedWidth =5880
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -586,8 +631,9 @@ Begin Form
                     IMESentenceMode =3
                     Left =900
                     Top =60
-                    Width =2340
+                    Width =3240
                     Height =315
+                    FontSize =9
                     TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
@@ -605,7 +651,7 @@ Begin Form
 
                     LayoutCachedLeft =900
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3240
+                    LayoutCachedWidth =4140
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -620,7 +666,7 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =1020
+                    Top =1260
                     Width =7860
                     Height =315
                     FontSize =9
@@ -634,9 +680,9 @@ Begin Form
                     Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =1020
+                    LayoutCachedTop =1260
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =1335
+                    LayoutCachedHeight =1575
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -646,7 +692,7 @@ Begin Form
                     OverlapFlags =223
                     TextAlign =2
                     Left =4320
-                    Top =840
+                    Top =1080
                     Width =825
                     Height =600
                     FontSize =20
@@ -658,20 +704,20 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
-                    LayoutCachedTop =840
+                    LayoutCachedTop =1080
                     LayoutCachedWidth =5145
-                    LayoutCachedHeight =1440
+                    LayoutCachedHeight =1680
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
-                    Left =4320
-                    Top =60
-                    Width =1560
+                    Left =900
+                    Top =480
+                    Width =2820
                     Height =315
                     TabIndex =7
                     BackColor =65535
@@ -688,10 +734,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4320
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =5880
-                    LayoutCachedHeight =375
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =3720
+                    LayoutCachedHeight =795
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000fff20000150000005b00 ,
@@ -764,6 +810,7 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -828,12 +875,13 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                    Overlaps =1
                 End
                 Begin Label
                     FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =4320
-                    Top =420
+                    Left =3840
+                    Top =480
                     Width =1560
                     Height =360
                     FontSize =8
@@ -843,12 +891,54 @@ Begin Form
                     Name ="lblSourceHint"
                     Caption ="Source hint"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4320
-                    LayoutCachedTop =420
-                    LayoutCachedWidth =5880
-                    LayoutCachedHeight =780
+                    LayoutCachedLeft =3840
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =5400
+                    LayoutCachedHeight =840
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =215
+                    TextAlign =2
+                    Top =900
+                    Width =7860
+                    Height =300
+                    FontSize =8
+                    LeftMargin =72
+                    TopMargin =72
+                    RightMargin =72
+                    BorderColor =8355711
+                    ForeColor =690698
+                    Name ="lblUploadFile"
+                    ControlTipText ="Selected upload file (not yet uploaded)"
+                    GridlineColor =10921638
+                    LayoutCachedTop =900
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =1200
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =87
+                    TextAlign =2
+                    Left =120
+                    Top =480
+                    Width =780
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =4138256
+                    Name ="lblSource"
+                    Caption ="Source"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =900
+                    LayoutCachedHeight =795
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
             End
         End
@@ -1005,9 +1095,15 @@ On Error GoTo Err_Handler
                  'Nz(TempVars("Feature"), "")
     
     Title = "SurveyFile"
-    Directions = "Enter the survey file information and click save."
+    lblTitle.Caption = "" 'hide header title
+    Directions = "Enter the survey file information and click save." _
+                    & vbCrLf & "Validate points so they are fully imported."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
+    lblUploadFile.ForeColor = lngBlue
+    lblUploadFile.backstyle = 1             'normal
+    lblUploadFile.BackColor = lngLtSalmon
+    btnUpload.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
             
@@ -1017,12 +1113,14 @@ On Error GoTo Err_Handler
     lblSourceHint.Caption = "RTK, TS, USGS, etc."
     
     'set hover
+    btnUpload.HoverColor = lngGreen
     btnComment.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
     btnUndo.HoverColor = lngGreen
       
     'defaults
     tbxIcon.ForeColor = lngRed
+    btnUpload.Enabled = False
     btnComment.Enabled = False
     btnSave.Enabled = False
     tbxFileName.BackColor = lngYellow
@@ -1036,6 +1134,26 @@ On Error GoTo Err_Handler
   
     'initialize values
     ClearForm Me
+
+    'determine if form was opened by upload --> if so, populate fields
+    If Len(Me.OpenArgs) > 0 Then
+        Dim strPath As String, strFile As String
+        
+        strPath = Me.OpenArgs
+        
+        'set filename
+        strFile = Right(strPath, Len(strPath) - InStrRev(strPath, "\"))
+        
+        tbxFileName = strFile
+        lblUploadFile.Caption = Me.OpenArgs
+        lblUploadFile.Visible = True
+        
+        lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & _
+                                        StringFromCodepoint(uRTriangle)
+        lblMsg.Caption = "File not yet uploaded."
+        lblMsgIcon.ForeColor = lngYellow
+        lblMsg.ForeColor = lngYellow
+    End If
 
 Exit_Handler:
     Exit Sub
@@ -1094,7 +1212,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+'      If tbxID > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1246,6 +1364,9 @@ On Error GoTo Err_Handler
     
     UpsertRecord Me
     
+    'enable upload after file is chosen
+    If Me.tbxID > 0 Then btnUpload.Enabled = True
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1283,6 +1404,58 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnComment_Click[SurveyFile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnUpload_Click
+' Description:  Upload button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 26, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/26/2017 - initial version
+' ---------------------------------
+Private Sub btnUpload_Click()
+On Error GoTo Err_Handler
+    
+    Dim StartFolder As String, strPath As String, strFile As String
+    
+    'handle upload
+    StartFolder = GetSpecialFolderPath("FOLDERID_Recent")
+    
+    strPath = BrowseFolder("Select survey file to upload", "Confirm File", _
+                            StartFolder, , msoFileDialogFilePicker, "Survey files-CSV")
+    
+    If Len(strPath) > 0 Then
+        'upload survey file
+        UploadCSVFile strPath
+    
+        'set filename
+        strFile = Right(strPath, Len(strPath) - InStrRev(strPath, "\"))
+    
+        'revise message
+        lblUploadFile.Caption = strPath & " UPLOADED!"
+    
+        lblMsg.Caption = "Points uploaded to temp table - review & commit!"
+    
+        'set Filename
+        tbxFileName = strFile
+    
+    End If
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnUpload_Click[SurveyFile form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1330,6 +1503,7 @@ End Sub
 ' Revisions:
 '   BLC - 9/1/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
+'   BLC - 1/26/2017 - revised to include filename, source org & survey type
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1340,9 +1514,11 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-'    If Len(tbxNumber.Value) > 0 And IsDate(tbxSampleDate.Value) Then
+    If Len(tbxFileName.Value) > 0 And _
+        Len(tbxSourceOrg.Value) > 0 And _
+        Len(cbxSurveyType.Value) > 0 Then
         isOK = True
-'    End If
+    End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK

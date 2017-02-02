@@ -22,6 +22,7 @@ Option Explicit
 '               BLC, 12/8/2016 - 1.09 - added text alignment constants
 '               BLC, 12/12/2016 - 1.10 - added scrolling constants & function
 '               BLC, 1/11/2017 - 1.11 - added SetToggleCaption()
+'               BLC, 1/26/2017 - 1.12 - added DisplayMsg()
 ' =================================
 
 ' ---------------------------------
@@ -1480,4 +1481,56 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - AddControl[mod_UI])"
     End Select
     Resume Exit_Handler
+End Sub
+' ---------------------------------
+'  Messages
+' ---------------------------------
+
+' ---------------------------------
+' SUB:          DisplayMsg
+' Description:  display a message specific for the database
+' Assumptions:  -
+' Parameters:   msg - type of message to display (string)
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:  Bonnie Campbell, January 26, 2017 - for NCPN tools
+' Revisions:
+'   BLC - 1/26/2017  - initial version
+' ---------------------------------
+Public Sub DisplayMsg(msg As String)
+On Error GoTo Err_Handler
+
+    Dim msgText As String, msgType As String, msgTitle As String
+    
+    Select Case msg
+        Case "mx"   'fixing
+            msgText = "Functionality currently under maintenance."
+            msgType = "caution"
+            msgTitle = "Feature Unavailable"
+        Case "dev"  'in progress
+            msgText = "Functionality under development."
+            msgType = "caution"
+            msgTitle = "Feature Unavailable"
+        Case "undev" 'undeveloped functionality
+            msgText = "Functionality not yet defined && developed."
+            msgType = "caution"
+            msgTitle = "Feature Unavailable"
+    End Select
+
+    'show msg
+    DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+        "msg" & PARAM_SEPARATOR & msgText & _
+        "|Type" & PARAM_SEPARATOR & msgType & "|Title" & PARAM_SEPARATOR & msgTitle
+
+Exit_Sub:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DisplayMsg[mod_UI])"
+    End Select
+    Resume Exit_Sub
 End Sub

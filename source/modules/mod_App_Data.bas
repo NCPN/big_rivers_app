@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.20
+' Version:      1.21
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -31,6 +31,8 @@ Option Explicit
 '               BLC - 1/9/2017   - 1.19 - revised UpsertRecord from ContactID to ID,
 '                                         added GetRecords templates
 '               BLC - 1/24/2017  - 1.20 - added IsNPS flag for SetRecord() contacts
+'               BLC - 2/1/2017   - 1.21 - updated UpsertRecord() to handle form upserts
+'                                         for forms w/o lists/msg & msg icons
 ' =================================
 
 ' ---------------------------------
@@ -1191,6 +1193,11 @@ On Error GoTo Err_Handler
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
                 
+                Case "s_feature_by_park_site"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+                
                 Case "s_feature_id"
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
@@ -1204,7 +1211,7 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
-                                        
+                                                                                
                 Case "s_get_parks"
                     '-- required parameters --
                                     
@@ -1336,6 +1343,11 @@ On Error GoTo Err_Handler
                     .sql = Replace(.sql, 8, TempVars("Blanks"))
                     
                     '-- optional parameters --
+        
+                Case "s_vegplot_number_by_site"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
                 
                 Case "s_vegtransect_by_feature"
                     '-- required parameters --
@@ -1343,11 +1355,21 @@ On Error GoTo Err_Handler
                     .Parameters("scode") = TempVars("SiteCode")
                     .Parameters("feat") = TempVars("Feature")
                 
+'                Case "s_vegtransect_by_park_site"
+'                    '-- required parameters --
+'                    .Parameters("pkcode") = TempVars("ParkCode")
+'                    .Parameters("scode") = TempVars("SiteCode")
+                
                 Case "s_vegtransect_by_site"
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
                 
+                Case "s_vegtransect_number_by_site"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
+                    
                 Case "s_tsys_datasheet_defaults"
                     '-- required parameters --
                     .Parameters("parkID") = TempVars("ParkID")
@@ -1607,6 +1629,20 @@ On Error GoTo Err_Handler
                     '.Parameters("CreatedByID") = TempVars("ContactID") 'CreatedByID
                     '.Parameters("LastModified") = Now()                'LastModified
                     .Parameters("LMID") = TempVars("AppUserID") 'ContactID")  'lastmodifiedID
+                
+                Case "i_template"
+                    '-- required parameters --
+                    .Parameters("tname") = Params(1)        'TemplateName
+                    .Parameters("contxt") = Params(2)       'Context
+                    .Parameters("tmpl") = Params(3)         'TemplateSQL
+                    .Parameters("rmks") = Params(4)         'Remarks
+                    .Parameters("effdate") = Params(5)      'EffectiveDate
+                    .Parameters("cid") = Params(6)          'CreatedBy_ID (contactID)
+                    .Parameters("prms") = Params(7)         'Params
+                    .Parameters("syntx") = Params(8)        'Syntax
+                    .Parameters("vers") = Params(9)         'Version
+                    .Parameters("sflag") = Params(10)       'IsSupported
+                    .Parameters("lmid") = TempVars("AppUserID") 'lastmodifiedID
                 
                 Case "i_transducer"
                     '-- required parameters --
@@ -1947,6 +1983,7 @@ Exit_Handler:
     Exit Function
 Err_Handler:
     Select Case Err.Number
+
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - SetRecord[mod_App_Data])"
@@ -1976,6 +2013,7 @@ End Function
 '   BLC - 10/4/2016 - added template, adjusted for form w/o list
 '   BLC - 10/14/2016 - updated to accommodate non-users for contacts
 '   BLC - 1/9/2017 - revised retrieve ID from ContactID to ID, revised i_event to use TempVar("SiteID")
+'   BLC - 2/1/2017 - handle form upserts for forms w/o lists/msg & msg icons
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -2217,6 +2255,8 @@ On Error GoTo Err_Handler
                     Set s = Nothing
                 End With
                 
+            Case "SurveyFile"
+            
             Case "Template"
                 Dim tpl As New Template
                 
@@ -2269,12 +2309,13 @@ On Error GoTo Err_Handler
                 With tpl
                     .TemplateName = frm!tbxTemplate
                     .Context = .TemplateName
-                    .IsSupported = 1
+                    .IsSupported = 1 '.IsSupported default = 1 (i.e. yes)
                     .Version = frm!tbxVersion
                     .Syntax = frm!cbxSyntax
                     .TemplateSQL = frm!tbxTemplateSQL
                     .EffectiveDate = frm!tbxEffectiveDate
-                    .Params = GetParamsFromSQL(.TemplateSQL)
+                    '.Params handled when .TemplateSQL set
+                    '.Params = GetParamsFromSQL(.TemplateSQL)
                     .Remarks = frm!tbxRemarks
                     .ContactID = TempVars("AppUserID")
                     
@@ -2504,7 +2545,8 @@ On Error GoTo Err_Handler
     'where form & SQL are attempting to save record
     'frm.Dirty = False
     
-    If frm.Dirty Then
+'    If frm.Dirty Then
+    If frm.Dirty And Not NoList Then
         Debug.Print "UpsertRecord " & frm.Name & " DIRTY"
         'frm.Dirty = False
         
@@ -2525,12 +2567,15 @@ On Error GoTo Err_Handler
     
     frm.Requery
     
-    'clear messages & icon
-    frm!lblMsgIcon.Caption = ""
-    frm!lblMsg.Caption = ""
-    
-    'refresh list
-    frm!list.Requery
+    'handle list forms - update messages, icon & refresh
+    If Not NoList Then
+        'clear messages & icon
+        frm!lblMsgIcon.Caption = ""
+        frm!lblMsg.Caption = ""
+        
+        'refresh list
+        frm!list.Requery
+    End If
     
     'exit
     GoTo Exit_Handler

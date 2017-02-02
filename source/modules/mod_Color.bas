@@ -78,6 +78,8 @@ Public Const lngLtSienna As Long = 3497896  '?RGB(168, 95, 53) #A85F35
 Public Const lngSpringGreen As Long = 32768 '?RGB(0,128,0) #008000
 Public Const lngTan As Long = 9221330       '?RGB(210,180,140) #D2B48C tan
 Public Const lngBurlywood As Long = 8894686 '?RGB(222,184,135) burlywood
+Public Const lngLtRose As Long = 11845354   '?RGB(234,190,180) #EABEB4
+Public Const lngRose As Long = 11843306     '?RGB(234,182,180) #EAB6B4
 
 ' ---------------------------------
 '  Subroutines & Functions

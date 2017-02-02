@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =3780
-    Top =1995
-    Right =11640
-    Bottom =12600
+    Left =6360
+    Top =2940
+    Right =14220
+    Bottom =13545
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -726,7 +726,7 @@ Option Explicit
 ' =================================
 ' Form:         Site
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Site form object related properties, events, functions & procedures for UI display
@@ -737,6 +737,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 10/20/2016 - 1.02 - adjusted to use GetContext(), added CallingForm property
+'               BLC - 1/31/2017  - 1.03 - added ClearForm to clear form fields after save
 ' =================================
 
 '---------------------
@@ -1147,11 +1148,14 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 1/17/2017 - code cleanup
+'   BLC - 1/31/2017 - added ClearForm to clear form fields after save
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     UpsertRecord Me
+    
+    ClearForm Me
     
 Exit_Handler:
     Exit Sub

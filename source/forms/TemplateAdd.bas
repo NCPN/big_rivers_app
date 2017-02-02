@@ -8,7 +8,6 @@ Begin Form
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
-    AllowEdits = NotDefault
     DataEntry = NotDefault
     DefaultView =0
     ScrollBars =2
@@ -19,16 +18,15 @@ Begin Form
     GridY =24
     Width =7620
     DatasheetFontHeight =11
-    ItemSuffix =44
-    Left =8205
-    Top =2490
-    Right =16980
-    Bottom =13470
+    ItemSuffix =45
+    Left =4440
+    Top =3315
+    Right =17685
+    Bottom =14190
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x0680db994fd0e440
+        0x40a16385ede1e440
     End
-    RecordSource ="tsys_Db_Templates"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -133,7 +131,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =2055
+            Height =2700
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -158,7 +156,7 @@ Begin Form
                     Left =120
                     Top =120
                     Width =7260
-                    Height =1500
+                    Height =1980
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
@@ -167,7 +165,7 @@ Begin Form
                     LayoutCachedLeft =120
                     LayoutCachedTop =120
                     LayoutCachedWidth =7380
-                    LayoutCachedHeight =1620
+                    LayoutCachedHeight =2100
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -175,8 +173,8 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =215
                     TextFontFamily =2
-                    Left =6840
-                    Top =240
+                    Left =6660
+                    Top =1440
                     Width =600
                     Height =660
                     FontSize =8
@@ -212,10 +210,10 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6840
-                    LayoutCachedTop =240
-                    LayoutCachedWidth =7440
-                    LayoutCachedHeight =900
+                    LayoutCachedLeft =6660
+                    LayoutCachedTop =1440
+                    LayoutCachedWidth =7260
+                    LayoutCachedHeight =2100
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -233,7 +231,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =1200
-                    Top =1740
+                    Top =2280
                     Width =615
                     Height =315
                     FontWeight =500
@@ -244,16 +242,16 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =1200
-                    LayoutCachedTop =1740
+                    LayoutCachedTop =2280
                     LayoutCachedWidth =1815
-                    LayoutCachedHeight =2055
+                    LayoutCachedHeight =2595
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =5400
-                    Top =1740
+                    Top =2280
                     Width =675
                     Height =315
                     FontWeight =500
@@ -263,9 +261,9 @@ Begin Form
                     Caption ="Syntax"
                     GridlineColor =10921638
                     LayoutCachedLeft =5400
-                    LayoutCachedTop =1740
+                    LayoutCachedTop =2280
                     LayoutCachedWidth =6075
-                    LayoutCachedHeight =2055
+                    LayoutCachedHeight =2595
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -292,7 +290,7 @@ Begin Form
                     Width =360
                     Height =315
                     FontSize =9
-                    TabIndex =2
+                    TabIndex =8
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -316,7 +314,7 @@ Begin Form
                     Left =6600
                     Width =720
                     FontSize =14
-                    TabIndex =1
+                    TabIndex =7
                     ForeColor =255
                     Name ="btnDelete"
                     Caption ="í ½í·´"
@@ -352,12 +350,10 @@ Begin Form
                     Width =4020
                     Height =315
                     FontSize =9
-                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxTemplate"
-                    ControlSource ="TemplateName"
                     ConditionalFormat = Begin
                         0x0100000094000000020000000100000000000000000000001500000001000000 ,
                         0x00000000fff20000000000000300000016000000190000000100000000000000 ,
@@ -397,11 +393,10 @@ Begin Form
                     Width =360
                     Height =315
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =9
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxID"
-                    ControlSource ="ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =600
@@ -419,12 +414,11 @@ Begin Form
                     Width =1020
                     Height =315
                     FontSize =9
-                    TabIndex =7
+                    TabIndex =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxVersion"
-                    ControlSource ="Version"
                     ConditionalFormat = Begin
                         0x0100000092000000020000000100000000000000000000001400000001000000 ,
                         0x00000000fff20000000000000300000015000000180000000100000000000000 ,
@@ -460,12 +454,12 @@ Begin Form
                     Width =1020
                     Height =315
                     FontSize =9
-                    TabIndex =6
+                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxEffectiveDate"
-                    ControlSource ="EffectiveDate"
+                    Format ="Short Date"
                     ConditionalFormat = Begin
                         0x01000000b0000000020000000100000000000000000000002300000001000000 ,
                         0x00000000fff20000000000000300000024000000270000000100000000000000 ,
@@ -503,12 +497,11 @@ Begin Form
                     Width =4140
                     Height =720
                     FontSize =9
-                    TabIndex =8
+                    TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRemarks"
-                    ControlSource ="Remarks"
                     ConditionalFormat = Begin
                         0x0100000092000000020000000100000000000000000000001400000001000000 ,
                         0x00000000fff20000000000000300000015000000180000000100000000000000 ,
@@ -535,10 +528,12 @@ Begin Form
                     End
                 End
                 Begin CommandButton
+                    TabStop = NotDefault
                     OverlapFlags =215
                     Left =6780
                     Top =60
                     Width =720
+                    TabIndex =6
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Save"
@@ -601,7 +596,6 @@ Begin Form
                 Begin ComboBox
                     LimitToList = NotDefault
                     TabStop = NotDefault
-                    RowSourceTypeInt =1
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
@@ -610,7 +604,7 @@ Begin Form
                     Width =900
                     Height =300
                     FontSize =9
-                    TabIndex =4
+                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
@@ -623,8 +617,7 @@ Begin Form
                         0x0000
                     End
                     Name ="cbxSyntax"
-                    ControlSource ="Syntax"
-                    RowSourceType ="Value List"
+                    RowSourceType ="Table/Query"
                     DefaultValue ="\"T-SQL\""
                     GridlineColor =10921638
 
@@ -705,12 +698,11 @@ Begin Form
                     Width =6120
                     Height =2040
                     FontSize =9
-                    TabIndex =9
+                    TabIndex =3
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxTemplateSQL"
-                    ControlSource ="Template"
                     ConditionalFormat = Begin
                         0x010000009c000000020000000100000000000000000000001900000001000000 ,
                         0x00000000fff2000000000000030000001a0000001d0000000100000000000000 ,
@@ -755,7 +747,7 @@ Begin Form
                 End
                 Begin Label
                     FontItalic = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =1140
                     Top =420
                     Width =4020
@@ -773,6 +765,47 @@ Begin Form
                     LayoutCachedHeight =1020
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    TextAlign =1
+                    IMESentenceMode =3
+                    Left =1140
+                    Top =780
+                    Width =4020
+                    Height =315
+                    FontSize =9
+                    TabIndex =10
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxContext"
+                    ConditionalFormat = Begin
+                        0x0100000094000000020000000100000000000000000000001500000001000000 ,
+                        0x00000000fff20000000000000300000016000000190000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x4c0065006e0028002200740062007800540065006d0070006c00610074006500 ,
+                        0x220029003d003000000000002200220000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1140
+                    LayoutCachedTop =780
+                    LayoutCachedWidth =5160
+                    LayoutCachedHeight =1095
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff20000140000004c00 ,
+                        0x65006e0028002200740062007800540065006d0070006c006100740065002200 ,
+                        0x29003d0030000000000000000000000000000000000000000000000000000003 ,
+                        0x0000000100000000000000ffffff000200000022002200000000000000000000 ,
+                        0x000000000000000000000000
+                    End
                 End
             End
         End
@@ -796,7 +829,7 @@ Option Explicit
 ' =================================
 ' Form:         TemplateAdd
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Add record form object related properties, events, functions & procedures for UI display
@@ -804,6 +837,12 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 4, 2016
 ' References:   -
 ' Revisions:    BLC - 10/4/2016 - 1.00 - initial version
+'               BLC - 1/31/2017 - 1.01 - adjusted to set ID value = 0 to signal template
+'                                        add vs. update
+'               BLC - 2/1/2017  - 1.02 - adjusted to set hidden context value,
+'                                        revised to unbound form (avoids template double save)
+'                                        adjust to retrieve valid syntaxes from AppEnum
+'                                        added CallingForm property
 ' =================================
 
 '---------------------
@@ -815,17 +854,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -861,35 +897,16 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
+Public Property Let CallingForm(Value As String)
     If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        'Me.btnEdit.Caption = m_ButtonCaption
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
 '---------------------
@@ -908,17 +925,26 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/4/2016 - initial version
+'   BLC - 2/1/2017 - revised to unbound form (avoids double save of template)
+'                    adjust to retrieve valid syntaxes from AppEnum
+'                    added CallingForm default, adjusted directions
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize Template List
-    ToggleForm "TemplateList", -1
+    'default
+    Me.CallingForm = "TemplateList"
+    
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+
+    'minimize Calling Form
+    ToggleForm Me.CallingForm, -1
 
     Me.Caption = "Add Template"
     lblTitle.Caption = ""
-    lblDirections.Caption = "Enter template details below using the standard template" & vbCrLf & _
+    lblDirections.Caption = "Enter template details below using the standard template " & _
                             "naming conventions (see hints below) and save." & vbCrLf & vbCrLf & _
+                            "The new template will appear at the bottom of the template list." & vbCrLf & vbCrLf & _
                             "To format your template text, use the Notepad button at right," & vbCrLf & _
                             "then copy && paste it into the template textbox."
     tbxIcon.Value = StringFromCodepoint(uLocked)
@@ -941,6 +967,14 @@ On Error GoTo Err_Handler
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
 
+    'set syntax values
+    SetTempVar "EnumType", "SyntaxType"
+    Set cbxSyntax.Recordset = GetRecords("s_app_enum_list")
+    cbxSyntax.ColumnCount = 3
+    cbxSyntax.BoundColumn = 2
+    cbxSyntax.ColumnWidths = "0;1;0"
+    cbxSyntax.Value = "T-SQL"
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1065,16 +1099,16 @@ End Sub
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
     
-    Dim result As Integer
-    
-    'identify the record ID
-     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
-                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
-
-    If result = vbYes Then DeleteRecord "tsys_Db_Templates", ID
-    
-    'clear the deleted record
-    Me.Requery
+'    Dim result As Integer
+'
+'    'identify the record ID
+'     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
+'                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
+'
+'    If result = vbYes Then DeleteRecord "tsys_Db_Templates", ID
+'
+'    'clear the deleted record
+'    Me.Requery
 
 Exit_Handler:
     Exit Sub
@@ -1099,14 +1133,31 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 1/31/2017 - adjusted to set ID value = 0 to signal template add vs. update
+'   BLC - 2/1/2017  - adjusted to set hidden context value, removed Me.IsSupported
+'                     value is defaulted to 1 for new templates in UpsertRecord
+'                     toggle list form (calling form)
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    'set default
-    Me.IsSupported = 1
+    'default IsSupported is 1 (set in UpsertRecord)
+    
+    'set hidden context field value
+    Me.tbxContext.Value = Me.tbxTemplate.Value
+    
+    'clear tbxID so templates are considered adds, not updates
+    Me.tbxID.Value = 0
     
     UpsertRecord Me
+    
+    'minimize form (calling form will close it)
+    ToggleForm Me.Name, -1
+    
+    'restore list & refresh
+    ToggleForm Me.CallingForm, 0
+    
+    Forms(Me.CallingForm).Requery
     
 Exit_Handler:
     Exit Sub
@@ -1186,7 +1237,7 @@ On Error GoTo Err_Handler
     btnSave.Enabled = isOK
     
     'refresh form
-    Me.Requery
+    'Me.Requery
         
 Exit_Handler:
     Exit Sub

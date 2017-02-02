@@ -21,10 +21,10 @@ Begin Form
     Width =8884
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =3360
-    Top =5295
-    Right =15975
-    Bottom =13110
+    Left =3855
+    Top =2430
+    Right =24030
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6ab456d96fb4e440
@@ -95,6 +95,8 @@ Begin Form
             PressedForeTint =75.0
         End
         Begin Section
+            CanGrow = NotDefault
+            CanShrink = NotDefault
             Height =1020
             BackColor =-2147483607
             Name ="Detail"
@@ -229,7 +231,7 @@ Option Explicit
 ' =================================
 ' MODULE:       MsgOverlay
 ' Level:        Form module
-' Version:      1.02
+' Version:      1.05
 ' Description:  data functions & procedures specific to overlay message
 '
 ' Source/date:  Bonnie Campbell, 2/2/2016
@@ -238,6 +240,9 @@ Option Explicit
 '               BLC - 4/13/2016 - 1.01 - added btnEnter_Click, btnEnter_KeyDown events for handling
 '                                        closing transect overlay on Enter
 '               BLC - 6/1/2016  - 1.02 - adapted for messages vs. transect # overlay for Big Rivers
+'               BLC - 1/26/2017 - 1.03 - adjusted to allow other message titles
+'               BLC - 1/31/2017 - 1.04 - added site case for deleting records
+'               BLC - 2/1/2017  - 1.05 - added critical case & default header/color
 ' =================================
 
 ' ---------------------------------
@@ -254,6 +259,9 @@ Option Explicit
 '   BLC, 2/3/2016  - initial version
 '   BLC, 6/1/2016  - adjusted for Big Rivers application
 '   BLC, 6/10/2016 - adjusted to accommodate other messages
+'   BLC, 1/26/2017 - adjusted to accommodate other titles
+'   BLC, 1/31/2017 - added site case for deleting records
+'   BLC, 2/1/2017  - added critical case & default header/color
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -281,7 +289,7 @@ On Error GoTo Err_Handler
             Select Case LCase(i)
                 Case 0 'message info
                     Select Case LCase(ary2(0))
-                        Case "contact", "event"
+                        Case "contact", "event", "site"
                             'set table
                             Me.lblMessage.Caption = "ID #" & Space(15) & "record deleted from " & ary2(0) & " table."
                             'set ID #
@@ -305,7 +313,7 @@ On Error GoTo Err_Handler
                         Case "info"
                             Transp = lngRobinEgg 'RGB(153, 255, 51)
                             Opac = 0.9
-                        Case "caution"
+                        Case "caution", "critical"
                             lblMessage.ForeColor = lngBlue
                             Transp = lngYellow
                             Opac = 0.9
@@ -317,11 +325,20 @@ On Error GoTo Err_Handler
                             lblMessage.ForeColor = lngBlack
                             Transp = lngYelLime
                             Opac = 0.9
+                        Case Else
+                            Transp = lngRobinEgg
+                            Opac = 0.9
                     End Select
             End Select
+            
         Next
-     
+        
+        'change form caption if defined
+        If UBound(ary) = 2 Then Me.Caption = Split(ary(2), PARAM_SEPARATOR)(1)
+    
     End If
+    
+    'resize the label & form to fit longer messages
     
     Me.Detail.BackColor = Transp
      

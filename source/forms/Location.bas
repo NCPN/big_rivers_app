@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =37
-    Left =7440
-    Top =1515
-    Right =15300
-    Bottom =10740
+    ItemSuffix =45
+    Left =5280
+    Top =2010
+    Right =13140
+    Bottom =12075
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -106,6 +106,15 @@ Begin Form
             PressedForeThemeColorIndex =0
             PressedForeTint =75.0
         End
+        Begin OptionGroup
+            SpecialEffect =3
+            BorderLineStyle =0
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin TextBox
             AddColon = NotDefault
             FELineBreak = NotDefault
@@ -148,8 +157,37 @@ Begin Form
             BorderShade =65.0
             ShowPageHeaderAndPageFooter =1
         End
+        Begin ToggleButton
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =2
+            Bevel =1
+            BackColor =-1
+            BackThemeColorIndex =4
+            BackTint =60.0
+            OldBorderStyle =0
+            BorderLineStyle =0
+            BorderColor =-1
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverColor =0
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedColor =0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeColor =0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeColor =0
+            PressedForeThemeColorIndex =1
+        End
         Begin FormHeader
-            Height =1380
+            Height =2220
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -174,7 +212,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =93
+                    OverlapFlags =85
                     Left =180
                     Top =420
                     Width =6840
@@ -194,7 +232,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =4260
-                    Top =1065
+                    Top =1905
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -204,9 +242,9 @@ Begin Form
                     Caption ="Bearing"
                     GridlineColor =10921638
                     LayoutCachedLeft =4260
-                    LayoutCachedTop =1065
+                    LayoutCachedTop =1905
                     LayoutCachedWidth =5505
-                    LayoutCachedHeight =1380
+                    LayoutCachedHeight =2220
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -214,7 +252,7 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
-                    Top =900
+                    Top =1740
                     Width =720
                     ForeColor =16711680
                     Name ="btnComment"
@@ -223,9 +261,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6660
-                    LayoutCachedTop =900
+                    LayoutCachedTop =1740
                     LayoutCachedWidth =7380
-                    LayoutCachedHeight =1260
+                    LayoutCachedHeight =2100
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -242,7 +280,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =2700
-                    Top =1065
+                    Top =1905
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -252,16 +290,16 @@ Begin Form
                     Caption ="Distance"
                     GridlineColor =10921638
                     LayoutCachedLeft =2700
-                    LayoutCachedTop =1065
+                    LayoutCachedTop =1905
                     LayoutCachedWidth =3945
-                    LayoutCachedHeight =1380
+                    LayoutCachedHeight =2220
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =1200
-                    Top =1065
+                    Top =1905
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -271,9 +309,9 @@ Begin Form
                     Caption ="Location"
                     GridlineColor =10921638
                     LayoutCachedLeft =1200
-                    LayoutCachedTop =1065
+                    LayoutCachedTop =1905
                     LayoutCachedWidth =2445
-                    LayoutCachedHeight =1380
+                    LayoutCachedHeight =2220
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -297,34 +335,16 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
-                Begin Label
-                    OverlapFlags =215
-                    Left =180
-                    Top =720
-                    Width =855
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblTransect"
-                    Caption ="Transect"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =1035
-                    LayoutCachedHeight =1035
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
                 Begin ComboBox
                     LimitToList = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =93
                     IMESentenceMode =3
                     ColumnCount =5
-                    Left =1260
-                    Top =720
-                    Width =2514
+                    Left =3720
+                    Top =1260
+                    Width =2694
                     Height =315
+                    ColumnOrder =0
                     TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
@@ -336,17 +356,17 @@ Begin Form
                         0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
                         0x5d002e00560061006c00750065003d0022002200000000002200220000000000
                     End
-                    Name ="cbxTransect"
+                    Name ="cbxCollectionSourceID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;0;0;1"
-                    ControlTipText ="Veg transect"
+                    ControlTipText ="Choose the feature, transect or plot this location is found in/on"
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =1260
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =3774
-                    LayoutCachedHeight =1035
+                    LayoutCachedLeft =3720
+                    LayoutCachedTop =1260
+                    LayoutCachedWidth =6414
+                    LayoutCachedHeight =1575
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
                     ForeTint =75.0
@@ -357,6 +377,186 @@ Begin Form
                         0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
                         0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
                         0x002200000000000000000000000000000000000000000000
+                    End
+                End
+                Begin OptionGroup
+                    SpecialEffect =0
+                    OverlapFlags =247
+                    Left =300
+                    Top =960
+                    Width =6240
+                    Height =713
+                    ColumnOrder =1
+                    TabIndex =2
+                    BorderColor =10921638
+                    Name ="optgLocationType"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Choose the location type and which feature/transect/plot this one is identified "
+                        "with"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =300
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =6540
+                    LayoutCachedHeight =1673
+                    Begin
+                        Begin Label
+                            BackStyle =1
+                            OverlapFlags =247
+                            Left =420
+                            Top =840
+                            Width =2460
+                            Height =315
+                            BackColor =4144959
+                            BorderColor =8355711
+                            ForeColor =16777215
+                            Name ="lblLocationType"
+                            Caption ="Location Type && Identifier"
+                            ControlTipText ="Choose the location type and which feature/transect/plot this one is identified "
+                                "with"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =420
+                            LayoutCachedTop =840
+                            LayoutCachedWidth =2880
+                            LayoutCachedHeight =1155
+                            BackThemeColorIndex =-1
+                            ForeThemeColorIndex =-1
+                            ForeTint =100.0
+                        End
+                        Begin ToggleButton
+                            OverlapFlags =127
+                            Left =486
+                            Top =1248
+                            Width =900
+                            Height =300
+                            OptionValue =1
+                            Name ="tglFeature"
+                            Caption ="Feature"
+                            FontName ="Calibri"
+                            ControlTipText ="This is a Feature location (parks w/ features only)"
+                            LeftPadding =60
+                            RightPadding =75
+                            BottomPadding =120
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =486
+                            LayoutCachedTop =1248
+                            LayoutCachedWidth =1386
+                            LayoutCachedHeight =1548
+                            ForeTint =100.0
+                            Bevel =0
+                            Gradient =12
+                            BackColor =12419407
+                            BackTint =100.0
+                            OldBorderStyle =1
+                            BorderColor =12419407
+                            BorderTint =100.0
+                            HoverColor =65280
+                            HoverThemeColorIndex =-1
+                            HoverTint =100.0
+                            PressedColor =65280
+                            PressedThemeColorIndex =-1
+                            PressedShade =100.0
+                            HoverForeColor =2366701
+                            HoverForeThemeColorIndex =-1
+                            HoverForeTint =100.0
+                            PressedForeColor =16711680
+                            PressedForeThemeColorIndex =-1
+                            Shadow =-1
+                            QuickStyle =23
+                            QuickStyleMask =-1
+                            WebImagePaddingTop =1
+                        End
+                        Begin ToggleButton
+                            OverlapFlags =119
+                            Left =1500
+                            Top =1260
+                            Width =900
+                            Height =300
+                            TabIndex =1
+                            OptionValue =2
+                            Name ="tglTransect"
+                            Caption ="Transect"
+                            FontName ="Calibri"
+                            ControlTipText ="This is a Transect location"
+                            LeftPadding =60
+                            RightPadding =75
+                            BottomPadding =120
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =1500
+                            LayoutCachedTop =1260
+                            LayoutCachedWidth =2400
+                            LayoutCachedHeight =1560
+                            ForeTint =100.0
+                            Bevel =0
+                            Gradient =12
+                            BackColor =12419407
+                            BackTint =100.0
+                            OldBorderStyle =1
+                            BorderColor =12419407
+                            BorderTint =100.0
+                            HoverColor =65280
+                            HoverThemeColorIndex =-1
+                            HoverTint =100.0
+                            PressedColor =65280
+                            PressedThemeColorIndex =-1
+                            PressedShade =100.0
+                            HoverForeColor =2366701
+                            HoverForeThemeColorIndex =-1
+                            HoverForeTint =100.0
+                            PressedForeColor =16711680
+                            PressedForeThemeColorIndex =-1
+                            Shadow =-1
+                            QuickStyle =23
+                            QuickStyleMask =-1
+                            WebImagePaddingTop =1
+                        End
+                        Begin ToggleButton
+                            OverlapFlags =119
+                            Left =2580
+                            Top =1260
+                            Width =900
+                            Height =300
+                            TabIndex =2
+                            OptionValue =3
+                            Name ="tglPlot"
+                            Caption ="Plot"
+                            FontName ="Calibri"
+                            ControlTipText ="This is a Plot location"
+                            LeftPadding =60
+                            RightPadding =75
+                            BottomPadding =120
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =2580
+                            LayoutCachedTop =1260
+                            LayoutCachedWidth =3480
+                            LayoutCachedHeight =1560
+                            ForeTint =100.0
+                            Bevel =0
+                            Gradient =12
+                            BackColor =12419407
+                            BackTint =100.0
+                            OldBorderStyle =1
+                            BorderColor =12419407
+                            BorderTint =100.0
+                            HoverColor =65280
+                            HoverThemeColorIndex =-1
+                            HoverTint =100.0
+                            PressedColor =65280
+                            PressedThemeColorIndex =-1
+                            PressedShade =100.0
+                            HoverForeColor =2366701
+                            HoverForeThemeColorIndex =-1
+                            HoverForeTint =100.0
+                            PressedForeColor =16711680
+                            PressedForeThemeColorIndex =-1
+                            Shadow =-1
+                            QuickStyle =23
+                            QuickStyleMask =-1
+                            WebImagePaddingTop =1
+                        End
                     End
                 End
             End
@@ -804,7 +1004,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -819,6 +1019,8 @@ Option Explicit
 '               BLC - 10/20/2016 - 1.04 - added CallingForm property, removed buttoncaption,
 '                                         selectedID, selectedValue properties
 '               BLC - 1/11/2017 - 1.05 - hide title label, CallingRecordID
+'               BLC - 1/31/2017 - 1.06 - added feature, transect, site location type &
+'                                        identifier option group
 ' =================================
 
 '---------------------
@@ -919,6 +1121,7 @@ End Property
 '   BLC - 5/31/2016 - initial version
 '   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
 '   BLC - 1/11/2017 - hide second title
+'   BLC - 2/1/2017 - disable feature toggle for non-feature parks
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -948,14 +1151,17 @@ On Error GoTo Err_Handler
     Select Case Me.CallingForm
         Case "Feature"
             ltype = "F"
+            optgLocationType.Value = 1
         Case "Transect"
             ltype = "T"
+            optgLocationType.Value = 2
         Case "VegPlot"
             ltype = "P"
+            optgLocationType.Value = 3
     End Select
     
     Me.LocationType = ltype
-    
+        
     'minimize calling form
     ToggleForm Me.CallingForm, -1
     
@@ -975,6 +1181,9 @@ On Error GoTo Err_Handler
     btnComment.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
     btnUndo.HoverColor = lngGreen
+    tglFeature.HoverColor = lngGreen
+    tglTransect.HoverColor = lngGreen
+    tglPlot.HoverColor = lngGreen
       
     'defaults
     tbxIcon.ForeColor = lngRed
@@ -984,9 +1193,18 @@ On Error GoTo Err_Handler
     tbxBearing.BackColor = lngYellow
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
+    tglFeature.Enabled = False
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
+    
+    'disable feature toggle for non-feature parks --> default disabled
+    Select Case TempVars("ParkCode")
+        Case "BLCA"
+            tglFeature.Enabled = True
+        Case "CANY", "DINO"
+            'already disabled
+    End Select
     
     'initialize values
     ClearForm Me
@@ -1057,6 +1275,60 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Location form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          optgLocationType_Click
+' Description:  option group click actions
+' Assumptions:  -
+' Note:         Ensure Form AllowEdits = Yes, otherwise option group cannot
+'               be changed & toggles will not set the option group value!
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 31, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/31/2017 - initial version
+' ---------------------------------
+Private Sub optgLocationType_Click()
+On Error GoTo Err_Handler
+
+    'assume visible
+    cbxCollectionSourceID.Visible = True
+
+    'filter by park, river site -> BLCA, Gunnison, xx
+    Select Case Me.optgLocationType.Value
+        Case 0  'Default
+            'hide if not applicable
+            cbxCollectionSourceID.Visible = False
+        Case 1  'Feature
+'            Set cbxCollectionSourceID.Recordset = GetRecords("s_feature_by_park_site")
+            Set cbxCollectionSourceID.Recordset = GetRecords("s_feature_list_by_site")
+        Case 2  'Transect
+'            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegtransect_by_site")
+            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegtransect_number_by_site")
+            cbxCollectionSourceID.ColumnCount = 2
+            cbxCollectionSourceID.ColumnWidths = "1;1in"
+        Case 3  'Plot
+'            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegplot_by_site")
+            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegplot_number_by_site")
+            cbxCollectionSourceID.ColumnCount = 4
+            cbxCollectionSourceID.ColumnWidths = "1in;0;0;0"
+    End Select
+    
+    Me.Refresh
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - optgLocationType_Click[Location form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1147,64 +1419,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-'' ---------------------------------
-'' Sub:          tbxStartDate_Change
-'' Description:  Dropdown change actions
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/1/2016 - initial version
-'' ---------------------------------
-'Private Sub tbxStartDate_Change()
-'On Error GoTo Err_Handler
-'
-'    ReadyForSave
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - tbxStartDate_Change[Location form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-'
-'' ---------------------------------
-'' Sub:          tbxStartDate_LostFocus
-'' Description:  Dropdown change actions
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 6/1/2016 - initial version
-'' ---------------------------------
-'Private Sub tbxStartDate_LostFocus()
-'On Error GoTo Err_Handler
-'
-'    'ReadyForSave
-'
-'Exit_Handler:
-'    Exit Sub
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - tbxStartDate_LostFocus[Location form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
 
 ' ---------------------------------
 ' Sub:          btnUndo_Click

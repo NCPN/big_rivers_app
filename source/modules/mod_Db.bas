@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.08
+' Version:      1.10
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -19,6 +19,8 @@ Option Explicit
 '               BLC, 10/20/2016 - 1.07 - added IsLinked()
 '               BLC, 1/9/2017 - 1.08   - added SetTempVar()
 '               BLC, 1/19/2017 - 1.09  - added RetrieveTableColumnData()
+'               BLC, 2/1/2017  - 1.10  - added error handling for improper GetTemplates()
+'                                        parameter syntax (param name:param type)
 ' =================================
 
 ' ---------------------------------
@@ -530,106 +532,106 @@ End Function
 '   vbUserDefinedType 36    Variants that contain user-defined types
 '   vbArray         8192    Array
 
-' ---------------------------------
-' FUNCTION:     FieldTypeName
-' Description:  retrieves field type property name from the numeric field type
-' Assumptions:  -
-' Parameters:   fld - field to retrieve type for (DAO.field)
-' Returns:      name for the field type (string)
-' Throws:       none
-' References:
-'   Allen Browne, April, 2010
-'   http://allenbrowne.com/func-06.html
-'   TofuBug     May 28, 2015
-'   http://stackoverflow.com/questions/30511987/why-does-vartype-always-return-8204-for-arrays
-' Source/date:  Bonnie Campbell, September 2016 for NCPN tools
-' Revisions:    BLC, 9/16/2016 - initial version
-' ---------------------------------
-Public Function FieldTypeName(fld As DAO.field) As String
-On Error GoTo Err_Handler
-    
-    Dim strReturn As String    'Name to return
-
-    Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
-        Case dbBoolean: strReturn = "Yes/No"            ' 1
-        Case dbByte: strReturn = "Byte"                 ' 2
-        Case dbInteger: strReturn = "Integer"           ' 3
-        Case dbLong                                     ' 4
-            If (fld.Attributes And dbAutoIncrField) = 0& Then
-                strReturn = "Long Integer"
-            Else
-                strReturn = "AutoNumber"
-            End If
-        Case dbCurrency: strReturn = "Currency"         ' 5
-        Case dbSingle: strReturn = "Single"             ' 6
-        Case dbDouble: strReturn = "Double"             ' 7
-        Case dbDate: strReturn = "Date/Time"            ' 8
-        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
-        Case dbText                                     '10
-            If (fld.Attributes And dbFixedField) = 0& Then
-                strReturn = "Text"
-            Else
-                strReturn = "Text (fixed width)"        '(no interface)
-            End If
-        Case dbLongBinary: strReturn = "OLE Object"     '11
-        Case dbMemo                                     '12
-            If (fld.Attributes And dbHyperlinkField) = 0& Then
-                strReturn = "Memo"
-            Else
-                strReturn = "Hyperlink"
-            End If
-        Case dbGUID: strReturn = "GUID"                 '15
-
-        'Attached tables only: cannot create these in JET.
-        Case dbBigInt: strReturn = "Big Integer"        '16
-        Case dbVarBinary: strReturn = "VarBinary"       '17
-        Case dbChar: strReturn = "Char"                 '18
-        Case dbNumeric: strReturn = "Numeric"           '19
-        Case dbDecimal: strReturn = "Decimal"           '20
-        Case dbFloat: strReturn = "Float"               '21
-        Case dbTime: strReturn = "Time"                 '22
-        Case dbTimeStamp: strReturn = "Time Stamp"      '23
-
-        'Constants for complex types don't work prior to Access 2007 and later.
-        Case 101&: strReturn = "Attachment"         'dbAttachment
-        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
-        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
-        Case 104&: strReturn = "Complex Long"       'dbComplexLong
-        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
-        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
-        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
-        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
-        Case 109&: strReturn = "Complex Text"       'dbComplexText
-        
-'        'Arrays
-'        Case vbArray:
-'            strReturn = "Array"                     '8192
+'' ---------------------------------
+'' FUNCTION:     FieldTypeName
+'' Description:  retrieves field type property name from the numeric field type
+'' Assumptions:  -
+'' Parameters:   fld - field to retrieve type for (DAO.field)
+'' Returns:      name for the field type (string)
+'' Throws:       none
+'' References:
+''   Allen Browne, April, 2010
+''   http://allenbrowne.com/func-06.html
+''   TofuBug     May 28, 2015
+''   http://stackoverflow.com/questions/30511987/why-does-vartype-always-return-8204-for-arrays
+'' Source/date:  Bonnie Campbell, September 2016 for NCPN tools
+'' Revisions:    BLC, 9/16/2016 - initial version
+'' ---------------------------------
+'Public Function FieldTypeName(fld As DAO.field) As String
+'On Error GoTo Err_Handler
 '
-'        Case Is > 8192
-'            Select Case (fld.Type - 8192)
-'                Case vbString                       '8 --> Overall 8200 = 8192+8
-'                    strReturn = "String Array"
-'                Case vbVariant                      '12 --> Overall 8204 = 8192+12
-'                    strReturn = "Variant Array"
-'                Case Else
-'                    strReturn = "Field type " & fld.Type & " unknown"
-'            End Select
-        Case Else: strReturn = "Field type " & fld.Type & " unknown"
-    End Select
-
-    FieldTypeName = strReturn
-
-Exit_Handler:
-    Exit Function
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - FieldTypeName[mod_Db])"
-    End Select
-    Resume Exit_Handler
-End Function
+'    Dim strReturn As String    'Name to return
+'
+'    Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
+'        Case dbBoolean: strReturn = "Yes/No"            ' 1
+'        Case dbByte: strReturn = "Byte"                 ' 2
+'        Case dbInteger: strReturn = "Integer"           ' 3
+'        Case dbLong                                     ' 4
+'            If (fld.Attributes And dbAutoIncrField) = 0& Then
+'                strReturn = "Long Integer"
+'            Else
+'                strReturn = "AutoNumber"
+'            End If
+'        Case dbCurrency: strReturn = "Currency"         ' 5
+'        Case dbSingle: strReturn = "Single"             ' 6
+'        Case dbDouble: strReturn = "Double"             ' 7
+'        Case dbDate: strReturn = "Date/Time"            ' 8
+'        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
+'        Case dbText                                     '10
+'            If (fld.Attributes And dbFixedField) = 0& Then
+'                strReturn = "Text"
+'            Else
+'                strReturn = "Text (fixed width)"        '(no interface)
+'            End If
+'        Case dbLongBinary: strReturn = "OLE Object"     '11
+'        Case dbMemo                                     '12
+'            If (fld.Attributes And dbHyperlinkField) = 0& Then
+'                strReturn = "Memo"
+'            Else
+'                strReturn = "Hyperlink"
+'            End If
+'        Case dbGUID: strReturn = "GUID"                 '15
+'
+'        'Attached tables only: cannot create these in JET.
+'        Case dbBigInt: strReturn = "Big Integer"        '16
+'        Case dbVarBinary: strReturn = "VarBinary"       '17
+'        Case dbChar: strReturn = "Char"                 '18
+'        Case dbNumeric: strReturn = "Numeric"           '19
+'        Case dbDecimal: strReturn = "Decimal"           '20
+'        Case dbFloat: strReturn = "Float"               '21
+'        Case dbTime: strReturn = "Time"                 '22
+'        Case dbTimeStamp: strReturn = "Time Stamp"      '23
+'
+'        'Constants for complex types don't work prior to Access 2007 and later.
+'        Case 101&: strReturn = "Attachment"         'dbAttachment
+'        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
+'        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
+'        Case 104&: strReturn = "Complex Long"       'dbComplexLong
+'        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
+'        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
+'        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
+'        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
+'        Case 109&: strReturn = "Complex Text"       'dbComplexText
+'
+''        'Arrays
+''        Case vbArray:
+''            strReturn = "Array"                     '8192
+''
+''        Case Is > 8192
+''            Select Case (fld.Type - 8192)
+''                Case vbString                       '8 --> Overall 8200 = 8192+8
+''                    strReturn = "String Array"
+''                Case vbVariant                      '12 --> Overall 8204 = 8192+12
+''                    strReturn = "Variant Array"
+''                Case Else
+''                    strReturn = "Field type " & fld.Type & " unknown"
+''            End Select
+'        Case Else: strReturn = "Field type " & fld.Type & " unknown"
+'    End Select
+'
+'    FieldTypeName = strReturn
+'
+'Exit_Handler:
+'    Exit Function
+'
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - FieldTypeName[mod_Db])"
+'    End Select
+'    Resume Exit_Handler
+'End Function
 
 ' ---------------------------------
 ' FUNCTION:     VarTypeName
@@ -948,6 +950,7 @@ End Function
 '                                can accommodate more than SQL
 '               BLC, 6/5/2016  - revised to set strSyntax to "T-SQL" to avoid error due to multiple items of same name in dict
 '               BLC, 6/6/2016  - added error handling for duplicate templates, renamed global to g_AppTemplates
+'               BLC, 2/1/2017  - added error handling for improper parameter syntax (param name:param type)
 ' ---------------------------------
 Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As String = "")
 
@@ -996,6 +999,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
     Dim dictTemplates As Dictionary
     Set dictTemplates = New Scripting.Dictionary
     
+    rs.MoveLast
     rs.MoveFirst
     Do Until rs.EOF
         'create new dictionary object
@@ -1014,14 +1018,28 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
 
                 'separate parameters
                 ary2 = Split(Nz(rs.Fields(ary(i)), ":"), "|")
-                
+ 
                 'prepare sets of param name & data type --> split(ary2(i), ":") yields name & data type
                 For j = 0 To UBound(ary2)
                 
                     'split the param into name & data type
                     param = Split(ary2(j), ":")
-                    
+                                        
                     If Not dictParam.Exists(param(0)) And Len(param(0)) <> 0 Then
+                        
+                        'catch parameters not in paramname:type format
+                        If UBound(param) <> 1 Then
+                            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                            "msg" & PARAM_SEPARATOR & "Parameter format must be name:type.  " _
+                            & "Please contact a data manager to resolve this issue.  " _
+                            & "Db says: ""I can't work this way, so I'm closing now.""" _
+                            & "|Type" & PARAM_SEPARATOR & "caution" _
+                            & "|Caption" & PARAM_SEPARATOR & "Invalid SQL Template Parameters for the '" & dict("TemplateName") & "' Template"
+                            
+                            'exit database since application won't function w/o valid templates
+                            DoCmd.CloseDatabase
+                        End If
+                            
                         dictParam.Add param(0), param(1)
                     End If
                 
@@ -1042,7 +1060,7 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
             
         Next
         
-'        Debug.Print dict("TemplateName")
+'        Debug.Print i & " " & dict("TemplateName")
         
 '        If dictTemplates.Exists("TemplateName") Then
 '            Debug.Print "dict: " & dict("TemplateName")
@@ -1093,7 +1111,8 @@ Err_Handler:
 
             '********** FATAL ERROR ****************
             'terminate *ALL* VBA code to prevent other popups
-            'End
+            'Exit Sub
+            Stop
             
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
@@ -1179,7 +1198,7 @@ Debug.Print strTemplate
     
     End If
     
-Debug.Print Template
+'Debug.Print Template
     
     GetTemplate = Template
     
@@ -1216,7 +1235,7 @@ Err_Handler:
 
             '********** FATAL ERROR ****************
             'terminate *ALL* VBA code to prevent other popups
-            'End
+            End
         
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _

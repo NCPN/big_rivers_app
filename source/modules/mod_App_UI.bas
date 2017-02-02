@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.16
+' Version:      1.17
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -27,6 +27,7 @@ Option Explicit
 '               BLC, 12/13/2016 - 1.15 - added SetCurrentPseudoRecord()
 '               BLC, 1/9/2017   - 1.16 - revised ClickAction() to use SetTempVar()
 '               BLC, 1/12/2017 - 1.17 - revised to VegTransect vs. Transect form
+'               BLC, 1/31/2017 - 1.18 - adjusted SortListForm() to accommodate template list form
 ' =================================
 
 ' =================================
@@ -493,13 +494,15 @@ On Error GoTo Err_Handler
                                     StartFolder, , msoFileDialogFilePicker, "Survey files-CSV")
             
             If Len(strPath) > 0 Then
+                'open data form before upload
+                DoCmd.OpenForm "SurveyFile", acNormal, , , , , strPath
+                
                 'upload survey file
-                UploadCSVFile strPath
-            
+'                UploadCSVFile strPath
             End If
-        
+            
             'restore Main
-            ToggleForm "Main", 0
+'            ToggleForm "Main", 0
             
         Case "batch upload photos"
             fName = ""
@@ -1036,6 +1039,7 @@ End Function
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/19/2017 - initial version
+'   BLC - 1/31/2017 - adjusted to accommodate templates list
 ' ---------------------------------
 Public Sub SortListForm(frm As Form, ctrl As Control)
 On Error GoTo Err_Handler
@@ -1049,10 +1053,14 @@ On Error GoTo Err_Handler
     Select Case Replace(ctrl.Name, "lbl", "")
         Case "HdrID"
             strSort = "ID"
+        Case "Template"
+            strSort = "TemplateName"
         Case "SOPNum"
             strSort = "SOPNumber"
         Case "SOP"
             strSort = "FullName"
+        Case "Syntax"
+            strSort = "Syntax"
         Case "Version"
             strSort = "Version"
         Case "EffectiveDate"

@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =7920
-    Top =2490
-    Right =16200
-    Bottom =10455
+    Left =4695
+    Top =2295
+    Right =12975
+    Bottom =10260
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -150,7 +150,7 @@ Begin Form
                     Height =300
                     ForeColor =15921906
                     Name ="lblTitle"
-                    Caption ="Data Entry"
+                    Caption ="user mode"
                     ControlTipText ="Application role for logged in user."
                     GridlineColor =10921638
                     LayoutCachedLeft =60
@@ -209,7 +209,8 @@ Begin Form
                     ForeColor =15921906
                     Name ="lblAppUser"
                     Caption ="(app user)"
-                    ControlTipText ="Logged in user"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Logged in user, click to change user"
                     GridlineColor =10921638
                     LayoutCachedLeft =1380
                     LayoutCachedTop =120
@@ -427,7 +428,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -441,6 +442,7 @@ Option Explicit
 '               BLC - 9/21/2016 - 1.04 - update PrepareLinks so BLCA & CANY enable transect links,
 '                                        DINO does not
 '               BLC - 10/19/2016 - 1.05 - adjusted to provide calling form on btnAdmin click
+'               BLC - 1/26/2017  - 1.06 - added user change, mode highlight
 ' =================================
 
 '---------------------
@@ -477,6 +479,7 @@ Dim oBRTile As Form_Tile
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/27/2016 - initial version
+'   BLC - 1/26/2017 - added mode & user change
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -503,11 +506,12 @@ On Error GoTo Err_Handler
     lblNotice.ForeColor = lngLtYellow
     
     'set app user
+    lblTitle.ForeColor = lngGreen
     lblAppUser.Caption = "(" & TempVars("AppUsername") & ")"
     lblAppUser.ForeColor = lngLtBlue
     
     'Admin --> filter actions when form opens (disable form buttons based on TempVars("AccessLevel")
-    Me.btnAdmin.HoverColor = LINK_HIGHLIGHT_BKGD
+    btnAdmin.HoverColor = LINK_HIGHLIGHT_BKGD
         
     ' ------ Top -------
     'Left
@@ -674,6 +678,35 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          lblAppUser_Click
+' Description:  Application username click actions
+' Parameters:   -
+' Returns:      -
+' Throws:       -
+' References:   -
+' Source/date:  Bonnie Campbell - January 26, 2017 for NCPN tools
+' Adapted:      -
+' Revisions:    BLC - 1/26/2017 - initial version
+' ---------------------------------
+Private Sub lblAppUser_Click()
+On Error GoTo Err_Handler
+
+    DoCmd.Close
+    DoCmd.OpenForm "User", acNormal
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblAppUser_Click[Main form])"
     End Select
     Resume Exit_Handler
 End Sub

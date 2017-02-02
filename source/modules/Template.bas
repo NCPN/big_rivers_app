@@ -239,7 +239,7 @@ On Error GoTo Err_Handler
     Dim Params(0 To 12) As Variant
 
     With Me
-        Params(0) = "Template"
+        Params(0) = Template
         Params(1) = .TemplateName
         Params(2) = .Context
         Params(3) = .TemplateSQL
@@ -250,7 +250,8 @@ On Error GoTo Err_Handler
         Params(8) = .Syntax
         Params(9) = .Version
         Params(10) = .IsSupported
-        Params(11) = .RetireDate
+        Params(11) = IIf(IsDate(.RetireDate), _
+                     IIf(.RetireDate = #12:00:00 AM#, Null, .RetireDate), Null)
     
         If IsUpdate Then
             Template = "u_template"
@@ -260,11 +261,24 @@ On Error GoTo Err_Handler
         .ID = SetRecord(Template, Params)
     End With
     
+    'after template is saved, refresh global Template dictionary
+    GetTemplates
+    
 Exit_Handler:
     Exit Sub
 
 Err_Handler:
     Select Case Err.Number
+        Case 457 'key already element --> template already exists
+            MsgBox _
+                "Template " & Me.TemplateName & " is a duplicate. Please contact " _
+                & "a data manager to fix this for you. " _
+                & vbCrLf & "If you are a data manager, oops." _
+                & vbCrLf & "Remove the duplicate template from tsys_Db_Templates " _
+                & "and try again." _
+                & vbCrLf & vbCrLf & "Error #" & Err.Description _
+                & "Error encountered (#" & Err.Number & " - SaveToDb[cls_Template])", _
+                vbCritical, "Duplicate Template"
         Case Else
             MsgBox "Error #" & Err.Description, vbCritical, _
                 "Error encounter (#" & Err.Number & " - SaveToDb[cls_Template])"

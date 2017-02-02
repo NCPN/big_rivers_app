@@ -18,11 +18,11 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =41
-    Left =8865
-    Top =2535
-    Right =16425
-    Bottom =13140
+    ItemSuffix =42
+    Left =4440
+    Top =3315
+    Right =13170
+    Bottom =14190
     DatasheetGridlinesColor =14806254
     OrderBy ="TemplateName"
     RecSrcDt = Begin
@@ -398,6 +398,72 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    Left =6120
+                    Top =180
+                    Width =504
+                    TabIndex =2
+                    ForeColor =4210752
+                    Name ="btnRefresh"
+                    Caption ="Refresh List"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Refresh template list"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x000000000000000000000000000000000000000000000000a08070ff604830ff ,
+                        0x604830ff604830ff604830ff604830ff604830ff604830ff604830ff604830ff ,
+                        0x604830ff000000000000000000000000a08070ff604830ffa08070ffffffffff ,
+                        0xb0a090ffb0a090ffb0a090ffb0a090ffb0a090ffb0a090ffb0a090ffb0a090ff ,
+                        0x604830ff00000000a08070ff604830ffa08070ffffffffffa08070ffffffffff ,
+                        0xfffffffffff8fffff0f0f0fff0e8e0fff0e0d0ffe0d0d0ffe0c8c0ffb0a090ff ,
+                        0x604830ff00000000a08070ffffffffffa08070ffffffffffa08070ffffffffff ,
+                        0xffffffffd0f0e0ff106850fff0f0f0fff0e0e0fff0d8d0ffe0d0c0ffb0a090ff ,
+                        0x604830ff00000000a08070ffffffffffa08070ffffffffffa08070ffffffffff ,
+                        0xffffffff209870ff209870ff209870ff209870ffc0c8c0ffe0d8d0ffb0a090ff ,
+                        0x604830ff00000000a08070ffffffffffa08070ffffffffffa08870ffffffffff ,
+                        0xffffffffe0f0f0ff209870fffff8f0ffc0e0d0ff209870fff0d8d0ffb0a090ff ,
+                        0x604830ff00000000a08070ffffffffffa08870ffffffffffa08880ffffffffff ,
+                        0xfffffffffffffffffffffffffffffffffff8f0ff209870fff0e0e0ffb0a090ff ,
+                        0x604830ff00000000a08870ffffffffffa08880ffffffffffb09080ffffffffff ,
+                        0xffffffff209870fffffffffffffffffffff8fffff0f0f0fff0e8e0ffb0a090ff ,
+                        0x604830ff00000000a08880ffffffffffb09080ffffffffffb09080ffffffffff ,
+                        0xffffffff209870ffb0d8c0ffffffffff107850ffd0e0e0fff0f0f0ffb0a090ff ,
+                        0x604830ff00000000b09080ffffffffffb09080ffffffffffb09880ffffffffff ,
+                        0xffffffffd0e8e0ff209870ff209870ff209870ff107850ffd0b8b0ffb0a090ff ,
+                        0x604830ff00000000b09080ffffffffffb09880ffffffffffb09880ffffffffff ,
+                        0xffffffffffffffffffffffffffffffff209870ffd0d8d0ffa09080ff605040ff ,
+                        0x604830ff00000000b09880ffffffffffb09880ffffffffffb0a090ffffffffff ,
+                        0xffffffffffffffffffffffffffffffffffffffffd0b8b0ffd0c8c0ff604830ff ,
+                        0xd0b0a09000000000b09880ffffffffffb0a090ffffffffffc0a090ffffffffff ,
+                        0xffffffffffffffffffffffffffffffffffffffffc0a8a0ff604830ffd0b0a090 ,
+                        0x0000000000000000b0a090ffffffffffc0a090ffffffffffc0a090ffd0c0b0ff ,
+                        0xd0c0b0ffd0c0b0ffd0b8b0ffd0b8a0ffc0b0a0ffc0a090ffd0b0a09000000000 ,
+                        0x0000000000000000c0a090ffffffffffc0a090ffe0c8b0ffe0c8c0ffe0d0c0ff ,
+                        0xe0d0c0ffe0d0c0ffe0d0c0ffd0b8b0ffd0b0a090000000000000000000000000 ,
+                        0x0000000000000000b09890ffd0c0b0ffd0c0b0ffd0c0b0ffd0c0b0ffd0c0b0ff ,
+                        0xd0b8b0ffc0b0a0ffd0b0a0900000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =6120
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =6624
+                    LayoutCachedHeight =540
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =15060409
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
             End
         End
         Begin Section
@@ -751,7 +817,7 @@ Option Explicit
 ' =================================
 ' Form:         TemplateList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -762,6 +828,9 @@ Option Explicit
 '               BLC - 10/4/2016 - 1.01 - added Add Template button
 '               BLC - 1/10/2017 - 1.02 - added Open Table button to access tsys_Db_Templates for
 '                                        editing
+'               BLC - 2/1/2017  - 1.03 - handles giving focus to new template after TemplateAdd
+'                                        added refresh button to run GetTemplates & update
+'                                        template dictionary
 ' =================================
 
 '---------------------
@@ -948,9 +1017,27 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 2/1/2017 - handles giving focus to new template after TemplateAdd
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
+
+    If FormIsOpen("TemplateAdd") Then
+    
+        'go to the new record (assumes new record is last)
+        'must sort & give form focus first --> sort is a toggle so do version then ID
+        '                                      to give low to high ID
+        Call lblVersion_Click
+        Call lblHdrID_Click
+        Me.SetFocus
+        DoCmd.GoToRecord acDataForm, Me.Name, acLast
+'        DoCmd.GoToRecord acDataForm, Me.Name, acPrevious, 30 << causes endless loop
+        
+        'close form
+        DoCmd.Close acForm, "TemplateAdd"
+    Else
+        Debug.Print "not open"
+    End If
        
 Exit_Handler:
     Exit Sub
@@ -959,6 +1046,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[TemplateList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnRefresh_Click
+' Description:  Open table button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 1, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/1/2017 - initial version
+' ---------------------------------
+Private Sub btnRefresh_Click()
+On Error GoTo Err_Handler
+    
+    'refresh templates
+    GetTemplates
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnRefresh_Click[TemplateList form])"
     End Select
     Resume Exit_Handler
 End Sub
