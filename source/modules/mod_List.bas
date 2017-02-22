@@ -1135,7 +1135,7 @@ Public Sub RemoveListDupes(lbx As ListBox)
 
 On Error GoTo Err_Handler
 
-    Dim index As Integer, Count As Integer
+    Dim Index As Integer, Count As Integer
     Dim lastItem As String
     
     'sort listbox
@@ -1148,12 +1148,12 @@ On Error GoTo Err_Handler
     
         lastItem = lbx.ItemData(Count - 1)
 
-        For index = Count - 2 To 0 Step -1
-            If lbx.ItemData(index) = lastItem And Len(lbx.ItemData(index)) > 0 Then
+        For Index = Count - 2 To 0 Step -1
+            If lbx.ItemData(Index) = lastItem And Len(lbx.ItemData(Index)) > 0 Then
                 'duplicate
-                lbx.RemoveItem (index)
+                lbx.RemoveItem (Index)
             Else
-                lastItem = lbx.ItemData(index)
+                lastItem = lbx.ItemData(Index)
             End If
         Next
     End If

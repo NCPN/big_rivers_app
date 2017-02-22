@@ -1032,7 +1032,7 @@ End Sub
 Private Sub tbxFeature_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxFeature.text) > 0 Then _
+    If Len(tbxFeature.Text) > 0 Then _
         ReadyForSave
 
 Exit_Handler:
@@ -1062,7 +1062,7 @@ End Sub
 Private Sub cbxLocation_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(cbxLocation.text) > 0 Then _
+    If Len(cbxLocation.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:

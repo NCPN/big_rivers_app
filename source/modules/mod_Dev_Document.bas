@@ -105,7 +105,7 @@ On Error GoTo Err_Handler
     Dim db As DAO.Database
     Dim tdf As DAO.TableDef
     Dim fld As DAO.field
-    Dim idx As DAO.index
+    Dim idx As DAO.Index
     
     Set db = CurrentDb()
     Set tdf = db.TableDefs(tbl)

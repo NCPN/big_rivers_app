@@ -514,11 +514,11 @@ Public Property Let CurrentCount(Value As String)
     lblCount.Caption = m_CurrentCount
 End Property
 
-Public Property Get maxcount() As String
-    maxcount = m_MaxCount
+Public Property Get MaxCount() As String
+    MaxCount = m_MaxCount
 End Property
 
-Public Property Let maxcount(Value As String)
+Public Property Let MaxCount(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "/ XX characters"
     If ValidateString(Value, "alphanumdashslashspace") Then
         m_MaxCount = Value
@@ -837,16 +837,16 @@ On Error GoTo Err_Handler
     
     'defaults
     Dim instruction As String
-    Dim maxcount As Integer
+    Dim MaxCount As Integer
     
     instruction = "Enter your establishment comment."
-    maxcount = 50
+    MaxCount = 50
     
     'set comment context
     ary = Split(Nz(Me.OpenArgs, ""), "|")
     If IsArray(ary) Then
         Me.Context = ary(0) & " - " & ary(1) '"Plot - 24"
-        maxcount = ary(2)
+        MaxCount = ary(2)
         
         'set instructions based on calling form
         Select Case LCase(ary(0))
@@ -861,7 +861,7 @@ On Error GoTo Err_Handler
     Me.CountLabelVisible = False
     Me.CurrentCount = "Characters Remaining:"
     Me.lblCharacterCount.Visible = False
-    Me.maxcount = maxcount
+    Me.MaxCount = MaxCount
     Me.AlertCount = 10
    
     Me.AddAction = "add_"
@@ -898,7 +898,7 @@ On Error GoTo Err_Handler
     
     Dim CurrentCount As Integer
     
-    CurrentCount = CInt(Me.maxcount) - Len(tbxComment.text)
+    CurrentCount = CInt(Me.MaxCount) - Len(tbxComment.Text)
 
     Me.lblMaxCount.Caption = CurrentCount & " remaining"
     
@@ -919,11 +919,11 @@ On Error GoTo Err_Handler
         Me.MaxCountFontColor = vbRed
     End If
     
-    If Len(tbxComment.text) > CInt(Me.maxcount) Then
+    If Len(tbxComment.Text) > CInt(Me.MaxCount) Then
         Me.lblMaxCount.Caption = -CurrentCount & " over"
         'disable add comment button until count is < or = MaxCount
         Me.btnAdd.Enabled = False
-    ElseIf Len(tbxComment.text) = 0 Then
+    ElseIf Len(tbxComment.Text) = 0 Then
         'disable add comment button if count = 0
         Me.btnAdd.Enabled = False
     Else

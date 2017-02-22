@@ -16,15 +16,17 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =30
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    ItemSuffix =32
+    Left =4335
+    Top =2880
+    Right =17415
+    Bottom =13185
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x06dd372434a7e440
+        0xd18018cccfe3e440
     End
+    RecordSource ="SELECT * FROM Task WHERE ID = 7;"
+    Caption ="Task"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -188,7 +190,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="title"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =30
@@ -206,7 +207,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Enter task details."
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =360
@@ -224,9 +225,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777215
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="BLCA  >  Gunnison  >  EP  >  A"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =30
@@ -257,6 +258,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxTask"
+                    ControlSource ="Task"
                     AfterUpdate ="[Event Procedure]"
                     OnKeyPress ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
@@ -305,10 +307,12 @@ Begin Form
                         0x00000000
                     End
                     Name ="cbxStatus"
+                    ControlSource ="Status_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT ID, Status, Icon, Sequence FROM Status ORDER BY Sequence; "
                     ColumnWidths ="0;1080"
                     AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="1"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1020
@@ -366,6 +370,7 @@ Begin Form
                         0x3000290000000000
                     End
                     Name ="cbxPriority"
+                    ControlSource ="Priority_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT ID, Priority, Sequence FROM Priority; "
                     ColumnWidths ="0;1080"
@@ -458,7 +463,8 @@ Begin Form
                     LayoutCachedHeight =2730
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -469,6 +475,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     TextFontFamily =2
                     Left =6900
@@ -492,7 +499,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -552,7 +560,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =3480
@@ -573,9 +580,8 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -629,6 +635,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    ControlSource ="ID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7380
@@ -703,7 +711,7 @@ Begin Form
                     FontSize =9
                     BorderColor =8355711
                     Name ="lblMaxCount"
-                    Caption ="-1 remaining"
+                    Caption ="255"
                     GridlineColor =10921638
                     LayoutCachedLeft =6300
                     LayoutCachedTop =600
@@ -714,10 +722,11 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    AllowAutoCorrect = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =2
-                    Left =1560
+                    Left =1920
                     Top =2460
                     Width =2274
                     Height =315
@@ -734,15 +743,17 @@ Begin Form
                         0x31002c003000290000000000
                     End
                     Name ="cbxRequestedBy"
+                    ControlSource ="RequestedBy_ID"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;1440"
+                    ColumnWidths ="0;1"
+                    AfterUpdate ="[Event Procedure]"
+                    OnGotFocus ="[Event Procedure]"
                     ControlTipText ="Person who collected the plant"
                     GridlineColor =10921638
-                    AllowValueListEdits =0
 
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1920
                     LayoutCachedTop =2460
-                    LayoutCachedWidth =3834
+                    LayoutCachedWidth =4194
                     LayoutCachedHeight =2775
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -761,23 +772,24 @@ Begin Form
                     OverlapFlags =85
                     Left =240
                     Top =2460
-                    Width =1230
+                    Width =1620
                     Height =315
                     BorderColor =8355711
-                    ForeColor =8355711
+                    ForeColor =16711680
                     Name ="lblRequestedBy"
-                    Caption ="Requested By"
+                    Caption ="⯈ Requested By"
                     GridlineColor =10921638
                     LayoutCachedLeft =240
                     LayoutCachedTop =2460
-                    LayoutCachedWidth =1470
+                    LayoutCachedWidth =1860
                     LayoutCachedHeight =2775
+                    ForeThemeColorIndex =-1
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =240
                     Top =2895
-                    Width =1230
+                    Width =1620
                     Height =315
                     BorderColor =8355711
                     ForeColor =8355711
@@ -786,14 +798,14 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =240
                     LayoutCachedTop =2895
-                    LayoutCachedWidth =1470
+                    LayoutCachedWidth =1860
                     LayoutCachedHeight =3210
                 End
                 Begin TextBox
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
-                    Left =1560
+                    Left =1920
                     Top =2895
                     Width =1320
                     Height =300
@@ -802,7 +814,9 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRequestDate"
+                    ControlSource ="RequestDate"
                     Format ="Short Date"
+                    AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000ec000000020000000100000000000000000000002200000001000000 ,
                         0x00000000ffffff00010000000000000023000000450000000100000000000000 ,
@@ -815,9 +829,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1920
                     LayoutCachedTop =2895
-                    LayoutCachedWidth =2880
+                    LayoutCachedWidth =3240
                     LayoutCachedHeight =3195
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =2
@@ -861,6 +875,7 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     Name ="lblTaskContext"
+                    Caption ="Photo (0)"
                     ControlTipText ="Table && record ID referenced by task"
                     GridlineColor =10921638
                     LayoutCachedLeft =1080
@@ -872,6 +887,62 @@ Begin Form
                     BorderTint =100.0
                     BorderShade =65.0
                     ForeTint =100.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2880
+                    Top =60
+                    Width =780
+                    Height =300
+                    FontSize =9
+                    TabIndex =10
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxType"
+                    ControlSource ="TaskType"
+                    DefaultValue ="0"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =3660
+                    LayoutCachedHeight =360
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3720
+                    Top =60
+                    Width =780
+                    Height =300
+                    FontSize =9
+                    TabIndex =11
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxTypeID"
+                    ControlSource ="TaskType_ID"
+                    DefaultValue ="0"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3720
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =4500
+                    LayoutCachedHeight =360
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
                 End
             End
         End
@@ -895,7 +966,7 @@ Option Explicit
 ' =================================
 ' Form:         Task
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Task form object related properties, events, functions & procedures for UI display
 '
@@ -903,59 +974,8 @@ Option Explicit
 ' References:
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 10/25/2016 - 1.01 - revised to clear header title, use GetContext(), code cleanup
+'               BLC - 2/13/2017 - 1.02 - revised to use callingform, code cleanup
 ' =================================
-
-''---------------------
-'' Declarations
-''---------------------
-'Private p_Task As Form_Comment
-'Private p_oTask As Task
-'
-'Private m_CallingForm As String
-'
-''---------------------
-'' Events
-''---------------------
-'Public Event Initialize()
-'Public Event Terminate()
-'
-''---------------------
-'' Properties
-''---------------------
-'
-''---------------------
-'' Events
-''---------------------
-'
-'' ---------------------------------
-'' Sub:          lblTitle_Click
-'' Description:  Title click event actions
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, October 29, 2015 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 10/29/2015 - initial version
-'' ---------------------------------
-'Private Sub lblTitle_Click()
-'On Error GoTo Err_Handler
-'
-'    MsgBox "Click event...", vbOKOnly
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - lblTitle_Click[Comment form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
 
 '---------------------
 ' Declarations
@@ -1068,11 +1088,11 @@ Public Property Let CurrentCount(Value As String)
     lblCount.Caption = m_CurrentCount
 End Property
 
-Public Property Get maxcount() As String
-    maxcount = m_MaxCount
+Public Property Get MaxCount() As String
+    MaxCount = m_MaxCount
 End Property
 
-Public Property Let maxcount(Value As String)
+Public Property Let MaxCount(Value As String)
     If Len(Trim(Value)) = 0 Then Value = "/ XX characters"
     If ValidateString(Value, "alphanumdashslashspace") Then
         m_MaxCount = Value
@@ -1195,168 +1215,9 @@ Public Property Let AlertBoxVisible(Value As Byte)
     Me.rctAlert.Visible = m_AlertBoxVisible
 End Property
 
-
 '---------------------
 ' Methods
 '---------------------
-
-'' ---------------------------------
-'' Sub:          Class_Initialize
-'' Description:  Class initialization (starting) event
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 11/3/2015 - initial version
-'' ---------------------------------
-'Private Sub Class_Initialize()
-'On Error GoTo Err_Handler
-'
-'    MsgBox "Initializing...", vbOKOnly
-'
-'    Set p_Task = New Form_Comment
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - Class_Initialize[Comment form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-'
-'' ---------------------------------
-'' Sub:          Class_Terminate
-'' Description:  Class termination (closing) event
-'' Assumptions:  -
-'' Parameters:   -
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 11/3/2015 - initial version
-'' ---------------------------------
-'Private Sub Class_Terminate()
-'On Error GoTo Err_Handler
-'
-'    MsgBox "Terminating...", vbOKOnly
-'
-'    Set p_Task = Nothing
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - Class_Terminate[Comment form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-'
-'Public Sub testme()
-'    With p_oTask
-'        .TaskType = "TaskType.Photo"
-'        .Task = "Testing description"
-'        .Status = Status.Opened
-'        .Priority = Priority.High
-'        .RequestedByID = 3
-'        .CompletedByID = 1
-'        .AddTask
-'    End With
-'End Sub
-'
-'' ---------------------------------
-'' Sub:          AddTask
-'' Description:  Add new task item
-'' Assumptions:  -
-'' Parameters:   context - what the task is about/task type (string)
-''               task
-''               recordID - ID for the record the task references (integer)
-'' Returns:      -
-'' Throws:       none
-'' References:   -
-'' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-'' Adapted:      -
-'' Revisions:
-''   BLC - 11/3/2015 - initial version
-'' ---------------------------------
-'Private Sub AddTask(Context As String, recordID As Integer, Description As String, _
-'                    Status As Integer, Priority As Integer, Requestor As Integer, _
-'                    Optional completor As Integer)
-'On Error GoTo Err_Handler
-'
-'
-'    Dim oTask As New Task
-'
-'    With oTask
-'        .TaskType = Context
-'        .Task = Description
-'        .Status = Status
-'        .Priority = Priority
-'        .RequestedByID = Requestor
-'        If IsNumeric(completor) Then
-'            .CompletedByID = completor
-'        End If
-'        .AddTask
-'
-'        If IsNumeric(.ID) Then
-'            MsgBox "New task ID = " & .ID
-'        End If
-'
-'    End With
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - AddTask[Task class])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-
-' ---------------------------------
-' Sub:          btnCancel_Click
-' Description:  Cancel task form entry
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, November 4, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 11/4/2015 - initial version
-' ---------------------------------
-'Private Sub btnCancel_Click()
-'On Error GoTo Err_Handler
-'
-'    DoCmd.Close
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - btnCancel_Click[Task form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Open
@@ -1400,6 +1261,8 @@ On Error GoTo Err_Handler
 
     'set the task context
     lblTaskContext.Caption = Me.ContextType & " (" & Me.ContextID & ")"
+    tbxType.Value = Me.ContextType
+    tbxTypeID.Value = Me.ContextID
 
     Title = "Task"
     lblTitle.Caption = "" 'clear header title
@@ -1427,12 +1290,22 @@ On Error GoTo Err_Handler
       
     'populate dropdowns
     Set cbxRequestedBy.Recordset = GetRecords("s_contact_list")
+    cbxRequestedBy.BoundColumn = 1
+    cbxRequestedBy.ColumnCount = 2
+    cbxRequestedBy.ColumnWidths = "0;1"
+  
+    'set default --> current user
+    cbxRequestedBy.Value = TempVars("AppUserID")
+    'highlight the requested by label to bring attention
+    'in case user isn't the requestor
+    lblRequestedBy.ForeColor = lngBlue
+    lblRequestedBy.Caption = StringFromCodepoint(uRTriangle) & " Requested By"
   
     'counts
     Me.CountLabelVisible = False
     Me.CurrentCount = "Characters Remaining:"
     Me.lblCharacterCount.Visible = True
-    Me.maxcount = 255
+    Me.MaxCount = 255
     Me.AlertCount = 10
   
     'ID default -> value used only for edits of existing table values
@@ -1454,88 +1327,6 @@ End Sub
 
 ' ---------------------------------
 ' Sub:          Form_Load
-' Description:  Form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, November 4, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 11/4/2015 - initial version
-' ---------------------------------
-Private Sub xForm_Load()
-On Error GoTo Err_Handler
-
-'    Me.Instructions = "Enter your task."
-'    Me.CountLabelVisible = False
-'    Me.CurrentCount = "Characters Remaining:"
-'    Me.lblCharacterCount.Visible = False
-'    Me.MaxCount = 50
-
-'    Me.cbxPriority.AddItem "Set Priority", 0
-'    Me.cbxStatus.AddItem "Set Status", 0
-    
-    PopulateCombobox cbxPriority, "priority"
-    PopulateCombobox cbxStatus, "status"
-    
-    'Me.context = Me.OpenArgs
-
-Exit_Handler:
-    Exit Sub
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[Task form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          tbxComment_Change
-' Description:  tbxComment actions on change event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, November 4, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 11/4/2015 - initial version
-' ---------------------------------
-'Private Sub tbxComment_Change()
-'On Error GoTo Err_Handler
-'
-'    Me.lblMaxCount.Caption = Me.MaxCount - Len(tbxComment.Text) & " remaining"
-'
-'    If Me.MaxCount - Len(tbxComment.Text) < 10 Then
-'        Me.MaxCountFontColor = vbRed
-'    Else
-'        Me.MaxCountFontColor = vbBlack
-'    End If
-'
-'    If Len(tbxComment.Text) > Me.MaxCount Then
-'        Me.lblMaxCount.Caption = -(Me.MaxCount - Len(tbxComment.Text)) & " over"
-'    End If
-'
-'Exit_Handler:
-'    Exit Sub
-'
-'Err_Handler:
-'    Select Case Err.Number
-'      Case Else
-'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-'            "Error encountered (#" & Err.Number & " - tbxComment_Change[Task form])"
-'    End Select
-'    Resume Exit_Handler
-'End Sub
-
-' ---------------------------------
-' Sub:          Form_Load
 ' Description:  form loading actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -1546,12 +1337,11 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 1/13/2017 - remove extraneous code
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
 
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
 
 Exit_Handler:
     Exit Sub
@@ -1623,6 +1413,36 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          cbxRequestedBy_GotFocus
+' Description:  Combobox got focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 14, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/14/2017 - initial version
+' ---------------------------------
+Private Sub cbxRequestedBy_GotFocus()
+On Error GoTo Err_Handler
+
+    lblRequestedBy.ForeColor = lngGray50 'RGB(127,127,127)
+    lblRequestedBy.Caption = "Requested By"
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxRequested_GotFocus[Site form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          tbxTask_Change
 ' Description:  Textbox change actions
 ' Assumptions:  -
@@ -1642,7 +1462,7 @@ On Error GoTo Err_Handler
     
     Dim CurrentCount As Integer
     
-    CurrentCount = CInt(Me.maxcount) - Len(tbxTask.text)
+    CurrentCount = CInt(Me.MaxCount) - Len(tbxTask.Text)
 
     Me.lblMaxCount.Caption = CurrentCount & " remaining"
     
@@ -1667,19 +1487,19 @@ On Error GoTo Err_Handler
 '        Me.MaxCountFontColor = vbBlack
 '    End If
 
-    If Len(tbxTask.text) > Me.maxcount Then
-        Me.lblMaxCount.Caption = -(Me.maxcount - Len(tbxTask.text)) & " over"
+    If Len(tbxTask.Text) > Me.MaxCount Then
+        Me.lblMaxCount.Caption = -(Me.MaxCount - Len(tbxTask.Text)) & " over"
     End If
     
         If CurrentCount < 1 Then 'CInt(Me.MaxCount) Then
         Me.MaxCountFontColor = vbRed
     End If
     
-    If Len(tbxTask.text) > CInt(Me.maxcount) Then
+    If Len(tbxTask.Text) > CInt(Me.MaxCount) Then
         Me.lblMaxCount.Caption = -CurrentCount & " over"
         'disable add comment button until count is < or = MaxCount
         Me.btnSave.Enabled = False
-    ElseIf Len(tbxTask.text) = 0 Then
+    ElseIf Len(tbxTask.Text) = 0 Then
         'disable add comment button if count = 0
         Me.btnSave.Enabled = False
     Else
@@ -1787,6 +1607,36 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          cbxRequestedBy_AfterUpdate
+' Description:  Combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 14, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/14/2017 - initial version
+' ---------------------------------
+Private Sub cbxRequestedBy_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxRequested_AfterUpdate[Site form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
 ' Sub:          btnCancel_Click
 ' Description:  Undo button click actions
 ' Assumptions:  -
@@ -1856,12 +1706,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 2/13/2017 - revised to use calling form
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore CallingForm
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub

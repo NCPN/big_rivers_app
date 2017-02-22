@@ -10,6 +10,7 @@ Begin Form
     CloseButton = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    OrderByOn = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
     ViewsAllowed =1
@@ -21,8 +22,10 @@ Begin Form
     Width =7500
     DatasheetFontHeight =11
     ItemSuffix =44
-    Right =14235
-    Bottom =11790
+    Left =3255
+    Top =4050
+    Right =10980
+    Bottom =8415
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8ae9cc518dd4e440
@@ -42,6 +45,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -236,6 +241,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblHdrID"
                     Caption ="ID"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =1020
                     LayoutCachedTop =1020
@@ -256,6 +262,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblName"
                     Caption ="Name"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =1620
                     LayoutCachedTop =1020
@@ -276,6 +283,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblEmail"
                     Caption ="Email"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =3180
                     LayoutCachedTop =1020
@@ -636,7 +644,7 @@ Option Explicit
 ' =================================
 ' Form:         ContactList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -646,6 +654,8 @@ Option Explicit
 ' Revisions:    BLC - 6/20/2016 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - shifted ToggleIsActive() to mod_App_Data
 '               BLC - 10/20/2016 - 1.02 - removed ButtonCaption, SelectedID, SelectedValue properties
+'               BLC - 2/21/2017 - 1.03 - added events for label sorting, updated contact combobox
+'                                        on calling form
 ' =================================
 
 '---------------------
@@ -804,6 +814,96 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[ContactList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblHdrID_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Private Sub lblHdrID_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblHdrID
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblHdrID_Click[ContactList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblName_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Private Sub lblName_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblName
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblName_Click[ContactList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblEmail_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Private Sub lblEmail_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblEmail
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblEmail_Click[ContactList form])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -19,12 +19,12 @@ Begin Form
     GridY =24
     Width =7680
     DatasheetFontHeight =11
-    ItemSuffix =33
-    Right =14115
-    Bottom =11250
+    ItemSuffix =35
+    Right =13245
+    Bottom =10875
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x9af8902d71c3e440
+        0xe1659ac02ce2e440
     End
     RecordSource ="Location"
     Caption ="_List"
@@ -244,7 +244,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblBearing"
-                    Caption ="Bearing"
+                    Caption ="Bearing (¬∞)"
                     GridlineColor =10921638
                     LayoutCachedLeft =4080
                     LayoutCachedTop =1200
@@ -292,7 +292,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =360
+            Height =765
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -529,9 +529,9 @@ Begin Form
                     Width =720
                     FontSize =16
                     TabIndex =7
-                    ForeColor =4210752
+                    ForeColor =255
                     Name ="btnSensitive"
-                    Caption ="Sensitive"
+                    Caption ="Ì†ΩÌ±Å"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Toggle sensitive location"
                     GridlineColor =10921638
@@ -539,6 +539,7 @@ Begin Form
                     LayoutCachedLeft =5340
                     LayoutCachedWidth =6060
                     LayoutCachedHeight =360
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -550,6 +551,58 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =4200
+                    Top =420
+                    Width =900
+                    Height =300
+                    TabIndex =8
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxIsSensitive"
+                    ControlSource ="IsSensitive"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4200
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =5100
+                    LayoutCachedHeight =720
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2940
+                    Top =420
+                    Width =900
+                    Height =300
+                    TabIndex =9
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxLocTypeID"
+                    ControlSource ="LocTypeID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2940
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =3840
+                    LayoutCachedHeight =720
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
                 End
             End
         End
@@ -573,7 +626,7 @@ Option Explicit
 ' =================================
 ' Form:         LocationList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -581,6 +634,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
+'               BLC - 2/3/2017  - 1.01 - updated btnSensitive()
 ' =================================
 
 '---------------------
@@ -710,7 +764,8 @@ On Error GoTo Err_Handler
     btnSensitive.ForeColor = lngRed
 
     'set data source
-    Me.RecordSource = "Location"
+    'Me.RecordSource = "Location"
+    Me.Recordset = GetRecords("s_location_with_loctypeID_sensitivity")
 
 Exit_Handler:
     Exit Sub
@@ -792,12 +847,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 2/3/2017  - updated to call ToggleSensitive()
 ' ---------------------------------
 Private Sub btnSensitive_Click()
 On Error GoTo Err_Handler
     
     'toggle sensitive location
-    'ToggleSensitive Me.Parent, ID
+    ToggleSensitive "Location", ID, IIf(tbxIsSensitive = 1, 0, 1)
 
 Exit_Handler:
     Exit Sub

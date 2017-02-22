@@ -13,8 +13,8 @@ Begin Form
     Width =6420
     DatasheetFontHeight =11
     ItemSuffix =55
-    Right =12855
-    Bottom =11790
+    Right =18135
+    Bottom =10305
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x36469deccdc4e440
@@ -26,6 +26,7 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
+    OnActivate ="[Event Procedure]"
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
@@ -569,12 +570,15 @@ Option Explicit
 ' =================================
 ' MODULE:       Form_PhotoOtherDetails
 ' Level:        Development module
-' Version:      1.00
+' Version:      1.01
 '
-' Description:  Photo detail functions & procedures for feature, transect, overview & reference photos
+' Description:  Photo detail functions & procedures for other & unclassified photos
 '
 ' Source/date:  Bonnie Campbell, 7/13/2015
 ' Revisions:    BLC - 7/13/2015 - 1.00 - initial version
+'               BLC - 2/21/2017 - 1.01 - added Form_Activate() event to handle photographer list updates
+'                                        removed Form_Activate() event photographer list updates
+'                                        require redefining RowSource for cbxPhoto control
 ' =================================
 
 '---------------------
@@ -636,6 +640,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 ' ---------------------------------
 ' SUB:          Form_Load
 ' Description:  Actions for form loading
@@ -663,6 +668,37 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Load[PhotoOtherDetails form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_Activate
+' Description:  Actions for form Activateing
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Private Sub Form_Activate()
+On Error GoTo Err_Handler
+
+    'update Contacts
+    'Me.cbxPhotog.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Activate[PhotoOtherDetails form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -767,12 +803,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/14/2016 - initial version
+'   BLC - 2/21/2017  - revised to use Photo vs. Tree form
 ' ---------------------------------
 Private Sub btnContacts_Click()
 On Error GoTo Err_Handler
     
-    DoCmd.OpenForm "Contact", acNormal, , , , , "Tree"
-    
+    DoCmd.OpenForm "Contact", acNormal, , , , , "Photo" '"Tree"
+        
 Exit_Handler:
     Exit Sub
 Err_Handler:

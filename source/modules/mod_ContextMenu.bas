@@ -507,7 +507,43 @@ End Sub
 
 Public Sub mnuMovePhoto()
     
-    Debug.Print "mnuMovePhoto"
+    'Debug.Print "mnuMovePhoto"
+    'move to identified node
+    Dim aryTypes() As String
+    Dim ptype As String, strOther As String
+    ptype = CommandBars.ActionControl.ListIndex
+    
+    Debug.Print "mnuMovePhoto " & ptype
+        
+    'prepare array --> this mirrors Photo tree form's CreatePopUpMenu list order for adding the combobox items
+    strOther = Replace(PHOTO_TYPES_OTHER, ",", ",Other - ")
+    aryTypes = Split(PHOTO_TYPES_MAIN & ",Other - " & strOther, ",")
+        
+    Select Case aryTypes(ptype) 'ptype 'strComboText
+        Case "Reference"
+        Case "Overview"
+        Case "Feature"
+        Case "Transect"
+        Case "Other - Animal"
+        Case "Other - Plant"
+        Case "Other - Cultural"
+        Case "Other - Disturbance"
+        Case "Other - Field Work"
+        Case "Other - Scenic"
+        Case "Other - Weather"
+        Case "Other - Other"
+        Case "Unclassified"
+    End Select
+    
+    'identify current node
+    'Set SelectedNode = Me.TreeViewName.Object.SelectedItem
+    
+    'move to desired immovable node --> aryTypes(ptype)
+    Dim oTree As MSComctlLib.Treeview
+    
+   ' Do Until VarType(obj.Parent) =
+    
+    MoveToNode SelectedNode.Parent.Parent, SelectedNode, aryTypes(ptype)
     
 End Sub
 

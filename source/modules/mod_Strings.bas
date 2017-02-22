@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Strings
 ' Level:        Framework module
-' Version:      1.08
+' Version:      1.09
 ' Description:  String related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -18,6 +18,7 @@ Option Explicit
 '               BLC, 8/23/2016 - 1.06 - added ExtractString()
 '               BLC, 8/30/2016 - 1.07 - added ParseString()
 '               BLC, 10/25/2016 - 1.08 - added InsertSpaceBeforeCaps()
+'               BLC, 2/21/2017 - 1.09 - added PadString()
 ' =================================
 
 '---------------------
@@ -567,7 +568,6 @@ Err_Handler:
     Resume Exit_Handler
 End Function
 
-
 ' ---------------------------------
 ' FUNCTION:     ExtractString
 ' Description:  Extracts string from within a string
@@ -687,6 +687,43 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (" & Err.Number & " - InsertSpaceBeforeCaps[mod_Strings])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' Function:     PadString
+' Description:  Class string padding function
+' Assumptions:  -
+' Parameters:   src - starting string (string)
+'               nSize - desired string length (integer)
+'               PadChar - character to use for padding (string)
+' Returns:      -
+' Throws:       none
+' References:
+'   Reinhold Thurner, August 19, 2015
+'   https://sourceforge.net/projects/exifclass/
+' Source/date:  Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Public Function PadString(src As String, nSize As Integer, PadChar As String) As String
+
+    If Len(src) < nSize Then
+        PadString = String(nSize - Len(src), PadChar) & src
+    Else
+        PadString = src
+    End If
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PadString[mod_Strings])"
     End Select
     Resume Exit_Handler
 End Function

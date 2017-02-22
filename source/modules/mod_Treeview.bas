@@ -9,7 +9,15 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, 8/30/2016
 ' Revisions:    BLC, 8/30/2016 - 1.00 - initial version
+'               BLC, 2/17/2017 - 1.01 - added SelectedNode for public reference,
+'                                       moved MoveToNode() from Tree form
 ' =================================
+
+'---------------------
+' Declarations
+'---------------------
+'for Treeview Context Menus:
+Public SelectedNode As MSComctlLib.Node
 
 ' ---------------------------------
 '  Properties
@@ -136,10 +144,10 @@ On Error GoTo Err_Handler
                     Dim strKey As String, strText As String, strDisplayName As String
                     Dim strPhotoType As String
                     Dim strDuplicates As String
-                    Dim nodeSelected As node
-                    Dim nodeParent As node
-                    Dim nodeX As node
-                    Dim nodeNew As node
+                    Dim nodeSelected As Node
+                    Dim nodeParent As Node
+                    Dim nodeX As Node
+                    Dim nodeNew As Node
                     
                     'default
                     strPhotoType = "U"
@@ -332,12 +340,12 @@ End Sub
 '   BLC - 7/10/2015 - initial version
 '   BLC - 6/15/2016 - adapted for big rivers app
 ' ---------------------------------
-Public Sub AddChildren(tvw As Treeview, nodeParent As node, aryKids As String)
+Public Sub AddChildren(tvw As Treeview, nodeParent As Node, aryKids As String)
 'Private Sub AddChildren(tvw As TreeView, nodeParent As String, aryChildren As String)
 
 On Error GoTo Err_Handler
     
-    Dim nodeX As node
+    Dim nodeX As Node
     Dim aryChildren() As String
     Dim child As Variant
     
@@ -358,7 +366,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - AddChildren[Tree form])"
+            "Error encountered (#" & Err.Number & " - AddChildren[mod_Treeview])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -401,7 +409,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - FindSpecificNode[Tree form])"
+            "Error encountered (" & Err.Number & " - FindSpecificNode[mod_Treeview])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -423,7 +431,7 @@ End Sub
 Public Function IsDuplicateKey(strKey As String, tvw As MSComctlLib.Treeview) As Boolean
 On Error GoTo Err_Handler
 
-    Dim tvwNode As node
+    Dim tvwNode As Node
     Dim item As Variant
     Dim blnIsDupe As Boolean
     
@@ -447,7 +455,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (" & Err.Number & " - IsDuplicateKey[Tree form])"
+            "Error encountered (" & Err.Number & " - IsDuplicateKey[mod_Treeview])"
     End Select
     Resume Exit_Handler
 End Function
@@ -466,15 +474,15 @@ End Function
 '   BLC - 7/27/2015 - initial version
 '   BLC - 9/1/2016  - added unclassified photo type
 ' ---------------------------------
-Public Function ImmovableNode(node As node) As Boolean
+Public Function ImmovableNode(Node As Node) As Boolean
 
 On Error GoTo Err_Handler
     
         'default
         ImmovableNode = False
         
-        If CountInString(PHOTO_TYPES_MAIN, node) + CountInString(PHOTO_TYPES_OTHER, node) _
-           + CountInString("Unclassified", node) > 0 Then
+        If CountInString(PHOTO_TYPES_MAIN, Node) + CountInString(PHOTO_TYPES_OTHER, Node) _
+           + CountInString("Unclassified", Node) > 0 Then
 '            Debug.Print node
             ImmovableNode = True
         End If
@@ -486,7 +494,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ImmovableNode[Tree form])"
+            "Error encountered (#" & Err.Number & " - ImmovableNode[mod_Treeview])"
     End Select
     Resume Exit_Handler
 End Function
@@ -506,19 +514,19 @@ End Function
 ' Revisions:
 '   BLC - 7/27/2015 - initial version
 ' ---------------------------------
-Private Sub tvwNodeSelect(Optional node As node, Optional blnNodeSelected As Boolean)
+Private Sub tvwNodeSelect(Optional Node As Node, Optional blnNodeSelected As Boolean)
 On Error GoTo Err_Handler
     Dim i As Long
-    Dim SelectedNode As node
+    Dim SelectedNode As Node
     Dim colTreeNodes As Collection
     
     If blnNodeSelected Then
-        If node.BackColor = vbHighlight Then
+        If Node.BackColor = vbHighlight Then
             If colTreeNodes.Count > 1 Then
-                node.BackColor = vbWindowBackground
-                node.ForeColor = vbWindowText
-                node.Selected = False
-                colTreeNodes.Remove node.key
+                Node.BackColor = vbWindowBackground
+                Node.ForeColor = vbWindowText
+                Node.Selected = False
+                colTreeNodes.Remove Node.key
             End If
             Exit Sub
         End If
@@ -531,10 +539,10 @@ On Error GoTo Err_Handler
         Next i
     End If
     
-    If Not node Is Nothing Then
-        node.BackColor = vbHighlight
-        node.ForeColor = vbHighlightText
-        colTreeNodes.Add node, node.key
+    If Not Node Is Nothing Then
+        Node.BackColor = vbHighlight
+        Node.ForeColor = vbHighlightText
+        colTreeNodes.Add Node, Node.key
     End If
     
 Exit_Handler:
@@ -544,7 +552,81 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tvwNodeSelect[Tree form])"
+            "Error encountered (#" & Err.Number & " - tvwNodeSelect[mod_Treeview])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          MoveToNode
+' Description:  move focus to desired node actions
+' Assumptions:  -
+' Parameters:   oTree - referenced treeview object (MSComctlLib.Treeview)
+'               Node - node to move (MSComctlLib.Node)
+'               WhichNode - name of node to move to (string)
+' Returns:      -
+' Throws:       none
+' References:
+'   Microsoft, unknown
+'   https://msdn.microsoft.com/en-us/library/system.windows.forms.treenode.nextnode(v=vs.110).aspx?f=255&MSPPError=-2147217396&cs-save-lang=1&cs-lang=vb#code-snippet-1
+' Source/date:  Bonnie Campbell, October 17, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/17/2016 - initial version
+'   BLC - 2/17/2017 - added oTree treeview parameter so code can be called from any form &
+'                     moved to mod_Treeview from Tree form
+' ---------------------------------
+'Private Sub MoveToNextNode() 'ByVal Node As MSComctlLib.Node)
+Public Sub MoveToNode(ByRef oTree As MSComctlLib.Treeview, ByVal Node As MSComctlLib.Node, WhichNode As String)
+On Error GoTo Err_Handler
+
+'    Dim oTree As Treeview
+
+    'Create a reference to the TreeView control
+'    Set oTree = Me!tvwTree.Object
+
+'    oTree.Nodes.item().Selected
+    
+    'oTree.SelectedItem
+    With oTree
+        If Node.Selected Then
+       'If node.IsSelected Then
+       
+          'which node to select
+          Select Case WhichNode
+             Case "Previous"
+                .SelectedItem = Node.Previous
+    '            node.tvw.SelectedNode = node.Previous '.PrevNode
+    '         Case "PreviousVisible"
+    '            node.tvw.SelectedNode = node.PrevVisibleNode
+             Case "Next"
+                .SelectedItem = Node.Next
+    '            node.tvw.SelectedNode = node.Next '.NextNode
+    '         Case "NextVisible"
+    '            node.tvw.SelectedNode = node.NextVisibleNode
+             Case "First"
+                .SelectedItem = Node.FirstSibling
+    '            node.tvw.SelectedNode = node.FirstSibling 'FirstNode
+             Case "Last"
+                .SelectedItem = Node.LastSibling
+    '            node.tvw.SelectedNode = node.LastSibling '.LastNode
+          End Select
+       
+       End If
+ 
+   End With
+
+
+'   node.tvw.Focus
+   'node.TreeView.Focus()
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MoveToNode[mod_Treeview])"
     End Select
     Resume Exit_Handler
 End Sub

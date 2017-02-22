@@ -20,13 +20,12 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =32
-    Right =14235
-    Bottom =11850
+    Right =13080
+    Bottom =10305
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x1faa16ae9bc7e440
+        0xbd77e8ebcfe3e440
     End
-    RecordSource ="UnknownSpecies"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -42,6 +41,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -267,7 +268,7 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="Label30"
+                    Name ="lblStatus"
                     Caption ="Status"
                     GridlineColor =10921638
                     LayoutCachedLeft =5160
@@ -338,7 +339,8 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -396,7 +398,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -653,36 +656,6 @@ End Property
 '---------------------
 
 ' ---------------------------------
-' Sub:          Form_Load
-' Description:  form loading actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 5/31/2016 - initial version
-' ---------------------------------
-Private Sub Form_Load()
-On Error GoTo Err_Handler
-
-    'eliminate NULLs
-    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
-
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Load[TaskList form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          Form_Open
 ' Description:  form opening actions
 ' Assumptions:  -
@@ -727,6 +700,37 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 31, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 5/31/2016 - initial version
+' ---------------------------------
+Private Sub Form_Load()
+On Error GoTo Err_Handler
+
+    'eliminate NULLs
+    If IsNull(Me.OpenArgs) Then GoTo Exit_Handler
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[TaskList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
 ' Sub:          Form_Current
 ' Description:  form current actions
 ' Assumptions:  -
@@ -765,12 +769,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 2/14/2017 - changed from ID to tbxID.Value to populate parent form
 ' ---------------------------------
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent, tbxID.Value 'ID
 
 Exit_Handler:
     Exit Sub
@@ -805,7 +810,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", ID
+    If result = vbYes Then DeleteRecord "Event", tbxID 'ID
     
     'clear the deleted record
     Me.Requery

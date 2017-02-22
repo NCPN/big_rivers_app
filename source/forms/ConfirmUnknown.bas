@@ -1449,7 +1449,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "Unknown|" & tbxID.text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "Unknown|" & tbxID.Text
     
 Exit_Handler:
     Exit Sub

@@ -18,7 +18,7 @@ Begin Form
     GridY =24
     Width =7620
     DatasheetFontHeight =11
-    ItemSuffix =45
+    ItemSuffix =47
     Left =4440
     Top =3315
     Right =17685
@@ -27,7 +27,7 @@ Begin Form
     RecSrcDt = Begin
         0x40a16385ede1e440
     End
-    Caption ="_List"
+    Caption ="Add Template"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -66,6 +66,16 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Rectangle
+            SpecialEffect =3
+            BackStyle =0
+            BorderLineStyle =0
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -144,7 +154,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="title"
                     GridlineColor =10921638
                     LayoutCachedWidth =3480
                     LayoutCachedHeight =300
@@ -160,7 +169,10 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Enter template details below using the standard template naming conventions (see"
+                        " hints below) and save.\015\012\015\012The new template will appear at the botto"
+                        "m of the template list.\015\012\015\012To format your template text, use the Not"
+                        "epad button at right,\015\012then copy && paste it into the template textbox."
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =120
@@ -218,7 +230,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -272,13 +285,32 @@ Begin Form
         Begin Section
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =4320
+            Height =5040
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin Rectangle
+                    SpecialEffect =0
+                    BackStyle =1
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    Left =5760
+                    Top =1920
+                    Width =1500
+                    Height =360
+                    BackColor =65535
+                    BorderColor =10921638
+                    Name ="rctAlert"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5760
+                    LayoutCachedTop =1920
+                    LayoutCachedWidth =7260
+                    LayoutCachedHeight =2280
+                    BackThemeColorIndex =-1
+                End
                 Begin TextBox
                     TabStop = NotDefault
                     OldBorderStyle =0
@@ -330,7 +362,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -354,6 +387,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxTemplate"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000094000000020000000100000000000000000000001500000001000000 ,
                         0x00000000fff20000000000000300000016000000190000000100000000000000 ,
@@ -419,6 +453,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxVersion"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000092000000020000000100000000000000000000001400000001000000 ,
                         0x00000000fff20000000000000300000015000000180000000100000000000000 ,
@@ -460,6 +495,7 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxEffectiveDate"
                     Format ="Short Date"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000b0000000020000000100000000000000000000002300000001000000 ,
                         0x00000000fff20000000000000300000024000000270000000100000000000000 ,
@@ -502,6 +538,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRemarks"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000092000000020000000100000000000000000000001400000001000000 ,
                         0x00000000fff20000000000000300000015000000180000000100000000000000 ,
@@ -528,6 +565,7 @@ Begin Form
                     End
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =215
                     Left =6780
@@ -583,7 +621,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -599,12 +638,14 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
+                    ColumnCount =3
                     Left =5340
                     Top =60
                     Width =900
                     Height =300
                     FontSize =9
                     TabIndex =1
+                    BoundColumn =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4138256
@@ -618,7 +659,9 @@ Begin Form
                     End
                     Name ="cbxSyntax"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;0;1"
                     DefaultValue ="\"T-SQL\""
+                    OnChange ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5340
@@ -674,7 +717,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =120
-                    Top =2040
+                    Top =2220
                     Width =915
                     Height =315
                     FontWeight =500
@@ -684,17 +727,17 @@ Begin Form
                     Caption ="Template"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
-                    LayoutCachedTop =2040
+                    LayoutCachedTop =2220
                     LayoutCachedWidth =1035
-                    LayoutCachedHeight =2355
+                    LayoutCachedHeight =2535
                 End
                 Begin TextBox
                     TabStop = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =87
                     TextAlign =1
                     IMESentenceMode =3
                     Left =1080
-                    Top =2040
+                    Top =2280
                     Width =6120
                     Height =2040
                     FontSize =9
@@ -703,29 +746,36 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxTemplateSQL"
+                    OnKeyPress ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
-                        0x010000009c000000020000000100000000000000000000001900000001000000 ,
+                        0x01000000cc000000030000000100000000000000000000001900000001000000 ,
                         0x00000000fff2000000000000030000001a0000001d0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0xffffff0001000000000000001e0000003500000001000000ed1c2400ffffff00 ,
                         0x4c0065006e0028002200740062007800540065006d0070006c00610074006500 ,
-                        0x530051004c00220029003d0022002200000000002200220000000000
+                        0x530051004c00220029003d00220022000000000022002200000000004c006500 ,
+                        0x6e0028005b00740062007800540065006d0070006c006100740065005d002900 ,
+                        0x3e0032003500350000000000
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1080
-                    LayoutCachedTop =2040
+                    LayoutCachedTop =2280
                     LayoutCachedWidth =7200
-                    LayoutCachedHeight =4080
+                    LayoutCachedHeight =4320
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000180000004c00 ,
+                        0x01000300000001000000000000000100000000000000fff20000180000004c00 ,
                         0x65006e0028002200740062007800540065006d0070006c006100740065005300 ,
                         0x51004c00220029003d0022002200000000000000000000000000000000000000 ,
                         0x00000000000000030000000100000000000000ffffff00020000002200220000 ,
-                        0x0000000000000000000000000000000000000000
+                        0x0000000000000000000000000000000000000000010000000000000001000000 ,
+                        0xed1c2400ffffff00160000004c0065006e0028005b0074006200780054006500 ,
+                        0x6d0070006c006100740065005d0029003e003200350035000000000000000000 ,
+                        0x00000000000000000000000000
                     End
                 End
                 Begin Label
@@ -757,7 +807,9 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16737792
                     Name ="lblTemplateNameHint"
-                    Caption ="Template name hint"
+                    Caption ="Naming conventions: \015\012                              s_ = select        d_ "
+                        "= delete    i_ = insert\015\012                              u_ = update    qa_ "
+                        "= QA      qsys_ = system"
                     GridlineColor =10921638
                     LayoutCachedLeft =1140
                     LayoutCachedTop =420
@@ -807,6 +859,85 @@ Begin Form
                         0x000000000000000000000000
                     End
                 End
+                Begin Label
+                    FontItalic = NotDefault
+                    OldBorderStyle =1
+                    OverlapFlags =85
+                    Left =900
+                    Top =4380
+                    Width =6420
+                    Height =600
+                    FontSize =8
+                    FontWeight =500
+                    BorderColor =255
+                    ForeColor =16737792
+                    Name ="lblTemplateMax"
+                    Caption ="Templates over 255 characters must be edited directly in the template table afte"
+                        "r saving. \015\012Save the template, then edit the new template's SQL text in th"
+                        "e table (only the first 255 characters are saved)."
+                    GridlineColor =10921638
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =4380
+                    LayoutCachedWidth =7320
+                    LayoutCachedHeight =4980
+                    BorderThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =93
+                    TextAlign =3
+                    Left =3540
+                    Top =1980
+                    Width =2160
+                    Height =240
+                    FontSize =9
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblCharacterCount"
+                    Caption ="Character Count"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3540
+                    LayoutCachedTop =1980
+                    LayoutCachedWidth =5700
+                    LayoutCachedHeight =2220
+                End
+                Begin Label
+                    OverlapFlags =223
+                    TextAlign =2
+                    Left =5160
+                    Top =1980
+                    Width =660
+                    Height =240
+                    FontSize =9
+                    BorderColor =8355711
+                    Name ="lblCount"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5160
+                    LayoutCachedTop =1980
+                    LayoutCachedWidth =5820
+                    LayoutCachedHeight =2220
+                    ForeThemeColorIndex =-1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    TextAlign =1
+                    Left =5820
+                    Top =1980
+                    Width =1380
+                    Height =240
+                    FontSize =9
+                    BorderColor =8355711
+                    ForeColor =255
+                    Name ="lblMaxCount"
+                    Caption ="-1 remaining"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =5820
+                    LayoutCachedTop =1980
+                    LayoutCachedWidth =7200
+                    LayoutCachedHeight =2220
+                    ForeThemeColorIndex =-1
+                End
             End
         End
         Begin FormFooter
@@ -843,6 +974,9 @@ Option Explicit
 '                                        revised to unbound form (avoids template double save)
 '                                        adjust to retrieve valid syntaxes from AppEnum
 '                                        added CallingForm property
+'               BLC - 2/2/2017 - 1.03 - truncate template SQL to 255 chars (others need to be added to table directly)
+'                                       add character counter & tbxTemplate_Change()
+'                                       added textbox & combobox change events
 ' =================================
 
 '---------------------
@@ -855,6 +989,25 @@ Option Explicit
 Private m_Title As String
 Private m_Directions As String
 Private m_CallingForm As String
+
+Private m_CountLabel As String
+Private m_CurrentCount As String
+Private m_MaxCount As String
+Private m_AlertCount As Integer
+Private m_RemainingCount As String
+
+Private m_CountLabelFontColor As Long
+Private m_CurrentCountFontColor As Long
+Private m_MaxCountFontColor As Long
+Private m_RemainingCountFontColor As Long
+Private m_AlertBoxBackgroundColor As Long
+
+Private m_CountLabelVisible As Byte
+Private m_CurrentCountVisible As Byte
+Private m_MaxCountVisible As Byte
+Private m_RemainingCountVisible As Byte
+Private m_AlertCountVisible As Byte
+Private m_AlertBoxVisible As Byte
 
 '---------------------
 ' Event Declarations
@@ -909,6 +1062,157 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
+Public Property Get CountLabel() As String
+    CountLabel = m_CountLabel
+End Property
+
+Public Property Let CountLabel(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Character Count"
+    If ValidateString(Value, "alphanumdashslashspace") Then
+        m_CountLabel = Value
+    End If
+    lblCharacterCount.Caption = m_CountLabel
+End Property
+
+Public Property Get CurrentCount() As String
+    CurrentCount = m_CurrentCount
+End Property
+
+Public Property Let CurrentCount(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "1"
+    If ValidateString(Value, "numeric") Then
+        m_CurrentCount = Value
+    End If
+    lblCount.Caption = m_CurrentCount
+End Property
+
+Public Property Get MaxCount() As String
+    MaxCount = m_MaxCount
+End Property
+
+Public Property Let MaxCount(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "/ XX characters"
+    If ValidateString(Value, "alphanumdashslashspace") Then
+        m_MaxCount = Value
+    End If
+    lblMaxCount.Caption = m_MaxCount
+End Property
+
+'set the value at which the count display changes color
+Public Property Get AlertCount() As Integer
+    AlertCount = m_AlertCount
+End Property
+
+Public Property Let AlertCount(Value As Integer)
+    If Len(Trim(Value)) = 0 Then Value = 10
+    m_AlertCount = Value
+End Property
+
+Public Property Get RemainingCount() As String
+    RemainingCount = m_RemainingCount
+End Property
+
+Public Property Let RemainingCount(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "XX characters remain"
+    If ValidateString(Value, "alphanumdashslashspace") Then
+        m_RemainingCount = Value
+    End If
+    lblMaxCount.Caption = m_RemainingCount
+End Property
+
+' ==== Color =========
+Public Property Get CountLabelFontColor() As Long
+    CountLabelFontColor = m_CountLabelFontColor
+End Property
+
+Public Property Let CountLabelFontColor(Value As Long)
+    m_CountLabelFontColor = Value
+    lblCount.ForeColor = m_CountLabelFontColor
+End Property
+
+Public Property Get CurrentCountFontColor() As Long
+    CurrentCountFontColor = m_CurrentCountFontColor
+End Property
+
+Public Property Let CurrentCountFontColor(Value As Long)
+    m_CurrentCountFontColor = Value
+    lblCount.ForeColor = m_CurrentCountFontColor
+End Property
+
+Public Property Get MaxCountFontColor() As Long
+    MaxCountFontColor = m_MaxCountFontColor
+End Property
+
+Public Property Let MaxCountFontColor(Value As Long)
+    m_MaxCountFontColor = Value
+    lblMaxCount.ForeColor = m_MaxCountFontColor
+End Property
+
+Public Property Get RemainingCountFontColor() As Long
+    RemainingCountFontColor = m_RemainingCountFontColor
+End Property
+
+Public Property Let RemainingCountFontColor(Value As Long)
+    m_RemainingCountFontColor = Value
+    lblMaxCount.ForeColor = m_RemainingCountFontColor
+End Property
+
+Public Property Get AlertBoxBackgroundColor() As Long
+    AlertBoxBackgroundColor = m_AlertBoxBackgroundColor
+End Property
+
+Public Property Let AlertBoxBackgroundColor(Value As Long)
+    rctAlert.backstyle = 1 '1 = Normal, 0 = Transparent
+    m_AlertBoxBackgroundColor = Value
+    rctAlert.BackColor = m_AlertBoxBackgroundColor
+End Property
+
+' ==== Visibility ====
+Public Property Get CountLabelVisible() As Byte
+    CountLabelVisible = m_CountLabelVisible
+End Property
+
+Public Property Let CountLabelVisible(Value As Byte)
+    m_CountLabelVisible = Value
+    lblCount.Visible = m_CountLabelVisible
+End Property
+
+Public Property Get CurrentCountVisible() As Byte
+    CurrentCountVisible = m_CurrentCountVisible
+End Property
+
+Public Property Let CurrentCountVisible(Value As Byte)
+    m_CurrentCountVisible = Value
+    lblCount.Visible = m_CurrentCountVisible
+End Property
+
+Public Property Get MaxCountVisible() As Byte
+    MaxCountVisible = m_MaxCountVisible
+End Property
+
+Public Property Let MaxCountVisible(Value As Byte)
+    m_MaxCountVisible = Value
+    lblMaxCount.Visible = m_MaxCountVisible
+End Property
+
+Public Property Get RemainingCountVisible() As Byte
+    RemainingCountVisible = m_RemainingCountVisible
+End Property
+
+Public Property Let RemainingCountVisible(Value As Byte)
+    m_RemainingCountVisible = Value
+End Property
+
+Public Property Get AlertBoxVisible() As Byte
+    AlertBoxVisible = m_AlertBoxVisible
+End Property
+
+Public Property Let AlertBoxVisible(Value As Byte)
+    m_AlertBoxVisible = Value
+    Me.rctAlert.Visible = m_AlertBoxVisible
+End Property
+
+
 '---------------------
 ' Methods
 '---------------------
@@ -920,7 +1224,9 @@ End Property
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   Microsoft, unknown
+'   https://msdn.microsoft.com/en-us/library/office/aa223974(v=office.11).aspx
 ' Source/date:  Bonnie Campbell, October 4, 2016 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -928,6 +1234,8 @@ End Property
 '   BLC - 2/1/2017 - revised to unbound form (avoids double save of template)
 '                    adjust to retrieve valid syntaxes from AppEnum
 '                    added CallingForm default, adjusted directions
+'   BLC - 2/2/2017 - handle Template memo truncation since > 255 yields
+'                    error 3271 SetRecord mod_App_Data  Invalid property value.
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -959,6 +1267,23 @@ On Error GoTo Err_Handler
                                 Space(4) & "qa_ = QA" & _
                                 Space(6) & "qsys_ = system"
     
+    lblTemplateMax.Visible = False 'hide by default
+    lblTemplateMax.BorderStyle = 1 '0-Transparent, 1-Solid, 2-Dashes, 3-Short dashes,
+                                   '4-Dots, 5-Sparse dots, 6-Dash dot, 7-Dash dot dot,
+                                   '8-Double solid
+    lblTemplateMax.borderColor = lngRed
+    lblTemplateMax.Caption = "Templates over 255 characters must be edited directly " _
+                            & "in the template table after saving. " & vbCrLf _
+                            & "Save the template, then edit the new template's " _
+                            & "SQL text in the table (only the first 255 characters are saved)."
+    
+    'character counts
+    Me.CountLabelVisible = False
+    Me.lblCharacterCount.Caption = "Characters Remaining:"
+    Me.lblCharacterCount.Visible = True
+    Me.MaxCount = 255   'limit to max characters before Template field (Memo) is truncated
+    Me.AlertCount = 10
+    Me.CurrentCount = Me.MaxCount
     'set hover
     btnDelete.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
@@ -971,9 +1296,15 @@ On Error GoTo Err_Handler
     SetTempVar "EnumType", "SyntaxType"
     Set cbxSyntax.Recordset = GetRecords("s_app_enum_list")
     cbxSyntax.ColumnCount = 3
-    cbxSyntax.BoundColumn = 2
-    cbxSyntax.ColumnWidths = "0;1;0"
+    cbxSyntax.BoundColumn = 3
+    cbxSyntax.ColumnWidths = "0;0;1;"
     cbxSyntax.Value = "T-SQL"
+    
+    'defaults
+    btnSave.Enabled = False
+    Me.rctAlert.Visible = False
+    Me.lblCount.ForeColor = vbBlack
+    Me.lblMaxCount.ForeColor = vbBlack
     
 Exit_Handler:
     Exit Sub
@@ -1042,6 +1373,270 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' Sub:          tbxTemplateSQL_KeyPress
+' Description:  Textbox keypress actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 28, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 6/28/2016 - initial version
+'   BLC - 2/2/2017 - adjusted for TemplateAdd from Task form
+' ---------------------------------
+Private Sub tbxTemplateSQL_KeyPress(KeyAscii As Integer)
+On Error GoTo Err_Handler
+
+    'LimitKeyPress Me.tbxTemplateSQL, 255, KeyAscii
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxTemplateSQL_KeyPress[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxTemplate_Change
+' Description:  Textbox actions on change event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/2/2017 - initial version
+' ---------------------------------
+Private Sub tbxTemplate_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxTemplate_Change[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxSyntax_Change
+' Description:  Combobox actions on change event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/2/2017 - initial version
+' ---------------------------------
+Private Sub cbxSyntax_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSyntax_Change[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxVersion_Change
+' Description:  Textbox actions on change event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/2/2017 - initial version
+' ---------------------------------
+Private Sub tbxVersion_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxVersion_Change[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxRemarks_Change
+' Description:  Textbox actions on change event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/2/2017 - initial version
+' ---------------------------------
+Private Sub tbxRemarks_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxRemarks_Change[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxEffectiveDate_Change
+' Description:  Textbox actions on change event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/2/2017 - initial version
+' ---------------------------------
+Private Sub tbxEffectiveDate_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxEffectiveDate_Change[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxTemplateSQL_Change
+' Description:  tbxTemplateSQL actions on change event
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 4, 2015 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/4/2015 - initial version
+'   BLC - 2/2/2017 - adjusted for template use from comment/task forms
+' ---------------------------------
+Private Sub tbxTemplateSQL_Change()
+On Error GoTo Err_Handler
+    
+'    LimitChange Me.tbxTask, 255
+    
+    Me.lblCharacterCount.Caption = "Characters:"
+    
+    Dim CurrentCount As Integer
+    
+    CurrentCount = CInt(Me.MaxCount) - Len(tbxTemplateSQL.Text)
+
+    Me.lblMaxCount.Caption = CurrentCount & " remaining"
+    
+    Me.CurrentCountFontColor = vbBlack
+    Me.AlertBoxVisible = False
+    Me.MaxCountFontColor = vbBlack
+    
+    Select Case CurrentCount
+        Case Is < Me.AlertCount
+            Me.AlertBoxVisible = True
+            Me.AlertBoxBackgroundColor = lngYellow
+            Me.MaxCountFontColor = vbRed
+        Case Is = 0
+            Me.CurrentCountFontColor = vbRed
+        Case Else
+    End Select
+
+    If Len(tbxTemplateSQL.Text) > Me.MaxCount Then
+        Me.lblMaxCount.Caption = -(Me.MaxCount - Len(tbxTemplateSQL.Text)) & " over"
+    End If
+    
+        If CurrentCount < 1 Then
+        Me.MaxCountFontColor = vbRed
+    End If
+    
+    'hide the templates > 255 notice by default
+    Me.lblTemplateMax.Visible = False
+    
+    If Len(tbxTemplateSQL.Text) > CInt(Me.MaxCount) Then
+        Me.lblMaxCount.Caption = -CurrentCount & " over"
+        
+        'display the templates > 255 notice
+        Me.lblTemplateMax.Visible = True
+        
+        'disable save button until count is < or = MaxCount
+'        Me.btnSave.Enabled = False
+    ElseIf Len(tbxTemplateSQL.Text) = 0 Then
+        'disable save button if count = 0
+'        Me.btnSave.Enabled = False
+    Else
+        'hide
+        're-enable save
+'        Me.btnSave.Enabled = True
+    End If
+
+    ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxTemplateSQL_Change[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ---------------------------------
 ' Sub:          btnOpenNotepad_Click
 ' Description:  Open notepad button click actions
@@ -1150,7 +1745,17 @@ On Error GoTo Err_Handler
     Me.tbxID.Value = 0
     
     UpsertRecord Me
+
+    'handle > 255 character SQL templates --> open table to record for editing
+    If Len(Me.tbxTemplateSQL) > 255 Then
+        DoCmd.OpenTable "tsys_Db_Templates", acViewNormal, acEdit
+        DoCmd.GoToRecord acDataTable, "tsys_Db_Templates", acLast
+    End If
     
+'FIX --> adjust so that when form goes to calling form (TemplateList)
+'        that list isn't calling same routine Form_Current
+'        multiple times when transitioning back (get focus?)
+
     'minimize form (calling form will close it)
     ToggleForm Me.Name, -1
     
@@ -1166,6 +1771,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnSave_Click[TemplateAdd form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblTemplateMax_Click
+' Description:  click template max label actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/2/2017 - initial version
+' ---------------------------------
+Private Sub lblTemplateMax_Click()
+On Error GoTo Err_Handler
+
+    'go to the template record so user can update it
+    DoCmd.GoToRecord acDataTable, "tsys_Db_Templates", acLast
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblTemplateMax_Click[TemplateAdd form])"
     End Select
     Resume Exit_Handler
 End Sub

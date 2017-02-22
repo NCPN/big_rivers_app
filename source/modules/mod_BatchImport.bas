@@ -67,7 +67,7 @@ On Error GoTo Err_Handler
                 
 Dim img 'As ImageFile
 Dim s 'As String
-Dim V 'As Vector
+Dim v 'As Vector
 
 Set img = CreateObject("WIA.ImageFile")
 
@@ -97,28 +97,28 @@ If img.IsAnimated Then
 End If
 
 If img.Properties.Exists("40091") Then
-    Set V = img.Properties("40091").Value
-    s = s & "Title = " & V.String & vbCrLf
+    Set v = img.Properties("40091").Value
+    s = s & "Title = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40092") Then
-    Set V = img.Properties("40092").Value
-    s = s & "Comment = " & V.String & vbCrLf
+    Set v = img.Properties("40092").Value
+    s = s & "Comment = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40093") Then
-    Set V = img.Properties("40093").Value
-    s = s & "Author = " & V.String & vbCrLf
+    Set v = img.Properties("40093").Value
+    s = s & "Author = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40094") Then
-    Set V = img.Properties("40094").Value
-    s = s & "Keywords = " & V.String & vbCrLf
+    Set v = img.Properties("40094").Value
+    s = s & "Keywords = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40095") Then
-    Set V = img.Properties("40095").Value
-    s = s & "Subject = " & V.String & vbCrLf
+    Set v = img.Properties("40095").Value
+    s = s & "Subject = " & v.String & vbCrLf
 End If
 
 MsgBox s

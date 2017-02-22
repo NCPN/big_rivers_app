@@ -1,10 +1,11 @@
 Option Compare Database
+
 Option Explicit
 
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.21
+' Version:      1.23
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -33,6 +34,8 @@ Option Explicit
 '               BLC - 1/24/2017  - 1.20 - added IsNPS flag for SetRecord() contacts
 '               BLC - 2/1/2017   - 1.21 - updated UpsertRecord() to handle form upserts
 '                                         for forms w/o lists/msg & msg icons
+'               BLC - 2/3/2017   - 1.22 - location adjustments for UpsertRecord() & SetRecord()
+'               BLC - 2/7/2017   - 1.23 - added template - s_location_with_loctypeID_sensitivity
 ' =================================
 
 ' ---------------------------------
@@ -722,6 +725,8 @@ On Error GoTo Err_Handler
     rs.MoveFirst
     Count = rs.RecordCount
     
+    'retrieve 2D array of records
+    'segments(intField, intRecord) --> segments(0,1) = 2nd record, 1st field
     segments = rs.GetRows(Count)
  
     rs.Close
@@ -1079,22 +1084,37 @@ End Sub
 Public Sub ToggleSensitive(Context As String, ID As Long, Sensitive As Byte)
 On Error GoTo Err_Handler
     
-    Dim strSQL As String
+    Dim Template As String
     
-    Select Case Context
-        Case "Location"
-            strSQL = GetTemplate("u_location_sensitive_flag", _
-                      "SensitiveFlag" & PARAM_SEPARATOR & Sensitive & _
-                      "|ID" & PARAM_SEPARATOR & ID)
-        Case "species"
-            strSQL = GetTemplate("u_species_sensitive_flag", _
-                      "SensitiveFlag" & PARAM_SEPARATOR & Sensitive & _
-                      "|ID" & PARAM_SEPARATOR & ID)
-    End Select
+    Template = IIf(Sensitive = 1, "i_", "d_")
+    
+    Template = Template & "Sensitive" & Context
+    
+    If Right(Template, 1) <> "s" Then Template = Template & "s"
+    
+'    Select Case Context
+'        Case "Locations"
+''            strSQL = GetTemplate("u_location_sensitive_flag", _
+''                      "SensitiveFlag" & PARAM_SEPARATOR & Sensitive & _
+''                      "|ID" & PARAM_SEPARATOR & ID)
+'            strToggle = strToggle & "Sensitive" & Context & "s"
+'        Case "Species"
+'            strSQL = GetTemplate("u_species_sensitive_flag", _
+'                      "SensitiveFlag" & PARAM_SEPARATOR & Sensitive & _
+'                      "|ID" & PARAM_SEPARATOR & ID)
+'    End Select
 
-    DoCmd.SetWarnings False
-    DoCmd.RunSQL (strSQL)
-    DoCmd.SetWarnings True
+'    DoCmd.SetWarnings False
+'    DoCmd.RunSQL (strSQL)
+'    DoCmd.SetWarnings True
+    
+    Dim Params(0 To 3) As Variant
+    
+    Params(0) = Template
+    Params(1) = ID
+    Params(2) = Sensitive
+        
+    SetRecord Template, Params
     
 Exit_Handler:
     Exit Sub
@@ -1123,6 +1143,7 @@ End Sub
 '   BLC - 7/26/2016 - initial version
 '   BLC - 9/22/2016 - added templates
 '   BLC - 1/9/2017 - added templates
+'   BLC - 2/7/2017 - added template - s_location_with_loctypeID_sensitivity
 ' ---------------------------------
 Public Function GetRecords(Template As String) As DAO.Recordset
 On Error GoTo Err_Handler
@@ -1207,7 +1228,8 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                                         
-                Case "s_feature_list_by_site"
+                Case "s_feature_list_by_site", _
+                     "s_feature_by_site"
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("scode") = TempVars("SiteCode")
@@ -1229,6 +1251,11 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("pkcode") = TempVars("ParkCode")
                     .Parameters("waterway") = TempVars("River")
+                
+                Case "s_location_with_loctypeID_sensitivity"
+                    '-- required parameters --
+                    .Parameters("pkcode") = TempVars("ParkCode")
+                    .Parameters("scode") = TempVars("SiteCode")
                 
                 Case "s_mod_wentworth_for_eventyr"
                     '-- required parameters --
@@ -1532,16 +1559,17 @@ On Error GoTo Err_Handler
                     
                 Case "i_location"
                     '-- required parameters --
-                    .Parameters("CollectionSourceName") = Params(1)
-                    .Parameters("LocationType") = Params(2)
-                    .Parameters("LocationName") = Params(3)
-                    .Parameters("HeadtoOrientDistance") = Params(4)
-                    .Parameters("HeadtoOrientBearing") = Params(5)
+                    .Parameters("csn") = Params(1)           'CollectionSourceName
+                    .Parameters("ltype") = Params(2)         'LocationType
+                    .Parameters("lname") = Params(3)         'LocationName
+                    .Parameters("dist") = Params(4)          'HeadtoOrientDistance
+                    .Parameters("brg") = Params(5)           'HeadtoOrientBearing
+                    .Parameters("lnotes") = Params(6)        'Notes
                     
-                    .Parameters("CreateDate") = Now()
-                    .Parameters("CreatedByID") = TempVars("AppUserID") 'ContactID")
-                    .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
+                    '.Parameters("CreateDate") = Now()
+                    .Parameters("CID") = TempVars("AppUserID")  'CreatedByID
+                    '.Parameters("LastModified") = Now()
+                    .Parameters("LMID") = TempVars("AppUserID") 'LastModifiedByID
                                                         
                 Case "i_login"
                     '-- required parameters --
@@ -1589,6 +1617,20 @@ On Error GoTo Err_Handler
                     
                     SkipRecordAction = True
                 
+                Case "i_sensitive_locations"
+                    '-- required parameters --
+                    .Parameters("pkid") = Params(0)
+                    .Parameters("lid") = Params(1)
+                    .Parameters("CID") = TempVars("AppUserID")
+                    .Parameters("LMID") = TempVars("AppUserID")
+                    
+                Case "i_sensitive_species"
+                    '-- required parameters --
+                    .Parameters("pkid") = Params(0)
+                    .Parameters("sp") = Params(1)
+                    .Parameters("CID") = TempVars("AppUserID")
+                    .Parameters("LMID") = TempVars("AppUserID")
+                    
                 Case "i_site"
                     '-- required parameters --
                     .Parameters("parkID") = Params(1)
@@ -1634,7 +1676,11 @@ On Error GoTo Err_Handler
                     '-- required parameters --
                     .Parameters("tname") = Params(1)        'TemplateName
                     .Parameters("contxt") = Params(2)       'Context
-                    .Parameters("tmpl") = Params(3)         'TemplateSQL
+                    '.Parameters("tmpl").Type = dbMemo       'set it to a memo field
+                    'Limit template SQL to 255 characters to avoid
+                    'error 3271 SetRecord mod_App_Data Invalid property value.
+                    'templates > 255 characters must be edited directly in the table
+                    .Parameters("tmpl") = Left(Params(3), 255) 'TemplateSQL
                     .Parameters("rmks") = Params(4)         'Remarks
                     .Parameters("effdate") = Params(5)      'EffectiveDate
                     .Parameters("cid") = Params(6)          'CreatedBy_ID (contactID)
@@ -1751,8 +1797,9 @@ On Error GoTo Err_Handler
                     .Parameters("Phone") = Params(8)
                     .Parameters("Ext") = Params(9)
                     .Parameters("IsActiveFlag") = Params(10)
-                    .Parameters("ContactID") = Params(11)
-                    ID = Params(11)
+                    .Parameters("IsNPSFlag") = Params(11)
+                    .Parameters("ContactID") = Params(12)
+                    ID = Params(12)
                 
                 Case "u_contact_access"
                     '-- required parameters --
@@ -1861,15 +1908,18 @@ On Error GoTo Err_Handler
                 
                 Case "u_task"
                     '-- required parameters --
-                    .Parameters("Task") = Params(1)
-                    .Parameters("Status") = Params(2)
-                    .Parameters("RequestedByID") = Params(3)
-                    .Parameters("RequestDate") = Params(4)
-                    .Parameters("CompletedByID") = Params(5)
-                    .Parameters("CompleteDate") = Params(6)
+                    .Parameters("tid") = Params(14)         'task ID
+                    .Parameters("descr") = Params(1)        'task
+                    .Parameters("stat") = Params(2)         'status
+                    .Parameters("prio") = Params(3)         'priority
+                    .Parameters("ttype") = Params(4)        'task type
+                    .Parameters("typeident") = Params(5)    'task type ID
+                    .Parameters("RID") = Params(3)          'requested by ID
+                    .Parameters("reqdate") = Params(7)      'request date
+                    .Parameters("CID") = Params(5)          'completed by ID
+                    .Parameters("compldate") = Params(9)    'complete date
                 
-                    .Parameters("LastModified") = Now()
-                    .Parameters("LastModifiedByID") = TempVars("AppUserID") 'ContactID")
+                    .Parameters("LMID") = TempVars("AppUserID") 'last modified by ID
                 
                 Case "u_transducer"
                     '-- required parameters --
@@ -2014,6 +2064,7 @@ End Function
 '   BLC - 10/14/2016 - updated to accommodate non-users for contacts
 '   BLC - 1/9/2017 - revised retrieve ID from ContactID to ID, revised i_event to use TempVar("SiteID")
 '   BLC - 2/1/2017 - handle form upserts for forms w/o lists/msg & msg icons
+'   BLC - 2/3/2017 - location adjustments
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -2138,39 +2189,31 @@ On Error GoTo Err_Handler
                     Dim loc As New Location
                     
                     With loc
-                        'values passed into form
-                        Dim loctype As String
-                        
-                        Select Case frm.CallingForm
-                            Case "Feature"
-                                loctype = "F"
-                            Case "VegPlot"
-                                loctype = "P"
-                            Case "Transect"
-                                loctype = "T"
-                        End Select
-                        
-                        'CollectionSourceName is the ID from passed in form
-                        'collection feature ID (A, B, C...) or Transect number (1-8)
-                        .CollectionSourceName = frm.CallingRecordID '"T"
-                        
-'                        .CreateDate = ""
-'                        .CreatedByID = 0
-                        .LastModified = Now()
-                        .LastModifiedByID = 0
-                        
-                        '.ProtocolID = 1
-                        '.SiteID = 1
-                        
                         'form values
-                        .LocationName = frm!tbxName.Value 'Collection feature ID (A, B, C, ...) or Transect number (1-8)
-                        .LocationType = loctype '"T" 'cbxLocationType.SelText 'F- feature, T- transect, P - plot
+                        
+                        'location types: F- feature, T- transect, P - plot
+                        .LocationType = frm.LocationType 'cbxLocationType.SelText
+                        
+                        'CollectionSourceName is the identifier for which
+                        'feature/transect/plot the location is located on
+                        'collection feature ID (A, B, C...) or Transect number (1-8)
+                        .CollectionSourceName = frm.cbxCollectionSourceID
+                                                                        
+                        .LocationName = frm!tbxName.Value
                 
                         .HeadtoOrientDistance = frm!tbxDistance.Value
                         .HeadtoOrientBearing = frm!tbxBearing.Value
                         
+                        .LocationNotes = frm!tbxNotes.Value
+                        
+                        '.CreateDate = ""
+                        '.CreatedByID = 0
+                        .LastModified = Now()
+                        .LastModifiedByID = 0
+                        
                         .ID = frm!tbxID.Value '0 if new, edit if > 0
 
+                        'ignore location notes in criteria
                         strCriteria = "[LocationName] = '" & .LocationName _
                                     & "' AND [LocationType] = '" & .LocationType _
                                     & "' AND [CollectionSourceName] = '" & .CollectionSourceName _
@@ -2201,6 +2244,53 @@ On Error GoTo Err_Handler
                     Set ph = Nothing
                 End With
                                         
+            Case "PhotoOtherDetails"
+                Dim pho As New Photo
+                
+                With pho
+                    Dim FilePath As String
+                    Dim aryFileInfo() As Variant
+                    Dim nodeinfo() As String
+                    '0 - M, 1- C, 2-full file path, 3-file name w/o extension
+                    nodeinfo = Split(frm.Parent!tvwTree.Object.SelectedItem.Tag, "|")
+                    FilePath = nodeinfo(2)
+                    'filepath = frm.Parent!tvwTree.Object.SelectedItem.Tag 'frm!tvw.SelectedNode.Tag
+                    'aryFileInfo = GetFileEXIFInfo()
+                    'values passed into form
+'        Params(0) = "Photo"
+'        Params(1) = .PhotoDate
+'        Params(2) = .PhotoType
+'        Params(3) = .PhotographerID
+'        Params(4) = .FileName
+'        Params(5) = .NCPNImageID
+'        Params(6) = .DirectionFacing
+'        Params(7) = .PhotogLocation
+'        Params(8) = .IsCloseup
+'        Params(9) = .IsInActive
+'        Params(10) = .IsSkipped
+'        Params(11) = .IsReplacement
+'        Params(12) = .LastPhotoUpdate
+                    .PhotoType = frm!lblPhotoType
+                    Select Case .PhotoType
+                        Case "U" 'unclassified
+                        Case "F" 'feature
+                        Case "T" 'transect
+                        Case "O" 'overview
+                        Case "R" 'reference
+                        Case "O" 'other
+                    End Select
+                    .PhotographerID = frm.fsub.Form.Controls("cbxPhotog")
+                    .FileName = "" 'lblPhotoFilename 'aryFileInfo(0)
+                    
+                    .ID = frm!tbxID.Value '0 if new, edit if > 0
+                                
+                    'set the generic object --> Location
+                    Set obj = pho
+                    
+                    'cleanup
+                    Set pho = Nothing
+                End With
+                                                                                
             Case "SetObserverRecorder"
                 Dim ra As New RecordAction
                 
@@ -2290,13 +2380,11 @@ On Error GoTo Err_Handler
                     .Task = frm!tbxTask.Value
                     .TaskType = frm.ContextType
                     
-                    
-'                    strCriteria = "[TransducerNumber] = " & .TransducerNumber _
-'                                & " AND [Timing] = '" & .Timing _
-'                                & "' AND [SerialNumber] = '" & .SerialNumber _
-'                                & "' AND [ActionDate] = " & .ActionDate
+                    strCriteria = "[TaskType] = '" & .TaskType _
+                                & "' AND [Task] = '" & .Task _
+                                & "'"
                 
-                    'set the generic object --> Transducer
+                    'set the generic object --> Task
                     Set obj = tk
                     
                     'cleanup

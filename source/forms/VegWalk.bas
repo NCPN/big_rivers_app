@@ -1559,7 +1559,7 @@ On Error GoTo Err_Handler
     
     'open comment form
     'DoCmd.OpenForm "Comment", acNormal, , , , , "VegWalk|" & tbxID.Text
-    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID.text
+    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID.Text
     
 Exit_Handler:
     Exit Sub

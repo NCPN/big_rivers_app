@@ -26,7 +26,7 @@ Begin Form
     Bottom =12075
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x7c316d7d90cae440
+        0x89ca99c02ce2e440
     End
     Caption ="Location (Sampling Location)"
     OnCurrent ="[Event Procedure]"
@@ -202,7 +202,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Location (Sampling Location)"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -298,19 +297,19 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1200
+                    Left =1008
                     Top =1905
-                    Width =1245
+                    Width =1440
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblName"
-                    Caption ="Location"
+                    Caption ="Location Name"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1200
+                    LayoutCachedLeft =1008
                     LayoutCachedTop =1905
-                    LayoutCachedWidth =2445
+                    LayoutCachedWidth =2448
                     LayoutCachedHeight =2220
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -324,9 +323,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777215
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="BLCA  >  Gunnison  >  EP  >  -"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -336,16 +335,19 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     LimitToList = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
-                    ColumnCount =5
+                    ColumnCount =2
                     Left =3720
                     Top =1260
                     Width =2694
                     Height =315
                     ColumnOrder =0
+                    FontSize =9
                     TabIndex =1
+                    BoundColumn =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -358,7 +360,7 @@ Begin Form
                     End
                     Name ="cbxCollectionSourceID"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;0;0;0;1"
+                    ColumnWidths ="0;1440"
                     ControlTipText ="Choose the feature, transect or plot this location is found in/on"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -571,7 +573,6 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -687,7 +688,7 @@ Begin Form
                     FontSize =9
                     TabIndex =5
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -875,6 +876,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxNotes"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter establishment comments and other notes."
                     GridlineColor =10921638
 
@@ -947,7 +949,7 @@ Begin Form
                     RightMargin =360
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =6750105
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
@@ -969,7 +971,7 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =6750105
                     Name ="lblMsgIcon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
@@ -1035,6 +1037,7 @@ Private m_Directions As String
 Private m_CallingForm As String
 Private m_CallingRecordID As Integer
 Private m_LocationType As String
+Private m_LocationNotes As String
 
 '---------------------
 ' Event Declarations
@@ -1103,6 +1106,14 @@ Public Property Get LocationType() As String
     LocationType = m_LocationType
 End Property
 
+Public Property Let LocationNotes(Value As String)
+        m_LocationNotes = Value
+End Property
+
+Public Property Get LocationNotes() As String
+    LocationNotes = m_LocationNotes
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -1125,42 +1136,25 @@ End Property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
-
-'    Dim aryOArgs() As Variant
-    Dim ltype As String
     
     'default
     Me.CallingForm = "Main"
     Me.CallingRecordID = -1
-    
-'    If Len(Me.OpenArgs) > 0 Then
-'        aryOArgs = Split(Me.OpenArgs, "|")
-'
-'        If IsArray(aryOArgs) Then
-'
-'            'set calling for & record
-'            Me.CallingForm = aryOArgs(0)
-'            Me.CallingRecordID = Nz(aryOArgs(1), -1)
-'
-'        End If
-'    End If
-    
-    'set location type
-    ltype = "" 'default
+        
+    'set location type default
+    Me.LocationType = ""
     
     Select Case Me.CallingForm
         Case "Feature"
-            ltype = "F"
+            Me.LocationType = "F"
             optgLocationType.Value = 1
         Case "Transect"
-            ltype = "T"
+            Me.LocationType = "T"
             optgLocationType.Value = 2
         Case "VegPlot"
-            ltype = "P"
+            Me.LocationType = "P"
             optgLocationType.Value = 3
     End Select
-    
-    Me.LocationType = ltype
         
     'minimize calling form
     ToggleForm Me.CallingForm, -1
@@ -1194,6 +1188,7 @@ On Error GoTo Err_Handler
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
     tglFeature.Enabled = False
+    cbxCollectionSourceID.Visible = False
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1297,28 +1292,43 @@ End Sub
 Private Sub optgLocationType_Click()
 On Error GoTo Err_Handler
 
-    'assume visible
-    cbxCollectionSourceID.Visible = True
-
-    'filter by park, river site -> BLCA, Gunnison, xx
-    Select Case Me.optgLocationType.Value
-        Case 0  'Default
-            'hide if not applicable
-            cbxCollectionSourceID.Visible = False
-        Case 1  'Feature
-'            Set cbxCollectionSourceID.Recordset = GetRecords("s_feature_by_park_site")
-            Set cbxCollectionSourceID.Recordset = GetRecords("s_feature_list_by_site")
-        Case 2  'Transect
-'            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegtransect_by_site")
-            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegtransect_number_by_site")
-            cbxCollectionSourceID.ColumnCount = 2
-            cbxCollectionSourceID.ColumnWidths = "1;1in"
-        Case 3  'Plot
-'            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegplot_by_site")
-            Set cbxCollectionSourceID.Recordset = GetRecords("s_vegplot_number_by_site")
-            cbxCollectionSourceID.ColumnCount = 4
-            cbxCollectionSourceID.ColumnWidths = "1in;0;0;0"
-    End Select
+    With cbxCollectionSourceID
+    
+        'assume visible
+        .Visible = True
+        .ColumnHeads = True
+        .FontSize = 9
+        
+        'clear existing value
+        .Value = ""
+    
+        'filter by park, river, site -> BLCA, Gunnison, xx
+        Select Case Me.optgLocationType.Value
+            Case 0  'Default
+                'hide if not applicable
+                .Visible = False
+                Me.LocationType = ""
+            Case 1  'Feature
+                Set .Recordset = GetRecords("s_feature_by_site")
+                .BoundColumn = 2
+                .ColumnCount = 2
+                .ColumnWidths = "0;1in"
+                Me.LocationType = "F"
+            Case 2  'Transect
+                Set .Recordset = GetRecords("s_vegtransect_number_by_site")
+                .BoundColumn = 1
+                .ColumnCount = 3
+                .ColumnWidths = "1in;1;0"
+                Me.LocationType = "T"
+            Case 3  'Plot
+                Set .Recordset = GetRecords("s_vegplot_number_by_site")
+                .BoundColumn = 1
+                .ColumnCount = 4
+                .ColumnWidths = "1in;0;0;0"
+                Me.LocationType = "P"
+        End Select
+    
+    End With
     
     Me.Refresh
     
@@ -1421,6 +1431,35 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          tbxNotes_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 3, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/3/2017 - initial version
+' ---------------------------------
+Private Sub tbxNotes_AfterUpdate()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxNotes_AfterUpdate[Location form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          btnUndo_Click
 ' Description:  Undo button click actions
 ' Assumptions:  -
@@ -1467,7 +1506,24 @@ End Sub
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
-        
+    
+    Dim ltype As String
+    
+    'ensure location type is set
+    Select Case Me.optgLocationType
+    Case 1 'Feature
+        ltype = "F"
+    Case 2 'Transect
+        ltype = "T"
+    Case 3 'Plot
+        ltype = "P"
+    Case Else
+        'no location type --> nothing to save!
+        GoTo Exit_Handler
+    End Select
+    
+    Me.LocationType = ltype
+    
     UpsertRecord Me
     
 Exit_Handler:
@@ -1498,7 +1554,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "location|" & tbxID.text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "location|" & tbxID.Text
     
 Exit_Handler:
     Exit Sub
@@ -1565,7 +1621,11 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-    If Len(tbxName.Value) > 0 And tbxDistance.Value > 0 And tbxBearing.Value <> "" Then
+    If Len(tbxName.Value) > 0 _
+        And tbxDistance.Value > 0 _
+        And tbxBearing.Value <> "" _
+        And cbxCollectionSourceID <> "" _
+        And Len(Me.LocationType) > 0 Then
         isOK = True
     End If
     

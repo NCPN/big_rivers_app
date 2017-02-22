@@ -13,8 +13,8 @@ Begin Form
     Width =6780
     DatasheetFontHeight =11
     ItemSuffix =56
-    Right =12855
-    Bottom =11790
+    Right =18135
+    Bottom =10305
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xcb7a7f08cdc4e440
@@ -1043,10 +1043,13 @@ Option Explicit
 
 ' =================================
 ' FORM:         PhotoFTORDetailsDetails Form
+' Level:        Application form
+' Version:      1.01
 ' Description:  Photo detail functions & procedures for feature, transect, overview & reference photos
 '
 ' Source/date:  Bonnie Campbell, 7/13/2015
-' Revisions:    BLC - 7/13/2015 - initial version
+' Revisions:    BLC - 7/13/2015 - 1.00 - initial version
+'               BLC - 2/21/2017  - 1.01 - revised to use Photo vs. Tree form
 ' =================================
 
 '---------------------
@@ -1422,11 +1425,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/14/2016 - initial version
+'   BLC - 2/21/2017  - revised to use Photo vs. Tree form
 ' ---------------------------------
 Private Sub btnContacts_Click()
 On Error GoTo Err_Handler
     
-    DoCmd.OpenForm "Contact", acNormal, , , , , "Tree"
+    DoCmd.OpenForm "Contact", acNormal, , , , , "Photo" '"Tree"
     
 Exit_Handler:
     Exit Sub

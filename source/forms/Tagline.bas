@@ -909,7 +909,7 @@ On Error GoTo Err_Handler
 
 '    Me.SelectedID = CInt(cbxCause.Column(0))
 '    Me.SelectedValue = CStr(cbxCause.Column(1))
-    If Len(cbxCause.text) > 0 Then _
+    If Len(cbxCause.Text) > 0 Then _
         ReadyForSave
     ReadyForSave
     
@@ -940,7 +940,7 @@ End Sub
 Private Sub tbxDistance_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxDistance.text) > 0 Then _
+    If Len(tbxDistance.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -970,7 +970,7 @@ End Sub
 Private Sub tbxHeight_AfterUpdate()
 On Error GoTo Err_Handler
 
-        If Len(tbxHeight.text) > 0 Then _
+        If Len(tbxHeight.Text) > 0 Then _
             ReadyForSave
     
 Exit_Handler:

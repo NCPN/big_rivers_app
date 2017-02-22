@@ -4,11 +4,12 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Photo
 ' Level:        Framework module
-' Version:      1.00
+' Version:      1.01
 ' Description:  photo functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 8/30/2016
 ' Revisions:    BLC, 8/30/2016 - 1.00 - initial version
+'               BLC, 2/21/2017 - 1.01 - added GetFileExifInfo()
 ' =================================
 
 ' ---------------------------------
@@ -135,6 +136,168 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - IngestPhotos[mod_Photo])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          GetFileExifInfo
+' Description:  photo exif data actions
+' Assumptions:  -
+' Parameters:   strPath - file full path (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Adapted:  -
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Public Function GetFileExifInfo(strPath As String) As Dictionary
+On Error GoTo Err_Handler
+
+    'check for existence
+    If FileExists(strPath) Then
+        
+        Dim imgFile As Object
+        Dim p    'As Property
+        Dim v As Vector
+        Dim i As Byte, j As Long
+        Dim s As String
+        Dim dict As Dictionary
+        
+        Set imgFile = CreateObject("WIA.ImageFile")
+        imgFile.LoadFile (strPath)
+            
+            
+        'fetch EXIF
+        
+        Set dict = New Dictionary
+        i = 1
+
+        For Each p In imgFile.Properties
+        
+             's = i & ": Type " & p.Type & ": " & p.Name & "(" & p.PropertyID & ") = "
+        
+             If p.IsVector Then
+                 's = s & "vector data: "
+        
+                 If imgFile.Properties.Exists(CStr(p.PropertyID)) Then
+                   Set v = imgFile.Properties(CStr(p.PropertyID)).Value
+                   For j = 1 To v.Count
+                    's = s & " " & v(j)
+                    s = s & "|" & v(j)
+                   Next j
+                   Set v = Nothing
+                 End If
+        
+              ElseIf p.Type = RationalImagePropertyType Then
+                 's = s & p.Value.Numerator & "/" & p.Value.Denominator
+                s = p.Value.Numerator & "/" & p.Value.Denominator
+              
+              ElseIf p.Type = StringImagePropertyType Then
+                 's = s & """" & Trim(p.Value) & """"
+                s = """" & Trim(p.Value) & """"
+              Else
+                 's = s & Trim(p.Value)
+                s = Trim(p.Value)
+             End If
+        
+             Debug.Print s
+             
+             dict.Add p.Name, s 'p.Value 's
+             
+             i = i + 1
+        Next
+    
+    
+    End If
+    
+    Set GetFileExifInfo = dict
+        
+Exit_Handler:
+    Set dict = Nothing
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetFileExifInfo[mod_Photo])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' SUB:          ShowImageFileProperties
+' Description:  print image file properties
+' Assumptions:  -
+' Parameters:   strPath - file full path (string)
+' Returns:      -
+' Throws:       none
+' References:
+'   DFS, May 8, 2014
+'   https://groups.google.com/forum/#!msg/comp.databases.ms-access/f7KDJNYNVgw/ZOKbUSd3KrcJ
+' Source/date:  Bonnie Campbell, February 21, 2017 - for NCPN tools
+' Adapted:  -
+' Revisions:
+'   BLC - 2/21/2017 - initial version
+' ---------------------------------
+Public Sub ShowImageFileProperties(strPath As String)
+On Error GoTo Err_Handler
+
+    Dim imgFile As Object
+    Dim p    'As Property
+    Dim v As Vector
+    Dim i As Byte, j As Long
+    Dim s As String
+    
+    Set imgFile = CreateObject("WIA.ImageFile")
+    imgFile.LoadFile (strPath)
+    
+    Debug.Print "========================================"
+    Debug.Print imgFile.Properties.Count & " properties"
+    Debug.Print ""
+    
+    i = 1
+    For Each p In imgFile.Properties
+    
+         s = i & ": Type " & p.Type & ": " & p.Name & "(" & p.PropertyID & ") = "
+    
+         If p.IsVector Then
+             s = s & "vector data: "
+    
+             If imgFile.Properties.Exists(CStr(p.PropertyID)) Then
+               Set v = imgFile.Properties(CStr(p.PropertyID)).Value
+               For j = 1 To v.Count
+                s = s & " " & v(j)
+               Next j
+               Set v = Nothing
+             End If
+    
+          ElseIf p.Type = RationalImagePropertyType Then
+             s = s & p.Value.Numerator & "/" & p.Value.Denominator
+    
+          ElseIf p.Type = StringImagePropertyType Then
+             s = s & """" & Trim(p.Value) & """"
+    
+          Else
+             s = s & Trim(p.Value)
+    
+         End If
+    
+         Debug.Print s
+         i = i + 1
+    Next
+    Debug.Print "========================================"
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ShowImageFileProperties[mod_Photo])"
     End Select
     Resume Exit_Handler
 End Sub

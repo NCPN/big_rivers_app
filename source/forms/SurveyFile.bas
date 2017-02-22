@@ -1241,7 +1241,7 @@ End Sub
 Private Sub tbxFilename_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxFileName.text) > 0 Then _
+    If Len(tbxFileName.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1301,7 +1301,7 @@ End Sub
 Private Sub tbxSourceOrg_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxSourceOrg.text) > 0 Then _
+    If Len(tbxSourceOrg.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:

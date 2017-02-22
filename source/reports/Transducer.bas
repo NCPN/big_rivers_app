@@ -14,8 +14,8 @@ Begin Report
     Width =15120
     DatasheetFontHeight =11
     ItemSuffix =77
-    Right =9480
-    Bottom =8835
+    Right =13080
+    Bottom =8145
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
@@ -26,7 +26,7 @@ Begin Report
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
-        0x6801000068010000680100006d01000000000000103b00004002000001000000 ,
+        0x6801000068010000680100006d01000000000000103b00006801000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -129,7 +129,7 @@ Begin Report
             ControlSource ="=[Timing]"
         End
         Begin BreakLevel
-            ControlSource ="=[Sequence]"
+            ControlSource ="=[SamplingOrder]"
         End
         Begin BreakLevel
             ControlSource ="=[SiteCode]"
@@ -192,7 +192,7 @@ Begin Report
                     FontWeight =700
                     BorderColor =8355711
                     Name ="lblRiverSegments"
-                    Caption ="Gunnison"
+                    Caption ="riversegs"
                     FontName ="Arial Narrow"
                     GridlineColor =10921638
                     LayoutCachedLeft =1860
@@ -798,7 +798,7 @@ Begin Report
                     BorderColor =8355711
                     ForeColor =6447974
                     Name ="lblTitle"
-                    Caption ="BLCA Transducers"
+                    Caption ="Park Transducers"
                     FontName ="Arial Narrow"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -959,6 +959,8 @@ Begin Report
                     ForeTint =100.0
                 End
                 Begin Label
+                    OverlapFlags =4
+                    TextAlign =3
                     Left =8760
                     Top =648
                     Width =6300
@@ -1230,7 +1232,7 @@ Option Explicit
 ' =================================
 ' Report:       Transducer
 ' Level:        Application report
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Transducer report object related properties, events, functions & procedures for UI display
 '
@@ -1239,6 +1241,7 @@ Option Explicit
 '  Allen Browne, April 2010
 '  http://allenbrowne.com/ser-43.html
 ' Revisions:    BLC - 11/10/2015 - 1.00 - initial version
+'               BLC - 2/16/2017  - 1.01 - adjusted to use SamplingOrder vs. Sequence
 ' =================================
 
 '---------------------
@@ -1272,6 +1275,7 @@ Option Explicit
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/4/2016 - initial version
+'   BLC - 2/16/2017 - adjusted to use SamplingOrder vs. Sequence
 ' ---------------------------------
 Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1299,9 +1303,9 @@ On Error GoTo Err_Handler
     'set title
     Me.lblTitle.Caption = strPark & " Transducers"
 
-    'protocol version
+    'protocol version --> Transducer is "Hydrology"
     aryProtocol = GetProtocolVersion
-    Set sopdata = GetSOPMetadata("Transducer") '0-code, 1-SOP#, 2-Version, 3-Effective Date
+    Set sopdata = GetSOPMetadata("Hydrology") '0-code, 1-SOP#, 2-Version, 3-Effective Date
 
     i = CInt(sopdata(1))
     
@@ -1319,7 +1323,7 @@ On Error GoTo Err_Handler
 
     'set before/after
     
-    'prepare data source
+    'prepare data source --> Sequence replaced by SamplingOrder
 '    strSQL = "SELECT 'BD' AS Timing, ParkCode, Segment, SiteCode, SiteName, " _
 '            & "Logger.ID, SensorType, SensorNumber, Sequence " _
 '            & "FROM (((Logger " _
@@ -1335,7 +1339,7 @@ On Error GoTo Err_Handler
         strWhere = "WHERE ParkCode = '" & strPark & "' "
     End If
     
-    strOrderBy = "ORDER BY ParkCode, Sequence ASC"
+    strOrderBy = "ORDER BY ParkCode, SamplingOrder ASC"
     
     strSQL = strSQL & strWhere & strOrderBy _
                 & " UNION ALL " _

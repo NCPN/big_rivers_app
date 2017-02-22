@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =61
-    Left =3855
-    Top =2430
-    Right =28545
-    Bottom =15015
+    Left =3975
+    Top =3510
+    Right =22110
+    Bottom =13815
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -1274,7 +1274,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.07
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  Contact form object related properties, Contact, functions & procedures for UI display
@@ -1292,6 +1292,8 @@ Option Explicit
 '               BLC - 10/25/2016 - 1.06 - revised to remove strParent calls, Main calling form
 '                                         passed via ClickAction()
 '               BLC - 1/24/2017 - 1.07 - hid header title, added IsNPS flag toggle button
+'               BLC - 2/21/2017 - 1.08 - added recordset redefinition for calling form contact control
+'                                        in Form_Close() event
 ' =================================
 
 '---------------------
@@ -1602,7 +1604,7 @@ End Sub
 Private Sub tbxFirst_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxFirst.text) > 0 Then _
+    If Len(tbxFirst.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1632,7 +1634,7 @@ End Sub
 Private Sub tbxLast_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxLast.text) > 0 Then _
+    If Len(tbxLast.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1662,7 +1664,7 @@ End Sub
 Private Sub tbxEmail_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxEmail.text) > 0 Then _
+    If Len(tbxEmail.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1692,7 +1694,7 @@ End Sub
 Private Sub tbxUsername_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxUsername.text) > 0 Then _
+    If Len(tbxUsername.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1722,7 +1724,7 @@ End Sub
 Private Sub tbxOrganization_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxOrganization.text) > 0 Then _
+    If Len(tbxOrganization.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1752,7 +1754,7 @@ End Sub
 Private Sub tbxPosition_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(tbxPosition.text) > 0 Then _
+    If Len(tbxPosition.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -1844,7 +1846,7 @@ End Sub
 Private Sub cbxUserRole_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(cbxUserRole.text) > 0 Then _
+    If Len(cbxUserRole.Text) > 0 Then _
         ReadyForSave
     
 Exit_Handler:
@@ -2012,6 +2014,7 @@ End Sub
 '   BLC - 6/20/2016 - initial version
 '   BLC - 10/17/2016 - revise to restore calling form vs. Main/DbAdmin only
 '   BLC - 10/25/2016 - revised to remove strParent calls, Main calling form passed via ClickAction()
+'   BLC - 2/21/2017 - added recordset redefinition for calling form contact control
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
@@ -2019,6 +2022,17 @@ On Error GoTo Err_Handler
     'restore calling form
     ToggleForm Me.CallingForm, 0
     
+    'update calling form
+    Select Case Me.CallingForm
+        Case "Photo" 'Tree" 'Photos
+            If FormIsOpen("Photo") Then '_
+                'Forms("Tree")!fsub.Form.Controls("cbxPhotog").Requery
+                'Forms("Tree")!fsub.Form.Refresh
+                're-initialize values
+                Set Forms("Photo")!fsub.Form.Controls("cbxPhotog").Recordset = GetRecords("s_contact_list")
+            End If
+    End Select
+
 Exit_Handler:
     Exit Sub
 Err_Handler:

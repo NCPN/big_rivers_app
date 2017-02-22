@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.17
+' Version:      1.21
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -28,6 +28,11 @@ Option Explicit
 '               BLC, 1/9/2017   - 1.16 - revised ClickAction() to use SetTempVar()
 '               BLC, 1/12/2017 - 1.17 - revised to VegTransect vs. Transect form
 '               BLC, 1/31/2017 - 1.18 - adjusted SortListForm() to accommodate template list form
+'               BLC, 2/2/2017  - 1.19 - commented CreateEnums call in Initialize(),
+'                                       most/not all enums handled through calls to AppEnum table
+'               BLC, 2/14/2017 - 1.20 - added Task form to PopulateForm()
+'               BLC, 2/21/2017 - 1.21 - adjusted SortListForm() to accommodate Contact list form,
+'                                       revised to use Photo vs. Tree form
 ' =================================
 
 ' =================================
@@ -264,11 +269,16 @@ End Function
 '   BLC - 5/13/2015 - stub only
 '   BLC - 11/19/2015 - added CreateEnums call to create application specific Enums,
 '                      updated documentation to reflect mod_App_UI vs. mod_Init
+'   BLC - 2/2/2017  - comment: most enums handled through calls to AppEnum table
+'                     however some require CreateEnums()
 ' ---------------------------------
 Public Sub Initialize()
 On Error GoTo Err_Handler
 
-    'create the enums specific to this application from the Enums table & mod_App_Enum stub module
+    'create the enums specific to this application from the Enums table &
+    'mod_App_Enum stub module
+    'CreateEnums requires BOTH mod_Enum & mod_App_Enum files to be re-imported to
+    'the database
     CreateEnums
 
     'set application UI display
@@ -412,6 +422,7 @@ End Function
 '   BLC - 10/19/2016 - revised to use UploadCSVFile() vs. UploadSurveyFile()
 '   BLC - 10/25/2016 - revised species search to add originForm TempVar, callingform oArg
 '   BLC - 1/9/2017   - revised to use SetTempVar()
+'   BLC - 2/21/2017  - revised to use Photo vs. Tree form
 ' ---------------------------------
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
@@ -476,7 +487,7 @@ On Error GoTo Err_Handler
 '            End If
         'Observations
         Case "photos"
-            fName = "Tree"
+            fName = "Photo" '"Tree"
         Case "transducers"
             fName = "Transducer"
             oArgs = ""
@@ -627,6 +638,7 @@ End Function
 '                     using usys_temp_qdf & adjusting ID to Contact_ID in final SQL
 '   BLC - 10/24/2016 - added ModWentworth form
 '   BLC - 1/12/2017 - code cleanup
+'   BLC - 2/14/2017 - added Task form
 ' ---------------------------------
 Public Sub PopulateForm(frm As Form, ID As Long)
 On Error GoTo Err_Handler
@@ -707,6 +719,17 @@ On Error GoTo Err_Handler
                 .Controls("cbxCause").ControlSource = "HeightType"
                 .Controls("tbxDistance").ControlSource = "LineDistance_m"
                 .Controls("tbxHeight").ControlSource = "Height_cm"
+            Case "Task"
+                'set form fields to record fields as datasource
+                .Controls("tbxType").ControlSource = "TaskType"
+                .Controls("tbxTypeID").ControlSource = "TaskType_ID"
+                '.Controls("lblTaskContext").Caption = .Controls("tbxType") & " (" & .Controls("tbxTypeID") & ")"
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("cbxStatus").ControlSource = "Status_ID"
+                .Controls("cbxPriority").ControlSource = "Priority_ID"
+                .Controls("tbxTask").ControlSource = "Task"
+                .Controls("cbxRequestedBy").ControlSource = "RequestedBy_ID"
+                .Controls("tbxRequestDate").ControlSource = "RequestDate"
             Case "Transducer"
                 'set form fields to record fields as datasource
                 .Controls("tbxID").ControlSource = "ID"
@@ -1040,6 +1063,7 @@ End Function
 ' Revisions:
 '   BLC - 1/19/2017 - initial version
 '   BLC - 1/31/2017 - adjusted to accommodate templates list
+'   BLC - 2/21/2017 - adjusted to accommodate Contact list
 ' ---------------------------------
 Public Sub SortListForm(frm As Form, ctrl As Control)
 On Error GoTo Err_Handler
@@ -1051,8 +1075,16 @@ On Error GoTo Err_Handler
     
     'set sort field
     Select Case Replace(ctrl.Name, "lbl", "")
+        Case "Email"
+            strSort = "Email"
         Case "HdrID"
             strSort = "ID"
+            Select Case frm.Name
+                Case "ContactList"
+                    strSort = "c.ID"
+            End Select
+        Case "Name"
+            strSort = "LastName"
         Case "Template"
             strSort = "TemplateName"
         Case "SOPNum"

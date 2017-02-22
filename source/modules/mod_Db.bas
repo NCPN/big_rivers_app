@@ -21,6 +21,8 @@ Option Explicit
 '               BLC, 1/19/2017 - 1.09  - added RetrieveTableColumnData()
 '               BLC, 2/1/2017  - 1.10  - added error handling for improper GetTemplates()
 '                                        parameter syntax (param name:param type)
+'               BLC, 2/2/2017  - 1.11  - cleared g_AppTemplates in GetTemplates()
+'                                        to allow re-definition w/o restarting db
 ' =================================
 
 ' ---------------------------------
@@ -951,6 +953,8 @@ End Function
 '               BLC, 6/5/2016  - revised to set strSyntax to "T-SQL" to avoid error due to multiple items of same name in dict
 '               BLC, 6/6/2016  - added error handling for duplicate templates, renamed global to g_AppTemplates
 '               BLC, 2/1/2017  - added error handling for improper parameter syntax (param name:param type)
+'               BLC, 2/2/2017  - added clearing of global g_AppTemplates to allow re-definition
+'                                without restarting db
 ' ---------------------------------
 Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As String = "")
 
@@ -1073,10 +1077,13 @@ Public Sub GetTemplates(Optional strSyntax As String = "", Optional Params As St
     Loop
     
     'load global AppTemplates As Scripting.Dictionary of templates
+    Set g_AppTemplates = Nothing    'clear first
+    
     Set g_AppTemplates = dictTemplates
     
 Exit_Handler:
     'cleanup
+    Set rs = Nothing
     Set dict = Nothing
     Set dictTemplates = Nothing
     Exit Sub
@@ -1281,7 +1288,7 @@ On Error GoTo Err_Handler
                     .Update
                 Next
                 
-                .index = "RecCount"
+                .Index = "RecCount"
                 '.Close
             End With
         End With

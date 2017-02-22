@@ -925,7 +925,7 @@ Public Sub testme()
 'wia
 Dim img 'As ImageFile
 Dim s 'As String
-Dim V 'As Vector
+Dim v 'As Vector
 
 Set img = CreateObject("WIA.ImageFile")
 
@@ -1018,28 +1018,28 @@ If img.IsAnimated Then
 End If
 
 If img.Properties.Exists("40091") Then
-    Set V = img.Properties("40091").Value
-    s = s & "Title = " & V.String & vbCrLf
+    Set v = img.Properties("40091").Value
+    s = s & "Title = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40092") Then
-    Set V = img.Properties("40092").Value
-    s = s & "Comment = " & V.String & vbCrLf
+    Set v = img.Properties("40092").Value
+    s = s & "Comment = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40093") Then
-    Set V = img.Properties("40093").Value
-    s = s & "Author = " & V.String & vbCrLf
+    Set v = img.Properties("40093").Value
+    s = s & "Author = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40094") Then
-    Set V = img.Properties("40094").Value
-    s = s & "Keywords = " & V.String & vbCrLf
+    Set v = img.Properties("40094").Value
+    s = s & "Keywords = " & v.String & vbCrLf
 End If
 
 If img.Properties.Exists("40095") Then
-    Set V = img.Properties("40095").Value
-    s = s & "Subject = " & V.String & vbCrLf
+    Set v = img.Properties("40095").Value
+    s = s & "Subject = " & v.String & vbCrLf
 End If
 
 Dim vecProperty As WIA.Vector
@@ -1367,4 +1367,33 @@ Dim strSQL As String
         End With
 
     End With
+End Function
+
+Public Function RetParams() As String
+Dim strSQL As String
+
+strSQL = "PARAMETERS csn TEXT(25), ltype TEXT(1), lname TEXT(100)," _
+& "dist INTEGER, brg INTEGER, lnotes TEXT(1500), CID LONG, LMID LONG;" _
+& "insert INTO" _
+& "Location" _
+& "(CollectionSourceName, LocationType, LocationName, HeadtoOrientDistance_m," _
+& "HeadtoOrientBearing, LocationNotes, CreateDate, CreatedBy_ID," _
+& "LastModified, LastModifiedBy_ID)" _
+& "Values" _
+& "([csn], [ltype], [lname], [dist], [brg], [lnotes], Now, [CID], Now, [LMID]);"
+
+GetParamsFromSQL (strSQL)
+
+End Function
+
+Public Function getvals() As String
+'showImageFileProperties ("C:\Users\Public\Pictures\Assets\117000000000248708_1080x1920.jpg")
+'showImageFileProperties ("C:\Users\indigonw\Pictures\GoPro\GOPR0729.MP4")
+'ShowImageFileProperties ("C:\Users\indigonw\Documents\HTC\Gallery\ht26ys318579\phone storage\IMAG4760.jpg")
+'ShowImageFileProperties ("E:\Big_Rivers\2012\CURE\P7211545.JPG")
+
+    Dim d As Dictionary
+    
+    Set d = GetFileExifInfo("Z:\_____LIB\dev\git_projects\big_rivers_app\Data\P7231618.JPG")
+
 End Function
