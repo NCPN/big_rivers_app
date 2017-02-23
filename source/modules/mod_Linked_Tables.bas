@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Linked_Tables
 ' Level:        Framework module
-' Version:      1.03
+' Version:      1.04
 ' Description:  Linked table related functions & subroutines
 '
 ' Adapted from: John R. Boetsch, May 24, 2006
@@ -19,6 +19,8 @@ Option Explicit
 '                                       removed underscores from fields
 '               BLC, 1/24/2017 - 1.03 - revised MakeBackup() to use FilePath vs. File_path
 '                                       (tsys_Link_Dbs)
+'               BLC, 2/22/2017 - 1.04 - added alternative path for new vs. legacy forms (ConnectDbs
+'                                       vs. frm_Connect_Dbs), BACKEND_REQUIRED check
 ' =================================
 
 ' ---------------------------------
@@ -50,6 +52,8 @@ Option Explicit
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
 '               BLC, 5/22/2015 - moved from mod_Initialize_App to mod_Linked_Tables
 '               BLC, 6/5/2016  - removed underscores from field names
+'               BLC, 2/22/2017 - added alternative path for new vs. legacy forms (ConnectDbs
+'                                vs. frm_Connect_Dbs), BACKEND_REQUIRED check
 ' ---------------------------------
 Public Function VerifyConnections()
     On Error GoTo Err_Handler
@@ -163,7 +167,23 @@ Proc_Final_Status:
         If MsgBox(strErrMsg, vbCritical + vbYesNo, "Update back-end connections") _
             = vbYes Then
             ' Open the form to reconnect back-end tables
-            DoCmd.OpenForm "frm_Connect_Dbs"
+            If DbObjectExists("frm_Connect_Db") Then
+                DoCmd.OpenForm "frm_Connect_Dbs"    'legacy
+            ElseIf DbObjectExists("ConnectDbs") Then
+                DoCmd.OpenForm "ConnectDbs", acNormal, , , , , "PreSplash"    'new
+                'If FormIsOpen("PreSplash") Then
+                    'DoCmd.Close acForm, "PreSplash"
+                    'DoCmd.OpenForm "Splash"
+                'End If
+            End If
+        Else
+            If BACKEND_REQUIRED Then
+                'close since the back-end is required
+                 If MsgBox("A viable back-end is required for this application." & _
+                 vbCrLf & "So I'm closing now unless you click ""No.""" & vbCrLf & vbCrLf & "", _
+                 vbCritical + vbYesNo, "Closing database...") = vbYes Then _
+                   DoCmd.CloseDatabase
+             End If
         End If
     Else  ' If no connection errors, then set the global variable flag to True
         TempVars.item("Connected") = True

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Db
 ' Level:        Framework module
-' Version:      1.10
+' Version:      1.12
 ' Description:  Database related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -23,6 +23,7 @@ Option Explicit
 '                                        parameter syntax (param name:param type)
 '               BLC, 2/2/2017  - 1.11  - cleared g_AppTemplates in GetTemplates()
 '                                        to allow re-definition w/o restarting db
+'               BLC, 2/22/2017 - 1.12  - added DbObjectExists() to validate db objects
 ' =================================
 
 ' ---------------------------------
@@ -278,6 +279,88 @@ End Sub
 ' ---------------------------------
 '  Validate Database Objects
 ' ---------------------------------
+' ---------------------------------
+' FUNCTION:     DbObjectExists
+' Description:  indicate if tables, forms, reports, modules, macros exist in the database
+' Assumptions:  -
+' Parameters:   strName - name of object (string)
+'               oType - type of object (optional string, default - frm)
+'                       frm-form, mac-macro, mod-module, qry-query, rpt-report, tbl-table
+'                       erd-database diagram, funct-function
+' Returns:      true - object exists | false - object doesn't exist in database (boolean)
+' Throws:       none
+' References:   none
+' Source/date:
+'   Richard (rapsr59), January 7, 2009
+'   https://access-programmers.co.uk/forums/showthread.php?t=161339
+'   Microsoft, unknown
+'   https://msdn.microsoft.com/en-us/library/office/ff845448.aspx
+' Adapted:      Bonnie Campbell, February 22, 2017 - for NCPN tools
+' Revisions:
+'   BLC - 2/22/2017  - initial version
+' ---------------------------------
+Public Function DbObjectExists(strName As String, Optional oType As String = "frm") As Boolean
+On Error GoTo Err_Handler
+
+    Dim db As Object, db2 As Object, db3 As Object
+    Dim obj As AccessObject
+    Dim dbColl As Object 'AccessObject 'New Collection
+    
+    'CurrentProject contains: AllForms, AllMacros, AllModules, AllReports objects
+    Set db = Application.CurrentProject
+    
+    'CurrentData contains: AllTables, AllQueries, AllFunctions objects
+    Set db2 = Application.CurrentData
+    
+    'CodeData contains: AllFunctions object
+ '   Set db3 = Application.CodeData
+    
+    Select Case oType
+        Case "erd"
+            Set dbColl = db2.AllDatabaseDiagrams
+        Case "frm"
+            Set dbColl = db.AllForms
+'        Case "funct"
+'            Set dbColl = db3.AllFunctions '<-- results in 2467: expression...refers to an object that is closed or doesn't exist.
+        Case "mac"
+            Set dbColl = db.AllMacros
+        Case "mod"
+            Set dbColl = db.AllModules
+        Case "qry"
+            Set dbColl = db2.AllQueries
+        Case "rpt"
+            Set dbColl = db.AllReports
+        Case "tbl"
+            Set dbColl = db2.AllTables
+    End Select
+    
+    For Each obj In dbColl
+    
+        If obj.Name = strName Then
+            DbObjectExists = True
+            GoTo Exit_Handler
+        End If
+        
+    Next
+
+    DbObjectExists = False
+    
+Exit_Handler:
+    'cleanup
+    Set db = Nothing
+    Set db2 = Nothing
+    Set db3 = Nothing
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DbObjectExists[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
 
 ' =================================
 ' FUNCTION:     TableExists

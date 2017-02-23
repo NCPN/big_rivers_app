@@ -22,10 +22,10 @@ Begin Form
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =111
-    Left =4875
-    Top =3390
-    Right =17295
-    Bottom =14385
+    Left =3855
+    Top =2430
+    Right =23490
+    Bottom =15015
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xfe27f5b1c5c3e440
@@ -34,6 +34,7 @@ Begin Form
         "ys_Link_Dbs.[LinkDb]; "
     Caption =" Update Database Connections"
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
@@ -756,7 +757,41 @@ Option Explicit
 '               BLC, 12/3/2015 - modified btnUpdateLinks_Click to handle updating database names for
 '                    the same type w/ a different file name
 '               BLC, 6/4/2016 - adapted for Big Rivers Application & re-named to ConnectDbs
+'               BLC, 2/22/2017 - added CallingForm property & Form_Close event
 ' =================================
+
+'---------------------
+' Simulated Inheritance
+'---------------------
+
+'---------------------
+' Declarations
+'---------------------
+Private m_CallingForm As String
+
+'---------------------
+' Event Declarations
+'---------------------
+Public Event InvalidCallingForm(Value As String)
+
+'---------------------
+' Properties
+'---------------------
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
+    Else
+        RaiseEvent InvalidCallingForm(Value)
+    End If
+End Property
+
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
+End Property
+
+'---------------------
+' Methods
+'---------------------
 
 ' ---------------------------------
 ' SUB:     Form_Open
@@ -773,12 +808,18 @@ Option Explicit
 '               BLC, 6/5/2016 - removed underscores from field names
 '               BLC, 6/20/2016 - revised from "frm_Switchboard" to MAIN_APP_FORM
 '               BLC, 6/24/2016 - minimized Main form
+'               BLC, 2/22/2017 - added CallingForm property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+    'default
+    Me.CallingForm = "DbAdmin"
+    
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
 
     If DB_ADMIN_CONTROL Then
         ' Close the form if the switchboard is not open
@@ -1664,6 +1705,7 @@ End Sub
 '               BLC, 5/21/2015 - added to invasives reporting tool & renamed cmd prefix to btn,
 '                                added DB_ADMIN_CONTROL check for partial DbAdmin form implementations
 '               BLC, 6/5/2016 - removed underscores from field names
+'               BLC, 2/22/2017 - added CallingForm toggle
 ' ---------------------------------
 Private Sub btnClose_Click()
     On Error GoTo Err_Handler
@@ -1702,8 +1744,8 @@ Exit_Sub:
     Set rs = Nothing
     DoCmd.Close , , acSaveNo
     
-    'restore DbAdmin
-    ToggleForm "DbAdmin", 0
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
     
     Exit Sub
 
@@ -1714,4 +1756,37 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - btnClose_Click[ConnectDbs])"
     End Select
     Resume Exit_Sub
+End Sub
+
+' ---------------------------------
+' Sub:          Form_Close
+' Description:  form closing actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 22, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 2/22/2017 - initial version
+' ---------------------------------
+Private Sub Form_Close()
+On Error GoTo Err_Handler
+
+    'restore calling form
+    ToggleForm Me.CallingForm, 0
+    
+    'set next action
+    SetTempVar "GoToSplash", True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Close[ConnectDbs])"
+    End Select
+    Resume Exit_Handler
 End Sub

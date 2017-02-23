@@ -21,10 +21,10 @@ Begin Form
     Width =10080
     DatasheetFontHeight =11
     ItemSuffix =70
-    Left =3840
-    Top =2655
-    Right =13920
-    Bottom =11085
+    Left =3975
+    Top =3510
+    Right =22110
+    Bottom =13815
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x58bf7152d8c6e440
@@ -500,7 +500,7 @@ Option Explicit
 ' =================================
 ' Form:         Splash
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.01
 ' Basis:        -
 '
 ' Description:  Splash form object related properties, events, functions & procedures for UI display
@@ -508,6 +508,8 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, June 29, 2016
 ' References:   -
 ' Revisions:    BLC - 6/29/2016 - 1.00 - initial version
+'               BLC - 2/22/2017 - 1.01 - added initApp to ensure database connections are valid before
+'                                        opening DbAdmin form, shifted to PreSplash form
 ' =================================
 
 '---------------------
@@ -560,6 +562,8 @@ End Property
 ' Revisions:
 '   BLC - 6/20/2016 - initial version
 '   BLC - 6/27/2016 - adjusted for ToggleForm()
+'   BLC - 2/22/2017 - added initApp to ensure database connections are valid before
+'                     opening DbAdmin form, shifted to PreSplash form instead
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -573,6 +577,9 @@ On Error GoTo Err_Handler
     
     'set hover
     btnNext.HoverColor = lngGreen
+
+    'initialize app settings --> shifted to PreSplash
+    'initApp
             
 Exit_Handler:
     Exit Sub

@@ -953,7 +953,7 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim TL As New tagline
+    Dim TL As New Tagline
     
     With TL
         'values passed into form

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Forms
 ' Level:        Framework module
-' Version:      1.07
+' Version:      1.08
 ' Description:  generic form functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/19/2015
@@ -19,6 +19,7 @@ Option Explicit
 '               BLC - 6/24/2016 - 1.05 - added ToggleForm(), replaced Exit_Function > Exit_Handler
 '               BLC - 7/1/2016  - 1.06 - added font weight constants
 '               BLC - 7/28/2016 - 1.07 - added clearing lblMsg caption for ClearForm()
+'               BLC - 2/22/2017 - 1.08 - added notes to ToggleForm()
 ' =================================
 
 '=================================================================
@@ -534,7 +535,9 @@ End Sub
 ' ---------------------------------
 ' SUB:          ToggleForm
 ' Description:  Minimizes, maximizes, or restores form display
-' Assumptions:
+' Assumptions:  Form is not opened if it is not already opened
+'               In part this is to avoid endless loops with forms
+'               like PreSplash which call routines that shouldn't be re-called.
 ' Note:         -
 ' Parameters:   strForm - form to change (string)
 '               Sizing - how to change display (integer) -1 = minimize, 0 = normal/restore, 1 = maximize
@@ -543,6 +546,7 @@ End Sub
 ' References:   -
 ' Source/date:  Bonnie Campbell, June 24, 2016  - for NCPN tools
 ' Revisions:    BLC, 6/24/2016 - initial version
+'               BLC, 2/22/2017 - added documentation notes @ opening form
 ' ---------------------------------
 Public Sub ToggleForm(strForm As String, Sizing As Integer)
 On Error GoTo Err_Handler

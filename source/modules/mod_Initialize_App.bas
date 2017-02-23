@@ -282,7 +282,7 @@ Public Function AppSetup()
     strReleaseVersion = Replace(Left(strRelease, InStr(strRelease, "/") - 2), "Version ", "")
     'set app version
     TempVars.Add "AppVersion", strReleaseVersion
-    strUser = TempVars.item("AppUsername")
+    strUser = Nz(TempVars.item("AppUsername"), "PreLogin")
     If IsODBC("tsys_Logins") Then
         ' Use a pass-through query to test the connection for write privileges
 '        strSQL = "INSERT INTO dbo.tsys_Logins " & _

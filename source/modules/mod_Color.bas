@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_Color
 ' Level:        Framework module
-' Version:      1.05
+' Version:      1.06
 ' Description:  color functions & procedures
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -14,6 +14,7 @@ Option Explicit
 '               BLC, 5/27/2016 - 1.03 - added additional colors
 '               BLC, 6/4/2016  - 1.04 - added HTMLconvert()
 '               BLC, 6/24/2016 - 1.05 - replaced Exit_Function > Exit_Handler
+'               BLC, 2/22/2017 - 1.06 - added RandomColor()
 ' =================================
 
 ' ---------------------------------
@@ -156,6 +157,48 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - HTMLConvert[mod_Color])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' SUB:          RandomColor
+' Description:  Swap color value randomly
+' Assumptions:  -
+' Parameters:   lngColor1 - color option 1 (long)
+'               lngColor2 - color option 2 (long)
+' Returns:      random color pick (long)
+' Throws:       none
+' References:   none
+' Requires:     -
+' Source/date:
+'   Microsoft, unknown
+'   https://support.office.com/en-us/article/Rnd-Function-503cd2e4-3949-413f-980a-ed8fb35c1d80
+' Adapted:      Bonnie Campbell, February 22, 2017 - for NCPN tools
+' Revisions:
+'   BLC - 2/22/2017  - initial version
+' ---------------------------------
+Public Function RandomColor(lngColor1 As Long, lngColor2 As Long) As Long
+On Error GoTo Err_Handler
+    
+    Dim i As Integer
+    
+    i = Int((100 * Rnd) + 1) 'random number between 1 & 100
+    
+    If i Mod 2 Then
+        RandomColor = lngColor1
+    Else
+        RandomColor = lngColor2
+    End If
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RandomColor[mod_Color])"
     End Select
     Resume Exit_Handler
 End Function

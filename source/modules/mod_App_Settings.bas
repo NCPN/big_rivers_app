@@ -68,6 +68,7 @@ Public Const ACCESS_ROLES As String = "admin,power user,data entry,read only"
                                                                 'String -> used in setting user application access level & permissions
 Public Const SWITCHBOARD As String = "Main"                     'String -> main application form
 Public Const DB_ADMIN_FORM As String = "DbAdmin"                'String -> main db administrative form
+Public Const BACKEND_REQUIRED As Boolean = True                 'Boolean flag -> identifies if back-end required
 
 '-----------------------------------------------------------------------
 ' Database Type
