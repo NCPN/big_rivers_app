@@ -1577,7 +1577,10 @@ On Error GoTo Err_Handler
                     .Parameters("activity") = Params(2) 'activity
                     .Parameters("version") = TempVars("AppVersion")
                     .Parameters("accesslvl") = TempVars("UserAccessLevelID")
-                
+
+Debug.Print "uname: " & Params(1) & " activity: " & Params(2) & _
+            " version: " & TempVars("AppVersion") & " accesslvl: " & TempVars("UserAccessLevelID")
+                    
                     SkipRecordAction = True
                     
                 Case "i_park"

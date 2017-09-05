@@ -57,6 +57,8 @@ Option Explicit
 ' ---------------------------------
 Public Function VerifyConnections()
     On Error GoTo Err_Handler
+    
+    PushCallStack "VerifyConnections"
 
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
@@ -171,10 +173,6 @@ Proc_Final_Status:
                 DoCmd.OpenForm "frm_Connect_Dbs"    'legacy
             ElseIf DbObjectExists("ConnectDbs") Then
                 DoCmd.OpenForm "ConnectDbs", acNormal, , , , , "PreSplash"    'new
-                'If FormIsOpen("PreSplash") Then
-                    'DoCmd.Close acForm, "PreSplash"
-                    'DoCmd.OpenForm "Splash"
-                'End If
             End If
         Else
             If BACKEND_REQUIRED Then
@@ -194,6 +192,7 @@ Exit_Procedure:
     rs.Close
     Set rs = Nothing
     Set db = Nothing
+    PopCallStack "VerifyConnections"
     Exit Function
 
 Err_Handler:
@@ -915,6 +914,8 @@ End Function
 Public Function VerifyLinkTableInfo() As Boolean
     On Error GoTo Err_Handler
 
+    PushCallStack "VerifyLinkTableInfo"
+
     Dim db As DAO.Database
     Dim rs As DAO.Recordset
     Dim tdf As DAO.TableDef
@@ -1055,6 +1056,7 @@ Exit_Procedure:
     Set tdf = Nothing
     Set rs = Nothing
     Set db = Nothing
+    PopCallStack "VerifyLinkTableInfo"
     Exit Function
 
 Err_Handler:
@@ -1100,6 +1102,8 @@ End Function
 Public Function VerifyLinks() As Boolean
     On Error GoTo Err_Handler
 
+    PushCallStack "VerifyLinks"
+    
     Dim rs As DAO.Recordset
     Dim intNumTables As Integer
     Dim intI As Integer
@@ -1173,6 +1177,7 @@ Exit_Procedure:
     Set frm = Nothing
     rs.Close
     Set rs = Nothing
+    PopCallStack "VerifyLinks"
     Exit Function
 
 Err_Handler:

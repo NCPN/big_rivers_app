@@ -121,6 +121,8 @@ End Sub
 ' ---------------------------------
 Public Sub initApp()
 On Error GoTo Err_Handler:
+    
+    PushCallStack "initApp"
 
     ' Initialize global TempVars that require function
     initGlobalTempVars
@@ -145,6 +147,7 @@ On Error GoTo Err_Handler:
     If TempVars.item("Connected") Then AppSetup
 
 Exit_Procedure:
+    PopCallStack "initApp"
     Exit Sub
 
 Err_Handler:
@@ -191,6 +194,7 @@ End Sub
 ' =================================
 Public Function AppSetup()
     On Error GoTo Err_Handler
+    PushCallStack "AppSetup"
 
     Dim frm As Form
     Dim strSysTable As String, strAddress As String, strUser As String, strRelease As String
@@ -349,6 +353,7 @@ Public Function AppSetup()
 
 Exit_Procedure:
     DoCmd.SetWarnings True
+    PopCallStack "AppSetup"
     Exit Function
 
 Update_Settings:

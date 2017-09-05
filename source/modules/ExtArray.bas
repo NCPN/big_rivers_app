@@ -80,7 +80,7 @@ End Property
 Private Sub Class_Initialize()
 On Error GoTo Err_Handler
 
-    Dim arr() As Variant
+    Dim Arr() As Variant
 
 Exit_Handler:
     Exit Sub
@@ -146,7 +146,7 @@ End Sub
 Public Sub Resize(Length As Integer)
 On Error GoTo Err_Handler
         
-    If Not arr Is Nothing Then
+    If Not Arr Is Nothing Then
 '        ReDim Preserve arr(length)
     End If
 

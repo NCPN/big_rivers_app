@@ -117,7 +117,7 @@ On Error GoTo Err_Handler
  
     Set db = CurrentDb
     
-    Dim lb As Integer, ub As Integer
+    Dim LB As Integer, UB As Integer
     
     CreateTempTable "usys_temp_rs", aryFields 'aryData
     
@@ -309,6 +309,77 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ArrayReplace[mod_Array])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+
+
+' ---------------------------------
+' FUNCTION:     IsArrayEmpty
+' Description:  tests whether the array is allocated
+' Assumptions:  -
+' Parameters:   ary - array data (variant, string or array)
+' Returns:      True or False whether array is empty (boolean)
+' Throws:       none
+' References:
+'   Chip Pearson, Unknown
+'   http://www.cpearson.com/excel/vbaarrays.htm
+' Source/date:  Bonnie Campbell, February 23, 2017 - for NCPN tools
+' Adapted:  -
+' Revisions:
+'   BLC - 2/23/2017 - initial version
+' ---------------------------------
+Public Function IsArrayEmpty(ary As Variant) As Boolean
+On Error GoTo Err_Handler
+
+    Dim LB As Long
+    Dim UB As Long
+    
+    Err.Clear
+    On Error Resume Next
+    If IsArray(ary) = False Then
+        'not an array --> return true
+        IsArrayEmpty = True
+    End If
+    
+    ' UBound check
+    UB = UBound(ary, 1)
+    
+    If (Err.Number <> 0) Then
+        'UBound leads to an error when array is unallocated --> return true
+        IsArrayEmpty = True
+    Else
+    
+        ''''''''''''''''''''''''''''''''''''''''''
+        ' Chip Pearson:
+        ' On rare occassion, under circumstances I
+        ' cannot reliably replicate, Err.Number
+        ' will be 0 for an unallocated, empty array.
+        ' On these occassions, LBound is 0 and
+        ' UBound is -1.
+        ' To accomodate the weird behavior, test to
+        ' see if LB > UB. If so, the array is not
+        ' allocated.
+        ''''''''''''''''''''''''''''''''''''''''''
+        Err.Clear
+        LB = LBound(ary)
+        If LB > UB Then
+            IsArrayEmpty = True
+        Else
+            IsArrayEmpty = False
+        End If
+    End If
+
+Exit_Handler:
+    'cleanup
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - IsEmptyArray[mod_Array])"
     End Select
     Resume Exit_Handler
 End Function
