@@ -1137,17 +1137,17 @@ On Error GoTo Err_Handler
     cbxSpecies.BackColor = lngYellow
     
     'determine level for events
-    Dim filter As String
+    Dim Filter As String
     If Not TempVars("SiteCode") Is Nothing Then
-            filter = "s_events_by_site"
+            Filter = "s_events_by_site"
         If Not TempVars("Feature") Is Nothing Then
-            filter = "s_events_by_feature"
+            Filter = "s_events_by_feature"
         End If
     End If
     
     'populate events
 '    Set cbxEvent.Recordset = GetRecords("s_events_by_park_river")
-    Set cbxEvent.Recordset = GetRecords(filter)
+    Set cbxEvent.Recordset = GetRecords(Filter)
     cbxEvent.BoundColumn = 1
     cbxEvent.ColumnCount = 5
 '    cbxEvent.ColumnWidths = "0;0;0;0;2"

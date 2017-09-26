@@ -14,8 +14,6 @@ Begin Report
     Width =10080
     DatasheetFontHeight =9
     ItemSuffix =40
-    Right =21285
-    Bottom =11790
     DatasheetGridlinesColor =12632256
     OnNoData ="[Event Procedure]"
     RecSrcDt = Begin

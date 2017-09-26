@@ -11,9 +11,6 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0xe9b773b0c737d2488e14c8a49de58510
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbByte "RecordsetType" ="0"
@@ -50,8 +47,5 @@ Begin
         dbInteger "ColumnWidth" ="2265"
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xcc901dae9bb169408afb344a68510b73
-        End
     End
 End

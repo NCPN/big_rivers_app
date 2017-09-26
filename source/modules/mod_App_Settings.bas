@@ -51,7 +51,17 @@ Public gSubReportCount As Integer                  'global counter for subreport
 '               BLC, 4/4/2016  - added LOCATION_TYPES to allow specific types only, RECORD_ACTIONS, CONTACT_ROLES, PARKS
 '               BLC, 6/7/2016  - added ACCESS_ROLES to set user application permissions
 '               BLC, 9/7/2016  - added LINK_NORMAL_TEXT & _BKGD for disabling tile links
+'               BLC, 5/3/2017  - added VCS_FULL_PATH for running VCS functions/subroutines
+'               BLC, 7/28/2017 - changed DEV_MODE to global variable vs. constant to
+'                                allow user to set via tglDevMode toggle control in UI
 ' ---------------------------------
+Public Const VCS_FULL_PATH As String = "Z:\_____LIB\dev\git_projects\libraries\VCS.accdb"   'Version Control System (VCS) db (contains modules for version control)
+                                                                'Tables to save for VCS (e.g. lookups)
+Public Const VCS_SAVE_TABLES As String = "Access, Status," & _
+    "Flags, Park, Feature, Site, River, Protocol, ModWentworthScale" & _
+    "tlu_NCPN_Plants, River, Priority, Measurement_Flags" & _
+    "tsys_Db_Templates, AppEnum, AppReport, Icon"
+
 Public Const USER_ACCESS_CONTROL As Boolean = True             'Boolean flag -> db includes user access control or not
 Public Const DB_ADMIN_CONTROL As Boolean = False                'Boolean flag -> db does not include DbAdmin subform & controls
 Public Const FIX_LINKED_DBS As Boolean = False                  'Boolean flag -> db requires tbl_Dbs to be updated via FixLinkedDb (usually when DbAdmin is not fully implemented)
@@ -62,7 +72,8 @@ Public Const APP_RELEASE_ID As String = ""                      'String -> relea
 Public Const APP_URL As String = "science.nature.nps.gov/im/units/ncpn/datamanagement.cfm"
                                                                 'String -> website URL for application
                                                                 '          used when db doesn't include full DbAdmin subform & controls, otherwise NULL
-Public Const DEV_MODE As Boolean = True                         'Boolean flag -> enable menus when typically they'd be OFF
+Public DEV_MODE As Boolean                                      'Boolean flag -> enable menus, show controls when typically they'd be OFF
+                                                                '        flag is set via DEV_MODE toggle in UI
 
 Public Const ACCESS_ROLES As String = "admin,power user,data entry,read only"
                                                                 'String -> used in setting user application access level & permissions

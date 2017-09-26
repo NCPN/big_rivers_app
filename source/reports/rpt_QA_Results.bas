@@ -16,8 +16,6 @@ Begin Report
     ItemSuffix =24
     Left =2895
     Top =480
-    Right =14685
-    Bottom =9660
     DatasheetGridlinesColor =12632256
     OnNoData ="[Event Procedure]"
     RecSrcDt = Begin

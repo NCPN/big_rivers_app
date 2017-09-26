@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =25
-    Left =4695
-    Top =2295
-    Right =12975
-    Bottom =10260
+    Left =4710
+    Top =2880
+    Right =12990
+    Bottom =10845
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -592,7 +592,7 @@ On Error GoTo Err_Handler
     oBCTile.Link2Caption = "VegWalk"
     oBCTile.Link3Caption = "Photo"
     oBCTile.Link4Caption = "Transducer"
-    oBCTile.Link5Visible = 0
+    oBCTile.Link5Caption = "Loggers"
     oBCTile.Link6Caption = "Tasks"
     oBCTile.lblIcon7L.Caption = StringFromCodepoint(uMapLighthouse)
     oBCTile.lblIcon7L.ForeColor = lngBlue
@@ -982,6 +982,7 @@ End Sub
 '   BLC - 9/6/2016  - initial version
 '   BLC - 9/21/2016 - update so BLCA & CANY enable transect links, DINO does not
 '   BLC - 10/21/2016 - revised TR Veg Plots, Vegetation Walk, removed Understory Cover, Woody Canopy Cover
+'   BLC - 9/5/2017 - added BC Loggers link
 ' ---------------------------------
 Private Sub PrepareLinks()
 On Error GoTo Err_Handler
@@ -1014,7 +1015,7 @@ On Error GoTo Err_Handler
         TC = "6"            'People
         TR = "6,7,8"        'Species, Unknowns, Species Search
         BL = "4,7"          'Survey Files, Upload Survey File
-        BC = "1,2,3,4,6,7,8"  'VegPlot, VegWalk, Photo, Transducer, Tasks, Mod Wentworth Settings, Sheet Settings
+        BC = "1,2,3,4,5,6,7,8"  'VegPlot, VegWalk, Photo, Transducer, Logger, Tasks, Mod Wentworth Settings, Sheet Settings
         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
         
         'prepare park specific sets
@@ -1102,7 +1103,7 @@ On Error GoTo Err_Handler
     oCTile.EnableLinks TC    'People
     oRTile.EnableLinks TR    'Veg Plots, VegWalk, Species, Unknowns, Species Search
     oBLTile.EnableLinks BL   'Batch Upload Photos
-    oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Tasks, Sheet Settings
+    oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Loggers, Tasks, Sheet Settings
     oBRTile.EnableLinks BR   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
     
 Exit_Handler:

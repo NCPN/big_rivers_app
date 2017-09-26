@@ -780,7 +780,7 @@ Private Function fxnOpenClickedQuery()
             Me.Parent.Form!subQueryResults.SourceObject = "Query." & Me.tbxQuery_name
         End If
         ' Set the form to the selected record
-        Me.Parent.Form.filter = "[Query_name] = """ & Me.tbxQuery_name & _
+        Me.Parent.Form.Filter = "[Query_name] = """ & Me.tbxQuery_name & _
             """ AND [Time_frame] = """ & Me.Parent.Form!cbxTimeframe & """"
 '            """ AND [Time_frame] = """ & Me.Time_frame & """"
         Me.Parent.Form.FilterOn = True

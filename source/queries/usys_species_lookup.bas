@@ -7,9 +7,6 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="-1"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0xce35d907c67e3e49b0b0abca28cdc6d3
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbMemo "OrderBy" ="[usys_species_lookup].[LU_Code], [usys_species_lookup].[Master_Species]"

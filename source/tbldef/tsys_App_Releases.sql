@@ -1,5 +1,5 @@
 CREATE TABLE [tsys_App_Releases] (
-  [ID] AUTOINCREMENT,
+  [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
   [ReleaseDate] DATETIME ,
   [DatabaseTitle] VARCHAR (100),
   [VersionNumber] VARCHAR (20),

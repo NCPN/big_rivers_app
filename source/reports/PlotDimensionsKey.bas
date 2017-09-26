@@ -20,8 +20,6 @@ Begin Report
     Width =3600
     DatasheetFontHeight =11
     ItemSuffix =115
-    Right =20565
-    Bottom =9630
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin

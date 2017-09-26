@@ -1352,18 +1352,18 @@ On Error GoTo Err_Handler
     ToggleForm Me.CallingForm, 0
     
     'update transect combobox for VegPlot
-    Dim filter As String
+    Dim Filter As String
     
     Select Case Me.CallingForm
         Case "VegPlot"
             Select Case GetHierarchyLevel
                 Case "feature"
-                    filter = "s_vegtransect_by_feature"
+                    Filter = "s_vegtransect_by_feature"
                 Case "site"
-                    filter = "s_vegtransect_by_site"
+                    Filter = "s_vegtransect_by_site"
             End Select
             
-            Set Forms("VegPlot").Controls("cbxTransect").Recordset = GetRecords(filter)
+            Set Forms("VegPlot").Controls("cbxTransect").Recordset = GetRecords(Filter)
             Forms("VegPlot").Controls("cbxTransect").Requery
     
     

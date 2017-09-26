@@ -8,9 +8,6 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="-1"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0xa56e814763ff6b4b8882d15bc19beba7
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbMemo "OrderBy" ="[Query2].[StartYear]"

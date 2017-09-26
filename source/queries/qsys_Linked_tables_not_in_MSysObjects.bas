@@ -14,9 +14,6 @@ dbText "Description" ="Linked table records in tsys_Link_Tables that are not act
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
-dbBinary "GUID" = Begin
-    0x292357a403aa1741891cfc39a08883e1
-End
 Begin
     Begin
         dbText "Name" ="tsys_Link_Tables.LinkTable"

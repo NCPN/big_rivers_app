@@ -1,5 +1,5 @@
 CREATE TABLE [tsys_App_Defaults] (
-  [ID] AUTOINCREMENT,
+  [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
   [Project] VARCHAR (50),
   [Release_ID] LONG ,
   [DataTimeframe] VARCHAR (30),

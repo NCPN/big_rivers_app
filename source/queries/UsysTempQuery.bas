@@ -19,9 +19,6 @@ dbByte "RecordsetType" ="0"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0xdfa89f91ad4e0840acbd7c389f87a880
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
@@ -35,9 +32,6 @@ Begin
     Begin
         dbText "Name" ="NumberOfDupes"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x21a050c0b9ffe845b485f1f448661b92
-        End
     End
 End
 Begin

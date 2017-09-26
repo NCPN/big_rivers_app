@@ -10,6 +10,6 @@ CREATE TABLE [tbl_QA_Results] (
   [Remedy_desc] LONGTEXT ,
   [Remedy_date] DATETIME ,
   [QA_user] VARCHAR (50),
-  [Is_done] VARCHAR ,
+  [Is_done] BIT ,
    CONSTRAINT [pk_tbl_QA_Results] PRIMARY KEY ([Query_name], [Time_frame], [Data_scope])
 )

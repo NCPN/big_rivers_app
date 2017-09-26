@@ -16,8 +16,6 @@ Begin Report
     ItemSuffix =11
     Left =900
     Top =450
-    Right =13755
-    Bottom =5565
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xe1cb1c939781e340

@@ -25,80 +25,47 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0x847662cf74d5b440a20ee268493bf3f1
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
         dbText "Name" ="CurrTable"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x42d79bf5d8653c4899acf87c052a7a2c
-        End
     End
     Begin
         dbText "Name" ="tsys_Link_Tables.LinkTable"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xe2f22821daba9c4b81915ec67c5a8a33
-        End
     End
     Begin
         dbText "Name" ="MSysObjects.Type"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x59d1d358657f7c4b88262b3a6d44d60d
-        End
     End
     Begin
         dbText "Name" ="tsys_Link_Dbs.[IsODBC]"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x90d4307e0f63934da336f640c492849c
-        End
     End
     Begin
         dbText "Name" ="CurrDb"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xfae7428c26074347b73fd40103193279
-        End
     End
     Begin
         dbText "Name" ="tsys_Link_Tables.[LinkDb]"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x592cd6b58f4ac349a4ee12a44cc89213
-        End
     End
     Begin
         dbText "Name" ="CurrServer"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x984810f2090cb8438b70134419a37b00
-        End
     End
     Begin
         dbText "Name" ="tsys_Link_Dbs.Server"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0xdeadb4c9288f694d8b4841df6d7f0f6f
-        End
     End
     Begin
         dbText "Name" ="CurrPath"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x84824942b4bf944fbc0680297e93135e
-        End
     End
     Begin
         dbText "Name" ="tsys_Link_Dbs.[FilePath]"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x60e3607f08994748859bb4d13faa8101
-        End
     End
 End

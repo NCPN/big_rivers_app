@@ -13,9 +13,6 @@ dbText "Description" ="Records in tsys_Link_Dbs that do not have any related chi
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
-dbBinary "GUID" = Begin
-    0x318ef3b0dba7a946a41b750464e715a6
-End
 Begin
     Begin
         dbText "Name" ="tsys_Link_Dbs.Backups"

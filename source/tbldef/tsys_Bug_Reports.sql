@@ -1,5 +1,5 @@
 CREATE TABLE [tsys_Bug_Reports] (
-  [ID] AUTOINCREMENT,
+  [ID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
   [Release_ID] VARCHAR (50),
   [ReportDate] DATETIME ,
   [FoundBy_ID] LONG ,

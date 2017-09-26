@@ -7,9 +7,9 @@ CREATE TABLE [tsys_Link_Tables] (
   [IsHidden] BYTE ,
   [AllowEditsLookup] BYTE ,
   [BrowserView] BYTE ,
-  [Is_hidden] VARCHAR ,
-  [Allow_edits_lookup] VARCHAR ,
-  [Browser_view] VARCHAR ,
+  [Is_hidden] BIT ,
+  [Allow_edits_lookup] BIT ,
+  [Browser_view] BIT ,
   [SortOrder] BYTE ,
    CONSTRAINT [PrimaryKey] PRIMARY KEY ([LinkType], [LinkTable])
 )

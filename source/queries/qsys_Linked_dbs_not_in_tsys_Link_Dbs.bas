@@ -17,17 +17,11 @@ dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
 dbBoolean "UseTransaction" ="-1"
 dbText "Description" ="Automatically appends back-end databases to tsys_Link_dbs if a record is missing"
-dbBinary "GUID" = Begin
-    0xe48054c9e4c2214392d20ea121a42928
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
         dbText "Name" ="Backup"
         dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x7c8c2c7eb7a1c3439d93736ddbde056e
-        End
     End
 End

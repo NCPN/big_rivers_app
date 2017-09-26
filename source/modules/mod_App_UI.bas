@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.21
+' Version:      1.22
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2015
@@ -33,6 +33,7 @@ Option Explicit
 '               BLC, 2/14/2017 - 1.20 - added Task form to PopulateForm()
 '               BLC, 2/21/2017 - 1.21 - adjusted SortListForm() to accommodate Contact list form,
 '                                       revised to use Photo vs. Tree form
+'               BLC, 9/5/2017  - 1.22 - added Logger form to PopulateForm() & ClickAction()
 ' =================================
 
 ' =================================
@@ -423,6 +424,7 @@ End Function
 '   BLC - 10/25/2016 - revised species search to add originForm TempVar, callingform oArg
 '   BLC - 1/9/2017   - revised to use SetTempVar()
 '   BLC - 2/21/2017  - revised to use Photo vs. Tree form
+'   BLC - 9/5/2017   - added Logger form
 ' ---------------------------------
 Public Sub ClickAction(action As String)
 On Error GoTo Err_Handler
@@ -552,6 +554,8 @@ On Error GoTo Err_Handler
             fName = "SetDatasheetDefaults"
         Case "transducer"
             rName = "Transducer"
+        Case "loggers"
+            fName = "Logger"
         Case "tasks"
             fName = "Task"
         'Reports
@@ -639,6 +643,7 @@ End Function
 '   BLC - 10/24/2016 - added ModWentworth form
 '   BLC - 1/12/2017 - code cleanup
 '   BLC - 2/14/2017 - added Task form
+'   BLC - 9/5/2017 - added Logger form
 ' ---------------------------------
 Public Sub PopulateForm(frm As Form, ID As Long)
 On Error GoTo Err_Handler
@@ -691,6 +696,14 @@ On Error GoTo Err_Handler
                 .Controls("tbxDistance").ControlSource = "HeadToOrientDistance_m"
                 .Controls("tbxBearing").ControlSource = "HeadToOrientBearing"
                 .Controls("tbxNotes").ControlSource = "LocationNotes"
+            Case "Logger"
+                strTable = "Logger"
+                'set form fields to record fields as datasource
+                .Controls("tbxID").ControlSource = "ID"
+                .Controls("cbxSite").ControlSource = Left([SensorNumber], 2)
+                .Controls("cbxLoggerType").ControlSource = "SensorType"
+                .Controls("tbxAbbreviation").ControlSource = "SensorNumber"
+                .Controls("tbxSampleOrder").ControlSource = "SamplingOrder"
             Case "ModWentworth"
                 strTable = "ModWentworthScale"
                 'set form fields to record fields as datasource
@@ -1121,7 +1134,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          FilterListForm

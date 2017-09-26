@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =4275
-    Top =2895
-    Right =12570
-    Bottom =13770
+    Left =4155
+    Top =3315
+    Right =13170
+    Bottom =14700
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x11fc963334e1e440
@@ -42,6 +42,7 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
+    OnActivate ="[Event Procedure]"
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
     AllowPivotTableView =0
@@ -168,6 +169,35 @@ Begin Form
             BorderShade =65.0
             ShowPageHeaderAndPageFooter =1
         End
+        Begin ToggleButton
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =2
+            Bevel =1
+            BackColor =-1
+            BackThemeColorIndex =4
+            BackTint =60.0
+            OldBorderStyle =0
+            BorderLineStyle =0
+            BorderColor =-1
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverColor =0
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedColor =0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeColor =0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeColor =0
+            PressedForeThemeColorIndex =1
+        End
         Begin Tab
             FontSize =11
             FontName ="Calibri"
@@ -283,6 +313,61 @@ Begin Form
                     BorderThemeColorIndex =-1
                     GridlineThemeColorIndex =-1
                     GridlineShade =100.0
+                End
+                Begin ToggleButton
+                    OverlapFlags =215
+                    Left =5370
+                    Top =150
+                    Width =1500
+                    Height =420
+                    FontSize =8
+                    FontWeight =500
+                    TabIndex =1
+                    Name ="tglDevMode"
+                    StatusBarText ="Turn DEV MODE on or off"
+                    DefaultValue ="False"
+                    Caption ="DEV MODE"
+                    FontName ="Tahoma"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Turn DEV MODE on or off"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+
+                    LayoutCachedLeft =5370
+                    LayoutCachedTop =150
+                    LayoutCachedWidth =6870
+                    LayoutCachedHeight =570
+                    ForeTint =100.0
+                    GridlineThemeColorIndex =-1
+                    GridlineShade =100.0
+                    Shape =1
+                    Bevel =0
+                    Gradient =12
+                    BackColor =5880731
+                    BackThemeColorIndex =6
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =5880731
+                    BorderThemeColorIndex =6
+                    BorderTint =100.0
+                    ThemeFontIndex =-1
+                    HoverColor =15788753
+                    HoverThemeColorIndex =-1
+                    HoverTint =100.0
+                    PressedColor =9699294
+                    PressedThemeColorIndex =-1
+                    PressedShade =100.0
+                    HoverForeColor =16724787
+                    HoverForeThemeColorIndex =-1
+                    HoverForeTint =100.0
+                    PressedForeColor =16724787
+                    PressedForeThemeColorIndex =-1
+                    Shadow =-1
+                    QuickStyle =25
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
                 End
             End
         End
@@ -2503,7 +2588,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.07
+' Version:      1.08
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2520,6 +2605,7 @@ Option Explicit
 '               BLC - 1/19/2017 - 1.06 - revised to SOPs from Version (button)
 '               BLC - 1/26/2017 - 1.07 - hid unused defaults, temporarily redirected button
 '                                        clicks to messages
+'               BLC - 9/6/2017  - 1.08 - added tglDevMode button, ToggleDevMode()
 ' =================================
 
 '---------------------
@@ -2742,6 +2828,37 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          Form_Activate
+' Description:  form actions when open form gets focus
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Adapted:      -
+' Revisions:
+'   BLC - 7/28/2017 - initial version
+'   BLC - 7/31/2017 - revised to ensure Dev Mode toggle button updates w/ current state
+' ---------------------------------
+Private Sub Form_Activate()
+
+    'set toggle based on current value
+    Me.tglDevMode.Value = DEV_MODE
+    
+    ToggleDevMode
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Activate[DbAmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          Form_Current
 ' Description:  form current actions
 ' Assumptions:  -
@@ -2765,6 +2882,37 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tglDevMode_Click
+' Description:  Sets value for DEV_MODE true or false based on toggle
+'                   Up = True, Down = False
+' Assumptions:  DEV_MODE sets visibility of ID controls
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Adapted:      -
+' Revisions:
+'   BLC - 7/28/2017 - initial version
+'   BLC - 7/31/2017 - revised to shift code to ToggleDevMode
+' ---------------------------------
+Private Sub tglDevMode_Click()
+On Error GoTo Err_Handler
+
+    ToggleDevMode
+ 
+Exit_Handler:
+    DoCmd.Hourglass False
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglDevMode_Click[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2827,6 +2975,60 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[DbAdmin form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' =================================
+'   DEV_MODE Functionality
+' =================================
+' ---------------------------------
+' Sub:          ToggleDevMode
+' Description:  Sets value for DEV_MODE true or false based on toggle
+'                   Up = True, Down = False
+' Assumptions:  DEV_MODE sets visibility of ID controls
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Adapted:      -
+' Revisions:
+'   BLC - 7/31/2017 - initial version
+' ---------------------------------
+Private Sub ToggleDevMode()
+On Error GoTo Err_Handler
+
+    'set global based on toggle
+    If Me!tglDevMode = True Then
+        'true = up
+        DEV_MODE = True
+        
+        With Me.tglDevMode
+            .Caption = "DEV MODE ON"
+            .BackColor = lngLtLime
+            .fontBold = True
+            .ForeColor = lngBlue
+        End With
+    Else
+        'false = down
+        DEV_MODE = False
+    
+        With Me.tglDevMode
+            .Caption = "DEV MODE OFF"
+            .BackColor = lngLtrYellow
+            .fontBold = False
+            .ForeColor = lngRed
+        End With
+    End If
+ 
+Exit_Handler:
+    DoCmd.Hourglass False
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ToggleDevMode[DbAdmin form])"
     End Select
     Resume Exit_Handler
 End Sub
