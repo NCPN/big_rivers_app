@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =85
-    Left =3855
-    Top =2430
-    Right =24030
-    Bottom =15015
+    Left =14085
+    Top =3510
+    Right =26490
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6efd080b49dfe440
@@ -2110,7 +2110,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.07
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -2132,6 +2132,7 @@ Option Explicit
 '               BLC - 1/12/2017 - 1.07 - revised to VegTransect vs. Transect form,
 '                                        added % litter, % woody debris (all parks),
 '                                        Total WCC %, standing dead
+'               BLC - 9/25/2017 - 1.08 - revise for NCPN_framework.XX classes
 ' =================================
 
 '---------------------
@@ -3111,11 +3112,14 @@ End Sub
 '                     converted values to 1/0 vs. -1/0 for SQL clarity
 '   BLC - 1/12/2017 - code cleanup, enabled buttons after tbxID > 0
 '                     (plot saved & ID returned)
+'   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim vp As New VegPlot
+    'Dim vp As New VegPlot
+    Dim vp As NCPN_framework.VegPlot
+    Set vp = vp.GetClass
     
     With vp
         'values passed into form

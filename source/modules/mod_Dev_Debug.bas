@@ -264,9 +264,12 @@ On Error GoTo Err_Handler
 '    'test parsing
 '    ParseFileName ("C:\___TEST_DATA\test_BE_new\Invasives_be.accdb")
 
-    Dim p_oTask As Task
+    'Dim p_oTask As Task
     
-    Set p_oTask = New Task
+    'Set p_oTask = New Task
+    Dim p_oTask As NCPN_framework.Task
+    Set p_oTask = p_oTask.GetClass
+    
     With p_oTask
         .TaskType = "TaskType.Photo"
         .Task = "Testing description"
@@ -655,7 +658,10 @@ Public Sub Testing()
 'End With
 Dim i As Integer
 For i = 0 To 4
-Dim myVegPlot As New VegPlot
+'Dim myVegPlot As New VegPlot
+Dim myVegPlot As NCPN_framework.VegPlot
+Set myVegPlot = myVegPlot.GetClass
+
 With myVegPlot
     .EventID = 2
     .SiteID = 2
@@ -1103,7 +1109,9 @@ Public Sub DoItAgain()
 '    a.Name = "my new array"
 
     TempVars("ContactID") = 1
-    Dim c As New Location 'Person 'AppComment
+    'Dim c As New Location 'Person 'AppComment
+    Dim c As NCPN_framework.Location
+    Set c = c.GetClass
     
     With c
 ''        .Comment = "test comment from dev_debug"

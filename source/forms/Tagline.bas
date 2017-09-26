@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =29
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =14085
+    Top =3510
+    Right =26490
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x417df2aa6fc3e440
@@ -661,7 +661,7 @@ Option Explicit
 ' =================================
 ' Form:         Tagline
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Tagline form object related properties, events, functions & procedures for UI display
@@ -671,6 +671,7 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
+'               BLC - 9/25/2017 - 1.02 - revise for NCPN_framework.XX classes
 ' =================================
 
 '---------------------
@@ -1026,11 +1027,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim TL As New Tagline
+    'Dim TL As New Tagline
+    Dim TL As NCPN_framework.Tagline
+    Set TL = TL.GetClass
     
     With TL
         'values passed into form

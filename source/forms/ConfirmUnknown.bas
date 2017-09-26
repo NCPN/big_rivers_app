@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =84
-    Left =3855
-    Top =2430
-    Right =28545
-    Bottom =15015
+    Left =14085
+    Top =3510
+    Right =26490
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -974,7 +974,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -983,6 +983,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 9/21/2016  - 1.00 - initial version
 '               BLC - 1/24/2017  - 1.01 - revise to use GetContext()
+'               BLC - 9/25/2017  - 1.02 - revise for NCPN_framework.XX classes
 ' =================================
 
 '---------------------
@@ -1377,11 +1378,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/5/2016 - initial version
+'   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    Dim loc As New Location
+    'Dim loc As New Location
+    Dim loc As NCPN_framework.Location
+    Set loc = loc.GetClass
     
     With loc
         'values passed into form

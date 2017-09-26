@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =4455
-    Top =3165
-    Right =21885
-    Bottom =14160
+    Left =14085
+    Top =3510
+    Right =26490
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x741eede0d9c6e440
@@ -374,15 +374,16 @@ Option Explicit
 ' =================================
 ' Form:         User
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, User, functions & procedures for UI display
 '
-' Source/date:  Bonnie Campbell, June 155, 2016
+' Source/date:  Bonnie Campbell, June 15, 2016
 ' References:   -
 ' Revisions:    BLC - 6/15/2016 - 1.00 - initial version
 '               BLC - 6/30/2016 - 1.01 - added cbxUser GotFocus() & KeyDown() actions
+'               BLC - 9/25/2017 - 1.02 - revise for NCPN_framework.AppUser class
 ' =================================
 
 '---------------------
@@ -696,12 +697,15 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 9/25/2017 - revise for NCPN_framework.AppUser class
 ' ---------------------------------
 Private Sub btnNext_Click()
 On Error GoTo Err_Handler
     
     'log user login
-    Dim u As New AppUser
+    'Dim u As New AppUser
+    Dim u As NCPN_framework.AppUser
+    Set u = u.GetClass
     
     With u
         .Username = TempVars("AppUsername")

@@ -20,8 +20,10 @@ Begin Form
     Width =7680
     DatasheetFontHeight =11
     ItemSuffix =35
-    Right =13245
-    Bottom =10875
+    Left =915
+    Top =4830
+    Right =8295
+    Bottom =9195
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xe1659ac02ce2e440
@@ -765,8 +767,9 @@ On Error GoTo Err_Handler
 
     'set data source
     'Me.RecordSource = "Location"
+    'Me.Recordset = GetRecords("s_location_with_loctypeID_sensitivity") << Error #3251 Operation is not supported for this type of object
     Me.Recordset = GetRecords("s_location_with_loctypeID_sensitivity")
-
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:

@@ -16,10 +16,10 @@ Begin Form
     Width =5820
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =4230
-    Top =3960
-    Right =10065
-    Bottom =4320
+    Left =10530
+    Top =3510
+    Right =19545
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x98f234fbd5a9e440
@@ -133,7 +133,7 @@ Begin Form
                     Width =1380
                     ForeColor =4210752
                     Name ="btnLevel0"
-                    Caption ="BLCA > "
+                    Caption ="Park >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638
@@ -171,7 +171,7 @@ Begin Form
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnLevel1"
-                    Caption ="Gunnison > "
+                    Caption ="River >"
                     OnClick ="[Event Procedure]"
                     OnMouseDown ="[Event Procedure]"
                     GridlineColor =10921638

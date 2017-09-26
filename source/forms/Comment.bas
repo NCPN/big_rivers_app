@@ -16,10 +16,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =5145
-    Top =5070
-    Right =11700
-    Bottom =8565
+    Left =14085
+    Top =3510
+    Right =26490
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -383,7 +383,7 @@ Option Explicit
 ' =================================
 ' Form:         AppComment
 ' Level:        Framework form
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Comment form object related properties, events, functions & procedures for UI display
 '
@@ -392,6 +392,7 @@ Option Explicit
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 8/9/2016  - 1.01 - revised Comment to AppComment (comment reserved word)
 '               BLC - 12/5/2016 - 1.02 - added instruction & max count
+'               BLC - 9/25/2017 - 1.03 - revise for NCPN_framework.XX classes
 ' =================================
 
 '---------------------
@@ -957,11 +958,14 @@ End Sub
 '   BLC - 11/12/2015 - initial version
 '   BLC - 8/9/2016   - revised Comment > AppComment (comment reserved word)
 '   BLC - 12/6/2016 - revise so comment type = context before "- ID#"
+'   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
 ' ---------------------------------
 Private Sub btnAdd_Click()
 On Error GoTo Err_Handler
     
-    Dim oComment As New AppComment
+    'Dim oComment As New AppComment
+    Dim oComment As NCPN_framework.AppComment
+    Set oComment = oComment.GetClass
     
     With oComment
         .CommentType = Left(lblContext.Caption, InStr(lblContext.Caption, " - "))

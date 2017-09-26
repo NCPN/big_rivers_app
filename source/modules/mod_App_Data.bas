@@ -5,7 +5,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.23
+' Version:      1.24
 ' Description:  data functions & procedures specific to this application
 '
 ' Source/date:  Bonnie Campbell, 2/9/2015
@@ -36,6 +36,7 @@ Option Explicit
 '                                         for forms w/o lists/msg & msg icons
 '               BLC - 2/3/2017   - 1.22 - location adjustments for UpsertRecord() & SetRecord()
 '               BLC - 2/7/2017   - 1.23 - added template - s_location_with_loctypeID_sensitivity
+'               BLC - 9/25/2017  - 1.24 - revise for NCPN_framework.XX class
 ' =================================
 
 ' ---------------------------------
@@ -2068,6 +2069,7 @@ End Function
 '   BLC - 1/9/2017 - revised retrieve ID from ContactID to ID, revised i_event to use TempVar("SiteID")
 '   BLC - 2/1/2017 - handle form upserts for forms w/o lists/msg & msg icons
 '   BLC - 2/3/2017 - location adjustments
+'   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
 ' ---------------------------------
 Public Sub UpsertRecord(ByRef frm As Form)
 On Error GoTo Err_Handler
@@ -2101,8 +2103,10 @@ On Error GoTo Err_Handler
     
         Select Case frm.Name
             Case "Contact"
-                Dim p As New Person
-    
+                'Dim p As New Person
+                Dim p As NCPN_framework.Person
+                Set p = p.GetClass
+                
                 With p
                     'values passed into form
                             
@@ -2141,7 +2145,10 @@ On Error GoTo Err_Handler
                 End With
 
             Case "Events"
-                Dim ev As New EventVisit
+                'Dim ev As New EventVisit
+                Dim ev As NCPN_framework.EventVisit
+                Set ev = ev.GetClass
+                
                 strTable = "Event"
                 
                 With ev
@@ -2166,7 +2173,9 @@ On Error GoTo Err_Handler
                 End With
             
             Case "Feature"
-                    Dim f As New Feature
+                    'Dim f As New Feature
+                    Dim f As NCPN_framework.Feature
+                    Set f = f.GetClass
     
                     With f
                         'values passed into form
@@ -2189,7 +2198,9 @@ On Error GoTo Err_Handler
                     End With
 
             Case "Location"
-                    Dim loc As New Location
+                    'Dim loc As New Location
+                    Dim loc As NCPN_framework.Location
+                    Set loc = loc.GetClass
                     
                     With loc
                         'form values
@@ -2233,7 +2244,9 @@ On Error GoTo Err_Handler
                     End With
                                         
             Case "Photo"
-                Dim ph As New Photo
+                'Dim ph As New Photo
+                Dim ph As NCPN_framework.Photo
+                Set ph = ph.GetClass
                 
                 With ph
                     'values passed into form
@@ -2248,7 +2261,9 @@ On Error GoTo Err_Handler
                 End With
                                         
             Case "PhotoOtherDetails"
-                Dim pho As New Photo
+                'Dim pho As New Photo
+                Dim pho As NCPN_framework.Photo
+                Set pho = pho.GetClass
                 
                 With pho
                     Dim FilePath As String
@@ -2295,7 +2310,9 @@ On Error GoTo Err_Handler
                 End With
                                                                                 
             Case "SetObserverRecorder"
-                Dim ra As New RecordAction
+                'Dim ra As New RecordAction
+                Dim ra As NCPN_framework.RecordAction
+                Set ra = ra.GetClass
                 
                 With ra
                     'values passed into form
@@ -2321,7 +2338,9 @@ On Error GoTo Err_Handler
             
             
             Case "Site"
-                Dim s As New Site
+                'Dim s As New Site
+                Dim s As NCPN_framework.Site
+                Set s = s.GetClass
                 
                 With s
                     'values passed into form
@@ -2351,7 +2370,9 @@ On Error GoTo Err_Handler
             Case "SurveyFile"
             
             Case "Template"
-                Dim tpl As New Template
+                'Dim tpl As New Template
+                Dim tpl As NCPN_framework.Template
+                Set tpl = tpl.GetClass
                 
                 With tpl
                     .IsSupported = 1
@@ -2372,7 +2393,9 @@ On Error GoTo Err_Handler
                 Set tpl = Nothing
             
             Case "Task"
-                Dim tk As New Task
+                'Dim tk As New Task
+                Dim tk As NCPN_framework.Task
+                Set tk = tk.GetClass
                 
                 With tk
                     .ID = frm!tbxID.Value '0 if new, edit if > 0
@@ -2421,7 +2444,9 @@ On Error GoTo Err_Handler
                 NoList = True
                 
             Case "Transducer"
-                Dim t As New Transducer
+                'Dim t As New Transducer
+                Dim t As NCPN_framework.Transducer
+                Set t = t.GetClass
         
                 With t
                     'values passed into form
@@ -2451,7 +2476,10 @@ On Error GoTo Err_Handler
                 End With
             
             Case "Transect"
-                Dim vt As New VegTransect
+                'Dim vt As New VegTransect
+                Dim vt As NCPN_framework.VegTransect
+                Set vt = vt.GetClass
+                
                 strTable = "VegTransect"
                 
                 With vt
@@ -2477,7 +2505,9 @@ On Error GoTo Err_Handler
                 End With
             
             Case "UserRole"
-                Dim u As New Person
+                'Dim u As New Person
+                Dim u As NCPN_framework.Person
+                Set u = u.GetClass
                     
                 With u
                     'values passed into form
@@ -2506,7 +2536,9 @@ On Error GoTo Err_Handler
             Case "VegWalk"
                 Select Case frm.FormContext
                     Case "AllRootedSpecies"
-                        Dim ars As New RootedSpecies
+                        'Dim ars As New RootedSpecies
+                        Dim ars As NCPN_framework.RootedSpecies
+                        Set ars = ars.GetClass
                         
                         With ars
                             'values passed into form
@@ -2520,7 +2552,9 @@ On Error GoTo Err_Handler
                         End With
                     
                     Case "UnderstoryRootedSpecies"
-                        Dim ucs As New UnderstoryCoverSpecies
+                        'Dim ucs As New UnderstoryCoverSpecies
+                        Dim ucs As NCPN_framework.UnderstoryCoverSpecies
+                        Set ucs = ucs.GetClass
                         
                         With ucs
                             'values passed into form
@@ -2534,7 +2568,9 @@ On Error GoTo Err_Handler
                         End With
 
                     Case "VegWalk"
-                        Dim vw As New VegWalk
+                        'Dim vw As New VegWalk
+                        Dim vw As NCPN_framework.VegPlot
+                        Set vw = vw.GetClass
                         
                         With vw
                             'values passed into form
@@ -2549,7 +2585,9 @@ On Error GoTo Err_Handler
                         End With
                     
                     Case "WoodyCanopySpecies"
-                        Dim wcs As New WoodyCanopySpecies
+                        'Dim wcs As New WoodyCanopySpecies
+                        Dim wcs As NCPN_framework.WoodyCanopySpecies
+                        Set wcs = wcs.GetClass
                         
                         With wcs
                             'values passed into form
@@ -2704,12 +2742,16 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 8/9/2016 - initial version
+'   BLC - 9/25/2017 - revise for NCPN_framework.RecordAction class
 ' ---------------------------------
 Public Sub SetObserverRecorder(obj As Object, tbl As String)
 On Error GoTo Err_Handler
     
     'handle record actions
-    Dim act As New RecordAction
+    'Dim act As New RecordAction
+    Dim act As NCPN_framework.RecordAction
+    Set act = act.GetClass
+    
     With act
     
     'Recorder
