@@ -383,7 +383,7 @@ Option Explicit
 ' =================================
 ' Form:         AppComment
 ' Level:        Framework form
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  Comment form object related properties, events, functions & procedures for UI display
 '
@@ -393,6 +393,7 @@ Option Explicit
 '               BLC - 8/9/2016  - 1.01 - revised Comment to AppComment (comment reserved word)
 '               BLC - 12/5/2016 - 1.02 - added instruction & max count
 '               BLC - 9/25/2017 - 1.03 - revise for NCPN_framework.XX classes
+'               BLC - 9/27/2017 - 1.04 - update to use Factory.NewClassXX() vs GetClass()
 ' =================================
 
 '---------------------
@@ -959,13 +960,14 @@ End Sub
 '   BLC - 8/9/2016   - revised Comment > AppComment (comment reserved word)
 '   BLC - 12/6/2016 - revise so comment type = context before "- ID#"
 '   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
+'   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
 ' ---------------------------------
 Private Sub btnAdd_Click()
 On Error GoTo Err_Handler
     
     'Dim oComment As New AppComment
     Dim oComment As NCPN_framework.AppComment
-    Set oComment = oComment.GetClass
+    Set oComment = Factory.NewAppComment
     
     With oComment
         .CommentType = Left(lblContext.Caption, InStr(lblContext.Caption, " - "))

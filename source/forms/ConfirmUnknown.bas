@@ -974,7 +974,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -984,6 +984,7 @@ Option Explicit
 ' Revisions:    BLC - 9/21/2016  - 1.00 - initial version
 '               BLC - 1/24/2017  - 1.01 - revise to use GetContext()
 '               BLC - 9/25/2017  - 1.02 - revise for NCPN_framework.XX classes
+'               BLC - 9/27/2017  - 1.03 - update to use Factory.NewClassXX() vs GetClass()
 ' =================================
 
 '---------------------
@@ -1379,13 +1380,14 @@ End Sub
 ' Revisions:
 '   BLC - 7/5/2016 - initial version
 '   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
+'   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     'Dim loc As New Location
     Dim loc As NCPN_framework.Location
-    Set loc = loc.GetClass
+    Set loc = Factory.NewLocation
     
     With loc
         'values passed into form

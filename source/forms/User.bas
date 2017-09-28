@@ -374,7 +374,7 @@ Option Explicit
 ' =================================
 ' Form:         User
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, User, functions & procedures for UI display
@@ -384,6 +384,7 @@ Option Explicit
 ' Revisions:    BLC - 6/15/2016 - 1.00 - initial version
 '               BLC - 6/30/2016 - 1.01 - added cbxUser GotFocus() & KeyDown() actions
 '               BLC - 9/25/2017 - 1.02 - revise for NCPN_framework.AppUser class
+'               BLC - 9/27/2017 - 1.03 - update to use Factory.NewClassXX() vs GetClass()
 ' =================================
 
 '---------------------
@@ -698,6 +699,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 9/25/2017 - revise for NCPN_framework.AppUser class
+'   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
 ' ---------------------------------
 Private Sub btnNext_Click()
 On Error GoTo Err_Handler
@@ -705,7 +707,7 @@ On Error GoTo Err_Handler
     'log user login
     'Dim u As New AppUser
     Dim u As NCPN_framework.AppUser
-    Set u = u.GetClass
+    Set u = Factory.NewAppUser
     
     With u
         .Username = TempVars("AppUsername")

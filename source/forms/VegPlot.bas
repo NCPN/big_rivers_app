@@ -2110,7 +2110,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.09
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -2133,6 +2133,7 @@ Option Explicit
 '                                        added % litter, % woody debris (all parks),
 '                                        Total WCC %, standing dead
 '               BLC - 9/25/2017 - 1.08 - revise for NCPN_framework.XX classes
+'               BLC - 9/27/2017 - 1.09 - update to use Factory.NewClassXX() vs GetClass()
 ' =================================
 
 '---------------------
@@ -3113,13 +3114,14 @@ End Sub
 '   BLC - 1/12/2017 - code cleanup, enabled buttons after tbxID > 0
 '                     (plot saved & ID returned)
 '   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
+'   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     'Dim vp As New VegPlot
     Dim vp As NCPN_framework.VegPlot
-    Set vp = vp.GetClass
+    Set vp = Factory.NewVegPlot
     
     With vp
         'values passed into form

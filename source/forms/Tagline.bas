@@ -661,7 +661,7 @@ Option Explicit
 ' =================================
 ' Form:         Tagline
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Tagline form object related properties, events, functions & procedures for UI display
@@ -672,6 +672,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 9/25/2017 - 1.02 - revise for NCPN_framework.XX classes
+'               BLC - 9/27/2017 - 1.03 - update to use Factory.NewClassXX() vs GetClass()
 ' =================================
 
 '---------------------
@@ -1028,13 +1029,14 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
+'   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
     'Dim TL As New Tagline
     Dim TL As NCPN_framework.Tagline
-    Set TL = TL.GetClass
+    Set TL = Factory.NewTagline
     
     With TL
         'values passed into form
