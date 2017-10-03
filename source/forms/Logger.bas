@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =4155
-    Top =3315
-    Right =13170
-    Bottom =14700
+    Left =4590
+    Top =2520
+    Right =16995
+    Bottom =13905
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -780,14 +780,15 @@ Option Explicit
 ' =================================
 ' Form:         Logger
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  Logger form object related properties, Logger, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, September, 2017
 ' References:   -
-' Revisions:    BLC - 9/5/2017 - 1.00 - initial version, based on transducer
+' Revisions:    BLC - 9/5/2017  - 1.00 - initial version, based on transducer
+'               BLC - 9/29/2017 - 1.01 - populate cbxSite
 ' =================================
 
 '---------------------
@@ -891,7 +892,8 @@ End Property
 ' Source/date:  Bonnie Campbell, September 5, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 9/5/2017 - initial version
+'   BLC - 9/5/2017  - initial version
+'   BLC - 9/29/2017 - updated to populate cbxSite
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -914,6 +916,11 @@ On Error GoTo Err_Handler
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
         
+    'set data sources
+    Set cbxSite.Recordset = GetRecords("s_site_by_park_river")
+    cbxSite.ColumnCount = 2
+    cbxSite.BoundColumn = 1
+    cbxSite.ColumnWidths = "0; 1"
     cbxLoggerType.RowSourceType = "Value List"
     cbxLoggerType.RowSource = "Air;Water" 'air or water transducer
     

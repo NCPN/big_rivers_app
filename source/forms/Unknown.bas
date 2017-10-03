@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =14085
-    Top =3510
-    Right =26490
-    Bottom =14895
+    Left =4470
+    Top =3150
+    Right =13485
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -176,7 +176,6 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =1395
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -258,8 +257,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =8760
-                    Top =900
+                    Left =9240
+                    Top =960
                     Width =720
                     ForeColor =4210752
                     Name ="btnComment"
@@ -267,10 +266,10 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =8760
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =9480
-                    LayoutCachedHeight =1260
+                    LayoutCachedLeft =9240
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =9960
+                    LayoutCachedHeight =1320
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -304,8 +303,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =7860
-                    Top =900
+                    Left =8340
+                    Top =960
                     Width =720
                     TabIndex =1
                     ForeColor =4210752
@@ -315,10 +314,10 @@ Begin Form
                     ControlTipText ="Identify/Confirm Unknown"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7860
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =8580
-                    LayoutCachedHeight =1260
+                    LayoutCachedLeft =8340
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =9060
+                    LayoutCachedHeight =1320
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -330,6 +329,36 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                     Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6360
+                    Top =960
+                    Width =1800
+                    TabIndex =2
+                    ForeColor =16711680
+                    Name ="btnSpeciesSearch"
+                    Caption ="í ½í´Ž  Species"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Lookup species name"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6360
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =8160
+                    LayoutCachedHeight =1320
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
             End
         End
@@ -1662,7 +1691,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.07
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -1678,6 +1707,7 @@ Option Explicit
 '               BLC - 1/24/2017 - 1.04 - adjust to use GetContext()
 '               BLC - 9/25/2017 - 1.05 - revise for NCPN_framework.Location class
 '               BLC - 9/27/2017 - 1.06 - update to use Factory.NewClassXX() vs GetClass()
+'               BLC - 10/2/2017 - 1.07 - add btnSpeciesSearch_Click()
 ' =================================
 
 '---------------------
@@ -2132,6 +2162,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnComment_Click[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnSpeciesSearch_Click
+' Description:  Woody Canopy Cover button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' SoSpeciesSearche/date:  Bonnie Campbell, August 2, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 8/2/2016 - initial version
+' ---------------------------------
+Private Sub btnSpeciesSearch_Click()
+On Error GoTo Err_Handler
+    
+    'open form
+    DoCmd.OpenForm "SpeciesSearch", acNormal, , , , , Me.Name
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSpeciesSearch_Click[Unknown form])"
     End Select
     Resume Exit_Handler
 End Sub

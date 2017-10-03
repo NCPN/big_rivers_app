@@ -20,15 +20,12 @@ Begin Form
     Width =7680
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =915
-    Top =4830
-    Right =8295
-    Bottom =9195
+    Right =9015
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xe1659ac02ce2e440
+        0x0e1aac03d0ffe440
     End
-    RecordSource ="Location"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -44,6 +41,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -440,6 +439,13 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxName"
                     ControlSource ="LocationName"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780049007300530065006e007300690074006900760065005d00 ,
+                        0x3d00310000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1320
@@ -449,6 +455,11 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00120000005b00 ,
+                        0x74006200780049007300530065006e007300690074006900760065005d003d00 ,
+                        0x3100000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -466,12 +477,24 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxID"
                     ControlSource ="ID"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780049007300530065006e007300690074006900760065005d00 ,
+                        0x3d00310000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =900
                     LayoutCachedTop =30
                     LayoutCachedWidth =1260
                     LayoutCachedHeight =345
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00120000005b00 ,
+                        0x74006200780049007300530065006e007300690074006900760065005d003d00 ,
+                        0x3100000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -489,6 +512,13 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxDistance"
                     ControlSource ="HeadtoOrientDistance_m"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780049007300530065006e007300690074006900760065005d00 ,
+                        0x3d00310000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2880
@@ -498,6 +528,11 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00120000005b00 ,
+                        0x74006200780049007300530065006e007300690074006900760065005d003d00 ,
+                        0x3100000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -515,6 +550,13 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxBearing"
                     ControlSource ="=CStr([HeadtoOrientBearing])"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780049007300530065006e007300690074006900760065005d00 ,
+                        0x3d00310000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4200
@@ -524,6 +566,11 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00120000005b00 ,
+                        0x74006200780049007300530065006e007300690074006900760065005d003d00 ,
+                        0x3100000000000000000000000000000000000000000000
+                    End
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -570,6 +617,12 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxIsSensitive"
                     ControlSource ="IsSensitive"
+                    ConditionalFormat = Begin
+                        0x0100000066000000010000000000000002000000000000000200000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x310000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4200
@@ -579,6 +632,10 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000000000000200000001000000ff000000ffffff00010000003100 ,
+                        0x000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -596,6 +653,13 @@ Begin Form
                     ForeColor =4138256
                     Name ="tbxLocTypeID"
                     ControlSource ="LocTypeID"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780049007300530065006e007300690074006900760065005d00 ,
+                        0x3d00310000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2940
@@ -605,6 +669,11 @@ Begin Form
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00120000005b00 ,
+                        0x74006200780049007300530065006e007300690074006900760065005d003d00 ,
+                        0x3100000000000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -628,7 +697,7 @@ Option Explicit
 ' =================================
 ' Form:         LocationList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -637,6 +706,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 2/3/2017  - 1.01 - updated btnSensitive()
+'               BLC - 9/28/2017 - 1.02 - set recordset on open, retrieve tbxID,
+'                                        update forecolor based on tbxIsSensitive value
 ' =================================
 
 '---------------------
@@ -741,6 +812,8 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 9/28/2017 - clear form RecordSource property (error #3251) &
+'                     change .Recordset to Set Me.Recordset (error #91)
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -768,7 +841,7 @@ On Error GoTo Err_Handler
     'set data source
     'Me.RecordSource = "Location"
     'Me.Recordset = GetRecords("s_location_with_loctypeID_sensitivity") << Error #3251 Operation is not supported for this type of object
-    Me.Recordset = GetRecords("s_location_with_loctypeID_sensitivity")
+    Set Me.Recordset = GetRecords("s_location_with_loctypeID_sensitivity")
     
 Exit_Handler:
     Exit Sub
@@ -826,6 +899,7 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
+
        
 Exit_Handler:
     Exit Sub
@@ -851,13 +925,17 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 2/3/2017  - updated to call ToggleSensitive()
+'   BLC - 9/28/2017 - revise ID to tbxID
 ' ---------------------------------
 Private Sub btnSensitive_Click()
 On Error GoTo Err_Handler
     
     'toggle sensitive location
-    ToggleSensitive "Location", ID, IIf(tbxIsSensitive = 1, 0, 1)
-
+    ToggleSensitive "Location", tbxID, IIf(tbxIsSensitive = 1, 0, 1)
+    
+    'update tbxIsSensitive
+'    Me.Requery
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -881,12 +959,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 9/28/2017 - revised to tbxID vs ID
 ' ---------------------------------
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent, tbxID
 
 Exit_Handler:
     Exit Sub

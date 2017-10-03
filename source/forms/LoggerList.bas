@@ -22,8 +22,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =37
-    Right =9015
-    Bottom =11385
+    Left =450
+    Top =3405
+    Right =7830
+    Bottom =7515
     DatasheetGridlinesColor =14806254
     Filter ="[Site_ID]"
     OrderBy ="[SamplingOrder]"
@@ -548,7 +550,7 @@ Begin Form
                     TabIndex =7
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxSampleDate"
+                    Name ="tbxSampleOrder"
                     ControlSource ="SamplingOrder"
                     GridlineColor =10921638
 

@@ -20,13 +20,13 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4755
-    Top =3360
-    Right =21315
-    Bottom =14325
+    Left =4470
+    Top =3150
+    Right =16875
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x45dde061d6cde440
+        0x4c511ada5200e540
     End
     Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
@@ -164,7 +164,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Events (Sampling Visits)"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -182,7 +181,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Choose the site & location, then enter the sampling start date."
+                    Caption ="Choose the site && location, then enter the sampling start date."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -252,7 +251,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="context"
+                    Caption ="BLCA  >  Gunnison  >  RR  >  A"
                     GridlineColor =10921638
                     LayoutCachedLeft =3840
                     LayoutCachedTop =60
@@ -314,6 +313,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -430,7 +430,7 @@ Begin Form
                     FontSize =9
                     TabIndex =3
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -622,6 +622,7 @@ Begin Form
                     End
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     LimitToList = NotDefault
                     OverlapFlags =247
                     TextAlign =2
@@ -704,7 +705,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -893,7 +893,7 @@ On Error GoTo Err_Handler
     Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
     
     'initialize values
-    ClearForm Me
+    'ClearForm Me
   
 Exit_Handler:
     Exit Sub

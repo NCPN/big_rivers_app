@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =84
-    Left =14085
-    Top =3510
-    Right =26490
-    Bottom =14895
+    Left =4470
+    Top =3150
+    Right =13485
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -259,7 +259,7 @@ Begin Form
                 Begin CommandButton
                     Visible = NotDefault
                     OverlapFlags =85
-                    Left =6660
+                    Left =6960
                     Top =900
                     Width =720
                     ForeColor =4210752
@@ -267,9 +267,9 @@ Begin Form
                     Caption ="comment"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =6960
                     LayoutCachedTop =900
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =7680
                     LayoutCachedHeight =1260
                     BackColor =14136213
                     BorderColor =14136213
@@ -301,6 +301,36 @@ Begin Form
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5040
+                    Top =900
+                    Width =1800
+                    TabIndex =1
+                    ForeColor =16711680
+                    Name ="btnSpeciesSearch"
+                    Caption ="í ½í´Ž  Species"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Lookup species name"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5040
+                    LayoutCachedTop =900
+                    LayoutCachedWidth =6840
+                    LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
             End
         End
@@ -715,6 +745,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxIdentifyDate"
+                    Format ="Short Date"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Date species was identified"
                     ConditionalFormat = Begin
@@ -813,6 +844,7 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
+                    ColumnCount =2
                     Left =2040
                     Top =60
                     Width =3774
@@ -831,6 +863,7 @@ Begin Form
                     End
                     Name ="cbxConfirmedSpecies"
                     RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Confirmed species"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -972,12 +1005,12 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         Unknown
+' Form:         ConfirmUnknown
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
-' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
+' Description:  Unknown confirmation form object related properties, Unknown, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, September 21, 2016
 ' References:   -
@@ -985,6 +1018,7 @@ Option Explicit
 '               BLC - 1/24/2017  - 1.01 - revise to use GetContext()
 '               BLC - 9/25/2017  - 1.02 - revise for NCPN_framework.XX classes
 '               BLC - 9/27/2017  - 1.03 - update to use Factory.NewClassXX() vs GetClass()
+'               BLC - 10/2/2017  - 1.04 - added btnSpeciesSearch_Click()
 ' =================================
 
 '---------------------
@@ -1404,9 +1438,6 @@ On Error GoTo Err_Handler
         'form values
 '        .UnknownName = tbxName.Value
 '        .UnknownType = "" 'cbxUnknownType.SelText
-'
-'        .HeadtoOrientDistance = tbxDistance.Value
-'        .HeadtoOrientBearing = tbxBearing.Value
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
@@ -1464,6 +1495,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnComment_Click[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnSpeciesSearch_Click
+' Description:  Woody Canopy Cover button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' SoSpeciesSearche/date:  Bonnie Campbell, August 2, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 8/2/2016 - initial version
+' ---------------------------------
+Private Sub btnSpeciesSearch_Click()
+On Error GoTo Err_Handler
+    
+    'open form
+    DoCmd.OpenForm "SpeciesSearch", acNormal, , , , , Me.Name
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSpeciesSearch_Click[ConfirmUnknown form])"
     End Select
     Resume Exit_Handler
 End Sub

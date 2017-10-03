@@ -19,10 +19,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =29
-    Left =9690
-    Top =7410
-    Right =12270
-    Bottom =10845
+    Left =5580
+    Top =19620
+    Right =8160
+    Bottom =23055
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -1286,7 +1286,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' Sub:          lblLink2_Click

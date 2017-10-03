@@ -1,4 +1,6 @@
-﻿dbMemo "SQL" ="SELECT ParkCode\015\012FROM Park\015\012WHERE IsActiveForProtocol = 1;\015\012"
+﻿dbMemo "SQL" ="PARAMETERS uname Text ( 50 ), activity Text ( 50 ), accesslvl Text ( 25 );\015\012"
+    "INSERT INTO tsys_Logins ( UserName, ActionTaken, ReleaseNumber, AccessLevel )\015"
+    "\012VALUES ([uname], [activity], [version], [accesslvl]);\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

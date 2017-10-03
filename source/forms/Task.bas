@@ -17,10 +17,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =4335
-    Top =2880
-    Right =17415
-    Bottom =13185
+    Left =5355
+    Top =1725
+    Right =13215
+    Bottom =10785
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xd18018cccfe3e440
@@ -966,7 +966,7 @@ Option Explicit
 ' =================================
 ' Form:         Task
 ' Level:        Framework form
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Task form object related properties, events, functions & procedures for UI display
 '
@@ -975,6 +975,7 @@ Option Explicit
 ' Revisions:    BLC - 11/3/2015 - 1.00 - initial version
 '               BLC - 10/25/2016 - 1.01 - revised to clear header title, use GetContext(), code cleanup
 '               BLC - 2/13/2017 - 1.02 - revised to use callingform, code cleanup
+'               BLC - 9/29/2017 - 1.03 - revised to handle NULL OpenArgs
 ' =================================
 
 '---------------------
@@ -1232,6 +1233,7 @@ End Property
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 10/25/2016 - revised to clear header title, use GetContext(), CallingForm property
+'   BLC - 9/29/2017 - revised to handle NULL OpenArgs
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1241,15 +1243,18 @@ On Error GoTo Err_Handler
     Me.ContextType = ""
     Me.ContextID = 0
 
-    If Len(Nz(Me.OpenArgs, "")) > 0 And CountInString(Me.OpenArgs, "|") = 2 Then
-        Dim aryContext() As String
-        
-        aryContext() = Split(Me.OpenArgs, "|")
-        Me.CallingForm = aryContext(0)
-        
-        'set task context
-        Me.ContextType = aryContext(1)
-        Me.ContextID = aryContext(2)
+    'handle NULL OpenArgs
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then
+        If CountInString(Me.OpenArgs, "|") = 2 Then
+            Dim aryContext() As String
+            
+            aryContext() = Split(Me.OpenArgs, "|")
+            Me.CallingForm = aryContext(0)
+            
+            'set task context
+            Me.ContextType = aryContext(1)
+            Me.ContextID = aryContext(2)
+        End If
     End If
     
     'minimize calling form
