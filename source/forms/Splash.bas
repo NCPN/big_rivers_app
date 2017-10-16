@@ -21,10 +21,10 @@ Begin Form
     Width =10080
     DatasheetFontHeight =11
     ItemSuffix =70
-    Left =3975
-    Top =3510
-    Right =22110
-    Bottom =13815
+    Left =4470
+    Top =3150
+    Right =13485
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x58bf7152d8c6e440
@@ -445,7 +445,6 @@ Begin Form
                     TabIndex =2
                     ForeColor =16711680
                     Name ="btnNCPNBigRivers"
-                    Caption ="Command69"
                     ControlTipText ="Go to NCPN Big Rivers Monitoring website"
                     HyperlinkAddress ="http://science.nature.nps.gov/im/units/ncpn/monitor/rivers.cfm"
                     GridlineColor =10921638

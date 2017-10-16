@@ -15,10 +15,10 @@ Begin Form
     Width =5160
     DatasheetFontHeight =11
     ItemSuffix =17
-    Left =2520
-    Top =2400
-    Right =19152
-    Bottom =11808
+    Left =4125
+    Top =3150
+    Right =17280
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xa3116d04ebbee440
@@ -310,7 +310,7 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' Form:         VegWalk
+' Form:         SpeciesList
 ' Level:        Framework form
 ' Version:      1.00
 '
