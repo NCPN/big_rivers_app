@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =6360
-    Top =2940
-    Right =14220
-    Bottom =13545
+    Left =3345
+    Top =2325
+    Right =11205
+    Bottom =12930
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1180,12 +1180,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/17/2017 - fixed to use site vs event table
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "site|" & tbxID
     
 Exit_Handler:
     Exit Sub

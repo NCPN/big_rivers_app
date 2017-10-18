@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =3855
-    Top =2430
-    Right =24030
-    Bottom =15015
+    Left =5670
+    Top =1800
+    Right =13530
+    Bottom =12720
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -284,6 +284,7 @@ Begin Form
                     Top =900
                     Width =3414
                     Height =315
+                    ColumnOrder =0
                     TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
@@ -793,7 +794,7 @@ Option Explicit
 ' =================================
 ' Form:         Feature
 ' Level:        Application form
-' Version:      1.04
+' Version:      1.05
 ' Basis:        Dropdown form
 '
 ' Description:  Feature form object related properties, Feature, functions & procedures for UI display
@@ -808,6 +809,7 @@ Option Explicit
 '               BLC - 1/10/2017 - 1.03 - revised to use GetRecords() vs. GetTemplate()
 '                                        to populate location, code cleanup
 '               BLC - 1/11/2017 - 1.04 - added location button/combobox
+'               BLC - 10/17/2017 - 1.05 - fixed comment arguments from Event/Transect to Feature
 ' =================================
 
 '---------------------
@@ -1146,12 +1148,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/11/2017 - initial version
+'   BLC - 10/17/2017 - fixed from Transect to Feature
 ' ---------------------------------
 Private Sub btnAddLocation_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Location", acNormal, , , , , "Transect|" & tbxID
+    DoCmd.OpenForm "Location", acNormal, , , , , "Feature|" & tbxID
     
 Exit_Handler:
     Exit Sub
@@ -1176,12 +1179,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
+'   BLC - 10/17/2017 - fix comment to feature vs event
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "feature|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

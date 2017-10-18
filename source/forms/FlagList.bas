@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =34
-    Right =10530
-    Bottom =11790
+    Right =13155
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x5dbc32126cd1e440
@@ -701,7 +701,7 @@ Option Explicit
 ' =================================
 ' Form:         FlagList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -710,6 +710,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - revised to use ToggleIsActive (mod_App_Data)
+'               BLC - 10/16/2017 - 1.02 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -980,6 +981,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -990,7 +992,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Flag", ID
+    If result = vbYes Then DeleteRecord "Flag", tbxID
     
     'clear the deleted record
     Me.Requery

@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =32
-    Right =13080
-    Bottom =10305
+    Right =13155
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xbd77e8ebcfe3e440
@@ -810,7 +810,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", tbxID 'ID
+    If result = vbYes Then DeleteRecord "Task", tbxID
     
     'clear the deleted record
     Me.Requery

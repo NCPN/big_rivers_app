@@ -20,8 +20,8 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =37
-    Right =14235
-    Bottom =11850
+    Right =13155
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x21398585f5d2e440
@@ -663,7 +663,7 @@ Option Explicit
 ' =================================
 ' Form:         ModWentworthList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -672,6 +672,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 10/20/2016 - 1.01 - removed ButtonCaption, SelectedID, SelectedValue properties
+'               BLC - 10/16/2017 - 1.02 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -925,6 +926,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -935,7 +937,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Location", ID
+    If result = vbYes Then DeleteRecord "ModWentworth", tbxID
     
     'clear the deleted record
     Me.Requery

@@ -16,10 +16,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =14085
-    Top =3510
-    Right =26490
-    Bottom =14895
+    Left =6315
+    Top =4200
+    Right =12870
+    Bottom =7695
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -383,7 +383,7 @@ Option Explicit
 ' =================================
 ' Form:         AppComment
 ' Level:        Framework form
-' Version:      1.04
+' Version:      1.05
 '
 ' Description:  Comment form object related properties, events, functions & procedures for UI display
 '
@@ -394,6 +394,7 @@ Option Explicit
 '               BLC - 12/5/2016 - 1.02 - added instruction & max count
 '               BLC - 9/25/2017 - 1.03 - revise for NCPN_framework.XX classes
 '               BLC - 9/27/2017 - 1.04 - update to use Factory.NewClassXX() vs GetClass()
+'               BLC - 10/16/2017 - 1.05 - remove Initialize() & Terminate()
 ' =================================
 
 '---------------------
@@ -961,6 +962,7 @@ End Sub
 '   BLC - 12/6/2016 - revise so comment type = context before "- ID#"
 '   BLC - 9/25/2017 - revise for NCPN_framework.XX classes
 '   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
+'   BLC - 10/17/2017 - added title to comment
 ' ---------------------------------
 Private Sub btnAdd_Click()
 On Error GoTo Err_Handler
@@ -982,8 +984,10 @@ On Error GoTo Err_Handler
 
             'show added record message & clear
             DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
-                        "Comment added (# " & .ID & " )" & _
-                        "|Type" & PARAM_SEPARATOR & "info"
+                        "msg" & PARAM_SEPARATOR & "Comment added (# " & .ID & " )" & _
+                        "|Type" & PARAM_SEPARATOR & "info" & _
+                        "|Title" & PARAM_SEPARATOR & "Comment Added!"
+
             
             'close comment form
             DoCmd.Close acForm, "Comment"
@@ -1037,65 +1041,6 @@ End Sub
 '---------------------
 ' Methods
 '---------------------
-
-' ---------------------------------
-' Sub:          Class_Initialize
-' Description:  Class initialization (starting) event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 11/3/2015 - initial version
-' ---------------------------------
-Private Sub Class_Initialize()
-On Error GoTo Err_Handler
-
-    MsgBox "Initializing...", vbOKOnly
-
-Exit_Handler:
-    Exit Sub
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Initialize[Comment form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Class_Terminate
-' Description:  Class termination (closing) event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 28, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 11/3/2015 - initial version
-' ---------------------------------
-Private Sub Class_Terminate()
-On Error GoTo Err_Handler
-    
-    MsgBox "Terminating...", vbOKOnly
-    
-Exit_Handler:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Comment form])"
-    End Select
-    Resume Exit_Handler
-End Sub
 
 ' ---------------------------------
 ' Sub:          SetHeaderColor

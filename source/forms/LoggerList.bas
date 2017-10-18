@@ -22,10 +22,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =450
-    Top =3405
-    Right =7830
-    Bottom =7515
+    Right =13155
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     Filter ="[Site_ID]"
     OrderBy ="[SamplingOrder]"
@@ -622,7 +620,7 @@ Option Explicit
 ' =================================
 ' Form:         LoggerList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -631,6 +629,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 9/5/2017 - 1.00 - initial version, based on transducer
 '               BLC - 9/6/2017 - 1.01 - added tbxDevMode
+'               BLC - 10/16/2017 - 1.02 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -877,6 +876,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -887,7 +887,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", ID
+    If result = vbYes Then DeleteRecord "Logger", tbxID
     
     'clear the deleted record
     Me.Requery

@@ -19,10 +19,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =42
-    Left =8520
-    Top =5115
-    Right =16080
-    Bottom =14040
+    Left =3825
+    Top =3105
+    Right =16980
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     OrderBy ="EffectiveDate DESC"
     RecSrcDt = Begin
@@ -791,14 +791,15 @@ Option Explicit
 ' =================================
 ' Form:         SOPVersion
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, January 19, 2017
 ' References:   -
-' Revisions:    BLC - 1/19/2017 - 1.00 - initial version (adapted from SQL Templates)
+' Revisions:    BLC - 1/19/2017  - 1.00 - initial version (adapted from SQL Templates)
+'               BLC - 10/16/2017 - 1.01 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -1193,6 +1194,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -1203,7 +1205,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", ID
+    If result = vbYes Then DeleteRecord "SOPVersion", tbxID
     
     'clear the deleted record
     Me.Requery

@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =38
-    Right =9240
-    Bottom =10995
+    Right =13155
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7ce3e0e10ec7e440
@@ -502,7 +502,7 @@ Option Explicit
 ' =================================
 ' Form:         SetObserverRecorderList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -510,6 +510,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, July 1, 2016
 ' References:   -
 ' Revisions:    BLC - 7/1/2016 - 1.00 - initial version
+'               BLC - 10/16/2017 - 1.01 - revised to RecordAction table on delete
 ' =================================
 
 '---------------------
@@ -754,6 +755,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to RecordAction table on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -764,7 +766,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "tsys_Datasheet_Defaults", tbxID
+    If result = vbYes Then DeleteRecord "RecordAction", tbxID
     
     'clear the deleted record
     Me.Requery

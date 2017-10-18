@@ -20,16 +20,19 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4470
-    Top =3150
-    Right =16875
-    Bottom =14535
+    Left =4350
+    Top =3225
+    Right =17505
+    Bottom =14610
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x4c511ada5200e540
+        0xcf74eb5c2d02e540
     End
+    RecordSource ="SELECT * FROM Event WHERE ID = 41;"
     Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
+    BeforeUpdate ="[Event Procedure]"
+    AfterUpdate ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
@@ -181,7 +184,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Choose the site && location, then enter the sampling start date."
+                    Caption ="Choose the site location, then enter the sampling start date."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -251,7 +254,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="BLCA  >  Gunnison  >  RR  >  A"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3840
                     LayoutCachedTop =60
@@ -305,7 +308,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5340
+            Height =5595
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -313,7 +316,6 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -380,7 +382,8 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
-                    OverlapFlags =93
+                    DecimalPlaces =0
+                    OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
                     Left =4320
@@ -393,14 +396,15 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxStartDate"
                     ControlSource ="StartDate"
+                    Format ="Short Date"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter the date of this sampling visit started"
                     ConditionalFormat = Begin
-                        0x010000009e000000020000000100000000000000000000001800000001000000 ,
-                        0x00000000fff2000000000000030000001a0000001d0000000100000000000000 ,
+                        0x010000009e000000020000000100000000000000000000001a00000001000000 ,
+                        0x00000000fff2000000000000030000001b0000001e0000000100000000000000 ,
                         0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078005300740061007200740044006100740065005d002e005600 ,
-                        0x61006c00750065003d002200220000000000000022002200000000000000
+                        0x5b007400620078005300740061007200740044006100740065005d002e005b00 ,
+                        0x560061006c00750065005d003d0022002200000000002200220000000000
                     End
                     GridlineColor =10921638
 
@@ -410,11 +414,11 @@ Begin Form
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
-                        0x7400620078005300740061007200740044006100740065005d002e0056006100 ,
-                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
-                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
-                        0x000000000000000000000000000000000000
+                        0x01000200000001000000000000000100000000000000fff20000190000005b00 ,
+                        0x7400620078005300740061007200740044006100740065005d002e005b005600 ,
+                        0x61006c00750065005d003d002200220000000000000000000000000000000000 ,
+                        0x000000000000000000030000000100000000000000ffffff0002000000220022 ,
+                        0x00000000000000000000000000000000000000000000
                     End
                 End
                 Begin TextBox
@@ -430,7 +434,7 @@ Begin Form
                     FontSize =9
                     TabIndex =3
                     BorderColor =8355711
-                    ForeColor =255
+                    ForeColor =690698
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -512,9 +516,9 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
-                    OverlapFlags =247
+                    OverlapFlags =215
                     Left =105
-                    Top =840
+                    Top =1095
                     Width =7650
                     Height =4380
                     TabIndex =4
@@ -524,25 +528,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =840
+                    LayoutCachedTop =1095
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =5220
+                    LayoutCachedHeight =5475
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =720
+                    Top =975
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =720
+                    LayoutCachedTop =975
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5340
+                    LayoutCachedHeight =5595
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -597,6 +601,7 @@ Begin Form
                         0x61006c00750065003d0022002200000000002200220000000000
                     End
                     Name ="cbxSite"
+                    ControlSource ="Site_ID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;0;0;0;0;1440"
                     AfterUpdate ="[Event Procedure]"
@@ -626,6 +631,7 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =247
                     TextAlign =2
+                    DecimalPlaces =0
                     IMESentenceMode =3
                     ColumnCount =4
                     Left =1080
@@ -638,11 +644,10 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     ConditionalFormat = Begin
-                        0x010000009a000000020000000100000000000000000000001800000001000000 ,
-                        0x00000000fff200000000000003000000190000001c0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078005300740061007200740044006100740065005d002e005600 ,
-                        0x61006c00750065003d0022002200000000002200220000000000
+                        0x0100000070000000020000000000000003000000000000000300000001000000 ,
+                        0x00000000ffffff00000000000200000004000000070000000100000000000000 ,
+                        0xfff2000000000000000000000000000000000000000000000000000000000000 ,
+                        0x22002200000000002200220000000000
                     End
                     Name ="cbxLocation"
                     RowSourceType ="Table/Query"
@@ -661,18 +666,17 @@ Begin Form
                     ForeTint =75.0
                     ForeShade =100.0
                     ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff20000170000005b00 ,
-                        0x7400620078005300740061007200740044006100740065005d002e0056006100 ,
-                        0x6c00750065003d00220022000000000000000000000000000000000000000000 ,
-                        0x0000000000030000000100000000000000ffffff000200000022002200000000 ,
-                        0x000000000000000000000000000000000000
+                        0x01000200000000000000030000000100000000000000ffffff00020000002200 ,
+                        0x2200000000000000000000000000000000000000000000000000000200000001 ,
+                        0x00000000000000fff20000020000002200220000000000000000000000000000 ,
+                        0x0000000000000000
                     End
                 End
                 Begin Label
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =525
+                    Top =780
                     Width =7860
                     Height =315
                     FontSize =9
@@ -681,38 +685,57 @@ Begin Form
                     RightMargin =360
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =6750105
+                    ForeColor =65535
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =525
+                    LayoutCachedTop =780
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =840
+                    LayoutCachedHeight =1095
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =255
+                    OverlapFlags =223
                     TextAlign =2
                     Left =4320
-                    Top =345
+                    Top =600
                     Width =825
                     Height =600
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =6750105
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
-                    LayoutCachedTop =345
+                    LayoutCachedTop =600
                     LayoutCachedWidth =5145
-                    LayoutCachedHeight =945
+                    LayoutCachedHeight =1200
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =4425
+                    Top =390
+                    Width =840
+                    Height =180
+                    FontSize =8
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblHintDate"
+                    Caption ="M\\DD\\YYYY"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4425
+                    LayoutCachedTop =390
+                    LayoutCachedWidth =5265
+                    LayoutCachedHeight =570
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -738,7 +761,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.10
 ' Basis:        Dropdown form
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -757,6 +780,9 @@ Option Explicit
 '               BLC - 1/9/2017   - 1.07 - revised to update VegPlot calling form event list,
 '                                         hid form title
 '               BLC - 1/13/2017 - 1.08 - revised to use && vs. StringFromCodepoint(uAmpersand)
+'               BLC - 10/16/2017 - 1.09 - added date hint & uncommented ClearForm(),
+'                                         reset combobox data sources on btnUndo_Click()
+'               BLC - 10/17/2017 - 1.10 - added form BeforeUpdate() & AfterUpdate()
 ' =================================
 
 '---------------------
@@ -845,6 +871,7 @@ End Property
 '   BLC - 7/26/2016 - added GetRecords() for cbxSite, cbxLocation recordsets
 '   BLC - 8/2/2016 - use Me.CallingForm
 '   BLC - 1/13/2017 - revised to use && vs. StringFromCodepoint(uAmpersand) for directions
+'   BLC - 10/16/2017 - added date hint, uncommented ClearForm()
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -863,11 +890,15 @@ On Error GoTo Err_Handler
     
     Title = "Events (Sampling Visits)"
     lblTitle.Caption = "" 'hide second title
-    Directions = "Choose the site && location, then enter the sampling start date."
+    Directions = "Choose the site location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
+    
+    'set hint
+    Me.lblHintDate.Caption = "M\DD\YYYY"
+    Me.lblHintDate.ForeColor = lngBlue
     
     'set hover
     btnComment.HoverColor = lngGreen
@@ -893,7 +924,7 @@ On Error GoTo Err_Handler
     Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
     
     'initialize values
-    'ClearForm Me
+    ClearForm Me
   
 Exit_Handler:
     Exit Sub
@@ -977,13 +1008,44 @@ End Sub
 ' Revisions:
 '   BLC - 8/22/2016 - initial version
 ' ---------------------------------
-Private Sub zForm_BeforeUpdate(Cancel As Integer)
+Private Sub Form_BeforeUpdate(Cancel As Integer)
 On Error GoTo Err_Handler
               
     If Not m_SaveOK Then
         Cancel = True
     End If
     'Cancel = True
+
+    Me.lblMsg.Caption = StringFromCodepoint(uRArrow) & " Updating record..."
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 17, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/17/2017 - initial version
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+              
+    Me.lblMsg.Caption = ""
 
 Exit_Handler:
     Exit Sub
@@ -1037,11 +1099,19 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - reset combobox data sources
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
     
     ClearForm Me
+    
+    'reset data sources
+    Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
+    Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
+            
+    cbxLocation.ControlSource = ""  'clear from Location_ID
+    cbxLocation.Value = ""
     
 Exit_Handler:
     Exit Sub
@@ -1083,6 +1153,12 @@ On Error GoTo Err_Handler
     
     'revert to disable non-btnSave_Click save
     m_SaveOK = False
+    
+    'clear fields
+    ClearForm Me
+        
+    cbxLocation.ControlSource = ""  'clear from Location_ID
+    cbxLocation.Value = ""
         
 Exit_Handler:
     Exit Sub

@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =28
-    Right =10785
-    Bottom =12045
+    Right =13155
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x69d3d7fef5d1e440
@@ -555,7 +555,7 @@ Option Explicit
 ' =================================
 ' Form:         SiteList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -564,7 +564,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 6/28/2016 - 1.01 - revised to use ToggleIsActive (mod_App_Data)
-'               BLC - 9/22/2016 - 1.02 - switche to use GetRecords()
+'               BLC - 9/22/2016 - 1.02 - switched to use GetRecords()
+'               BLC - 10/16/2017 - 1.03 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -844,6 +845,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -854,7 +856,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Site", ID
+    If result = vbYes Then DeleteRecord "Site", tbxID
     
     'clear the deleted record
     Me.Requery

@@ -20,7 +20,7 @@ Begin Form
     Width =7680
     DatasheetFontHeight =11
     ItemSuffix =35
-    Right =9015
+    Right =13155
     Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -697,7 +697,7 @@ Option Explicit
 ' =================================
 ' Form:         LocationList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -708,6 +708,7 @@ Option Explicit
 '               BLC - 2/3/2017  - 1.01 - updated btnSensitive()
 '               BLC - 9/28/2017 - 1.02 - set recordset on open, retrieve tbxID,
 '                                        update forecolor based on tbxIsSensitive value
+'               BLC - 10/16/2017 - 1.03 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -990,6 +991,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -1000,7 +1002,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Location", ID
+    If result = vbYes Then DeleteRecord "Location", tbxID
     
     'clear the deleted record
     Me.Requery

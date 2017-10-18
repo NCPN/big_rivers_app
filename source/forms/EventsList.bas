@@ -20,13 +20,11 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Left =2130
-    Top =2475
-    Right =9510
-    Bottom =6840
+    Right =9765
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x9f21e161d6cde440
+        0x7c3b4d9f2d02e540
     End
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
@@ -391,7 +389,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =4800
                     Top =15
-                    Width =1020
+                    Width =1140
                     Height =300
                     TabIndex =3
                     BorderColor =10921638
@@ -402,7 +400,7 @@ Begin Form
 
                     LayoutCachedLeft =4800
                     LayoutCachedTop =15
-                    LayoutCachedWidth =5820
+                    LayoutCachedWidth =5940
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -783,7 +781,7 @@ On Error GoTo Err_Handler
     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", tbxID 'ID
+    If result = vbYes Then DeleteRecord "Event", tbxID
     
     'clear the deleted record
 '    Me.Requery

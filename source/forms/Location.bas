@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =45
-    Left =15285
-    Top =3510
-    Right =24300
-    Bottom =14895
+    Left =5670
+    Top =2085
+    Right =13530
+    Bottom =12150
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x89ca99c02ce2e440
@@ -1006,7 +1006,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.07
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -1023,6 +1023,7 @@ Option Explicit
 '               BLC - 1/11/2017 - 1.05 - hide title label, CallingRecordID
 '               BLC - 1/31/2017 - 1.06 - added feature, transect, site location type &
 '                                        identifier option group
+'               BLC - 10/17/2017 - 1.07 - handle OpenArgs
 ' =================================
 
 '---------------------
@@ -1133,6 +1134,7 @@ End Property
 '   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
 '   BLC - 1/11/2017 - hide second title
 '   BLC - 2/1/2017 - disable feature toggle for non-feature parks
+'   BLC - 10/17/2017 - handle OpenArgs
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1141,6 +1143,21 @@ On Error GoTo Err_Handler
     Me.CallingForm = "Main"
     Me.CallingRecordID = -1
         
+    'retrieve calling form & record ID if present
+    If Len(Nz(Me.OpenArgs, "")) > 0 Then
+        Dim HasArray As Boolean
+        HasArray = InStr(Me.OpenArgs, "|")
+        If HasArray Then
+            Dim ary() As String
+            ary = Split(Me.OpenArgs, "|")
+        End If
+        Me.CallingForm = IIf(HasArray, ary(0), Me.OpenArgs)
+        Me.CallingRecordID = IIf(HasArray, ary(1), 0)
+    End If
+    
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
+    
     'set location type default
     Me.LocationType = ""
     

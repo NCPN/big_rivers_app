@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =84
-    Left =4470
-    Top =3150
-    Right =13485
-    Bottom =14535
+    Left =3825
+    Top =3105
+    Right =13590
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -734,6 +734,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin TextBox
+                    DecimalPlaces =0
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =3540

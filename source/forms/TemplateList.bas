@@ -19,10 +19,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =42
-    Left =4440
-    Top =3315
-    Right =13170
-    Bottom =14190
+    Left =3825
+    Top =3105
+    Right =16980
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     OrderBy ="TemplateName"
     RecSrcDt = Begin
@@ -817,7 +817,7 @@ Option Explicit
 ' =================================
 ' Form:         TemplateList
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -831,6 +831,7 @@ Option Explicit
 '               BLC - 2/1/2017  - 1.03 - handles giving focus to new template after TemplateAdd
 '                                        added refresh button to run GetTemplates & update
 '                                        template dictionary
+'               BLC - 10/16/2017 - 1.04 - fixed to use tbxID vs. ID on delete
 ' =================================
 
 '---------------------
@@ -1227,6 +1228,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -1237,7 +1239,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Event", ID
+    If result = vbYes Then DeleteRecord "tsys_Db_Templates", tbxID
     
     'clear the deleted record
     Me.Requery

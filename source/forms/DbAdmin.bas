@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =4155
-    Top =3315
-    Right =13170
-    Bottom =14700
+    Left =4350
+    Top =3225
+    Right =17505
+    Bottom =14610
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x11fc963334e1e440
@@ -316,6 +316,8 @@ Begin Form
                 End
                 Begin ToggleButton
                     OverlapFlags =215
+                    TextFontCharSet =177
+                    TextFontFamily =0
                     Left =5370
                     Top =150
                     Width =1500
@@ -2588,7 +2590,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.08
+' Version:      1.09
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2606,6 +2608,7 @@ Option Explicit
 '               BLC - 1/26/2017 - 1.07 - hid unused defaults, temporarily redirected button
 '                                        clicks to messages
 '               BLC - 9/6/2017  - 1.08 - added tglDevMode button, ToggleDevMode()
+'               BLC - 10/17/2017 - 1.09 - commented out initApp (already called in PreSplash form)
 ' =================================
 
 '---------------------
@@ -2709,6 +2712,7 @@ End Property
 '   BLC - 10/19/2016 - adjust to use calling form property
 '   BLC - 1/12/2017 - add versions button
 '   BLC - 1/26/2017 - hid unused defaults
+'   BLC - 10/17/2017 - commented out initApp (already called in PreSplash form)
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2779,7 +2783,7 @@ On Error GoTo Err_Handler
     setUserAccess Me
     
     'initialize app settings
-    initApp
+'    initApp    '<< DUPE call (already called in PreSplash form)
     
     ' If there is an Access back-end, open the always-open form (to maintain a connection
     '   to the back-end and avoid unnecessary create/delete/updates to its .ldb lock file)

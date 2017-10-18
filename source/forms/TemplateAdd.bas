@@ -19,10 +19,10 @@ Begin Form
     Width =7620
     DatasheetFontHeight =11
     ItemSuffix =47
-    Left =4440
-    Top =3315
-    Right =17685
-    Bottom =14190
+    Left =3825
+    Top =3105
+    Right =16980
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x40a16385ede1e440
@@ -1700,7 +1700,7 @@ On Error GoTo Err_Handler
 '     result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
 '                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 '
-'    If result = vbYes Then DeleteRecord "tsys_Db_Templates", ID
+'    If result = vbYes Then DeleteRecord "tsys_Db_Templates", tbxID
 '
 '    'clear the deleted record
 '    Me.Requery
