@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =61
-    Left =3975
-    Top =3510
-    Right =22110
-    Bottom =13815
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -1174,6 +1174,8 @@ Begin Form
                 End
                 Begin ToggleButton
                     OverlapFlags =215
+                    TextFontCharSet =177
+                    TextFontFamily =0
                     Left =2400
                     Top =1560
                     Width =270
@@ -1274,7 +1276,7 @@ Option Explicit
 ' =================================
 ' Form:         Contact
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.09
 ' Basis:        Dropdown form
 '
 ' Description:  Contact form object related properties, Contact, functions & procedures for UI display
@@ -1294,6 +1296,7 @@ Option Explicit
 '               BLC - 1/24/2017 - 1.07 - hid header title, added IsNPS flag toggle button
 '               BLC - 2/21/2017 - 1.08 - added recordset redefinition for calling form contact control
 '                                        in Form_Close() event
+'               BLC - 10/19/2017 - 1.09 - added comment length
 ' =================================
 
 '---------------------
@@ -1982,12 +1985,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "Contact|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "Contact|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

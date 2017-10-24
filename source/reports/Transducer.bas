@@ -957,7 +957,6 @@ Begin Report
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =4
                     TextAlign =3
                     Left =8760
                     Top =648

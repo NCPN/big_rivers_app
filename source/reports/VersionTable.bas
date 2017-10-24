@@ -17,9 +17,9 @@ Begin Report
     DatasheetGridlinesColor =14806254
     OnNoData ="=NoData([Report])"
     RecSrcDt = Begin
-        0xe436f31936e0e440
+        0x9d53b675fa02e540
     End
-    RecordSource ="SELECT SOP_VersionTable.* FROM SOP_VersionTable;"
+    RecordSource ="SELECT SOP_VersionTable.* FROM SOP_VersionTable; "
     Caption ="SOP Version Table"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"

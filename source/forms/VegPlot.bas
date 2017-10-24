@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =85
-    Left =14085
-    Top =3510
-    Right =26490
-    Bottom =14895
+    Left =6180
+    Top =1740
+    Right =14040
+    Bottom =13665
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6efd080b49dfe440
@@ -1617,6 +1617,8 @@ Begin Form
                 End
                 Begin ToggleButton
                     OverlapFlags =215
+                    TextFontCharSet =177
+                    TextFontFamily =0
                     Left =3180
                     Top =4020
                     Width =270
@@ -1681,6 +1683,8 @@ Begin Form
                 Begin ToggleButton
                     Visible = NotDefault
                     OverlapFlags =215
+                    TextFontCharSet =177
+                    TextFontFamily =0
                     Left =3180
                     Top =3600
                     Width =270
@@ -1744,6 +1748,8 @@ Begin Form
                 End
                 Begin ToggleButton
                     OverlapFlags =215
+                    TextFontCharSet =177
+                    TextFontFamily =0
                     Left =1020
                     Top =4020
                     Width =270
@@ -1806,6 +1812,8 @@ Begin Form
                 End
                 Begin ToggleButton
                     OverlapFlags =215
+                    TextFontCharSet =177
+                    TextFontFamily =0
                     Left =1020
                     Top =3600
                     Width =270
@@ -3450,7 +3458,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "VegPlot|" & tbxID.Text & "|255"
     
 Exit_Handler:
     Exit Sub

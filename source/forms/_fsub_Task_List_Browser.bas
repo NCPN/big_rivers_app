@@ -14,10 +14,8 @@ Begin Form
     GridY =24
     Width =14160
     ItemSuffix =20
-    Left =2430
-    Top =2460
-    Right =13680
-    Bottom =4320
+    Right =7995
+    Bottom =11385
     DatasheetForeColor =33554432
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
@@ -538,33 +536,34 @@ Private Sub Form_BeforeUpdate(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Validate the record before updating
-    If IsNull(Me.Request_date) Then
-        MsgBox "Please enter the request date for the task", vbOKOnly, "Validation error"
-        Me.txtRequest_date.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf IsNull(Me.Task_desc) Then
-        MsgBox "Please enter a brief task description", vbOKOnly, "Validation error"
-        Me.txtTask_desc.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf IsNull(Me.Task_status) Then
-        MsgBox "Please enter the task status", vbOKOnly, "Validation error"
-        Me.cmbTask_status.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf Me.Task_status = "Complete" And IsNull(Me.txtDate_completed) Then
-        MsgBox "Please enter the completion date", vbOKOnly, "Validation error"
-        Me.txtDate_completed.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf Me.Task_status <> "Complete" And Not IsNull(Me.txtDate_completed) Then
-        MsgBox "Either the task status should be 'Complete' or" & vbCrLf & _
-            "the completion date should be blank.", vbOKOnly, "Validation error"
-        Me.cmbTask_status.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    End If
+'FIX
+'    If IsNull(Me.Request_date) Then
+'        MsgBox "Please enter the request date for the task", vbOKOnly, "Validation error"
+'        Me.txtRequest_date.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf IsNull(Me.Task_desc) Then
+'        MsgBox "Please enter a brief task description", vbOKOnly, "Validation error"
+'        Me.txtTask_desc.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf IsNull(Me.Task_status) Then
+'        MsgBox "Please enter the task status", vbOKOnly, "Validation error"
+'        Me.cmbTask_status.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf Me.Task_status = "Complete" And IsNull(Me.txtDate_completed) Then
+'        MsgBox "Please enter the completion date", vbOKOnly, "Validation error"
+'        Me.txtDate_completed.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf Me.Task_status <> "Complete" And Not IsNull(Me.txtDate_completed) Then
+'        MsgBox "Either the task status should be 'Complete' or" & vbCrLf & _
+'            "the completion date should be blank.", vbOKOnly, "Validation error"
+'        Me.cmbTask_status.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    End If
 
 Exit_Procedure:
     Exit Sub
@@ -590,15 +589,16 @@ End Sub
 Private Sub Form_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    ' Bail out if Location ID is missing ...
-    If IsNull(Me.Location_ID) Then GoTo Exit_Procedure
-
-    ' Save the record if it is new or there are changes
-    If Me.Dirty Then DoCmd.RunCommand acCmdSaveRecord
-    
-    DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
-        """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
-        Me.txtTask_desc & """", acFormEdit, , ctlPark.Value
+'FIX
+'    ' Bail out if Location ID is missing ...
+'    If IsNull(Me.Location_ID) Then GoTo Exit_Procedure
+'
+'    ' Save the record if it is new or there are changes
+'    If Me.Dirty Then DoCmd.RunCommand acCmdSaveRecord
+'
+'    DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
+'        """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
+'        Me.txtTask_desc & """", acFormEdit, , ctlPark.Value
 
     ' This code must come after opening the form as the subform bookmark is lost when requerying
     ' Requery the referring form first (to show any recent changes before resetting)
@@ -639,14 +639,15 @@ Private Sub cmdCloseup_Click()
     ' Save the record if it is new or there are changes
     If Me.Dirty Then DoCmd.RunCommand acCmdSaveRecord
 
-    If IsNull(Me.Location_ID) Then
-    ' If there is no location, launch a new record
-        DoCmd.OpenForm "frm_Task_List_Popup", , , , acFormAdd, , ctlPark.Value
-    Else:
-        DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
-            """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
-            Me.txtTask_desc & """", acFormEdit, , ctlPark.Value
-    End If
+'FIX
+'    If IsNull(Me.Location_ID) Then
+'    ' If there is no location, launch a new record
+'        DoCmd.OpenForm "frm_Task_List_Popup", , , , acFormAdd, , ctlPark.Value
+'    Else:
+'        DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
+'            """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
+'            Me.txtTask_desc & """", acFormEdit, , ctlPark.Value
+'    End If
 
     ' This code must come after opening the form as the subform bookmark is lost when requerying
     ' Requery the referring form first (to show any recent changes before resetting)

@@ -20,8 +20,8 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =9765
-    Bottom =11385
+    Right =22215
+    Bottom =12585
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c3b4d9f2d02e540
@@ -501,7 +501,7 @@ Option Explicit
 ' =================================
 ' Form:         EventsList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -511,6 +511,7 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 7/26/2016 - 1.01 - add RunReadyForSave() check
 '               BLC - 1/9/2017  - 1.02 - revised btnDelete_Click() to use tbxID vs ID on delete
+'               BLC - 10/18/2017 - 1.03 - code cleanup
 ' =================================
 
 '---------------------
@@ -615,6 +616,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 10/18/2017 - code cleanup
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -636,18 +638,7 @@ On Error GoTo Err_Handler
     Me.RecordSource = ""
     
     'set data source
-'    Me.RecordSource = GetTemplate("s_events_list_by_park_river", _
-'                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
-'                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
     Set Me.Recordset = GetRecords("s_event_by_park_river_w_location")
-    
-'    With CurrentDb.QueryDefs("")
-'
-'    Me.RecordSource = GetTemplate("s_event_by_park_river_w_location", _
-'                    "ParkCode" & PARAM_SEPARATOR & TempVars("ParkCode") & _
-'                    "|waterway" & PARAM_SEPARATOR & TempVars("River"))
-'    End With
-    
     
     'Me.tbxSite.ControlSource = SiteName & "(" & SiteCode & ")"
     
@@ -784,7 +775,6 @@ On Error GoTo Err_Handler
     If result = vbYes Then DeleteRecord "Event", tbxID
     
     'clear the deleted record
-'    Me.Requery
     Me.Refresh
     Me.Requery
 

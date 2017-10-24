@@ -1,6 +1,6 @@
-﻿dbMemo "SQL" ="TRANSFORM First(Query2.Version) AS VarOfVersion\015\012SELECT Query2.[EffectiveD"
-    "ate]\015\012FROM Query2\015\012GROUP BY Query2.EffectiveDate\015\012ORDER BY Que"
-    "ry2.NumName\015\012PIVOT Query2.NumName;\015\012"
+﻿dbMemo "SQL" ="TRANSFORM First(SOP_list.Version) AS VarOfVersion\015\012SELECT SOP_list.[Effect"
+    "iveDate]\015\012FROM SOP_list\015\012GROUP BY SOP_list.EffectiveDate\015\012ORDE"
+    "R BY SOP_list.NumName\015\012PIVOT SOP_list.NumName;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -433,6 +433,10 @@ Begin
     End
     Begin
         dbText "Name" ="7-DINO field methods"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="VarOfVersion"
         dbLong "AggregateType" ="-1"
     End
 End

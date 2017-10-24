@@ -16,11 +16,11 @@ Begin Form
     GridY =24
     Width =8280
     DatasheetFontHeight =11
-    ItemSuffix =25
-    Left =4710
-    Top =2880
-    Right =12990
-    Bottom =10845
+    ItemSuffix =26
+    Left =4065
+    Top =2295
+    Right =12345
+    Bottom =10260
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -164,7 +164,7 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6645
+                    Left =6420
                     Top =45
                     Height =299
                     ForeColor =15921906
@@ -174,9 +174,9 @@ Begin Form
                     ControlTipText ="Go to administration settings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6645
+                    LayoutCachedLeft =6420
                     LayoutCachedTop =45
-                    LayoutCachedWidth =8085
+                    LayoutCachedWidth =7860
                     LayoutCachedHeight =344
                     ForeThemeColorIndex =1
                     ForeTint =100.0
@@ -220,6 +220,43 @@ Begin Form
                     ForeThemeColorIndex =1
                     ForeTint =100.0
                     ForeShade =95.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =7920
+                    Top =30
+                    Width =285
+                    Height =299
+                    TabIndex =1
+                    ForeColor =255
+                    Name ="btnExit"
+                    Caption ="X"
+                    StatusBarText ="Close this database"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Close this database"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7920
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =8205
+                    LayoutCachedHeight =329
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                    Gradient =0
+                    BackColor =4144959
+                    BackThemeColorIndex =-1
+                    BackTint =100.0
+                    OldBorderStyle =0
+                    BorderColor =14136213
+                    HoverColor =9699294
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -342,7 +379,7 @@ Begin Form
                     TabIndex =6
                     BorderColor =10921638
                     Name ="fsubBreadcrumb"
-                    SourceObject ="Form._Level"
+                    SourceObject ="Form.Tier"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
@@ -428,7 +465,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.06
+' Version:      1.08
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -443,6 +480,9 @@ Option Explicit
 '                                        DINO does not
 '               BLC - 10/19/2016 - 1.05 - adjusted to provide calling form on btnAdmin click
 '               BLC - 1/26/2017  - 1.06 - added user change, mode highlight
+'               BLC - 10/18/2017 - 1.07 - updated BC to 8 for App Settings (Sheet & ModWentworth) &
+'                                         turned off w/o ParkCode since DataSheet settings require ParkCode
+'               BLC - 10/23/2017 - 1.08 - added Exit button
 ' =================================
 
 '---------------------
@@ -480,6 +520,8 @@ Dim oBRTile As Form_Tile
 ' Revisions:
 '   BLC - 4/27/2016 - initial version
 '   BLC - 1/26/2017 - added mode & user change
+'   BLC - 10/18/2017 - updated BC to 8 for App Settings (Sheet & ModWentworth)
+'   BLC - 10/23/2017 - added Exit button hover
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -512,6 +554,10 @@ On Error GoTo Err_Handler
     
     'Admin --> filter actions when form opens (disable form buttons based on TempVars("AccessLevel")
     btnAdmin.HoverColor = LINK_HIGHLIGHT_BKGD
+        
+    'Exit
+    btnExit.HoverColor = lngYellow
+    btnExit.HoverForeColor = lngRed
         
     ' ------ Top -------
     'Left
@@ -585,7 +631,7 @@ On Error GoTo Err_Handler
     'Center
     Set oBCTile = BCTile.Form
     oBCTile.Title = "Trip Prep"
-    oBCTile.TileTag = "prep-"
+    'oBCTile.TileTag = "prep-"
     oBCTile.BarColor = lngWhite
     oBCTile.TileHeaderColor = lngLtSalmon
     oBCTile.Link1Caption = "VegPlot"
@@ -594,14 +640,15 @@ On Error GoTo Err_Handler
     oBCTile.Link4Caption = "Transducer"
     oBCTile.Link5Caption = "Loggers"
     oBCTile.Link6Caption = "Tasks"
-    oBCTile.lblIcon7L.Caption = StringFromCodepoint(uMapLighthouse)
+    oBCTile.Link7Visible = 0
+    oBCTile.lblIcon7L.Caption = "" 'StringFromCodepoint(uMapLighthouse)
     oBCTile.lblIcon7L.ForeColor = lngBlue
     oBCTile.lblIcon7L.FontWeight = wtMedium
-    oBCTile.Link7Caption = Space(4) & "Sediment Class Settings"
+    oBCTile.Link7Caption = "" 'Space(4) & "Sediment Class Settings"
     oBCTile.lblIcon8L.Caption = StringFromCodepoint(uMapLighthouse)
     oBCTile.lblIcon8L.ForeColor = lngBlue
     oBCTile.lblIcon8L.FontWeight = wtMedium
-    oBCTile.Link8Caption = Space(4) & "Sheet Settings"
+    oBCTile.Link8Caption = Space(4) & "Application Settings"
 
     'Right
     Set oBRTile = BRTile.Form
@@ -739,6 +786,42 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnAdmin_Click[Main form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnExit_Click
+' Description:  Exit button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 23, 2017 for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/23/2017 - initial version
+' ---------------------------------
+Private Sub btnExit_Click()
+On Error GoTo Err_Handler
+    
+    SysCmd acSysCmdSetStatus, "Closing database..."
+    
+    'close database
+    'DoCmd.CloseDatabase << leaves the VBE shell
+    'Dim app As New Access.Application
+    
+    Application.Quit acQuitSaveNone '<< quit w/o saving to avoid saving control states
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExit_Click[Main form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -983,6 +1066,8 @@ End Sub
 '   BLC - 9/21/2016 - update so BLCA & CANY enable transect links, DINO does not
 '   BLC - 10/21/2016 - revised TR Veg Plots, Vegetation Walk, removed Understory Cover, Woody Canopy Cover
 '   BLC - 9/5/2017 - added BC Loggers link
+'   BLC - 10/18/2017 - updated BC to 8 for App Settings (Sheet & ModWentworth) & turned off w/o ParkCode
+'                      since DataSheet settings require ParkCode
 ' ---------------------------------
 Private Sub PrepareLinks()
 On Error GoTo Err_Handler
@@ -1004,7 +1089,7 @@ On Error GoTo Err_Handler
     TC = "6"            'People
     TR = "6,7,8"        'Species, Unknowns, Species Search
     BL = ""             'N/A
-    BC = "7"            'Mod Wentworth Settings
+    BC = ""             'N/A
     BR = ""             'N/A
     
     'if no park --> all links deactivated, EXCEPT these
@@ -1015,7 +1100,7 @@ On Error GoTo Err_Handler
         TC = "6"            'People
         TR = "6,7,8"        'Species, Unknowns, Species Search
         BL = "4,7"          'Survey Files, Upload Survey File
-        BC = "1,2,3,4,5,6,7,8"  'VegPlot, VegWalk, Photo, Transducer, Logger, Tasks, Mod Wentworth Settings, Sheet Settings
+        BC = "1,2,3,4,5,6,7,8"  'VegPlot, VegWalk, Photo, Transducer, Logger, Tasks, App Settings (Sheet & ModWentworth)
         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
         
         'prepare park specific sets
@@ -1103,7 +1188,7 @@ On Error GoTo Err_Handler
     oCTile.EnableLinks TC    'People
     oRTile.EnableLinks TR    'Veg Plots, VegWalk, Species, Unknowns, Species Search
     oBLTile.EnableLinks BL   'Batch Upload Photos
-    oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Loggers, Tasks, Sheet Settings
+    oBCTile.EnableLinks BC   'VegPlot, VegWalk, Photo, Transducer, Loggers, Tasks, App Settings (Sheet & ModWentworth)
     oBRTile.EnableLinks BR   '#Plots, VegPlot-Species, VegPlot-#Species, VegWalk-Species, VegWalk-#Species
     
 Exit_Handler:

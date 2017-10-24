@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =3360
-    Top =2775
-    Right =17595
-    Bottom =14625
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -719,7 +719,7 @@ Option Explicit
 ' =================================
 ' Form:         Flag
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Flag form object related properties, events, functions & procedures for UI display
@@ -731,6 +731,7 @@ Option Explicit
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 10/20/2016 - 1.02 - added CallingForm property, removed buttoncaption
 '                                         selectedID, selectedValue properties
+'               BLC - 10/19/2017 - 1.03 - added comment length & replaced event w/ flag
 ' =================================
 
 '---------------------
@@ -1202,12 +1203,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length & replaced event w/ flag
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "flag|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

@@ -10,7 +10,6 @@ Begin Form
     CloseButton = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    OrderByOn = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
     ViewsAllowed =1

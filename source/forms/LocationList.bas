@@ -19,8 +19,8 @@ Begin Form
     GridY =24
     Width =7680
     DatasheetFontHeight =11
-    ItemSuffix =35
-    Right =13155
+    ItemSuffix =36
+    Right =9645
     Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -293,7 +293,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =765
+            Height =780
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -665,6 +665,44 @@ Begin Form
                     LayoutCachedLeft =2940
                     LayoutCachedTop =420
                     LayoutCachedWidth =3840
+                    LayoutCachedHeight =720
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ff000000ffffff00120000005b00 ,
+                        0x74006200780049007300530065006e007300690074006900760065005d003d00 ,
+                        0x3100000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1920
+                    Top =420
+                    Width =900
+                    Height =300
+                    TabIndex =10
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxLocType"
+                    ControlSource ="LocationType"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xff000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b0074006200780049007300530065006e007300690074006900760065005d00 ,
+                        0x3d00310000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1920
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =2820
                     LayoutCachedHeight =720
                     ForeThemeColorIndex =2
                     ForeTint =100.0

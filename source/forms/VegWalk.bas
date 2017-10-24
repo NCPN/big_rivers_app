@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =8790
-    Top =1950
-    Right =16650
-    Bottom =9495
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -908,7 +908,7 @@ Option Explicit
 ' =================================
 ' Form:         VegWalk
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  VegWalk form object related properties, functions & procedures for UI display
@@ -922,6 +922,7 @@ Option Explicit
 '                                         use GetContext()
 '               BLC - 10/24/2016 - 1.03 - revised to accommodate VegPlot WCC, URC, ARC; &
 '                                         use UpsertRecord()
+'               BLC - 10/19/2017 - 1.04 - added comment length
 ' =================================
 
 '---------------------
@@ -1553,13 +1554,13 @@ End Sub
 ' Revisions:
 '   BLC - 8/2/2016 - initial version
 '   BLC - 10/25/2016 - revised to use strFormContext vs. VegWalk
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    'DoCmd.OpenForm "Comment", acNormal, , , , , "VegWalk|" & tbxID.Text
-    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

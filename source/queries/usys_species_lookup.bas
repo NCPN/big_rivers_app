@@ -4,12 +4,11 @@
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
-dbBoolean "OrderByOn" ="-1"
+dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
-dbMemo "OrderBy" ="[usys_species_lookup].[LU_Code], [usys_species_lookup].[Master_Species]"
 Begin
     Begin
         dbText "Name" ="LU_Code"

@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =4470
-    Top =3150
-    Right =13485
-    Bottom =14535
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1691,7 +1691,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.07
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -1708,6 +1708,7 @@ Option Explicit
 '               BLC - 9/25/2017 - 1.05 - revise for NCPN_framework.Location class
 '               BLC - 9/27/2017 - 1.06 - update to use Factory.NewClassXX() vs GetClass()
 '               BLC - 10/2/2017 - 1.07 - add btnSpeciesSearch_Click()
+'               BLC - 10/19/2017 - 1.08 - added comment length
 ' =================================
 
 '---------------------
@@ -2148,12 +2149,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "Unknown|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "Unknown|" & tbxID.Text & "|255"
     
 Exit_Handler:
     Exit Sub

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =40
-    Left =4755
-    Top =3360
-    Right =21315
-    Bottom =14325
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20e2f9274edfe440
@@ -875,7 +875,7 @@ Option Explicit
 ' =================================
 ' Form:         VegTransect
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.05
 ' Basis:        Dropdown form
 '
 ' Description:  Veg Transect form object related properties, Transect, functions & procedures for UI display
@@ -888,6 +888,7 @@ Option Explicit
 '               BLC - 9/1/2016  - 1.02 - btnSave_Click code cleanup
 '               BLC - 1/11/2017 - 1.03 - added CallingForm property
 '               BLC - 1/12/2017 - 1.04 - renamed to VegTransect to match related table
+'               BLC - 10/19/2017 - 1.05 - added comment length
 ' =================================
 
 '---------------------
@@ -1287,7 +1288,7 @@ Private Sub btnAddEvent_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Events", acNormal, , , , , "Transect|" & tbxID
+    DoCmd.OpenForm "Events", acNormal, , , , , "Transect|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub
@@ -1312,12 +1313,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "Transect|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "Transect|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

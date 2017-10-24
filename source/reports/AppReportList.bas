@@ -194,7 +194,6 @@ Begin Report
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =4
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
@@ -219,7 +218,6 @@ Begin Report
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =4
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
@@ -268,7 +266,6 @@ Begin Report
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =4
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3

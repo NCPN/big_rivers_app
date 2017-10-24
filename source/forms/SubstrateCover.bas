@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =8205
-    Top =2490
-    Right =23730
-    Bottom =13470
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -692,7 +692,7 @@ Option Explicit
 ' =================================
 ' Form:         SubstrateCover
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  SubstrateCover form object related properties, functions & procedures for UI display
@@ -700,6 +700,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, May 31, 2016
 ' References:   -
 ' Revisions:    BLC - 1/9/2017 - 1.00 - initial version
+'               BLC - 10/19/2017 - 1.01 - added comment length
 ' =================================
 
 '---------------------
@@ -1098,13 +1099,13 @@ End Sub
 ' Revisions:
 '   BLC - 8/2/2016 - initial version
 '   BLC - 10/25/2016 - revised to use strFormContext vs. VegWalk
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    'DoCmd.OpenForm "Comment", acNormal, , , , , "VegWalk|" & tbxID.Text
-    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , Me.FormContext & "|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

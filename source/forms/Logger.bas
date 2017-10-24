@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =4590
-    Top =2520
-    Right =16995
-    Bottom =13905
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -780,7 +780,7 @@ Option Explicit
 ' =================================
 ' Form:         Logger
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Logger form object related properties, Logger, functions & procedures for UI display
@@ -789,6 +789,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 9/5/2017  - 1.00 - initial version, based on transducer
 '               BLC - 9/29/2017 - 1.01 - populate cbxSite
+'               BLC - 10/19/2017 - 1.02 - added comment length
 ' =================================
 
 '---------------------
@@ -1203,12 +1204,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 9/5/2017 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "Logger|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "Logger|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

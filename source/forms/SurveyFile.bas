@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =59
-    Left =4440
-    Top =3315
-    Right =12735
-    Bottom =14190
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -962,7 +962,7 @@ Option Explicit
 ' =================================
 ' Form:         SurveyFile
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  Survey file form object related properties, survey file, functions & procedures for UI display
@@ -974,6 +974,7 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.02 - changed ReadyForSave() to public for
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 1/24/2017 - 1.03 - adjusted to use GetContext()
+'               BLC - 10/19/2017 - 1.04 - added comment length
 ' =================================
 
 '---------------------
@@ -1390,12 +1391,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "SurveyFile|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "SurveyFile|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

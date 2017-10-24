@@ -20,15 +20,15 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4350
-    Top =3225
-    Right =17505
-    Bottom =14610
+    Left =4275
+    Top =2625
+    Right =12135
+    Bottom =9600
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xcf74eb5c2d02e540
+        0x5ac4ec74fa02e540
     End
-    RecordSource ="SELECT * FROM Event WHERE ID = 41;"
+    RecordSource ="SELECT * FROM Event WHERE ID = 41; "
     Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
     BeforeUpdate ="[Event Procedure]"
@@ -214,14 +214,13 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =900
                     Width =720
                     ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="í ½í·©"
+                    Caption ="comm"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -761,7 +760,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.10
+' Version:      1.11
 ' Basis:        Dropdown form
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -783,6 +782,7 @@ Option Explicit
 '               BLC - 10/16/2017 - 1.09 - added date hint & uncommented ClearForm(),
 '                                         reset combobox data sources on btnUndo_Click()
 '               BLC - 10/17/2017 - 1.10 - added form BeforeUpdate() & AfterUpdate()
+'               BLC - 10/18/2017 - 1.11 - enable comment button when ID is set (>0)
 ' =================================
 
 '---------------------
@@ -980,10 +980,13 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/20/2016 - code cleanup
+'   BLC - 10/18/2017 - enable comment button when ID is set (>0)
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-              
+
+'Debug.Print tbxID
+
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1188,7 +1191,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub
@@ -1276,6 +1279,9 @@ On Error GoTo Err_Handler
     
     'refresh form
 '    Me.Requery
+    
+    'enable comment if ID > 0
+    If tbxID > 0 Then btnComment.Enabled = True
     
 Exit_Handler:
     Exit Sub

@@ -18,8 +18,8 @@ Begin Form
     Width =2220
     DatasheetFontHeight =11
     ItemSuffix =10
-    Right =13860
-    Bottom =10995
+    Right =9765
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -165,13 +165,14 @@ Option Explicit
 ' =================================
 ' Form:         Breadcrumb
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Breadcrumb form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 10/30/2015
 ' References:
 ' Revisions:    BLC - 10/30/2015 - 1.00 - initial version
+'               BLC - 10/18/2017 - 1.01 - removed Initialize() and Terminate()
 ' =================================
 
 '---------------------
@@ -281,65 +282,6 @@ End Sub
 '---------------------
 
 ' ---------------------------------
-' Sub:          Class_Initialize
-' Description:  Class initialization (starting) event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 30, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/30/2015 - initial version
-' ---------------------------------
-Private Sub Class_Initialize()
-On Error GoTo Err_Handler
-
-    MsgBox "Initializing...", vbOKOnly
-
-Exit_Handler:
-    Exit Sub
-
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Initialize[Breadcrumb form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' Sub:          Class_Terminate
-' Description:  Class termination (closing) event
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, October 30, 2015 - for NCPN tools
-' Adapted:      -
-' Revisions:
-'   BLC - 10/30/2015 - initial version
-' ---------------------------------
-Private Sub Class_Terminate()
-On Error GoTo Err_Handler
-Exit_Handler:
-    Exit Sub
-    
-    MsgBox "Terminating...", vbOKOnly
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Class_Terminate[Breadcrumb form])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
 ' Sub:          SetHeaderColor
 ' Description:  Set header color event
 ' Assumptions:  -
@@ -370,7 +312,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' Sub:          SetHeaderColor
 ' Description:  Set header color event
@@ -384,8 +325,6 @@ End Sub
 ' Revisions:
 '   BLC - 10/30/2015 - initial version
 ' ---------------------------------
-
-
 Private Sub Form_Load()
 On Error GoTo Err_Handler
     

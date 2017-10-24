@@ -710,7 +710,7 @@ On Error GoTo Err_Handler
     Set u = Factory.NewAppUser
     
     With u
-        .Username = TempVars("AppUsername")
+        .UserName = TempVars("AppUsername")
         .Activity = "Application login"
         .SaveToDb False
     End With

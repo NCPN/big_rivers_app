@@ -412,6 +412,8 @@ Begin Form
                         End
                         Begin ToggleButton
                             OverlapFlags =87
+                            TextFontCharSet =177
+                            TextFontFamily =0
                             Left =885
                             Top =330
                             Height =317
@@ -461,6 +463,8 @@ Begin Form
                         End
                         Begin ToggleButton
                             OverlapFlags =87
+                            TextFontCharSet =177
+                            TextFontFamily =0
                             Left =1665
                             Top =330
                             Height =317

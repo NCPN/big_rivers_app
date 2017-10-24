@@ -23,10 +23,10 @@ Begin Form
     Width =8580
     DatasheetFontHeight =9
     ItemSuffix =20
-    Left =5250
-    Top =2085
-    Right =14130
-    Bottom =10590
+    Left =4605
+    Top =2730
+    Right =12600
+    Bottom =14115
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xae250b0a8d01e340
@@ -600,39 +600,40 @@ Private Sub Form_BeforeUpdate(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Validate the record before updating
-    If IsNull(Me.Location_ID) Then
-        MsgBox "Please enter the sample location associated with task" & _
-            vbCrLf & "  or hit ESC to undo changes to the record", vbOKOnly, "Validation error"
-        Me.cmbLocation_ID.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf IsNull(Me.Request_date) Then
-        MsgBox "Please enter the request date for the task", vbOKOnly, "Validation error"
-        Me.txtRequest_date.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf IsNull(Me.Task_desc) Then
-        MsgBox "Please enter a brief task description", vbOKOnly, "Validation error"
-        Me.txtTask_desc.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf IsNull(Me.Task_status) Then
-        MsgBox "Please enter the task status", vbOKOnly, "Validation error"
-        Me.cmbTask_status.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf Me.Task_status = "Complete" And IsNull(Me.txtDate_completed) Then
-        MsgBox "Please enter the completion date", vbOKOnly, "Validation error"
-        Me.txtDate_completed.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    ElseIf Me.Task_status <> "Complete" And Not IsNull(Me.txtDate_completed) Then
-        MsgBox "Either the task status should be 'Complete' or" & vbCrLf & _
-            "the completion date should be blank.", vbOKOnly, "Validation error"
-        Me.cmbTask_status.SetFocus
-        DoCmd.CancelEvent
-        GoTo Exit_Procedure
-    End If
+'FIX
+'    If IsNull(Me.Location_ID) Then
+'        MsgBox "Please enter the sample location associated with task" & _
+'            vbCrLf & "  or hit ESC to undo changes to the record", vbOKOnly, "Validation error"
+'        Me.cmbLocation_ID.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf IsNull(Me.Request_date) Then
+'        MsgBox "Please enter the request date for the task", vbOKOnly, "Validation error"
+'        Me.txtRequest_date.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf IsNull(Me.Task_desc) Then
+'        MsgBox "Please enter a brief task description", vbOKOnly, "Validation error"
+'        Me.txtTask_desc.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf IsNull(Me.Task_status) Then
+'        MsgBox "Please enter the task status", vbOKOnly, "Validation error"
+'        Me.cmbTask_status.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf Me.Task_status = "Complete" And IsNull(Me.txtDate_completed) Then
+'        MsgBox "Please enter the completion date", vbOKOnly, "Validation error"
+'        Me.txtDate_completed.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    ElseIf Me.Task_status <> "Complete" And Not IsNull(Me.txtDate_completed) Then
+'        MsgBox "Either the task status should be 'Complete' or" & vbCrLf & _
+'            "the completion date should be blank.", vbOKOnly, "Validation error"
+'        Me.cmbTask_status.SetFocus
+'        DoCmd.CancelEvent
+'        GoTo Exit_Procedure
+'    End If
 
 Exit_Procedure:
     Exit Sub

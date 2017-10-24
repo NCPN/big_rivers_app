@@ -23,10 +23,8 @@ Begin Form
     Width =12301
     DatasheetFontHeight =10
     ItemSuffix =29
-    Left =2295
-    Top =360
-    Right =14595
-    Bottom =9330
+    Right =7995
+    Bottom =11385
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xa0a341e20e76e340
@@ -788,9 +786,10 @@ Private Sub Form_Open(Cancel As Integer)
 
     If Me.FilterOn Then
     ' If the form is filtered, set the filter according to the filtered record
-        Me.cmbParkFilter = Me.Park_code
+'FIX
+'        Me.cmbParkFilter = Me.Park_code
         Me.togFilterByPark = True
-        Me.cmbSiteFilter = Me.Site_ID
+'        Me.cmbSiteFilter = Me.Site_ID
         Me.togFilterBySite = True
         fxnFilterRecords (True)
     Else
@@ -1168,16 +1167,16 @@ End Sub
 Private Sub cmdCloseup_Click()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.Location_ID) = False Then
+'    If IsNull(Me.Location_ID) = False Then
     ' If there is a location ID in the record ...
 
     ' Set the global reference variables
     Set gvarRefForm = Me.Form
-    DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
-        """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
-        Me.Task_desc & """", acFormEdit, , Me.Park_code
-
-    End If
+'    DoCmd.OpenForm "frm_Task_List_Popup", , , "[Location_ID]=""" & Me.Location_ID & _
+'        """ AND [Request_date] = #" & Me.Request_date & "# AND [Task_desc] = """ & _
+'        Me.Task_desc & """", acFormEdit, , Me.Park_code
+'
+'    End If
 
 Exit_Procedure:
     Exit Sub

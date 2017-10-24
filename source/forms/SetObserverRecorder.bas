@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =3090
-    Top =3495
-    Right =12330
-    Bottom =14490
+    Left =2955
+    Top =2730
+    Right =16110
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x1ad85127b3cfe440
@@ -696,7 +696,7 @@ Option Explicit
 ' =================================
 ' Form:         SetObserverRecorder
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  Observer / recorder setting form object related properties, events, functions & procedures for UI display
@@ -704,6 +704,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, September 8, 2016
 ' References:   -
 ' Revisions:    BLC - 9/1/2016  - 1.00 - initial version
+'               BLC - 10/19/2017 - 1.01 - added comment length & replaced event w/ observerrecorder
 ' =================================
 
 '---------------------
@@ -1222,12 +1223,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length & replaced event w/ observerrecorder
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "observerrecorder|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

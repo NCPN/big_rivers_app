@@ -4,5 +4,6 @@ CREATE TABLE [tsys_Datasheet_Defaults] (
   [River_ID] LONG ,
   [CoverType] VARCHAR (3),
   [SpeciesRows] SHORT ,
-  [BlankRows] SHORT 
+  [BlankRows] SHORT ,
+   CONSTRAINT 
 )

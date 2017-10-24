@@ -17,15 +17,15 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =5355
-    Top =1725
-    Right =13215
-    Bottom =10785
+    Left =4350
+    Top =2730
+    Right =12600
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0xd18018cccfe3e440
+        0x4d373b75fa02e540
     End
-    RecordSource ="SELECT * FROM Task WHERE ID = 7;"
+    RecordSource ="SELECT * FROM Task WHERE ID = 7; "
     Caption ="Task"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -227,7 +227,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="BLCA  >  Gunnison  >  EP  >  A"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =30
@@ -875,7 +875,7 @@ Begin Form
                     BackColor =65535
                     BorderColor =10921638
                     Name ="lblTaskContext"
-                    Caption ="Photo (0)"
+                    Caption ="task context"
                     ControlTipText ="Table && record ID referenced by task"
                     GridlineColor =10921638
                     LayoutCachedLeft =1080
@@ -1375,8 +1375,6 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      'If tbxID > 0 Then btnComment.Enabled = True
-
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1640,7 +1638,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' Sub:          btnCancel_Click
 ' Description:  Undo button click actions
@@ -1765,7 +1762,7 @@ On Error GoTo Err_Handler
     
     'refresh form
     Me.Requery
-        
+
 Exit_Handler:
     Exit Sub
 Err_Handler:

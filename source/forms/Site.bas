@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =3345
-    Top =2325
-    Right =11205
-    Bottom =12930
+    Left =6180
+    Top =2175
+    Right =14040
+    Bottom =12780
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -919,7 +919,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      'If tbxID > 0 Then btnComment.Enabled = True
+      If tbxID > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1186,7 +1186,7 @@ Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "site|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "site|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

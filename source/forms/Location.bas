@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =45
-    Left =5670
-    Top =2085
-    Right =13530
-    Bottom =12150
+    Left =4275
+    Top =1590
+    Right =12135
+    Bottom =11655
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x89ca99c02ce2e440
@@ -427,6 +427,8 @@ Begin Form
                         End
                         Begin ToggleButton
                             OverlapFlags =127
+                            TextFontCharSet =177
+                            TextFontFamily =0
                             Left =486
                             Top =1248
                             Width =900
@@ -471,6 +473,8 @@ Begin Form
                         End
                         Begin ToggleButton
                             OverlapFlags =119
+                            TextFontCharSet =177
+                            TextFontFamily =0
                             Left =1500
                             Top =1260
                             Width =900
@@ -516,6 +520,8 @@ Begin Form
                         End
                         Begin ToggleButton
                             OverlapFlags =119
+                            TextFontCharSet =177
+                            TextFontFamily =0
                             Left =2580
                             Top =1260
                             Width =900
@@ -1006,7 +1012,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.07
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -1024,6 +1030,7 @@ Option Explicit
 '               BLC - 1/31/2017 - 1.06 - added feature, transect, site location type &
 '                                        identifier option group
 '               BLC - 10/17/2017 - 1.07 - handle OpenArgs
+'               BLC - 10/19/2017 - 1.08 - added comment length, set location toggle
 ' =================================
 
 '---------------------
@@ -1274,11 +1281,25 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - set location toggle
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+    If tbxID > 0 Then btnComment.Enabled = True
+
+    If Me.LocationType = "" Then Me.LocationType = Me.list.Controls("tbxLocType")
+
+    Select Case Nz(Me.LocationType, "")
+        Case ""     '0 Default
+            Me.optgLocationType.Value = 0
+        Case "F"    '1 Feature
+            Me.optgLocationType.Value = 1
+        Case "T"    '2 Transect
+            Me.optgLocationType.Value = 2
+        Case "P"    '3 Plot
+            Me.optgLocationType.Value = 3
+    End Select
 
 Exit_Handler:
     Exit Sub
@@ -1566,12 +1587,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "location|" & tbxID.Text
+    DoCmd.OpenForm "Comment", acNormal, , , , , "location|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

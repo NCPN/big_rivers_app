@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =5670
-    Top =1800
-    Right =13530
-    Bottom =12720
+    Left =2820
+    Top =2430
+    Right =25035
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -215,6 +215,7 @@ Begin Form
                     Left =6660
                     Top =900
                     Width =720
+                    TabIndex =2
                     ForeColor =4210752
                     Name ="btnComment"
                     Caption ="comment"
@@ -285,7 +286,6 @@ Begin Form
                     Width =3414
                     Height =315
                     ColumnOrder =0
-                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -325,7 +325,7 @@ Begin Form
                     Left =4740
                     Top =900
                     Width =1680
-                    TabIndex =2
+                    TabIndex =1
                     ForeColor =16711680
                     Name ="btnAddLocation"
                     Caption =" Add Location"
@@ -403,7 +403,7 @@ Begin Form
                     Left =6660
                     Top =60
                     Width =720
-                    TabIndex =1
+                    TabIndex =3
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -508,7 +508,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =5
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -529,7 +529,7 @@ Begin Form
                     Left =5760
                     Top =60
                     Width =720
-                    TabIndex =2
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -596,7 +596,7 @@ Begin Form
                     Top =4740
                     Width =7650
                     Height =4380
-                    TabIndex =4
+                    TabIndex =6
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.FeatureList"
@@ -635,7 +635,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =7
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -657,7 +657,7 @@ Begin Form
                     Top =2820
                     Width =7140
                     Height =1500
-                    TabIndex =6
+                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
@@ -695,7 +695,7 @@ Begin Form
                     Top =990
                     Width =7140
                     Height =1320
-                    TabIndex =7
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxFeatureDirections"

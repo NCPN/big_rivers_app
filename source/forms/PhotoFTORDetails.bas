@@ -13,8 +13,8 @@ Begin Form
     Width =6780
     DatasheetFontHeight =11
     ItemSuffix =56
-    Right =18135
-    Bottom =10305
+    Right =9645
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xcb7a7f08cdc4e440
@@ -1014,6 +1014,47 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                 End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =120
+                    Top =6300
+                    Width =240
+                    Height =300
+                    FontSize =9
+                    TabIndex =12
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxID"
+                    ControlSource ="ID"
+                    DefaultValue ="0"
+                    ConditionalFormat = Begin
+                        0x0100000096000000010000000100000000000000000000001a00000001000000 ,
+                        0xffffff00ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b004400450056005f004d004f00440045005d003d004600 ,
+                        0x61006c00730065002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =6300
+                    LayoutCachedWidth =360
+                    LayoutCachedHeight =6600
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ffffff00ffffff00190000004900 ,
+                        0x4900660028005b004400450056005f004d004f00440045005d003d0046006100 ,
+                        0x6c00730065002c0031002c003000290000000000000000000000000000000000 ,
+                        0x0000000000
+                    End
+                End
             End
         End
         Begin Section
@@ -1044,12 +1085,13 @@ Option Explicit
 ' =================================
 ' FORM:         PhotoFTORDetailsDetails Form
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Description:  Photo detail functions & procedures for feature, transect, overview & reference photos
 '
 ' Source/date:  Bonnie Campbell, 7/13/2015
 ' Revisions:    BLC - 7/13/2015 - 1.00 - initial version
 '               BLC - 2/21/2017  - 1.01 - revised to use Photo vs. Tree form
+'               BLC - 10/19/2017 - 1.02 - added comment length & replace event w/ photo
 ' =================================
 
 '---------------------
@@ -1548,12 +1590,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length & replaced event w/ photo
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-'    DoCmd.OpenForm "Comment", acNormal, , , , , "event|" & tbxID
+    DoCmd.OpenForm "Comment", acNormal, , , , , "photo|" & tbxID & "|255"
     
 Exit_Handler:
     Exit Sub

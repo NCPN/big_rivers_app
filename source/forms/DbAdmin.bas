@@ -20,19 +20,19 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =4350
-    Top =3225
-    Right =17505
-    Bottom =14610
+    Left =4275
+    Top =2730
+    Right =12135
+    Bottom =9375
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x11fc963334e1e440
+        0x7982ea74fa02e540
     End
-    RecordSource ="SELECT\015\012Project, Release_ID, DataTimeframe,\015\012UserName, Park, BackupP"
-        "romptOnStartUp, BackupPromptOnExit,CompactBEOnExit,\015\012WebURL, AppContactNam"
-        "e, AppContactOrg, AppContactPhone, AppContactEmail,\015\012ar.ReleaseDate, ar.Is"
-        "Supported, DatabaseTitle, VersionNumber, FileName\015\012FROM (tsys_App_Defaults"
-        " ad\015\012INNER JOIN tsys_App_Releases ar ON ar.ID = ad.Release_ID)\015\012;"
+    RecordSource ="SELECT Project, Release_ID, DataTimeframe, UserName, Park, BackupPromptOnStartUp"
+        ", BackupPromptOnExit, CompactBEOnExit, WebURL, AppContactName, AppContactOrg, Ap"
+        "pContactPhone, AppContactEmail, ar.ReleaseDate, ar.IsSupported, DatabaseTitle, V"
+        "ersionNumber, FileName FROM tsys_App_Defaults AS ad INNER JOIN tsys_App_Releases"
+        " AS ar ON ar.ID = ad.Release_ID; "
     Caption ="NCPN Big Rivers App"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -322,6 +322,7 @@ Begin Form
                     Top =150
                     Width =1500
                     Height =420
+                    ColumnOrder =0
                     FontSize =8
                     FontWeight =500
                     TabIndex =1
@@ -1878,7 +1879,7 @@ Begin Form
                                     ControlSource ="Release_ID"
                                     RowSourceType ="Table/Query"
                                     RowSource ="SELECT tsys_App_Releases.ID, 'Version ' & [VersionNumber] & ' (' & [ReleaseDate]"
-                                        " & ')' AS Version FROM tsys_App_Releases;"
+                                        " & ')' AS Version FROM tsys_App_Releases; "
                                     ColumnWidths ="0;2880"
                                     FontName ="Arial"
                                     ControlTipText ="Version number of this application"
@@ -2590,7 +2591,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.09
+' Version:      1.10
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2609,6 +2610,7 @@ Option Explicit
 '                                        clicks to messages
 '               BLC - 9/6/2017  - 1.08 - added tglDevMode button, ToggleDevMode()
 '               BLC - 10/17/2017 - 1.09 - commented out initApp (already called in PreSplash form)
+'               BLC - 10/19/2017 - 1.10 - added comment length
 ' =================================
 
 '---------------------
@@ -2933,12 +2935,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 10/19/2017 - added comment length
 ' ---------------------------------
 Private Sub btnComment_Click()
 On Error GoTo Err_Handler
     
     'open comment form
-    DoCmd.OpenForm "Comment", acNormal, , , , , "DbAdmin|" & ""
+    DoCmd.OpenForm "Comment", acNormal, , , , , "DbAdmin|" & "" & "|255"
     
 Exit_Handler:
     Exit Sub
