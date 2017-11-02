@@ -19,14 +19,14 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =45
+    ItemSuffix =46
     Left =4275
-    Top =1590
+    Top =1575
     Right =12135
-    Bottom =11655
+    Bottom =11700
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x89ca99c02ce2e440
+        0x8c4fda390b03e540
     End
     Caption ="Location (Sampling Location)"
     OnCurrent ="[Event Procedure]"
@@ -187,7 +187,7 @@ Begin Form
             PressedForeThemeColorIndex =1
         End
         Begin FormHeader
-            Height =2220
+            Height =2280
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -248,7 +248,6 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =1740
@@ -325,7 +324,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="BLCA  >  Gunnison  >  EP  >  -"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -361,6 +360,7 @@ Begin Form
                     Name ="cbxCollectionSourceID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1440"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Choose the feature, transect or plot this location is found in/on"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -383,7 +383,7 @@ Begin Form
                 End
                 Begin OptionGroup
                     SpecialEffect =0
-                    OverlapFlags =247
+                    OverlapFlags =255
                     Left =300
                     Top =960
                     Width =6240
@@ -567,6 +567,26 @@ Begin Form
                         End
                     End
                 End
+                Begin Label
+                    OverlapFlags =247
+                    TextAlign =2
+                    Left =3720
+                    Top =960
+                    Width =2700
+                    Height =315
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblCollectionSourceID"
+                    Caption ="Identifier"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3720
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =6420
+                    LayoutCachedHeight =1275
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
             End
         End
         Begin Section
@@ -579,6 +599,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -694,7 +715,7 @@ Begin Form
                     FontSize =9
                     TabIndex =5
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -955,7 +976,7 @@ Begin Form
                     RightMargin =360
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =6750105
+                    ForeColor =65535
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
@@ -977,7 +998,7 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =6750105
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
@@ -1012,7 +1033,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.09
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -1031,6 +1052,7 @@ Option Explicit
 '                                        identifier option group
 '               BLC - 10/17/2017 - 1.07 - handle OpenArgs
 '               BLC - 10/19/2017 - 1.08 - added comment length, set location toggle
+'               BLC - 10/24/2017 - 1.09 - add optgLocationType default, handle location toggle defaults
 ' =================================
 
 '---------------------
@@ -1046,6 +1068,7 @@ Private m_CallingForm As String
 Private m_CallingRecordID As Integer
 Private m_LocationType As String
 Private m_LocationNotes As String
+Private m_CollectionSourceID As String
 
 '---------------------
 ' Event Declarations
@@ -1122,6 +1145,14 @@ Public Property Get LocationNotes() As String
     LocationNotes = m_LocationNotes
 End Property
 
+Public Property Let CollectionSourceID(Value As String)
+        m_CollectionSourceID = Value
+End Property
+
+Public Property Get CollectionSourceID() As String
+    CollectionSourceID = m_CollectionSourceID
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -1142,6 +1173,7 @@ End Property
 '   BLC - 1/11/2017 - hide second title
 '   BLC - 2/1/2017 - disable feature toggle for non-feature parks
 '   BLC - 10/17/2017 - handle OpenArgs
+'   BLC - 10/24/2017 - add optgLocationType default
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1165,8 +1197,9 @@ On Error GoTo Err_Handler
     'minimize calling form
     ToggleForm Me.CallingForm, -1
     
-    'set location type default
+    'set location type defaults
     Me.LocationType = ""
+    optgLocationType.Value = 0
     
     Select Case Me.CallingForm
         Case "Feature"
@@ -1213,6 +1246,7 @@ On Error GoTo Err_Handler
     lblMsg.Caption = ""
     tglFeature.Enabled = False
     cbxCollectionSourceID.Visible = False
+    lblCollectionSourceID.Visible = False
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1282,24 +1316,29 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/19/2017 - set location toggle
+'   BLC - 10/24/2017 - set location toggle when tbxID > 0
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-    If tbxID > 0 Then btnComment.Enabled = True
+    'handle location edits
+    If tbxID > 0 Then
+        btnComment.Enabled = True
 
-    If Me.LocationType = "" Then Me.LocationType = Me.list.Controls("tbxLocType")
-
-    Select Case Nz(Me.LocationType, "")
-        Case ""     '0 Default
-            Me.optgLocationType.Value = 0
-        Case "F"    '1 Feature
-            Me.optgLocationType.Value = 1
-        Case "T"    '2 Transect
-            Me.optgLocationType.Value = 2
-        Case "P"    '3 Plot
-            Me.optgLocationType.Value = 3
-    End Select
+        If Me.LocationType = "" Then Me.LocationType = Me.list.Controls("tbxLocType")
+    
+        Select Case Nz(Me.LocationType, "")
+            Case ""     '0 Default
+                Me.optgLocationType.Value = 0
+            Case "F"    '1 Feature
+                Me.optgLocationType.Value = 1
+            Case "T"    '2 Transect
+                Me.optgLocationType.Value = 2
+            Case "P"    '3 Plot
+                Me.optgLocationType.Value = 3
+        End Select
+        
+    End If
 
 Exit_Handler:
     Exit Sub
@@ -1336,6 +1375,9 @@ On Error GoTo Err_Handler
         .Visible = True
         .ColumnHeads = True
         .FontSize = 9
+        
+        'display label also
+        lblCollectionSourceID.Visible = True
         
         'clear existing value
         .Value = ""
@@ -1377,6 +1419,38 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - optgLocationType_Click[Location form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxCollectionSourceID_AfterUpdate
+' Description:  Combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/24/2017 - initial version
+' ---------------------------------
+Private Sub cbxCollectionSourceID_AfterUpdate()
+On Error GoTo Err_Handler
+
+    cbxCollectionSourceID.SetFocus
+    Me.CollectionSourceID = cbxCollectionSourceID.SelText
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxCollectionSourceID_AfterUpdate[Location form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1541,6 +1615,7 @@ End Sub
 '   BLC - 5/31/2016 - initial version
 '   BLC - 7/29/2016 - revised to use UpsertRecord()
 '   BLC - 9/1/2016  - commented code cleanup
+'   BLC - 10/24/2017 - clear form after save
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
@@ -1562,7 +1637,19 @@ On Error GoTo Err_Handler
     
     Me.LocationType = ltype
     
+Debug.Print Me.LocationType
+'Debug.Print Me.cbxCollectionSourceID.SelText
+Debug.Print Me.CollectionSourceID
+    
     UpsertRecord Me
+    
+    'clear fields
+    ClearForm Me
+        
+    Me.optgLocationType = 0
+    cbxCollectionSourceID.Visible = False
+    cbxCollectionSourceID.ControlSource = ""
+    lblCollectionSourceID.Visible = False
     
 Exit_Handler:
     Exit Sub
@@ -1625,6 +1712,11 @@ On Error GoTo Err_Handler
     
     'restore calling form
     ToggleForm Me.CallingForm, 0
+    
+    'clear sources to avoid save issues
+    Me.optgLocationType.ControlSource = ""
+    Me.cbxCollectionSourceID.ControlSource = ""
+    Me.list.Form.RecordSource = ""
     
 Exit_Handler:
     Exit Sub

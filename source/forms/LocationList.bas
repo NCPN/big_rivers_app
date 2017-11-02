@@ -20,11 +20,11 @@ Begin Form
     Width =7680
     DatasheetFontHeight =11
     ItemSuffix =36
-    Right =9645
+    Right =9240
     Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x0e1aac03d0ffe440
+        0x566d246e0b03e540
     End
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
@@ -735,7 +735,7 @@ Option Explicit
 ' =================================
 ' Form:         LocationList
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -746,7 +746,8 @@ Option Explicit
 '               BLC - 2/3/2017  - 1.01 - updated btnSensitive()
 '               BLC - 9/28/2017 - 1.02 - set recordset on open, retrieve tbxID,
 '                                        update forecolor based on tbxIsSensitive value
-'               BLC - 10/16/2017 - 1.03 - fixed to use tbxID vs. ID on delete
+'               BLC - 10/16/2017 - 1.03 - fixed to use tbxID vs. ID on
+'               BLC - 10/24/2017 - 1.04 - cleared parent form fields on delete
 ' =================================
 
 '---------------------
@@ -973,7 +974,7 @@ On Error GoTo Err_Handler
     ToggleSensitive "Location", tbxID, IIf(tbxIsSensitive = 1, 0, 1)
     
     'update tbxIsSensitive
-'    Me.Requery
+    Me.Requery
     
 Exit_Handler:
     Exit Sub
@@ -1030,6 +1031,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
+'   BLC - 10/24/2017 - cleared parent form fields
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -1040,10 +1042,29 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "Location", tbxID
+    If result = vbYes Then
+        DeleteRecord "Location", tbxID, False
     
-    'clear the deleted record
-    Me.Requery
+        Me.Parent.lblMsgIcon.ForeColor = lngLtLime
+        Me.Parent.lblMsg.ForeColor = lngLtLime
+        Me.Parent.lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & _
+                                        StringFromCodepoint(uRTriangle)
+        Me.Parent.lblMsg.Caption = "Record deleted!"
+    
+        If Me.Parent.tbxID > 0 Then
+            'clear the deleted record
+            Me.Requery
+            
+            'clear parent form
+            'clear fields
+            ClearForm Me.Parent
+                
+            Me.Parent.optgLocationType = 0
+            Me.Parent.cbxCollectionSourceID.Visible = False
+            Me.Parent.cbxCollectionSourceID.ControlSource = ""
+        End If
+        
+    End If
 
 Exit_Handler:
     Exit Sub

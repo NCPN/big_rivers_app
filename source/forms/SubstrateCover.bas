@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =2955
-    Top =2730
-    Right =16110
-    Bottom =14115
+    Left =3615
+    Top =2940
+    Right =12855
+    Bottom =14325
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -261,7 +261,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="BLCA  >  Gunnison  >  RR  >  A"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60

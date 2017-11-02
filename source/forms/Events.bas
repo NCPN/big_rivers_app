@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4275
-    Top =2625
-    Right =12135
-    Bottom =9600
+    Left =3360
+    Top =2730
+    Right =12600
+    Bottom =14115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x5ac4ec74fa02e540
@@ -152,7 +152,7 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =1395
+            Height =1620
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -196,8 +196,8 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =4260
-                    Top =1080
+                    Left =1560
+                    Top =1260
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -206,17 +206,17 @@ Begin Form
                     Name ="lblStartDate"
                     Caption ="Start Date"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4260
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =5505
-                    LayoutCachedHeight =1395
+                    LayoutCachedLeft =1560
+                    LayoutCachedTop =1260
+                    LayoutCachedWidth =2805
+                    LayoutCachedHeight =1575
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6660
-                    Top =900
+                    Left =6780
+                    Top =1200
                     Width =720
                     ForeColor =16711680
                     Name ="btnComment"
@@ -224,10 +224,10 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6660
-                    LayoutCachedTop =900
-                    LayoutCachedWidth =7380
-                    LayoutCachedHeight =1260
+                    LayoutCachedLeft =6780
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =1560
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -263,32 +263,11 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =93
+                    OverlapFlags =85
                     TextAlign =2
-                    Left =1080
-                    Top =1080
-                    Width =1680
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblSite"
-                    Caption ="Site"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1080
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =2760
-                    LayoutCachedHeight =1395
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =215
-                    TextAlign =2
-                    Left =1140
-                    Top =1080
-                    Width =3060
+                    Left =480
+                    Top =840
+                    Width =1065
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -296,18 +275,132 @@ Begin Form
                     Name ="lblLocation"
                     Caption ="Location"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1140
-                    LayoutCachedTop =1080
-                    LayoutCachedWidth =4200
-                    LayoutCachedHeight =1395
+                    LayoutCachedLeft =480
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =1545
+                    LayoutCachedHeight =1155
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4860
+                    Top =840
+                    Width =1680
+                    TabIndex =1
+                    ForeColor =16711680
+                    Name ="btnAddLocation"
+                    Caption =" Add Location"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new location"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000009070603090706080 ,
+                        0x906850c0806850f0806050f0805840c070584080705040300000000000000000 ,
+                        0x0000000000000000000000000000000000000000a0786060907060e0907050ff ,
+                        0x706840ff906840ffb06840ff906040ff805040ff705040e07050406000000000 ,
+                        0x00000000000000000000000000000000a0806060a07860f0c08060ff807830ff ,
+                        0x607820ff506040ff906040ffc06840ffb06040ff905840ff705040f070504060 ,
+                        0x000000000000000000000000b0807030a07860e0d08860fff08860ffd08040ff ,
+                        0x608820ff308820ff606830ff706840ffb06840ffb06040ff905840ff705040e0 ,
+                        0x705040300000000000000000b0807080c08870fff09860fff09060ffc08860ff ,
+                        0x508040ff409820ff408830ff707040ffb06840ff806040ff606040ff605840ff ,
+                        0x705840800000000000000000b08070c0e09870ffffa070ffe09070ff707850ff ,
+                        0x50a840ff50a830ff809830ffd07850ff707040ff506840ff307810ff606830ff ,
+                        0x805840c00000000000000000b08870f0f0b890fff0a880ff607860ff609850ff ,
+                        0x60b040ff90a040ffe08860ffd08050ff507050ff408830ff309010ff408020ff ,
+                        0x806050f00000000000000000b08870f0ffb8a0ffa09880ff40a850ff60b850ff ,
+                        0x909860ffe09870ffe09060ffe08860ff60a030ff40a020ff409820ff408820ff ,
+                        0x806850f00000000000000000b08870c0e0b8a0ff90b880ff50c870ff50c870ff ,
+                        0x80a070ffc0a070ffd09870ffe09060ffa09840ff50a830ff40a020ff508830ff ,
+                        0x906850c00000000000000000b0907080b0a080ff90d0a0ff70e090ff90e0a0ff ,
+                        0x80e8a0ffa0d090ffb0a870fff09870ffe09060ff50a830ff50a830ff708840ff ,
+                        0x907060800000000000000000b0907030b09080e090c8a0ffa0e8b0ffd0f0c0ff ,
+                        0xd0f8d0fff0f8d0ffb0e8b0ff809860ffd09840ffb09040ff609840ff907050e0 ,
+                        0x90706030000000000000000000000000b0908070b0a080f0b0d8b0ffd0f0d0ff ,
+                        0xe0f8d0ff80b070ff80d890ff50b070ff908840ffd08860ffa07860f0a0786060 ,
+                        0x0000000000000000000000000000000000000000b0908070b09080e0c0c0a0ff ,
+                        0xd0e0c0ffb0e8b0ff80e0a0ff60b870ffa08850ffa07860e0a080606000000000 ,
+                        0x000000000000000000000000000000000000000000000000b0908030b0908080 ,
+                        0xb09080c0b09080f0c09880f0b09080c0b0807080b08070300000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =4860
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =6540
+                    LayoutCachedHeight =1200
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin ComboBox
+                    ColumnHeads = NotDefault
+                    LimitToList = NotDefault
+                    OverlapFlags =85
+                    TextAlign =2
+                    DecimalPlaces =0
+                    IMESentenceMode =3
+                    ColumnCount =4
+                    Left =1560
+                    Top =840
+                    Width =3120
+                    Height =315
+                    FontSize =8
+                    TabIndex =2
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x0100000070000000020000000000000003000000000000000300000001000000 ,
+                        0x00000000ffffff00000000000200000004000000070000000100000000000000 ,
+                        0xfff2000000000000000000000000000000000000000000000000000000000000 ,
+                        0x22002200000000002200220000000000
+                    End
+                    Name ="cbxLocation"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1440;0;0"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Select location of this sampling visit"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =1560
+                    LayoutCachedTop =840
+                    LayoutCachedWidth =4680
+                    LayoutCachedHeight =1155
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000000000000030000000100000000000000ffffff00020000002200 ,
+                        0x2200000000000000000000000000000000000000000000000000000200000001 ,
+                        0x00000000000000fff20000020000002200220000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
                 End
             End
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5595
+            Height =5445
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -385,7 +478,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
-                    Left =4320
+                    Left =1620
                     Top =60
                     Width =1020
                     Height =315
@@ -407,9 +500,9 @@ Begin Form
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4320
+                    LayoutCachedLeft =1620
                     LayoutCachedTop =60
-                    LayoutCachedWidth =5340
+                    LayoutCachedWidth =2640
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -517,7 +610,7 @@ Begin Form
                     CanShrink = NotDefault
                     OverlapFlags =215
                     Left =105
-                    Top =1095
+                    Top =945
                     Width =7650
                     Height =4380
                     TabIndex =4
@@ -527,25 +620,25 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =105
-                    LayoutCachedTop =1095
+                    LayoutCachedTop =945
                     LayoutCachedWidth =7755
-                    LayoutCachedHeight =5475
+                    LayoutCachedHeight =5325
                 End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
                     OverlapFlags =93
-                    Top =975
+                    Top =825
                     Width =7860
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
-                    LayoutCachedTop =975
+                    LayoutCachedTop =825
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =5595
+                    LayoutCachedHeight =5445
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
@@ -579,11 +672,11 @@ Begin Form
                 Begin ComboBox
                     LimitToList = NotDefault
                     Visible = NotDefault
-                    OverlapFlags =93
+                    OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
                     ColumnCount =7
-                    Left =1080
+                    Left =3480
                     Top =60
                     Width =1740
                     Height =315
@@ -609,9 +702,9 @@ Begin Form
                     SeparatorCharacters =2
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =1080
+                    LayoutCachedLeft =3480
                     LayoutCachedTop =60
-                    LayoutCachedWidth =2820
+                    LayoutCachedWidth =5220
                     LayoutCachedHeight =375
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
@@ -625,57 +718,11 @@ Begin Form
                         0x000000000000000000000000000000000000
                     End
                 End
-                Begin ComboBox
-                    ColumnHeads = NotDefault
-                    LimitToList = NotDefault
-                    OverlapFlags =247
-                    TextAlign =2
-                    DecimalPlaces =0
-                    IMESentenceMode =3
-                    ColumnCount =4
-                    Left =1080
-                    Top =60
-                    Width =3120
-                    Height =315
-                    FontSize =8
-                    TabIndex =7
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    ConditionalFormat = Begin
-                        0x0100000070000000020000000000000003000000000000000300000001000000 ,
-                        0x00000000ffffff00000000000200000004000000070000000100000000000000 ,
-                        0xfff2000000000000000000000000000000000000000000000000000000000000 ,
-                        0x22002200000000002200220000000000
-                    End
-                    Name ="cbxLocation"
-                    RowSourceType ="Table/Query"
-                    ColumnWidths ="0;1440;0;0"
-                    AfterUpdate ="[Event Procedure]"
-                    ControlTipText ="Select location of this sampling visit"
-                    GridlineColor =10921638
-                    AllowValueListEdits =0
-
-                    LayoutCachedLeft =1080
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =4200
-                    LayoutCachedHeight =375
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =0
-                    ForeTint =75.0
-                    ForeShade =100.0
-                    ConditionalFormat14 = Begin
-                        0x01000200000000000000030000000100000000000000ffffff00020000002200 ,
-                        0x2200000000000000000000000000000000000000000000000000000200000001 ,
-                        0x00000000000000fff20000020000002200220000000000000000000000000000 ,
-                        0x0000000000000000
-                    End
-                End
                 Begin Label
                     BackStyle =1
                     OverlapFlags =223
                     TextAlign =3
-                    Top =780
+                    Top =630
                     Width =7860
                     Height =315
                     FontSize =9
@@ -688,9 +735,9 @@ Begin Form
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =780
+                    LayoutCachedTop =630
                     LayoutCachedWidth =7860
-                    LayoutCachedHeight =1095
+                    LayoutCachedHeight =945
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -700,7 +747,7 @@ Begin Form
                     OverlapFlags =223
                     TextAlign =2
                     Left =4320
-                    Top =600
+                    Top =450
                     Width =825
                     Height =600
                     FontSize =20
@@ -711,9 +758,9 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
-                    LayoutCachedTop =600
+                    LayoutCachedTop =450
                     LayoutCachedWidth =5145
-                    LayoutCachedHeight =1200
+                    LayoutCachedHeight =1050
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -721,7 +768,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4425
+                    Left =1725
                     Top =390
                     Width =840
                     Height =180
@@ -731,9 +778,9 @@ Begin Form
                     Name ="lblHintDate"
                     Caption ="M\\DD\\YYYY"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4425
+                    LayoutCachedLeft =1725
                     LayoutCachedTop =390
-                    LayoutCachedWidth =5265
+                    LayoutCachedWidth =2565
                     LayoutCachedHeight =570
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -783,6 +830,7 @@ Option Explicit
 '                                         reset combobox data sources on btnUndo_Click()
 '               BLC - 10/17/2017 - 1.10 - added form BeforeUpdate() & AfterUpdate()
 '               BLC - 10/18/2017 - 1.11 - enable comment button when ID is set (>0)
+'               BLC - 10/24/2017 - 1.12 - comment out unused cbxSite
 ' =================================
 
 '---------------------
@@ -872,6 +920,7 @@ End Property
 '   BLC - 8/2/2016 - use Me.CallingForm
 '   BLC - 1/13/2017 - revised to use && vs. StringFromCodepoint(uAmpersand) for directions
 '   BLC - 10/16/2017 - added date hint, uncommented ClearForm()
+'   BLC - 10/24/2017 - commented out unused cbxSite
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -920,7 +969,7 @@ On Error GoTo Err_Handler
     Me.RecordSource = ""
     
     'set data sources
-    Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
+    'Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
     Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
     
     'initialize values
@@ -1103,6 +1152,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/16/2017 - reset combobox data sources
+'   BLC - 10/24/2017 - comment out unused cbxSite
 ' ---------------------------------
 Private Sub btnUndo_Click()
 On Error GoTo Err_Handler
@@ -1110,7 +1160,7 @@ On Error GoTo Err_Handler
     ClearForm Me
     
     'reset data sources
-    Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
+    'Set cbxSite.Recordset = GetRecords("s_site_by_park_river_segment")
     Set cbxLocation.Recordset = GetRecords("s_location_by_park_river_segment")
             
     cbxLocation.ControlSource = ""  'clear from Location_ID
@@ -1170,6 +1220,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnSave_Click[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnAddLocation_Click
+' Description:  Add location button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 10/24/2017 - initial version
+' ---------------------------------
+Private Sub btnAddLocation_Click()
+On Error GoTo Err_Handler
+    
+    'open comment form
+    DoCmd.OpenForm "Location", acNormal, , , , , "Event|" & tbxID
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddLocation_Click[Event form])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -1,0 +1,3 @@
+CREATE TABLE [AppPlot] (
+  [PlotNum] SHORT  CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL 
+)

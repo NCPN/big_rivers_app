@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =2955
+    Left =3360
     Top =2730
-    Right =16110
-    Bottom =14115
+    Right =13755
+    Bottom =16275
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -795,6 +795,7 @@ Begin Form
                     BorderColor =10921638
                     Name ="chkHasPhotos"
                     AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3600
@@ -830,6 +831,7 @@ Begin Form
                     BorderColor =10921638
                     Name ="chkCollected"
                     AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="0"
                     ControlTipText ="Was plant collected?"
                     GridlineColor =10921638
 
