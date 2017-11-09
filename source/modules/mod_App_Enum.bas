@@ -34,8 +34,8 @@ Option Explicit
 ' Revisions:    BLC - 4/12/2015  - 1.01 - revised rs to use SQL to retrieve
 '                                         sorted results, .Sort doesn't apply to table recordsets
 '                                         added hidden _First & _Last values for @ enum
-'               app - 10/18/2017  - 1.02 - latest enum update from db
-'                                         last updated: 10/18/2017 5:41:19 AM
+'               app - 11/2/2017  - 1.02 - latest enum update from db
+'                                         last updated: 11/2/2017 11:12:58 AM
 ' =================================
 
 '-----------------------------
@@ -71,7 +71,7 @@ End Enum
 '-----------------------------
 Public Enum ModWentworthClassSize
     [_First] = 64
-    f = 64
+    F = 64
     CL = 65
     LC = 66
     LO = 67
@@ -195,14 +195,14 @@ End Enum
 '-----------------------------
 Public Enum TaglineType
     [_First] = 82
-    h = 82
+    H = 82
     WRS = 83
     rs = 84
-    v = 85
+    V = 85
     G = 86
-    w = 87
+    W = 87
     R = 88
-    d = 89
+    D = 89
     [_Last] = 89
 End Enum
 
@@ -231,11 +231,27 @@ Public Enum TransducerType
 End Enum
 
 '-----------------------------
+'  TransectNumbers
+'-----------------------------
+Public Enum TransectNumber
+    [_First] = 100
+    T1 = 100
+    T2 = 101
+    T3 = 102
+    T4 = 103
+    T5 = 104
+    T6 = 105
+    T7 = 106
+    T8 = 107
+    [_Last] = 107
+End Enum
+
+'-----------------------------
 '  WentworthClassSizes
 '-----------------------------
 Public Enum WentworthClassSize
     [_First] = 27
-    s = 27
+    S = 27
     FG = 28
     MG = 29
     CG = 30

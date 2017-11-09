@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =46
-    Left =4275
-    Top =1575
-    Right =12135
-    Bottom =11700
+    Left =4695
+    Top =2265
+    Right =12555
+    Bottom =12390
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8c4fda390b03e540
@@ -1033,7 +1033,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.09
+' Version:      1.10
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -1053,6 +1053,7 @@ Option Explicit
 '               BLC - 10/17/2017 - 1.07 - handle OpenArgs
 '               BLC - 10/19/2017 - 1.08 - added comment length, set location toggle
 '               BLC - 10/24/2017 - 1.09 - add optgLocationType default, handle location toggle defaults
+'               BLC - 11/2/2017 - 1.10 - revise transect & plot numbers, add PopulateOptions()
 ' =================================
 
 '---------------------
@@ -1174,6 +1175,7 @@ End Property
 '   BLC - 2/1/2017 - disable feature toggle for non-feature parks
 '   BLC - 10/17/2017 - handle OpenArgs
 '   BLC - 10/24/2017 - add optgLocationType default
+'   BLC - 11/2/2017 - populate identifier options when option selection set by calling form
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1212,6 +1214,9 @@ On Error GoTo Err_Handler
             Me.LocationType = "P"
             optgLocationType.Value = 3
     End Select
+    
+    'populate the identifier dropdown
+    PopulateOptions
         
     'minimize calling form
     ToggleForm Me.CallingForm, -1
@@ -1245,8 +1250,11 @@ On Error GoTo Err_Handler
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
     tglFeature.Enabled = False
-    cbxCollectionSourceID.Visible = False
-    lblCollectionSourceID.Visible = False
+    'hide ID if no toggle is set
+    If Nz(Me.LocationType, "") = "" Then
+        cbxCollectionSourceID.Visible = False
+        lblCollectionSourceID.Visible = False
+    End If
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1365,52 +1373,59 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/31/2017 - initial version
+'   BLC - 11/2/2017 - change combobox source for transects & plots, shift to PopulateOptions()
 ' ---------------------------------
 Private Sub optgLocationType_Click()
 On Error GoTo Err_Handler
 
-    With cbxCollectionSourceID
-    
-        'assume visible
-        .Visible = True
-        .ColumnHeads = True
-        .FontSize = 9
-        
-        'display label also
-        lblCollectionSourceID.Visible = True
-        
-        'clear existing value
-        .Value = ""
-    
-        'filter by park, river, site -> BLCA, Gunnison, xx
-        Select Case Me.optgLocationType.Value
-            Case 0  'Default
-                'hide if not applicable
-                .Visible = False
-                Me.LocationType = ""
-            Case 1  'Feature
-                Set .Recordset = GetRecords("s_feature_by_site")
-                .BoundColumn = 2
-                .ColumnCount = 2
-                .ColumnWidths = "0;1in"
-                Me.LocationType = "F"
-            Case 2  'Transect
-                Set .Recordset = GetRecords("s_vegtransect_number_by_site")
-                .BoundColumn = 1
-                .ColumnCount = 3
-                .ColumnWidths = "1in;1;0"
-                Me.LocationType = "T"
-            Case 3  'Plot
-                Set .Recordset = GetRecords("s_vegplot_number_by_site")
-                .BoundColumn = 1
-                .ColumnCount = 4
-                .ColumnWidths = "1in;0;0;0"
-                Me.LocationType = "P"
-        End Select
-    
-    End With
-    
-    Me.Refresh
+    PopulateOptions
+
+'    'set maximums
+'    SetTempVar "MaxTransectNumber", MAX_TRANSECT_NUMBER
+'    SetTempVar "MaxPlotNumber", MAX_PLOT_NUMBER
+'
+'    With cbxCollectionSourceID
+'
+'        'assume visible
+'        .Visible = True
+'        .ColumnHeads = True
+'        .FontSize = 9
+'
+'        'display label also
+'        lblCollectionSourceID.Visible = True
+'
+'        'clear existing value
+'        .Value = ""
+'
+'        'filter by park, river, site -> BLCA, Gunnison, xx
+'        Select Case Me.optgLocationType.Value
+'            Case 0  'Default
+'                'hide if not applicable
+'                .Visible = False
+'                Me.LocationType = ""
+'            Case 1  'Feature
+'                Set .Recordset = GetRecords("s_feature_by_site")
+'                .BoundColumn = 2
+'                .ColumnCount = 2
+'                .ColumnWidths = "0;1in"
+'                Me.LocationType = "F"
+'            Case 2  'Transect
+'                Set .Recordset = GetRecords("s_transect_numbers") 's_vegtransect_number_by_site")
+'                .BoundColumn = 1
+'                .ColumnCount = 2 '3
+'                .ColumnWidths = "0;1in" ';1;0"
+'                Me.LocationType = "T"
+'            Case 3  'Plot
+'                Set .Recordset = GetRecords("s_plot_numbers") 's_vegplot_number_by_site")
+'                .BoundColumn = 1
+'                .ColumnCount = 1 '4
+'                .ColumnWidths = "1in" ';0;0;0"
+'                Me.LocationType = "P"
+'        End Select
+'
+'    End With
+'
+'    Me.Refresh
     
 Exit_Handler:
     Exit Sub
@@ -1773,6 +1788,80 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ReadyForSave[Location form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          PopulateOptions
+' Description:  populated option identifier combobox
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 2, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/2/2017 - initial version
+' ---------------------------------
+Private Sub PopulateOptions()
+On Error GoTo Err_Handler
+    
+    'set maximums
+    SetTempVar "MaxTransectNumber", MAX_TRANSECT_NUMBER
+    SetTempVar "MaxPlotNumber", MAX_PLOT_NUMBER
+    
+    With cbxCollectionSourceID
+    
+        'assume visible
+        .Visible = True
+        .ColumnHeads = True
+        .FontSize = 9
+        
+        'display label also
+        lblCollectionSourceID.Visible = True
+        
+        'clear existing value
+        .Value = ""
+    
+        'filter by park, river, site -> BLCA, Gunnison, xx
+        Select Case Me.optgLocationType.Value
+            Case 0  'Default
+                'hide if not applicable
+                .Visible = False
+                Me.LocationType = ""
+            Case 1  'Feature
+                Set .Recordset = GetRecords("s_feature_by_site")
+                .BoundColumn = 2
+                .ColumnCount = 2
+                .ColumnWidths = "0;1in"
+                Me.LocationType = "F"
+            Case 2  'Transect
+                Set .Recordset = GetRecords("s_transect_numbers") 's_vegtransect_number_by_site")
+                .BoundColumn = 1
+                .ColumnCount = 2 '3
+                .ColumnWidths = "0;1in" ';1;0"
+                Me.LocationType = "T"
+            Case 3  'Plot
+                Set .Recordset = GetRecords("s_plot_numbers") 's_vegplot_number_by_site")
+                .BoundColumn = 1
+                .ColumnCount = 1 '4
+                .ColumnWidths = "1in" ';0;0;0"
+                Me.LocationType = "P"
+        End Select
+    
+    End With
+    
+    Me.Refresh
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateOptions[Location form])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -17,10 +17,10 @@ Begin Form
     Width =9660
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =3375
-    Top =2070
-    Right =13035
-    Bottom =10725
+    Left =3810
+    Top =3420
+    Right =16530
+    Bottom =14805
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xde3980067302e540
@@ -151,7 +151,7 @@ Begin Form
                     Height =300
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="title"
+                    Caption ="Comment"
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -186,7 +186,7 @@ Begin Form
                     Height =300
                     ForeColor =12566463
                     Name ="lblContext"
-                    Caption ="context"
+                    Caption ="event - 59"
                     GridlineColor =10921638
                     LayoutCachedLeft =7380
                     LayoutCachedTop =60
@@ -583,7 +583,7 @@ Option Explicit
 ' =================================
 ' Form:         Comment
 ' Level:        Framework form
-' Version:      1.08
+' Version:      1.09
 '
 ' Description:  Comment form object related properties, events, functions & procedures for UI display
 '
@@ -598,7 +598,9 @@ Option Explicit
 '               BLC - 10/17/2017 - 1.06 - added calling form info
 '               BLC - 10/18/2017 - 1.07 - added Form_Open() & Form_Close(), shifted calling form info,
 '                                         set filter on comment list subform from Form_Load()
-'               BLC 6- 10/19/2017 - 1.08 - added comment message
+'               BLC - 10/19/2017 - 1.08 - added comment message
+'               BLC - 11/6/2017  - 1.09 - added Add & Cancel button hover color, adjusted instructions,
+'                                         clear form after adding comment
 ' =================================
 
 '---------------------
@@ -1043,6 +1045,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/18/2017 - initial version
+'   BLC - 11/6/2017  - added Add & Cancel button hover color, adjusted instructions
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1089,6 +1092,8 @@ On Error GoTo Err_Handler
         Select Case LCase(ary(0))
             Case "importeddata"
                 instruction = "Enter your import comment."
+            Case Else 'event,
+                instruction = "Enter your " & LCase(ary(0)) & " comment."
         End Select
     Else
         GoTo Exit_Handler
@@ -1104,6 +1109,10 @@ On Error GoTo Err_Handler
     Me.AddAction = "add_"
     
     Me.Context = Me.OpenArgs
+
+    'set hover
+    btnAdd.HoverColor = lngGreen
+    btnCancel.HoverColor = lngGreen
 
     'default
     btnAdd.Enabled = False
@@ -1293,10 +1302,10 @@ On Error GoTo Err_Handler
 '        Me.btnAdd.Enabled = True
 '    End If
 
-    'enable add/save for new comments
+    'enable add/save for new comments where text length < max + 1
     btnAdd.Enabled = False
     
-    If Len(tbxComment.Text) > 0 And tbxID = 0 Then
+    If Len(tbxComment.Text) > 0 And tbxID = 0 And Len(tbxComment.Text) < Me.MaxCount + 1 Then
         btnAdd.Enabled = True
     ElseIf Len(tbxComment.Text) < MaxCount + 1 And tbxID > 0 Then
         lblMsg.ForeColor = lngYellow
@@ -1372,6 +1381,7 @@ End Sub
 '   BLC - 9/27/2017 - update to use Factory.NewClassXX() vs GetClass()
 '   BLC - 10/17/2017 - added title to comment
 '   BLC - 10/19/2017 - added comment message
+'   BLC - 11/6/2017 - clear form after adding comment
 ' ---------------------------------
 Private Sub btnAdd_Click()
 On Error GoTo Err_Handler
@@ -1396,6 +1406,9 @@ On Error GoTo Err_Handler
             lblMsg.Caption = "Comment added!"
     
             list.Requery
+
+            'clear fields
+            ClearForm Me
 
             'show added record message & clear
 '            DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _

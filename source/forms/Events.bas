@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =3360
-    Top =2730
-    Right =12600
-    Bottom =14115
+    Left =4695
+    Top =3285
+    Right =12555
+    Bottom =10335
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x5ac4ec74fa02e540
@@ -362,6 +362,7 @@ Begin Form
                     Top =840
                     Width =3120
                     Height =315
+                    ColumnOrder =0
                     FontSize =8
                     TabIndex =2
                     BackColor =65535
@@ -733,6 +734,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =65535
                     Name ="lblMsg"
+                    Caption ="msg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =630
@@ -755,6 +757,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16772541
                     Name ="lblMsgIcon"
+                    Caption ="Icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -807,7 +810,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.11
+' Version:      1.13
 ' Basis:        Dropdown form
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -831,6 +834,7 @@ Option Explicit
 '               BLC - 10/17/2017 - 1.10 - added form BeforeUpdate() & AfterUpdate()
 '               BLC - 10/18/2017 - 1.11 - enable comment button when ID is set (>0)
 '               BLC - 10/24/2017 - 1.12 - comment out unused cbxSite
+'               BLC - 11/6/2017  - 1.13 - set so Save button only enabled for new events (tbxID = 0)
 ' =================================
 
 '---------------------
@@ -942,8 +946,6 @@ On Error GoTo Err_Handler
     Directions = "Choose the site location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
-    btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
     
     'set hint
     Me.lblHintDate.Caption = "M\DD\YYYY"
@@ -1033,8 +1035,11 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-
+'FIX!
+    'default
+    btnSave.Enabled = False
 'Debug.Print tbxID
+    If tbxID = 0 Then btnSave.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1339,6 +1344,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
+'   BLC - 11/6/2017 - revised so Save button is only enabled for new events (tbxID = 0)
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1355,7 +1361,8 @@ On Error GoTo Err_Handler
     End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
-    btnSave.Enabled = isOK
+    'enable save button only for new events (tbxID = 0)
+    If tbxID = 0 Then btnSave.Enabled = isOK
     
     'refresh form
 '    Me.Requery

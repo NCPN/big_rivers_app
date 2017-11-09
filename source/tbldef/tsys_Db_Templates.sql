@@ -17,6 +17,5 @@ CREATE TABLE [tsys_Db_Templates] (
   [CreateDate] DATETIME ,
   [CreatedBy_ID] SHORT ,
   [LastModified] DATETIME ,
-  [LastModifiedBy_ID] SHORT ,
-  [Field1] DATETIME 
+  [LastModifiedBy_ID] SHORT 
 )

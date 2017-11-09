@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =95
-    Left =4530
-    Top =1005
-    Right =12390
-    Bottom =13470
+    Left =3810
+    Top =3420
+    Right =16530
+    Bottom =14805
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6efd080b49dfe440
@@ -2328,7 +2328,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.10
+' Version:      1.11
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -2353,6 +2353,7 @@ Option Explicit
 '               BLC - 9/25/2017 - 1.08 - revise for NCPN_framework.XX classes
 '               BLC - 9/27/2017 - 1.09 - update to use Factory.NewClassXX() vs GetClass()
 '               BLC - 11/1/2017 - 1.10 - added chkCalibration, chkReplicate
+'               BLC - 11/7/2017 - 1.11 - fix cbxEvent column for date (cbxEvent_AfterUpdate())
 ' =================================
 
 '---------------------
@@ -2582,7 +2583,7 @@ On Error GoTo Err_Handler
                 cbxTransect.ColumnCount = 9
                 cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
         Case "CANY" 'site level
-        Case "DINO" 'no transects
+        Case "DINO" 'no transects/plots
     End Select
     
     'populate events
@@ -2776,7 +2777,11 @@ End Sub
 ' ---------------------------------
 ' Sub:          cbxEvent_AfterUpdate
 ' Description:  Combobox after update actions
-' Assumptions:  -
+' Assumptions:  Event combobox contains the following columns:
+'                   column(0)= event ID                 column(3)= event date - site name (sitecode)
+'                   column(1)= event date               column(4)= site code
+'                   column(2)= event date - site code   column(5)= park code
+'               Column 1 (event date) will be used to determine the proper MSS year
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
@@ -2785,13 +2790,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/9/2017 - initial version
+'   BLC - 11/7/2017 - fix cbxEvent column for date
 ' ---------------------------------
 Private Sub cbxEvent_AfterUpdate()
 On Error GoTo Err_Handler
 
     'enable modal sediment size based on event year
-    'column(4) = event/visit date - site --> split & get year() of visit date
-    SetTempVar "EventYear", Year(Split(cbxEvent.Column(4), " - ")(0))
+    'column(1)= event date
+    SetTempVar "EventYear", Year(cbxEvent.Column(1))
     Me.cbxModalSedSize.Enabled = True
     
     'update modal sed size classes

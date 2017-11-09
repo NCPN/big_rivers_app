@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =2955
-    Top =2730
-    Right =16110
-    Bottom =14115
+    Left =3810
+    Top =3420
+    Right =12150
+    Bottom =14805
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -1537,6 +1537,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnSpeciesSearch_Click[VegWalk form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnSetObserverRecorder_Click
+' Description:  Set observer/recorder button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, August 2, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/6/2017 - initial version
+' ---------------------------------
+Private Sub btnSetObserverRecorder_Click()
+On Error GoTo Err_Handler
+    
+    'open comment form
+    DoCmd.OpenForm "SetObserverRecorder", acNormal, , , , , Me.FormContext & "|" & tbxID
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnSetObserverRecorder_Click[VegWalk form])"
     End Select
     Resume Exit_Handler
 End Sub

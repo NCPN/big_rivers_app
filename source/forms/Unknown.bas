@@ -20,15 +20,15 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3360
-    Top =2730
-    Right =13755
-    Bottom =16275
+    Left =3810
+    Top =3420
+    Right =12150
+    Bottom =14805
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
     End
-    Caption ="Events (Sampling Visits)"
+    Caption ="Unknown Species"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
@@ -1820,6 +1820,8 @@ On Error GoTo Err_Handler
     Directions = "Enter the unknown information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
+    btnComment.Caption = StringFromCodepoint(uComment)
+    btnComment.ForeColor = lngBlue
     
     lblLeaf.Caption = StringFromCodepoint(uLeafFallen)
     lblLeaf.FontSize = 20
