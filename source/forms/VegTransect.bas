@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =40
-    Left =2955
-    Top =2730
-    Right =16110
-    Bottom =14115
+    Left =4740
+    Top =2835
+    Right =12600
+    Bottom =10440
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20e2f9274edfe440
@@ -875,7 +875,7 @@ Option Explicit
 ' =================================
 ' Form:         VegTransect
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.07
 ' Basis:        Dropdown form
 '
 ' Description:  Veg Transect form object related properties, Transect, functions & procedures for UI display
@@ -889,6 +889,8 @@ Option Explicit
 '               BLC - 1/11/2017 - 1.03 - added CallingForm property
 '               BLC - 1/12/2017 - 1.04 - renamed to VegTransect to match related table
 '               BLC - 10/19/2017 - 1.05 - added comment length
+'               BLC - 11/9/2017  - 1.06 - populate dropdowns based on hierarchy level
+'               BLC - 11/10/2017 - 1.07 - shift combobox population to PopulateComboData
 ' =================================
 
 '---------------------
@@ -1022,6 +1024,8 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 11/9/2017 - populate dropdowns based on hierarchy level
+'   BLC - 11/10/2017 - shift combobox population to PopulateComboData
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1049,10 +1053,6 @@ On Error GoTo Err_Handler
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
-'    lblContext.Caption = Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-'                 Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-'                 Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-'                 Nz(TempVars("Feature"), "")
     lblContext.Caption = GetContext()
 
     Title = "Transect"
@@ -1079,6 +1079,9 @@ On Error GoTo Err_Handler
     
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
+    
+    'populate comboboxes
+    PopulateComboData
     
     'initialize values
     ClearForm Me
@@ -1368,7 +1371,6 @@ On Error GoTo Err_Handler
             Set Forms("VegPlot").Controls("cbxTransect").Recordset = GetRecords(Filter)
             Forms("VegPlot").Controls("cbxTransect").Requery
     
-    
     End Select
     
 '    Set Forms(Me.CallingForm).Controls("cbxTransect").Recordset = GetRecords(filter)
@@ -1381,6 +1383,59 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[VegTransect form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          PopulateComboData
+' Description:  Populate form comboboxes
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 10, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/10/2017 - initial version
+' ---------------------------------
+Private Sub PopulateComboData()
+On Error GoTo Err_Handler
+
+    'populate comboboxes
+    Select Case GetHierarchyLevel
+        Case "feature"
+            Filter = "s_vegtransect_by_feature"
+        Case "site"
+            Filter = "s_vegtransect_by_site"
+    End Select
+    
+    Set Me.cbxEvent.Recordset = GetRecords("s_events_by_site")
+    Set Me.cbxLocation.Recordset = GetRecords(Filter)
+    
+    'combobox defaults
+    With cbxEvent
+        .BoundColumn = 1                'event ID
+        .ColumnCount = 6
+        .ColumnWidths = "0;0;0;1in;0;0" 'display SiteNameEventDate
+        .ColumnHeads = False
+    End With
+    
+    With cbxLocation
+        .BoundColumn = 1                'transect ID
+        .ColumnCount = 8
+        .ColumnWidths = "0;0;0;0;1in;0;0;0;" 'display TransectSite or TransectFeature
+        .ColumnHeads = True
+    End With
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateComboData[VegTransect form])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =84
-    Left =2955
-    Top =2730
-    Right =16110
-    Bottom =14115
+    Left =3855
+    Top =3150
+    Right =14190
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1008,7 +1008,7 @@ Option Explicit
 ' =================================
 ' Form:         ConfirmUnknown
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown confirmation form object related properties, Unknown, functions & procedures for UI display
@@ -1021,6 +1021,7 @@ Option Explicit
 '               BLC - 9/27/2017  - 1.03 - update to use Factory.NewClassXX() vs GetClass()
 '               BLC - 10/2/2017  - 1.04 - added btnSpeciesSearch_Click()
 '               BLC - 10/19/2017 - 1.05 - added comment length
+'               BLC - 11/9/2017  - 1.06 - added cbxConfirmedSpecies headers, enable comment when ID > 0
 ' =================================
 
 '---------------------
@@ -1141,6 +1142,7 @@ End Property
 '   BLC - 7/5/2016 - initial version
 '   BLC - 8/2/2016 - use Me.CallingForm
 '   BLC - 1/24/1017 - revise to use GetContext()
+'   BLC - 11/9/2017 - added cbxConfirmedSpecies headers
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1170,10 +1172,6 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
-                'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                'Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                'Nz(TempVars("Feature"), "")
 
     Title = "Identify/Confirm Unknown Species"
     lblTitle.Caption = ""
@@ -1194,6 +1192,8 @@ On Error GoTo Err_Handler
     tbxIcon.ForeColor = lngRed
     btnSave.Enabled = False
     tbxIdentifyDate.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1216,6 +1216,7 @@ On Error GoTo Err_Handler
     Set cbxConfirmedSpecies.Recordset = GetRecords("s_species_by_park")
     Set cbxIdentifiedBy.Recordset = GetRecords("s_contact_list")
         
+    cbxConfirmedSpecies.ColumnHeads = True
     cbxConfirmedSpecies.BoundColumn = 1
     cbxConfirmedSpecies.ColumnCount = 3
     cbxConfirmedSpecies.ColumnWidths = "0;.8in;.7in"
@@ -1578,6 +1579,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/5/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
+'   BCL - 11/9/2017 - enable comment when ID > 0
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1597,6 +1599,9 @@ On Error GoTo Err_Handler
     
     'refresh form
     Me.Requery
+    
+    'enable comment button if ID > 0
+    If tbxID > 0 Then btnComment.Enabled = True
     
 Exit_Handler:
     Exit Sub

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =54
-    Left =3810
-    Top =3420
-    Right =12150
-    Bottom =14805
+    Left =3855
+    Top =3150
+    Right =16575
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1949,7 +1949,6 @@ On Error GoTo Err_Handler
     
     'enable comment if ID > 0
     If tbxID > 0 Then btnComment.Enabled = True
-    
     
     'refresh form
     Me.Requery

@@ -20,15 +20,14 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4695
-    Top =3285
-    Right =12555
-    Bottom =10335
+    Left =3855
+    Top =3150
+    Right =12765
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x5ac4ec74fa02e540
+        0x656d3fc92f05e540
     End
-    RecordSource ="SELECT * FROM Event WHERE ID = 41; "
     Caption ="Events (Sampling Visits)"
     OnCurrent ="[Event Procedure]"
     BeforeUpdate ="[Event Procedure]"
@@ -214,6 +213,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6780
                     Top =1200
@@ -378,6 +378,7 @@ Begin Form
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1440;0;0"
                     AfterUpdate ="[Event Procedure]"
+                    OnGotFocus ="[Event Procedure]"
                     ControlTipText ="Select location of this sampling visit"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -409,6 +410,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -488,7 +490,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxStartDate"
-                    ControlSource ="StartDate"
                     Format ="Short Date"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter the date of this sampling visit started"
@@ -527,7 +528,7 @@ Begin Form
                     FontSize =9
                     TabIndex =3
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -657,7 +658,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
-                    ControlSource ="ID"
                     DefaultValue ="0"
                     GridlineColor =10921638
 
@@ -757,7 +757,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="Icon"
+                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -810,7 +810,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.13
+' Version:      1.14
 ' Basis:        Dropdown form
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -835,6 +835,7 @@ Option Explicit
 '               BLC - 10/18/2017 - 1.11 - enable comment button when ID is set (>0)
 '               BLC - 10/24/2017 - 1.12 - comment out unused cbxSite
 '               BLC - 11/6/2017  - 1.13 - set so Save button only enabled for new events (tbxID = 0)
+'               BLC - 11/10/2017 - 1.14 - added Form_GotFocus for updating cbxLocation after new location added
 ' =================================
 
 '---------------------
@@ -1038,8 +1039,8 @@ On Error GoTo Err_Handler
 'FIX!
     'default
     btnSave.Enabled = False
-'Debug.Print tbxID
-    If tbxID = 0 Then btnSave.Enabled = True
+
+'    If tbxID = 0 Then btnSave.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1111,6 +1112,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxLocation_GotFocus
+' Description:  combobox got focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 10, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/10/2017 - initial version
+' ---------------------------------
+Private Sub cbxLocation_GotFocus()
+On Error GoTo Err_Handler
+    
+    'refresh Location - handles update after adding location
+    Me.cbxLocation.Requery
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxLocation_GotFocus[Events form])"
     End Select
     Resume Exit_Handler
 End Sub

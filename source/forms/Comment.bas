@@ -17,10 +17,10 @@ Begin Form
     Width =9660
     DatasheetFontHeight =11
     ItemSuffix =18
-    Left =3810
-    Top =3420
-    Right =16530
-    Bottom =14805
+    Left =3840
+    Top =2490
+    Right =13500
+    Bottom =11145
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xde3980067302e540
@@ -1149,61 +1149,6 @@ End Sub
 Private Sub Form_Load()
 On Error GoTo Err_Handler
     
-'    Dim ary() As String
-'
-'    'default
-'    Me.CallingForm = "Main"
-'
-'    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
-'
-'    'minimize calling form
-'    ToggleForm Me.CallingForm, -1
-'
-'    Me.FormHeader.BackColor = lngBrown
-'    Me.TitleFontColor = lngWhite
-'
-'    Me.lineIndicator.Width = Me.Form.Width
-'    Me.lineIndicator.borderColor = lngLime
-'
-'    'defaults
-'    Dim instruction As String
-'    Dim MaxCount As Integer
-'
-'    instruction = "Enter your establishment comment."
-'    MaxCount = 50
-'
-'    'set comment context
-'    ary = Split(Nz(Me.OpenArgs, ""), "|")
-'    If IsArray(ary) Then
-'        Me.Context = ary(0) & " - " & ary(1) '"Plot - 24"
-'
-'        'set filter for subform
-'        Me.list.Form.Filter = "CommentType=" & ary(0) & " AND CommentType_ID=" & ary(1)
-'        'update subform
-'        Me.list.Form.Requery
-'
-'        MaxCount = ary(2)
-'
-'        'set instructions based on calling form
-'        Select Case LCase(ary(0))
-'            Case "importeddata"
-'                instruction = "Enter your import comment."
-'        End Select
-'    Else
-'        GoTo Exit_Handler
-'    End If
-'
-'    Me.Instructions = instruction
-'    Me.CountLabelVisible = False
-'    Me.CurrentCount = "Characters Remaining:"
-'    Me.lblCharacterCount.Visible = False
-'    Me.MaxCount = MaxCount
-'    Me.AlertCount = 10
-'
-'    Me.AddAction = "add_"
-'
-'    Me.Context = Me.OpenArgs
-
 Exit_Handler:
     Exit Sub
     

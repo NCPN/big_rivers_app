@@ -20,8 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =32
-    Right =13155
-    Bottom =11385
+    Left =1035
+    Top =6330
+    Right =8670
+    Bottom =10695
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xe8a9c07c72c3e440
@@ -492,7 +494,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlotList
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -501,6 +503,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 10/16/2017 - 1.01 - revised to use tbxID vs. ID on delete
+'               BLC - 11/10/2017 - 1.02 - fix so passes form Me.Parent.Form vs. Me.Parent (btnEdit_Click())
 ' =================================
 
 '---------------------
@@ -705,12 +708,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 11/10/2017 - fix so passes form Me.Parent.Form vs. Me.Parent
 ' ---------------------------------
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
-    PopulateForm Me.Parent, ID
+    PopulateForm Me.Parent.Form, ID
 
 Exit_Handler:
     Exit Sub

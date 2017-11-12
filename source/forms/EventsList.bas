@@ -20,12 +20,17 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =22215
-    Bottom =12585
+    Left =285
+    Top =2985
+    Right =7920
+    Bottom =7350
     DatasheetGridlinesColor =14806254
-    RecSrcDt = Begin
-        0x7c3b4d9f2d02e540
-    End
+    RecordSource ="PARAMETERS pkcode Text ( 255 ), waterway Text ( 255 ); SELECT e.ID, s.SiteCode, "
+        "e.Site_ID, s.SiteName, loc.LocationName, e.Location_ID, e.StartDate FROM (((Even"
+        "t AS e INNER JOIN Site AS s ON s.ID = e.Site_ID) INNER JOIN Location AS loc ON l"
+        "oc.ID = e.Location_ID) INNER JOIN Park AS p ON p.ID = s.Park_ID) INNER JOIN Rive"
+        "r AS r ON r.ID = s.River_ID WHERE p.ParkCode = [pkcode] AND r.Segment = [waterwa"
+        "y] ORDER BY e.StartDate DESC , s.SiteName, loc.LocationName; "
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"

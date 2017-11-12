@@ -1,4 +1,4 @@
-﻿dbMemo "SQL" ="SELECT DISTINCT ID, FirstName + ' ' + LastName AS Name\015\012FROM Contact;\015\012"
+﻿dbMemo "SQL" ="SELECT ParkCode\015\012FROM Park\015\012WHERE IsActiveForProtocol = 1;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3810
-    Top =3420
-    Right =12150
-    Bottom =14805
+    Left =3855
+    Top =3150
+    Right =14190
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -1693,7 +1693,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.09
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -1711,6 +1711,7 @@ Option Explicit
 '               BLC - 9/27/2017 - 1.06 - update to use Factory.NewClassXX() vs GetClass()
 '               BLC - 10/2/2017 - 1.07 - add btnSpeciesSearch_Click()
 '               BLC - 10/19/2017 - 1.08 - added comment length
+'               BLC - 11/9/2017 - 1.09 - enable comment, confirm unknown buttons when ID > 0
 ' =================================
 
 '---------------------
@@ -1810,10 +1811,6 @@ On Error GoTo Err_Handler
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
-                'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                'Nz(TempVars("River"), "") & Space(2) & ">" & Space(2) & _
-                'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                'Nz(TempVars("Feature"), "")
 
     Title = "Unknown Species"
     lblTitle.Caption = ""
@@ -2246,6 +2243,7 @@ End Sub
 ' Revisions:
 '   BLC - 7/5/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
+'   BLC - 11/9/2017 - enable comment, confirm unknown buttons when ID > 0
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -2265,6 +2263,12 @@ On Error GoTo Err_Handler
     
     'refresh form
     Me.Requery
+    
+    'enable comment button if ID > 0
+    If tbxID > 0 Then
+        btnComment.Enabled = True
+        btnConfirmUnknown = True
+    End If
     
 Exit_Handler:
     Exit Sub
