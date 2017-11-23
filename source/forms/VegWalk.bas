@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =3810
-    Top =3420
-    Right =12150
-    Bottom =14805
+    Left =3855
+    Top =3150
+    Right =12765
+    Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06ca311a8bd5e440
@@ -226,6 +226,7 @@ Begin Form
                     Left =7020
                     Top =1020
                     Width =720
+                    TabIndex =1
                     ForeColor =16711680
                     Name ="btnComment"
                     Caption ="í ½í·©"
@@ -280,7 +281,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="BLCA  >  Gunnison  >  RR  >  A"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -294,7 +295,7 @@ Begin Form
                     Left =3480
                     Top =1560
                     Width =1800
-                    TabIndex =1
+                    TabIndex =3
                     ForeColor =16711680
                     Name ="btnAddUnknown"
                     Caption ="?  Add Unknown"
@@ -329,7 +330,6 @@ Begin Form
                     Width =3414
                     Height =315
                     ColumnOrder =0
-                    TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -369,7 +369,7 @@ Begin Form
                     Left =5400
                     Top =1560
                     Width =1800
-                    TabIndex =3
+                    TabIndex =4
                     ForeColor =16711680
                     Name ="btnSpeciesSearch"
                     Caption ="í ½í´Ž  Species"
@@ -398,7 +398,7 @@ Begin Form
                     OverlapFlags =85
                     Left =4440
                     Top =1020
-                    TabIndex =4
+                    TabIndex =2
                     ForeColor =16711680
                     Name ="btnAddEvent"
                     Caption ="í ½í·“  Add Event"
@@ -468,7 +468,7 @@ Begin Form
                     Left =6720
                     Top =60
                     Width =720
-                    TabIndex =1
+                    TabIndex =3
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -536,7 +536,7 @@ Begin Form
                     Top =1500
                     Width =7650
                     Height =4380
-                    TabIndex =2
+                    TabIndex =7
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.VegWalkList"
@@ -553,7 +553,7 @@ Begin Form
                     Left =5940
                     Top =60
                     Width =720
-                    TabIndex =3
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -641,7 +641,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =4
+                    TabIndex =6
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -744,6 +744,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
+                    Caption ="msg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =1140
@@ -766,6 +767,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16772541
                     Name ="lblMsgIcon"
+                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -783,10 +785,11 @@ Begin Form
                     Top =135
                     Width =360
                     Height =360
-                    TabIndex =6
+                    TabIndex =1
                     BorderColor =10921638
                     Name ="chkIsSeedling"
                     AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =5640
@@ -820,7 +823,7 @@ Begin Form
                     Top =480
                     Width =2850
                     Height =315
-                    TabIndex =7
+                    TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752

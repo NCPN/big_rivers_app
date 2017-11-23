@@ -20,9 +20,9 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3855
+    Left =3825
     Top =3150
-    Right =14190
+    Right =12765
     Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -190,7 +190,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Unknown Species"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -208,7 +207,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="description"
+                    Caption ="Enter the unknown information and click save."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -260,9 +259,9 @@ Begin Form
                     Left =9240
                     Top =960
                     Width =720
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="í ½í·©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -270,6 +269,7 @@ Begin Form
                     LayoutCachedTop =960
                     LayoutCachedWidth =9960
                     LayoutCachedHeight =1320
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =15060409
@@ -290,9 +290,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777184
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =5820
                     LayoutCachedTop =60
@@ -309,7 +309,7 @@ Begin Form
                     TabIndex =1
                     ForeColor =4210752
                     Name ="btnConfirmUnknown"
-                    Caption ="Identify Unknown"
+                    Caption ="í ½í´‘"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Identify/Confirm Unknown"
                     GridlineColor =10921638
@@ -320,7 +320,8 @@ Begin Form
                     LayoutCachedHeight =1320
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -397,11 +398,12 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =8760
                     Top =60
                     Width =720
-                    TabIndex =2
+                    TabIndex =18
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -451,7 +453,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -472,9 +475,9 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =20
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -494,7 +497,7 @@ Begin Form
                     Left =7860
                     Top =60
                     Width =720
-                    TabIndex =4
+                    TabIndex =19
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -544,7 +547,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -565,7 +569,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =21
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -587,11 +591,12 @@ Begin Form
                     Top =1620
                     Width =4620
                     Height =720
-                    TabIndex =1
+                    TabIndex =4
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
                     AfterUpdate ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Enter plant general description"
                     GridlineColor =10921638
 
@@ -631,6 +636,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxUnknownCode"
                     AfterUpdate ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009e000000020000000100000000000000000000001a00000001000000 ,
                         0x00000000fff2000000000000030000001b0000001e0000000100000000000000 ,
@@ -661,12 +667,12 @@ Begin Form
                     Top =4200
                     Width =2340
                     Height =1680
-                    FontSize =14
+                    FontSize =24
                     LeftMargin =72
                     TopMargin =72
                     BackColor =12444887
                     Name ="lblFlower"
-                    Caption ="flower"
+                    Caption ="â€"
                     ControlTipText ="Add/Edit flower charateristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =2940
@@ -688,12 +694,12 @@ Begin Form
                     Top =2445
                     Width =5040
                     Height =1680
-                    FontSize =14
+                    FontSize =20
                     LeftMargin =216
                     TopMargin =288
                     BackColor =11916796
                     Name ="lblLeaf"
-                    Caption ="leaf"
+                    Caption ="í ¼í½‚"
                     GridlineColor =10921638
                     LayoutCachedLeft =4980
                     LayoutCachedTop =2445
@@ -714,12 +720,12 @@ Begin Form
                     Top =2445
                     Width =4620
                     Height =1680
-                    FontSize =14
+                    FontSize =20
                     LeftMargin =216
                     TopMargin =288
                     BackColor =16051931
                     Name ="lblGrass"
-                    Caption ="grass"
+                    Caption ="í ¼í¼¾"
                     ControlTipText ="Add/Edit grass characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -741,7 +747,7 @@ Begin Form
                     Top =7620
                     Width =9855
                     Height =4380
-                    TabIndex =6
+                    TabIndex =22
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.UnknownList"
@@ -791,7 +797,7 @@ Begin Form
                     Top =6600
                     Width =360
                     Height =360
-                    TabIndex =7
+                    TabIndex =15
                     BorderColor =10921638
                     Name ="chkHasPhotos"
                     AfterUpdate ="[Event Procedure]"
@@ -827,7 +833,7 @@ Begin Form
                     Top =6600
                     Width =360
                     Height =360
-                    TabIndex =8
+                    TabIndex =16
                     BorderColor =10921638
                     Name ="chkCollected"
                     AfterUpdate ="[Event Procedure]"
@@ -872,7 +878,7 @@ Begin Form
                     TopMargin =72
                     BackColor =12835293
                     Name ="lblStem"
-                    Caption ="stem"
+                    Caption ="í ¼í¼¿"
                     ControlTipText ="Add/Edit stem characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
@@ -890,16 +896,19 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
+                    ColumnCount =2
                     Left =6900
                     Top =6540
                     Width =2274
                     Height =315
-                    TabIndex =9
+                    TabIndex =17
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="cbxCollectedBy"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1008"
                     AfterUpdate ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Person who collected the plant"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -946,7 +955,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="message"
+                    Caption ="msg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =7260
@@ -990,13 +999,13 @@ Begin Form
                     Top =510
                     Width =9840
                     Height =690
-                    FontSize =14
+                    FontSize =30
                     LeftMargin =216
                     RightMargin =216
                     BackColor =32768
                     ForeColor =16777215
                     Name ="lblConfirmed"
-                    Caption ="confirmed"
+                    Caption ="í ½í·¹"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =510
@@ -1015,11 +1024,12 @@ Begin Form
                     Top =6120
                     Width =5310
                     Height =315
-                    TabIndex =10
+                    TabIndex =14
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxBestGuess"
                     AfterUpdate ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Best guess species"
                     GridlineColor =10921638
 
@@ -1052,7 +1062,7 @@ Begin Form
                     Top =720
                     Width =2280
                     Height =315
-                    TabIndex =11
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxConfirmedCode"
@@ -1092,11 +1102,12 @@ Begin Form
                     Top =1620
                     Width =5040
                     Height =720
-                    TabIndex =12
+                    TabIndex =5
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSalientFeature"
                     AfterUpdate ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Enter plant most salient feature"
                     GridlineColor =10921638
 
@@ -1133,7 +1144,7 @@ Begin Form
                     Top =60
                     Width =1794
                     Height =315
-                    TabIndex =13
+                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -1146,7 +1157,9 @@ Begin Form
                     End
                     Name ="cbxPlantType"
                     RowSourceType ="Value List"
+                    RowSource ="herb;shrub;tree;grass;sedge;other"
                     AfterUpdate ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Type of plant"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -1174,9 +1187,9 @@ Begin Form
                     Top =3465
                     Width =3366
                     Height =555
-                    TabIndex =14
+                    TabIndex =7
                     BorderColor =10921638
-                    Name ="Frame51"
+                    Name ="optgPerennialGrassType"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1260
@@ -1283,7 +1296,7 @@ Begin Form
                     Top =2685
                     Width =3366
                     Height =598
-                    TabIndex =15
+                    TabIndex =6
                     BorderColor =10921638
                     Name ="optgGrassType"
                     GridlineColor =10921638
@@ -1392,10 +1405,11 @@ Begin Form
                     Top =2565
                     Width =3285
                     Height =315
-                    TabIndex =16
+                    TabIndex =8
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxLeafType"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Leaf type"
                     GridlineColor =10921638
 
@@ -1444,10 +1458,11 @@ Begin Form
                     Top =3015
                     Width =3285
                     Height =315
-                    TabIndex =17
+                    TabIndex =9
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxLeafMargin"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Leaf margin"
                     GridlineColor =10921638
 
@@ -1465,7 +1480,7 @@ Begin Form
                     Height =540
                     BorderColor =8355711
                     ForeColor =8355711
-                    Name ="Label68"
+                    Name ="lblOtherLeafCharacteristics"
                     Caption ="Other Leaf Characteristics"
                     GridlineColor =10921638
                     LayoutCachedLeft =5160
@@ -1480,10 +1495,11 @@ Begin Form
                     Top =3480
                     Width =3285
                     Height =525
-                    TabIndex =18
+                    TabIndex =10
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxLeafOtherCharacteristics"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Leaf - other characteristics"
                     GridlineColor =10921638
 
@@ -1516,10 +1532,11 @@ Begin Form
                     Top =4800
                     Width =2460
                     Height =960
-                    TabIndex =19
+                    TabIndex =11
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxStemCharacteristics"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Stem characteristics"
                     GridlineColor =10921638
 
@@ -1552,10 +1569,11 @@ Begin Form
                     Top =4860
                     Width =2100
                     Height =900
-                    TabIndex =20
+                    TabIndex =12
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxFlowerCharacteristics"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="Flower characteristics"
                     GridlineColor =10921638
 
@@ -1613,10 +1631,11 @@ Begin Form
                     Top =4860
                     Width =4485
                     Height =900
-                    TabIndex =21
+                    TabIndex =13
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxMicroHabitat"
+                    OnChange ="[Event Procedure]"
                     ControlTipText ="General && microhabitat characteristics"
                     GridlineColor =10921638
 
@@ -1646,18 +1665,21 @@ Begin Form
                     ForeShade =95.0
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     LimitToList = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
+                    ColumnCount =5
                     Left =5880
                     Top =720
                     Width =3894
                     Height =315
-                    TabIndex =22
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="cbxConfirmedSpecies"
                     RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1008;288;0;0"
                     ControlTipText ="Confirmed species"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -1693,7 +1715,7 @@ Option Explicit
 ' =================================
 ' Form:         Unknown
 ' Level:        Application form
-' Version:      1.09
+' Version:      1.10
 ' Basis:        Dropdown form
 '
 ' Description:  Unknown form object related properties, Unknown, functions & procedures for UI display
@@ -1712,6 +1734,8 @@ Option Explicit
 '               BLC - 10/2/2017 - 1.07 - add btnSpeciesSearch_Click()
 '               BLC - 10/19/2017 - 1.08 - added comment length
 '               BLC - 11/9/2017 - 1.09 - enable comment, confirm unknown buttons when ID > 0
+'               BLC - 11/12/2017 - 1.10 - set msg icon & msg defaults, update required fields
+'                                         for save
 ' =================================
 
 '---------------------
@@ -1796,6 +1820,7 @@ End Property
 '   BLC - 7/5/2016 - initial version
 '   BLC - 8/2/2016 - use Me.CallingForm
 '   BLC - 1/24/2017 - adjust to use GetContext()
+'   BLC - 11/12/2017 - set msg icon & msg defaults
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1842,6 +1867,14 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     tbxUnknownCode.BackColor = lngYellow
     cbxPlantType.BackColor = lngYellow
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
+  
+    'confirmed code
+    tbxConfirmedCode.Enabled = False
+    cbxConfirmedSpecies.Enabled = False
+    lblConfirmed.BackColor = lngGray
+    lblConfirmed.Caption = StringFromCodepoint(uCheckboxEmpty)
   
     'ID default -> value used only for edits of existing table values
     tbxID.Value = 0
@@ -1929,9 +1962,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 11/12/2017 - set observer recorder list
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
+
+    If tbxID > 0 Then btnComment.Enabled = True
+    'btnSetObserverRecorder.Enabled = IIf(tbxID.Value > 0, True, False)
 
 Exit_Handler:
     Exit Sub
@@ -1945,19 +1982,19 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_Change
+' Sub:          tbxUnknownCode_Change
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 11/12/2017 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_Change()
+Private Sub tbxUnknownCode_Change()
 On Error GoTo Err_Handler
 
     ReadyForSave
@@ -1968,28 +2005,28 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_Change[Unknown form])"
+            "Error encountered (#" & Err.Number & " - tbxUnknownCode_Change[Unknown form])"
     End Select
     Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxStartDate_LostFocus
+' Sub:          cbxPlantType_Change
 ' Description:  Dropdown change actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, June 1, 2016 - for NCPN tools
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 6/1/2016 - initial version
+'   BLC - 11/12/2017 - initial version
 ' ---------------------------------
-Private Sub tbxStartDate_LostFocus()
+Private Sub cbxPlantType_Change()
 On Error GoTo Err_Handler
 
-    'ReadyForSave
+    ReadyForSave
     
 Exit_Handler:
     Exit Sub
@@ -1997,7 +2034,356 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDate_LostFocus[Unknown form])"
+            "Error encountered (#" & Err.Number & " - cbxPlantType_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxDescription_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxDescription_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDescription_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxSalientFeature_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxSalientFeature_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxSalientFeature_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxLeafType_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxLeafType_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxLeafType_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxLeafMargin_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxLeafMargin_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxLeafMargin_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxLeafOtherCharacteristics_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxLeafOtherCharacteristics_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxLeafOtherCharacteristics_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxStemCharacteristics_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxStemCharacteristics_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxStemCharacteristics_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxFlowerCharacteristics_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxFlowerCharacteristics_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxFlowerCharacteristics_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxMicroHabitat_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxMicroHabitat_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxMicroHabitat_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxBestGuess_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub tbxBestGuess_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxBestGuess_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' Sub:          chkCollected_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub chkCollected_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkCollected_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          chkHasPhotos_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub chkHasPhotos_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkHasPhotos_Change[Unknown form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxCollectedBy_Change
+' Description:  Dropdown change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 12, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/12/2017 - initial version
+' ---------------------------------
+Private Sub cbxCollectedBy_Change()
+On Error GoTo Err_Handler
+
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxCollectedBy_Change[Unknown form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2055,28 +2441,38 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    'Dim loc As New Location
-    Dim loc As NCPN_framework.Location
-    Set loc = Factory.NewLocation
+    'Dim unknown As New Unknown
+    Dim unk As NCPN_framework.UnknownSpecies
+    Set unk = Factory.NewUnknownSpecies
     
-    With loc
+    With unk
         'values passed into form
-        .CollectionSourceName = "T"
-        
-        .CreateDate = ""
-        .CreatedByID = 0
-        .LastModified = ""
-        .LastModifiedByID = 0
-        
-        '.ProtocolID = 1
-        '.SiteID = 1
         
         'form values
-'        .UnknownName = tbxName.Value
-'        .UnknownType = "" 'cbxUnknownType.SelText
-'
-'        .HeadtoOrientDistance = tbxDistance.Value
-'        .HeadtoOrientBearing = tbxBearing.Value
+        .UnknownCode = tbxUnknownCode  'Text(15)
+        .PlantType = cbxPlantType 'Text(15)
+        .PlantDescription = Nz(tbxDescription, "") 'Memo >> Text(255)
+        .SalientFeature = Nz(tbxSalientFeature, "") 'Text(255)
+        .LeafType = Nz(tbxLeafType, "") 'Text(50)
+        .LeafMargin = Nz(tbxLeafMargin, "") 'Text(50)
+        .LeafCharacter = Nz(tbxLeafOtherCharacteristics, "") 'Text(255)
+        .StemCharacter = Nz(tbxStemCharacteristics, "") 'Text(255)
+        .FlowerCharacter = Nz(tbxFlowerCharacteristics, "") 'Text(255)
+        .GeneralCharacter = Nz(tbxMicroHabitat, "") 'Text(255)
+        .ForbGrassType = Nz(optgGrassType, "") 'Text(10)
+        .PerennialGrassType = Nz(optgPerennialGrassType, "") 'Text(15)
+        .Collected = Nz(Ne(chkCollected, 0), 0) 'Byte
+        .CollectedByID = Nz(cbxCollectedBy, 0) 'Long
+'        .CollectionMethod = Nz(, "") 'Text(50)
+        .BestGuess = Nz(tbxBestGuess, "") 'Text(50)
+        .HasPhotos = Nz(Ne(chkHasPhotos, 0), 0) 'Byte
+
+'        .ConfirmedCode =Nz(,"")'Text(50)
+'        .IdentifiedByID = 'Long
+'        .IdentifiedDate ='DateTime
+
+'        .TransectPosition ='Integer > Double??
+'        .LocationID = 'Long
         
         .ID = tbxID.Value '0 if new, edit if > 0
         .SaveToDb
@@ -2244,6 +2640,7 @@ End Sub
 '   BLC - 7/5/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
 '   BLC - 11/9/2017 - enable comment, confirm unknown buttons when ID > 0
+'   BLC - 11/12/2017 - update required fields to enable save
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -2254,9 +2651,9 @@ On Error GoTo Err_Handler
     isOK = False
     
     'set color of icon depending on if values are set
-'    If tbxDistance.Value > 0 And tbxBearing.Value <> "" Then
+    If Len(tbxUnknownCode) > 0 And cbxPlantType > 0 Then
         isOK = True
-'    End If
+    End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
@@ -2267,7 +2664,7 @@ On Error GoTo Err_Handler
     'enable comment button if ID > 0
     If tbxID > 0 Then
         btnComment.Enabled = True
-        btnConfirmUnknown = True
+        btnConfirmUnknown.Enabled = True
     End If
     
 Exit_Handler:

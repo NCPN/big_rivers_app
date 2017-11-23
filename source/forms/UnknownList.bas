@@ -20,8 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Right =13155
-    Bottom =11385
+    Left =-210
+    Top =7155
+    Right =9630
+    Bottom =11520
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x1faa16ae9bc7e440
@@ -305,7 +307,8 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -363,7 +366,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752

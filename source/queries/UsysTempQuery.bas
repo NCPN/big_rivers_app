@@ -1,10 +1,11 @@
 ﻿Operation =1
 Option =0
-Having ="(((Count(tsys_Db_Templates.TemplateName))>1))"
+Having ="(((Count([tsys_Db_Templates].[TemplateName]))>1))"
 Begin InputTables
     Name ="tsys_Db_Templates"
 End
 Begin OutputColumns
+    Alias ="Expr1"
     Expression ="tsys_Db_Templates.TemplateName"
     Alias ="NumberOfDupes"
     Expression ="Count(tsys_Db_Templates.TemplateName)"
@@ -33,6 +34,9 @@ Begin
         dbText "Name" ="NumberOfDupes"
         dbLong "AggregateType" ="-1"
     End
+    Begin
+        dbText "Name" ="Expr1"
+    End
 End
 Begin
     State =0
@@ -43,7 +47,7 @@ Begin
     Left =-1
     Top =-1
     Right =851
-    Bottom =169
+    Bottom =152
     Left =0
     Top =0
     ColumnsShown =543

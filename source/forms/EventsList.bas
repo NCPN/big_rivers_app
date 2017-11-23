@@ -25,6 +25,9 @@ Begin Form
     Right =7920
     Bottom =7350
     DatasheetGridlinesColor =14806254
+    RecSrcDt = Begin
+        0xc002d3eb7005e540
+    End
     RecordSource ="PARAMETERS pkcode Text ( 255 ), waterway Text ( 255 ); SELECT e.ID, s.SiteCode, "
         "e.Site_ID, s.SiteName, loc.LocationName, e.Location_ID, e.StartDate FROM (((Even"
         "t AS e INNER JOIN Site AS s ON s.ID = e.Site_ID) INNER JOIN Location AS loc ON l"

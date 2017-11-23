@@ -35,11 +35,11 @@ Option Explicit
 '-----------------------------------------------------------------------
 ' VCS
 '-----------------------------------------------------------------------
-Public Const INCLUDE_TABLES = "AppEnum, AppPlot, AppReport, AppSettings, Icon, SOP_VersionTable," _
-                              & "tsys_App_Defaults, tsys_App_Defaults, tsys_Db_Templates," _
-                              & "Tally, tsys_BE_Updates, tsys_Link_Dbs, tsys_Link_Files, tsys_Link_Tables," _
-                              & "USysRibbons, Access, Feature, Flags, Park, Priority," _
-                              & "River, Site, Site_Feature, SOP, Status"
+'Global Const APP_INCLUDE_TABLES As String = "AppEnum, AppPlot, AppReport, AppSettings, Icon, SOP_VersionTable," _
+'                              & "tsys_App_Defaults, tsys_App_Defaults, tsys_Db_Templates," _
+'                              & "Tally, tsys_BE_Updates, tsys_Link_Dbs, tsys_Link_Files, tsys_Link_Tables," _
+'                              & "USysRibbons, Access, Feature, Flags, Park, Priority," _
+'                              & "River, Site, Site_Feature, SOP, Status"
 
 ' ---------------------------------
 ' CONSTANTS:    global constant values

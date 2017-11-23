@@ -22,7 +22,7 @@ Begin Form
     ItemSuffix =84
     Left =3855
     Top =3150
-    Right =14190
+    Right =12765
     Bottom =14535
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -373,7 +373,7 @@ Begin Form
                     Left =6720
                     Top =60
                     Width =720
-                    TabIndex =1
+                    TabIndex =6
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -444,7 +444,7 @@ Begin Form
                     Width =720
                     Height =300
                     FontSize =9
-                    TabIndex =2
+                    TabIndex =8
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -466,7 +466,7 @@ Begin Form
                     Left =5940
                     Top =60
                     Width =720
-                    TabIndex =3
+                    TabIndex =7
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
@@ -537,7 +537,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =4
+                    TabIndex =9
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -564,6 +564,7 @@ Begin Form
                     Width =960
                     Height =315
                     FontSize =9
+                    TabIndex =5
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -584,7 +585,7 @@ Begin Form
                     Top =3000
                     Width =7650
                     Height =4380
-                    TabIndex =5
+                    TabIndex =10
                     BorderColor =10921638
                     Name ="list"
                     SourceObject ="Form.UnknownList"
@@ -620,7 +621,7 @@ Begin Form
                     Top =600
                     Width =2214
                     Height =315
-                    TabIndex =6
+                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -741,7 +742,7 @@ Begin Form
                     Top =1020
                     Width =1860
                     Height =315
-                    TabIndex =7
+                    TabIndex =2
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -851,7 +852,6 @@ Begin Form
                     Width =3774
                     Height =315
                     FontSize =9
-                    TabIndex =8
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -895,7 +895,7 @@ Begin Form
                     Top =1980
                     Width =1680
                     Height =315
-                    TabIndex =9
+                    TabIndex =3
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =16051931
@@ -934,7 +934,7 @@ Begin Form
                     Top =1980
                     Width =2700
                     Height =315
-                    TabIndex =10
+                    TabIndex =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =16051931
