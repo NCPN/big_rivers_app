@@ -20,15 +20,14 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =28
-    Left =1815
-    Top =4710
-    Right =9450
-    Bottom =9075
+    Left =450
+    Top =7320
+    Right =7830
+    Bottom =11430
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x388afb2190c6e440
+        0x07cbc4f50007e540
     End
-    RecordSource ="SELECT * FROM Feature AS f INNER JOIN Location AS l ON l.ID = f.Location_ID; "
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -44,6 +43,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -288,7 +289,8 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -346,7 +348,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752

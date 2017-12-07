@@ -1271,7 +1271,7 @@ On Error GoTo Err_Handler
     lblTemplateMax.BorderStyle = 1 '0-Transparent, 1-Solid, 2-Dashes, 3-Short dashes,
                                    '4-Dots, 5-Sparse dots, 6-Dash dot, 7-Dash dot dot,
                                    '8-Double solid
-    lblTemplateMax.borderColor = lngRed
+    lblTemplateMax.BorderColor = lngRed
     lblTemplateMax.Caption = "Templates over 255 characters must be edited directly " _
                             & "in the template table after saving. " & vbCrLf _
                             & "Save the template, then edit the new template's " _

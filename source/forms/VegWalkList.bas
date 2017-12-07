@@ -20,13 +20,15 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Right =13155
-    Bottom =11385
+    Left =1065
+    Top =3435
+    Right =8700
+    Bottom =7800
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x5614fef60dcbe440
+        0x34d35a973107e540
     End
-    RecordSource ="VegWalkSpecies"
+    RecordSource ="VegWalk"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -41,7 +43,7 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
-    FilterOnLoad =0
+    FilterOnLoad =255
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -172,17 +174,17 @@ Begin Form
                     OverlapFlags =85
                     Left =1560
                     Top =1020
-                    Width =1245
+                    Width =1500
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblSpecies"
-                    Caption ="Species"
+                    Name ="lblWalkStartDate"
+                    Caption ="Walk Start Date"
                     GridlineColor =10921638
                     LayoutCachedLeft =1560
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =3060
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -202,27 +204,6 @@ Begin Form
                     LayoutCachedLeft =960
                     LayoutCachedTop =1020
                     LayoutCachedWidth =1230
-                    LayoutCachedHeight =1335
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
-                End
-                Begin Label
-                    OverlapFlags =85
-                    TextAlign =2
-                    Left =4620
-                    Top =1020
-                    Width =1245
-                    Height =315
-                    FontWeight =500
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblIsSeedling"
-                    Caption ="Seedling?"
-                    ControlTipText ="Indicates if the species present is a seedling (not an adult)"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =4620
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =5865
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -372,8 +353,8 @@ Begin Form
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =4138256
-                    Name ="tbxSpecies"
-                    ControlSource ="Master_PLANT_Code"
+                    Name ="tbxWalkStartDate"
+                    ControlSource ="WalkStartDate"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1440
@@ -404,30 +385,6 @@ Begin Form
                     LayoutCachedLeft =900
                     LayoutCachedWidth =1380
                     LayoutCachedHeight =315
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4740
-                    Width =975
-                    Height =300
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxIsSeedling"
-                    ControlSource ="IsSeedling"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4740
-                    LayoutCachedWidth =5715
-                    LayoutCachedHeight =300
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
                 End
             End
         End
@@ -460,6 +417,8 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 5/31/2016  - 1.00 - initial version
 '               BLC - 10/16/2017 - 1.01 - revised to use tbxID vs. ID on delete
+'               BLC - 11/26/2017 - 1.02 - revised to list veg walk info vs. species
+'                                         VegSpecies added to cover them
 ' =================================
 
 '---------------------
@@ -564,6 +523,8 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 11/26/2017 - revised to list veg walk info vs. species
+'                      VegSpecies added to cover them
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler

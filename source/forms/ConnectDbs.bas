@@ -22,10 +22,10 @@ Begin Form
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =111
-    Left =3855
-    Top =2430
-    Right =23490
-    Bottom =15015
+    Left =4065
+    Top =3105
+    Right =16815
+    Bottom =14490
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xfe27f5b1c5c3e440
@@ -1624,12 +1624,13 @@ Private Sub btnUpdateLinks_Click()
         End With
         
         ' update tsys_Link_Dbs & tsys_Link_Files database name & paths
-        DoCmd.SetWarnings False 'hide the append dialog
+'        DoCmd.SetWarnings False 'hide the append dialog
         
 '        strSQL = "UPDATE tsys_Link_Files SET Link_File_Path = '" & strNewPath & "', " & _
 '                 "Link_file_name = '" & strNewDb & "' " & _
 '                 "WHERE Link_file_name = '" & strDbName & "';"
         strSQL = GetTemplate("u_tsys_Link_Files_new_db", "NewPath" & PARAM_SEPARATOR & strNewPath & "|NewDb" & PARAM_SEPARATOR & strNewDb & "|DbName" & PARAM_SEPARATOR & strNewDb)
+Debug.Print strSQL
         DoCmd.RunSQL strSQL
         DoCmd.SetWarnings True
 

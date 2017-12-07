@@ -20,11 +20,11 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =38
-    Right =13155
+    Right =8940
     Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x7ce3e0e10ec7e440
+        0xa998d3ec5708e540
     End
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
@@ -41,6 +41,8 @@ Begin Form
     AllowPivotChartView =0
     AllowPivotChartView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -163,8 +165,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Edit or Delete Records using the buttons for the record at right.\015\012Icon co"
-                        "des at left identify if record may be edited/deleted."
+                    Caption ="Edit records using the buttons for the record at right.\015\012Icon codes at lef"
+                        "t identify if record may be edited."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =120
@@ -311,7 +313,8 @@ Begin Form
                     LayoutCachedHeight =360
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -327,7 +330,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =60
-                    Top =45
+                    Top =60
                     Width =720
                     Height =300
                     FontSize =9
@@ -338,9 +341,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
-                    LayoutCachedTop =45
+                    LayoutCachedTop =60
                     LayoutCachedWidth =780
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =360
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -369,7 +372,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -387,7 +391,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =3660
-                    Top =45
+                    Top =60
                     Width =735
                     Height =300
                     TabIndex =3
@@ -398,57 +402,8 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3660
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =4395
-                    LayoutCachedHeight =345
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =840
-                    Top =30
-                    Width =360
-                    Height =315
-                    TabIndex =4
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxID"
-                    ControlSource ="ID"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =840
-                    LayoutCachedTop =30
-                    LayoutCachedWidth =1200
-                    LayoutCachedHeight =345
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =4620
-                    Top =60
-                    Width =1140
-                    Height =300
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxSpecies"
-                    ControlSource ="ActionDate"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4620
                     LayoutCachedTop =60
-                    LayoutCachedWidth =5760
+                    LayoutCachedWidth =4395
                     LayoutCachedHeight =360
                     ForeThemeColorIndex =2
                     ForeTint =100.0
@@ -461,9 +416,60 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1260
+                    Left =840
+                    Top =45
+                    Width =540
+                    Height =315
+                    FontSize =9
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="tbxID"
+                    ControlSource ="ID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =840
+                    LayoutCachedTop =45
+                    LayoutCachedWidth =1380
+                    LayoutCachedHeight =360
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =4500
                     Top =60
-                    Width =2280
+                    Width =1380
+                    Height =300
+                    FontSize =9
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxSpecies"
+                    ControlSource ="ActionDate"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4500
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =360
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1440
+                    Top =60
+                    Width =2100
                     Height =300
                     TabIndex =6
                     BorderColor =10921638
@@ -472,7 +478,7 @@ Begin Form
                     ControlSource ="ContactName"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1260
+                    LayoutCachedLeft =1440
                     LayoutCachedTop =60
                     LayoutCachedWidth =3540
                     LayoutCachedHeight =360
@@ -619,6 +625,9 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    'default
+    Me.RecordSource = ""
+
     lblTitle.Caption = ""
     lblDirections.Caption = "Edit records using the buttons for the record at right." _
                             & vbCrLf & "Icon codes at left identify if record may be edited."
@@ -633,10 +642,13 @@ On Error GoTo Err_Handler
     btnDelete.Caption = StringFromCodepoint(uDelete)
     btnDelete.ForeColor = lngRed
     
-    'hide delete!
-    btnDelete.Visible = False
+    'hide delete! < no
+    btnDelete.Visible = True
 
-    Me.RecordSource = GetTemplate("s_record_action_by_refID")
+    'Dim Params(0 To 2) As Variant
+    'Params(0) = Me
+    'Params (1)
+    'Me.RecordSource = GetTemplate("s_record_action_by_refID", Params)
 
 Exit_Handler:
     Exit Sub
@@ -756,6 +768,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/16/2017 - revised to RecordAction table on delete
+'   BLC - 12/5/2017  - update for using msg & icon vs. msgoverlay
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -766,7 +779,29 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "RecordAction", tbxID
+    If result = vbYes Then
+        
+        DeleteRecord "RecordAction", tbxID, False
+    
+        Me.Parent.lblMsgIcon.ForeColor = lngLtLime
+        Me.Parent.lblMsg.ForeColor = lngLtLime
+        Me.Parent.lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & _
+                                        StringFromCodepoint(uRTriangle)
+        Me.Parent.lblMsg.Caption = "Record deleted!"
+        
+        If Me.Parent.tbxID > 0 Then
+            'clear the deleted record
+            Me.Requery
+            
+            'clear parent form
+            'clear fields
+            ClearForm Me.Parent
+                
+        End If
+        
+    '    Me.Parent![list].Requery
+    
+    End If
     
     'clear the deleted record
     Me.Requery

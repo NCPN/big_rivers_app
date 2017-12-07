@@ -20,16 +20,18 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =6180
-    Top =2175
-    Right =14040
-    Bottom =12780
+    Left =4065
+    Top =3105
+    Right =16815
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0xd3734756f206e540
     End
-    Caption ="Events (Sampling Visits)"
+    Caption ="Site"
     OnCurrent ="[Event Procedure]"
+    BeforeUpdate ="[Event Procedure]"
+    AfterUpdate ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
@@ -163,7 +165,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Site"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -181,7 +182,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Enter site details."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -214,9 +215,9 @@ Begin Form
                     Left =6660
                     Top =900
                     Width =720
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="í ½í·©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -224,9 +225,11 @@ Begin Form
                     LayoutCachedTop =900
                     LayoutCachedWidth =7380
                     LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -244,9 +247,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777215
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="BLCA  >  Gunnison  >  EP  >  B"
                     GridlineColor =10921638
                     LayoutCachedLeft =3600
                     LayoutCachedTop =60
@@ -340,7 +343,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -361,6 +365,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSiteCode"
+                    ControlSource ="SiteCode"
                     AfterUpdate ="[Event Procedure]"
                     OnKeyPress ="[Event Procedure]"
                     OnLostFocus ="[Event Procedure]"
@@ -470,7 +475,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -530,6 +536,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    ControlSource ="ID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -553,6 +561,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSiteName"
+                    ControlSource ="SiteName"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter full site name"
                     ConditionalFormat = Begin
@@ -588,6 +597,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
+                    ControlSource ="SiteDescription"
                     ControlTipText ="Enter site description as needed."
                     GridlineColor =10921638
 
@@ -626,6 +636,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxSiteDirections"
+                    ControlSource ="SiteDirections"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Enter directions to the site."
                     GridlineColor =10921638
@@ -669,7 +680,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="message"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =4320
@@ -690,9 +700,8 @@ Begin Form
                     FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =4320
@@ -726,7 +735,7 @@ Option Explicit
 ' =================================
 ' Form:         Site
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  Site form object related properties, events, functions & procedures for UI display
@@ -738,6 +747,8 @@ Option Explicit
 '                                        mod_App_Data Upsert/SetRecord()
 '               BLC - 10/20/2016 - 1.02 - adjusted to use GetContext(), added CallingForm property
 '               BLC - 1/31/2017  - 1.03 - added ClearForm to clear form fields after save
+'               BLC - 11/24/2017 - 1.04 - Save button enable only for new records,
+'                                         added before & after form update events
 ' =================================
 
 '---------------------
@@ -750,6 +761,8 @@ Option Explicit
 Private m_Title As String
 Private m_Directions As String
 Private m_CallingForm As String
+
+Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
 '---------------------
 ' Event Declarations
@@ -818,6 +831,7 @@ End Property
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
+'   BLC - 11/24/2017 - Save button enable only for new records
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -915,12 +929,17 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 11/24/2017 - Save button enable only for new records
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-              
-      If tbxID > 0 Then btnComment.Enabled = True
+    
+    'default
+    btnSave.Enabled = False
+    
+'    If tbxID > 0 Then btnComment.Enabled = True
 
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -928,6 +947,69 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Site form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_BeforeUpdate
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/24/2017 - initial version
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+              
+    If Not m_SaveOK Then
+        Cancel = True
+    End If
+    'Cancel = True
+
+    Me.lblMsg.Caption = StringFromCodepoint(uRArrow) & " Updating record..."
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Events form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/24/2017 - initial version
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+              
+    Me.lblMsg.Caption = ""
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Events form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1243,6 +1325,7 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
+'   BLC - 11/24/2017 - Save button enable only for new records
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1260,7 +1343,9 @@ On Error GoTo Err_Handler
     End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
-    btnSave.Enabled = isOK
+    
+    'enable save button only for new sites (tbxID = 0)
+    If tbxID = 0 Then btnSave.Enabled = isOK
     
     'refresh form
     Me.Requery

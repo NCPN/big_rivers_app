@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =3855
-    Top =3150
-    Right =12765
-    Bottom =14535
+    Left =4065
+    Top =3105
+    Right =16815
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x656d3fc92f05e540
@@ -810,8 +810,8 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.14
-' Basis:        Dropdown form
+' Version:      1.15
+' Basis:        Dropdown frm
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
 '
@@ -836,6 +836,7 @@ Option Explicit
 '               BLC - 10/24/2017 - 1.12 - comment out unused cbxSite
 '               BLC - 11/6/2017  - 1.13 - set so Save button only enabled for new events (tbxID = 0)
 '               BLC - 11/10/2017 - 1.14 - added Form_GotFocus for updating cbxLocation after new location added
+'               BLC - 11/24/2017 - 1.15 - revised comment button caption
 ' =================================
 
 '---------------------
@@ -926,6 +927,7 @@ End Property
 '   BLC - 1/13/2017 - revised to use && vs. StringFromCodepoint(uAmpersand) for directions
 '   BLC - 10/16/2017 - added date hint, uncommented ClearForm()
 '   BLC - 10/24/2017 - commented out unused cbxSite
+'   BLC - 11/24/2017 - revised comment button caption
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -947,6 +949,9 @@ On Error GoTo Err_Handler
     Directions = "Choose the site location, then enter the sampling start date."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
+    btnComment.Caption = StringFromCodepoint(uComment)
+    btnComment.ForeColor = lngBlue
+
     
     'set hint
     Me.lblHintDate.Caption = "M\DD\YYYY"

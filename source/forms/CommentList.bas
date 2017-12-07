@@ -19,12 +19,12 @@ Begin Form
     Width =9060
     DatasheetFontHeight =11
     ItemSuffix =43
-    Left =3525
-    Top =6630
-    Right =12945
-    Bottom =10995
+    Left =4230
+    Top =7005
+    Right =13650
+    Bottom =11370
     DatasheetGridlinesColor =14806254
-    Filter ="CommentType='event' AND CommentType_ID=39"
+    Filter ="CommentType='event' AND CommentType_ID=38"
     RecSrcDt = Begin
         0x0a6c31995402e540
     End
@@ -693,7 +693,7 @@ Option Explicit
 ' =================================
 ' Form:         CommentList
 ' Level:        Application form
-' Version:      1.00
+' Version:      1.01
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -701,6 +701,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 18, 2017
 ' References:   -
 ' Revisions:    BLC - 10/18/2017 - 1.00 - initial version
+'               BLC - 11/24/2017 - 1.01 - fixed to delete from AppComment vs tsys_Db_Templates
 ' =================================
 
 '---------------------
@@ -1014,6 +1015,7 @@ End Sub
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
+'   BLC - 11/24/2017 - fixed to delete from AppComment vs tsys_Db_Templates
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -1024,7 +1026,7 @@ On Error GoTo Err_Handler
      result = MsgBox("Delete Record this record: #" & tbxID & " ?" _
                         & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Record?")
 
-    If result = vbYes Then DeleteRecord "tsys_Db_Templates", tbxID
+    If result = vbYes Then DeleteRecord "AppComment", tbxID
     
     'clear the deleted record
     Me.Requery

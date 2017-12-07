@@ -20,9 +20,9 @@ Begin Form
     Width =7680
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =1035
+    Left =1065
     Top =4875
-    Right =8415
+    Right =8445
     Bottom =9240
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -731,13 +731,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Option Compare Database
+    Option Compare Database
 Option Explicit
 
 ' =================================
 ' Form:         LocationList
 ' Level:        Application form
-' Version:      1.04
+' Version:      1.05
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -750,6 +750,7 @@ Option Explicit
 '                                        update forecolor based on tbxIsSensitive value
 '               BLC - 10/16/2017 - 1.03 - fixed to use tbxID vs. ID on
 '               BLC - 10/24/2017 - 1.04 - cleared parent form fields on delete
+'               BLC - 11/24/2017 - 1.05 - revised to requery list & clear msg after deletes
 ' =================================
 
 '---------------------
@@ -1002,12 +1003,16 @@ End Sub
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
 '   BLC - 9/28/2017 - revised to tbxID vs ID
+'   BLC - 11/24/2017 - clear any existing msgs
 ' ---------------------------------
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
     'populate the parent form
     PopulateForm Me.Parent, tbxID
+    
+    Me.Parent.lblMsgIcon.Caption = ""
+        Me.Parent.lblMsg.Caption = ""
 
 Exit_Handler:
     Exit Sub
@@ -1034,6 +1039,7 @@ End Sub
 '   BLC - 6/1/2016 - initial version
 '   BLC - 10/16/2017 - revised to use tbxID vs. ID on delete
 '   BLC - 10/24/2017 - cleared parent form fields
+'   BLC - 11/24/2017 - requery list after deletes
 ' ---------------------------------
 Private Sub btnDelete_Click()
 On Error GoTo Err_Handler
@@ -1066,6 +1072,7 @@ On Error GoTo Err_Handler
             Me.Parent.cbxCollectionSourceID.ControlSource = ""
         End If
         
+        Me.Parent![list].Requery
     End If
 
 Exit_Handler:

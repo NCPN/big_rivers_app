@@ -268,7 +268,7 @@ End Property
 
 Public Property Let BarColor(Value As Variant)
     m_BarColor = Value
-    Me.lineIndicator.borderColor = m_BarColor
+    Me.lineIndicator.BorderColor = m_BarColor
 End Property
 
 Public Property Get BarColor()

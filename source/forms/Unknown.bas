@@ -20,10 +20,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =11
     ItemSuffix =81
-    Left =3825
-    Top =3150
-    Right =12765
-    Bottom =14535
+    Left =14235
+    Top =3120
+    Right =23175
+    Bottom =14505
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -365,7 +365,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =12120
+            Height =11220
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -746,7 +746,7 @@ Begin Form
                     Left =105
                     Top =7620
                     Width =9855
-                    Height =4380
+                    Height =3480
                     TabIndex =22
                     BorderColor =10921638
                     Name ="list"
@@ -756,7 +756,7 @@ Begin Form
                     LayoutCachedLeft =105
                     LayoutCachedTop =7620
                     LayoutCachedWidth =9960
-                    LayoutCachedHeight =12000
+                    LayoutCachedHeight =11100
                 End
                 Begin Rectangle
                     SpecialEffect =0
@@ -765,14 +765,14 @@ Begin Form
                     OverlapFlags =93
                     Top =7500
                     Width =10140
-                    Height =4620
+                    Height =3720
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
                     LayoutCachedTop =7500
                     LayoutCachedWidth =10140
-                    LayoutCachedHeight =12120
+                    LayoutCachedHeight =11220
                     BackThemeColorIndex =-1
                 End
                 Begin Label

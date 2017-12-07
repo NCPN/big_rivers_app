@@ -199,7 +199,7 @@ Public Enum TaglineType
     WRS = 83
     rs = 84
     V = 85
-    G = 86
+    g = 86
     W = 87
     R = 88
     D = 89

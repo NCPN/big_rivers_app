@@ -19,17 +19,19 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =34
-    Left =2820
-    Top =2430
-    Right =25035
-    Bottom =15015
+    ItemSuffix =35
+    Left =4065
+    Top =3105
+    Right =13005
+    Bottom =14490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x236ab60a61c3e440
+        0x82eca7fa0007e540
     End
-    Caption ="Events (Sampling Visits)"
+    Caption ="Feature"
     OnCurrent ="[Event Procedure]"
+    BeforeUpdate ="[Event Procedure]"
+    AfterUpdate ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
@@ -164,7 +166,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblTitle"
-                    Caption ="Features"
+                    Caption ="Feature"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =60
@@ -182,7 +184,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="directions"
+                    Caption ="Enter feature details."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =420
@@ -216,9 +218,9 @@ Begin Form
                     Top =900
                     Width =720
                     TabIndex =2
-                    ForeColor =4210752
+                    ForeColor =16711680
                     Name ="btnComment"
-                    Caption ="comment"
+                    Caption ="í ½í·©"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -226,9 +228,11 @@ Begin Form
                     LayoutCachedTop =900
                     LayoutCachedWidth =7380
                     LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -246,9 +250,9 @@ Begin Form
                     Height =315
                     FontWeight =600
                     BorderColor =8355711
-                    ForeColor =16777215
+                    ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="Context"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =3660
                     LayoutCachedTop =60
@@ -280,7 +284,7 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    ColumnCount =5
+                    ColumnCount =2
                     Left =1200
                     Top =900
                     Width =3414
@@ -298,7 +302,7 @@ Begin Form
                     End
                     Name ="cbxLocation"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;0;0;0;1"
+                    ColumnWidths ="0;1440"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Transect location"
                     GridlineColor =10921638
@@ -399,6 +403,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -453,7 +458,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -474,6 +480,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxFeature"
+                    ControlSource ="Feature"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009a000000020000000100000000000000000000001600000001000000 ,
@@ -579,7 +586,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -591,7 +599,7 @@ Begin Form
                 End
                 Begin Subform
                     CanShrink = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =105
                     Top =4740
                     Width =7650
@@ -639,6 +647,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
+                    ControlSource ="ID"
+                    DefaultValue ="0"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7560
@@ -651,13 +661,13 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
                     Left =420
                     Top =2820
                     Width =7140
                     Height =1500
-                    TabIndex =1
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxDescription"
@@ -695,7 +705,7 @@ Begin Form
                     Top =990
                     Width =7140
                     Height =1320
-                    TabIndex =2
+                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxFeatureDirections"
@@ -738,9 +748,9 @@ Begin Form
                     RightMargin =360
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =65535
                     Name ="lblMsg"
-                    Caption ="message"
+                    Caption ="msg"
                     GridlineColor =10921638
                     LayoutCachedTop =4380
                     LayoutCachedWidth =7860
@@ -750,23 +760,43 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    BackStyle =1
-                    OverlapFlags =215
+                    OverlapFlags =85
+                    Left =3300
+                    Top =180
+                    Width =1620
+                    Height =420
+                    FontSize =8
+                    BorderColor =8355711
+                    ForeColor =16711680
+                    Name ="lblHintFeature"
+                    Caption ="1 or 2-letters \015\012(e.g. A, B, EF, R)"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =3300
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =4920
+                    LayoutCachedHeight =600
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                End
+                Begin Label
+                    OverlapFlags =255
                     TextAlign =2
-                    Top =4380
-                    Width =660
-                    Height =315
-                    TopMargin =7
+                    Left =3720
+                    Top =4140
+                    Width =825
+                    Height =600
+                    FontSize =20
                     BackColor =4144959
                     BorderColor =8355711
-                    ForeColor =16777164
+                    ForeColor =16772541
                     Name ="lblMsgIcon"
                     Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedTop =4380
-                    LayoutCachedWidth =660
-                    LayoutCachedHeight =4695
+                    LayoutCachedLeft =3720
+                    LayoutCachedTop =4140
+                    LayoutCachedWidth =4545
+                    LayoutCachedHeight =4740
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -794,7 +824,7 @@ Option Explicit
 ' =================================
 ' Form:         Feature
 ' Level:        Application form
-' Version:      1.05
+' Version:      1.06
 ' Basis:        Dropdown form
 '
 ' Description:  Feature form object related properties, Feature, functions & procedures for UI display
@@ -810,6 +840,8 @@ Option Explicit
 '                                        to populate location, code cleanup
 '               BLC - 1/11/2017 - 1.04 - added location button/combobox
 '               BLC - 10/17/2017 - 1.05 - fixed comment arguments from Event/Transect to Feature
+'               BLC - 11/24/2017 - 1.06 - fixed Save & Comment button states,
+'                                         added tbxFeatureDirections, tbxDescription after update events
 ' =================================
 
 '---------------------
@@ -822,6 +854,8 @@ Option Explicit
 Private m_Title As String
 Private m_Directions As String
 Private m_CallingForm As String
+
+Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
 '---------------------
 ' Event Declarations
@@ -912,6 +946,7 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     lblDirections.Caption = "Enter feature details."
+    lblHintFeature.Caption = "1 or 2-letters " & vbCrLf & "(e.g. A, B, EF, R)"
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
     
@@ -925,6 +960,7 @@ On Error GoTo Err_Handler
     btnComment.Enabled = False
     btnSave.Enabled = False
     tbxFeature.BackColor = lngYellow
+    'tbxFeature.ValidationRule = "LIKE [A-Z][A-Z]"
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
     
@@ -1005,7 +1041,7 @@ End Sub
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-      If tbxID > 0 Then btnComment.Enabled = True
+      'If tbxID > 0 Then btnComment.Enabled = True
 
 Exit_Handler:
     Exit Sub
@@ -1014,6 +1050,69 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[Feature form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_BeforeUpdate
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/24/2017 - initial version
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+              
+    If Not m_SaveOK Then
+        Cancel = True
+    End If
+    'Cancel = True
+
+    Me.lblMsg.Caption = StringFromCodepoint(uRArrow) & " Updating record..."
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Feature form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/24/2017 - initial version
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+              
+    Me.lblMsg.Caption = ""
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[Feature form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1044,6 +1143,66 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - tbxFeature_Change[Feature form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxFeatureDirections_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/24/2016 - initial version
+' ---------------------------------
+Private Sub tbxFeatureDirections_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxFeatureDirections.Text) > 0 Then _
+        ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxFeatureDirections_Change[Feature form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          tbxDescription_AfterUpdate
+' Description:  Textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 24, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/24/2016 - initial version
+' ---------------------------------
+Private Sub tbxDescription_AfterUpdate()
+On Error GoTo Err_Handler
+
+    If Len(tbxDescription.Text) > 0 Then _
+        ReadyForSave
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDescription_Change[Feature form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1123,7 +1282,21 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
+    'set enable btnSave_Click save
+    m_SaveOK = True
+    
     UpsertRecord Me
+    
+    Me![list].Form.Requery
+    
+    'revert to disable non-btnSave_Click save
+    m_SaveOK = False
+    
+    'clear fields
+    ClearForm Me
+        
+    cbxLocation.ControlSource = ""  'clear from Location_ID
+    cbxLocation.Value = ""
     
 Exit_Handler:
     Exit Sub
@@ -1153,7 +1326,7 @@ End Sub
 Private Sub btnAddLocation_Click()
 On Error GoTo Err_Handler
     
-    'open comment form
+    'open location form
     DoCmd.OpenForm "Location", acNormal, , , , , "Feature|" & tbxID
     
 Exit_Handler:
@@ -1242,6 +1415,8 @@ End Sub
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
 '   BLC - 8/23/2016 - changed ReadyForSave() to public for mod_App_Data Upsert/SetRecord()
+'   BLC - 11/24/2017 - updated so Save button only available when tbxID = 0 (new feature),
+'                      Comment button only available when tbxID > 0 (existing feature)
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1255,13 +1430,24 @@ On Error GoTo Err_Handler
     'requires: feature & location ID
     If Len(Nz(tbxFeature.Value, "")) > 0 Then
         isOK = True
+        
+        lblMsg.ForeColor = lngYellow
+        lblMsgIcon.ForeColor = lngYellow
+        lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+        lblMsg.Caption = "Tab to enter feature changes..."
     End If
     
     tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
-    btnSave.Enabled = isOK
+    
+    'enable save button only for new events (tbxID = 0)
+    If tbxID = 0 Then btnSave.Enabled = isOK
     
     'refresh form
-    Me.Requery
+    'Me.Requery
+    
+    'enable comment if ID > 0
+    If tbxID > 0 Then btnComment.Enabled = True
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:

@@ -20,13 +20,14 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =28
-    Right =13155
-    Bottom =11385
+    Left =450
+    Top =7005
+    Right =7830
+    Bottom =11115
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x69d3d7fef5d1e440
+        0xf7b14756f206e540
     End
-    RecordSource ="Site"
     Caption ="_List"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -289,7 +290,8 @@ Begin Form
                     LayoutCachedHeight =420
                     BackColor =14136213
                     BorderColor =14136213
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752
@@ -349,7 +351,8 @@ Begin Form
                     BackColor =14136213
                     BorderColor =14136213
                     ThemeFontIndex =-1
-                    HoverColor =15060409
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     PressedColor =9592887
                     HoverForeColor =4210752
                     PressedForeColor =4210752

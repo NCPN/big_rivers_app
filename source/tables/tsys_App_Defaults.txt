@@ -1,0 +1,3 @@
+﻿ID	Project	Release_ID	DataTimeframe	UserName	Park	BackupPromptOnStartup	BackupPromptOnExit	CompactBEOnExit	VerifyLinksOnStartup	WebURL	AppContactName	AppContactOrg	AppContactPhone	AppContactEmail
+1	BR16	1	2015	Campbell_Bonnie	CANY		1	1		http://science.nature.nps.gov/im/units/ncpn/datamanagement.cfm	Bonnie L. Campbell	Northern Colorado Plateau Network	435-719-2343	bonnie_campbell@nps.gov
+2	IR15		2015	Campbell_Bonnie	CANY									

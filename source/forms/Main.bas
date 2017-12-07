@@ -17,10 +17,10 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =26
-    Left =4065
-    Top =2295
-    Right =12345
-    Bottom =10260
+    Left =4260
+    Top =3225
+    Right =12540
+    Bottom =11190
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -465,7 +465,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.09
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -483,6 +483,7 @@ Option Explicit
 '               BLC - 10/18/2017 - 1.07 - updated BC to 8 for App Settings (Sheet & ModWentworth) &
 '                                         turned off w/o ParkCode since DataSheet settings require ParkCode
 '               BLC - 10/23/2017 - 1.08 - added Exit button
+'               BLC - 11/24/2017 - 1.09 - disable Veg Plots & VegWalk for BLCA until feature available (TR - 1,2)
 ' =================================
 
 '---------------------
@@ -812,6 +813,9 @@ On Error GoTo Err_Handler
     'DoCmd.CloseDatabase << leaves the VBE shell
     'Dim app As New Access.Application
     
+    'shutdown w/ compact & repair
+    'Application.CompactRepair
+    
     Application.Quit acQuitSaveNone '<< quit w/o saving to avoid saving control states
     
 Exit_Handler:
@@ -1068,6 +1072,7 @@ End Sub
 '   BLC - 9/5/2017 - added BC Loggers link
 '   BLC - 10/18/2017 - updated BC to 8 for App Settings (Sheet & ModWentworth) & turned off w/o ParkCode
 '                      since DataSheet settings require ParkCode
+'   BLC - 11/24/2017 - disable Veg Plots & VegWalk for BLCA until Feature is set (TR - 1,2)
 ' ---------------------------------
 Private Sub PrepareLinks()
 On Error GoTo Err_Handler
@@ -1115,7 +1120,7 @@ On Error GoTo Err_Handler
                         
                         TL = "1,2,6"     'Site, Feature, Location
                         TC = "1,5,6"     'Event, Locations, People
-                        TR = "1,2,6,7,8" 'Veg Plots, Vegetation Walk, Species, Unknowns, Species Search
+                        TR = "6,7,8"     'Species, Unknowns, Species Search
                         BL = "2,4,7,8"   'Transducers, Survey Files, Upload Survey File,
                                          ' Batch Upload Photos
                         BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
@@ -1124,8 +1129,9 @@ On Error GoTo Err_Handler
                         If Len(Nz(TempVars("Feature"), "")) > 0 Then
                             TL = "1,2,3,4,6"    'Site, Feature, Transect, Plot, Location
                             TC = "1,3,5,6"      'Event, VegPlots, Locations, People
-                            BL = "1,2,4,7,8"   'Photos, Transducers, Survey Files, Upload Survey File,
-                                               ' Batch Upload Photos
+                            TR = "1,2,6,7,8"    'Veg Plots, Vegetation Walk,Species, Unknowns, Species Search
+                            BL = "1,2,4,7,8"    'Photos, Transducers, Survey Files, Upload Survey File,
+                                                'Batch Upload Photos
                             BR = "1,2,3,4,5,8"  '#Plots, VegPlot-Species, VegPlot-#Species,
                                                 ' VegWalk-Species, VegWalk-#Species, More
                         End If

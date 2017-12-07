@@ -1065,7 +1065,7 @@ On Error GoTo Err_Handler
     Me.Title = "Comment"
     
     Me.lineIndicator.Width = Me.Form.Width
-    Me.lineIndicator.borderColor = lngLime
+    Me.lineIndicator.BorderColor = lngLime
     
     'defaults
     Dim instruction As String
