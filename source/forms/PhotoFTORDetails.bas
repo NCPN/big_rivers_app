@@ -12,8 +12,8 @@ Begin Form
     GridY =24
     Width =6780
     DatasheetFontHeight =11
-    ItemSuffix =56
-    Right =9645
+    ItemSuffix =57
+    Right =8940
     Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -719,7 +719,7 @@ Begin Form
                             FontWeight =500
                             BorderColor =8355711
                             ForeColor =8355711
-                            Name ="Label43"
+                            Name ="lblComments"
                             Caption ="Comments"
                             GridlineColor =10921638
                             LayoutCachedLeft =540
@@ -1053,6 +1053,43 @@ Begin Form
                         0x4900660028005b004400450056005f004d004f00440045005d003d0046006100 ,
                         0x6c00730065002c0031002c003000290000000000000000000000000000000000 ,
                         0x0000000000
+                    End
+                End
+                Begin TextBox
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =120
+                    Top =6000
+                    Width =480
+                    FontSize =8
+                    TabIndex =13
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxPhotoType"
+                    ConditionalFormat = Begin
+                        0x0100000098000000020000000100000000000000000000000d00000001000000 ,
+                        0x3333ff00ffffff0001000000000000000e0000001b00000001000000ffffff00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004400450056005f004d004f00440045005d003d003100000000005b004400 ,
+                        0x450056005f004d004f00440045005d003d00300000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =6000
+                    LayoutCachedWidth =600
+                    LayoutCachedHeight =6240
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
+                    ConditionalFormat14 = Begin
+                        0x0100020000000100000000000000010000003333ff00ffffff000c0000005b00 ,
+                        0x4400450056005f004d004f00440045005d003d00310000000000000000000000 ,
+                        0x0000000000000000000000010000000000000001000000ffffff00ffffff000c ,
+                        0x0000005b004400450056005f004d004f00440045005d003d0030000000000000 ,
+                        0x00000000000000000000000000000000
                     End
                 End
             End

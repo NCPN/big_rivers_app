@@ -20,10 +20,10 @@ Begin Form
     Width =8220
     DatasheetFontHeight =11
     ItemSuffix =61
-    Left =2955
-    Top =2730
-    Right =16110
-    Bottom =14115
+    Left =9150
+    Top =3510
+    Right =18090
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20f1f0c46fcee440
@@ -1520,10 +1520,10 @@ End Sub
 Private Sub Form_BeforeUpdate(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    Debug.Print Me.Name & " Form_BeforeUpdate SaveOK = " & m_SaveOK
-
-    Debug.Print Me.Name & " Form_BeforeUpdate Me.Dirty IS " & Me.Dirty
-    Debug.Print Me.Name & " Form_BeforeUpdate Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+'    Debug.Print Me.Name & " Form_BeforeUpdate SaveOK = " & m_SaveOK
+'
+'    Debug.Print Me.Name & " Form_BeforeUpdate Me.Dirty IS " & Me.Dirty
+'    Debug.Print Me.Name & " Form_BeforeUpdate Me.list.Form.Dirty IS " & Me.list.Form.Dirty
 
     'avoid actions when clearing form
     If RefSub = "ClearForm" Then GoTo Exit_Handler
@@ -1536,8 +1536,8 @@ On Error GoTo Err_Handler
         'm_ContinueSave = True
     End If
 
-    Debug.Print Me.Name & " Form_BeforeUpdate after cnx Me.Dirty IS " & Me.Dirty
-    Debug.Print Me.Name & " Form_BeforeUpdate after cnx Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+'    Debug.Print Me.Name & " Form_BeforeUpdate after cnx Me.Dirty IS " & Me.Dirty
+'    Debug.Print Me.Name & " Form_BeforeUpdate after cnx Me.list.Form.Dirty IS " & Me.list.Form.Dirty
 
 
 Exit_Handler:
@@ -2067,8 +2067,8 @@ On Error GoTo Err_Handler
 
     Dim isOK As Boolean
     
-    Debug.Print Me.Name & " Form_Current Me.Dirty IS " & Me.Dirty
-    Debug.Print Me.Name & " Form_Current Me.list.Form.Dirty IS " & Me.list.Form.Dirty
+'    Debug.Print Me.Name & " Form_Current Me.Dirty IS " & Me.Dirty
+'    Debug.Print Me.Name & " Form_Current Me.list.Form.Dirty IS " & Me.list.Form.Dirty
 
     'default
     isOK = False

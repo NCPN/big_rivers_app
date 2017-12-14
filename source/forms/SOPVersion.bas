@@ -19,10 +19,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =42
-    Left =3825
-    Top =3105
-    Right =16980
-    Bottom =14490
+    Left =6615
+    Top =2520
+    Right =14175
+    Bottom =13545
     DatasheetGridlinesColor =14806254
     OrderBy ="EffectiveDate DESC"
     RecSrcDt = Begin
@@ -1043,7 +1043,9 @@ End Sub
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   Microsoft, January 19, 2017
+'   https://docs.microsoft.com/en-us/sql/odbc/microsoft/column-name-limitations
 ' Source/date:  Bonnie Campbell, January 19, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
@@ -1061,7 +1063,7 @@ On Error GoTo Err_Handler
     '
     ' retrieve SOP names
     ' retrieve SOP numbers
-    Dim rs As Recordset
+    Dim rs As DAO.Recordset
     
     Dim ary() As Variant
     ary = RetrieveTableColumnData("SOP_VersionTable")
@@ -1071,23 +1073,26 @@ On Error GoTo Err_Handler
     'prepare top level hdr - SOP Names
     'prepare second level hdr - SOP #s
 
-    Dim ary2 As String
+    Dim ary2() As String
     ary2 = Split(ary(1), ",")
     
-    
-    
+    Dim rsColInfo As DAO.Recordset
+    Set rsColInfo = ary(0)
     
     Dim i As Integer
     Dim sop As String, sopnum As Integer
     
-'    For i = 0 To UBound(ary2)
-'
-'        'ary2(i)(0)
-'
+    Dim aryRecord() As Variant
+    
+    For i = 0 To UBound(ary2)
+
+'        Debug.Print ary2(i)(0)
+
 '    'create new record
 '        rs.AddNew
 '
-'        aryRecord = Split(ary2(i)(0), "-")
+'
+'        'aryRecord() = IIF(InStr(ary2(i)Split(ary2(i)(0), "-")
 '
 '        rs!EffectiveDate = aryRecord(0)
 '        rs!ColType = aryRecord(5)
@@ -1097,11 +1102,83 @@ On Error GoTo Err_Handler
 '
 '        'add the new record
 '        rs.Update
-'
-'
-'    Next
+
+
+    Next
+    
+    'create columns - EffectiveDate, 1-XXX SOP names
+    
+    Dim tdf As New DAO.TableDef
+    Dim aryCols() As String
+    Dim tbl As String
+
+    aryCols = Split(ary(1), ",")
+        
+    'generate table name
+    tbl = "SOP_Version_" & Format(Now, "YYYYmmdd_hhmmss")
+
+    'remove table if it already exists
+    Dim result As Boolean
+    If TableExists(tbl) Then _
+         result = MsgBox("Version table already exists. Delete existing table: #" & tbl & " ?" _
+                        & vbCrLf & "This action cannot be undone.", vbYesNo, "Delete Existing SOP Version Table?")
+
+    If result = vbYes Then CurrDb.TableDefs.Delete tbl
+
+    With tdf
+        .Name = tbl
+        .Fields.Append .CreateField("EffectiveDate", dbDate)
+        
+        'iterate through the SOPs (skip EffectiveDate = first record, aryCols(0))
+        'maximum column name length = 64
+        'column w/ any other characters other than letters, #s, or underscores
+        'name must be delimited by enclosing it in back quotes (`)
+        For i = 1 To UBound(aryCols)
+        'Debug.Print aryCols(i) & " " & Len(aryCols(i))
+        
+            'add only viable fields
+            If Len(Trim(aryCols(i))) > 0 Then
+                'add the column
+                .Fields.Append .CreateField("" & Trim(aryCols(i)) & "", dbDouble)
+            End If
+        Next
+        
+        CurrDb.TableDefs.Append tdf
+    End With
+
+    'move table to RESULT TABLES group
+    SetNavGroup "RESULT TABLES", tbl, "table"
+
+    Dim rsNew As DAO.Recordset
+    
+    'open a rs from the table
+    Set rsNew = CurrDb.OpenRecordset(tbl)
     
     
+    'iterate through SOP data
+    If Not (rsColInfo.BOF And rsColInfo.EOF) Then
+        rsColInfo.MoveFirst
+        Do Until rsColInfo.EOF = True
+
+            rs.AddNew
+                
+                Debug.Print rsColInfo.Fields("Column")
+                Debug.Print rsColInfo.Fields("ColType")
+                Debug.Print rsColInfo.Fields("IsReqd")
+                Debug.Print rsColInfo.Fields("Length")
+                Debug.Print rsColInfo.Fields("AllowZLS")
+                
+                'create columns
+                
+                'EffectiveDate first
+                
+            rs.Update
+    
+        rsColInfo.MoveNext
+        Loop
+    End If
+
+
 Exit_Handler:
     Exit Sub
 Err_Handler:

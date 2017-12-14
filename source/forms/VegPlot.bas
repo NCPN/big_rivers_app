@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =99
-    Left =4440
-    Top =915
-    Right =12300
-    Bottom =12285
+    Left =3225
+    Top =2430
+    Right =24735
+    Bottom =15015
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6efd080b49dfe440
@@ -2438,7 +2438,7 @@ Option Explicit
 '               BLC - 10/25/2016 - 1.04 - add CallingForm property & remove ButtonCaption,
 '                                         SelectedID, SelectedValue properties
 '               BLC - 1/9/2017 - 1.05 - added cbxEvent, observer/recorder, substrate cover %
-'                                       functionality
+'
 '               BLC - 1/11/2017 - 1.06 - changed checkboxes (chk) to toggles (tgl)
 '                                        & converted -1/0 values to 1/0 for SQL clarity,
 '                                        changed event/transect display based on site/feature set
@@ -2448,7 +2448,7 @@ Option Explicit
 '               BLC - 9/25/2017 - 1.08 - revise for NCPN_framework.XX classes
 '               BLC - 9/27/2017 - 1.09 - update to use Factory.NewClassXX() vs GetClass()
 '               BLC - 11/1/2017 - 1.10 - added chkCalibration, chkReplicate
-'               BLC - 11/7/2017 - 1.11 - fix cbxEvent column for date (cbxEvent_AfterUpdate())
+'               BLC - 11/7/2017 - 1.11 - fix cbxEvent column fofunctionalityr date (cbxEvent_AfterUpdate())
 '               BLC - 11/10/2017 - 1.12 - updated park specific controls, updated comment click,
 '                                         update to handle unset values using Ne()
 '               BLC - 11/11/2017 - 1.13 - update percent values to use SetTrace()
@@ -2466,6 +2466,8 @@ Option Explicit
 Private m_Title As String
 Private m_Directions As String
 Private m_CallingForm As String
+
+Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
 '---------------------
 ' Event Declarations
@@ -2696,8 +2698,10 @@ On Error GoTo Err_Handler
         Case "BLCA" 'feature level if set
             If Not TempVars("Feature") Is Nothing Then _
                 efilter = "s_events_by_feature"
-                cbxTransect.ColumnCount = 8
-                cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
+                cbxEvent.ColumnCount = 8
+                cbxEvent.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
+'                cbxTransect.ColumnCount = 8
+'                cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
                 
                 tfilter = "s_vegtransect_by_feature"
                 cbxTransect.ColumnCount = 9
@@ -2738,6 +2742,8 @@ On Error GoTo Err_Handler
     'defaults --> always on items
     '% sand & finer, water, litter, woody debris, modal sediment cover,
     '% standing dead, filamentous algae, beaver browse
+    tglBeaverBrowse.Visible = True
+    lblBeaverBrowse.Visible = True
   
     'defaults --> turn off items
     lblTransect.Visible = False
@@ -3651,80 +3657,99 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
     
-    'Dim vp As New VegPlot
-    Dim vp As NCPN_framework.VegPlot
-    Set vp = Factory.NewVegPlot
+'    'Dim vp As New VegPlot
+'    Dim vp As NCPN_framework.VegPlot
+'    Set vp = Factory.NewVegPlot
+'
+'    With vp
+'        'values passed into form
+'        .SiteID = TempVars("SiteID")
+'        .FeatureID = GetFeatureID(TempVars("ParkCode"), TempVars("FeatureID"))
+'
+'        'form values
+'        .EventID = cbxEvent
+'        .VegTransectID = Ne(Nz(cbxTransect, 0), 0)
+'        .PlotNumber = Ne(tbxNumber, 0)
+'        .PlotDistance = Ne(tbxDistance, 0)
+'        .ModalSedimentSizeID = cbxModalSedSize
+'
+'        .PlotDensity = Ne(tbxPlotDensity, 0)
+'
+'        'pct values
+'        .PctFines = SetTrace(tbxPctFines, 0.5)
+'        .PctWater = SetTrace(tbxPctWater, 0.5)
+'        .PctLitter = SetTrace(tbxPctLitter, 0.5)
+'        .PctWoodyDebris = SetTrace(tbxPctWoodyDebris, 0.5)
+'        .PctFilamentousAlgae = SetTrace(tbxPctFA, 0.5)
+'        .PctStandingDead = SetTrace(tbxPctStandingDead, 0.5)
+'        .PctSocialTrails = SetTrace(tbxPctSocialTrails, 0.5)
+'        .PctModalSedimentSize = SetTrace(tbxPctMSS, 0.5)
+'        .WoodyCanopyPctCover = SetTrace(Ne(tbxPctWCC, 0), 0.5)
+'        .UnderstoryRootedPctCover = SetTrace(Ne(tbxPctURC, 0), 0.5)
+'        .AllRootedPctCover = SetTrace(Ne(tbxPctARC, 0), 0.5)
+'
+'        'chk/tgl values -> change Access -1 (true) to clearer 1 for use in SQL
+'        '                  so value of 1 = has no canopy veg, 0 = has canopy veg etc.
+'        .NoCanopyVeg = IIf(tglNoCanopyVeg = -1, 1, 0)
+'        .NoRootedVeg = IIf(tglNoRootedVeg = -1, 1, 0)
+'        .NoIndicatorSpecies = IIf(tglNoIndicatorSpecies = -1, 1, 0)
+'        '.HasSocialTrails = IIf(tglHasSocialTrails = -1, 1, 0) 'replaced w/ PctSocialTrails
+'        .BeaverBrowse = IIf(tglBeaverBrowse = -1, 1, 0)
+'
+'        .CalibrationPlot = IIf(chkCalibrationPlot = True, 1, 0)
+'        .ReplicatePlot = IIf(chkReplicatePlot = True, 1, 0)
+'
+'        .ID = tbxID '0 if new, edit if > 0
+'        .SaveToDb
+'
+'        'set the tbxID.value
+'        tbxID = .ID
+'
+'    End With
+'
+'    'clear values & refresh display
+'
+'    ReadyForSave
+'
+'    PopulateForm Me, tbxID.Value
+'
+'    If tbxID.Value > 0 Then
+'        'highlight SetObserverRecorder button
+'        btnSetObserverRecorder.BorderColor = lngYellow
+'        lblMsg.ForeColor = lngYellow
+'        lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+'        lblMsg.Caption = "Don't forget to set observer && recorder!"
+'
+'        'enable buttons
+'        btnSubstrateCover.Enabled = True
+'        btnWCC.Enabled = True
+'        btnURC.Enabled = True
+'        btnARC.Enabled = True
+'        btnTaglines.Enabled = True
+'    End If
+'    'refresh list
+'    Me.list.Requery
+'
+'    Me.Requery
     
-    With vp
-        'values passed into form
-        .SiteID = TempVars("SiteID")
-        .FeatureID = GetFeatureID(TempVars("ParkCode"), TempVars("FeatureID"))
+    'set enable btnSave_Click save
+    m_SaveOK = True
         
-        'form values
-        .EventID = cbxEvent
-        .VegTransectID = Ne(cbxTransect, 0)
-        .PlotNumber = Ne(tbxNumber, 0)
-        .PlotDistance = Ne(tbxDistance, 0)
-        .ModalSedimentSizeID = cbxModalSedSize
-        
-        .PlotDensity = Ne(tbxPlotDensity, 0)
-        
-        'pct values
-        .PctFines = SetTrace(tbxPctFines, 0.5)
-        .PctWater = SetTrace(tbxPctWater, 0.5)
-        .PctLitter = SetTrace(tbxPctLitter, 0.5)
-        .PctWoodyDebris = SetTrace(tbxPctWoodyDebris, 0.5)
-        .PctFilamentousAlgae = SetTrace(tbxPctFA, 0.5)
-        .PctStandingDead = SetTrace(tbxPctStandingDead, 0.5)
-        .PctSocialTrails = SetTrace(tbxPctSocialTrails, 0.5)
-        .PctModalSedimentSize = SetTrace(tbxPctMSS, 0.5)
-        .WoodyCanopyPctCover = SetTrace(Ne(tbxPctWCC, 0), 0.5)
-        .UnderstoryRootedPctCover = SetTrace(Ne(tbxPctURC, 0), 0.5)
-        .AllRootedPctCover = SetTrace(Ne(tbxPctARC, 0), 0.5)
-        
-        'chk/tgl values -> change Access -1 (true) to clearer 1 for use in SQL
-        '                  so value of 1 = has no canopy veg, 0 = has canopy veg etc.
-        .NoCanopyVeg = IIf(tglNoCanopyVeg = -1, 1, 0)
-        .NoRootedVeg = IIf(tglNoRootedVeg = -1, 1, 0)
-        .NoIndicatorSpecies = IIf(tglNoIndicatorSpecies = -1, 1, 0)
-        '.HasSocialTrails = IIf(tglHasSocialTrails = -1, 1, 0) 'replaced w/ PctSocialTrails
-        .BeaverBrowse = IIf(tglBeaverBrowse = -1, 1, 0)
-        
-        .CalibrationPlot = IIf(chkCalibrationPlot = True, 1, 0)
-        .ReplicatePlot = IIf(chkReplicatePlot = True, 1, 0)
-        
-        .ID = tbxID '0 if new, edit if > 0
-        .SaveToDb
-        
-        'set the tbxID.value
-        tbxID = .ID
-        
-    End With
+    UpsertRecord Me
     
-    'clear values & refresh display
+    Me![list].Form.Requery
     
-    ReadyForSave
+    'revert to disable non-btnSave_Click save
+    m_SaveOK = False
     
-    PopulateForm Me, tbxID.Value
+    'clear fields
+    ClearForm Me
     
-    If tbxID.Value > 0 Then
-        'highlight SetObserverRecorder button
-        btnSetObserverRecorder.BorderColor = lngYellow
-        lblMsg.ForeColor = lngYellow
-        lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
-        lblMsg.Caption = "Don't forget to set observer && recorder!"
-        
-        'enable buttons
-        btnSubstrateCover.Enabled = True
-        btnWCC.Enabled = True
-        btnURC.Enabled = True
-        btnARC.Enabled = True
-        btnTaglines.Enabled = True
-    End If
-    'refresh list
-    Me.list.Requery
-    
-    Me.Requery
+    'clear control sources
+    cbxEvent.ControlSource = ""
+    'cbxLocation.Value = ""
+    cbxTransect.ControlSource = ""
+    cbxModalSedSize.ControlSource = ""
     
 Exit_Handler:
     Exit Sub

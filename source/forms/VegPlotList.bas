@@ -9,6 +9,7 @@ Begin Form
     CloseButton = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    OrderByOn = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
     ViewsAllowed =1
@@ -19,12 +20,13 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =32
-    Left =1035
-    Top =6330
-    Right =8670
-    Bottom =10695
+    ItemSuffix =37
+    Left =1065
+    Top =6570
+    Right =8445
+    Bottom =10065
     DatasheetGridlinesColor =14806254
+    OrderBy ="ID DESC"
     RecSrcDt = Begin
         0xe8a9c07c72c3e440
     End
@@ -43,7 +45,7 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
-    FilterOnLoad =0
+    FilterOnLoad =255
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -172,26 +174,27 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1560
+                    Left =1200
                     Top =1020
-                    Width =1245
+                    Width =1860
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblNumber"
-                    Caption ="Plot #"
+                    Name ="lblPlotNumDist"
+                    Caption ="Plot #/Distance (m)"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1560
+                    LayoutCachedLeft =1200
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =2805
+                    LayoutCachedWidth =3060
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =960
+                    Left =840
                     Top =1020
                     Width =270
                     Height =315
@@ -200,36 +203,39 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblHdrID"
                     Caption ="ID"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
-                    LayoutCachedLeft =960
+                    LayoutCachedLeft =840
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =1230
+                    LayoutCachedWidth =1110
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =2940
+                    Left =3120
                     Top =1020
                     Width =1245
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblDistance"
-                    Caption ="Distance (m)"
+                    Name ="lblPctMSS"
+                    Caption ="MSS % Cover"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2940
+                    LayoutCachedLeft =3120
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =4185
+                    LayoutCachedWidth =4365
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4320
+                    TextAlign =2
+                    Left =4500
                     Top =1020
                     Width =1245
                     Height =315
@@ -237,11 +243,12 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777215
                     Name ="lblModalSedSize"
-                    Caption ="Modal Sediment Size"
+                    Caption ="MSS Class"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4320
+                    LayoutCachedLeft =4500
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =5565
+                    LayoutCachedWidth =5745
                     LayoutCachedHeight =1335
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -256,8 +263,108 @@ Begin Form
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1080
+                    Width =1560
+                    Height =300
+                    TabIndex =9
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxReplicatePlot"
+                    ControlSource ="ReplicatePlot"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1080
+                    LayoutCachedWidth =2640
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2700
+                    Width =1560
+                    Height =300
+                    TabIndex =8
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxCalibrationPlot"
+                    ControlSource ="CalibrationPlot"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2700
+                    LayoutCachedWidth =4260
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =5940
+                    Width =1560
+                    Height =300
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxDistance"
+                    ControlSource ="PlotDistance_m"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5940
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =4320
+                    Width =1560
+                    Height =300
+                    TabIndex =3
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxNumber"
+                    ControlSource ="PlotNumber"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4320
+                    LayoutCachedWidth =5880
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
                 Begin CommandButton
-                    OverlapFlags =85
+                    OverlapFlags =247
                     Left =6000
                     Width =720
                     ForeColor =4210752
@@ -320,7 +427,7 @@ Begin Form
                 End
                 Begin TextBox
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
@@ -345,7 +452,7 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin CommandButton
-                    OverlapFlags =85
+                    OverlapFlags =247
                     TextFontFamily =2
                     Left =6780
                     Width =720
@@ -380,37 +487,11 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =93
+                    OverlapFlags =247
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =1440
-                    Top =15
-                    Width =1560
-                    Height =300
-                    TabIndex =3
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxNumber"
-                    ControlSource ="PlotNumber"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1440
-                    LayoutCachedTop =15
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =315
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =900
+                    Left =720
                     Width =480
                     Height =315
                     TabIndex =4
@@ -418,35 +499,29 @@ Begin Form
                     ForeColor =4210752
                     Name ="tbxID"
                     ControlSource ="ID"
+                    ConditionalFormat = Begin
+                        0x01000000e0000000020000000100000000000000000000002000000001000000 ,
+                        0xff990000ffffff000100000000000000210000003f0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b00740062007800430061006c0069006200720061007400 ,
+                        0x69006f006e0050006c006f0074005d003d0031002c0031002c00300029000000 ,
+                        0x000049004900660028005b007400620078005200650070006c00690063006100 ,
+                        0x7400650050006c006f0074005d003d0031002c0031002c003000290000000000
+                    End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =900
-                    LayoutCachedWidth =1380
+                    LayoutCachedLeft =720
+                    LayoutCachedWidth =1200
                     LayoutCachedHeight =315
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =255
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =2820
-                    Width =1560
-                    Height =300
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4138256
-                    Name ="tbxDistance"
-                    ControlSource ="PlotDistance_m"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2820
-                    LayoutCachedWidth =4380
-                    LayoutCachedHeight =300
-                    ForeThemeColorIndex =2
-                    ForeTint =100.0
-                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010002000000010000000000000001000000ff990000ffffff001f0000004900 ,
+                        0x4900660028005b00740062007800430061006c00690062007200610074006900 ,
+                        0x6f006e0050006c006f0074005d003d0031002c0031002c003000290000000000 ,
+                        0x000000000000000000000000000000000001000000000000000100000022b14c ,
+                        0x00ffffff001d00000049004900660028005b007400620078005200650070006c ,
+                        0x006900630061007400650050006c006f0074005d003d0031002c0031002c0030 ,
+                        0x002900000000000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -455,22 +530,126 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4080
+                    Left =4200
                     Width =1560
                     Height =300
+                    FontSize =9
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxModalSedSize"
                     ControlSource ="ModalSedimentSize_ID"
+                    ConditionalFormat = Begin
+                        0x01000000e0000000020000000100000000000000000000002000000001000000 ,
+                        0xff990000ffffff000100000000000000210000003f0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b00740062007800430061006c0069006200720061007400 ,
+                        0x69006f006e0050006c006f0074005d003d0031002c0031002c00300029000000 ,
+                        0x000049004900660028005b007400620078005200650070006c00690063006100 ,
+                        0x7400650050006c006f0074005d003d0031002c0031002c003000290000000000
+                    End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4080
-                    LayoutCachedWidth =5640
+                    LayoutCachedLeft =4200
+                    LayoutCachedWidth =5760
                     LayoutCachedHeight =300
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010002000000010000000000000001000000ff990000ffffff001f0000004900 ,
+                        0x4900660028005b00740062007800430061006c00690062007200610074006900 ,
+                        0x6f006e0050006c006f0074005d003d0031002c0031002c003000290000000000 ,
+                        0x000000000000000000000000000000000001000000000000000100000022b14c ,
+                        0x00ffffff001d00000049004900660028005b007400620078005200650070006c ,
+                        0x006900630061007400650050006c006f0074005d003d0031002c0031002c0030 ,
+                        0x002900000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =1440
+                    Width =1560
+                    Height =300
+                    TabIndex =7
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxPlotNumDist"
+                    ControlSource ="=IIf([tbxCalibrationPlot]=1,\"C\",\"\") & IIf([tbxReplicatePlot]=1,\"R\",\"\") &"
+                        " IIf(TempVars(\"ParkCode\")=\"DINO\",[tbxNumber],[tbxDistance])"
+                    ConditionalFormat = Begin
+                        0x01000000e0000000020000000100000000000000000000002000000001000000 ,
+                        0xff990000ffffff000100000000000000210000003f0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b00740062007800430061006c0069006200720061007400 ,
+                        0x69006f006e0050006c006f0074005d003d0031002c0031002c00300029000000 ,
+                        0x000049004900660028005b007400620078005200650070006c00690063006100 ,
+                        0x7400650050006c006f0074005d003d0031002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1440
+                    LayoutCachedWidth =3000
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010002000000010000000000000001000000ff990000ffffff001f0000004900 ,
+                        0x4900660028005b00740062007800430061006c00690062007200610074006900 ,
+                        0x6f006e0050006c006f0074005d003d0031002c0031002c003000290000000000 ,
+                        0x000000000000000000000000000000000001000000000000000100000022b14c ,
+                        0x00ffffff001d00000049004900660028005b007400620078005200650070006c ,
+                        0x006900630061007400650050006c006f0074005d003d0031002c0031002c0030 ,
+                        0x002900000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3120
+                    Width =840
+                    Height =300
+                    TabIndex =10
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxPctMSS"
+                    ControlSource ="PctModalSedimentSize"
+                    ConditionalFormat = Begin
+                        0x01000000e0000000020000000100000000000000000000002000000001000000 ,
+                        0xff990000ffffff000100000000000000210000003f0000000100000022b14c00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x49004900660028005b00740062007800430061006c0069006200720061007400 ,
+                        0x69006f006e0050006c006f0074005d003d0031002c0031002c00300029000000 ,
+                        0x000049004900660028005b007400620078005200650070006c00690063006100 ,
+                        0x7400650050006c006f0074005d003d0031002c0031002c003000290000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3120
+                    LayoutCachedWidth =3960
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010002000000010000000000000001000000ff990000ffffff001f0000004900 ,
+                        0x4900660028005b00740062007800430061006c00690062007200610074006900 ,
+                        0x6f006e0050006c006f0074005d003d0031002c0031002c003000290000000000 ,
+                        0x000000000000000000000000000000000001000000000000000100000022b14c ,
+                        0x00ffffff001d00000049004900660028005b007400620078005200650070006c ,
+                        0x006900630061007400650050006c006f0074005d003d0031002c0031002c0030 ,
+                        0x002900000000000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -494,7 +673,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlotList
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -504,6 +683,7 @@ Option Explicit
 ' Revisions:    BLC - 5/31/2016 - 1.00 - initial version
 '               BLC - 10/16/2017 - 1.01 - revised to use tbxID vs. ID on delete
 '               BLC - 11/10/2017 - 1.02 - fix so passes form Me.Parent.Form vs. Me.Parent (btnEdit_Click())
+'               BLC - 12/7/2017 - 1.03 - added sorting by header
 ' =================================
 
 '---------------------
@@ -692,6 +872,134 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[VegPlotList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblHdrID_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblHdrID_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblHdrID
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblHdrID_Click[VegPlotList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblPctMSS_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblPctMSS_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblPctMSS
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblPctMSS_Click[VegPlotList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblModalSedSize_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblModalSedSize_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblModalSedSize
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblModalSedSize_Click[VegPlotList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblPlotNumDist_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblPlotNumDist_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblPlotNumDist
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblPlotNumDist_Click[VegPlotList form])"
     End Select
     Resume Exit_Handler
 End Sub

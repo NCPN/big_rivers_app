@@ -18,13 +18,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7500
+    Width =8640
     DatasheetFontHeight =11
     ItemSuffix =44
-    Left =3255
-    Top =4050
-    Right =10980
-    Bottom =8415
+    Left =450
+    Top =5835
+    Right =8175
+    Bottom =9945
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8ae9cc518dd4e440
@@ -211,9 +211,9 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =215
-                    Left =180
-                    Top =120
+                    OverlapFlags =223
+                    Left =1380
+                    Top =240
                     Width =7260
                     Height =840
                     BorderColor =8355711
@@ -222,10 +222,10 @@ Begin Form
                     Caption ="Edit or Delete Records using the buttons for the record at right.\015\012Icon co"
                         "des at left identify if record may be edited/deleted."
                     GridlineColor =10921638
-                    LayoutCachedLeft =180
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =7440
-                    LayoutCachedHeight =960
+                    LayoutCachedLeft =1380
+                    LayoutCachedTop =240
+                    LayoutCachedWidth =8640
+                    LayoutCachedHeight =1080
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -250,7 +250,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =1
                     Left =1620
                     Top =1020
@@ -271,7 +271,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =1
                     Left =3180
                     Top =1020

@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =42
-    Left =4440
-    Top =1455
-    Right =12300
-    Bottom =11235
+    Left =3525
+    Top =2490
+    Right =12465
+    Bottom =13875
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x747b49e35508e540
@@ -308,7 +308,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750156
                     Name ="lblRecordRefID"
-                    Caption ="VegPlot ID # 6"
+                    Caption ="refID"
                     GridlineColor =10921638
                     LayoutCachedLeft =108
                     LayoutCachedTop =960

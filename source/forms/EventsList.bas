@@ -20,10 +20,10 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =30
-    Left =450
-    Top =3450
-    Right =7830
-    Bottom =7560
+    Left =1065
+    Top =2820
+    Right =8700
+    Bottom =7185
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x78280a14fe06e540
@@ -182,6 +182,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblStartDate"
                     Caption ="Start Date"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =4740
                     LayoutCachedTop =1080
@@ -201,6 +202,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblHdrID"
                     Caption ="ID"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =1020
                     LayoutCachedTop =1080
@@ -221,6 +223,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblLocation"
                     Caption ="Location"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =3420
                     LayoutCachedTop =1080
@@ -241,6 +244,7 @@ Begin Form
                     ForeColor =16777215
                     Name ="lblSite"
                     Caption ="Site"
+                    OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =1440
                     LayoutCachedTop =1080
@@ -503,7 +507,7 @@ Option Explicit
 ' =================================
 ' Form:         EventsList
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -514,6 +518,7 @@ Option Explicit
 '               BLC - 7/26/2016 - 1.01 - add RunReadyForSave() check
 '               BLC - 1/9/2017  - 1.02 - revised btnDelete_Click() to use tbxID vs ID on delete
 '               BLC - 10/18/2017 - 1.03 - code cleanup
+'               BLC - 12/7/2017 -  1.04 - added sorting
 ' =================================
 
 '---------------------
@@ -710,6 +715,134 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[EventsList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblHdrID_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblHdrID_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblHdrID
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblHdrID_Click[EventsList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblSite_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblSite_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblSite
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblSite_Click[EventsList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblLocation_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblLocation_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblLocation
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblLocation_Click[EventsList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          lblStartDate_Click
+' Description:  lbl click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+' Source/date:  Bonnie Campbell, September 13, 2016 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/7/2016 - initial version
+' ---------------------------------
+Private Sub lblStartDate_Click()
+On Error GoTo Err_Handler
+
+    'set the sort
+    SortListForm Me, Me.lblStartDate
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblStartDate_Click[EventsList form])"
     End Select
     Resume Exit_Handler
 End Sub

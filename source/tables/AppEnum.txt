@@ -1,16 +1,16 @@
 ﻿ID	EnumType	Label	Summary	Sequence
-1	PhotoType	Feature		1
-2	PhotoType	Transect		2
-3	PhotoType	Overview		3
-4	PhotoType	Reference		4
-5	PhotoType	Animals		6
-6	PhotoType	Plants		7
-7	PhotoType	Cultural		8
-8	PhotoType	Scenic		9
-9	PhotoType	Disturbance		10
-10	PhotoType	Weather		11
-11	PhotoType	Fieldwork		12
-12	PhotoType	Other		5
+1	PhotoType	F	Feature	1
+2	PhotoType	T	Transect	2
+3	PhotoType	O	Overview	3
+4	PhotoType	R	Reference	4
+5	PhotoType	OA	Animals	6
+6	PhotoType	OP	Plants	7
+7	PhotoType	OC	Cultural	8
+8	PhotoType	OS	Scenic	9
+9	PhotoType	OD	Disturbance	10
+10	PhotoType	OW	Weather	11
+11	PhotoType	OF	Fieldwork	12
+12	PhotoType	OO	Other	5
 13	DirectionFacing	US		1
 14	DirectionFacing	DS		2
 15	DirectionFacing	RR		3
