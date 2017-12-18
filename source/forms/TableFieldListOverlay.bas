@@ -20,8 +20,8 @@ Begin Form
     Width =3480
     DatasheetFontHeight =11
     ItemSuffix =105
-    Right =11955
-    Bottom =9240
+    Right =8940
+    Bottom =11385
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xeecc3f14b0d0e440
@@ -1747,4 +1747,5 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - HideControls[TableFieldListOverlay form])"
     End Select
     Resume Exit_Handler
+
 End Sub
