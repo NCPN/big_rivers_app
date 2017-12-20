@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =41
-    Left =3855
-    Top =2430
-    Right =28545
-    Bottom =15015
+    Left =4755
+    Top =2595
+    Right =12615
+    Bottom =9420
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -815,7 +815,7 @@ Option Explicit
 ' =================================
 ' Form:         SetDatasheetDefaults
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  Set datasheet defaults form object related properties, SetDatasheetDefaults,
@@ -827,6 +827,8 @@ Option Explicit
 '               BLC - 8/23/2016 - 1.01 - changed ReadyForSave() to public for mod_App_Data
 '                                        Upsert/SetRecord()
 '               BLC - 1/24/2017 - 1.02 - adjusted to use GetContext()
+'               BLC - 12/18/2017 - 1.03 - updated calling form info
+'               BLC - 12/18/2017 - 1.04 - revised to use CallingForm
 ' =================================
 
 '---------------------
@@ -838,17 +840,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -884,35 +883,12 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
 '---------------------
@@ -932,20 +908,29 @@ End Property
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
 '   BLC - 1/24/2017 - adjusted to use GetContext()
+'   BLC - 12/18/2017 - updated calling form info
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'minimize DbAdmin
-    ToggleForm "DbAdmin", -1
+    'default
+    Me.CallingForm = "DbAdmin" '"Main"
+    
+    If Len(Me.OpenArgs) > 0 Then
+        'if openargs is delimited, first element is calling form
+        If InStr(Me.OpenArgs, "|") Then
+            Me.CallingForm = Split(Me.OpenArgs, "|")(0)
+        Else
+            Me.CallingForm = Me.OpenArgs
+        End If
+    End If
+    
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
-              'Nz(TempVars("ParkCode"), "") '& Space(2) & ">" & Space(2) & _
-              '   Nz(TempVars("River"), "") & Space(2) '& ">" & Space(2) & _
-              '   Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-              '   Nz(TempVars("Feature"), "")
 
     Title = "SetDatasheetDefaults"
     Directions = "Enter the SetDatasheetDefaults information and click save."
@@ -1236,12 +1221,13 @@ End Sub
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
 '   BLC - 6/27/2016 - adjusted for ToggleForm
+'   BLC - 12/18/2017 - revised to use CallingForm
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
     'restore Main
-    ToggleForm "Main", 0
+    ToggleForm Me.CallingForm, 0 '"Main", 0
     
 Exit_Handler:
     Exit Sub

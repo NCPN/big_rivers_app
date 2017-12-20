@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =2232
     DatasheetFontHeight =11
-    ItemSuffix =36
-    Left =9150
-    Top =3510
-    Right =11385
-    Bottom =6405
+    ItemSuffix =38
+    Left =3810
+    Top =7275
+    Right =5775
+    Bottom =9450
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -248,6 +248,46 @@ Begin Form
                     BorderTint =100.0
                     BorderShade =65.0
                     ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ForeShade =85.0
+                End
+                Begin Label
+                    OverlapFlags =247
+                    Left =1260
+                    Width =366
+                    Height =315
+                    FontSize =8
+                    BorderColor =10921638
+                    ForeColor =14277081
+                    Name ="lblPhotoType"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1260
+                    LayoutCachedWidth =1626
+                    LayoutCachedHeight =315
+                    BorderThemeColorIndex =1
+                    BorderTint =100.0
+                    BorderShade =65.0
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
+                    ForeShade =85.0
+                End
+                Begin Label
+                    OverlapFlags =247
+                    Left =1680
+                    Width =456
+                    Height =315
+                    FontSize =8
+                    BorderColor =10921638
+                    ForeColor =14277081
+                    Name ="lblID"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1680
+                    LayoutCachedWidth =2136
+                    LayoutCachedHeight =315
+                    BorderThemeColorIndex =1
+                    BorderTint =100.0
+                    BorderShade =65.0
+                    ForeThemeColorIndex =-1
                     ForeTint =100.0
                     ForeShade =85.0
                 End
@@ -673,9 +713,20 @@ On Error GoTo Err_Handler
     If selection = True Then
         imgPhoto.BorderColor = lngGreen
         lblName.ForeColor = lngGreen
+        
+        'add to list
+        Me.Parent!tbxIDs = IIf(Len(Me.Parent!tbxIDs) > 0, Me.Parent!tbxIDs & "," & lblID.Caption, lblID.Caption)
     Else
         imgPhoto.BorderColor = lngLtBgdGray
         lblName.ForeColor = lngLtTextGray
+        
+        'remove from list > remove single comma, replace double comma with single, remove #
+        Me.Parent!tbxIDs = _
+        IIf(Left(Me.Parent!tbxIDs, 1) = ",", "", _
+        IIf(Me.Parent!tbxIDs = _
+        Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ","), _
+        "", Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ",")))
+        
     End If
     
 Exit_Handler:

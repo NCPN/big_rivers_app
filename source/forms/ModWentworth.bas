@@ -20,10 +20,10 @@ Begin Form
     Width =8400
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =3690
-    Top =4410
-    Right =12090
-    Bottom =11895
+    Left =9150
+    Top =3510
+    Right =21900
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7c316d7d90cae440
@@ -862,7 +862,7 @@ Option Explicit
 ' =================================
 ' Form:         ModWentworth
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  ModWentworth form object related properties, ModWentworth, functions & procedures for UI display
@@ -873,6 +873,7 @@ Option Explicit
 '               BLC - 10/20/2016 - 1.01 - added CallingForm property, removed ButtonCaption, SelectedID,
 '                                         SelectedValue properties, revised to use GetContext()
 '               BLC - 10/24/2016 - 1.02 - added year hinting
+'               BLC - 12/18/2017 - 1.03 - updated calling form info
 ' =================================
 
 '---------------------
@@ -953,6 +954,7 @@ End Property
 '   BLC - 10/4/2016 - initial version
 '   BLC - 10/20/2016 - revised to use CallingForm property, GetContext()
 '   BLC - 10/24/2016 - added year hint
+'   BLC - 12/18/2017 - updated calling form info
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -960,8 +962,15 @@ On Error GoTo Err_Handler
     'default
     Me.CallingForm = "Main"
     
-    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
-
+    If Len(Me.OpenArgs) > 0 Then
+        'if openargs is delimited, first element is calling form
+        If InStr(Me.OpenArgs, "|") Then
+            Me.CallingForm = Split(Me.OpenArgs, "|")(0)
+        Else
+            Me.CallingForm = Me.OpenArgs
+        End If
+    End If
+    
     'minimize calling form
     ToggleForm Me.CallingForm, -1
     

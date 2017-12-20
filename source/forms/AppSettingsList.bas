@@ -20,9 +20,9 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =-1950
+    Left =-3240
     Top =14580
-    Right =5685
+    Right =4395
     Bottom =18945
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -400,6 +400,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 18, 2017
 ' References:   -
 ' Versions:     BLC - 10/18/2017 - 1.00 - initial version
+'               BLC - 12/18/2017 - 1.01 - updated oArgs to pass calling form
 ' =================================
 
 '---------------------
@@ -542,12 +543,13 @@ End Sub
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
 '   BLC - 10/18/2017 - added tbxOArgs to pass WCC, URC, ARC when opening Datasheet Settings
+'   BLC - 12/18/2017 - updated oArgs to pass calling form
 ' ---------------------------------
 Private Sub tbxFormName_Click()
 On Error GoTo Err_Handler
         
     DoCmd.Minimize
-    DoCmd.OpenForm tbxForm.Value, acViewNormal, , , , , tbxOArgs.Value
+    DoCmd.OpenForm tbxForm.Value, acViewNormal, , , , , "AppSettings|" & tbxOArgs.Value
 
 Exit_Handler:
     Exit Sub

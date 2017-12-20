@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4860
+    Left =3345
     Top =2490
-    Right =14625
-    Bottom =15000
+    Right =13290
+    Bottom =14340
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -156,7 +156,7 @@ Begin Form
             AlternateBackShade =95.0
             Begin
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =180
                     Top =60
                     Width =3480
@@ -218,9 +218,9 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =3
-                    Left =3720
+                    Left =3600
                     Top =60
                     Width =4140
                     Height =315
@@ -230,9 +230,9 @@ Begin Form
                     Name ="lblContext"
                     Caption ="Context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3720
+                    LayoutCachedLeft =3600
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7860
+                    LayoutCachedWidth =7740
                     LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -358,6 +358,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, October 18, 2017
 ' References:   -
 ' Revisions:    BLC - 10/18/2017 - 1.00 - initial version
+'               BLC - 12/18/2017 - 1.01 - updated properties, revised to use CallingForm
 ' =================================
 
 '---------------------
@@ -369,17 +370,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -415,36 +413,17 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
-    If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        'Me.btnSave.Caption = m_ButtonCaption
-    Else
-        RaiseEvent InvalidCaption(Value)
-    End If
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
-End Property
+'---------------------
+' Methods
+'---------------------
 
 '---------------------
 ' Methods
@@ -464,12 +443,25 @@ End Property
 '   BLC - 7/30/2016 - initial version
 '   BLC - 1/24/2017 - adjusted to use GetContext()
 '   BLC - 10/18/2017 - changed to match settings form information
+'   BLC - 12/18/2017 - revised to use CallingForm
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
-
-    'minimize Main
-    ToggleForm "Main", -1
+    
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Me.OpenArgs) > 0 Then
+        'if openargs is delimited, first element is calling form
+        If InStr(Me.OpenArgs, "|") Then
+            Me.CallingForm = Split(Me.OpenArgs, "|")(0)
+        Else
+            Me.CallingForm = Me.OpenArgs
+        End If
+    End If
+    
+    'minimize CallingForm
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
@@ -478,6 +470,17 @@ On Error GoTo Err_Handler
     Title = "Application Settings"
     Directions = "Double click the desired settings name to launch its form."
     lblDirections.ForeColor = lngLtBlue
+        
+    btnComment.Caption = StringFromCodepoint(uComment)
+    btnComment.ForeColor = lngBlue
+    
+    'set hover
+    btnComment.HoverColor = lngGreen
+      
+    'defaults
+    btnComment.Enabled = False
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
   
 Exit_Handler:
     Exit Sub
@@ -532,12 +535,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/30/2016 - initial version
+'   BLC - 12/18/2017 - revised to use CallingForm
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore CallingForm
+    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub
