@@ -9,6 +9,7 @@ Begin Form
     CloseButton = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     OrderByOn = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
@@ -21,12 +22,9 @@ Begin Form
     Width =7560
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =1065
-    Top =6570
-    Right =8445
-    Bottom =10065
+    Right =9945
+    Bottom =11850
     DatasheetGridlinesColor =14806254
-    OrderBy ="ID DESC"
     RecSrcDt = Begin
         0xe8a9c07c72c3e440
     End
@@ -673,7 +671,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlotList
 ' Level:        Application form
-' Version:      1.03
+' Version:      1.04
 ' Basis:        Dropdown form
 '
 ' Description:  List form object related properties, events, functions & procedures for UI display
@@ -684,6 +682,7 @@ Option Explicit
 '               BLC - 10/16/2017 - 1.01 - revised to use tbxID vs. ID on delete
 '               BLC - 11/10/2017 - 1.02 - fix so passes form Me.Parent.Form vs. Me.Parent (btnEdit_Click())
 '               BLC - 12/7/2017 - 1.03 - added sorting by header
+'               BLC - 12/27/2017 - 1.04 - updated filter & order by
 ' =================================
 
 '---------------------
@@ -808,6 +807,16 @@ On Error GoTo Err_Handler
     
     'populate Modal Sediment Size
 
+    'filter & order by on load
+'    Me.FilterOn = True
+'    Me.FilterOnLoad = True
+'    Me.Filter = "Site_ID = " & TempVars("SiteID")
+'    Me.Requery
+'
+'    Me.OrderBy = "ID DESC"
+'    Me.OrderByOn = True
+'    Me.OrderByOnLoad = True
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -1086,10 +1095,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 12/27/2017 - clear order & filter by
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
+'    'clear filters
+'    Me.Filter = ""
+'    Me.OrderBy = ""
     
 Exit_Handler:
     Exit Sub

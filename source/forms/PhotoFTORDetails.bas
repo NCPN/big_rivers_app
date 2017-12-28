@@ -13,8 +13,8 @@ Begin Form
     Width =6780
     DatasheetFontHeight =11
     ItemSuffix =57
-    Right =8940
-    Bottom =11385
+    Right =9945
+    Bottom =11850
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xcb7a7f08cdc4e440
@@ -584,6 +584,7 @@ Begin Form
                     TabIndex =6
                     BorderColor =10921638
                     Name ="chkCloseup"
+                    DefaultValue ="0"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Is photo a Closeup?"
                     GridlineColor =10921638
@@ -621,6 +622,7 @@ Begin Form
                     TabIndex =7
                     BorderColor =10921638
                     Name ="chkReplacement"
+                    DefaultValue ="0"
                     ControlTipText ="Is photo a Replacement?"
                     GridlineColor =10921638
 

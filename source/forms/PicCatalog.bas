@@ -1,6 +1,7 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
+    PopUp = NotDefault
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
@@ -12,8 +13,10 @@ Begin Form
     Width =11880
     DatasheetFontHeight =11
     ItemSuffix =34
-    Right =13755
-    Bottom =11850
+    Left =3345
+    Top =2490
+    Right =13290
+    Bottom =14340
     DatasheetGridlinesColor =14806254
     Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
         " #9/22/2016#"

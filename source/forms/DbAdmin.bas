@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =4275
-    Top =2730
-    Right =12135
-    Bottom =9375
+    Left =4755
+    Top =2985
+    Right =12615
+    Bottom =9630
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7982ea74fa02e540
@@ -2591,7 +2591,7 @@ Option Explicit
 ' =================================
 ' Form:         DbAdmin
 ' Level:        Framework form
-' Version:      1.10
+' Version:      1.11
 ' Basis:        -
 '
 ' Description:  DbAdmin form object related properties, functions & procedures for UI display
@@ -2611,6 +2611,7 @@ Option Explicit
 '               BLC - 9/6/2017  - 1.08 - added tglDevMode button, ToggleDevMode()
 '               BLC - 10/17/2017 - 1.09 - commented out initApp (already called in PreSplash form)
 '               BLC - 10/19/2017 - 1.10 - added comment length
+'               BLC - 12/27/2017 - 1.11 - update current DEV_MODE state
 ' =================================
 
 '---------------------
@@ -2876,11 +2877,16 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 12/27/2017 - update current DEV_MODE state
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
               
-
+    'set toggle based on current value
+    Me.tglDevMode.Value = DEV_MODE
+    
+    ToggleDevMode
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:

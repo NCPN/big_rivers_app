@@ -1481,7 +1481,7 @@ On Error GoTo Err_Handler
     lblRefToEyebolt.Caption = "Eyebolt"
     lblRefToWaterline.Caption = "Waterline"
     lblEyeboltToWaterline.Caption = "Waterline"
-    lblScribeline.Caption = "Scribeline"
+    lblScribeLine.Caption = "Scribeline"
     
     cbxTiming.RowSourceType = "Value List"
     cbxTiming.RowSource = "BD;AD" 'before download, after download

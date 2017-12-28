@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =55
-    Left =2955
-    Top =2730
-    Right =16110
-    Bottom =14115
+    Left =3345
+    Top =2820
+    Right =17100
+    Bottom =14670
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x236ab60a61c3e440
@@ -780,7 +780,7 @@ Option Explicit
 ' =================================
 ' Form:         Logger
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Logger form object related properties, Logger, functions & procedures for UI display
@@ -790,6 +790,7 @@ Option Explicit
 ' Revisions:    BLC - 9/5/2017  - 1.00 - initial version, based on transducer
 '               BLC - 9/29/2017 - 1.01 - populate cbxSite
 '               BLC - 10/19/2017 - 1.02 - added comment length
+'               BLC - 12/27/2017 - 1.03 - code cleanup, add CallingForm property
 ' =================================
 
 '---------------------
@@ -801,17 +802,14 @@ Option Explicit
 '---------------------
 Private m_Title As String
 Private m_Directions As String
-Private m_ButtonCaption
-Private m_SelectedID As Integer
-Private m_SelectedValue As String
+Private m_CallingForm As String
 
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
-Public Event InvalidLabel(Value As String)
-Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
@@ -847,35 +845,16 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(Value As String)
+Public Property Let CallingForm(Value As String)
     If Len(Value) > 0 Then
-        m_ButtonCaption = Value
-
-        'set the form button caption
-        Me.btnSave.Caption = m_ButtonCaption
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCaption(Value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
-Public Property Get ButtonCaption() As String
-    ButtonCaption = m_ButtonCaption
-End Property
-
-Public Property Let SelectedID(Value As Integer)
-        m_SelectedID = Value
-End Property
-
-Public Property Get SelectedID() As Integer
-    SelectedID = m_SelectedID
-End Property
-
-Public Property Let SelectedValue(Value As String)
-        m_SelectedValue = Value
-End Property
-
-Public Property Get SelectedValue() As String
-    SelectedValue = m_SelectedValue
+Public Property Get CallingForm() As String
+    CallingForm = m_CallingForm
 End Property
 
 '---------------------
@@ -895,22 +874,26 @@ End Property
 ' Revisions:
 '   BLC - 9/5/2017  - initial version
 '   BLC - 9/29/2017 - updated to populate cbxSite
+'   BLC - 12/27/2017 - code cleanup, add CallingForm property
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
-
-    'minimize Main
-    ToggleForm "Main", -1
+    
+    'default
+    Me.CallingForm = "Main"
+    
+    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
+    
+    'minimize calling form
+    ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
-                 'Nz(TempVars("ParkCode"), "") & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("River"), "") ' & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("SiteCode"), "") & Space(2) & ">" & Space(2) & _
-                 'Nz(TempVars("Feature"), "")
     
+    'defaults
     Title = "Logger"
+        lblTitle.Caption = "" 'clear header title
     Directions = "Enter the Logger information and click save."
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
@@ -924,6 +907,7 @@ On Error GoTo Err_Handler
     cbxSite.ColumnWidths = "0; 1"
     cbxLoggerType.RowSourceType = "Value List"
     cbxLoggerType.RowSource = "Air;Water" 'air or water transducer
+    cbxLoggerType.AllowValueListEdits = False
     
     'set hover
     btnComment.HoverColor = lngGreen
@@ -1235,12 +1219,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 9/5/2017 - initial version
+'   BLC - 12/27/2017 - revise to use CallingForm
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
-    'restore Main
-    ToggleForm "Main", 0
+    'restore CallingForm
+    ToggleForm Me.CallingForm, 0
         
 Exit_Handler:
     Exit Sub

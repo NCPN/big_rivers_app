@@ -19,14 +19,14 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =99
-    Left =3225
-    Top =2430
-    Right =24735
-    Bottom =15015
+    ItemSuffix =103
+    Left =4695
+    Top =300
+    Right =12555
+    Bottom =11670
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x6efd080b49dfe440
+        0x95f0359a100be540
     End
     Caption ="VegPlot"
     OnCurrent ="[Event Procedure]"
@@ -220,8 +220,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Enter the plot information and click save.\015\012Add cover species via buttons "
-                        "at right."
+                    Caption ="Enter the plot information and click save.\015\012Add substrates, cover species,"
+                        " taglines via buttons at right."
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =120
@@ -302,6 +302,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =1080
                     Top =1920
@@ -391,15 +392,16 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     LimitToList = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    ColumnCount =5
+                    ColumnCount =8
                     Left =1080
                     Top =900
                     Width =3414
                     Height =315
-                    ColumnOrder =1
+                    ColumnOrder =4
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -412,7 +414,6 @@ Begin Form
                     End
                     Name ="cbxEvent"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;0;0;0;2880"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Event (sample visit)"
                     GridlineColor =10921638
@@ -487,12 +488,12 @@ Begin Form
                     LimitToList = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    ColumnCount =5
+                    ColumnCount =9
                     Left =1080
                     Top =1380
                     Width =3414
                     Height =315
-                    ColumnOrder =0
+                    ColumnOrder =3
                     TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
@@ -507,6 +508,7 @@ Begin Form
                     Name ="cbxTransect"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;0;0;1"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Veg transect"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -556,6 +558,127 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                     Overlaps =1
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =6240
+                    Top =960
+                    Width =960
+                    Height =300
+                    ColumnOrder =1
+                    FontSize =9
+                    TabIndex =6
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="tbxEventID"
+                    DefaultValue ="0"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0x00000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004400650076004d006f00640065005d003d00460061006c00 ,
+                        0x7300650000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6240
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =7200
+                    LayoutCachedHeight =1260
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000ffffff00120000005b00 ,
+                        0x7400620078004400650076004d006f00640065005d003d00460061006c007300 ,
+                        0x6500000000000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =6240
+                    Top =1380
+                    Width =960
+                    Height =300
+                    ColumnOrder =2
+                    FontSize =9
+                    TabIndex =7
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="tbxTransectID"
+                    DefaultValue ="0"
+                    ConditionalFormat = Begin
+                        0x0100000084000000010000000100000000000000000000001100000001000000 ,
+                        0x00000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004400450056005f004d004f00440045005d003d00460061006c0073006500 ,
+                        0x00000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6240
+                    LayoutCachedTop =1380
+                    LayoutCachedWidth =7200
+                    LayoutCachedHeight =1680
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000ffffff00100000005b00 ,
+                        0x4400450056005f004d004f00440045005d003d00460061006c00730065000000 ,
+                        0x00000000000000000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =7320
+                    Top =960
+                    Width =420
+                    Height =300
+                    ColumnOrder =0
+                    FontSize =9
+                    TabIndex =8
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="tbxDevMode"
+                    DefaultValue ="0"
+                    ConditionalFormat = Begin
+                        0x010000006e000000010000000000000002000000000000000600000001000000 ,
+                        0x00000000ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x460061006c007300650000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7320
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =1260
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000100000000000000020000000100000000000000ffffff00050000004600 ,
+                        0x61006c0073006500000000000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -619,6 +742,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =93
@@ -693,7 +817,7 @@ Begin Form
                     TopMargin =72
                     BackColor =15855852
                     Name ="lblPlotDensityBgd"
-                    Caption ="pd"
+                    Caption ="⡢"
                     FontName ="Arial"
                     ControlTipText ="Plot Density"
                     GridlineColor =10921638
@@ -761,6 +885,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =60
@@ -993,6 +1118,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
                     Left =1020
@@ -1038,7 +1164,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctFines"
-                    ValidationRule ="Not Like \"[0-9]*.[0-9]*\""
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Percent of plot covered by fines"
@@ -1330,7 +1456,7 @@ Begin Form
                     FontSize =9
                     TabIndex =28
                     BorderColor =8355711
-                    ForeColor =690698
+                    ForeColor =255
                     Name ="tbxIcon"
                     GridlineColor =10921638
 
@@ -1345,6 +1471,7 @@ Begin Form
                     ForeTint =50.0
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =215
                     Left =6840
                     Top =1080
@@ -1375,6 +1502,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =215
                     Left =6840
                     Top =600
@@ -1406,6 +1534,7 @@ Begin Form
                 End
                 Begin CommandButton
                     Visible = NotDefault
+                    Enabled = NotDefault
                     OverlapFlags =215
                     Left =6840
                     Top =1560
@@ -1518,7 +1647,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblMsg"
-                    Caption ="msg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =5115
@@ -1541,7 +1669,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16772541
                     Name ="lblMsgIcon"
-                    Caption ="icon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedLeft =3960
@@ -1554,7 +1681,6 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin ToggleButton
-                    Visible = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =215
                     TextFontCharSet =177
@@ -1602,7 +1728,6 @@ Begin Form
                     Overlaps =1
                     Begin
                         Begin Label
-                            Visible = NotDefault
                             OverlapFlags =215
                             Left =3540
                             Top =4410
@@ -1622,7 +1747,6 @@ Begin Form
                     End
                 End
                 Begin ToggleButton
-                    Visible = NotDefault
                     OverlapFlags =215
                     TextFontCharSet =177
                     TextFontFamily =0
@@ -1653,7 +1777,8 @@ Begin Form
                     OldBorderStyle =1
                     BorderColor =12419407
                     BorderTint =100.0
-                    HoverColor =13277810
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     HoverTint =80.0
                     PressedColor =10250042
                     PressedShade =80.0
@@ -1668,7 +1793,6 @@ Begin Form
                     Overlaps =1
                     Begin
                         Begin Label
-                            Visible = NotDefault
                             OverlapFlags =215
                             Left =3540
                             Top =3990
@@ -1688,6 +1812,7 @@ Begin Form
                     End
                 End
                 Begin ToggleButton
+                    Visible = NotDefault
                     OverlapFlags =215
                     TextFontCharSet =177
                     TextFontFamily =0
@@ -1718,7 +1843,8 @@ Begin Form
                     OldBorderStyle =1
                     BorderColor =12419407
                     BorderTint =100.0
-                    HoverColor =13277810
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     HoverTint =80.0
                     PressedColor =10250042
                     PressedShade =80.0
@@ -1733,6 +1859,7 @@ Begin Form
                     Overlaps =1
                     Begin
                         Begin Label
+                            Visible = NotDefault
                             OverlapFlags =215
                             Left =1380
                             Top =4410
@@ -1782,7 +1909,8 @@ Begin Form
                     OldBorderStyle =1
                     BorderColor =12419407
                     BorderTint =100.0
-                    HoverColor =13277810
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
                     HoverTint =80.0
                     PressedColor =10250042
                     PressedShade =80.0
@@ -1826,7 +1954,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctLitter"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Percent of plot covered by litter"
@@ -1864,7 +1992,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctWoodyDebris"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Percent of plot covered by woody debris"
@@ -1936,7 +2064,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctStandingDead"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Percent of plot woody canopy covered by standing dead (rooted/non-rotted), all s"
@@ -1975,7 +2103,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctWCC"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Total percent woody canopy cover (WCC) for the plot"
@@ -2112,6 +2240,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =223
                     IMESentenceMode =3
                     Left =4200
@@ -2122,7 +2251,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctARC"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     ControlTipText ="Total percent all rooted cover (ARC) for the plot"
                     ConditionalFormat = Begin
@@ -2148,6 +2277,7 @@ Begin Form
                     End
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =4200
                     Top =1020
@@ -2175,7 +2305,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctMSS"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     ControlTipText ="Total percent modal sediment cover (MSS) for the plot"
                     ConditionalFormat = Begin
@@ -2340,7 +2470,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxPctSocialTrails"
-                    ValidationRule ="Is Null Or \"T\" Or Between 0 And 101"
+                    ValidationRule ="Is Null Or \"T\" Or Between 0 and 101"
                     ValidationText ="Values may be whole percentages (0-100), 0.5, or T"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Total percent social trail cover for the plot"
@@ -2367,7 +2497,7 @@ Begin Form
                     End
                 End
                 Begin Label
-                    OverlapFlags =247
+                    OverlapFlags =255
                     Left =4380
                     Top =3000
                     Width =2895
@@ -2384,6 +2514,7 @@ Begin Form
                     LayoutCachedHeight =3315
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =2880
                     Width =2040
@@ -2392,7 +2523,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16711680
                     Name ="lblHintPlotNumDist"
-                    Caption ="Calibration/Replicate Plot? Set > 900"
+                    Caption ="Calibration/Replicate Plot? Set plot #/distance > 900"
                     ControlTipText ="Set plot number or distance > 900 if this is a calibration or replicate plot"
                     GridlineColor =10921638
                     LayoutCachedLeft =2880
@@ -2400,6 +2531,45 @@ Begin Form
                     LayoutCachedHeight =420
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =7200
+                    Top =3240
+                    Width =420
+                    Height =300
+                    FontSize =9
+                    TabIndex =31
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxMSSID"
+                    DefaultValue ="0"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0xe2dd8200ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004400650076004d006f00640065005d003d00460061006c00 ,
+                        0x7300650000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7200
+                    LayoutCachedTop =3240
+                    LayoutCachedWidth =7620
+                    LayoutCachedHeight =3540
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000e2dd8200ffffff00120000005b00 ,
+                        0x7400620078004400650076004d006f00640065005d003d00460061006c007300 ,
+                        0x6500000000000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -2423,7 +2593,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.15
+' Version:      1.16
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -2454,6 +2624,7 @@ Option Explicit
 '               BLC - 11/11/2017 - 1.13 - update percent values to use SetTrace()
 '               BLC - 11/26/2017 - 1.14 - updated PctFines validation, added PctSocialTrails
 '               BLC - 12/5/2017  - 1.15 - add VegPlot BeaverBrowse
+'               BLC - 12/27/2017 - 1.16 - updated checkbox click events to properly check values
 ' =================================
 
 '---------------------
@@ -2575,12 +2746,15 @@ On Error GoTo Err_Handler
     'minimize calling form
     ToggleForm Me.CallingForm, -1
     
+    'dev mode
+    tbxDevMode = DEV_MODE
+
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
                  
     Title = "VegPlot"
-    Me.lblTitle.Caption = "" 'clear header title
+    lblTitle.Caption = "" 'clear header title
     Directions = "Enter the plot information and click save." _
                 & vbCrLf & "Add substrates, cover species, taglines via buttons at right."
     tbxIcon.Value = StringFromCodepoint(uBullet)
@@ -2600,6 +2774,10 @@ On Error GoTo Err_Handler
     btnSubstrateCover.Visible = False
     'hide original size class label
     lblModalSedSize.Visible = False
+    
+    'set checkbox defaults to avoid black boxes
+    'chkCalibrationPlot.DefaultValue = False
+    'chkReplicatePlot.DefaultValue = False
     
     'hints
     lblHintPlotNumDist.Caption = "Calibration/Replicate Plot? Set plot #/distance > 900"
@@ -2689,33 +2867,37 @@ On Error GoTo Err_Handler
     'site is default <-- cannot reach VegPlot if site isn't set
     efilter = "s_events_by_site"
     cbxEvent.ColumnCount = 6
-    cbxEvent.ColumnWidths = "0;0;0;2in;0;0"
+    'cbxEvent.ColumnWidths = "0;.2in;.2in;.2in;0;0"
+    cbxEvent.ColumnHeads = True
     tfilter = "s_vegtransect_by_site"
     cbxTransect.ColumnCount = 8
-    cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0"
+    'cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0"
 
     Select Case TempVars("ParkCode")
         Case "BLCA" 'feature level if set
             If Not TempVars("Feature") Is Nothing Then _
                 efilter = "s_events_by_feature"
                 cbxEvent.ColumnCount = 8
-                cbxEvent.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
+ '               cbxEvent.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
 '                cbxTransect.ColumnCount = 8
 '                cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
                 
                 tfilter = "s_vegtransect_by_feature"
                 cbxTransect.ColumnCount = 9
-                cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
+ '               cbxTransect.ColumnWidths = "0;0;0;0;2in;0;0;0;0"
                 
         Case "CANY" 'site level
         Case "DINO" 'no transects/plots
     End Select
     
     'populate events
+    'BLCA (7): ID,StartDate,FeatureEventDate,FeatureNameEventDate,SiteCode,Feature,ParkCode
+    'CANY,DINO (5): ID,StartDate,SiteEventDate,SiteCode,ParkCode
+    'ID, SiteCode, SiteName, Segment, ddEvent
     Set cbxEvent.Recordset = GetRecords(efilter) '"s_events_by_park_river")
     cbxEvent.BoundColumn = 1
-    'cbxEvent.ColumnCount = 5
-    'cbxEvent.ColumnWidths = "0in;0in;0in;0in;2in"
+    cbxEvent.ColumnCount = 5
+    cbxEvent.ColumnWidths = "0;0;.5in;0;0"
     
     'populate veg transects
     Set cbxTransect.Recordset = GetRecords(tfilter) 's_transect_by_park_river")
@@ -2850,6 +3032,16 @@ On Error GoTo Err_Handler
     'initialize values
     ClearForm Me
   
+    'filter & order subform
+'    With list.Form
+'        .Filter = "Site_ID = " & TempVars("SiteID")
+'        .FilterOn = True
+'        .FilterOnLoad = True
+'        .OrderBy = "ID DESC"
+'        .OrderByOn = True
+'        .OrderByOnLoad = True
+'    End With
+  
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -2938,6 +3130,7 @@ End Sub
 ' Revisions:
 '   BLC - 1/9/2017 - initial version
 '   BLC - 11/7/2017 - fix cbxEvent column for date
+'   BLC - 12/27/2017 - update related ID value
 ' ---------------------------------
 Private Sub cbxEvent_AfterUpdate()
 On Error GoTo Err_Handler
@@ -2951,6 +3144,9 @@ On Error GoTo Err_Handler
     Set cbxModalSedSize.Recordset = GetRecords("s_mod_wentworth_for_eventyr")
     cbxModalSedSize.Requery
     
+    'updated related ID
+    tbxEventID = cbxEvent.Value
+    
     'check if ready
     ReadyForSave
     
@@ -2961,6 +3157,42 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - cbxEvent_AfterUpdate[VegPlot form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxTransect_AfterUpdate
+' Description:  Combobox after update actions
+' Assumptions:  Transect combobox contains the following columns:
+'                   column(0)= transect ID              column(3)= event date - site name (sitecode)
+'                   column(1)= event date               column(4)= site code
+'                   column(2)= event date - site code   column(5)= park code
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, December 27, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/27/2017 - initial version
+' ---------------------------------
+Private Sub cbxTransect_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    'updated related ID
+    tbxTransectID = cbxTransect.Value
+    
+    'check if ready
+    ReadyForSave
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTransect_AfterUpdate[VegPlot form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -3038,12 +3270,17 @@ End Sub
 ' Revisions:
 '   BLC - 6/27/2016 - initial version
 '   BLC - 7/13/2016 - revised to combobox
+'   BLC - 12/27/2017 - update related ID value
 ' ---------------------------------
 Private Sub cbxModalSedSize_AfterUpdate()
 On Error GoTo Err_Handler
 
-    If Len(cbxModalSedSize.Text) > 0 Then _
+    If Len(cbxModalSedSize.Text) > 0 Then
+        'update ID
+        tbxMSSID = cbxModalSedSize.Value
+        
         ReadyForSave
+    End If
     
 Exit_Handler:
     Exit Sub
@@ -3542,6 +3779,7 @@ End Sub
 ' Revisions:
 '   BLC - 11/1/2017 - initial version
 '   BLC - 11/26/2017 - display plot # hint when calibration/replicate
+'   BLC - 12/27/2017 - updated IF to avoid error #13 - type mismatch
 ' ---------------------------------
 Private Sub chkCalibrationPlot_Click()
 On Error GoTo Err_Handler
@@ -3550,7 +3788,8 @@ On Error GoTo Err_Handler
     lblHintPlotNumDist.Visible = False
     
     'unhide hint if calibration/replicate plot
-    If chkCalibrationPlot Or chkReplicatePlot Then lblHintPlotNumDist.Visible = True
+    If chkCalibrationPlot = True Or chkReplicatePlot = True Then _
+        lblHintPlotNumDist.Visible = True
     
     ReadyForSave
     
@@ -3578,6 +3817,7 @@ End Sub
 ' Revisions:
 '   BLC - 11/1/2017 - initial version
 '   BLC - 11/26/2017 - display plot # hint when calibration/replicate
+'   BLC - 12/27/2017 - updated IF to avoid error #13 - type mismatch
 ' ---------------------------------
 Private Sub chkReplicatePlot_Click()
 On Error GoTo Err_Handler
@@ -3586,7 +3826,8 @@ On Error GoTo Err_Handler
     lblHintPlotNumDist.Visible = False
     
     'unhide hint if calibration/replicate plot
-    If chkCalibrationPlot Or chkReplicatePlot Then lblHintPlotNumDist.Visible = True
+    If chkCalibrationPlot = True Or chkReplicatePlot = True Then _
+    lblHintPlotNumDist.Visible = True
     
     ReadyForSave
     
@@ -4058,6 +4299,12 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
+
+    'clear subform filter & order
+'    With list.Form
+'        .Filter = ""
+'        .OrderBy = ""
+'    End With
 
     'restore CallingForm
     ToggleForm Me.CallingForm, 0

@@ -12,9 +12,11 @@ Begin Form
     GridY =24
     Width =6420
     DatasheetFontHeight =11
-    ItemSuffix =55
-    Right =8940
-    Bottom =11385
+    ItemSuffix =56
+    Left =4530
+    Top =4155
+    Right =11295
+    Bottom =11280
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x36469deccdc4e440
@@ -364,7 +366,7 @@ Begin Form
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
-                    ForeColor =16737792
+                    ForeColor =16711680
                     Name ="lblPhotoNumHint"
                     Caption ="P + Month\015\012(Jan-Sep=0-9,Oct-Dec=A-C) + day(01-31) + \015\0124-digit camera"
                         " seq# \015\012(PA010300 = Jan 1, #300)"
@@ -386,7 +388,7 @@ Begin Form
                     FontSize =8
                     FontWeight =500
                     BorderColor =8355711
-                    ForeColor =16737792
+                    ForeColor =16711680
                     Name ="lblDescriptionHint"
                     GridlineColor =10921638
                     LayoutCachedLeft =4620
@@ -518,6 +520,7 @@ Begin Form
                     End
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =4500
                     Top =3300
@@ -585,6 +588,43 @@ Begin Form
                         0x00000000000000000000000000000000
                     End
                 End
+                Begin TextBox
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =660
+                    Top =3420
+                    Width =480
+                    FontSize =8
+                    TabIndex =7
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="tbxID"
+                    ConditionalFormat = Begin
+                        0x0100000098000000020000000100000000000000000000000d00000001000000 ,
+                        0x3333ff00ffffff0001000000000000000e0000001b0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004400450056005f004d004f00440045005d003d003100000000005b004400 ,
+                        0x450056005f004d004f00440045005d003d00300000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =660
+                    LayoutCachedTop =3420
+                    LayoutCachedWidth =1140
+                    LayoutCachedHeight =3660
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ForeTint =50.0
+                    ConditionalFormat14 = Begin
+                        0x0100020000000100000000000000010000003333ff00ffffff000c0000005b00 ,
+                        0x4400450056005f004d004f00440045005d003d00310000000000000000000000 ,
+                        0x000000000000000000000001000000000000000100000000000000ffffff000c ,
+                        0x0000005b004400450056005f004d004f00440045005d003d0030000000000000 ,
+                        0x00000000000000000000000000000000
+                    End
+                End
             End
         End
         Begin FormFooter
@@ -607,7 +647,7 @@ Option Explicit
 ' =================================
 ' MODULE:       Form_PhotoOtherDetails
 ' Level:        Development module
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Photo detail functions & procedures for other & unclassified photos
 '
@@ -616,6 +656,7 @@ Option Explicit
 '               BLC - 2/21/2017 - 1.01 - added Form_Activate() event to handle photographer list updates
 '                                        removed Form_Activate() event photographer list updates
 '                                        require redefining RowSource for cbxPhoto control
+'               BLC - 12/22/2017 - 1.02 - update hints, defaults
 ' =================================
 
 '---------------------
@@ -650,6 +691,7 @@ Option Explicit
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/31/2016 - initial version
+'   BLC - 12/22/2017 - update hints, defaults
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -661,9 +703,34 @@ On Error GoTo Err_Handler
     btnSave.Enabled = False
     cbxPhotog.BackColor = lngYellow
     tbxPhotoNum.BackColor = lngYellow
+    tbxPhotoType = "OO"  'later set by image node
+    tbxID = 0
+  
+    'set hints
+    lblPhotoNumHint.ForeColor = lngBlue
+    lblPhotoNumHint.Caption = "P + Month" & vbCrLf & _
+                        "(Jan-Sep=0-9,Oct-Dec=A-C)" & vbCrLf & _
+                        "+ day(01-31) +" & vbCrLf & _
+                        "4-digit camera seq#" & vbCrLf & _
+                        "(PA010300 = Jan 1, #300)"
+    lblDescriptionHint.ForeColor = lngBlue
+    lblDescriptionHint.Caption = ""
+    
+    'based on node clicked
+    Dim nodeinfo() As String
+    '0 - M, 1- C, 2-full file path, 3-file name w/o extension
+    'nodeinfo = Split(Me.Parent!tvwTree.Object.SelectedItem.Tag, "|")
+    'FilePath = nodeinfo(2)
+  
+    With Me.Parent!tvwTree.Object
+    
+        Debug.Print "tag: " & .SelectedItem.Tag
+    
+    End With
   
     'initialize values
     Set Me.cbxPhotog.Recordset = GetRecords("s_contact_list")
+    
     
 '    ClearForm Me
   

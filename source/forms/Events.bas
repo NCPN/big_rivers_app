@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =4065
-    Top =3105
-    Right =16815
-    Bottom =14490
+    Left =3345
+    Top =2820
+    Right =17100
+    Bottom =14670
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x656d3fc92f05e540
@@ -951,7 +951,6 @@ On Error GoTo Err_Handler
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
-
     
     'set hint
     Me.lblHintDate.Caption = "M\DD\YYYY"
