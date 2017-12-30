@@ -20,10 +20,10 @@ Begin Form
     Width =2232
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =3810
-    Top =7275
-    Right =5775
-    Bottom =9450
+    Left =13095
+    Top =18060
+    Right =15315
+    Bottom =20490
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -313,13 +313,14 @@ Option Explicit
 ' =================================
 ' Form:         PicTile
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  PicTile form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 12/18/2017
 ' References:   -
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
+'               BLC - 12/29/2017 - 1.01 - revise to accommodate PicPhotos subform
 ' =================================
 
 '---------------------
@@ -703,6 +704,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/28/2015 - initial version
+'   BLC - 12/29/2017 - revise to accommodate PicPhotos subform
 ' ---------------------------------
 Private Sub ToggleSelect(selection As Boolean)
 On Error GoTo Err_Handler
@@ -710,23 +712,54 @@ On Error GoTo Err_Handler
     'set checkbox
     chkSelect = selection
     
+    'define grandparent form
+    Dim frm As Form
+    Set frm = Me.Parent.Parent '.SelPhotos 'Form.SelPhotos
+    
     If selection = True Then
         imgPhoto.BorderColor = lngGreen
         lblName.ForeColor = lngGreen
         
-        'add to list
-        Me.Parent!tbxIDs = IIf(Len(Me.Parent!tbxIDs) > 0, Me.Parent!tbxIDs & "," & lblID.Caption, lblID.Caption)
+        'add to PicCatalog form's collection
+        frm.SelPhoto = lblID.Caption
+        
+        'set tempvars
+'        SetTempVar "SelectedPhotos", P
+        
+'        Me.Parent!tbxIDs = IIf(Len(Me.Parent!tbxIDs) > 0, Me.Parent!tbxIDs & "," & lblID.Caption, lblID.Caption)
     Else
         imgPhoto.BorderColor = lngLtBgdGray
         lblName.ForeColor = lngLtTextGray
         
         'remove from list > remove single comma, replace double comma with single, remove #
-        Me.Parent!tbxIDs = _
-        IIf(Left(Me.Parent!tbxIDs, 1) = ",", "", _
-        IIf(Me.Parent!tbxIDs = _
-        Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ","), _
-        "", Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ",")))
+'        Me.Parent!tbxIDs = _
+'        IIf(Left(Me.Parent!tbxIDs, 1) = ",", "", _
+'        IIf(Me.Parent!tbxIDs = _
+'        Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ","), _
+'        "", Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ",")))
+        Dim i As Long
         
+        If frm.SelPhotos.Count > 0 Then
+            For i = 1 To frm.SelPhotos.Count
+                If frm.SelPhotos.Item(i) = lblID.Caption Then
+                    'remove from PicCatalog form's collection (must use index since collection is unkeyed)
+                    frm.SelPhotos.Remove i 'lblID.Caption
+                    Exit For
+                End If
+            Next
+        End If
+    End If
+    
+    'print the collection
+    Debug.Print "Selected Photos: "
+    If frm.SelPhotos.Count > 0 Then
+        Dim pics As String
+        For i = 1 To frm.SelPhotos.Count
+            pics = pics & frm.SelPhotos.Item(i) & Space(2)
+        Next
+        Debug.Print pics
+    Else
+        Debug.Print 0
     End If
     
 Exit_Handler:

@@ -1519,7 +1519,7 @@ End Sub
 ' ---------------------------------
 Private Sub tbxLUCode_DblClick(Cancel As Integer)
 On Error GoTo Err_Handler
-    Dim item As String
+    Dim Item As String
     Dim i As Integer
     Dim lbx As ListBox
     
@@ -1544,7 +1544,7 @@ On Error GoTo Err_Handler
     'add components of item (code, species (UT or whatever), & ITIS) to listbox
 
     'prepare item for listbox value
-    item = tbxMasterPlantCode & ";" & tbxMasterSpecies & ";" & tbxLUCode & ";0;0"
+    Item = tbxMasterPlantCode & ";" & tbxMasterSpecies & ";" & tbxLUCode & ";0;0"
     
     'iterate through listbox (use .Column(x,i) vs .ListIndex(i) which results in error 451 property let not defined, property get...)
     If IsListDuplicate(Forms("frm_Tgt_Species").Controls("lbxTgtSpecies"), 2, tbxLUCode) Then
@@ -1556,7 +1556,7 @@ On Error GoTo Err_Handler
     
     With lbx
         'add item if not duplicate
-        .AddItem item
+        .AddItem Item
     
         'update target species count
         Forms("frm_Tgt_Species").Controls("lblTgtSpeciesCount").Caption = .ListCount - 1 & " species"
@@ -1754,7 +1754,7 @@ On Error GoTo Err_Handler
     
     'leave last selections for checkboxes (don't clear TempVars.item("speciestype"))
     'must clear to clear highlighting & reset speciestypes
-    TempVars.item("speciestype") = ""
+    TempVars.Item("speciestype") = ""
 
 Exit_Handler:
     Exit Sub

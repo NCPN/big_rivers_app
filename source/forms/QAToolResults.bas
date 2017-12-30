@@ -776,7 +776,7 @@ Private Function fxnOpenClickedQuery()
         Me.Parent.Form!selObject = Me.tbxQuery_name
         ' Bind the subform to the selected query - only if matching the current timeframe
 'FIX If Me.Time_frame = TempVars.item("Timeframe") Then
-        If Me.Parent.Form!cbxTimeframe = TempVars.item("Timeframe") Then
+        If Me.Parent.Form!cbxTimeframe = TempVars.Item("Timeframe") Then
             Me.Parent.Form!subQueryResults.SourceObject = "Query." & Me.tbxQuery_name
         End If
         ' Set the form to the selected record
@@ -840,18 +840,18 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     Me.Form.OrderByOn = True
 
     ' Change the label format to indicate the sorted field
-    Me.Controls.item(strSortFieldLabel).FontItalic = False
-    Me.Controls.item(strSortFieldLabel).fontBold = False
+    Me.Controls.Item(strSortFieldLabel).FontItalic = False
+    Me.Controls.Item(strSortFieldLabel).fontBold = False
     strSortFieldLabel = "lbl" & strFieldName
-    Me.Controls.item(strSortFieldLabel).FontItalic = True
-    Me.Controls.item(strSortFieldLabel).fontBold = True
+    Me.Controls.Item(strSortFieldLabel).FontItalic = True
+    Me.Controls.Item(strSortFieldLabel).fontBold = True
     ' Do the same for the second sort field, if applicable
     If strField2Name <> "" Then
-        Me.Controls.item(strSortFieldLabel2).FontItalic = False
-        Me.Controls.item(strSortFieldLabel2).fontBold = False
+        Me.Controls.Item(strSortFieldLabel2).FontItalic = False
+        Me.Controls.Item(strSortFieldLabel2).fontBold = False
         strSortFieldLabel = "lbl" & strField2Name
-        Me.Controls.item(strSortFieldLabel2).FontItalic = True
-        Me.Controls.item(strSortFieldLabel2).fontBold = True
+        Me.Controls.Item(strSortFieldLabel2).FontItalic = True
+        Me.Controls.Item(strSortFieldLabel2).fontBold = True
     End If
 
 Exit_Procedure:

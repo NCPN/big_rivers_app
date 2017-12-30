@@ -12,11 +12,11 @@ Begin Form
     GridY =24
     Width =11880
     DatasheetFontHeight =11
-    ItemSuffix =34
+    ItemSuffix =36
     Left =3345
-    Top =2490
-    Right =13290
-    Bottom =14340
+    Top =2820
+    Right =15225
+    Bottom =18420
     DatasheetGridlinesColor =14806254
     Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
         " #9/22/2016#"
@@ -155,31 +155,9 @@ Begin Form
             BackThemeColorIndex =0
             BackTint =75.0
             Begin
-                Begin TextBox
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =8280
-                    Top =3240
-                    Width =960
-                    Height =315
-                    ColumnOrder =3
-                    TabIndex =3
-                    BorderColor =10921638
-                    ForeColor =16777215
-                    Name ="tbxNumPix"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =8280
-                    LayoutCachedTop =3240
-                    LayoutCachedWidth =9240
-                    LayoutCachedHeight =3555
-                    ForeThemeColorIndex =1
-                    ForeTint =100.0
-                End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
+                    Left =60
                     Top =60
                     Width =7500
                     Height =615
@@ -188,8 +166,9 @@ Begin Form
                     Name ="lblDirections"
                     Caption ="Select the desired photos"
                     GridlineColor =10921638
+                    LayoutCachedLeft =60
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7500
+                    LayoutCachedWidth =7560
                     LayoutCachedHeight =675
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -200,7 +179,7 @@ Begin Form
                     Left =10800
                     Top =1560
                     Width =720
-                    TabIndex =4
+                    TabIndex =3
                     ForeColor =16711680
                     Name ="btnComment"
                     Caption ="í ½í·©"
@@ -225,9 +204,10 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =87
                     TextAlign =3
-                    Left =7620
+                    Left =7560
+                    Top =60
                     Width =4140
                     Height =315
                     FontWeight =600
@@ -236,9 +216,10 @@ Begin Form
                     Name ="lblContext"
                     Caption ="context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =7620
-                    LayoutCachedWidth =11760
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =7560
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =11700
+                    LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -247,7 +228,7 @@ Begin Form
                     Left =180
                     Top =2760
                     Width =1080
-                    TabIndex =5
+                    TabIndex =4
                     ForeColor =16711680
                     Name ="btnClearAll"
                     Caption ="Clear All"
@@ -277,7 +258,7 @@ Begin Form
                     Left =1380
                     Top =2760
                     Width =1080
-                    TabIndex =6
+                    TabIndex =5
                     ForeColor =16711680
                     Name ="btnSelectAll"
                     Caption ="Select All"
@@ -382,6 +363,7 @@ Begin Form
                     Width =3414
                     Height =315
                     ColumnOrder =1
+                    TabIndex =1
                     BoundColumn =1
                     BackColor =65535
                     BorderColor =10921638
@@ -445,8 +427,8 @@ Begin Form
                     FontWeight =500
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lblAfterDate"
-                    Caption ="After"
+                    Name ="lblYear"
+                    Caption ="Year"
                     GridlineColor =10921638
                     LayoutCachedLeft =480
                     LayoutCachedTop =1635
@@ -454,44 +436,6 @@ Begin Form
                     LayoutCachedHeight =1950
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                End
-                Begin TextBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    Left =1680
-                    Top =1635
-                    Width =3414
-                    Height =315
-                    ColumnOrder =0
-                    TabIndex =1
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="tbxAfterDate"
-                    Format ="Short Date"
-                    AfterUpdate ="[Event Procedure]"
-                    ControlTipText ="Return photos after this date (inclusive)"
-                    ConditionalFormat = Begin
-                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1680
-                    LayoutCachedTop =1635
-                    LayoutCachedWidth =5094
-                    LayoutCachedHeight =1950
-                    BackThemeColorIndex =-1
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
                 End
                 Begin TextBox
                     OverlapFlags =85
@@ -533,6 +477,46 @@ Begin Form
                         0x002200000000000000000000000000000000000000000000
                     End
                 End
+                Begin ComboBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =1680
+                    Top =1635
+                    Width =3414
+                    Height =315
+                    ColumnOrder =0
+                    BackColor =65535
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    ConditionalFormat = Begin
+                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
+                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
+                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
+                    End
+                    Name ="cbxYear"
+                    RowSourceType ="Table/Query"
+                    ControlTipText ="Return photos from the selected year"
+                    Format ="Short Date"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1680
+                    LayoutCachedTop =1635
+                    LayoutCachedWidth =5094
+                    LayoutCachedHeight =1950
+                    BackThemeColorIndex =-1
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                    ForeShade =100.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
+                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
+                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
+                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
+                        0x002200000000000000000000000000000000000000000000
+                    End
+                End
             End
         End
         Begin Section
@@ -547,443 +531,36 @@ Begin Form
             BackTint =75.0
             Begin
                 Begin Subform
-                    OverlapFlags =85
-                    Left =120
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    BorderColor =10921638
-                    Name ="PicTile11"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
                     OverlapFlags =215
                     Left =120
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =1
+                    Top =120
+                    Width =11640
+                    Height =12780
                     BorderColor =10921638
-                    Name ="PicTile21"
-                    SourceObject ="Form.PicTile"
+                    Name ="grid"
+                    SourceObject ="Form.PicPhotos"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =215
-                    Left =120
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =2
-                    BorderColor =10921638
-                    Name ="PicTile31"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =120
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =3
-                    BorderColor =10921638
-                    Name ="PicTile41"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =2460
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =4
-                    BorderColor =10921638
-                    Name ="PicTile12"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2460
                     LayoutCachedTop =120
-                    LayoutCachedWidth =4692
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =215
-                    Left =2460
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =5
-                    BorderColor =10921638
-                    Name ="PicTile22"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2460
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =4692
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =215
-                    Left =2460
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =6
-                    BorderColor =10921638
-                    Name ="PicTile32"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2460
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =4692
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =2460
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =7
-                    BorderColor =10921638
-                    Name ="PicTile42"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2460
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =4692
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =4800
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =8
-                    BorderColor =10921638
-                    Name ="PicTile13"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =4800
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =9
-                    BorderColor =10921638
-                    Name ="PicTile23"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =4800
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =10
-                    BorderColor =10921638
-                    Name ="PicTile33"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =4800
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =11
-                    BorderColor =10921638
-                    Name ="PicTile43"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =12
-                    BorderColor =10921638
-                    Name ="PicTile14"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =13
-                    BorderColor =10921638
-                    Name ="PicTile24"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =14
-                    BorderColor =10921638
-                    Name ="PicTile34"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =15
-                    BorderColor =10921638
-                    Name ="PicTile44"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =16
-                    BorderColor =10921638
-                    Name ="PicTile15"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =17
-                    BorderColor =10921638
-                    Name ="PicTile25"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =18
-                    BorderColor =10921638
-                    Name ="PicTile35"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =19
-                    BorderColor =10921638
-                    Name ="PicTile45"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =120
-                    Top =10380
-                    Width =2232
-                    Height =2448
-                    TabIndex =20
-                    BorderColor =10921638
-                    Name ="PicTile51"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =10380
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =12828
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =2460
-                    Top =10380
-                    Width =2232
-                    Height =2448
-                    TabIndex =21
-                    BorderColor =10921638
-                    Name ="PicTile52"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2460
-                    LayoutCachedTop =10380
-                    LayoutCachedWidth =4692
-                    LayoutCachedHeight =12828
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =4800
-                    Top =10380
-                    Width =2232
-                    Height =2448
-                    TabIndex =22
-                    BorderColor =10921638
-                    Name ="PicTile53"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =10380
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =12828
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =10380
-                    Width =2232
-                    Height =2448
-                    TabIndex =23
-                    BorderColor =10921638
-                    Name ="PicTile54"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =10380
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =12828
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =10380
-                    Width =2232
-                    Height =2448
-                    TabIndex =24
-                    BorderColor =10921638
-                    Name ="PicTile55"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =10380
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =12828
-                End
-                Begin Label
-                    OverlapFlags =93
-                    Top =4980
-                    Width =3480
-                    Height =300
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lblTitle"
-                    GridlineColor =10921638
-                    LayoutCachedTop =4980
-                    LayoutCachedWidth =3480
-                    LayoutCachedHeight =5280
-                    ForeThemeColorIndex =1
-                    ForeTint =100.0
+                    LayoutCachedWidth =11760
+                    LayoutCachedHeight =12900
+                    Begin
+                        Begin Label
+                            OverlapFlags =93
+                            Left =120
+                            Width =825
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="Label35"
+                            Caption ="Child34:"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =120
+                            LayoutCachedWidth =945
+                            LayoutCachedHeight =315
+                        End
+                    End
                 End
             End
         End
@@ -1010,13 +587,14 @@ Option Explicit
 ' =================================
 ' Form:         PicCatalog
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  PicCatalog form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 12/18/2017
 ' References:   -
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
+'               BLC - 12/29/2017 - 1.01 - added SelPhotos collection property
 ' =================================
 
 '---------------------
@@ -1032,12 +610,17 @@ Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
+Private m_SelPhotos As Collection
+Private m_SelPhoto As String
+
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidCallingForm(Value As String)
+
+Public Event InvalidSelPhoto(Value As Long)
 
 '---------------------
 ' Properties
@@ -1047,7 +630,7 @@ Public Property Let Title(Value As String)
         m_Title = Value
 
         'set the form title & caption
-        Me.lblTitle.Caption = m_Title
+        'Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
         RaiseEvent InvalidTitle(Value)
@@ -1085,6 +668,48 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
+Public Property Let SelPhotos(Value As Collection)
+'    If  Then
+        Set m_SelPhotos = Value
+'    Else
+'        RaiseEvent InvalidSelPhotos(Value)
+'    End If
+End Property
+
+Public Property Get SelPhotos() As Collection
+    Set SelPhotos = m_SelPhotos
+End Property
+
+Public Property Let SelPhoto(Value As Long)
+    If IsNumeric(Value) Then
+        m_SelPhoto = Value
+    Else
+        RaiseEvent InvalidSelPhoto(Value)
+    End If
+
+    'check if value is already present
+    Dim InCollection As Boolean
+    InCollection = False
+    Dim i As Long
+    
+    For i = 1 To Me.SelPhotos.Count
+        If SelPhotos.Item(i) = Value Then
+            InCollection = True
+            Exit For
+        End If
+    Next
+    
+    If InCollection = False Then
+        'add to the collection
+        Me.SelPhotos.Add Value
+    End If
+    
+End Property
+
+Public Property Get SelPhoto() As Long
+    SelPhoto = m_SelPhoto
+End Property
+
 '---------------------
 ' Events
 '---------------------
@@ -1118,7 +743,7 @@ On Error GoTo Err_Handler
     lblContext.Caption = GetContext()
     
     Title = "Photo Binder Photos"
-    lblTitle.Caption = "" 'hide second title
+    'lblTitle.Caption = "" 'hide second title
     Directions = "Select the desired photos"
     lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -1133,6 +758,9 @@ On Error GoTo Err_Handler
     btnComment.Enabled = False
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
+    
+    'set subform
+    'Set Me.grid.SourceObject = Forms("PicPhotos").Form
   
     'filters
     Me.Filter = ""
@@ -1146,7 +774,7 @@ On Error GoTo Err_Handler
     Set Me.Recordset = GetRecords("s_usys_temp_photo_data")
     
     '# of photos
-    tbxNumPix = Me.Recordset.RecordCount
+    Me.grid!tbxNumPix = Me.Recordset.RecordCount
     
     'populate subforms
     PopulatePicTiles
@@ -1159,7 +787,12 @@ On Error GoTo Err_Handler
     cbxPhotoType.BoundColumn = 2
     cbxPhotoType.ColumnWidths = "1;1;1;"
     
+    'Set Me.cbxYear.Recordset = GetRecords("")
+    
+    
     'initialize values
+    Dim col As New Collection
+    Me.SelPhotos = New Collection 'col
   
 Exit_Handler:
     Exit Sub
@@ -1343,9 +976,13 @@ End Sub
 Private Sub tbxAfterDate_AfterUpdate()
 On Error GoTo Err_Handler
     
+'    Me.Filter = IIf(Len(Me.Filter) > 0, _
+'                Me.Filter & " AND PhotoDate > #" & tbxAfterDate & "#", _
+'                "PhotoDate > #" & tbxAfterDate & "#")
+    
     Me.Filter = IIf(Len(Me.Filter) > 0, _
-                Me.Filter & " AND PhotoDate > #" & tbxAfterDate & "#", _
-                "PhotoDate > #" & tbxAfterDate & "#")
+                Me.Filter & " AND Year(PhotoDate) = " & Me.cbxYear, _
+                "Year(PhotoDate) = " & cbxYear)
     
     'requery tiles
     RefreshTiles

@@ -1296,7 +1296,7 @@ On Error GoTo Err_Handler
                 '.ItemData(.NewIndex) = lbxObserver.Column(0)
                 'check if duplicate
                 If Not IsDupeItem(lbxObservers, lbxObserver.ItemData(i)) Then _
-                    .AddItem item:=lbxObserver.Column(0, i) & ";" & lbxObserver.Column(1, i)
+                    .AddItem Item:=lbxObserver.Column(0, i) & ";" & lbxObserver.Column(1, i)
                     '.AddItem item:=lbxObserver.ListIndex & ";" & lbxObserver.Column(1)
             End If
             
@@ -1351,7 +1351,7 @@ On Error GoTo Err_Handler
                 
                 'check if duplicate
                 If Not IsDupeItem(lbxRecorders, lbxRecorder.ItemData(i)) Then _
-                    .AddItem item:=lbxRecorder.Column(0, i) & ";" & lbxRecorder.Column(1, i)
+                    .AddItem Item:=lbxRecorder.Column(0, i) & ";" & lbxRecorder.Column(1, i)
             End If
         Next
     
@@ -1708,7 +1708,7 @@ End Sub
 ' Revisions:
 '   BLC - 12/5/2017 - initial version
 ' ---------------------------------
-Public Function IsDupeItem(lbx As ListBox, item As Variant) As Boolean
+Public Function IsDupeItem(lbx As ListBox, Item As Variant) As Boolean
 On Error GoTo Err_Handler
 
     Dim DupeItem As Boolean
@@ -1721,7 +1721,7 @@ On Error GoTo Err_Handler
     
 '        If lbx.ListIndex = item Then DupeItem = True
     
-        If lbx.ItemData(i) = item Then
+        If lbx.ItemData(i) = Item Then
             DupeItem = True
             Exit For
         End If
