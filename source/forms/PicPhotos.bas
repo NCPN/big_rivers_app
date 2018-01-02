@@ -13,10 +13,10 @@ Begin Form
     Width =11880
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =3810
-    Top =7605
-    Right =15180
-    Bottom =20115
+    Left =975
+    Top =6165
+    Right =13125
+    Bottom =18675
     DatasheetGridlinesColor =14806254
     Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
         " #9/22/2016#"

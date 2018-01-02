@@ -97,3 +97,7 @@
 105	TransectNumber	T6		6
 106	TransectNumber	T7		7
 107	TransectNumber	T8		8
+108	SlideOrientation	1C	1 photo - centered	1
+109	SlideOrientation	2H	2 photos - horiz (side-by-side)	2
+110	SlideOrientation	2V	2 photos - vert (top/bottom)	3
+111	SlideOrientation	3H	3 photos - horiz (side-by-side)	4

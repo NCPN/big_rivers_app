@@ -21,9 +21,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =38
     Left =13095
-    Top =18060
+    Top =16755
     Right =15315
-    Bottom =20490
+    Bottom =19185
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x06dd372434a7e440
@@ -313,7 +313,7 @@ Option Explicit
 ' =================================
 ' Form:         PicTile
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  PicTile form object related properties, events, functions & procedures for UI display
 '
@@ -321,6 +321,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
 '               BLC - 12/29/2017 - 1.01 - revise to accommodate PicPhotos subform
+'               BLC - 1/2/2018   - 1.02 - enable/disable powerpoint wizard button, code cleanup
 ' =================================
 
 '---------------------
@@ -705,6 +706,7 @@ End Sub
 ' Revisions:
 '   BLC - 10/28/2015 - initial version
 '   BLC - 12/29/2017 - revise to accommodate PicPhotos subform
+'   BLC - 1/2/2018   - enable/disable powerpoint wizard button, code cleanup
 ' ---------------------------------
 Private Sub ToggleSelect(selection As Boolean)
 On Error GoTo Err_Handler
@@ -723,20 +725,11 @@ On Error GoTo Err_Handler
         'add to PicCatalog form's collection
         frm.SelPhoto = lblID.Caption
         
-        'set tempvars
-'        SetTempVar "SelectedPhotos", P
-        
-'        Me.Parent!tbxIDs = IIf(Len(Me.Parent!tbxIDs) > 0, Me.Parent!tbxIDs & "," & lblID.Caption, lblID.Caption)
     Else
         imgPhoto.BorderColor = lngLtBgdGray
         lblName.ForeColor = lngLtTextGray
         
-        'remove from list > remove single comma, replace double comma with single, remove #
-'        Me.Parent!tbxIDs = _
-'        IIf(Left(Me.Parent!tbxIDs, 1) = ",", "", _
-'        IIf(Me.Parent!tbxIDs = _
-'        Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ","), _
-'        "", Replace(Replace(Me.Parent!tbxIDs, lblID.Caption, ""), ",,", ",")))
+        'remove from list
         Dim i As Long
         
         If frm.SelPhotos.Count > 0 Then
@@ -758,8 +751,14 @@ On Error GoTo Err_Handler
             pics = pics & frm.SelPhotos.Item(i) & Space(2)
         Next
         Debug.Print pics
+        
+        'enable powerpoint wizard
+        frm.btnMakePPT.Enabled = True
     Else
         Debug.Print 0
+        
+        'disable powerpoint wizard
+        frm.btnMakePPT.Enabled = False
     End If
     
 Exit_Handler:

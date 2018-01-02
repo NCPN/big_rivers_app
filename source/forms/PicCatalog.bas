@@ -10,28 +10,17 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =11880
+    Width =12660
     DatasheetFontHeight =11
-    ItemSuffix =36
-    Left =3345
-    Top =2820
-    Right =15225
-    Bottom =18420
+    ItemSuffix =37
+    Left =4440
+    Top =3105
+    Right =18195
+    Bottom =14955
     DatasheetGridlinesColor =14806254
-    Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
-        " #9/22/2016#"
     RecSrcDt = Begin
-        0x8fe23098f909e540
+        0x736515bcc70be540
     End
-    RecordSource ="SELECT \015\012p.ID AS PhotoID, p.PhotoPath, p.PhotoFilename, p.PhotoType, p.Pho"
-        "toDate, p.Photographer_ID, e.StartDate, p.Event_ID,\015\012c.FirstName, c.LastNa"
-        "me, c.FirstName & ' ' & c.LastName AS PhotogName, c.Email,\015\012s.SiteCode, s."
-        "ID AS SiteID, s.Park_ID, s.River_ID,\015\012pk.ParkCode,\015\012r.River, r.Segme"
-        "nt\015\012FROM (((((usys_temp_photo p\015\012LEFT JOIN Event e ON e.ID = p.Event"
-        "_ID)\015\012LEFT JOIN Contact c ON c.ID = p.Photographer_ID)\015\012LEFT JOIN Si"
-        "te s ON s.ID = e.Site_ID)\015\012LEFT JOIN River r ON r.ID = s.River_ID)\015\012"
-        "LEFT JOIN Park pk ON pk.ID = s.Park_ID)\015\012ORDER BY\015\012p.PhotoType\015\012"
-        ";"
     Caption ="Photo Binder Photos"
     OnCurrent ="[Event Procedure]"
     BeforeUpdate ="[Event Procedure]"
@@ -147,7 +136,8 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =3780
+            CanGrow = NotDefault
+            Height =2460
             BackColor =4210752
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -164,7 +154,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Select the desired photos"
+                    Caption ="Select the desired photos, then click the Make PPT button to begin the powerpoin"
+                        "t wizard."
                     GridlineColor =10921638
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -177,9 +168,9 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =85
                     Left =10800
-                    Top =1560
+                    Top =600
                     Width =720
-                    TabIndex =3
+                    TabIndex =4
                     ForeColor =16711680
                     Name ="btnComment"
                     Caption ="í ½í·©"
@@ -187,9 +178,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =10800
-                    LayoutCachedTop =1560
+                    LayoutCachedTop =600
                     LayoutCachedWidth =11520
-                    LayoutCachedHeight =1920
+                    LayoutCachedHeight =960
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -214,7 +205,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="context"
+                    Caption ="DINO  >  Yampa  >  EP"
                     GridlineColor =10921638
                     LayoutCachedLeft =7560
                     LayoutCachedTop =60
@@ -226,9 +217,9 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     Left =180
-                    Top =2760
+                    Top =1920
                     Width =1080
-                    TabIndex =4
+                    TabIndex =3
                     ForeColor =16711680
                     Name ="btnClearAll"
                     Caption ="Clear All"
@@ -237,9 +228,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =180
-                    LayoutCachedTop =2760
+                    LayoutCachedTop =1920
                     LayoutCachedWidth =1260
-                    LayoutCachedHeight =3120
+                    LayoutCachedHeight =2280
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -256,9 +247,9 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     Left =1380
-                    Top =2760
+                    Top =1920
                     Width =1080
-                    TabIndex =5
+                    TabIndex =2
                     ForeColor =16711680
                     Name ="btnSelectAll"
                     Caption ="Select All"
@@ -267,9 +258,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1380
-                    LayoutCachedTop =2760
+                    LayoutCachedTop =1920
                     LayoutCachedWidth =2460
-                    LayoutCachedHeight =3120
+                    LayoutCachedHeight =2280
                     ForeThemeColorIndex =-1
                     BackColor =14136213
                     BorderColor =14136213
@@ -287,8 +278,8 @@ Begin Form
                     BackStyle =1
                     OverlapFlags =93
                     TextAlign =3
-                    Left =60
-                    Top =3255
+                    Left =3840
+                    Top =1995
                     Width =7860
                     Height =315
                     FontSize =9
@@ -301,10 +292,10 @@ Begin Form
                     Name ="lblMsg"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedLeft =60
-                    LayoutCachedTop =3255
-                    LayoutCachedWidth =7920
-                    LayoutCachedHeight =3570
+                    LayoutCachedLeft =3840
+                    LayoutCachedTop =1995
+                    LayoutCachedWidth =11700
+                    LayoutCachedHeight =2310
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -313,8 +304,8 @@ Begin Form
                 Begin Label
                     OverlapFlags =215
                     TextAlign =2
-                    Left =4020
-                    Top =3120
+                    Left =7800
+                    Top =1860
                     Width =825
                     Height =600
                     FontSize =20
@@ -324,10 +315,10 @@ Begin Form
                     Name ="lblMsgIcon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4020
-                    LayoutCachedTop =3120
-                    LayoutCachedWidth =4845
-                    LayoutCachedHeight =3720
+                    LayoutCachedLeft =7800
+                    LayoutCachedTop =1860
+                    LayoutCachedWidth =8625
+                    LayoutCachedHeight =2460
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =-1
@@ -363,7 +354,6 @@ Begin Form
                     Width =3414
                     Height =315
                     ColumnOrder =1
-                    TabIndex =1
                     BoundColumn =1
                     BackColor =65535
                     BorderColor =10921638
@@ -420,9 +410,10 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =480
-                    Top =1635
-                    Width =1125
+                    TextAlign =3
+                    Left =5940
+                    Top =1200
+                    Width =480
                     Height =315
                     FontWeight =500
                     BorderColor =8355711
@@ -430,61 +421,22 @@ Begin Form
                     Name ="lblYear"
                     Caption ="Year"
                     GridlineColor =10921638
-                    LayoutCachedLeft =480
-                    LayoutCachedTop =1635
-                    LayoutCachedWidth =1605
-                    LayoutCachedHeight =1950
+                    LayoutCachedLeft =5940
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =6420
+                    LayoutCachedHeight =1515
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
-                End
-                Begin TextBox
-                    OverlapFlags =85
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =1680
-                    Top =2070
-                    Width =6954
-                    Height =570
-                    ColumnOrder =2
-                    TabIndex =2
-                    BackColor =65535
-                    BorderColor =10921638
-                    ForeColor =15921906
-                    Name ="tbxIDs"
-                    ControlTipText ="Return photos after this date (inclusive)"
-                    ConditionalFormat = Begin
-                        0x01000000a0000000020000000100000000000000000000001b00000001000000 ,
-                        0x00000000fff2000000000000030000001c0000001f0000000100000000000000 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b007400620078004d006f00640061006c00530065006400530069007a006500 ,
-                        0x5d002e00560061006c00750065003d0022002200000000002200220000000000
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =1680
-                    LayoutCachedTop =2070
-                    LayoutCachedWidth =8634
-                    LayoutCachedHeight =2640
-                    BackThemeColorIndex =-1
-                    ForeThemeColorIndex =1
-                    ForeTint =100.0
-                    ForeShade =95.0
-                    ConditionalFormat14 = Begin
-                        0x01000200000001000000000000000100000000000000fff200001a0000005b00 ,
-                        0x7400620078004d006f00640061006c00530065006400530069007a0065005d00 ,
-                        0x2e00560061006c00750065003d00220022000000000000000000000000000000 ,
-                        0x0000000000000000000000030000000100000000000000ffffff000200000022 ,
-                        0x002200000000000000000000000000000000000000000000
-                    End
                 End
                 Begin ComboBox
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =1680
-                    Top =1635
+                    Left =6540
+                    Top =1200
                     Width =3414
                     Height =315
                     ColumnOrder =0
+                    TabIndex =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -501,10 +453,10 @@ Begin Form
                     Format ="Short Date"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1680
-                    LayoutCachedTop =1635
-                    LayoutCachedWidth =5094
-                    LayoutCachedHeight =1950
+                    LayoutCachedLeft =6540
+                    LayoutCachedTop =1200
+                    LayoutCachedWidth =9954
+                    LayoutCachedHeight =1515
                     BackThemeColorIndex =-1
                     ForeThemeColorIndex =0
                     ForeTint =75.0
@@ -517,11 +469,79 @@ Begin Form
                         0x002200000000000000000000000000000000000000000000
                     End
                 End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =10800
+                    Top =1140
+                    Width =1425
+                    TabIndex =5
+                    ForeColor =16711680
+                    Name ="btnMakePPT"
+                    Caption =" Make PPT"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Create powerpoint file from selected photos"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000ff000000ff00000000000000ff000000ff00000000 ,
+                        0x000000ff000000ff000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000ff000000ff00000000000000ff000000ff00000000 ,
+                        0x000000ff000000ff000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000020 ,
+                        0x000000ff0000005000000000000000000000000000000000c0585080000000ff ,
+                        0x00000030000000000000000000000000000000000000000000000020000000ff ,
+                        0x808080ff000000ffc0585080000000ff0000003000000000c06050ffffc0c0ff ,
+                        0x000000ff0000000000000000000000000000000000000020000000ff808080ff ,
+                        0x000000ff00000010c06050ffffc0c0ff000000ff00000000e07070a0c06050ff ,
+                        0xc060605000000000000000000000000000000020000000ff808080ff000000ff ,
+                        0x0000001000000000e07070a0c06050ffc0606050000000000000000000000000 ,
+                        0x00000000000000000000000000000020000000ff808080ff000000ff00000010 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x000000000000000000000020000000ff808080ff000000ff0000001000000000 ,
+                        0x00000000000000000000000000000000c0585080000000ff0000003000000000 ,
+                        0x0000000000000020000000ff808080ff000000ff000000100000000000000000 ,
+                        0x00000000000000000000000000000000c06050ffffc0c0ff000000ff00000000 ,
+                        0x00000020000000ff40d8f0ff000000ff00000010000000000000000000000000 ,
+                        0x00000000000000000000000000000000e07070a0c06050ffc060605000000020 ,
+                        0x000000ff40d8f0ff000000ff0000001000000000000000000000000000000000 ,
+                        0x00000000000000000000000000000000000000000000000000000000000000ff ,
+                        0xf0f8f0ff000000ff000000100000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000010 ,
+                        0x000000ff00000010000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =10800
+                    LayoutCachedTop =1140
+                    LayoutCachedWidth =12225
+                    LayoutCachedHeight =1500
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
             End
         End
         Begin Section
             CanGrow = NotDefault
-            Height =12960
+            Height =12900
             BackColor =4210752
             Name ="Detail"
             AlternateBackColor =4210752
@@ -533,8 +553,7 @@ Begin Form
                 Begin Subform
                     OverlapFlags =215
                     Left =120
-                    Top =120
-                    Width =11640
+                    Width =12420
                     Height =12780
                     BorderColor =10921638
                     Name ="grid"
@@ -542,9 +561,8 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =11760
-                    LayoutCachedHeight =12900
+                    LayoutCachedWidth =12540
+                    LayoutCachedHeight =12780
                     Begin
                         Begin Label
                             OverlapFlags =93
@@ -565,10 +583,9 @@ Begin Form
             End
         End
         Begin FormFooter
-            Height =360
+            Height =0
             BackColor =4210752
             Name ="FormFooter"
-            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =0
@@ -587,7 +604,7 @@ Option Explicit
 ' =================================
 ' Form:         PicCatalog
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  PicCatalog form object related properties, events, functions & procedures for UI display
 '
@@ -595,6 +612,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
 '               BLC - 12/29/2017 - 1.01 - added SelPhotos collection property
+'               BLC - 1/2/2018   - 1.02 - update for PicPhotos subform
 ' =================================
 
 '---------------------
@@ -731,7 +749,7 @@ Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     'default
-    Me.CallingForm = "Main"
+    Me.CallingForm = "Photo"
     
     If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
 
@@ -744,18 +762,21 @@ On Error GoTo Err_Handler
     
     Title = "Photo Binder Photos"
     'lblTitle.Caption = "" 'hide second title
-    Directions = "Select the desired photos"
+    Directions = "Select the desired photos, then click the Make PPT button to begin the powerpoint wizard."
     lblDirections.ForeColor = lngLtBlue
+    btnMakePPT.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
     
     'set hint
     
     'set hover
+    btnMakePPT.HoverColor = lngGreen
     btnComment.HoverColor = lngGreen
       
     'defaults
     btnComment.Enabled = False
+    btnMakePPT.Enabled = False
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
     
@@ -765,6 +786,11 @@ On Error GoTo Err_Handler
     'filters
     Me.Filter = ""
     Me.FilterOnLoad = True
+    
+    'initialize values << place here before initial call to Form_Current()
+    '                     driven by setting record sources
+    Dim col As New Collection
+    Me.SelPhotos = New Collection 'col
     
 '    Set cbxPhotoType.Recordset = GetRecords("s_")
     
@@ -788,11 +814,6 @@ On Error GoTo Err_Handler
     cbxPhotoType.ColumnWidths = "1;1;1;"
     
     'Set Me.cbxYear.Recordset = GetRecords("")
-    
-    
-    'initialize values
-    Dim col As New Collection
-    Me.SelPhotos = New Collection 'col
   
 Exit_Handler:
     Exit Sub
@@ -972,14 +993,11 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/2/2018   - code cleanup
 ' ---------------------------------
 Private Sub tbxAfterDate_AfterUpdate()
 On Error GoTo Err_Handler
-    
-'    Me.Filter = IIf(Len(Me.Filter) > 0, _
-'                Me.Filter & " AND PhotoDate > #" & tbxAfterDate & "#", _
-'                "PhotoDate > #" & tbxAfterDate & "#")
-    
+        
     Me.Filter = IIf(Len(Me.Filter) > 0, _
                 Me.Filter & " AND Year(PhotoDate) = " & Me.cbxYear, _
                 "Year(PhotoDate) = " & cbxYear)
@@ -1011,6 +1029,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/2/2018   - revise to clear SelPhotos collection (vs. using tbxIDs)
 ' ---------------------------------
 Private Sub btnClearAll_Click()
 On Error GoTo Err_Handler
@@ -1018,8 +1037,11 @@ On Error GoTo Err_Handler
     'check none
     ToggleChecks False
     
-    'clear tbx
-    tbxIDs = ""
+    'clear SelPhotos
+    Me.SelPhotos = New Collection
+    
+    'disable powerpoint wizard
+    btnMakePPT.Enabled = False
 
 Exit_Handler:
     Exit Sub
@@ -1060,6 +1082,42 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnSelectAll_Click[PicPicTile form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnMakePPT_Click
+' Description:  select all click event actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 2, 2018 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/2/2018 - initial version
+' ---------------------------------
+Private Sub btnMakePPT_Click()
+On Error GoTo Err_Handler
+    
+    'convert object to pointer
+    Dim pix As Long
+    
+    'pix = ConvertObjectToPointer(Me.SelPhotos)
+    
+    'begin wizard
+    DoCmd.OpenForm "PPTWizard", acNormal ', , , , , pix 'Me.SelPhotos
+    
+Exit_Handler:
+    Exit Sub
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnMakePPT_Click[PicPicTile form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1187,35 +1245,55 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/2/2018 - update for PicPhotos subform
 ' ---------------------------------
 Private Sub ToggleChecks(selection As Boolean)
 On Error GoTo Err_Handler
 
     Dim ctrl As Control
     Dim sctrl As Control
+    Dim ssctrl As Control
+    
+    'set default
+    btnMakePPT.Enabled = False
     
     'iterate through all subforms
     For Each ctrl In Me.Controls
 'Debug.Print ctrl.Name
 
-        'check for subform (control type 112)
+        'check for subform (control type 112) - list grid (PicPhotos)
         If ctrl.ControlType = acSubform Then
             
             'iterate through subform controls
             For Each sctrl In ctrl.Form.Controls
             
-                Select Case sctrl.ControlType
-                    Case acCheckBox
-                        If sctrl.Name = "chkSelect" Then _
-                            sctrl = selection
-                    'Case acTextBox
-                    Case acLabel
-                        If sctrl.Name = "lblName" Then _
-                            sctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
-                    Case acImage
-                        If sctrl.Name = "imgPhoto" Then _
-                            sctrl.BorderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
-                End Select
+                'check for subform (control type 112) - individual photos (PicTile)
+                If sctrl.ControlType = acSubform Then
+                    
+                    'iterate through subform controls
+                    For Each ssctrl In sctrl.Form.Controls
+       'Debug.Print ssctrl.Name
+       
+                        Select Case ssctrl.ControlType
+                            Case acCheckBox
+                                If ssctrl.Name = "chkSelect" Then _
+                                    ssctrl = selection
+                            'Case acTextBox
+                            Case acLabel
+                                If ssctrl.Name = "lblName" Then _
+                                    ssctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
+                            Case acImage
+                                If ssctrl.Name = "imgPhoto" Then _
+                                    ssctrl.BorderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
+                        End Select
+                    
+                        'add photo to selected photos collection
+                        If ssctrl.Name = "lblID" Then _
+                            Me.SelPhoto = ssctrl.Caption
+                    
+                    Next
+                    
+                End If
                 
             Next
             
@@ -1223,6 +1301,9 @@ On Error GoTo Err_Handler
     
     Next
     
+    'enable wizard if there are selected photos
+    If Me.SelPhotos.Count > 0 Then btnMakePPT.Enabled = True
+        
 Exit_Handler:
     Exit Sub
 Err_Handler:
