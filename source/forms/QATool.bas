@@ -2783,7 +2783,7 @@ Private Sub Form_Open(Cancel As Integer)
     ' Initialize UI
     With Me
         ' Set form time frame to global time frame
-        .cbxTimeframe = TempVars.Item("Timeframe")
+        .cbxTimeframe = TempVars.item("Timeframe")
         
         .cbxDoneFilter = "False"
         .tglFilterByDone = True
@@ -2861,11 +2861,11 @@ End Sub
 Private Sub cbxTimeframe_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If Me.cbxTimeframe <> TempVars.Item("Timeframe") Then
+    If Me.cbxTimeframe <> TempVars.item("Timeframe") Then
         Me.btnRefresh.Enabled = False
         Me.optgMode.Enabled = False
     Else
-        Select Case TempVars.Item("UserAccessLevel")
+        Select Case TempVars.item("UserAccessLevel")
           Case "admin", "power user"
             Me.btnRefresh.Enabled = True
             Me.optgMode.Enabled = True
@@ -4089,8 +4089,8 @@ Private Function FilterRecords()
     Me.subResults.Form.FilterOn = bFilterOn
 
     ' Make the labels bold or not depending on filter settings
-    Me.lblTypeFilter.fontBold = Me.tglFilterByType
-    Me.lblDoneFilter.fontBold = Me.tglFilterByDone
+    Me.lblTypeFilter.FontBold = Me.tglFilterByType
+    Me.lblDoneFilter.FontBold = Me.tglFilterByDone
 
 Exit_Handler:
     Exit Function
@@ -4180,7 +4180,7 @@ Private Function EnableAutoFix()
     Set ctlAutoFix = Forms!frm_QA_Tool.subQueryResults!varAutoFix
 
     ' If no error, the field is there ... enable the ctl if user has sufficient rights
-    Select Case TempVars.Item("UserAccessLevel")
+    Select Case TempVars.item("UserAccessLevel")
       Case "admin", "power user"
         Me.btnAutoFix.Enabled = True
     End Select

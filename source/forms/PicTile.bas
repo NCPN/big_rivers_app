@@ -734,7 +734,7 @@ On Error GoTo Err_Handler
         
         If frm.SelPhotos.Count > 0 Then
             For i = 1 To frm.SelPhotos.Count
-                If frm.SelPhotos.Item(i) = lblID.Caption Then
+                If frm.SelPhotos.item(i) = lblID.Caption Then
                     'remove from PicCatalog form's collection (must use index since collection is unkeyed)
                     frm.SelPhotos.Remove i 'lblID.Caption
                     Exit For
@@ -748,7 +748,7 @@ On Error GoTo Err_Handler
     If frm.SelPhotos.Count > 0 Then
         Dim pics As String
         For i = 1 To frm.SelPhotos.Count
-            pics = pics & frm.SelPhotos.Item(i) & Space(2)
+            pics = pics & frm.SelPhotos.item(i) & Space(2)
         Next
         Debug.Print pics
         

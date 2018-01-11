@@ -841,7 +841,7 @@ Public Property Get AlertBoxBackgroundColor() As Long
 End Property
 
 Public Property Let AlertBoxBackgroundColor(Value As Long)
-    rctAlert.backstyle = 1 '1 = Normal, 0 = Transparent
+    rctAlert.BackStyle = 1 '1 = Normal, 0 = Transparent
     m_AlertBoxBackgroundColor = Value
     rctAlert.BackColor = m_AlertBoxBackgroundColor
 End Property

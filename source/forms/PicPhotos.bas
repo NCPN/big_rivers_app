@@ -13,10 +13,10 @@ Begin Form
     Width =11880
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =975
-    Top =6165
-    Right =13125
-    Bottom =18675
+    Left =4440
+    Top =3045
+    Right =14385
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
         " #9/22/2016#"
@@ -178,6 +178,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =180
                     Top =60
@@ -208,6 +209,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =1380
                     Top =60

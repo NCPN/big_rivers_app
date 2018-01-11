@@ -201,7 +201,7 @@ Public Enum TaglineType
     V = 85
     g = 86
     W = 87
-    R = 88
+    r = 88
     D = 89
     [_Last] = 89
 End Enum

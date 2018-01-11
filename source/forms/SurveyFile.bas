@@ -1102,7 +1102,7 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     lblUploadFile.ForeColor = lngBlue
-    lblUploadFile.backstyle = 1             'normal
+    lblUploadFile.BackStyle = 1             'normal
     lblUploadFile.BackColor = lngLtSalmon
     btnUpload.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)

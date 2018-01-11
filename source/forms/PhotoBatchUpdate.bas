@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =45
-    Left =3225
-    Top =2430
-    Right =11085
-    Bottom =14670
+    Left =5850
+    Top =2805
+    Right =13710
+    Bottom =10650
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x26c502515408e540
@@ -299,7 +299,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =10935
+            Height =6540
             Name ="Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -487,41 +487,6 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
-                Begin Subform
-                    CanShrink = NotDefault
-                    OverlapFlags =215
-                    Left =105
-                    Top =6435
-                    Width =7650
-                    Height =4380
-                    TabIndex =5
-                    BorderColor =10921638
-                    Name ="list"
-                    SourceObject ="Form.SetObserverRecorderList"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =105
-                    LayoutCachedTop =6435
-                    LayoutCachedWidth =7755
-                    LayoutCachedHeight =10815
-                End
-                Begin Rectangle
-                    SpecialEffect =0
-                    BackStyle =1
-                    OldBorderStyle =0
-                    OverlapFlags =93
-                    Top =6315
-                    Width =7860
-                    Height =4620
-                    BackColor =4144959
-                    BorderColor =10921638
-                    Name ="rctList"
-                    GridlineColor =10921638
-                    LayoutCachedTop =6315
-                    LayoutCachedWidth =7860
-                    LayoutCachedHeight =10935
-                    BackThemeColorIndex =-1
-                End
                 Begin TextBox
                     Visible = NotDefault
                     TabStop = NotDefault
@@ -534,7 +499,7 @@ Begin Form
                     Width =240
                     Height =300
                     FontSize =9
-                    TabIndex =6
+                    TabIndex =5
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
@@ -599,7 +564,7 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =223
+                    OverlapFlags =93
                     TextAlign =3
                     Top =6120
                     Width =7860
@@ -623,7 +588,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =223
+                    OverlapFlags =215
                     TextAlign =2
                     Left =4320
                     Top =5940
@@ -697,7 +662,7 @@ Begin Form
                     Top =60
                     Width =3414
                     Height =315
-                    TabIndex =7
+                    TabIndex =6
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -736,7 +701,7 @@ Begin Form
                     OverlapFlags =85
                     Left =5520
                     Top =60
-                    TabIndex =8
+                    TabIndex =7
                     ForeColor =16711680
                     Name ="btnAddEvent"
                     Caption ="í ½í·“  Add Event"
@@ -803,7 +768,7 @@ Begin Form
                     Left =5520
                     Top =480
                     Width =720
-                    TabIndex =9
+                    TabIndex =8
                     ForeColor =4210752
                     Name ="btnAddContact"
                     Caption ="í ½í±¥"
@@ -838,7 +803,7 @@ Begin Form
                     Width =3720
                     Height =315
                     FontSize =8
-                    TabIndex =10
+                    TabIndex =9
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -896,7 +861,7 @@ Begin Form
                     OverlapFlags =85
                     Left =6240
                     Top =5640
-                    TabIndex =11
+                    TabIndex =10
                     ForeColor =16711680
                     Name ="btnUpdatePhotos"
                     Caption ="í ½í·“  Update Photos"
@@ -944,6 +909,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     LimitToList = NotDefault
                     OverlapFlags =85
                     TextAlign =2
@@ -954,7 +920,8 @@ Begin Form
                     Width =2820
                     Height =315
                     FontSize =8
-                    TabIndex =12
+                    TabIndex =11
+                    BoundColumn =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -967,7 +934,7 @@ Begin Form
                     End
                     Name ="cbxPhotoType"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;2160"
+                    ColumnWidths ="1440;1440;1440"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Select desired photo type"
                     GridlineColor =10921638
@@ -1030,7 +997,7 @@ Option Explicit
 ' =================================
 ' Form:         PhotoBatchUpdate
 ' Level:        Application form
-' Version:      1.01
+' Version:      1.02
 ' Basis:        Dropdown form
 '
 ' Description:  Batch photo form object related properties, events, functions & procedures for UI display
@@ -1039,6 +1006,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 12/8/2017  - 1.00 - initial version
 '               BLC - 12/11/2017 - 1.01 - renamed PhotoBatchUpdate vs PhotoBulkUpdate
+'               BLC - 1/3/2018   - 1.02 - add PhotoType recordset, SelPhoto & SelPhotos properties
 ' =================================
 
 '---------------------
@@ -1054,12 +1022,17 @@ Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
+Private m_SelPhotos As Collection
+Private m_SelPhoto As String
+
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidCallingForm(Value As String)
+
+Public Event InvalidSelPhoto(Value As Long)
 
 '---------------------
 ' Properties
@@ -1107,6 +1080,48 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
+Public Property Let SelPhotos(Value As Collection)
+'    If  Then
+        Set m_SelPhotos = Value
+'    Else
+'        RaiseEvent InvalidSelPhotos(Value)
+'    End If
+End Property
+
+Public Property Get SelPhotos() As Collection
+    Set SelPhotos = m_SelPhotos
+End Property
+
+Public Property Let SelPhoto(Value As Long)
+    If IsNumeric(Value) Then
+        m_SelPhoto = Value
+    Else
+        RaiseEvent InvalidSelPhoto(Value)
+    End If
+
+    'check if value is already present
+    Dim InCollection As Boolean
+    InCollection = False
+    Dim i As Long
+    
+    For i = 1 To Me.SelPhotos.Count
+        If SelPhotos.item(i) = Value Then
+            InCollection = True
+            Exit For
+        End If
+    Next
+    
+    If InCollection = False Then
+        'add to the collection
+        Me.SelPhotos.Add Value
+    End If
+    
+End Property
+
+Public Property Get SelPhoto() As Long
+    SelPhoto = m_SelPhoto
+End Property
+
 '---------------------
 ' Methods
 '---------------------
@@ -1123,12 +1138,14 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/8/2017 - initial version
+'   BLC - 1/3/2018  - add PhotoType recordset, SelPhotos collection property
+'                     revised default calling form (Photos vs Main)
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
     'default
-    Me.CallingForm = "Main"
+    Me.CallingForm = "Photos"
     
     If Len(Nz(Me.OpenArgs, "")) > 0 And _
         Len(Nz(Me.OpenArgs, "")) <> Replace(Nz(Me.OpenArgs, ""), "|", "") Then
@@ -1151,7 +1168,7 @@ On Error GoTo Err_Handler
     tbxIcon.Value = StringFromCodepoint(uBullet)
     lblDirections.ForeColor = lngLtBlue
     lblPhotoTypesHint.Caption = "Photo Types: " & vbCrLf & _
-                                "F-feature" & Space(2) & "T-transect" & Space(2) & "V-overview" & Space(2) & "R-reference" & Space(2) & "U-unclassified " & vbCrLf & _
+                                "F-feature" & Space(2) & "T-transect" & Space(2) & "O-overview" & Space(2) & "R-reference" & Space(2) & "U-unclassified " & vbCrLf & _
                                 "OA-OtherAnimal" & Space(2) & "OP-Plant" & Space(2) & "OC-Cultural" & Space(2) & "OD-Disturbance" & Space(2) & "OF-Field Work" & Space(2) & "OS-Scenic" & Space(2) & "OW-Weather" & Space(2) & "OO-Other"
     lblPhotoTypesHint.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
@@ -1189,13 +1206,25 @@ On Error GoTo Err_Handler
     'ID default -> value used only for edits of existing table values
     tbxID.DefaultValue = 0
     
+    'initialize values << place here before initial call to Form_Current()
+    '                     driven by setting record sources
+    Dim col As New Collection
+    Me.SelPhotos = New Collection 'col
+    
     'clear form datasource in case it was saved (to keep unbound)
     Me.RecordSource = ""
     
     'set data sources
     Set cbxPhotographer.Recordset = GetRecords("s_contact_list")
+    'lbxPhotos:  ID, PhotoType, PhotoPath, PhotoFilename, PhotoDate,  Event_ID, Photographer_ID
     Set lbxPhotos.Recordset = GetRecords("s_usys_temp_photo_list")
-    Set cbxPhotoType.Recordset = GetRecords("")
+    
+    SetTempVar "EnumType", "PhotoType"
+    Set cbxPhotoType.Recordset = GetRecords("s_app_enum_list")
+    cbxPhotoType.ColumnHeads = True
+    cbxPhotoType.ColumnCount = 3            'ID, type abbrev, type name
+    cbxPhotoType.BoundColumn = 2            'type abbrev
+    cbxPhotoType.ColumnWidths = "0;0;1;"    'display only type name
     
     'determine what level to populate
     Dim efilter As String
@@ -1220,11 +1249,12 @@ On Error GoTo Err_Handler
     'cbxEvent.ColumnWidths = "0in;0in;0in;0in;2in"
     
     'populate photo types
-    cbxPhotoType.BoundColumn = 1
-    cbxPhotoType.ColumnCount = 2
-    cbxPhotoType.ColumnWidths = "1in;3in"
+'    cbxPhotoType.BoundColumn = 1
+'    cbxPhotoType.ColumnCount = 2
+'    cbxPhotoType.ColumnWidths = "1in;3in"
     
     'populate photo list
+    ' ID, PhotoType, PhotoPath, PhotoFilename, PhotoDate,  Event_ID, Photographer_ID
     'Event_ID , Photographer_ID, PhotoPath, PhotoFilename, PhotoDate, PhotoType
     lbxPhotos.ColumnHeads = True
     lbxPhotos.BoundColumn = 1
@@ -1236,7 +1266,7 @@ On Error GoTo Err_Handler
     'set list data source
     
 '    Set Me.list.Form.Recordset = GetRecords("s_record_action_by_refID", Params)
-    Me.list.Form.Requery
+'    Me.list.Form.Requery
     
     'initialize values
     ClearForm Me
@@ -1446,16 +1476,28 @@ End Sub
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   Microsoft (office 365 dev), June 12, 2017
+'   https://msdn.microsoft.com/en-us/vba/access-vba/articles/listbox-itemsselected-property-access
 ' Source/date:  Bonnie Campbell, December 8, 2017 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/8/2017 - initial version
+'   BLC - 1/3/2018  - set SelPhotos from selected images
 ' ---------------------------------
 Private Sub lbxPhotos_AfterUpdate()
 On Error GoTo Err_Handler
-
-    'Me.RecorderID = lbxPhotos.Value
+    
+    'clear the overall collection
+    Me.SelPhotos = New Collection
+    
+    Dim item As Variant 'items selected are variants
+    
+    For Each item In lbxPhotos.ItemsSelected
+        'add photo to selected photos collection
+        Me.SelPhoto = lbxPhotos.ItemData(item)
+Debug.Print lbxPhotos.ItemData(item)
+    Next
     
     ReadyForSave
     
@@ -1616,27 +1658,29 @@ End Sub
 Private Sub btnUpdatePhotos_Click()
 On Error GoTo Err_Handler
     
-    'set enable btnSave_Click save
-    m_SaveOK = True
+'    'set enable btnSave_Click save
+'    m_SaveOK = True
        
     Dim i As Integer
     
     With lbxPhotos
         If .ItemsSelected.Count > 0 Then
-        Debug.Print "#selected" & .ItemsSelected.Count
+        Debug.Print "#selected " & .ItemsSelected.Count
             For i = 1 To .ItemsSelected.Count
                 'UpsertRecord Me
                 Debug.Print .ItemData(i)
+                
+                UpsertRecord Me
             Next
         End If
     End With
     
-    UpsertRecord Me
-    
-    Me![list].Form.Requery
-    
-    'revert to disable non-btnSave_Click save
-    m_SaveOK = False
+'    UpsertRecord Me
+'
+'    Me![list].Form.Requery
+'
+'    'revert to disable non-btnSave_Click save
+'    m_SaveOK = False
     
 Exit_Handler:
     Exit Sub
@@ -1720,6 +1764,8 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/8/2017 - initial version
+'   BLC - 1/3/2018  - revised to pass Int(x) values to IsInt to avoid
+'                     false results due to strings (vs numerics)
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1731,9 +1777,10 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: Event_ID, Photographer_ID, PhotoType, Photos selected
+    'cbxPhotoType Columns: 0 - ID, 1 - type abbrev, 3 - type name
     If cbxEvent > 0 _
-        And IsInt(cbxPhotographer) _
-        And IsInt(cbxPhotoType) _
+        And IsInt(Int(cbxPhotographer)) _
+        And IsInt(Int(cbxPhotoType.Column(0))) _
         And lbxPhotos.ItemsSelected.Count > 0 _
         Then
             isOK = True

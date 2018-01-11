@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =9360
     DatasheetFontHeight =11
-    ItemSuffix =85
-    Left =8520
-    Top =5115
-    Right =20475
-    Bottom =14355
+    ItemSuffix =88
+    Left =3930
+    Top =2805
+    Right =17685
+    Bottom =14655
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8a05f9ebf1d4e440
@@ -268,7 +268,7 @@ Begin Form
                     Top =480
                     Width =2964
                     Height =315
-                    ColumnOrder =0
+                    ColumnOrder =1
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
@@ -314,9 +314,9 @@ Begin Form
                     Top =480
                     Width =180
                     Height =300
-                    ColumnOrder =1
+                    ColumnOrder =2
                     FontSize =9
-                    TabIndex =1
+                    TabIndex =4
                     BorderColor =8355711
                     ForeColor =690698
                     Name ="tbxIcon"
@@ -338,7 +338,7 @@ Begin Form
                     Left =7740
                     Top =420
                     Width =720
-                    TabIndex =2
+                    TabIndex =6
                     ForeColor =4210752
                     Name ="btnSave"
                     Caption ="Edit"
@@ -408,13 +408,21 @@ Begin Form
                     Top =480
                     Width =240
                     Height =300
-                    ColumnOrder =2
+                    ColumnOrder =3
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =5
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxID"
                     DefaultValue ="0"
+                    ConditionalFormat = Begin
+                        0x01000000ae000000020000000100000000000000000000001200000001000000 ,
+                        0x92929200ffffff0001000000000000001300000026000000010000003f3f3f00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004400650076004d006f00640065005d003d00540072007500 ,
+                        0x6500000000005b007400620078004400650076004d006f00640065005d003d00 ,
+                        0x460061006c007300650000000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4800
@@ -425,13 +433,21 @@ Begin Form
                     BorderTint =50.0
                     BorderShade =100.0
                     ForeTint =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100000092929200ffffff00110000005b00 ,
+                        0x7400620078004400650076004d006f00640065005d003d005400720075006500 ,
+                        0x0000000000000000000000000000000000000000000100000000000000010000 ,
+                        0x003f3f3f00ffffff00120000005b007400620078004400650076004d006f0064 ,
+                        0x0065005d003d00460061006c0073006500000000000000000000000000000000 ,
+                        0x000000000000
+                    End
                 End
                 Begin CommandButton
                     OverlapFlags =85
                     Left =8520
                     Top =420
                     Width =720
-                    TabIndex =4
+                    TabIndex =3
                     ForeColor =16711680
                     Name ="btnComment"
                     Caption ="í ½í·©"
@@ -454,6 +470,175 @@ Begin Form
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5220
+                    Top =420
+                    Width =720
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="btnNewTable"
+                    Caption ="Make new table"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Create a new table to import data to"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000b0a090ff604830ff705040ff605040ff605040ff604830ff ,
+                        0x604830ff604830ff705040ff0000000000000000000000000000000000000000 ,
+                        0x0000000000000000c0a090fffff0f0fffff0f0fffff0e0ffffe8e0ffffe8d0ff ,
+                        0xffe0d0fff0e0d0ff705040ff00000000000000000000000020182080000000ff ,
+                        0x0000007000000000c0a8a0fffff8f0ffd0c0b0ffd0b8a0ffffe8e0ffd0b0a0ff ,
+                        0xd0b0a0ffffe0d0ff705040ff000000000000000000000000808080ff606060ff ,
+                        0x000000ff00000000c0b0a0fffff8f0fffff8f0fffff0f0fffff0e0ffffe8e0ff ,
+                        0xffe8e0ffffe0d0ff705040ff00000000000000000000000070707080807880ff ,
+                        0x1010105000000000c0b8a0fffff8ffffe0d0d0ffe0c8c0fffff0f0ffd0b0a0ff ,
+                        0xd0b0a0ffffe8e0ff705040ff0000000000000000000000000000000010081070 ,
+                        0x0000000000000000d0b8b0fffffffffffff8f0fffff8f0fffff0f0fffff0f0ff ,
+                        0xfff0e0ffffe8e0ff705040ff00000000000000000000000000000000202020ff ,
+                        0x0000000000000000d0b8b0ffffffffffe0d8d0ffe0d0d0fffff8f0ffd0c0b0ff ,
+                        0xd0c0b0ffffe8e0ff705040ff30b8e00030b8e0000000000000000070404040ff ,
+                        0x0000007000000000d0b8b0fffffffffffffffffffff8ffff80d0e0ff90e0f0ff ,
+                        0x90e8ffff40c0e0ff90e0e0ffa0e0f0ffc0d8d0ff00000000202820ff404040ff ,
+                        0x000000f000000000f0a890fff0a880fff0a080ffe09870ffa0b0a0ff30b8e0ff ,
+                        0x80e8ffff60c8e0ff90f0ffff30b8e0ff90c0c0ff40404070606060ff505850ff ,
+                        0x202020ff00000030f0a890ffffc0a0ffffc0a0ffffb890ffa0d8e0ff90f0ffff ,
+                        0xc0f8ffffb0e8f0ffc0f8ffff90f0ffffa0e0e0ff404040c0707070ff606060ff ,
+                        0x504850ff00000080f0b090fff0a890fff0a080fff09870ff20a8d0ff50c0e0ff ,
+                        0xb0e8f0fff0ffffffb0e8f0ff50c0e0ff30b8e0ff605860ff909890ff606060ff ,
+                        0x505050ff000000f00000000000000000000000000000000080e8ffc090f0ffff ,
+                        0xc0f8ffffb0e8f0ffc0f8ffff90f0ffff80e8ffc0707070ffa0a8a0ff707070ff ,
+                        0x606060ff101010f00000000000000000000000000000000050d8ff8030b8e0ff ,
+                        0x90f0ffff60c0e0ff90f0ffff30b8e0ff50d0f080807880ffc0b8c0ffb0b0b0ff ,
+                        0x908890ff100810e00000000000000000000000000000000030b0e0a040c8f090 ,
+                        0x80e8ffc020b0e0ff70e8ffc050d8f08030b0e08070707030807880ff606860ff ,
+                        0x505050ff50505020000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+
+                    LayoutCachedLeft =5220
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =5940
+                    LayoutCachedHeight =780
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =6060
+                    Top =420
+                    Width =720
+                    TabIndex =2
+                    ForeColor =4210752
+                    Name ="btnCopyTable"
+                    Caption ="Make new table"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Copy the currently selected table for import"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x2800000010000000100000000100200000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000c0a890ff908070ff604830ff604830ff604830ff604830ff ,
+                        0x604830ff604830ff604830ff604830ff604830ff000000000000000000000000 ,
+                        0x0000000000000000c0a8a0fffffffffff0e0d0fff0d8d0fff0d8d0fff0d8d0ff ,
+                        0xf0d8d0fff0d8d0fff0d0c0fff0d0c0ff604830ff000000000000000000000000 ,
+                        0x0000000000000000c0b0a0ffffffffffd0b8b0ffc0b8a0ffffffffffffffffff ,
+                        0xffffffffc0a8a0ffc0a890fff0d0c0ff604830ff000000000000000000000000 ,
+                        0x0000000000000000c0b0a0fffffffffffffffffffff8f0fffff8f0fffff8f0ff ,
+                        0xfff8f0fffff8f0fffff8f0fff0d8c0ff604830ff000000000000000000000000 ,
+                        0x0000000000000000d0b8a0ffffffffffd0c0b0ffd0b8b0fffff8f0ffc0a890ff ,
+                        0x908070ff604830ff604830ff604830ff604830ff604830ff604830ff604830ff ,
+                        0x604830ff604830ffd0b8b0ffffffffffffffffffffffffffffffffffc0a8a0ff ,
+                        0xfffffffffffffffffffffffff0d8d0ff604830fff0d8d0fff0d8d0fff0d0c0ff ,
+                        0xf0d0c0ff604830ffd0c0b0ffffffffffd0c0b0ffd0c0b0ffffffffffc0b0a0ff ,
+                        0xffffffffc0b0a0ffc0b0a0fff0d8d0ff705040ffffffffffc0a8a0ffc0a890ff ,
+                        0xf0d0c0ff604830ffd0c0b0ffffffffffffffffffffffffffffffffffc0b0a0ff ,
+                        0xfffffffffffffffffffffffffff8f0ff806050fffff8f0fffff8f0fffff8f0ff ,
+                        0xf0d8c0ff604830ffa09860ffa09050ffa09050ff908850ff908840ffd0b8a0ff ,
+                        0x908030ff807830ff807830ff807020ff807020ffffffffffc0b0a0ffc0a8a0ff ,
+                        0xf0d8d0ff604830ffa09860ffd0d0a0ffd0c890ffd0c090ffc0b880ffd0b8b0ff ,
+                        0xb0a870ffb0a060ffa09860ffa09050ff807020ffffffffffffffffffffffffff ,
+                        0xf0d8d0ff604830ffa0a070ffa09860ffa09860ffa09860ffa09050ffd0c0b0ff ,
+                        0x908850ff908850ff908840ff908040ff908040ffffffffffc0b0a0ffc0b0a0ff ,
+                        0xf0d0c0ff705040ff0000000000000000000000000000000000000000d0c0b0ff ,
+                        0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff ,
+                        0xfff8f0ff806050ff0000000000000000000000000000000000000000a09860ff ,
+                        0xa09050ffa09050ff908850ff908840ff908040ff908030ff807830ff807830ff ,
+                        0x807020ff807020ff0000000000000000000000000000000000000000a09860ff ,
+                        0xd0d0a0ffd0c890ffd0c090ffc0b880ffc0b070ffb0a870ffb0a060ffa09860ff ,
+                        0xa09050ff807020ff0000000000000000000000000000000000000000a0a070ff ,
+                        0xa09860ffa09860ffa09860ffa09050ffa09050ff908850ff908850ff908840ff ,
+                        0x908040ff908040ff
+                    End
+
+                    LayoutCachedLeft =6060
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =6780
+                    LayoutCachedHeight =780
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =6960
+                    Top =480
+                    Width =540
+                    Height =315
+                    ColumnOrder =0
+                    TabIndex =7
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxDevMode"
+                    ConditionalFormat = Begin
+                        0x0100000084000000010000000100000000000000000000001100000001000000 ,
+                        0xececec00ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b004400450056005f004d004f00440045005d003d00460061006c0073006500 ,
+                        0x00000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6960
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =795
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x010001000000010000000000000001000000ececec00ffffff00100000005b00 ,
+                        0x4400450056005f004d004f00440045005d003d00460061006c00730065000000 ,
+                        0x00000000000000000000000000000000000000
+                    End
                 End
             End
         End
@@ -906,7 +1091,7 @@ Option Explicit
 ' =================================
 ' Form:         ImportMap
 ' Level:        Application form
-' Version:      1.08
+' Version:      1.10
 ' Basis:        Dropdown form
 '
 ' Description:  ImportMap form object related properties, functions & procedures for UI display
@@ -924,6 +1109,8 @@ Option Explicit
 '               BLC - 12/13/2016 - 1.07 - added row highlighting (current CSV record drives highlighting of table fields)
 '               BLC - 1/3/2017  - 1.08  - btnImportCSV_Click code cleanup, enabled XLS export button
 '                                         when table is specified (CSV data list is populated)
+'               BLC - 1/9/2018  - 1.09  - added new table creation button (btnNewTable)
+'               BLC - 1/11/2018 - 1.10  - added copy table button (btnCopyTable)
 ' =================================
 
 '---------------------
@@ -1035,6 +1222,9 @@ On Error GoTo Err_Handler
     'restore calling form
     ToggleForm Me.CallingForm, -1
 
+    'set dev mode
+    Me.tbxDevMode.Value = DEV_MODE
+
     'set context - based on TempVars
     lblContext.ForeColor = lngLime
     'lblContext.Caption = GetContext()
@@ -1058,30 +1248,32 @@ On Error GoTo Err_Handler
     lblImportAlert.BackColor = lngYellow
     btnImportCSVData.Visible = False
     
-    'comment --> no longer used
+    'comment, save --> not used
+    btnSave.Visible = False
+    btnSave.Enabled = False
     btnComment.Visible = False
-    btnComment.ForeColor = lngBlue
     btnComment.Enabled = False
     
     'disable import until comment complete
     btnImport.Enabled = False
     
     'set data sources
-    Dim strTables As String
-    Dim showsys As Boolean
-    
-    'default --> show linked; exclude msys, tsys, usys tables
-    showsys = False
-    
-    'include all except msys for administrators
-    If TempVars("UserAccessLevel") = "admin" Then showsys = True
-    
-    strTables = ListTables(False, showsys, showsys, True)
-Debug.Print "ImportMap form_open strTables = " & strTables
-
-    cbxTable.SeparatorCharacters = acSeparatorCharactersSemiColon
-    cbxTable.RowSourceType = "Value List"
-    cbxTable.RowSource = Replace(strTables, "|", ";")
+    PopulateTables
+'    Dim strTables As String
+'    Dim showsys As Boolean
+'
+'    'default --> show linked; exclude msys, tsys, usys tables
+'    showsys = False
+'
+'    'include all except msys for administrators
+'    If TempVars("UserAccessLevel") = "admin" Then showsys = True
+'
+'    strTables = ListTables(False, showsys, showsys, True)
+'Debug.Print "ImportMap form_open strTables = " & strTables
+'
+'    cbxTable.SeparatorCharacters = acSeparatorCharactersSemiColon
+'    cbxTable.RowSourceType = "Value List"
+'    cbxTable.RowSource = Replace(strTables, "|", ";")
     
     'hints
     lblHintReqd.Caption = "* = Required Field"
@@ -1100,15 +1292,25 @@ Debug.Print "ImportMap form_open strTables = " & strTables
     lblHintIDField.Visible = False
     lblHintIDField.Caption = StringFromCodepoint(uProhibited) & " = Autogenerated ID field. CSV field should be 'None'"
     
+    'set fore colors
+    btnNewTable.ForeColor = lngBlue
+    btnCopyTable.ForeColor = lngBlue
+    btnComment.ForeColor = lngBlue
+    btnSave.ForeColor = lngBlue
+    
     'set hover
     btnSave.HoverColor = lngGreen
     btnImport.HoverColor = lngGreen
+    btnNewTable.HoverColor = lngGreen
+    btnCopyTable.HoverColor = lngGreen
       
     'defaults
     tbxIcon.ForeColor = lngRed
     btnSave.Enabled = False
     btnSave.Visible = False
     btnImport.Enabled = False
+    btnNewTable.Enabled = True
+    btnCopyTable.Enabled = False
     cbxTable.BackColor = lngYellow
     
     'ID default -> value used only for edits of existing table values
@@ -1181,6 +1383,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 6/1/2016 - initial version
+'   BLC - 1/11/2018 - clear & update msg & msg icon
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
@@ -1188,6 +1391,14 @@ On Error GoTo Err_Handler
     'pseudo current record for CSV columns (record highlighting)
 '    tbxCSVRecord.Value = Replace(Me.listCSV.Form.ActiveControl.Name, "cbxColumnName", "")
     'Forms![ImportColumnList].CurrentRecord '[listCSV].[Form].[CurrentRecord]
+
+    'clear msg & icon
+'    lblMsg.ForeColor = lngRobinEgg
+'    lblMsgIcon.ForeColor = lngRobinEgg
+'    lblMsg.Caption = ""
+'    lblMsgIcon.Caption = ""
+    ClearMsgIcon Me
+
 
 Exit_Handler:
     Exit Sub
@@ -1233,6 +1444,11 @@ On Error GoTo Err_Handler
         lblHintNone.Visible = True
         listCSV.Visible = True
         btnImport.Visible = True
+        btnNewTable.Visible = True
+        btnCopyTable.Visible = True
+        
+        'enable table copy
+        btnCopyTable.Enabled = True
         
         'disable import until fields are selected
         btnImport.Enabled = False
@@ -1278,6 +1494,9 @@ On Error GoTo Err_Handler
         'ready for XLS export
         Me!list.Form!btnExportXLS.Enabled = True
         
+        'clear msg & msgIcon
+        ClearMsgIcon Me
+        
     End If
 
 Exit_Handler:
@@ -1319,7 +1538,7 @@ On Error GoTo Err_Handler
         If InStr(ctrl.Name, "lblColumnName") Then
         
             ctrl.Visible = False
-            ctrl.backstyle = 0 'transparent
+            ctrl.BackStyle = 0 'transparent
         
         End If
     
@@ -1337,7 +1556,7 @@ On Error GoTo Err_Handler
     Me.overlay.Form.Controls(strControl).Caption = StringFromCodepoint(uRArrow)
     'Me.overlay.Form.Requery
     Me.overlay.Form.Controls(strControl).Visible = True
-    Me.overlay.Form.Controls(strControl).backstyle = 1
+    Me.overlay.Form.Controls(strControl).BackStyle = 1
     
     
 Exit_Handler:
@@ -1347,6 +1566,100 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - tbxCSVRecord_Change[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnNewTable_Click
+' Description:  New table creation button click actions
+' Assumptions:  Assumes individual creating new tables understands
+'               database schema and table construction
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   BlackHawk, January 10, 2018
+'   https://stackoverflow.com/questions/48179277/how-to-trigger-the-access-ribbons-create-table-design-button-via-vba/48195078#48195078
+' Source/date:  Bonnie Campbell, January 9, 2018 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/9/2018 - initial version
+' ---------------------------------
+Private Sub btnNewTable_Click()
+On Error GoTo Err_Handler
+    
+    'minimize form
+    ToggleForm Me.Name, -1
+    
+    'open new table design view
+    DoCmd.RunCommand acCmdNewObjectDesignTable
+    
+    PopulateTables
+    cbxTable.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnNewTable_Click[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          btnCopyTable_Click
+' Description:  Copies table button click actions
+' Assumptions:  Assumes individual creating new tables understands
+'               database schema and table construction
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 11, 2018 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2018 - initial version
+' ---------------------------------
+Private Sub btnCopyTable_Click()
+On Error GoTo Err_Handler
+        
+    'copy currently selected table if it exists (it should)
+    'new table name:  OldTableName_YYYYMMDD_HHMM
+    'copy structure only: don't use "True" as this still copies data
+    If TableExists(Me.cbxTable) Then
+    
+        Dim tblName As String
+        tblName = Me.cbxTable & "_" & Format(Now, "YYYYMMDD_HHMM")
+        DoCmd.TransferDatabase acExport, "Microsoft Access", CurrDb().Name, _
+            acTable, Me.cbxTable, tblName, 1
+
+        'add new table to IMPORTS custom group
+        SetNavGroup "IMPORTS", tblName, "table"
+
+        'add new table to tabledefs
+        CurrDb.TableDefs.Refresh
+        
+        lblMsg.ForeColor = lngYellow
+        lblMsgIcon.ForeColor = lngYellow
+        lblMsg.Caption = tblName & " created!"
+        lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & _
+                                        StringFromCodepoint(uRTriangle)
+                                        
+        'update cbx
+        PopulateTables
+        cbxTable.Requery
+    End If
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnCopyTable_Click[ImportMap form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1533,7 +1846,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' Sub:          Form_Close
 ' Description:  form closing actions
@@ -1561,6 +1873,50 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[ImportMap form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          PopulateTables
+' Description:  Populates the table combobox (cbxTables)
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 11, 2018 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/11/2018 - initial version
+' ---------------------------------
+Private Sub PopulateTables()
+On Error GoTo Err_Handler
+
+    'set data sources
+    Dim strTables As String
+    Dim showsys As Boolean
+    
+    'default --> show linked; exclude msys, tsys, usys tables
+    showsys = False
+
+    'include all except msys for administrators
+    If TempVars("UserAccessLevel") = "admin" Then showsys = True
+    
+    strTables = ListTables(False, showsys, showsys, True)
+Debug.Print "ImportMap form_open strTables = " & strTables
+
+    cbxTable.SeparatorCharacters = acSeparatorCharactersSemiColon
+    cbxTable.RowSourceType = "Value List"
+    cbxTable.RowSource = Replace(strTables, "|", ";")
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulateTables[ImportMap form])"
     End Select
     Resume Exit_Handler
 End Sub

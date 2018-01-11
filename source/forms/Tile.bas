@@ -1849,7 +1849,7 @@ On Error GoTo Err_Handler
                 With ctrl
                     'avoid flicker w/ if statement
                     If Not .ForeColor = LINK_NORMAL_TEXT Then .ForeColor = LINK_NORMAL_TEXT
-                    If Not .backstyle = acTransparent Then .backstyle = acTransparent
+                    If Not .BackStyle = acTransparent Then .BackStyle = acTransparent
                 End With
             
             End If
@@ -1984,7 +1984,7 @@ On Error GoTo Err_Handler
     With ctrl
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
-        If Not .backstyle = acNormalSolid Then .backstyle = acNormalSolid
+        If Not .BackStyle = acNormalSolid Then .BackStyle = acNormalSolid
         If Not .BackColor = LINK_HIGHLIGHT_BKGD Then .BackColor = LINK_HIGHLIGHT_BKGD
     End With
 
@@ -2019,7 +2019,7 @@ On Error GoTo Err_Handler
     With ctrl
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_NORMAL_TEXT Then .ForeColor = LINK_NORMAL_TEXT
-        If Not .backstyle = acTransparent Then .backstyle = acTransparent
+        If Not .BackStyle = acTransparent Then .BackStyle = acTransparent
     End With
 
 Exit_Handler:
@@ -2064,7 +2064,7 @@ On Error GoTo Err_Handler
             If Left(ctrl.Name, 7) = "lblLink" Then
                 ctrl.Tag = "DISABLED"
                 ctrl.ForeColor = LINK_NORMAL_TEXT
-                ctrl.backstyle = acTransparent
+                ctrl.BackStyle = acTransparent
             End If
         Next
         
@@ -2085,7 +2085,7 @@ On Error GoTo Err_Handler
             If ctrl.Name = strLink Then
                 ctrl.Tag = "DISABLED"
                 ctrl.ForeColor = LINK_NORMAL_TEXT
-                ctrl.backstyle = acTransparent
+                ctrl.BackStyle = acTransparent
             End If
         Next
         

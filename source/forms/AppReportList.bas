@@ -19,9 +19,9 @@ Begin Form
     GridY =24
     Width =7560
     DatasheetFontHeight =11
-    ItemSuffix =31
-    Right =17430
-    Bottom =10995
+    ItemSuffix =37
+    Right =14010
+    Bottom =12105
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xb7c2305fa3cae440
@@ -66,6 +66,16 @@ Begin Form
             BorderTint =50.0
             ForeThemeColorIndex =0
             ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Rectangle
+            SpecialEffect =3
+            BackStyle =0
+            BorderLineStyle =0
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
@@ -131,6 +141,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
+            Height =735
             BackColor =4144959
             Name ="FormHeader"
             AlternateBackThemeColorIndex =1
@@ -154,17 +165,16 @@ Begin Form
                     Left =180
                     Top =120
                     Width =7260
-                    Height =840
+                    Height =240
                     BorderColor =8355711
                     ForeColor =16777164
                     Name ="lblDirections"
-                    Caption ="Edit or Delete Records using the buttons for the record at right.\015\012Icon co"
-                        "des at left identify if record may be edited/deleted."
+                    Caption ="dirs"
                     GridlineColor =10921638
                     LayoutCachedLeft =180
                     LayoutCachedTop =120
                     LayoutCachedWidth =7440
-                    LayoutCachedHeight =960
+                    LayoutCachedHeight =360
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -172,7 +182,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =2
                     Left =4740
-                    Top =1080
+                    Top =420
                     Width =1245
                     Height =315
                     FontWeight =500
@@ -182,9 +192,9 @@ Begin Form
                     Caption ="Format"
                     GridlineColor =10921638
                     LayoutCachedLeft =4740
-                    LayoutCachedTop =1080
+                    LayoutCachedTop =420
                     LayoutCachedWidth =5985
-                    LayoutCachedHeight =1395
+                    LayoutCachedHeight =735
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -192,7 +202,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =2
                     Left =1440
-                    Top =1080
+                    Top =420
                     Width =1800
                     Height =315
                     FontWeight =500
@@ -202,16 +212,60 @@ Begin Form
                     Caption ="Report"
                     GridlineColor =10921638
                     LayoutCachedLeft =1440
-                    LayoutCachedTop =1080
+                    LayoutCachedTop =420
                     LayoutCachedWidth =3240
-                    LayoutCachedHeight =1395
+                    LayoutCachedHeight =735
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =6360
+                    Top =420
+                    Width =1020
+                    Height =300
+                    ColumnOrder =0
+                    FontSize =8
+                    BorderColor =10921638
+                    ForeColor =14277081
+                    Name ="tbxDevMode"
+                    ConditionalFormat = Begin
+                        0x01000000ae000000020000000100000000000000000000001200000001000000 ,
+                        0x7f7f7f00ffffff000100000000000000130000002600000001000000ffffff00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004400650076004d006f00640065005d003d00540072007500 ,
+                        0x6500000000005b007400620078004400650076004d006f00640065005d003d00 ,
+                        0x460061006c007300650000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6360
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =7380
+                    LayoutCachedHeight =720
+                    ForeThemeColorIndex =1
+                    ForeTint =100.0
+                    ForeShade =85.0
+                    ConditionalFormat14 = Begin
+                        0x0100020000000100000000000000010000007f7f7f00ffffff00110000005b00 ,
+                        0x7400620078004400650076004d006f00640065005d003d005400720075006500 ,
+                        0x0000000000000000000000000000000000000000000100000000000000010000 ,
+                        0x00ffffff00ffffff00120000005b007400620078004400650076004d006f0064 ,
+                        0x0065005d003d00460061006c0073006500000000000000000000000000000000 ,
+                        0x000000000000
+                    End
                 End
             End
         End
         Begin Section
-            Height =420
+            Height =360
             Name ="Detail"
             OnMouseMove ="[Event Procedure]"
             AlternateBackColor =15921906
@@ -246,6 +300,7 @@ Begin Form
                 End
                 Begin TextBox
                     Enabled = NotDefault
+                    Locked = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
                     TextAlign =2
@@ -255,6 +310,7 @@ Begin Form
                     Top =15
                     Width =1020
                     Height =300
+                    FontSize =9
                     TabIndex =1
                     BorderColor =10921638
                     ForeColor =4138256
@@ -291,9 +347,9 @@ Begin Form
                     LayoutCachedHeight =315
                 End
                 Begin TextBox
-                    Enabled = NotDefault
+                    Locked = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
@@ -306,8 +362,13 @@ Begin Form
                     ForeColor =8355711
                     Name ="tbxReportName"
                     ControlSource ="DisplayName"
-                    OnMouseMove ="[Event Procedure]"
                     OnClick ="[Event Procedure]"
+                    ConditionalFormat = Begin
+                        0x0100000064000000010000000200000000000000000000000100000001000000 ,
+                        0x0000ff00ccffcc00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x00000000
+                    End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1425
@@ -315,17 +376,23 @@ Begin Form
                     LayoutCachedWidth =4500
                     LayoutCachedHeight =315
                     ForeTint =50.0
+                    ConditionalFormat14 = Begin
+                        0x0100010000000200000000000000010000000000ff00ccffcc00000000000000 ,
+                        0x00000000000000000000000000000000000000
+                    End
                 End
                 Begin TextBox
                     Enabled = NotDefault
+                    Locked = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =6120
+                    Left =5940
                     Width =1020
                     Height =300
+                    FontSize =8
                     TabIndex =4
                     BorderColor =10921638
                     ForeColor =4138256
@@ -333,12 +400,80 @@ Begin Form
                     ControlSource ="ReportName"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6120
-                    LayoutCachedWidth =7140
+                    LayoutCachedLeft =5940
+                    LayoutCachedWidth =6960
                     LayoutCachedHeight =300
                     ForeThemeColorIndex =2
                     ForeTint =100.0
                     ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =7140
+                    Width =300
+                    Height =300
+                    FontSize =8
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxFormat"
+                    ControlSource ="FormatIcon"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7140
+                    LayoutCachedWidth =7440
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3720
+                    Width =1020
+                    Height =300
+                    FontSize =8
+                    TabIndex =6
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="tbxTemplate"
+                    ControlSource ="ReportTemplate"
+                    ConditionalFormat = Begin
+                        0x01000000ae000000020000000100000000000000000000001200000001000000 ,
+                        0x7f7f7f00ffffff000100000000000000130000002600000001000000ffffff00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b007400620078004400650076004d006f00640065005d003d00540072007500 ,
+                        0x6500000000005b007400620078004400650076004d006f00640065005d003d00 ,
+                        0x460061006c007300650000000000
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3720
+                    LayoutCachedWidth =4740
+                    LayoutCachedHeight =300
+                    ForeThemeColorIndex =2
+                    ForeTint =100.0
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x0100020000000100000000000000010000007f7f7f00ffffff00110000005b00 ,
+                        0x7400620078004400650076004d006f00640065005d003d005400720075006500 ,
+                        0x0000000000000000000000000000000000000000000100000000000000010000 ,
+                        0x00ffffff00ffffff00120000005b007400620078004400650076004d006f0064 ,
+                        0x0065005d003d00460061006c0073006500000000000000000000000000000000 ,
+                        0x000000000000
+                    End
                 End
             End
         End
@@ -444,6 +579,10 @@ End Property
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
+    'dev mode
+    tbxDevMode = DEV_MODE
+    
+    'defaults
     lblTitle.Caption = ""
     lblDirections.Caption = ""
     tbxIcon.Value = StringFromCodepoint(uDocument)
@@ -511,12 +650,19 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 7/1/2016 - initial version
+'   BLC - 1/10/2018 - revised to use FetchReportRecordset() to set report
+'                     recordset prior to opening report
 ' ---------------------------------
 Private Sub tbxReportName_Click()
 On Error GoTo Err_Handler
         
     DoCmd.Minimize
-    DoCmd.OpenReport tbxReport.Value, acViewNormal
+    
+    'set report recordsource (rpt_recordset)
+    SetReportRecordset (tbxTemplate.Value)
+    
+    'open report
+    DoCmd.OpenReport tbxReport.Value, acViewReport, , , acDialog
 
 Exit_Handler:
     Exit Sub
@@ -553,7 +699,7 @@ On Error GoTo Err_Handler
         
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
-        If Not .backstyle = acNormalSolid Then .backstyle = acNormalSolid
+        If Not .BackStyle = acNormalSolid Then .BackStyle = acNormalSolid
         If Not .BackColor = LINK_HIGHLIGHT_BKGD Then .BackColor = LINK_HIGHLIGHT_BKGD
         
     End With
@@ -603,7 +749,7 @@ On Error GoTo Err_Handler
                 With ctrl
                     'avoid flicker w/ if statement
                     If Not .ForeColor = lngGray50 Then .ForeColor = lngGray50
-                    If Not .backstyle = acTransparent Then .backstyle = acTransparent
+                    If Not .BackStyle = acTransparent Then .BackStyle = acTransparent
                 End With
             
             End If

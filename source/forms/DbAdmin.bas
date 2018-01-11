@@ -3019,7 +3019,7 @@ On Error GoTo Err_Handler
         With Me.tglDevMode
             .Caption = "DEV MODE ON"
             .BackColor = lngLtLime
-            .fontBold = True
+            .FontBold = True
             .ForeColor = lngBlue
         End With
     Else
@@ -3029,7 +3029,7 @@ On Error GoTo Err_Handler
         With Me.tglDevMode
             .Caption = "DEV MODE OFF"
             .BackColor = lngLtrYellow
-            .fontBold = False
+            .FontBold = False
             .ForeColor = lngRed
         End With
     End If

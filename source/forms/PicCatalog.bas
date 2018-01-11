@@ -13,10 +13,10 @@ Begin Form
     Width =12660
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =4440
-    Top =3105
-    Right =18195
-    Bottom =14955
+    Left =3930
+    Top =2805
+    Right =13875
+    Bottom =14655
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x736515bcc70be540
@@ -551,7 +551,7 @@ Begin Form
             BackTint =75.0
             Begin
                 Begin Subform
-                    OverlapFlags =215
+                    OverlapFlags =85
                     Left =120
                     Width =12420
                     Height =12780
@@ -563,22 +563,6 @@ Begin Form
                     LayoutCachedLeft =120
                     LayoutCachedWidth =12540
                     LayoutCachedHeight =12780
-                    Begin
-                        Begin Label
-                            OverlapFlags =93
-                            Left =120
-                            Width =825
-                            Height =315
-                            BorderColor =8355711
-                            ForeColor =8355711
-                            Name ="Label35"
-                            Caption ="Child34:"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =120
-                            LayoutCachedWidth =945
-                            LayoutCachedHeight =315
-                        End
-                    End
                 End
             End
         End
@@ -711,7 +695,7 @@ Public Property Let SelPhoto(Value As Long)
     Dim i As Long
     
     For i = 1 To Me.SelPhotos.Count
-        If SelPhotos.Item(i) = Value Then
+        If SelPhotos.item(i) = Value Then
             InCollection = True
             Exit For
         End If
@@ -791,9 +775,7 @@ On Error GoTo Err_Handler
     '                     driven by setting record sources
     Dim col As New Collection
     Me.SelPhotos = New Collection 'col
-    
-'    Set cbxPhotoType.Recordset = GetRecords("s_")
-    
+        
     'clear form datasource in case it was saved (to keep unbound)
     Me.RecordSource = ""
     
@@ -809,9 +791,12 @@ On Error GoTo Err_Handler
     SetTempVar "EnumType", "PhotoType"
     Set cbxPhotoType.Recordset = GetRecords("s_app_enum_list")
     cbxPhotoType.ColumnHeads = True
-    cbxPhotoType.ColumnCount = 3
-    cbxPhotoType.BoundColumn = 2
-    cbxPhotoType.ColumnWidths = "1;1;1;"
+    cbxPhotoType.ColumnCount = 3            'ID, type abbrev, type name
+    cbxPhotoType.BoundColumn = 2            'type abbrev
+    cbxPhotoType.ColumnWidths = "0;0;1;"    'display only type name
+    'cbxPhotoType.ColumnCount = 3
+    'cbxPhotoType.BoundColumn = 2
+    'cbxPhotoType.ColumnWidths = "1;1;1;"
     
     'Set Me.cbxYear.Recordset = GetRecords("")
   

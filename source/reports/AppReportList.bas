@@ -507,7 +507,7 @@ On Error GoTo Err_Handler
         
         'avoid flicker w/ if statement
         If Not .ForeColor = LINK_HIGHLIGHT_TEXT Then .ForeColor = LINK_HIGHLIGHT_TEXT
-        If Not .backstyle = acNormalSolid Then .backstyle = acNormalSolid
+        If Not .BackStyle = acNormalSolid Then .BackStyle = acNormalSolid
         If Not .BackColor = LINK_HIGHLIGHT_BKGD Then .BackColor = LINK_HIGHLIGHT_BKGD
         
     End With
@@ -557,7 +557,7 @@ On Error GoTo Err_Handler
                 With ctrl
                     'avoid flicker w/ if statement
                     If Not .ForeColor = lngGray50 Then .ForeColor = lngGray50
-                    If Not .backstyle = acTransparent Then .backstyle = acTransparent
+                    If Not .BackStyle = acTransparent Then .BackStyle = acTransparent
                 End With
             
             End If
