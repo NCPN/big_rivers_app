@@ -19,10 +19,10 @@ Begin Form
     Width =9060
     DatasheetFontHeight =11
     ItemSuffix =43
-    Left =4230
-    Top =7005
-    Right =13650
-    Bottom =11370
+    Left =4035
+    Top =3045
+    Right =13980
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     Filter ="CommentType='event' AND CommentType_ID=38"
     RecSrcDt = Begin

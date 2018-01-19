@@ -1,13 +1,18 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
+    AllowFilters = NotDefault
     PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     DividingLines = NotDefault
+    AllowAdditions = NotDefault
+    AllowEdits = NotDefault
     DefaultView =0
+    AllowUpdating =2
     ScrollBars =0
     BorderStyle =1
     PictureAlignment =2
@@ -17,13 +22,13 @@ Begin Form
     Width =8280
     DatasheetFontHeight =11
     ItemSuffix =26
-    Left =4260
-    Top =3225
-    Right =12540
-    Bottom =11190
+    Left =4035
+    Top =3045
+    Right =13980
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x06dd372434a7e440
+        0xf88624bfaf0de540
     End
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -37,9 +42,13 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
+    FetchDefaults =0
     FilterOnLoad =0
+    OrderByOnLoad =0
     SplitFormSplitterBar =0
     SaveSplitterBarPosition =0
+    FetchDefaults =0
+    OrderByOnLoad =0
     SplitFormSplitterBar =0
     SaveSplitterBarPosition =0
     ShowPageMargins =0
@@ -274,10 +283,12 @@ Begin Form
                     Top =540
                     Width =2592
                     Height =3456
+                    TabIndex =1
                     BorderColor =10921638
                     Name ="LTile"
                     SourceObject ="Form.Tile"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =120
                     LayoutCachedTop =540
@@ -290,11 +301,12 @@ Begin Form
                     Top =540
                     Width =2592
                     Height =3456
-                    TabIndex =1
+                    TabIndex =2
                     BorderColor =10921638
                     Name ="CTile"
                     SourceObject ="Form.Tile"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =2850
                     LayoutCachedTop =540
@@ -307,11 +319,12 @@ Begin Form
                     Top =540
                     Width =2592
                     Height =3456
-                    TabIndex =2
+                    TabIndex =3
                     BorderColor =10921638
                     Name ="RTile"
                     SourceObject ="Form.Tile"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =5580
                     LayoutCachedTop =540
@@ -324,11 +337,12 @@ Begin Form
                     Top =4080
                     Width =2592
                     Height =3456
-                    TabIndex =3
+                    TabIndex =4
                     BorderColor =10921638
                     Name ="BLTile"
                     SourceObject ="Form.Tile"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =120
                     LayoutCachedTop =4080
@@ -341,11 +355,12 @@ Begin Form
                     Top =4080
                     Width =2592
                     Height =3456
-                    TabIndex =4
+                    TabIndex =5
                     BorderColor =10921638
                     Name ="BCTile"
                     SourceObject ="Form.Tile"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =2850
                     LayoutCachedTop =4080
@@ -358,11 +373,12 @@ Begin Form
                     Top =4080
                     Width =2592
                     Height =3456
-                    TabIndex =5
+                    TabIndex =6
                     BorderColor =10921638
                     Name ="BRTile"
                     SourceObject ="Form.Tile"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =5580
                     LayoutCachedTop =4080
@@ -376,7 +392,6 @@ Begin Form
                     Top =60
                     Width =5832
                     Height =360
-                    TabIndex =6
                     BorderColor =10921638
                     Name ="fsubBreadcrumb"
                     SourceObject ="Form.Tier"
@@ -465,7 +480,7 @@ Option Explicit
 ' =================================
 ' Form:         Main
 ' Level:        Application form
-' Version:      1.09
+' Version:      1.10
 ' Basis:        Main form
 '
 ' Description:  Main switchboard form object related properties, events, functions & procedures for UI display
@@ -484,6 +499,7 @@ Option Explicit
 '                                         turned off w/o ParkCode since DataSheet settings require ParkCode
 '               BLC - 10/23/2017 - 1.08 - added Exit button
 '               BLC - 11/24/2017 - 1.09 - disable Veg Plots & VegWalk for BLCA until feature available (TR - 1,2)
+'               BLC - 1/12/2018  - 1.10 - added hourglass loading indication
 ' =================================
 
 '---------------------
@@ -523,9 +539,13 @@ Dim oBRTile As Form_Tile
 '   BLC - 1/26/2017 - added mode & user change
 '   BLC - 10/18/2017 - updated BC to 8 for App Settings (Sheet & ModWentworth)
 '   BLC - 10/23/2017 - added Exit button hover
+'   BLC - 1/12/2018 - added hourglass
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+    
+    'let user know its loading
+    DoCmd.Hourglass True
     
     'initialize app (mod_App_UI)
     Initialize
@@ -686,6 +706,8 @@ On Error GoTo Err_Handler
     HighlightBreadcrumb
     
 Exit_Handler:
+    'finish up
+    DoCmd.Hourglass False
     Exit Sub
     
 Err_Handler:

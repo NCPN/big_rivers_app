@@ -13,10 +13,10 @@ Begin Form
     Width =6420
     DatasheetFontHeight =11
     ItemSuffix =56
-    Left =4530
-    Top =4155
-    Right =11295
-    Bottom =11280
+    Left =3990
+    Top =4095
+    Right =10755
+    Bottom =11220
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x36469deccdc4e440
@@ -724,7 +724,7 @@ On Error GoTo Err_Handler
   
     With Me.Parent!tvwTree.Object
     
-        Debug.Print "tag: " & .SelectedItem.Tag
+        'Debug.Print "tag: " & .SelectedItem.Tag '<< Error 91 object variable & with block not set
     
     End With
   

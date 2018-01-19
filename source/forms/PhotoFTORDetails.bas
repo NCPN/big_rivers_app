@@ -12,7 +12,7 @@ Begin Form
     GridY =24
     Width =6780
     DatasheetFontHeight =11
-    ItemSuffix =57
+    ItemSuffix =60
     Right =9945
     Bottom =11850
     DatasheetGridlinesColor =14806254
@@ -209,7 +209,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     Left =1260
-                    Top =6240
+                    Top =6252
                     Width =1620
                     Height =372
                     ForeColor =16711680
@@ -219,9 +219,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1260
-                    LayoutCachedTop =6240
+                    LayoutCachedTop =6252
                     LayoutCachedWidth =2880
-                    LayoutCachedHeight =6612
+                    LayoutCachedHeight =6624
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                     Gradient =0
@@ -694,7 +694,7 @@ Begin Form
                     OverlapFlags =85
                     IMESentenceMode =3
                     Left =780
-                    Top =4800
+                    Top =4812
                     Width =4080
                     Height =1380
                     ColumnOrder =8
@@ -708,14 +708,14 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =780
-                    LayoutCachedTop =4800
+                    LayoutCachedTop =4812
                     LayoutCachedWidth =4860
-                    LayoutCachedHeight =6180
+                    LayoutCachedHeight =6192
                     Begin
                         Begin Label
                             OverlapFlags =85
                             Left =540
-                            Top =4428
+                            Top =4440
                             Width =1080
                             Height =315
                             FontWeight =500
@@ -725,9 +725,9 @@ Begin Form
                             Caption ="Comments"
                             GridlineColor =10921638
                             LayoutCachedLeft =540
-                            LayoutCachedTop =4428
+                            LayoutCachedTop =4440
                             LayoutCachedWidth =1620
-                            LayoutCachedHeight =4743
+                            LayoutCachedHeight =4755
                         End
                     End
                 End
@@ -796,9 +796,9 @@ Begin Form
                 End
                 Begin Label
                     FontItalic = NotDefault
-                    OverlapFlags =85
-                    Left =4980
-                    Top =4800
+                    OverlapFlags =93
+                    Left =4890
+                    Top =4815
                     Width =1800
                     Height =660
                     FontSize =8
@@ -808,10 +808,10 @@ Begin Form
                     Name ="lblCommentHint"
                     Caption ="Comment hint"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4980
-                    LayoutCachedTop =4800
-                    LayoutCachedWidth =6780
-                    LayoutCachedHeight =5460
+                    LayoutCachedLeft =4890
+                    LayoutCachedTop =4815
+                    LayoutCachedWidth =6690
+                    LayoutCachedHeight =5475
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -896,7 +896,7 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =85
                     Left =4680
-                    Top =6240
+                    Top =6252
                     Width =1800
                     TabIndex =10
                     ForeColor =4210752
@@ -908,9 +908,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4680
-                    LayoutCachedTop =6240
+                    LayoutCachedTop =6252
                     LayoutCachedWidth =6480
-                    LayoutCachedHeight =6600
+                    LayoutCachedHeight =6612
                     PictureCaptionArrangement =5
                     BackColor =14136213
                     BorderColor =14136213
@@ -1023,7 +1023,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =6300
+                    Top =6312
                     Width =240
                     Height =300
                     FontSize =9
@@ -1043,9 +1043,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =6300
+                    LayoutCachedTop =6312
                     LayoutCachedWidth =360
-                    LayoutCachedHeight =6600
+                    LayoutCachedHeight =6612
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -1062,7 +1062,7 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =120
-                    Top =6000
+                    Top =6012
                     Width =480
                     FontSize =8
                     TabIndex =13
@@ -1079,9 +1079,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =6000
+                    LayoutCachedTop =6012
                     LayoutCachedWidth =600
-                    LayoutCachedHeight =6240
+                    LayoutCachedHeight =6252
                     BorderThemeColorIndex =0
                     BorderTint =50.0
                     BorderShade =100.0
@@ -1093,6 +1093,63 @@ Begin Form
                         0x0000005b004400450056005f004d004f00440045005d003d0030000000000000 ,
                         0x00000000000000000000000000000000
                     End
+                End
+                Begin CheckBox
+                    OverlapFlags =85
+                    Left =4980
+                    Top =5490
+                    Width =1200
+                    Height =300
+                    TabIndex =14
+                    BorderColor =10921638
+                    Name ="chkSkipped"
+                    DefaultValue ="0"
+                    ControlTipText ="Was photo skipped?"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4980
+                    LayoutCachedTop =5490
+                    LayoutCachedWidth =6180
+                    LayoutCachedHeight =5790
+                    Begin
+                        Begin Label
+                            OverlapFlags =247
+                            Left =5210
+                            Top =5460
+                            Width =930
+                            Height =315
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblSkipped"
+                            Caption ="Skipped?"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =5210
+                            LayoutCachedTop =5460
+                            LayoutCachedWidth =6140
+                            LayoutCachedHeight =5775
+                        End
+                    End
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =85
+                    Left =4920
+                    Top =5820
+                    Width =1800
+                    Height =360
+                    FontSize =8
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =16737792
+                    Name ="lblSkippedHint"
+                    Caption ="Skipped hint"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =4920
+                    LayoutCachedTop =5820
+                    LayoutCachedWidth =6720
+                    LayoutCachedHeight =6180
+                    ForeThemeColorIndex =-1
+                    ForeTint =100.0
                 End
             End
         End

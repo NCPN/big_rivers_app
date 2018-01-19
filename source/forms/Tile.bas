@@ -1,6 +1,7 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
+    AllowFilters = NotDefault
     PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
@@ -8,9 +9,13 @@ Begin Form
     ControlBox = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     CloseButton = NotDefault
     DividingLines = NotDefault
+    AllowAdditions = NotDefault
+    AllowEdits = NotDefault
     DefaultView =0
+    AllowUpdating =2
     BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
@@ -19,13 +24,13 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =29
-    Left =5580
-    Top =19620
-    Right =8160
-    Bottom =23055
+    Left =4500
+    Top =4830
+    Right =6825
+    Bottom =8010
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x06dd372434a7e440
+        0x35aad241af0de540
     End
     DatasheetFontName ="Calibri"
     PrtMip = Begin
@@ -37,9 +42,13 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
+    FetchDefaults =0
     FilterOnLoad =0
+    OrderByOnLoad =0
     SplitFormSplitterBar =0
     SaveSplitterBarPosition =0
+    FetchDefaults =0
+    OrderByOnLoad =0
     SplitFormSplitterBar =0
     SaveSplitterBarPosition =0
     ShowPageMargins =0

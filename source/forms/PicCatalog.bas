@@ -4,7 +4,9 @@ Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     DividingLines = NotDefault
+    AllowAdditions = NotDefault
     DefaultView =0
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
@@ -13,10 +15,10 @@ Begin Form
     Width =12660
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =3930
-    Top =2805
-    Right =13875
-    Bottom =14655
+    Left =2805
+    Top =1530
+    Right =15720
+    Bottom =16875
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x736515bcc70be540
@@ -37,8 +39,10 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
+    FetchDefaults =0
     FilterOnLoad =0
     OrderByOnLoad =0
+    FetchDefaults =0
     OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -559,6 +563,7 @@ Begin Form
                     Name ="grid"
                     SourceObject ="Form.PicPhotos"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =120
                     LayoutCachedWidth =12540
@@ -588,7 +593,7 @@ Option Explicit
 ' =================================
 ' Form:         PicCatalog
 ' Level:        Framework form
-' Version:      1.02
+' Version:      1.04
 '
 ' Description:  PicCatalog form object related properties, events, functions & procedures for UI display
 '
@@ -597,6 +602,8 @@ Option Explicit
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
 '               BLC - 12/29/2017 - 1.01 - added SelPhotos collection property
 '               BLC - 1/2/2018   - 1.02 - update for PicPhotos subform
+'               BLC - 1/17/2017  - 1.03 - revised to use do while loop & exit when rs.eof
+'               BLC - 1/19/2018  - 1.04 - select/clear based on if lblID is set ToggleChecks
 ' =================================
 
 '---------------------
@@ -1231,6 +1238,7 @@ End Sub
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
 '   BLC - 1/2/2018 - update for PicPhotos subform
+'   BLC - 1/19/2018 - select/clear based on if lblID is set
 ' ---------------------------------
 Private Sub ToggleChecks(selection As Boolean)
 On Error GoTo Err_Handler
@@ -1251,14 +1259,18 @@ On Error GoTo Err_Handler
             
             'iterate through subform controls
             For Each sctrl In ctrl.Form.Controls
-            
+ Debug.Print sctrl.Name
+ 
                 'check for subform (control type 112) - individual photos (PicTile)
                 If sctrl.ControlType = acSubform Then
                     
+                    'check if tile has photos, if not skip
+                    If Len(sctrl.Form.Controls("lblID").Caption) > 0 Then
+                    
                     'iterate through subform controls
                     For Each ssctrl In sctrl.Form.Controls
-       'Debug.Print ssctrl.Name
-       
+       Debug.Print ssctrl.Name
+              
                         Select Case ssctrl.ControlType
                             Case acCheckBox
                                 If ssctrl.Name = "chkSelect" Then _
@@ -1273,10 +1285,14 @@ On Error GoTo Err_Handler
                         End Select
                     
                         'add photo to selected photos collection
-                        If ssctrl.Name = "lblID" Then _
-                            Me.SelPhoto = ssctrl.Caption
-                    
+                        If ssctrl.Name = "lblID" Then
+                            Debug.Print "ssctrl.caption = " & ssctrl.Caption
+                            'check if tile has photo (caption is populated)
+                            If Len(ssctrl.Caption) > 0 Then Me.SelPhoto = ssctrl.Caption
+                        End If
                     Next
+                    
+                    End If
                     
                 End If
                 
@@ -1312,6 +1328,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/17/2017  - revised to use do while loop & exit when rs.eof
 ' ---------------------------------
 Private Sub PopulatePicTiles()
 On Error GoTo Err_Handler
@@ -1325,8 +1342,9 @@ On Error GoTo Err_Handler
     Set rs = Me.Recordset
     i = 0
     
-    If Not (rs.BOF And rs.EOF) Then
-        rs.MoveFirst
+'    If Not (rs.BOF And rs.EOF) Then
+'        rs.MoveFirst
+    Do While Not (rs.BOF And rs.EOF)
         
         'iterate through tiles
         For Each ctrl In Me.Controls
@@ -1349,19 +1367,25 @@ On Error GoTo Err_Handler
                                 'photo
                                 If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
                                     sctrl.Picture = rs("PhotoPath") & "\" & rs("PhotoFilename")
-                                    sctrl.ControlTip = rs("PhotoType") & "-" & rs("PhotoID") & "-" & rs("PhotoFilename")
+                                    sctrl.ControlTipText = rs("PhotoType") & "-" & rs("PhotoID") & "-" & rs("PhotoFilename")
                                 End If
                             End If
                     End Select
                 
                     'next record
-                    rs.MoveNext
-                
+                    'rs.MoveNext
+                    
+                    If Not rs.EOF Then
+                        rs.MoveNext
+                    Else
+                        GoTo Exit_Handler
+                    End If
                 Next
             End If
         Next
     
-    End If
+    'End If
+    Loop
     
 Exit_Handler:
     Exit Sub

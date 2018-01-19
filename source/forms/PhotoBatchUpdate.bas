@@ -19,11 +19,11 @@ Begin Form
     GridY =24
     Width =7860
     DatasheetFontHeight =11
-    ItemSuffix =45
-    Left =5850
-    Top =2805
-    Right =13710
-    Bottom =10650
+    ItemSuffix =46
+    Left =4440
+    Top =2370
+    Right =12300
+    Bottom =10215
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x26c502515408e540
@@ -227,9 +227,10 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =6660
+                    Left =5520
                     Top =900
                     Width =720
                     ForeColor =16711680
@@ -238,9 +239,9 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =5520
                     LayoutCachedTop =900
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =6240
                     LayoutCachedHeight =1260
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -295,6 +296,35 @@ Begin Form
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6300
+                    Top =900
+                    TabIndex =1
+                    ForeColor =16711680
+                    Name ="btnAddTask"
+                    Caption ="í ½í·¹ Add Task"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new task"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6300
+                    LayoutCachedTop =900
+                    LayoutCachedWidth =7740
+                    LayoutCachedHeight =1260
+                    ForeThemeColorIndex =-1
+                    BackColor =14136213
+                    BorderColor =14136213
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    PressedColor =9592887
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
             End
         End
         Begin Section
@@ -306,6 +336,21 @@ Begin Form
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin Rectangle
+                    BackStyle =1
+                    OverlapFlags =93
+                    Top =6240
+                    Width =7860
+                    Height =300
+                    BackColor =4144959
+                    BorderColor =10921638
+                    Name ="rctBottom"
+                    GridlineColor =10921638
+                    LayoutCachedTop =6240
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =6540
+                    BackThemeColorIndex =-1
+                End
                 Begin Rectangle
                     SpecialEffect =0
                     BackStyle =1
@@ -564,7 +609,7 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =93
+                    OverlapFlags =223
                     TextAlign =3
                     Top =6120
                     Width =7860
@@ -590,7 +635,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =215
                     TextAlign =2
-                    Left =4320
+                    Left =2040
                     Top =5940
                     Width =825
                     Height =600
@@ -601,9 +646,9 @@ Begin Form
                     Name ="lblMsgIcon"
                     FontName ="Segoe UI"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4320
+                    LayoutCachedLeft =2040
                     LayoutCachedTop =5940
-                    LayoutCachedWidth =5145
+                    LayoutCachedWidth =2865
                     LayoutCachedHeight =6540
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
@@ -997,7 +1042,7 @@ Option Explicit
 ' =================================
 ' Form:         PhotoBatchUpdate
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.03
 ' Basis:        Dropdown form
 '
 ' Description:  Batch photo form object related properties, events, functions & procedures for UI display
@@ -1007,6 +1052,7 @@ Option Explicit
 ' Revisions:    BLC - 12/8/2017  - 1.00 - initial version
 '               BLC - 12/11/2017 - 1.01 - renamed PhotoBatchUpdate vs PhotoBulkUpdate
 '               BLC - 1/3/2018   - 1.02 - add PhotoType recordset, SelPhoto & SelPhotos properties
+'               BLC - 1/16/2018  - 1.03 - add Task button, hid Comment button
 ' =================================
 
 '---------------------
@@ -1150,10 +1196,10 @@ On Error GoTo Err_Handler
     If Len(Nz(Me.OpenArgs, "")) > 0 And _
         Len(Nz(Me.OpenArgs, "")) <> Replace(Nz(Me.OpenArgs, ""), "|", "") Then
         
-        'set the referencing table & record
+        'set the referencing form (table & record are not set)
         Me.CallingForm = Split(Me.OpenArgs, "|")(0)
-        lblRecordRefID.Caption = Me.CallingForm _
-                                & " ID # " & Split(Me.OpenArgs, "|")(1)
+        lblRecordRefID.Caption = Me.CallingForm '_
+                                '& " ID # " & Split(Me.OpenArgs, "|")(1)
     End If
 
     'minimize Main
@@ -1171,6 +1217,8 @@ On Error GoTo Err_Handler
                                 "F-feature" & Space(2) & "T-transect" & Space(2) & "O-overview" & Space(2) & "R-reference" & Space(2) & "U-unclassified " & vbCrLf & _
                                 "OA-OtherAnimal" & Space(2) & "OP-Plant" & Space(2) & "OC-Cultural" & Space(2) & "OD-Disturbance" & Space(2) & "OF-Field Work" & Space(2) & "OS-Scenic" & Space(2) & "OW-Weather" & Space(2) & "OO-Other"
     lblPhotoTypesHint.ForeColor = lngBlue
+    btnAddTask.Caption = StringFromCodepoint(uCheckItem) & " Add Task"
+    btnAddTask.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
     btnComment.ForeColor = lngBlue
     btnAddEvent.Caption = StringFromCodepoint(uCalendarSpiral) & Space(2) & "Add Event"
@@ -1186,11 +1234,13 @@ On Error GoTo Err_Handler
     btnAddEvent.HoverColor = lngGreen
     btnAddContact.HoverColor = lngGreen
     btnUpdatePhotos.HoverColor = lngGreen
+    btnAddTask.HoverColor = lngGreen
     btnComment.HoverColor = lngGreen
     btnSave.HoverColor = lngGreen
     btnUndo.HoverColor = lngGreen
       
     'hidden (unused) controls
+    btnComment.Visible = False
     btnSave.Visible = False
     btnUndo.Visible = False
     lblPhotoFilter.Visible = False
@@ -1198,6 +1248,7 @@ On Error GoTo Err_Handler
       
     'defaults
     tbxIcon.ForeColor = lngRed
+    btnAddTask.Enabled = False
     btnComment.Enabled = False
     btnSave.Enabled = False
     lblMsgIcon.Caption = ""
@@ -1217,7 +1268,8 @@ On Error GoTo Err_Handler
     'set data sources
     Set cbxPhotographer.Recordset = GetRecords("s_contact_list")
     'lbxPhotos:  ID, PhotoType, PhotoPath, PhotoFilename, PhotoDate,  Event_ID, Photographer_ID
-    Set lbxPhotos.Recordset = GetRecords("s_usys_temp_photo_list")
+    'Set lbxPhotos.Recordset = GetRecords("s_usys_temp_photo_list")
+    PopulatePhotos
     
     SetTempVar "EnumType", "PhotoType"
     Set cbxPhotoType.Recordset = GetRecords("s_app_enum_list")
@@ -1266,7 +1318,7 @@ On Error GoTo Err_Handler
     'set list data source
     
 '    Set Me.list.Form.Recordset = GetRecords("s_record_action_by_refID", Params)
-'    Me.list.Form.Requery
+    'Me.list.Form.Requery
     
     'initialize values
     ClearForm Me
@@ -1484,6 +1536,7 @@ End Sub
 ' Revisions:
 '   BLC - 12/8/2017 - initial version
 '   BLC - 1/3/2018  - set SelPhotos from selected images
+'   BLC - 1/16/2018 - cleared icon & msg
 ' ---------------------------------
 Private Sub lbxPhotos_AfterUpdate()
 On Error GoTo Err_Handler
@@ -1498,6 +1551,10 @@ On Error GoTo Err_Handler
         Me.SelPhoto = lbxPhotos.ItemData(item)
 Debug.Print lbxPhotos.ItemData(item)
     Next
+    
+    'clear message & icon
+    lblMsgIcon.Caption = ""
+    lblMsg.Caption = ""
     
     ReadyForSave
     
@@ -1667,13 +1724,55 @@ On Error GoTo Err_Handler
         If .ItemsSelected.Count > 0 Then
         Debug.Print "#selected " & .ItemsSelected.Count
             For i = 1 To .ItemsSelected.Count
-                'UpsertRecord Me
-                Debug.Print .ItemData(i)
+                'NOTE: i is NOT the row in the listbox
+                '      it is the # for it in items selected
+                
+                'Debug.Print .ItemData(i) 'listbox row
+                Dim row As Long
+                
+                row = .ItemsSelected.item(i - 1) 'listbox row for item selected
+                Debug.Print "row:" & row
+                
+                Debug.Print "Col(3,row): " & .Column(3, row)
+                Debug.Print "Col(2,row): " & .Column(2, row)
+                Debug.Print "Col(0,row): " & .Column(0, row)
+                Debug.Print "event: " & cbxEvent.Column(0)
                 
                 UpsertRecord Me
+                
+                'add message @ update
+                'use .Column(col) vs .Column(col,row) to retrieve photo
+                'filename, i is NOT the row #
+                ' cols: 0-photo ID, 1-photo type, 2-photo directory,
+                '       3-photo filename, 4-date taken
+                lblMsg.ForeColor = lngLime
+                lblMsgIcon.ForeColor = lngLime
+                lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
+                'lblMsg.Caption = "Photo " & .Column(3, i) & " updated"
+                lblMsg.Caption = "Photo " & .Column(3, row) & " updated"
+                
+                'add the event_photo record
+                'note: NewRecordID is used since lbxPhotos ID may be from
+                '      tsys_temp_photo vs. Photo table & therefore has
+                '      a different ID than lbxPhotos.Column(0,i) would give
+                Dim Params(0 To 1) As Variant
+                
+                Params(0) = CInt(cbxEvent.Column(0))
+                Params(1) = TempVars!NewRecordID 'lbxPhotos.Column(0, i)
+                
+                SetRecord "i_event_photo", Params
+                
+                'remove photo from usys_temp_photo
+                'DeleteRecord "usys_temp_photo", lbxPhotos.Column(0, i), False
+                'DeleteRecord "usys_temp_photo", lbxPhotos.Column(0), False
+                DeleteRecord "usys_temp_photo", lbxPhotos.Column(0, row), False
+                
             Next
         End If
     End With
+    
+    'update listbox
+    PopulatePhotos
     
 '    UpsertRecord Me
 '
@@ -1692,6 +1791,37 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          btnAddTask_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   none
+' Source/date:
+' Adapted:      Bonnie Campbell, October 28, 2016 - for NCPN tools
+' Revisions:
+'   BLC - 1/16/2018 - initial version
+' ---------------------------------
+Private Sub btnAddTask_Click()
+On Error GoTo Err_Handler
+
+    DoCmd.OpenForm "Task", acNormal, , , , , "Photos|" & tbxID
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddTask_Click[PhotoBatchUpdate form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ---------------------------------
 ' Sub:          btnComment_Click
 ' Description:  Undo button click actions
@@ -1740,6 +1870,9 @@ On Error GoTo Err_Handler
 
     'restore calling form
     ToggleForm Me.CallingForm, 0
+    
+    'refresh treeview
+    'Forms(Me.CallingForm).Controls("tvw").Refresh
     
 Exit_Handler:
     Exit Sub
@@ -1829,6 +1962,36 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - RunReadyForSave[PhotoBatchUpdate form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          PopulatePhotos
+' Description:  Populate the photo listbox
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, December 8, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 12/8/2017 - initial version
+' ---------------------------------
+Public Sub PopulatePhotos()
+On Error GoTo Err_Handler
+
+    Set lbxPhotos.Recordset = GetRecords("s_usys_temp_photo_list")
+    'lbxPhotos.Requery
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PopulatePhotos[PhotoBatchUpdate form])"
     End Select
     Resume Exit_Handler
 End Sub

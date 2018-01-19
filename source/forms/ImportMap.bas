@@ -20,10 +20,10 @@ Begin Form
     Width =9360
     DatasheetFontHeight =11
     ItemSuffix =88
-    Left =3930
-    Top =2805
-    Right =17685
-    Bottom =14655
+    Left =4545
+    Top =1425
+    Right =13905
+    Bottom =13410
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8a05f9ebf1d4e440
@@ -1636,9 +1636,6 @@ On Error GoTo Err_Handler
         DoCmd.TransferDatabase acExport, "Microsoft Access", CurrDb().Name, _
             acTable, Me.cbxTable, tblName, 1
 
-        'add new table to IMPORTS custom group
-        SetNavGroup "IMPORTS", tblName, "table"
-
         'add new table to tabledefs
         CurrDb.TableDefs.Refresh
         
@@ -1647,10 +1644,17 @@ On Error GoTo Err_Handler
         lblMsg.Caption = tblName & " created!"
         lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & _
                                         StringFromCodepoint(uRTriangle)
-                                        
+ Debug.Print tblName
+ 
         'update cbx
         PopulateTables
         cbxTable.Requery
+ 
+ Debug.Print tblName
+        
+        'add new table to IMPORTS custom group
+        SetNavGroup "IMPORTS", tblName, "table"
+    
     End If
     
 Exit_Handler:

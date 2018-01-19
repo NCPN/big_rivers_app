@@ -4,7 +4,9 @@ Begin Form
     PopUp = NotDefault
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     DividingLines = NotDefault
+    AllowAdditions = NotDefault
     DefaultView =0
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
@@ -13,9 +15,9 @@ Begin Form
     Width =11880
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =4440
+    Left =4035
     Top =3045
-    Right =14385
+    Right =13980
     Bottom =14895
     DatasheetGridlinesColor =14806254
     Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
@@ -48,8 +50,10 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
+    FetchDefaults =0
     FilterOnLoad =0
     OrderByOnLoad =0
+    FetchDefaults =0
     OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -164,7 +168,7 @@ Begin Form
                     Top =120
                     Width =960
                     Height =315
-                    ColumnOrder =3
+                    ColumnOrder =0
                     BorderColor =10921638
                     ForeColor =16777215
                     Name ="tbxNumPix"
@@ -309,7 +313,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile11"
                     SourceObject ="Form.PicTile"
+                    Tag ="row1"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =120
                     LayoutCachedTop =120
@@ -319,82 +325,92 @@ Begin Form
                 Begin Subform
                     OverlapFlags =215
                     Left =120
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =1
-                    BorderColor =10921638
-                    Name ="PicTile21"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =215
-                    Left =120
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =2
-                    BorderColor =10921638
-                    Name ="PicTile31"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =120
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =3
-                    BorderColor =10921638
-                    Name ="PicTile41"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =2352
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =2460
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =4
-                    BorderColor =10921638
-                    Name ="PicTile12"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2460
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =4692
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =215
-                    Left =2460
                     Top =2688
                     Width =2232
                     Height =2448
                     TabIndex =5
                     BorderColor =10921638
+                    Name ="PicTile21"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row2"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =2688
+                    LayoutCachedWidth =2352
+                    LayoutCachedHeight =5136
+                End
+                Begin Subform
+                    OverlapFlags =215
+                    Left =120
+                    Top =5256
+                    Width =2232
+                    Height =2448
+                    TabIndex =10
+                    BorderColor =10921638
+                    Name ="PicTile31"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row3"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =5256
+                    LayoutCachedWidth =2352
+                    LayoutCachedHeight =7704
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =120
+                    Top =7824
+                    Width =2232
+                    Height =2448
+                    TabIndex =15
+                    BorderColor =10921638
+                    Name ="PicTile41"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row4"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =7824
+                    LayoutCachedWidth =2352
+                    LayoutCachedHeight =10272
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =2460
+                    Top =120
+                    Width =2232
+                    Height =2448
+                    TabIndex =1
+                    BorderColor =10921638
+                    Name ="PicTile12"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row1"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =2460
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =4692
+                    LayoutCachedHeight =2568
+                End
+                Begin Subform
+                    OverlapFlags =215
+                    Left =2460
+                    Top =2688
+                    Width =2232
+                    Height =2448
+                    TabIndex =6
+                    BorderColor =10921638
                     Name ="PicTile22"
                     SourceObject ="Form.PicTile"
+                    Tag ="row2"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =2460
                     LayoutCachedTop =2688
@@ -407,11 +423,13 @@ Begin Form
                     Top =5256
                     Width =2232
                     Height =2448
-                    TabIndex =6
+                    TabIndex =11
                     BorderColor =10921638
                     Name ="PicTile32"
                     SourceObject ="Form.PicTile"
+                    Tag ="row3"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =2460
                     LayoutCachedTop =5256
@@ -424,11 +442,13 @@ Begin Form
                     Top =7824
                     Width =2232
                     Height =2448
-                    TabIndex =7
+                    TabIndex =16
                     BorderColor =10921638
                     Name ="PicTile42"
                     SourceObject ="Form.PicTile"
+                    Tag ="row4"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =2460
                     LayoutCachedTop =7824
@@ -441,11 +461,13 @@ Begin Form
                     Top =120
                     Width =2232
                     Height =2448
-                    TabIndex =8
+                    TabIndex =2
                     BorderColor =10921638
                     Name ="PicTile13"
                     SourceObject ="Form.PicTile"
+                    Tag ="row1"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =4800
                     LayoutCachedTop =120
@@ -455,167 +477,187 @@ Begin Form
                 Begin Subform
                     OverlapFlags =85
                     Left =4800
+                    Top =2688
+                    Width =2232
+                    Height =2448
+                    TabIndex =7
+                    BorderColor =10921638
+                    Name ="PicTile23"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row2"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =2688
+                    LayoutCachedWidth =7032
+                    LayoutCachedHeight =5136
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =4800
+                    Top =5256
+                    Width =2232
+                    Height =2448
+                    TabIndex =12
+                    BorderColor =10921638
+                    Name ="PicTile33"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row3"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =5256
+                    LayoutCachedWidth =7032
+                    LayoutCachedHeight =7704
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =4800
+                    Top =7824
+                    Width =2232
+                    Height =2448
+                    TabIndex =17
+                    BorderColor =10921638
+                    Name ="PicTile43"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row4"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =7824
+                    LayoutCachedWidth =7032
+                    LayoutCachedHeight =10272
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =7140
+                    Top =120
+                    Width =2232
+                    Height =2448
+                    TabIndex =3
+                    BorderColor =10921638
+                    Name ="PicTile14"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row1"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =7140
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =9372
+                    LayoutCachedHeight =2568
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =7140
+                    Top =2688
+                    Width =2232
+                    Height =2448
+                    TabIndex =8
+                    BorderColor =10921638
+                    Name ="PicTile24"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row2"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =7140
+                    LayoutCachedTop =2688
+                    LayoutCachedWidth =9372
+                    LayoutCachedHeight =5136
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =7140
+                    Top =5256
+                    Width =2232
+                    Height =2448
+                    TabIndex =13
+                    BorderColor =10921638
+                    Name ="PicTile34"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row3"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =7140
+                    LayoutCachedTop =5256
+                    LayoutCachedWidth =9372
+                    LayoutCachedHeight =7704
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =7140
+                    Top =7824
+                    Width =2232
+                    Height =2448
+                    TabIndex =18
+                    BorderColor =10921638
+                    Name ="PicTile44"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row4"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =7140
+                    LayoutCachedTop =7824
+                    LayoutCachedWidth =9372
+                    LayoutCachedHeight =10272
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =9480
+                    Top =120
+                    Width =2232
+                    Height =2448
+                    TabIndex =4
+                    BorderColor =10921638
+                    Name ="PicTile15"
+                    SourceObject ="Form.PicTile"
+                    Tag ="row1"
+                    GridlineColor =10921638
+                    FilterOnEmptyMaster =0
+
+                    LayoutCachedLeft =9480
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =11712
+                    LayoutCachedHeight =2568
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =9480
                     Top =2688
                     Width =2232
                     Height =2448
                     TabIndex =9
                     BorderColor =10921638
-                    Name ="PicTile23"
+                    Name ="PicTile25"
                     SourceObject ="Form.PicTile"
+                    Tag ="row2"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
-                    LayoutCachedLeft =4800
+                    LayoutCachedLeft =9480
                     LayoutCachedTop =2688
-                    LayoutCachedWidth =7032
+                    LayoutCachedWidth =11712
                     LayoutCachedHeight =5136
                 End
                 Begin Subform
                     OverlapFlags =85
-                    Left =4800
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =10
-                    BorderColor =10921638
-                    Name ="PicTile33"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =4800
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =11
-                    BorderColor =10921638
-                    Name ="PicTile43"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4800
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =7032
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =12
-                    BorderColor =10921638
-                    Name ="PicTile14"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =13
-                    BorderColor =10921638
-                    Name ="PicTile24"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
+                    Left =9480
                     Top =5256
                     Width =2232
                     Height =2448
                     TabIndex =14
                     BorderColor =10921638
-                    Name ="PicTile34"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =5256
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =7704
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =7140
-                    Top =7824
-                    Width =2232
-                    Height =2448
-                    TabIndex =15
-                    BorderColor =10921638
-                    Name ="PicTile44"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =7140
-                    LayoutCachedTop =7824
-                    LayoutCachedWidth =9372
-                    LayoutCachedHeight =10272
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =120
-                    Width =2232
-                    Height =2448
-                    TabIndex =16
-                    BorderColor =10921638
-                    Name ="PicTile15"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =2568
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =2688
-                    Width =2232
-                    Height =2448
-                    TabIndex =17
-                    BorderColor =10921638
-                    Name ="PicTile25"
-                    SourceObject ="Form.PicTile"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =9480
-                    LayoutCachedTop =2688
-                    LayoutCachedWidth =11712
-                    LayoutCachedHeight =5136
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =9480
-                    Top =5256
-                    Width =2232
-                    Height =2448
-                    TabIndex =18
-                    BorderColor =10921638
                     Name ="PicTile35"
                     SourceObject ="Form.PicTile"
+                    Tag ="row3"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =9480
                     LayoutCachedTop =5256
@@ -632,7 +674,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile45"
                     SourceObject ="Form.PicTile"
+                    Tag ="row4"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =9480
                     LayoutCachedTop =7824
@@ -649,7 +693,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile51"
                     SourceObject ="Form.PicTile"
+                    Tag ="row5"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =120
                     LayoutCachedTop =10380
@@ -666,7 +712,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile52"
                     SourceObject ="Form.PicTile"
+                    Tag ="row5"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =2460
                     LayoutCachedTop =10380
@@ -683,7 +731,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile53"
                     SourceObject ="Form.PicTile"
+                    Tag ="row5"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =4800
                     LayoutCachedTop =10380
@@ -700,7 +750,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile54"
                     SourceObject ="Form.PicTile"
+                    Tag ="row5"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =7140
                     LayoutCachedTop =10380
@@ -717,7 +769,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="PicTile55"
                     SourceObject ="Form.PicTile"
+                    Tag ="row5"
                     GridlineColor =10921638
+                    FilterOnEmptyMaster =0
 
                     LayoutCachedLeft =9480
                     LayoutCachedTop =10380
@@ -764,13 +818,14 @@ Option Explicit
 ' =================================
 ' Form:         PicPhotos
 ' Level:        Framework form
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  PicPhotos form object related properties, events, functions & procedures for UI display
 '
 ' Source/date:  Bonnie Campbell, 12/18/2017
 ' References:   -
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
+'               BLC - 1/17/2017  - 1.01 - used as subform, no calling form minimize/restore needed
 ' =================================
 
 '---------------------
@@ -855,17 +910,18 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/17/2017  - used as subform, no calling form minimize/restore needed
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    'default
-    Me.CallingForm = "Main"
-    
-    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
-
-    'minimize calling form
-    ToggleForm Me.CallingForm, -1
+'    'default
+'    Me.CallingForm = "Main"
+'
+'    If Len(Nz(Me.OpenArgs, "")) > 0 Then Me.CallingForm = Me.OpenArgs
+'
+'    'minimize calling form
+'    ToggleForm Me.CallingForm, -1
     
     'set hover
     btnPrev.HoverColor = lngGreen
@@ -1096,12 +1152,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/17/2017  - used as subform, no calling form minimize/restore needed
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
     'restore calling form
-    ToggleForm Me.CallingForm, 0
+'    ToggleForm Me.CallingForm, 0
     
 Exit_Handler:
     Exit Sub
@@ -1189,6 +1246,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/19/2018 - set fill sequence by using control tags (row1-5)
 ' ---------------------------------
 Private Sub PopulatePicTiles()
 On Error GoTo Err_Handler
@@ -1197,49 +1255,144 @@ On Error GoTo Err_Handler
     Dim ctrl As Control
     Dim sctrl As Control
     Dim i As Long
+    Dim row As Integer
     
     'use form recordset
     Set rs = Me.Recordset
     i = 0
     
+    'If Not (rs.BOF And rs.EOF) Then
+    '   rs.MoveFirst
+    'Do While Not (rs.BOF And rs.EOF) '>> endless loop
+    
+    'iterate through the photo records
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveFirst
-        
-        'iterate through tiles
+Debug.Print "# records = " & rs.RecordCount
+
+        'iterate through PicPhoto controls
         For Each ctrl In Me.Controls
+Debug.Print ctrl.Name
+            'tile subform
             If ctrl.ControlType = acSubform Then
             
+'move to the first record if rs.BOF
+If Not (rs.BOF Or rs.EOF) Then _
+    rs.MoveNext
+    i = i + 1
+'End If
+    'set control row
+    row = Left(Right(ctrl.Name, 2), 1)
+
+                        'check if the row is the proper row
+                        'photos per row = 5
+Debug.Print i
+Debug.Print ctrl.Tag
+Debug.Print "abspos = " & rs.AbsolutePosition
+
+If i / 5 < Left(Right(ctrl.Name, 2), 1) Then _
+Debug.Print "row = " & Left(Right(ctrl.Name, 2), 1) & " i/5 = " & i / 5
+
+'If (row - 1 < i / 5 And i / 5 < row) Then
+If (i / 5 < row And i < row * 5) Then
+    
+    Debug.Print "good row"
+Else
+    Debug.Print "skip row"
+    
+    'GoTo NextControl
+End If
+                
+Debug.Print "abs pos = " & rs.AbsolutePosition
+
+                'iterate through tile's controls
                 For Each sctrl In ctrl.Form
-                        
-                    Select Case sctrl.ControlType
-                        Case acLabel
-                            Select Case sctrl.Name
-                                Case "lblID"
-                                    sctrl.Caption = rs("PhotoID")
-                                Case "lblPhotoType"
-                                    sctrl.Caption = rs("PhotoType")
-                                Case "lblName"
-                                    sctrl.Caption = rs("PhotoFilename")
-                            End Select
-                        Case acImage
-                            If sctrl.Name = "imgPhoto" Then
-                                'photo
-                                If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
-                                    sctrl.Picture = rs("PhotoPath") & "\" & rs("PhotoFilename")
-                                    sctrl.ControlTip = rs("PhotoType") & "-" & rs("PhotoID") & "-" & rs("PhotoFilename")
+Debug.Print sctrl.Name
+                    'check if all photos populated
+                    If Not rs.EOF Then
+
+                        'set tile controls info
+                        Select Case sctrl.ControlType
+                            Case acLabel
+                                Select Case sctrl.Name
+                                    Case "lblID"
+                                        sctrl.Caption = rs("PhotoID")
+                                    Case "lblPhotoType"
+                                        sctrl.Caption = rs("PhotoType")
+                                    Case "lblName"
+                                        sctrl.Caption = rs("PhotoFilename")
+                                    Case "lblFullPath"
+                                        sctrl.Caption = rs("PhotoPath") & "\" & rs("PhotoFilename")
+                                End Select
+                            Case acImage
+                                If sctrl.Name = "imgPhoto" Then
+                                
+                                Debug.Print rs("PhotoPath") & "\" & rs("PhotoFilename")
+                                
+                                    'photo
+                                    If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
+                                        sctrl.Picture = rs("PhotoPath") & "\" & rs("PhotoFilename")
+                                        sctrl.ControlTipText = rs("PhotoType") & "-" & rs("PhotoID") & "-" & rs("PhotoFilename")
+                                    End If
                                 End If
-                            End If
-                    End Select
-                
-                    'next record
-                    rs.MoveNext
-                
-                Next
-            End If
-        Next
+                            Case acCheckBox
+                                'enable checkbox only if photo is viable
+                                If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
+    '                                sctrl.Enabled = True
+    Debug.Print sctrl.Name & " enabled"
+                                Else
+    '                                sctrl.Enabled = False
+    Debug.Print sctrl.Name & " disabled "
+                                End If
+                        End Select
+                                            
+'                        'next record << check for EOF in case there are fewer
+'                        '               photos than controls
+'                        Debug.Print "next"
+'                        If Not rs.EOF Then
+'                            rs.MoveNext
+'                            Debug.Print "move"
+'                        Else
+'                            'no more photos >> exit
+'                            GoTo Exit_Handler
+'                        End If
+                    Else
+                        'Exit For
+                        'no more photos >> exit
+                        GoTo Exit_Handler
+                    End If
+                Next 'sctrl
+            
+            End If 'tile subform check
+            
+'            'done w/ tile subform? >> go to next photo
+'            'next record << check for EOF in case there are fewer
+'            '               photos than controls
+'            Debug.Print "next"
+'            If Not rs.EOF Then
+'                rs.MoveNext
+'                Debug.Print "move"
+'            Else
+'                'no more photos >> exit
+'                GoTo Exit_Handler
+'            End If
+NextControl:
+        Next 'ctrl
     
+'            'done w/ tile subform? >> go to next photo
+'            'next record << check for EOF in case there are fewer
+'            '               photos than controls
+'            Debug.Print "next"
+'            If Not rs.EOF Then
+'                rs.MoveNext
+'                Debug.Print "move"
+'            Else
+'                'no more photos >> exit
+'                GoTo Exit_Handler
+'            End If
+    'Loop
+'    End If
     End If
-    
 Exit_Handler:
     Exit Sub
 Err_Handler:

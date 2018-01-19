@@ -1,6 +1,7 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
+    AllowFilters = NotDefault
     PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
@@ -8,9 +9,12 @@ Begin Form
     ControlBox = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
+    AllowDeletions = NotDefault
     CloseButton = NotDefault
     DividingLines = NotDefault
+    AllowAdditions = NotDefault
     DefaultView =0
+    AllowUpdating =2
     ScrollBars =0
     BorderStyle =1
     PictureAlignment =2
@@ -20,13 +24,13 @@ Begin Form
     Width =2232
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =13095
-    Top =16755
-    Right =15315
-    Bottom =19185
+    Left =13785
+    Top =16980
+    Right =16005
+    Bottom =19410
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x06dd372434a7e440
+        0x212270ceaf0de540
     End
     DatasheetFontName ="Calibri"
     PrtMip = Begin
@@ -39,9 +43,13 @@ Begin Form
     AllowPivotTableView =0
     AllowPivotChartView =0
     AllowPivotChartView =0
+    FetchDefaults =0
     FilterOnLoad =0
+    OrderByOnLoad =0
     SplitFormSplitterBar =0
     SaveSplitterBarPosition =0
+    FetchDefaults =0
+    OrderByOnLoad =0
     SplitFormSplitterBar =0
     SaveSplitterBarPosition =0
     ShowPageMargins =0
@@ -313,7 +321,7 @@ Option Explicit
 ' =================================
 ' Form:         PicTile
 ' Level:        Framework form
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  PicTile form object related properties, events, functions & procedures for UI display
 '
@@ -322,6 +330,7 @@ Option Explicit
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
 '               BLC - 12/29/2017 - 1.01 - revise to accommodate PicPhotos subform
 '               BLC - 1/2/2018   - 1.02 - enable/disable powerpoint wizard button, code cleanup
+'               BLC - 1/19/2018  - 1.03 - revise to set FullPhotoPath on enlarge
 ' =================================
 
 '---------------------
@@ -499,24 +508,33 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
+'   BLC - 1/19/2018 - set & clear temp var for PhotoEnlarge form
 ' ---------------------------------
 Private Sub imgPhoto_DblClick(Cancel As Integer)
 On Error GoTo Err_Handler
     
     If FileExists(lblFullPath.Caption) Then
-        DoCmd.OpenForm "PhotoEnlarge", acNormal, , , , , lblFullPath.Caption 'TempVars("FullPhotoPath")
-        Me.Parent!lblMsg.Caption = ""
-        Me.Parent!lblMsg.ForeColor = lngRobinEgg
-        Me.Parent!lblMsgIcon.Caption = ""
-        Me.Parent!lblMsgIcon.ForeColor = lngRobinEgg
+        'update temp var since PhotoEnlarge uses it
+        'vs. openargs since it is also used from photo treeview
+        SetTempVar "FullPhotoPath", lblFullPath.Caption
+        
+        DoCmd.OpenForm "PhotoEnlarge", acNormal ', , , , , lblFullPath.Caption 'TempVars("FullPhotoPath")
+'        Me.Parent!lblMsg.Caption = ""
+'        Me.Parent!lblMsg.ForeColor = lngRobinEgg
+'        Me.Parent!lblMsgIcon.Caption = ""
+'        Me.Parent!lblMsgIcon.ForeColor = lngRobinEgg
+        ClearMsgIcon Me.Parent
     Else
-        Me.Parent!lblMsg.ForeColor = lngYellow
-        Me.Parent!lblMsg.Caption = "Missing photo!"
-        Me.Parent!lblMsgIcon.ForeColor = lngYellow
-        Me.Parent!lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & StringFromCodepoint(uRTriangle)
+'        Me.Parent!lblMsg.ForeColor = lngYellow
+'        Me.Parent!lblMsg.Caption = "Missing photo!"
+'        Me.Parent!lblMsgIcon.ForeColor = lngYellow
+'        Me.Parent!lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & StringFromCodepoint(uRTriangle)
+        SetMsgIcon Me.Parent, "Missing photo"
     End If
     
 Exit_Handler:
+    'clear temp var
+    TempVars.Remove "FullPhotoPath"
     Exit Sub
 
 Err_Handler:
@@ -544,8 +562,21 @@ End Sub
 Private Sub chkSelect_Click()
 On Error GoTo Err_Handler
     
-    ToggleSelect chkSelect
-    
+'    If Len(lblFullPath.Caption) > 0 Then
+        ToggleSelect chkSelect
+                
+'        Me.Parent!lblMsg.ForeColor = lngLime
+'        Me.Parent!lblMsg.Caption = ""
+'        Me.Parent!lblMsgIcon.ForeColor = lngLime
+'        Me.Parent!lblMsgIcon.Caption = ""
+
+'    Else
+
+'        Me.Parent!lblMsg.ForeColor = lngYellow
+'        Me.Parent!lblMsg.Caption = "No photo!"
+'        Me.Parent!lblMsgIcon.ForeColor = lngYellow
+'        Me.Parent!lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & StringFromCodepoint(uRTriangle)
+'    End If
 '    If chkSelect = True Then
 '        imgPhoto.BorderColor = lngGreen
 '        lblName.ForeColor = lngGreen
@@ -581,9 +612,23 @@ End Sub
 ' ---------------------------------
 Private Sub imgPhoto_Click()
 On Error GoTo Err_Handler
+        
+'    If Len(lblFullPath.Caption) > 0 Then
     
-    'toggle the opposite of the current checkbox selection
-    ToggleSelect Not chkSelect
+        'toggle the opposite of the current checkbox selection
+        ToggleSelect Not chkSelect
+                
+'        Me.Parent!lblMsg.ForeColor = lngLime
+'        Me.Parent!lblMsg.Caption = ""
+'        Me.Parent!lblMsgIcon.ForeColor = lngLime
+'        Me.Parent!lblMsgIcon.Caption = ""
+
+'    Else
+'        Me.Parent!lblMsg.ForeColor = lngYellow
+'        Me.Parent!lblMsg.Caption = "No photo!"
+'        Me.Parent!lblMsgIcon.ForeColor = lngYellow
+'        Me.Parent!lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & StringFromCodepoint(uRTriangle)
+'    End If
     
 Exit_Handler:
     Exit Sub

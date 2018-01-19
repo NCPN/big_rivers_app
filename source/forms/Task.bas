@@ -14,18 +14,17 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7860
+    Width =9000
     DatasheetFontHeight =11
     ItemSuffix =32
-    Left =4350
-    Top =2730
-    Right =12600
-    Bottom =14115
+    Left =4035
+    Top =3045
+    Right =13980
+    Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x4d373b75fa02e540
+        0x6370e280b30de540
     End
-    RecordSource ="SELECT * FROM Task WHERE ID = 7; "
     Caption ="Task"
     OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -182,7 +181,7 @@ Begin Form
                     BorderThemeColorIndex =-1
                 End
                 Begin Label
-                    OverlapFlags =93
+                    OverlapFlags =85
                     Left =120
                     Top =30
                     Width =3480
@@ -199,7 +198,7 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =120
                     Top =360
                     Width =6840
@@ -217,10 +216,10 @@ Begin Form
                     ForeTint =100.0
                 End
                 Begin Label
-                    OverlapFlags =87
+                    OverlapFlags =215
                     TextAlign =3
-                    Left =3600
-                    Top =30
+                    Left =4800
+                    Top =60
                     Width =4140
                     Height =315
                     FontWeight =600
@@ -229,10 +228,10 @@ Begin Form
                     Name ="lblContext"
                     Caption ="context"
                     GridlineColor =10921638
-                    LayoutCachedLeft =3600
-                    LayoutCachedTop =30
-                    LayoutCachedWidth =7740
-                    LayoutCachedHeight =345
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =8940
+                    LayoutCachedHeight =375
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -252,13 +251,12 @@ Begin Form
                     IMESentenceMode =3
                     Left =240
                     Top =900
-                    Width =7140
+                    Width =8400
                     Height =1380
                     BackColor =65535
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="tbxTask"
-                    ControlSource ="Task"
                     AfterUpdate ="[Event Procedure]"
                     OnKeyPress ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
@@ -273,7 +271,7 @@ Begin Form
 
                     LayoutCachedLeft =240
                     LayoutCachedTop =900
-                    LayoutCachedWidth =7380
+                    LayoutCachedWidth =8640
                     LayoutCachedHeight =2280
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -307,7 +305,6 @@ Begin Form
                         0x00000000
                     End
                     Name ="cbxStatus"
-                    ControlSource ="Status_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT ID, Status, Icon, Sequence FROM Status ORDER BY Sequence; "
                     ColumnWidths ="0;1080"
@@ -352,7 +349,7 @@ Begin Form
                     IMESentenceMode =3
                     ColumnCount =2
                     ListWidth =1080
-                    Left =5790
+                    Left =6840
                     Top =60
                     Width =1260
                     Height =360
@@ -370,16 +367,15 @@ Begin Form
                         0x3000290000000000
                     End
                     Name ="cbxPriority"
-                    ControlSource ="Priority_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT ID, Priority, Sequence FROM Priority; "
                     ColumnWidths ="0;1080"
                     AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5790
+                    LayoutCachedLeft =6840
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7050
+                    LayoutCachedWidth =8100
                     LayoutCachedHeight =420
                     BackThemeColorIndex =-1
                     ConditionalFormat14 = Begin
@@ -392,7 +388,7 @@ Begin Form
                     Begin
                         Begin Label
                             OverlapFlags =93
-                            Left =5010
+                            Left =6060
                             Top =60
                             Width =984
                             Height =314
@@ -401,17 +397,17 @@ Begin Form
                             Name ="lblPriority"
                             Caption ="Priority"
                             GridlineColor =10921638
-                            LayoutCachedLeft =5010
+                            LayoutCachedLeft =6060
                             LayoutCachedTop =60
-                            LayoutCachedWidth =5994
+                            LayoutCachedWidth =7044
                             LayoutCachedHeight =374
                         End
                     End
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6000
-                    Top =2370
+                    Left =7200
+                    Top =2340
                     Width =720
                     TabIndex =3
                     ForeColor =4210752
@@ -457,10 +453,10 @@ Begin Form
                         0x0000000000000000
                     End
 
-                    LayoutCachedLeft =6000
-                    LayoutCachedTop =2370
-                    LayoutCachedWidth =6720
-                    LayoutCachedHeight =2730
+                    LayoutCachedLeft =7200
+                    LayoutCachedTop =2340
+                    LayoutCachedWidth =7920
+                    LayoutCachedHeight =2700
                     BackColor =14136213
                     BorderColor =14136213
                     HoverColor =65280
@@ -478,8 +474,8 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =85
                     TextFontFamily =2
-                    Left =6900
-                    Top =2370
+                    Left =8100
+                    Top =2340
                     Width =720
                     FontSize =14
                     TabIndex =4
@@ -490,10 +486,10 @@ Begin Form
                     FontName ="Academy Engraved LET"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6900
-                    LayoutCachedTop =2370
-                    LayoutCachedWidth =7620
-                    LayoutCachedHeight =2730
+                    LayoutCachedLeft =8100
+                    LayoutCachedTop =2340
+                    LayoutCachedWidth =8820
+                    LayoutCachedHeight =2700
                     PictureCaptionArrangement =5
                     ForeThemeColorIndex =-1
                     BackColor =14136213
@@ -515,7 +511,7 @@ Begin Form
                     OverlapFlags =215
                     Left =105
                     Top =3840
-                    Width =7650
+                    Width =8775
                     Height =4380
                     TabIndex =5
                     BorderColor =10921638
@@ -525,7 +521,7 @@ Begin Form
 
                     LayoutCachedLeft =105
                     LayoutCachedTop =3840
-                    LayoutCachedWidth =7755
+                    LayoutCachedWidth =8880
                     LayoutCachedHeight =8220
                 End
                 Begin Rectangle
@@ -534,14 +530,14 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     Top =3720
-                    Width =7860
+                    Width =9000
                     Height =4620
                     BackColor =4144959
                     BorderColor =10921638
                     Name ="rctList"
                     GridlineColor =10921638
                     LayoutCachedTop =3720
-                    LayoutCachedWidth =7860
+                    LayoutCachedWidth =9000
                     LayoutCachedHeight =8340
                     BackThemeColorIndex =-1
                 End
@@ -550,7 +546,7 @@ Begin Form
                     OverlapFlags =223
                     TextAlign =3
                     Top =3480
-                    Width =7860
+                    Width =9000
                     Height =315
                     FontSize =9
                     LeftMargin =360
@@ -563,7 +559,7 @@ Begin Form
                     FontName ="Segoe UI"
                     GridlineColor =10921638
                     LayoutCachedTop =3480
-                    LayoutCachedWidth =7860
+                    LayoutCachedWidth =9000
                     LayoutCachedHeight =3795
                     ThemeFontIndex =-1
                     BackThemeColorIndex =-1
@@ -626,7 +622,7 @@ Begin Form
                     OverlapFlags =85
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =7380
+                    Left =8430
                     Top =105
                     Width =240
                     Height =300
@@ -639,9 +635,9 @@ Begin Form
                     DefaultValue ="0"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7380
+                    LayoutCachedLeft =8430
                     LayoutCachedTop =105
-                    LayoutCachedWidth =7620
+                    LayoutCachedWidth =8670
                     LayoutCachedHeight =405
                     BorderThemeColorIndex =0
                     BorderTint =50.0
@@ -651,7 +647,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =93
                     TextAlign =3
-                    Left =4260
+                    Left =5340
                     Top =600
                     Width =1980
                     Height =240
@@ -661,16 +657,16 @@ Begin Form
                     Name ="lblCharacterCount"
                     Caption ="Character Count:"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4260
+                    LayoutCachedLeft =5340
                     LayoutCachedTop =600
-                    LayoutCachedWidth =6240
+                    LayoutCachedWidth =7320
                     LayoutCachedHeight =840
                 End
                 Begin Label
                     Visible = NotDefault
                     OverlapFlags =223
                     TextAlign =2
-                    Left =5640
+                    Left =6720
                     Top =600
                     Width =660
                     Height =240
@@ -679,9 +675,9 @@ Begin Form
                     ForeColor =255
                     Name ="lblCount"
                     GridlineColor =10921638
-                    LayoutCachedLeft =5640
+                    LayoutCachedLeft =6720
                     LayoutCachedTop =600
-                    LayoutCachedWidth =6300
+                    LayoutCachedWidth =7380
                     LayoutCachedHeight =840
                     ForeThemeColorIndex =-1
                 End
@@ -689,22 +685,22 @@ Begin Form
                     SpecialEffect =0
                     OldBorderStyle =0
                     OverlapFlags =223
-                    Left =6240
+                    Left =7320
                     Top =540
                     Width =1500
                     Height =324
                     BorderColor =10921638
                     Name ="rctAlert"
                     GridlineColor =10921638
-                    LayoutCachedLeft =6240
+                    LayoutCachedLeft =7320
                     LayoutCachedTop =540
-                    LayoutCachedWidth =7740
+                    LayoutCachedWidth =8820
                     LayoutCachedHeight =864
                 End
                 Begin Label
                     OverlapFlags =215
                     TextAlign =1
-                    Left =6300
+                    Left =7380
                     Top =600
                     Width =1380
                     Height =240
@@ -713,9 +709,9 @@ Begin Form
                     Name ="lblMaxCount"
                     Caption ="255"
                     GridlineColor =10921638
-                    LayoutCachedLeft =6300
+                    LayoutCachedLeft =7380
                     LayoutCachedTop =600
-                    LayoutCachedWidth =7680
+                    LayoutCachedWidth =8760
                     LayoutCachedHeight =840
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -743,7 +739,6 @@ Begin Form
                         0x31002c003000290000000000
                     End
                     Name ="cbxRequestedBy"
-                    ControlSource ="RequestedBy_ID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;1"
                     AfterUpdate ="[Event Procedure]"
@@ -814,7 +809,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="tbxRequestDate"
-                    ControlSource ="RequestDate"
                     Format ="Short Date"
                     AfterUpdate ="[Event Procedure]"
                     ConditionalFormat = Begin
@@ -903,7 +897,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxType"
-                    ControlSource ="TaskType"
                     DefaultValue ="0"
                     GridlineColor =10921638
 
@@ -931,7 +924,6 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="tbxTypeID"
-                    ControlSource ="TaskType_ID"
                     DefaultValue ="0"
                     GridlineColor =10921638
 
@@ -1245,15 +1237,15 @@ On Error GoTo Err_Handler
 
     'handle NULL OpenArgs
     If Len(Nz(Me.OpenArgs, "")) > 0 Then
-        If CountInString(Me.OpenArgs, "|") = 2 Then
+        If CountInString(Me.OpenArgs, "|") = 1 Then '2 Then
             Dim aryContext() As String
             
             aryContext() = Split(Me.OpenArgs, "|")
             Me.CallingForm = aryContext(0)
             
             'set task context
-            Me.ContextType = aryContext(1)
-            Me.ContextID = aryContext(2)
+            Me.ContextType = aryContext(0) '(1)
+            Me.ContextID = aryContext(1) '(2)
         End If
     End If
     
@@ -1266,8 +1258,11 @@ On Error GoTo Err_Handler
 
     'set the task context
     lblTaskContext.Caption = Me.ContextType & " (" & Me.ContextID & ")"
-    tbxType.Value = Me.ContextType
-    tbxTypeID.Value = Me.ContextID
+   ' tbxType.Value = Me.ContextType
+    'tbxTypeID.Value = Me.ContextID
+    tbxType = Me.ContextType
+    tbxTypeID = Me.ContextID
+
 
     Title = "Task"
     lblTitle.Caption = "" 'clear header title
