@@ -24,10 +24,10 @@ Begin Form
     Width =2232
     DatasheetFontHeight =11
     ItemSuffix =38
-    Left =13785
-    Top =16980
-    Right =16005
-    Bottom =19410
+    Left =4965
+    Top =7995
+    Right =6930
+    Bottom =10170
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x212270ceaf0de540
@@ -187,6 +187,7 @@ Begin Form
                     Name ="imgPhoto"
                     OnClick ="[Event Procedure]"
                     OnDblClick ="[Event Procedure]"
+                    ControlTipText ="U-2007-getimage.jpg"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
@@ -224,6 +225,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =14277081
                     Name ="lblName"
+                    Caption ="name"
                     OnClick ="[Event Procedure]"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
@@ -247,6 +249,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =14277081
                     Name ="lblFullPath"
+                    Caption ="path"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =2595
@@ -268,6 +271,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =14277081
                     Name ="lblPhotoType"
+                    Caption ="ptype"
                     GridlineColor =10921638
                     LayoutCachedLeft =1260
                     LayoutCachedWidth =1626
@@ -288,6 +292,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =14277081
                     Name ="lblID"
+                    Caption ="id"
                     GridlineColor =10921638
                     LayoutCachedLeft =1680
                     LayoutCachedWidth =2136
@@ -451,6 +456,8 @@ End Property
 Private Sub Form_Load()
 On Error GoTo Err_Handler
 
+    'default - disable checkbox
+    chkSelect.Enabled = False
     
 Exit_Handler:
     Exit Sub
@@ -577,13 +584,6 @@ On Error GoTo Err_Handler
 '        Me.Parent!lblMsgIcon.ForeColor = lngYellow
 '        Me.Parent!lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & StringFromCodepoint(uRTriangle)
 '    End If
-'    If chkSelect = True Then
-'        imgPhoto.BorderColor = lngGreen
-'        lblName.ForeColor = lngGreen
-'    Else
-'        imgPhoto.BorderColor = lngLtBgdGray
-'        lblName.ForeColor = lngLtTextGray
-'    End If
     
 Exit_Handler:
     Exit Sub
@@ -612,8 +612,9 @@ End Sub
 ' ---------------------------------
 Private Sub imgPhoto_Click()
 On Error GoTo Err_Handler
-        
-'    If Len(lblFullPath.Caption) > 0 Then
+       
+Debug.Print Len(lblFullPath.Caption)
+    If FileExists(lblFullPath.Caption) Then
     
         'toggle the opposite of the current checkbox selection
         ToggleSelect Not chkSelect
@@ -623,12 +624,12 @@ On Error GoTo Err_Handler
 '        Me.Parent!lblMsgIcon.ForeColor = lngLime
 '        Me.Parent!lblMsgIcon.Caption = ""
 
-'    Else
+    Else
 '        Me.Parent!lblMsg.ForeColor = lngYellow
 '        Me.Parent!lblMsg.Caption = "No photo!"
 '        Me.Parent!lblMsgIcon.ForeColor = lngYellow
 '        Me.Parent!lblMsgIcon.Caption = StringFromCodepoint(uRTriangle) & StringFromCodepoint(uRTriangle)
-'    End If
+    End If
     
 Exit_Handler:
     Exit Sub
@@ -658,8 +659,10 @@ End Sub
 Private Sub lblName_Click()
 On Error GoTo Err_Handler
     
-    'toggle the opposite of the current checkbox selection
-    ToggleSelect Not chkSelect
+    If FileExists(lblFullPath.Caption) Then
+        'toggle the opposite of the current checkbox selection
+        ToggleSelect Not chkSelect
+    End If
     
 Exit_Handler:
     Exit Sub
@@ -756,6 +759,9 @@ End Sub
 Private Sub ToggleSelect(selection As Boolean)
 On Error GoTo Err_Handler
     
+    'check if tile is populated
+    If Len(lblFullPath.Caption) > 0 Then 'Debug.Print "length = " & Len(lblFullPath.Caption)
+    
     'set checkbox
     chkSelect = selection
     
@@ -786,6 +792,8 @@ On Error GoTo Err_Handler
                 End If
             Next
         End If
+    End If
+    
     End If
     
     'print the collection

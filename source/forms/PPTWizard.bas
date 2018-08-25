@@ -18,9 +18,9 @@ Begin Form
     Width =7440
     DatasheetFontHeight =11
     ItemSuffix =71
-    Left =4440
+    Left =4035
     Top =3045
-    Right =14385
+    Right =17790
     Bottom =14895
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
@@ -1168,7 +1168,7 @@ On Error GoTo Err_Handler
     Me.SelPhotos = New Collection
 
     If Len(Nz(Me.OpenArgs, "")) > 0 Then _
-        Me.SelPhotos = Me.OpenArgs
+        Me.SelPhotos = NCPN_framework.GetObject(Me.OpenArgs)
         
     tbxNumPics = Me.SelPhotos.Count
     

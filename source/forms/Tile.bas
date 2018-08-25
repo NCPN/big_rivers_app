@@ -24,10 +24,10 @@ Begin Form
     Width =2592
     DatasheetFontHeight =11
     ItemSuffix =29
-    Left =4500
-    Top =4830
-    Right =6825
-    Bottom =8010
+    Left =10860
+    Top =7590
+    Right =13440
+    Bottom =11025
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x35aad241af0de540
@@ -741,7 +741,7 @@ Option Explicit
 ' =================================
 ' Form:         Tile
 ' Level:        Framework form
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  Tile form object related properties, events, functions & procedures for UI display
 '
@@ -758,6 +758,7 @@ Option Explicit
 '               BLC - 9/7/2016   - 1.03 - updated DisableLinks() to allow ALL & SELECTIVE disabling,
 '                                         added LinkNormal(), updated Detail_MouseMove() to use
 '                                         LINK_TEXT_NORMAL vs. lngGray50 (current LINK_TEXT_NORMAL setting)
+'               BLC - 1/24/2018  - 1.04 - set hourglass on while loading
 ' =================================
 
 '---------------------
@@ -1211,6 +1212,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 5/27/2016 - initial version
+'   BLC - 1/24/2018 - set hourglass on while loading
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
@@ -1218,6 +1220,8 @@ On Error GoTo Err_Handler
     Dim ctrl As Control
     Dim strLink As String
     Dim i As Integer
+    
+    DoCmd.Hourglass True
     
 '    MsgBox "loading...", vbOKOnly
     
@@ -1250,6 +1254,8 @@ On Error GoTo Err_Handler
     Next
     
 Exit_Handler:
+    'cleanup
+    DoCmd.Hourglass False
     Exit Sub
 
 Err_Handler:

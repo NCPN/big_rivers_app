@@ -15,15 +15,13 @@ Begin Form
     Width =11880
     DatasheetFontHeight =11
     ItemSuffix =34
-    Left =4035
-    Top =3045
-    Right =13980
-    Bottom =14895
+    Left =4500
+    Top =6390
+    Right =16650
+    Bottom =18900
     DatasheetGridlinesColor =14806254
-    Filter ="PhotoType = 'O' AND PhotoDate > #9/21/2016# AND PhotoType = 'OO' AND PhotoDate >"
-        " #9/22/2016#"
     RecSrcDt = Begin
-        0x8fe23098f909e540
+        0xf3c4e9608d0ee540
     End
     RecordSource ="SELECT \015\012p.ID AS PhotoID, p.PhotoPath, p.PhotoFilename, p.PhotoType, p.Pho"
         "toDate, p.Photographer_ID, e.StartDate, p.Event_ID,\015\012c.FirstName, c.LastNa"
@@ -342,6 +340,7 @@ Begin Form
                     LayoutCachedHeight =5136
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =120
                     Top =5256
@@ -361,6 +360,7 @@ Begin Form
                     LayoutCachedHeight =7704
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =120
                     Top =7824
@@ -418,6 +418,7 @@ Begin Form
                     LayoutCachedHeight =5136
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =2460
                     Top =5256
@@ -437,6 +438,7 @@ Begin Form
                     LayoutCachedHeight =7704
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =2460
                     Top =7824
@@ -475,6 +477,7 @@ Begin Form
                     LayoutCachedHeight =2568
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =4800
                     Top =2688
@@ -494,6 +497,7 @@ Begin Form
                     LayoutCachedHeight =5136
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =4800
                     Top =5256
@@ -513,6 +517,7 @@ Begin Form
                     LayoutCachedHeight =7704
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =4800
                     Top =7824
@@ -551,6 +556,7 @@ Begin Form
                     LayoutCachedHeight =2568
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7140
                     Top =2688
@@ -570,6 +576,7 @@ Begin Form
                     LayoutCachedHeight =5136
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7140
                     Top =5256
@@ -589,6 +596,7 @@ Begin Form
                     LayoutCachedHeight =7704
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7140
                     Top =7824
@@ -627,6 +635,7 @@ Begin Form
                     LayoutCachedHeight =2568
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =9480
                     Top =2688
@@ -646,6 +655,7 @@ Begin Form
                     LayoutCachedHeight =5136
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =9480
                     Top =5256
@@ -665,6 +675,7 @@ Begin Form
                     LayoutCachedHeight =7704
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =9480
                     Top =7824
@@ -684,6 +695,7 @@ Begin Form
                     LayoutCachedHeight =10272
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =120
                     Top =10380
@@ -703,6 +715,7 @@ Begin Form
                     LayoutCachedHeight =12828
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =2460
                     Top =10380
@@ -722,6 +735,7 @@ Begin Form
                     LayoutCachedHeight =12828
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =4800
                     Top =10380
@@ -741,6 +755,7 @@ Begin Form
                     LayoutCachedHeight =12828
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7140
                     Top =10380
@@ -760,6 +775,7 @@ Begin Form
                     LayoutCachedHeight =12828
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =9480
                     Top =10380
@@ -779,6 +795,7 @@ Begin Form
                     LayoutCachedHeight =12828
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =93
                     Top =4980
                     Width =3480
@@ -818,7 +835,7 @@ Option Explicit
 ' =================================
 ' Form:         PicPhotos
 ' Level:        Framework form
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  PicPhotos form object related properties, events, functions & procedures for UI display
 '
@@ -826,6 +843,7 @@ Option Explicit
 ' References:   -
 ' Revisions:    BLC - 12/18/2017 - 1.00 - initial version
 '               BLC - 1/17/2017  - 1.01 - used as subform, no calling form minimize/restore needed
+'               BLC - 1/19/2018  - 1.02 - added TilesPerRow property, adjsuted populate tiles
 ' =================================
 
 '---------------------
@@ -841,12 +859,15 @@ Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
+Private m_TilesPerRow As Integer    '# of tiles per row
+
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTilesPerRow(Value As Integer)
 
 '---------------------
 ' Properties
@@ -894,6 +915,18 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
+Public Property Let TilesPerRow(Value As Integer)
+    If Value > 0 Then
+        m_TilesPerRow = Value
+    Else
+        RaiseEvent InvalidTilesPerRow(Value)
+    End If
+End Property
+
+Public Property Get TilesPerRow() As Integer
+    TilesPerRow = m_TilesPerRow
+End Property
+
 '---------------------
 ' Events
 '---------------------
@@ -910,7 +943,8 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
-'   BLC - 1/17/2017  - used as subform, no calling form minimize/restore needed
+'   BLC - 1/17/2018  - used as subform, no calling form minimize/restore needed
+'   BLC - 1/19/2018  - update to set TilesPerRow & hide tiles before populating
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -922,6 +956,9 @@ On Error GoTo Err_Handler
 '
 '    'minimize calling form
 '    ToggleForm Me.CallingForm, -1
+    
+    'set # tiles per row
+    TilesPerRow = 5
     
     'set hover
     btnPrev.HoverColor = lngGreen
@@ -944,7 +981,13 @@ On Error GoTo Err_Handler
     '# of photos
     tbxNumPix = Me.Recordset.RecordCount
     
-    'populate subforms
+    'hide all tiles << cannot hide control that has focus
+    '                  instead change design so all tiles are hidden
+'    For Each ctrl In Me.Controls
+'        If ctrl.ControlType = acSubform Then ctrl.Visible = False
+'    Next
+    
+    'populate subforms (tiles) & display those which have photos
     PopulatePicTiles
     
     'initialize values
@@ -1255,144 +1298,140 @@ On Error GoTo Err_Handler
     Dim ctrl As Control
     Dim sctrl As Control
     Dim i As Long
-    Dim row As Integer
+    Dim row As Integer, col As Integer, prevrow As Integer, TilesLeft As Integer
+    Dim filledrows As Integer, lastrow As Integer
+    Dim minpics As Integer, maxpics As Integer
+    Dim MoveToNext As Boolean
     
     'use form recordset
     Set rs = Me.Recordset
-    i = 0
+    'default
+    row = 0
+    TilesLeft = TilesPerRow
+    filledrows = CInt(rs.RecordCount / TilesPerRow)
+    lastrow = rs.RecordCount - (filledrows * TilesPerRow)
     
-    'If Not (rs.BOF And rs.EOF) Then
-    '   rs.MoveFirst
-    'Do While Not (rs.BOF And rs.EOF) '>> endless loop
-    
-    'iterate through the photo records
-    If Not (rs.BOF And rs.EOF) Then
-        rs.MoveFirst
-Debug.Print "# records = " & rs.RecordCount
+    Do While Not (rs.BOF And rs.EOF)
 
-        'iterate through PicPhoto controls
+        'iterate through form controls
         For Each ctrl In Me.Controls
-Debug.Print ctrl.Name
-            'tile subform
-            If ctrl.ControlType = acSubform Then
+        
+            'default
+            MoveToNext = False
             
-'move to the first record if rs.BOF
-If Not (rs.BOF Or rs.EOF) Then _
-    rs.MoveNext
-    i = i + 1
-'End If
-    'set control row
-    row = Left(Right(ctrl.Name, 2), 1)
-
-                        'check if the row is the proper row
-                        'photos per row = 5
-Debug.Print i
-Debug.Print ctrl.Tag
-Debug.Print "abspos = " & rs.AbsolutePosition
-
-If i / 5 < Left(Right(ctrl.Name, 2), 1) Then _
-Debug.Print "row = " & Left(Right(ctrl.Name, 2), 1) & " i/5 = " & i / 5
-
-'If (row - 1 < i / 5 And i / 5 < row) Then
-If (i / 5 < row And i < row * 5) Then
-    
-    Debug.Print "good row"
-Else
-    Debug.Print "skip row"
-    
-    'GoTo NextControl
+            'check if this is the end
+If rs.EOF Then
+    Debug.Print "end of recordset"
+    Exit Do
 End If
+            'set control row
+            If ctrl.ControlType = acSubform Then
+                row = Left(Right(ctrl.Name, 2), 1)
+                col = Right(ctrl.Name, 1)
+            End If
+            
+        'rs.AbsolutePosition < row*TilesPerRow +1
+Debug.Print ctrl.Name
+'Debug.Print rs.AbsolutePosition & " " & rs("PhotoFilename")
+'Debug.Print "max pics = " & row * TilesPerRow
+'Debug.Print "min pics = " & (row - 1) * TilesPerRow + 1
+'Debug.Print "tiles left = " & TilesLeft
+Debug.Print "r,c,lastrowtiles = " & row & ", " & col & ", " & lastrow
+
+            minpics = (row - 1) * TilesPerRow + 1
+
+            'tile subform (iterate only those in rows < # records)
+            If ctrl.ControlType = acSubform And _
+                    (rs.AbsolutePosition <= (row * TilesPerRow + 1)) And _
+                    Not (rs.RecordCount < minpics) _
+                    Then
+
+                'check if filled tile
+                If row > (filledrows + 1) Or (row > filledrows And col > lastrow) Then
+Debug.Print "bad row/col"
+'                    ctrl.Visible = False
+                Else
+Debug.Print "good row/col"
                 
-Debug.Print "abs pos = " & rs.AbsolutePosition
-
-                'iterate through tile's controls
-                For Each sctrl In ctrl.Form
-Debug.Print sctrl.Name
-                    'check if all photos populated
-                    If Not rs.EOF Then
-
-                        'set tile controls info
-                        Select Case sctrl.ControlType
-                            Case acLabel
-                                Select Case sctrl.Name
-                                    Case "lblID"
-                                        sctrl.Caption = rs("PhotoID")
-                                    Case "lblPhotoType"
-                                        sctrl.Caption = rs("PhotoType")
-                                    Case "lblName"
-                                        sctrl.Caption = rs("PhotoFilename")
-                                    Case "lblFullPath"
-                                        sctrl.Caption = rs("PhotoPath") & "\" & rs("PhotoFilename")
-                                End Select
-                            Case acImage
-                                If sctrl.Name = "imgPhoto" Then
-                                
-                                Debug.Print rs("PhotoPath") & "\" & rs("PhotoFilename")
-                                
-                                    'photo
-                                    If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
-                                        sctrl.Picture = rs("PhotoPath") & "\" & rs("PhotoFilename")
-                                        sctrl.ControlTipText = rs("PhotoType") & "-" & rs("PhotoID") & "-" & rs("PhotoFilename")
-                                    End If
-                                End If
-                            Case acCheckBox
-                                'enable checkbox only if photo is viable
-                                If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
-    '                                sctrl.Enabled = True
-    Debug.Print sctrl.Name & " enabled"
-                                Else
-    '                                sctrl.Enabled = False
-    Debug.Print sctrl.Name & " disabled "
-                                End If
-                        End Select
-                                            
-'                        'next record << check for EOF in case there are fewer
-'                        '               photos than controls
-'                        Debug.Print "next"
-'                        If Not rs.EOF Then
-'                            rs.MoveNext
-'                            Debug.Print "move"
-'                        Else
-'                            'no more photos >> exit
-'                            GoTo Exit_Handler
-'                        End If
+                    'display tiles
+                    ctrl.Visible = True
+                
+                    'set # tiles
+                    If prevrow <> row Then
+                        TilesLeft = TilesPerRow
                     Else
-                        'Exit For
-                        'no more photos >> exit
-                        GoTo Exit_Handler
+                        'set # of tiles remaining
+                        TilesLeft = TilesLeft - 1
                     End If
-                Next 'sctrl
+                
+                    'iterate through tile's controls
+                    For Each sctrl In ctrl.Form
+    Debug.Print sctrl.Name
+                        'check if all photos populated already
+                        If Not rs.EOF Then
+                            
+                            'set tile controls info
+                            Select Case sctrl.ControlType
+                                Case acLabel
+                                    Select Case sctrl.Name
+                                        Case "lblID"
+                                            sctrl.Caption = rs("PhotoID")
+                                        Case "lblPhotoType"
+                                            sctrl.Caption = rs("PhotoType")
+                                        Case "lblName"
+                                            sctrl.Caption = rs("PhotoFilename")
+                                            'set
+                                            MoveToNext = True
+                                        Case "lblFullPath"
+                                            sctrl.Caption = rs("PhotoPath") & "\" & rs("PhotoFilename")
+                                    End Select
+                                Case acImage
+                                    If sctrl.Name = "imgPhoto" Then
+                                        'photo
+                                        If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
+                                            sctrl.Picture = rs("PhotoPath") & "\" & rs("PhotoFilename")
+                                            sctrl.ControlTipText = rs("PhotoType") & "-" & rs("PhotoID") & "-" & rs("PhotoFilename")
+                                        End If
+                                    End If
+                                Case acCheckBox
+                                    'enable checkbox only if photo is viable
+                                    If FileExists(rs("PhotoPath") & "\" & rs("PhotoFilename")) Then
+                                        sctrl.Enabled = True
+        Debug.Print sctrl.Name & " enabled"
+                                    Else
+                                        'sctrl.Enabled = False
+                                        'sctrl.Visible = False
+        Debug.Print sctrl.Name & " disabled "
+                                    End If
+                            End Select
+                                                
+                        Else
+                            'Exit For
+                            'no more photos >> exit
+                            GoTo Exit_Handler
+                        End If
+
+                    Next 'sctrl
+            
+                    'go to next photo
+                    If MoveToNext = True And Not (rs.EOF = True) And TilesLeft > 0 Then
+        Debug.Print "move"
+                        rs.MoveNext
+                     End If
+                
+                    prevrow = row
+            
+                End If 'row/col subform check
             
             End If 'tile subform check
-            
-'            'done w/ tile subform? >> go to next photo
-'            'next record << check for EOF in case there are fewer
-'            '               photos than controls
-'            Debug.Print "next"
-'            If Not rs.EOF Then
-'                rs.MoveNext
-'                Debug.Print "move"
-'            Else
-'                'no more photos >> exit
-'                GoTo Exit_Handler
-'            End If
-NextControl:
+                         
         Next 'ctrl
+
+      'next photo
+       'If Not rs.EOF Then rs.MoveNext
+       
+    Loop
     
-'            'done w/ tile subform? >> go to next photo
-'            'next record << check for EOF in case there are fewer
-'            '               photos than controls
-'            Debug.Print "next"
-'            If Not rs.EOF Then
-'                rs.MoveNext
-'                Debug.Print "move"
-'            Else
-'                'no more photos >> exit
-'                GoTo Exit_Handler
-'            End If
-    'Loop
-'    End If
-    End If
 Exit_Handler:
     Exit Sub
 Err_Handler:

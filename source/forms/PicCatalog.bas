@@ -7,6 +7,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     DefaultView =0
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
@@ -15,14 +16,24 @@ Begin Form
     Width =12660
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =2805
-    Top =1530
-    Right =15720
-    Bottom =16875
+    Left =4035
+    Top =3045
+    Right =16950
+    Bottom =18390
     DatasheetGridlinesColor =14806254
+    Filter ="PhotoType = 'R' AND Year(PhotoDate) = 2016"
     RecSrcDt = Begin
-        0x736515bcc70be540
+        0x4c0bd34e8d0ee540
     End
+    RecordSource ="SELECT \015\012p.ID AS PhotoID, p.PhotoPath, p.PhotoFilename, p.PhotoType, p.Pho"
+        "toDate, p.Photographer_ID, e.StartDate, p.Event_ID,\015\012c.FirstName, c.LastNa"
+        "me, c.FirstName & ' ' & c.LastName AS PhotogName, c.Email,\015\012s.SiteCode, s."
+        "ID AS SiteID, s.Park_ID, s.River_ID,\015\012pk.ParkCode,\015\012r.River, r.Segme"
+        "nt\015\012FROM (((((usys_temp_photo p\015\012LEFT JOIN Event e ON e.ID = p.Event"
+        "_ID)\015\012LEFT JOIN Contact c ON c.ID = p.Photographer_ID)\015\012LEFT JOIN Si"
+        "te s ON s.ID = e.Site_ID)\015\012LEFT JOIN River r ON r.ID = s.River_ID)\015\012"
+        "LEFT JOIN Park pk ON pk.ID = s.Park_ID)\015\012ORDER BY\015\012p.PhotoType\015\012"
+        ";"
     Caption ="Photo Binder Photos"
     OnCurrent ="[Event Procedure]"
     BeforeUpdate ="[Event Procedure]"
@@ -209,7 +220,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6750105
                     Name ="lblContext"
-                    Caption ="DINO  >  Yampa  >  EP"
+                    Caption ="context"
                     GridlineColor =10921638
                     LayoutCachedLeft =7560
                     LayoutCachedTop =60
@@ -434,6 +445,7 @@ Begin Form
                 End
                 Begin ComboBox
                     OverlapFlags =85
+                    DecimalPlaces =0
                     IMESentenceMode =3
                     Left =6540
                     Top =1200
@@ -453,8 +465,9 @@ Begin Form
                     End
                     Name ="cbxYear"
                     RowSourceType ="Table/Query"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Return photos from the selected year"
-                    Format ="Short Date"
+                    Format ="General Number"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6540
@@ -603,7 +616,8 @@ Option Explicit
 '               BLC - 12/29/2017 - 1.01 - added SelPhotos collection property
 '               BLC - 1/2/2018   - 1.02 - update for PicPhotos subform
 '               BLC - 1/17/2017  - 1.03 - revised to use do while loop & exit when rs.eof
-'               BLC - 1/19/2018  - 1.04 - select/clear based on if lblID is set ToggleChecks
+'               BLC - 1/19/2018  - 1.04 - select/clear based on if lblID is set ToggleChecks,
+'                                         added check for missing photos (ToggleChecks)
 ' =================================
 
 '---------------------
@@ -796,7 +810,18 @@ On Error GoTo Err_Handler
     
     'set data sources
     SetTempVar "EnumType", "PhotoType"
-    Set cbxPhotoType.Recordset = GetRecords("s_app_enum_list")
+    
+    'add unclassified to recordset
+    Dim rs As DAO.Recordset
+    Set rs = GetRecords("s_app_enum_list")
+    With rs
+        .AddNew
+        rs!ID = 0
+        rs!Label = "U"
+        rs!Summary = "Unclassified"
+    End With
+    
+    Set cbxPhotoType.Recordset = rs 'GetRecords("s_app_enum_list")
     cbxPhotoType.ColumnHeads = True
     cbxPhotoType.ColumnCount = 3            'ID, type abbrev, type name
     cbxPhotoType.BoundColumn = 2            'type abbrev
@@ -805,7 +830,12 @@ On Error GoTo Err_Handler
     'cbxPhotoType.BoundColumn = 2
     'cbxPhotoType.ColumnWidths = "1;1;1;"
     
-    'Set Me.cbxYear.Recordset = GetRecords("")
+    Set Me.cbxYear.Recordset = GetRecords("s_photo_year_by_site")
+    
+    'add unclassified to photo type
+
+    'cbxPhotoType.AllowValueListEdits
+    'cbxPhotoType.AddItem "Unclassified"
   
 Exit_Handler:
     Exit Sub
@@ -954,12 +984,14 @@ End Sub
 Private Sub cbxPhotoType_AfterUpdate()
 On Error GoTo Err_Handler
     
-    Me.Filter = IIf(Len(Me.Filter) > 0, _
-                Me.Filter & " AND PhotoType = '" & cbxPhotoType & "'", _
-                "PhotoType = '" & cbxPhotoType & "'")
-
-    'requery tiles
-    RefreshTiles
+'    Me.Filter = IIf(Len(Me.Filter) > 0, _
+'                Me.Filter & " AND PhotoType = '" & cbxPhotoType & "'", _
+'                "PhotoType = '" & cbxPhotoType & "'")
+'
+'    'requery tiles
+'    RefreshTiles
+   
+    If Len(cbxPhotoType) > 0 And cbxYear > 0 Then SetFilter
     
 Exit_Handler:
     Exit Sub
@@ -974,28 +1006,32 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' Sub:          tbxAfterDate_AfterUpdate
-' Description:  combobox after event actions
+' Sub:          cbxYear_AfterUpdate
+' Description:  combobox after update event actions
 ' Assumptions:  -
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, December 18, 2017 - for NCPN tools
+' Source/date:  Bonnie Campbell, January 24, 2018 - for NCPN tools
 ' Adapted:      -
 ' Revisions:
-'   BLC - 12/18/2017 - initial version
-'   BLC - 1/2/2018   - code cleanup
+'   BLC - 1/24/2018 - initial version
 ' ---------------------------------
-Private Sub tbxAfterDate_AfterUpdate()
+Private Sub cbxYear_AfterUpdate()
 On Error GoTo Err_Handler
-        
-    Me.Filter = IIf(Len(Me.Filter) > 0, _
-                Me.Filter & " AND Year(PhotoDate) = " & Me.cbxYear, _
-                "Year(PhotoDate) = " & cbxYear)
     
-    'requery tiles
-    RefreshTiles
+'    Me.Filter = IIf(Len(Me.Filter) > 0, _
+'                Me.Filter & " AND Year(PhotoDate) = " & Me.cbxYear, _
+'                "Year(PhotoDate) = " & cbxYear)
+'Debug.Print Me.Filter
+'
+'    Me.FilterOn = True
+'
+'    'requery tiles
+'    'RefreshTiles
+
+    If Len(cbxPhotoType) > 0 And cbxYear > 0 Then SetFilter
     
 Exit_Handler:
     Exit Sub
@@ -1004,7 +1040,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxAfterDate_AfterUpdate[PicPicTile form])"
+            "Error encountered (#" & Err.Number & " - cbxYear_AfterUpdate[PicPicTile form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1099,8 +1135,10 @@ On Error GoTo Err_Handler
     
     'pix = ConvertObjectToPointer(Me.SelPhotos)
     
+    pix = GetPointer(Me.SelPhotos)
+    
     'begin wizard
-    DoCmd.OpenForm "PPTWizard", acNormal ', , , , , pix 'Me.SelPhotos
+    DoCmd.OpenForm "PPTWizard", acNormal, , , , , pix  'Me.SelPhotos
     
 Exit_Handler:
     Exit Sub
@@ -1238,7 +1276,8 @@ End Sub
 ' Revisions:
 '   BLC - 12/18/2017 - initial version
 '   BLC - 1/2/2018 - update for PicPhotos subform
-'   BLC - 1/19/2018 - select/clear based on if lblID is set
+'   BLC - 1/19/2018 - select/clear based on if lblID is set, added
+'                     check for missing photos
 ' ---------------------------------
 Private Sub ToggleChecks(selection As Boolean)
 On Error GoTo Err_Handler
@@ -1267,30 +1306,35 @@ On Error GoTo Err_Handler
                     'check if tile has photos, if not skip
                     If Len(sctrl.Form.Controls("lblID").Caption) > 0 Then
                     
-                    'iterate through subform controls
-                    For Each ssctrl In sctrl.Form.Controls
-       Debug.Print ssctrl.Name
-              
-                        Select Case ssctrl.ControlType
-                            Case acCheckBox
-                                If ssctrl.Name = "chkSelect" Then _
-                                    ssctrl = selection
-                            'Case acTextBox
-                            Case acLabel
-                                If ssctrl.Name = "lblName" Then _
-                                    ssctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
-                            Case acImage
-                                If ssctrl.Name = "imgPhoto" Then _
-                                    ssctrl.BorderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
-                        End Select
-                    
-                        'add photo to selected photos collection
-                        If ssctrl.Name = "lblID" Then
-                            Debug.Print "ssctrl.caption = " & ssctrl.Caption
-                            'check if tile has photo (caption is populated)
-                            If Len(ssctrl.Caption) > 0 Then Me.SelPhoto = ssctrl.Caption
+                        'photo existance check
+                        If FileExists(sctrl.Form.Controls("lblFullPath").Caption) Then
+                        
+                            'iterate through subform controls
+                            For Each ssctrl In sctrl.Form.Controls
+            Debug.Print ssctrl.Name
+                            
+                                Select Case ssctrl.ControlType
+                                    Case acCheckBox
+                                        If ssctrl.Name = "chkSelect" Then _
+                                            ssctrl = selection
+                                    'Case acTextBox
+                                    Case acLabel
+                                        If ssctrl.Name = "lblName" Then _
+                                            ssctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
+                                    Case acImage
+                                        If ssctrl.Name = "imgPhoto" Then _
+                                            ssctrl.BorderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
+                                End Select
+                            
+                                'add photo to selected photos collection
+                                If ssctrl.Name = "lblID" Then
+                                    Debug.Print "ssctrl.caption = " & ssctrl.Caption
+                                    'check if tile has photo (caption is populated)
+                                    If Len(ssctrl.Caption) > 0 Then Me.SelPhoto = ssctrl.Caption
+                                End If
+                            Next
+                        
                         End If
-                    Next
                     
                     End If
                     
@@ -1430,6 +1474,52 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - RefreshTiles[PicCatalog form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          SetFilter
+' Description:  Set the filter value based on current combobox selections
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 25, 2018 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/25/2018 - initial version
+' ---------------------------------
+Private Sub SetFilter()
+On Error GoTo Err_Handler
+
+    'avoid flicker
+    Application.Echo False
+    
+    'clear existing filter
+    Me.Filter = ""
+    
+    'set filter based on selections
+    Me.Filter = "PhotoType = '" & cbxPhotoType & "'" _
+                & " AND Year(PhotoDate) = " & Me.cbxYear
+Debug.Print Me.Filter
+
+    Me.FilterOn = True
+    
+    'populate tiles
+    RefreshTiles
+    
+    'allow flicker (no, really just turn echo back on)
+    Application.Echo True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetFilter[PicCatalog form])"
     End Select
     Resume Exit_Handler
 End Sub
