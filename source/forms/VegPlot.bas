@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =103
-    Left =4695
-    Top =300
-    Right =12555
-    Bottom =11670
+    Left =3225
+    Top =2640
+    Right =22995
+    Bottom =16815
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x95f0359a100be540
@@ -39,9 +39,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -2593,7 +2590,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.16
+' Version:      1.17
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -2625,6 +2622,7 @@ Option Explicit
 '               BLC - 11/26/2017 - 1.14 - updated PctFines validation, added PctSocialTrails
 '               BLC - 12/5/2017  - 1.15 - add VegPlot BeaverBrowse
 '               BLC - 12/27/2017 - 1.16 - updated checkbox click events to properly check values
+'               BLC - 8/25/2018  - 1.17 - adjusted DINO to include WCC & % Standing Dead (2018 & beyond)
 ' =================================
 
 '---------------------
@@ -2706,7 +2704,8 @@ End Property
 '   Certain fields are not applicable across all parks:
 '       % Total ARC - DINO & CANY
 '       % Total URC - BLCA
-'       % Total WCC - BLCA & CANY
+'       % Total WCC - BLCA & CANY, (DINO 2018 & beyond only)
+'       % Standing Dead - BLCA & CANY, DINO 2018 & beyond
 '       Transect - BLCA & CANY
 '       Plot # - DINO only
 '       Plot Distance - BLCA & CANY
@@ -2734,6 +2733,7 @@ End Property
 '   BLC - 11/10/2017 - updated park specific controls
 '   BLC - 11/26/2017 - updated PctFines validation, added PctSocialTrails
 '   BLC - 12/5/2017  - added BeaverBrowse
+'   BLC - 8/25/2018 - added DINO WCC, % Standing Dead (2018 forward only)
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -3016,6 +3016,7 @@ On Error GoTo Err_Handler
             btnARC.Visible = True
             
         Case "DINO"     'ARC, NoRootedVeg, No Transects
+                        'WCC, % Standing Dead (2018 & after)
             lblARC.Visible = True
             tbxPctARC.Visible = True
             lblNumber.Visible = True
@@ -3023,6 +3024,9 @@ On Error GoTo Err_Handler
             tglNoRootedVeg.Visible = True
             lblNoRootedVeg.Visible = True
             btnARC.Visible = True
+            
+            '2018 & after only
+            btnWCC.Visible = IIf(EventYear > 2017, True, False)
     
     End Select
     

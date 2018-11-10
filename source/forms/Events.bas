@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =35
-    Left =3345
-    Top =2820
-    Right =17100
-    Bottom =14670
+    Left =3240
+    Top =2655
+    Right =16095
+    Bottom =10320
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x656d3fc92f05e540
@@ -41,9 +41,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -810,7 +807,7 @@ Option Explicit
 ' =================================
 ' Form:         Events
 ' Level:        Application form
-' Version:      1.15
+' Version:      1.16
 ' Basis:        Dropdown frm
 '
 ' Description:  Events form object related properties, events, functions & procedures for UI display
@@ -837,6 +834,7 @@ Option Explicit
 '               BLC - 11/6/2017  - 1.13 - set so Save button only enabled for new events (tbxID = 0)
 '               BLC - 11/10/2017 - 1.14 - added Form_GotFocus for updating cbxLocation after new location added
 '               BLC - 11/24/2017 - 1.15 - revised comment button caption
+'               BLC - 11/2/2018  - 1.16 - add update VegTransect form's event combobox
 ' =================================
 
 '---------------------
@@ -1338,6 +1336,7 @@ End Sub
 '   BLC - 5/31/2016 - initial version
 '   BLC - 8/2/2016 - use Me.CallingForm
 '   BLC - 1/9/2017 - revise to update VegPlot form's event combobox
+'   BLC - 11/2/2018 - add update VegTransect form's event combobox
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
@@ -1345,14 +1344,17 @@ On Error GoTo Err_Handler
     'restore calling form
     ToggleForm Me.CallingForm, 0
     
-    'update events combobox for VegPlot
+    'update events combobox for VegPlot, VegTransect
     Select Case Me.CallingForm
         Case "VegPlot"
-'   show #DELETED vs. refreshing combo
-'            Forms("VegPlot").Controls("cbxEvent").Requery
-'            Forms("VegPlot").Controls("cbxEvent").Refresh
-        Set Forms("VegPlot").Controls("cbxEvent").Recordset = GetRecords("s_events_by_park_river")
-        Forms("VegPlot").Controls("cbxEvent").Requery
+    '   show #DELETED vs. refreshing combo
+    '            Forms("VegPlot").Controls("cbxEvent").Requery
+    '            Forms("VegPlot").Controls("cbxEvent").Refresh
+            Set Forms("VegPlot").Controls("cbxEvent").Recordset = GetRecords("s_events_by_park_river")
+            Forms("VegPlot").Controls("cbxEvent").Requery
+        Case "VegTransect"
+            Set Forms("VegTransect").Controls("cbxEvent").Recordset = GetRecords("s_events_by_site")
+            Forms("VegTransect").Controls("cbxEvent").Requery
     End Select
     
 Exit_Handler:

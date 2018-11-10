@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =40
-    Left =4740
-    Top =2835
-    Right =12600
-    Bottom =10440
+    Left =3240
+    Top =2655
+    Right =16095
+    Bottom =10320
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x20e2f9274edfe440
@@ -39,9 +39,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -322,6 +319,7 @@ Begin Form
                     Name ="cbxEvent"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;0;0;1"
+                    AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Event (sample visit)"
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -875,7 +873,7 @@ Option Explicit
 ' =================================
 ' Form:         VegTransect
 ' Level:        Application form
-' Version:      1.07
+' Version:      1.08
 ' Basis:        Dropdown form
 '
 ' Description:  Veg Transect form object related properties, Transect, functions & procedures for UI display
@@ -891,6 +889,7 @@ Option Explicit
 '               BLC - 10/19/2017 - 1.05 - added comment length
 '               BLC - 11/9/2017  - 1.06 - populate dropdowns based on hierarchy level
 '               BLC - 11/10/2017 - 1.07 - shift combobox population to PopulateComboData
+'               BLC - 11/2/2018  - 1.08 - populate sample date w/ event date info
 ' =================================
 
 '---------------------
@@ -1152,6 +1151,41 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Current[VegTransect form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          cbxEvent_AfterUpdate
+' Description:  Combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 2,2018 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 11/2/2018 - initial version
+' ---------------------------------
+Private Sub cbxEvent_AfterUpdate()
+On Error GoTo Err_Handler
+    Dim eDate As String
+
+    'populate tbxSampleDate
+    eDate = Trim(Left(cbxEvent.Text, InStr(cbxEvent.Text, " -")))
+    
+    Me.tbxSampleDate.Value = eDate
+    
+    'MsgBox eDate, vbCritical, "Test"
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxEvent_AfterUpdate[VegTransect form])"
     End Select
     Resume Exit_Handler
 End Sub
