@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =103
-    Left =3225
-    Top =2640
-    Right =22995
-    Bottom =16815
+    Left =3270
+    Top =2655
+    Right =20220
+    Bottom =10320
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x95f0359a100be540
@@ -2590,7 +2590,7 @@ Option Explicit
 ' =================================
 ' Form:         VegPlot
 ' Level:        Application form
-' Version:      1.17
+' Version:      1.18
 ' Basis:        Dropdown form
 '
 ' Description:  Vegplot form object related properties, functions & procedures for UI display
@@ -2623,6 +2623,7 @@ Option Explicit
 '               BLC - 12/5/2017  - 1.15 - add VegPlot BeaverBrowse
 '               BLC - 12/27/2017 - 1.16 - updated checkbox click events to properly check values
 '               BLC - 8/25/2018  - 1.17 - adjusted DINO to include WCC & % Standing Dead (2018 & beyond)
+'               BLC - 11/16/2018 - 1.18 - added EventYear property
 ' =================================
 
 '---------------------
@@ -2638,12 +2639,15 @@ Private m_CallingForm As String
 
 Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immediately updating)
 
+Private m_EventYear As Integer
+
 '---------------------
 ' Event Declarations
 '---------------------
 Public Event InvalidTitle(Value As String)
 Public Event InvalidDirections(Value As String)
 Public Event InvalidCallingForm(Value As String)
+Public Event InvalidEventYear(Value As Integer)
 
 '---------------------
 ' Properties
@@ -2685,6 +2689,18 @@ End Property
 
 Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
+End Property
+
+Public Property Let EventYear(Value As Integer)
+    If Len(Value) > 0 Then
+        m_EventYear = Value
+    Else
+        RaiseEvent InvalidEventYear(Value)
+    End If
+End Property
+
+Public Property Get EventYear() As Integer
+    EventYear = m_EventYear
 End Property
 
 '---------------------

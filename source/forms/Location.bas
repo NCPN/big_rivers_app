@@ -20,10 +20,10 @@ Begin Form
     Width =7860
     DatasheetFontHeight =11
     ItemSuffix =46
-    Left =4695
-    Top =2265
-    Right =12555
-    Bottom =12390
+    Left =3270
+    Top =2655
+    Right =16830
+    Bottom =10320
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x8c4fda390b03e540
@@ -39,9 +39,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -1033,7 +1030,7 @@ Option Explicit
 ' =================================
 ' Form:         Location
 ' Level:        Application form
-' Version:      1.10
+' Version:      1.11
 ' Basis:        Dropdown form
 '
 ' Description:  Location form object related properties, Location, functions & procedures for UI display
@@ -1054,6 +1051,7 @@ Option Explicit
 '               BLC - 10/19/2017 - 1.08 - added comment length, set location toggle
 '               BLC - 10/24/2017 - 1.09 - add optgLocationType default, handle location toggle defaults
 '               BLC - 11/2/2017 - 1.10 - revise transect & plot numbers, add PopulateOptions()
+'               BLC - 11/16/2018 - 1.11 - reset toggle captions after ClearForm ToggleCaption clears them
 ' =================================
 
 '---------------------
@@ -1176,6 +1174,7 @@ End Property
 '   BLC - 10/17/2017 - handle OpenArgs
 '   BLC - 10/24/2017 - add optgLocationType default
 '   BLC - 11/2/2017 - populate identifier options when option selection set by calling form
+'   BLC - 11/16/2018 - reset toggle captions after ClearForm's ToggleCaption clears them
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1269,6 +1268,13 @@ On Error GoTo Err_Handler
     
     'initialize values
     ClearForm Me
+
+    'repopulate form toggle captions
+    'resets captions after ToggleCaption (used for toggle button checkboxes)
+    'called from ClearForm clears captions for all toggles
+    tglFeature.Caption = "Feature"
+    tglTransect.Caption = "Transect"
+    tglPlot.Caption = "Plot"
 
 Exit_Handler:
     Exit Sub

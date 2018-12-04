@@ -20,10 +20,10 @@ Begin Form
     Width =7680
     DatasheetFontHeight =11
     ItemSuffix =36
-    Left =1065
-    Top =4875
-    Right =8445
-    Bottom =9240
+    Left =3165
+    Top =3510
+    Right =10545
+    Bottom =7875
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x566d246e0b03e540
@@ -39,9 +39,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     OrderByOnLoad =0
     OrderByOnLoad =0
@@ -731,7 +728,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-    Option Compare Database
+Option Compare Database
 Option Explicit
 
 ' =================================
@@ -1008,11 +1005,35 @@ End Sub
 Private Sub btnEdit_Click()
 On Error GoTo Err_Handler
     
+    'set parent form location type
+    Me.Parent.LocationType = Me.tbxLocType
+    
     'populate the parent form
     PopulateForm Me.Parent, tbxID
     
     Me.Parent.lblMsgIcon.Caption = ""
         Me.Parent.lblMsg.Caption = ""
+
+    'fetch tbxLocTypeID before changing focus to parent form
+    'value must be a variant to handle integers and values like T1, T4 etc.
+    Dim LocTypeID As Variant
+    LocTypeID = Me.tbxLocTypeID
+
+    'determine which column of the combobox to match against
+    Dim SelectColumn As Integer
+    
+    Select Case Me.tbxLocType
+        Case "F", "P"
+            SelectColumn = 0
+        Case "T"
+            SelectColumn = 1
+    End Select
+
+    'set focus on the combobox
+    Me.Parent!cbxCollectionSourceID.SetFocus
+    
+    SelectComboboxValue Me.Parent!cbxCollectionSourceID, SelectColumn, LocTypeID 'Me.tbxLocTypeID
+    'Me.Parent!cbxCollectionSourceID.SelText = Me.tbxLocTypeID
 
 Exit_Handler:
     Exit Sub
@@ -1110,6 +1131,62 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Form_Close[LocationList form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SelectComboboxValue
+' Description:  Sets combobox value based on input values
+' Assumptions:  -
+' Parameters:   ctrl - cbx (combobox control)
+'               SelectColumn - the column of the combobox to match against (integer)
+'               SelectValue - value to select, if present in the combobox list (variant)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, November 16, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 11/16/2018 - initial version
+' ---------------------------------
+Public Sub SelectComboboxValue(ctrl As ComboBox, SelectColumn As Integer, SelectValue As Variant)
+On Error GoTo Err_Handler
+
+    'capture NULL values
+    If IsNull(SelectValue) = True Then
+
+        'show deleted record message & clear
+        DoCmd.OpenForm "MsgOverlay", acNormal, , , , acDialog, _
+                    "msg" & PARAM_SEPARATOR & "Check underlying " _
+                        & "location record. It has an invalid location type (possibly numeric) " _
+                        & "instead of F, T or P. " _
+                        & "So I can't select location identifier (LocTypeID is NULL)." _
+                        & "|Type" & PARAM_SEPARATOR & "info"
+    Else
+    
+        'set the value
+        Dim i As Integer
+        With ctrl
+            For i = 0 To .ListCount - 1
+                If CStr(.Column(SelectColumn, i)) = CStr(SelectValue) Then
+                    .Value = .ItemData(i)
+                    Exit For
+                End If
+            Next
+        End With
+    
+    End If
+    
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SelectComboboxValue[mod_UI])"
     End Select
     Resume Exit_Handler
 End Sub
